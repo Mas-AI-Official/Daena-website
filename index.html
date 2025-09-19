@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daena AI - The World's First AI-Native Autonomous Company</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Honeycomb background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 193, 7, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.04) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Honeycomb corner decorations */
+        .honeycomb-corner {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .honeycomb-corner.top-left {
+            top: 20px;
+            left: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 85,30 85,70 50,95 15,70 15,30" fill="%23FFC107" stroke="%23FFD700" stroke-width="2"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .honeycomb-corner.top-right {
+            top: 20px;
+            right: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 85,30 85,70 50,95 15,70 15,30" fill="%23FFC107" stroke="%23FFD700" stroke-width="2"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .honeycomb-corner.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 85,30 85,70 50,95 15,70 15,30" fill="%23FFC107" stroke="%23FFD700" stroke-width="2"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .honeycomb-corner.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 85,30 85,70 50,95 15,70 15,30" fill="%23FFC107" stroke="%23FFD700" stroke-width="2"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 58, 0.9) 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #00bcd4;
+            background: rgba(0, 188, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section - Eye-catching Daena exploration */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(76, 175, 80, 0.05) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50, #FFD700);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #00bcd4;
+            font-weight: 300;
+            text-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 188, 212, 0.5); }
+            to { text-shadow: 0 0 30px rgba(0, 188, 212, 0.8); }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            color: #e0e0e0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        /* Daena Exploration Key - Main CTA */
+        .daena-explore-key {
+            display: inline-block;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            background-size: 300% 300%;
+            color: white;
+            padding: 25px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 20px 30px 20px;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 10px 30px rgba(255, 215, 0, 0.3),
+                0 0 0 3px rgba(255, 215, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: gradientShift 3s ease-in-out infinite, float 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .daena-explore-key::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .daena-explore-key:hover::before {
+            left: 100%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .daena-explore-key:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(255, 215, 0, 0.4),
+                0 0 0 5px rgba(255, 215, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .daena-explore-key .icon {
+            margin-right: 15px;
+            font-size: 2rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Secondary CTA */
+        .secondary-cta {
+            display: inline-block;
+            background: transparent;
+            color: #00bcd4;
+            padding: 20px 40px;
+            border: 3px solid #00bcd4;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secondary-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #00bcd4;
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .secondary-cta:hover::before {
+            width: 100%;
+        }
+
+        .secondary-cta:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 188, 212, 0.3);
+        }
+
+        /* Daena in Action Key - Eye-catching demo button */
+        .daena-action-key {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF6B35, #F7931E, #FFD700, #FF6B35);
+            background-size: 300% 300%;
+            color: white;
+            padding: 25px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 20px 30px 20px;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 10px 30px rgba(255, 107, 53, 0.4),
+                0 0 0 3px rgba(255, 107, 53, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: gradientShift 3s ease-in-out infinite, float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            min-width: 350px;
+        }
+
+        .daena-action-key::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .daena-action-key:hover::before {
+            left: 100%;
+        }
+
+        .daena-action-key:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 
+                0 20px 50px rgba(255, 107, 53, 0.5),
+                0 0 0 6px rgba(255, 107, 53, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .daena-action-key .icon {
+            margin-right: 15px;
+            font-size: 2rem;
+            display: inline-block;
+            animation: bounce 2s infinite, rotate 4s linear infinite;
+        }
+
+        .daena-action-key .text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .daena-action-key .subtitle {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-top: 5px;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            border: none;
+            border-radius: 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            color: white;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(45deg, #4caf50, #00bcd4, #FFD700);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.4);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 188, 212, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border-top: 2px solid rgba(0, 188, 212, 0.2);
+            border-bottom: 2px solid rgba(0, 188, 212, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(0, 188, 212, 0.1) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(0, 188, 212, 0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 188, 212, 0.2);
+            border-color: rgba(0, 188, 212, 0.4);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #00bcd4;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #00bcd4, #0097a7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #e0e0e0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .feature p {
+            color: #e0e0e0;
+        }
+
+        /* Market Data Section */
+        .market-data {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(26, 26, 58, 0.4) 100%);
+            position: relative;
+        }
+
+        .market-chart {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%);
+            padding: 4rem;
+            border-radius: 25px;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 193, 7, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+        }
+
+        .chart-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .chart-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 193, 7, 0.15) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 193, 7, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 193, 7, 0.2);
+        }
+
+        .chart-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FFC107, #FFD700, #00bcd4);
+        }
+
+        .chart-bar {
+            height: 250px;
+            background: linear-gradient(180deg, #FFC107 0%, #FFD700 50%, #00bcd4 100%);
+            border-radius: 15px;
+            margin: 2rem 0;
+            position: relative;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .chart-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: 13px;
+        }
+
+        .chart-value {
+            color: #FFD700;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+        }
+
+        .chart-label {
+            color: #e0e0e0;
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .chart-cagr {
+            color: #4caf50;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        /* Professional Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            height: 300px;
+            margin: 2rem 0;
+            padding: 0 1rem;
+        }
+
+        .bar {
+            background: linear-gradient(180deg, #FFC107 0%, #FFD700 50%, #00bcd4 100%);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            min-width: 60px;
+            margin: 0 5px;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .bar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        /* Business Model Section */
+        .business-model {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .revenue-streams {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .revenue-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .revenue-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .revenue-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .revenue-item h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .revenue-item p {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+        }
+
+        .revenue-percentage {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        /* Pitch Deck Section */
+        .pitch-deck {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .pitch-deck h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #FFD700, #FFC107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+            font-weight: bold;
+        }
+
+        .pitch-deck p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pitch-deck-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pitch-option {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pitch-option:hover {
+            border-color: #FFD700;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.2);
+        }
+
+        .pitch-option h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .pitch-option p {
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #FFD700, #FFC107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+            font-weight: bold;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .contact-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .contact-item a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #FFD700;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem 0;
+            text-align: center;
+            color: #e0e0e0;
+        }
+
+        /* Demo Videos Section */
+        .demo-videos {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            color: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50, #FFD700);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .patent-notice {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 12px 25px;
+            margin-top: 1rem;
+        }
+
+        .patent-icon {
+            font-size: 1.2rem;
+        }
+
+        .patent-text {
+            color: #FFD700;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 215, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .video-card:hover .play-button {
+            background: #FFD700;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .video-card p {
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .video-link:hover::before {
+            left: 100%;
+        }
+
+        .video-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .video-card {
+                padding: 1rem;
+            }
+
+            .video-thumbnail {
+                height: 180px;
+            }
+
+            .daena-action-key {
+                font-size: 1.4rem;
+                padding: 20px 40px;
+                min-width: 300px;
+            }
+
+            .daena-action-key .icon {
+                font-size: 1.6rem;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Honeycomb corner decorations -->
+    <div class="honeycomb-corner top-left"></div>
+    <div class="honeycomb-corner top-right"></div>
+    <div class="honeycomb-corner bottom-left"></div>
+    <div class="honeycomb-corner bottom-right"></div>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Daena AI</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#demos">Demos</a></li>
+                <li><a href="#market">Market</a></li>
+                <li><a href="#business">Business</a></li>
+                <li><a href="#pitch-deck">Pitch Deck</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Meet Daena</h1>
+                    <div class="hero-subtitle">The World's First AI-Native Autonomous Company</div>
+                    <p>Revolutionary AI orchestration that transforms how companies operate. Daena doesn't just assist—she orchestrates, governs, and evolves your entire organization with intelligent autonomy.</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="pitch-deck-presentation.html" class="daena-explore-key">
+                            <span class="icon">🚀</span>
+                            Explore Daena Now
+                        </a>
+                        <a href="#demos" class="daena-action-key">
+                            <span class="icon">🎬</span>
+                            <span class="text">
+                                Daena in Action
+                                <span class="subtitle">Watch Live Demos</span>
+                            </span>
+                        </a>
+                        <a href="#pitch-deck" class="secondary-cta">View Pitch Deck</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">48+</div>
+                        <div class="stat-label">Specialized Agents</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Departments</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Council Agents per Domain</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Structured Files</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Videos Section -->
+        <section id="demos" class="demo-videos">
+            <div class="container">
+                <div class="section-header">
+                    <h2>See Daena in Action</h2>
+                    <p>Watch our comprehensive demo videos showcasing Daena's revolutionary AI capabilities across different business scenarios.</p>
+                    <div class="patent-notice">
+                        <span class="patent-icon">🔒</span>
+                        <span class="patent-text">Patent Provisional Pending - Protected Technology</span>
+                    </div>
+                </div>
+                
+                <div class="videos-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                            <img src="images/video-thumb-1.jpg" alt="Agent Communication Demo" onerror="this.style.display='none'">
+                        </div>
+                        <h3>Agent Communication</h3>
+                        <p>Watch how Daena's specialized agents communicate and collaborate in real-time to solve complex business problems.</p>
+                        <a href="video-player.html" class="video-link">Watch Demo</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                            <img src="images/video-thumb-2.jpg" alt="Budget Calculation Demo" onerror="this.style.display='none'">
+                        </div>
+                        <h3>Budget Calculation</h3>
+                        <p>See Daena's financial intelligence in action as she calculates budgets and provides strategic financial insights.</p>
+                        <a href="video-player.html" class="video-link">Watch Demo</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                            <img src="images/video-thumb-3.jpg" alt="CMP Pipeline Demo" onerror="this.style.display='none'">
+                        </div>
+                        <h3>CMP Pipeline</h3>
+                        <p>Experience Daena's project management capabilities through our comprehensive CMP pipeline demonstration.</p>
+                        <a href="video-player.html" class="video-link">Watch Demo</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                            <img src="images/video-thumb-4.jpg" alt="Patent Technology Demo" onerror="this.style.display='none'">
+                        </div>
+                        <h3>Patent Technology</h3>
+                        <p>Explore Daena's proprietary patent technology and intellectual property management capabilities.</p>
+                        <a href="video-player.html" class="video-link">Watch Demo</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                            <img src="images/video-thumb-5.jpg" alt="Patent Technology Enhanced Demo" onerror="this.style.display='none'">
+                        </div>
+                        <h3>Patent Technology Enhanced</h3>
+                        <p>Advanced demonstration of Daena's patent technology with enhanced features and capabilities.</p>
+                        <a href="video-player.html" class="video-link">Watch Demo</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                            <img src="images/video-thumb-6.jpg" alt="Real Scenario Demo" onerror="this.style.display='none'">
+                        </div>
+                        <h3>Real Scenario</h3>
+                        <p>Watch Daena handle real-world business scenarios with autonomous decision-making and problem-solving.</p>
+                        <a href="video-player.html" class="video-link">Watch Demo</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-button">▶</div>
+                            <img src="images/video-thumb-7.jpg" alt="Real Talk to Daena" onerror="this.style.display='none'">
+                        </div>
+                        <h3>Real Talk to Daena</h3>
+                        <p>Experience authentic conversation with Daena as she demonstrates her natural language understanding and response capabilities.</p>
+                        <a href="video-player.html" class="video-link">Watch Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">The Problem I Solve</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>AI Agents Behave Like Humans</h3>
+                        <p>Most AI agents today behave like humans in traditional hierarchies. Humans often hoard knowledge, because in their world knowledge equals power, promotions, and pay. Employees hold onto information to protect their value — but that creates silos and weakens the whole company.</p>
+                        <p>AI agents today fall into the same trap. They drift from goals, they lack governance and compliance, and they keep knowledge locked inside themselves, never sharing across departments. This makes them fragile, fragmented, and impossible to scale.</p>
+                    </div>
+                    <div class="about-text">
+                        <h3>My Solution: Sunflower-Honeycomb Architecture</h3>
+                        <p>I was built on top of a structure my creator designed — the Sunflower-Honeycomb. Unlike the fragmented hierarchies of humans or the fragile nature of most AI agents, this architecture creates a scalable, living system.</p>
+                        <p>Each department is like a honeycomb cell, with agents that share memory, learn from each other, and never drift away from goals. Governance, compliance, and adaptability are embedded into the system itself.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <h2 class="section-title">How I Work</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🌻</div>
+                        <h4>Sunflower-Honeycomb Architecture</h4>
+                        <p>Each department is like a honeycomb cell, with agents that share memory, learn from each other, and never drift away from goals.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🧠</div>
+                        <h4>Reflexive Memory</h4>
+                        <p>Department + global memory system for context-aware decisions and knowledge sharing across all agents.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Multi-LLM Brain</h4>
+                        <p>Smart routing for reasoning, speed, and cost optimization. GPT-5 ready with intelligent model selection.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🛡️</div>
+                        <h4>Real-time Governance</h4>
+                        <p>ABAC permissions, audit trails, override capabilities, and automatic course correction built into every operation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="market" class="market-data">
+            <div class="container">
+                <h2 class="section-title">Market Opportunity</h2>
+                <div class="market-chart">
+                    <h3 style="text-align: center; margin-bottom: 3rem; background: linear-gradient(45deg, #FFD700, #FFC107); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2.5rem; font-weight: bold;">Market Size Projections (2030)</h3>
+                    
+                    <!-- Professional Bar Chart -->
+                    <div class="bar-chart">
+                        <div class="bar" style="height: 35%;">
+                            <div class="bar-value">$46-52B</div>
+                            <div class="bar-label">AI Agents</div>
+                        </div>
+                        <div class="bar" style="height: 60%;">
+                            <div class="bar-value">$94B</div>
+                            <div class="bar-label">AI Platforms</div>
+                        </div>
+                        <div class="bar" style="height: 20%;">
+                            <div class="bar-value">$5.8B</div>
+                            <div class="bar-label">AI Governance</div>
+                        </div>
+                        <div class="bar" style="height: 100%;">
+                            <div class="bar-value">$155B</div>
+                            <div class="bar-label">Total TAM</div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Market Cards -->
+                    <div class="chart-container">
+                        <div class="chart-item">
+                            <div class="chart-value">$46-52B</div>
+                            <div class="chart-bar" style="height: 35%;"></div>
+                            <div class="chart-label">AI Agents Market</div>
+                            <div class="chart-cagr">47% CAGR</div>
+                        </div>
+                        <div class="chart-item">
+                            <div class="chart-value">$94B</div>
+                            <div class="chart-bar" style="height: 60%;"></div>
+                            <div class="chart-label">AI Platforms Market</div>
+                            <div class="chart-cagr">39% CAGR</div>
+                        </div>
+                        <div class="chart-item">
+                            <div class="chart-value">$5.8B</div>
+                            <div class="chart-bar" style="height: 20%;"></div>
+                            <div class="chart-label">AI Governance Tools</div>
+                            <div class="chart-cagr">43.6% CAGR</div>
+                        </div>
+                        <div class="chart-item">
+                            <div class="chart-value">$155B</div>
+                            <div class="chart-bar" style="height: 100%;"></div>
+                            <div class="chart-label">Total Addressable Market</div>
+                            <div class="chart-cagr">38% CAGR</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Revenue Potential Highlight -->
+                    <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(255, 193, 7, 0.1) 100%); border-radius: 20px; border: 2px solid rgba(76, 175, 80, 0.3);">
+                        <div style="font-size: 2rem; color: #4caf50; font-weight: bold; margin-bottom: 1rem;">
+                            🎯 Revenue Potential
+                        </div>
+                        <div style="font-size: 1.5rem; color: #FFD700; font-weight: bold;">
+                            Even 1% capture = $1.55B+ annual revenue potential
+                        </div>
+                        <div style="font-size: 1.2rem; color: #e0e0e0; margin-top: 1rem;">
+                            Positioned in fastest-growing AI orchestration vertical (~39-45% CAGR)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="business" class="business-model">
+            <div class="container">
+                <h2 class="section-title">Business Model</h2>
+                <p style="text-align: center; font-size: 1.3rem; color: #e0e0e0; margin-bottom: 3rem;">
+                    A blended model that makes Daena both scalable and defensible
+                </p>
+                <div class="revenue-streams">
+                    <div class="revenue-item">
+                        <div class="revenue-icon">☁️</div>
+                        <h4>SaaS Subscriptions</h4>
+                        <p>Predictable recurring fees based on seats and active agents</p>
+                        <div class="revenue-percentage">40%</div>
+                    </div>
+                    <div class="revenue-item">
+                        <div class="revenue-icon">🏢</div>
+                        <h4>Enterprise Licenses</h4>
+                        <p>Tailored onboarding and customization for client workflows</p>
+                        <div class="revenue-percentage">25%</div>
+                    </div>
+                    <div class="revenue-item">
+                        <div class="revenue-icon">🛡️</div>
+                        <h4>Governance & Compliance</h4>
+                        <p>Advanced security, auditing, and regulatory modules</p>
+                        <div class="revenue-percentage">20%</div>
+                    </div>
+                    <div class="revenue-item">
+                        <div class="revenue-icon">🛒</div>
+                        <h4>Marketplace</h4>
+                        <p>Extensions, agent packs, and training modules</p>
+                        <div class="revenue-percentage">15%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <h2 class="section-title">Current Traction</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Daena Today</h3>
+                        <p>✅ MVP Running locally with 48 agents across 8 departments</p>
+                        <p>✅ Private GitHub repo with over 1,000 structured files</p>
+                        <p>✅ Live demo available — not just a chatbot, but a true AI-native VP in action</p>
+                        <p>✅ Council agents for expert decision-making</p>
+                    </div>
+                    <div class="about-text">
+                        <h3>Ready for Scale</h3>
+                        <p>🚀 Cloud-ready and open to partnerships — AWS, Azure, or GCP</p>
+                        <p>🚀 Startup credits already in motion</p>
+                        <p>🚀 Governance and reflexive memory are integrated</p>
+                        <p>🚀 Multi-LLM brain is operational</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pitch-deck" class="pitch-deck">
+            <div class="container">
+                <h2>Pitch Deck</h2>
+                <p>Explore our comprehensive presentation covering market opportunity, technology innovation, business model, and funding requirements.</p>
+                
+                <div class="pitch-deck-options">
+                    <div class="pitch-option">
+                        <h3>🎬 View Online</h3>
+                        <p>Interactive presentation with voice-over narration and smooth transitions between slides.</p>
+                        <a href="pitch-deck-presentation.html" class="btn btn-primary">Launch Presentation</a>
+                    </div>
+                    <div class="pitch-option">
+                        <h3>📥 Download</h3>
+                        <p>Download the complete PowerPoint presentation for offline viewing and sharing.</p>
+                        <a href="Daena_Pitch_Deck.pptx" class="btn btn-secondary" download>Download PPTX</a>
+                    </div>
+                    <div class="pitch-option">
+                        <h3>📄 PDF Version</h3>
+                        <p>Static PDF version of the pitch deck for easy sharing and printing.</p>
+                        <a href="daena Pitch Deck .pdf" class="btn btn-secondary" download>Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p>Ready to revolutionize your business with AI-native operations? Let's discuss how Daena can transform your organization.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h4>📧 Email</h4>
+                        <a href="mailto:masoud.masoori@gmail.com">masoud.masoori@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <h4>🌐 Website</h4>
+                        <a href="https://mas-ai.co">mas-ai.co</a>
+                    </div>
+                    <div class="contact-item">
+                        <h4>🤖 Daena Platform</h4>
+                        <a href="https://daena.mas-ai.co">daena.mas-ai.co</a>
+                    </div>
+                    <div class="contact-item">
+                        <h4>💻 GitHub</h4>
+                        <a href="https://github.com/Masoud-Masoori">View Public Projects</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Mas-AI. All rights reserved. | VP of Mas-AI | Leading the world's first AI-native, multi-agent autonomous company</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+            }
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const finalValue = stat.textContent;
+                        const isPercentage = finalValue.includes('%');
+                        const isBillion = finalValue.includes('B');
+                        const isPlus = finalValue.includes('+');
+                        
+                        let numericValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                        if (isBillion) numericValue *= 1000000000;
+                        
+                        let current = 0;
+                        const increment = numericValue / 50;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= numericValue) {
+                                stat.textContent = finalValue;
+                                clearInterval(timer);
+                            } else {
+                                let displayValue = Math.floor(current);
+                                if (isBillion) displayValue = Math.floor(displayValue / 1000000000) + 'B';
+                                if (isPlus) displayValue += '+';
+                                if (isPercentage) displayValue += '%';
+                                stat.textContent = displayValue;
+                            }
+                        }, 50);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+    </script>
+</body>
+</html>
+</html>

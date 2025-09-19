@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daena Demo Videos - Online Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .video-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .video-description {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-player {
+            width: 100%;
+            height: 450px;
+            background: #000;
+            border-radius: 15px;
+        }
+
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .video-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-item.active {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .video-item h3 {
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-item p {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        .patent-notice {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .patent-notice h3 {
+            color: #FF6B35;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .video-player {
+                height: 250px;
+            }
+            
+            .video-title {
+                font-size: 2rem;
+            }
+            
+            .video-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <a href="index.html" class="back-btn">← Back to Daena</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="video-section">
+                <h1 class="video-title">🎬 Daena Demo Videos</h1>
+                <p class="video-description">Watch Daena AI in action with our comprehensive demo videos showcasing revolutionary AI capabilities.</p>
+                
+                <div class="video-container">
+                    <video id="mainVideo" class="video-player" controls preload="metadata">
+                        <source src="videos/compressed/agent communication.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="video-controls">
+                    <button class="control-btn" onclick="playVideo()">▶ Play</button>
+                    <button class="control-btn" onclick="pauseVideo()">⏸ Pause</button>
+                    <button class="control-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+                </div>
+            </div>
+
+            <div class="patent-notice">
+                <h3>🔒 Patent Protected Technology</h3>
+                <p>All demo videos contain proprietary technology protected under patent provisional pending status. These demonstrations showcase Daena's revolutionary AI capabilities.</p>
+            </div>
+
+            <div class="video-list">
+                <div class="video-item active" onclick="loadVideo('agent communication.mp4', this)">
+                    <h3>🤖 Agent Communication</h3>
+                    <p>Watch how Daena's specialized agents communicate and collaborate in real-time to solve complex business problems.</p>
+                </div>
+
+                <div class="video-item" onclick="loadVideo('budget calculation demo.mp4', this)">
+                    <h3>💰 Budget Calculation</h3>
+                    <p>See Daena's financial intelligence in action as she calculates budgets and provides strategic financial insights.</p>
+                </div>
+
+                <div class="video-item" onclick="loadVideo('CMP PIPELINBE DEMO.mp4', this)">
+                    <h3>⚙️ CMP Pipeline</h3>
+                    <p>Experience Daena's project management capabilities through our comprehensive CMP pipeline demonstration.</p>
+                </div>
+
+                <div class="video-item" onclick="loadVideo('patent Technology.mp4', this)">
+                    <h3>💡 Patent Technology</h3>
+                    <p>Explore Daena's proprietary patent technology and intellectual property management capabilities.</p>
+                </div>
+
+                <div class="video-item" onclick="loadVideo('patent Technology - Made with Clipchamp.mp4', this)">
+                    <h3>🚀 Patent Technology Enhanced</h3>
+                    <p>Advanced demonstration of Daena's patent technology with enhanced features and capabilities.</p>
+                </div>
+
+                <div class="video-item" onclick="loadVideo('REAL SENARIO DEMO.mp4', this)">
+                    <h3>🎯 Real Scenario</h3>
+                    <p>Watch Daena handle real-world business scenarios with autonomous decision-making and problem-solving.</p>
+                </div>
+
+                <div class="video-item" onclick="loadVideo('real talk to daena and whole system - Made with Clipchamp.mp4', this)">
+                    <h3>💬 Real Talk to Daena</h3>
+                    <p>Experience authentic conversation with Daena as she demonstrates her natural language understanding and response capabilities.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const video = document.getElementById('mainVideo');
+        
+        function loadVideo(filename, element) {
+            // Update video source
+            video.src = `videos/compressed/${filename}`;
+            video.load();
+            
+            // Update active state
+            document.querySelectorAll('.video-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            // Auto-play the new video
+            video.play().catch(e => {
+                console.log('Auto-play failed:', e);
+            });
+        }
+        
+        function playVideo() {
+            video.play();
+        }
+        
+        function pauseVideo() {
+            video.pause();
+        }
+        
+        function toggleFullscreen() {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        }
+        
+        // Video event listeners
+        video.addEventListener('loadstart', () => {
+            console.log('Video loading started');
+        });
+        
+        video.addEventListener('canplay', () => {
+            console.log('Video can start playing');
+        });
+        
+        video.addEventListener('error', (e) => {
+            console.error('Video error:', e);
+            alert('Error loading video. Please try again or contact support.');
+        });
+    </script>
+</body>
+</html>
