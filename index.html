@@ -935,6 +935,11 @@
             height: 100%;
             object-fit: cover;
             border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .video-thumbnail:hover img {
+            transform: scale(1.05);
         }
 
         .play-button {
@@ -1147,7 +1152,7 @@
                     <div class="video-card">
                         <div class="video-thumbnail">
                             <div class="play-button">▶</div>
-                            <img src="images/video-thumb-1.jpg" alt="Agent Communication Demo" onerror="this.style.display='none'">
+                            <img src="images/video-thumb-1.jpg" alt="Agent Communication Demo" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <h3>Agent Communication</h3>
                         <p>Watch how Daena's specialized agents communicate and collaborate in real-time to solve complex business problems.</p>
@@ -1157,7 +1162,7 @@
                     <div class="video-card">
                         <div class="video-thumbnail">
                             <div class="play-button">▶</div>
-                            <img src="images/video-thumb-2.jpg" alt="Budget Calculation Demo" onerror="this.style.display='none'">
+                            <img src="images/video-thumb-2.jpg" alt="Budget Calculation Demo" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <h3>Budget Calculation</h3>
                         <p>See Daena's financial intelligence in action as she calculates budgets and provides strategic financial insights.</p>
@@ -1167,7 +1172,7 @@
                     <div class="video-card">
                         <div class="video-thumbnail">
                             <div class="play-button">▶</div>
-                            <img src="images/video-thumb-3.jpg" alt="CMP Pipeline Demo" onerror="this.style.display='none'">
+                            <img src="images/video-thumb-3.jpg" alt="CMP Pipeline Demo" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <h3>CMP Pipeline</h3>
                         <p>Experience Daena's project management capabilities through our comprehensive CMP pipeline demonstration.</p>
@@ -1177,7 +1182,7 @@
                     <div class="video-card">
                         <div class="video-thumbnail">
                             <div class="play-button">▶</div>
-                            <img src="images/video-thumb-4.jpg" alt="Patent Technology Demo" onerror="this.style.display='none'">
+                            <img src="images/video-thumb-4.jpg" alt="Patent Technology Demo" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <h3>Patent Technology</h3>
                         <p>Explore Daena's proprietary patent technology and intellectual property management capabilities.</p>
@@ -1187,7 +1192,7 @@
                     <div class="video-card">
                         <div class="video-thumbnail">
                             <div class="play-button">▶</div>
-                            <img src="images/video-thumb-5.jpg" alt="Patent Technology Enhanced Demo" onerror="this.style.display='none'">
+                            <img src="images/video-thumb-5.jpg" alt="Patent Technology Enhanced Demo" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <h3>Patent Technology Enhanced</h3>
                         <p>Advanced demonstration of Daena's patent technology with enhanced features and capabilities.</p>
@@ -1197,7 +1202,7 @@
                     <div class="video-card">
                         <div class="video-thumbnail">
                             <div class="play-button">▶</div>
-                            <img src="images/video-thumb-6.jpg" alt="Real Scenario Demo" onerror="this.style.display='none'">
+                            <img src="images/video-thumb-6.jpg" alt="Real Scenario Demo" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <h3>Real Scenario</h3>
                         <p>Watch Daena handle real-world business scenarios with autonomous decision-making and problem-solving.</p>
@@ -1207,7 +1212,7 @@
                     <div class="video-card">
                         <div class="video-thumbnail">
                             <div class="play-button">▶</div>
-                            <img src="images/video-thumb-7.jpg" alt="Real Talk to Daena" onerror="this.style.display='none'">
+                            <img src="images/video-thumb-7.jpg" alt="Real Talk to Daena" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <h3>Real Talk to Daena</h3>
                         <p>Experience authentic conversation with Daena as she demonstrates her natural language understanding and response capabilities.</p>
@@ -1520,6 +1525,43 @@
                 observer.observe(statsSection);
             }
         });
+    </script>
+    
+    <script>
+        // Performance optimization: Defer non-critical resources
+        window.addEventListener('load', function() {
+            // Lazy load images
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+            });
+        });
+
+        // Preload critical resources
+        function preloadCriticalResources() {
+            const criticalImages = [
+                'images/video-thumb-1.jpg',
+                'images/video-thumb-2.jpg',
+                'images/video-thumb-3.jpg'
+            ];
+            
+            criticalImages.forEach(src => {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = src;
+                document.head.appendChild(link);
+            });
+        }
+        
+        // Initialize preloading after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', preloadCriticalResources);
+        } else {
+            preloadCriticalResources();
+        }
     </script>
 </body>
 </html>
