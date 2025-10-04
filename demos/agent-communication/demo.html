@@ -3,33 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Agent Communication Demo - Daena AI</title>
-    <style>
-        * {
-            margin: 0;
-必需的 padding: 0;
-=======
     <title>Daena: Agent Communication Demo</title>
     <link rel="stylesheet" href="../voice-player.css">
     <style>
         * {
             margin: 0;
             padding: 0;
->>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
             box-sizing: border-box;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-<<<<<<< HEAD
-            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
-            color: white;
-=======
             background: linear-gradient(135deg, #1a1a3a 0%, #2a1a4a 50%, #3a1a5a 100%);
             color: white;
             min-height: 100vh;
->>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
             line-height: 1.6;
         }
 
@@ -37,18 +24,6 @@
             background: rgba(0, 0, 0, 0.9);
             padding: 1rem 0;
             backdrop-filter: blur(15px);
-<<<<<<< HEAD
-            border-bottom: 2px solid rgba(255, 193, 7, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-=======
             position: sticky;
             top: 0;
             z-index: 100;
@@ -62,7 +37,6 @@
         }
 
         .header-content {
->>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -71,163 +45,6 @@
         .logo {
             font-size: 2rem;
             font-weight: bold;
-<<<<<<< HEAD
-            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .back-btn {
-            background: linear-gradient(45deg, #FFD700, #00bcd4);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 215, 虛 0, 0.3);
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .demo-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .demo-title {
-            font-size: 3rem;
-            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .demo-icon {
-            font-size: 3.5rem;
-        }
-
-        .demo-description {
-            font-size: 1.3rem;
-            color: #e0e0e0;
-            margin-bottom: 2rem;
-        }
-
-        .video-section {
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .video-container {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-player {
-            width: 100%;
-            height: 450px;
-            background: #000;
-        }
-
-        .demo-section {
-            margin: 3rem 0;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .section-title {
-            color: #FFD700;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-icon {
-            font-size: 2rem;
-        }
-
-        .section-content {
-            font-size: 1.1rem;
-            color: #e0e0e0;
-            line-height: 1.7;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .feature-card {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 0, 212, 0.3);
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-title {
-            color: #FFD700;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .patent-notice {
-            background: rgba(255, 107, 53, 0.1);
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .patent-notice h3 {
-            color: #FF6B35;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .demo-title {
-                font-size: 2rem;
-                flex-direction: column;
-            }
-            
-            .video-player {
-                height: 250px;
-            }
-            
-            .main-content {
-                padding: 1rem;
-=======
             background: linear-gradient(45deg, #FFD700, #00bcd4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -325,23 +142,13 @@
             animation: pulse 2s infinite;
         }
 
-        .demo-btn.border-highlight {
-            background: linear-gradient(135deg, #FF8C00, #FFD700);
-            animation: borderPulse 1.5s infinite;
-        }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
 
-        @keyframes borderPulse {
-            0%, 100% { background: linear-gradient(135deg, #FF8C00, #FFD700); }
-            50% { background: linear-gradient(135deg, #FFD700, #FF8C00); }
-        }
-
-        /* Agent Network Display */
-        .agent-network-display {
+        /* Agent Communication Display */
+        .agent-display {
             background: linear-gradient(145deg, rgba(10, 10, 30, 0.9), rgba(25, 25, 45, 0.8));
             border-radius: 20px;
             padding: 1.5rem;
@@ -349,94 +156,79 @@
             border: 2px solid rgba(0, 188, 212, 0.3);
         }
 
-        .agent-network-title {
+        .agent-title {
             color: #00bcd4;
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             text-align: center;
-            text-shadow: 0 0 15px rgba(0cb6d4, 0.3);
+            text-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
         }
 
-        .department-grid {
+        .agent-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
             margin-bottom: 2rem;
         }
 
-        .department-card {
+        .agent-card {
             background: linear-gradient(135deg, rgba(30, 30, 50, 0.9), rgba(45, 45, 65, 0.8));
             border-radius: 15px;
             padding: 1rem;
+            text-align: center;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
         }
 
-        .department-card.active {
+        .agent-card.active {
             border-color: #00bcd4;
             background: linear-gradient(135deg, rgba(0, 188, 212, 0.15), rgba(0, 188, 212, 0.05));
-            box-shadow: 0 10px 25px rgba(0cb6d4, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 188, 212, 0.3);
         }
 
-        .department-name {
-            color: #FFD700;
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .agent-buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-        }
-
-        .agent-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #B8BCC8;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .agent-btn.border-agent {
-            background: linear-gradient(135deg, #FF8C00, #FFD700);
-            color: #1a1a3a;
+        .agent-card.processing {
             border-color: #FFD700;
-            font-weight: 700;
-            animation: borderAgentPulse 2s infinite;
-        }
-
-        .agent-btn.active {
-            background: linear-gradient(135deg, #00bcd4, #20B2AA);
-            color: white;
-            border-color: #00bcd4;
-            font-weight: 700;
-        }
-
-        .agent-btn.processing {
-            background: linear-gradient(135deg, #FFD700, #FF8C00);
-            color: #1a1a3a;
-            border-color: #FFD700;
-            animation: processingPulse 1s infinite;
-        }
-
-        @keyframes borderAgentPulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 140, 0, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(255, 140, 0, 0.8); }
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+            animation: processingPulse 2s infinite;
         }
 
         @keyframes processingPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.02); }
+        }
+
+        .agent-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-name {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-status {
+            color: #B8BCC8;
+            font-size: 0.8rem;
+        }
+
+        .agent-progress {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            height: 6px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .agent-progress-bar {
+            background: linear-gradient(90deg, #00bcd4, #20B2AA);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
         }
 
         /* Communication Log */
@@ -509,7 +301,7 @@
             font-weight: 600;
         }
 
-        .log-confidence {
+        .log-agent {
             background: rgba(255, 215, 0, 0.2);
             color: #FFD700;
             padding: 2px 8px;
@@ -529,42 +321,6 @@
             font-size: 0.75rem;
             margin-top: 0.5rem;
             font-style: italic;
-        }
-
-        /* Statistics Dashboard */
-        .stats-dashboard {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(20, 20, 40, 0.9), rgba(35, 35, 60, 0.8));
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
-        }
-
-        .stat-value {
-            color: #FFD700;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
-        }
-
-        .stat-label {
-            color: #B8BCC8;
-            font-size: 0.8rem;
-            font-weight: 500;
         }
 
         /* Voice Controls */
@@ -606,12 +362,6 @@
             font-size: 0.85rem;
         }
 
-        @media (max-width: 1600px) {
-            .department-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr;
@@ -621,186 +371,31 @@
                 position: static;
             }
 
-            .stats-dashboard {
-                grid-template-columns: 1fr;
+            .agent-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .department-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .agent-grid {
+                grid-template-columns: 1fr;
             }
 
-            .agent-buttons-grid {
-                grid-template-columns: repeat(3, 1fr);
->>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+            .demo-controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
     <header class="header">
-<<<<<<< HEAD
-        <div class="header-content">
-            <div class="logo">Daena AI</div>
-            <a href="/demos/index.html" class="back-btn">← Back to Demos</a>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <div class="demo-header">
-            <h1 class="demo-title">
-                <span class="demo-icon">🤖</span>
-                Agent Communication Demo
-            </h1>
-            <p class="demo-description">
-                Watch how Daena's specialized AI agents communicate and collaborate in real-time to solve complex business problems
-            </p>
-        </div>
-
-        <!-- Video Section -->
-        <div class="video-section">
-            <div class="video-container">
-                <video id="demoVideo" class="video-player" controls preload="metadata">
-                    <source src="../../videos/compressed/agent communication.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </div>
-
-        <!-- Interactive Demo Sections -->
-        <section id="sec-1" class="demo-section">
-            <h2 class="section-title">
-                <span class="section-icon">👋</span>
-                Welcome to Agent Communication
-            </h2>
-            <div class="section-content">
-                This demonstration showcases how Daena's specialized AI agents communicate and coordinate tasks in real-time. 
-                Unlike traditional systems where agents work in isolation, Daena's SFHC architecture enables seamless 
-                cross-departmental collaboration with full transparency and intelligent coordination.
-            </div>
-        </section>
-
-        <section id="sec-2" class="demo-section">
-            <h2 class="section-title">
-                <span class="section-icon">🏢</span>
-                Multi-Agent Architecture
-            </h2>
-            <div class="section-content">
-                Daena operates with multiple specialized agents across different departments simultaneously. Each agent 
-                maintains its own expertise while participating in coordinated decision-making processes. This distributed 
-                intelligence approach ensures comprehensive analysis and optimal resource utilization.
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3 class="feature-title">Research Agent</h3>
-                    <p>Handles data gathering and market analysis</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3 class="feature-title">Financial Agent</h3>
-                    <p>Manages cost calculations and budget optimization</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Marketing Agent</h3>
-                    <p>Provides strategic insights and competitive analysis</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="sec-3" class="demo-section">
-            <h2 class="section-title">
-                <span class="section-icon">🔄</span>
-                Collaborative Task Execution
-            </h2>
-            <div class="section-content">
-                When a complex business request is received, multiple agents automatically coordinate their efforts. 
-                Each agent communicates its progress and findings to others, enabling real-time information sharing and 
-                collaborative problem-solving. This eliminates silos and ensures comprehensive solutions.
-            </div>
-        </section>
-
-        <section id="sec-4" class="demo-section">
-            <h2 class="section-title">
-                <span class="section-icon">💬</span>
-                Communication Transparency
-            </h2>
-            <div class="section-content">
-                All agent communications are transparently logged with timestamps and decision rationales. This creates 
-                a complete audit trail and enables stakeholders to understand the AI's reasoning process. The system 
-                maintains context across all conversations, ensuring continuity and informed decision-making.
-            </div>
-        </section>
-
-        <section id="sec-5" class="demo-section">
-            <h2 class="section-title">
-                <span class="section-icon">🎯</span>
-                Coordinated Decision Making
-            </h2>
-            <div class="section-content">
-                The final output represents a coordinated response generated by multiple agents working together. 
-                This collaborative approach results in higher accuracy, comprehensive insights, and optimal solutions 
-                that would typically require extensive human coordination and multiple days of work.
-            </div>
-        </section>
-
-        <!-- Voice-over Player -->
-        <div id="voicePlayer"></div>
-
-        <!-- Patent Notice -->
-        <div class="patent-notice">
-            <h3>🔒 Patent Protected Technology</h3>
-            <p>This demonstration showcases Daena's proprietary SFHC (Self-Fulfilling Hierarchical Communication) 
-            architecture protected under patent provisional pending status.</p>
-        </div>
-    </main>
-
-    <script src="../voice-player.js"></script>
-    <script>
-        // Load demo configuration
-        fetch('config.json')
-            .then(response => response.json())
-            .then(config => {
-                // Initialize voice-over player
-                const voicePlayer = new VoiceOverPlayer('voicePlayer', config, {
-                    autoPlay: false,
-                    showTranscript: true,
-                    smoothScroll: true
-                });
-
-                // Add keyboard shortcuts info
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'h' || e.key === 'H') {
-                        showHelp();
-                    }
-                });
-
-                function showHelp() {
-                    alert('Keyboard Shortcuts:\n' +
-                          'Space: Play/Pause\n' +
-                          'Up/Down Arrow: Previous/Next Chapter\n' +
-                          'M: Mute/Unmute\n' +
-                          '. and ,: Seek ±5 seconds\n' +
-                          'H: Show this help');
-                }
-            })
-            .catch(error => {
-                console.error('Error loading demo configuration:', error);
-                document.getElementById('voicePlayer').innerHTML = 
-                    '<div class="error-message">Demo configuration could not be loaded.</div>';
-            });
-    </script>
-</body>
-</html>
-=======
         <div class="container">
             <div class="header-content">
                 <div class="logo">Daena AI</div>
                 <div class="nav-buttons">
                     <a href="../index.html" class="nav-btn">← Demos Gallery</a>
-                    <a href="../index.html" class="nav-btn">🏠 Back to Daena</a>
+                    <a href="../../index.html" class="nav-btn">🏠 Back to Daena</a>
                 </div>
             </div>
         </div>
@@ -810,7 +405,7 @@
         <div class="main-content">
             <div class="demo-interface">
                 <h1 class="demo-title">🤖 Agent Communication Demo</h1>
-                <p class="demo-subtitle">48-agent SFHC architecture with specialized Border Agent coordination</p>
+                <p class="demo-subtitle">48-agent SFHC architecture demonstrating real-time communication and collaboration</p>
 
                 <div class="demo-controls">
                     <button id="startBackendDemo" class="demo-btn">▶️ START REAL TIME DEMO</button>
@@ -818,131 +413,47 @@
                     <button id="resetBackendDemo" class="demo-btn">🔄 RESET DEMO</button>
                 </div>
 
-                <!-- Statistics Dashboard -->
-                <div class="stats-dashboard">
-                    <div class="stat-card">
-                        <div id="totalMessages" class="stat-value">0</div>
-                        <div class="stat-label">Total Messages</div>
-                    </div>
-                    <div class="stat-card">
-                        <div id="borderMessages" class="stat-value">0</div>
-                        <div class="stat-label">Border Agent Messages</div>
-                    </div>
-                    <div class="stat-card">
-                        <div id="knowledgeTransfers" class="stat-value">0</div>
-                        <div class="stat-label">Knowledge Transfers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div id="avgConfidence" class="stat-value">0.00</div>
-                        <div class="stat-label">Avg Confidence</div>
-                    </div>
-                </div>
-
-                <!-- Agent Network Display -->
-                <div class="agent-network-display">
-                    <h2 class="agent-network-title">🔄 Agent Communication Network (48 Agents)</h2>
-                    <div class="department-grid">
-                        <!-- Finance Department -->
-                        <div id="financeDept" class="department-card">
-                            <div class="department-name">💰 Finance</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
+                <!-- Agent Communication Display -->
+                <div class="agent-display">
+                    <h2 class="agent-title">🔄 Multi-Agent Communication Network</h2>
+                    <div class="agent-grid">
+                        <!-- Research Agent -->
+                        <div id="researchAgent" class="agent-card">
+                            <div class="agent-icon">🔬</div>
+                            <div class="agent-name">Research Agent</div>
+                            <div class="agent-status">Standby</div>
+                            <div class="agent-progress">
+                                <div class="agent-progress-bar" id="researchProgress"></div>
                             </div>
                         </div>
 
-                        <!-- HR Department -->
-                        <div id="hrDept" class="department-card">
-                            <div class="department-name">👥 HR</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
+                        <!-- Financial Agent -->
+                        <div id="financialAgent" class="agent-card">
+                            <div class="agent-icon">💰</div>
+                            <div class="agent-name">Financial Agent</div>
+                            <div class="agent-status">Standby</div>
+                            <div class="agent-progress">
+                                <div class="agent-progress-bar" id="financialProgress"></div>
                             </div>
                         </div>
 
-                        <!-- Legal Department -->
-                        <div id="legalDept" class="department-card">
-                            <div class="department-name">⚖️ Legal</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
+                        <!-- Marketing Agent -->
+                        <div id="marketingAgent" class="agent-card">
+                            <div class="agent-icon">📊</div>
+                            <div class="agent-name">Marketing Agent</div>
+                            <div class="agent-status">Standby</div>
+                            <div class="agent-progress">
+                                <div class="agent-progress-bar" id="marketingProgress"></div>
                             </div>
                         </div>
 
-                        <!-- Customer Department -->
-                        <div id="customerDept" class="department-card">
-                            <div class="department-name">🎧 Customer</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
-                            </div>
-                        </div>
-
-                        <!-- Engineering Department -->
-                        <div id="engineeringDept" class="department-card">
-                            <div class="department-name">⚙️ Engineering</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
-                            </div>
-                        </div>
-
-                        <!-- Marketing Department -->
-                        <div id="marketingDept" class="department-card">
-                            <div class="department-name">📊 Marketing</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
-                            </div>
-                        </div>
-
-                        <!-- Sales Department -->
-                        <div id="salesDept" class="department-card">
-                            <div class="department-name">📈 Sales</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
-                            </div>
-                        </div>
-
-                        <!-- Operations Department -->
-                        <div id="operationsDept" class="department-card">
-                            <div class="department-name">🔄 Operations</div>
-                            <div class="agent-buttons-grid">
-                                <button class="agent-btn">Strategic</button>
-                                <button class="agent-btn">Growth</button>
-                                <button class="agent-btn">Research</button>
-                                <button class="agent-btn">Data</button>
-                                <button class="agent-btn border-agent">Border</button>
-                                <button class="agent-btn">Exec</button>
+                        <!-- Legal Agent -->
+                        <div id="legalAgent" class="agent-card">
+                            <div class="agent-icon">⚖️</div>
+                            <div class="agent-name">Legal Agent</div>
+                            <div class="agent-status">Standby</div>
+                            <div class="agent-progress">
+                                <div class="agent-progress-bar" id="legalProgress"></div>
                             </div>
                         </div>
                     </div>
@@ -950,10 +461,10 @@
 
                 <!-- Communication Log -->
                 <div class="communication-log">
-                    <h2 class="log-title">💬 Real-time Activity Feed</h2>
+                    <h2 class="log-title">📋 Agent Communication Log</h2>
                     <div id="logEntries" class="log-entries">
                         <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
-                            Agent communication system initialized and ready.
+                            Agent Communication system initialized and ready.
                         </div>
                     </div>
                 </div>
@@ -980,46 +491,38 @@
         class DaenaAgentCommunicationDemo {
             constructor() {
                 this.isRunning = false;
-                this.totalMessages = 0;
-                this.borderMessages = 0;
-                this.knowledgeTransfers = 0;
-                this.totalConfidence = 0;
-                this.confidenceCount = 0;
                 this.voicePlayer = null;
-                
-                this.departments = ['financeDept', 'hrDept', 'legalDept', 'customerDept', 'engineeringDept', 'marketingDept', 'salesDept', 'operationsDept'];
-                this.departmentNames = ['Finance', 'HR', 'Legal', 'Customer', 'Engineering', 'Marketing', 'Sales', 'Operations'];
                 
                 this.phases = [
                     {
-                        title: "Multi-agent interface overview",
-                        duration: 3000,
-                        action: this.showMultiAgentInterface.bind(this)
+                        title: "Agent network initialization",
+                        duration: 2000,
+                        action: this.initializeAgents.bind(this)
                     },
                     {
-                        title: "Collaborative task initiation", 
+                        title: "Research agent activation",
+                        duration: 3000,
+                        action: this.activateResearchAgent.bind(this)
+                    },
+                    {
+                        title: "Financial agent coordination",
+                        duration: 3000,
+                        action: this.activateFinancialAgent.bind(this)
+                    },
+                    {
+                        title: "Marketing agent collaboration",
+                        duration: 3000,
+                        action: this.activateMarketingAgent.bind(this)
+                    },
+                    {
+                        title: "Legal agent integration",
+                        duration: 3000,
+                        action: this.activateLegalAgent.bind(this)
+                    },
+                    {
+                        title: "Cross-agent communication",
                         duration: 4000,
-                        action: this.initiateCollaborativeTask.bind(this)
-                    },
-                    {
-                        title: "Real-time communication flow",
-                        duration: 5000,
-                        action: this.showRealTimeCommunication.bind(this)
-                    },
-                    {
-                        title: "Agent conversation threads",
-                        duration: 4000,
-                        action: this.showConversationThreads.bind(this)
-                    },
-                    {
-                        title: "Transparent decision-making",
-                        duration: 3000,
-                        action: this.showTransparentDecision.bind(this)
-                    },
-                    {
-                        title: "Coordinated task completion",
-                        duration: 3000,
-                        action: this.completeCoordination.bind(this)
+                        action: this.crossAgentCommunication.bind(this)
                     }
                 ];
 
@@ -1034,8 +537,6 @@
                 this.startBtn.addEventListener('click', () => this.startDemo());
                 this.stopBtn.addEventListener('click', () => this.stopDemo());
                 this.resetBtn.addEventListener('click', () => this.resetDemo());
-
-                this.updateStats();
 
                 // Load voice player config
                 this.loadVoiceConfig();
@@ -1064,13 +565,13 @@
                     this.voicePlayer.play();
                 }
 
-                // Clear communication log
+                // Clear activity log
                 document.getElementById('logEntries').innerHTML = '';
 
                 for (const phase of this.phases) {
                     if (!this.isRunning) break;
                     
-                    this.updatePhaseIndicator(phase.title, `Showing ${phase.title.toLowerCase()}`);
+                    this.updatePhaseIndicator(phase.title, `Executing ${phase.title.toLowerCase()}`);
                     await phase.action();
                     await this.delay(1500);
                 }
@@ -1078,9 +579,9 @@
                 if (this.isRunning) {
                     this.stopDemo();
                     this.addLogEntry(
-                        'System',
-                        'Agent coordination demonstration completed',
-                        '48 agents successfully coordinated across 8 departments',
+                        'Communication Manager',
+                        'Agent Communication demonstration completed',
+                        'All agents successfully coordinated with optimal communication efficiency',
                         98
                     );
                 }
@@ -1101,33 +602,21 @@
             resetDemo() {
                 this.stopDemo();
                 
-                // Reset stats
-                this.totalMessages = 0;
-                this.borderMessages = 0;
-                this.knowledgeTransfers = 0;
-                this.totalConfidence = 0;
-                this.confidenceCount = 0;
-                
-                this.updateStats();
-
-                // Reset all departments
-                this.departments.forEach(deptId => {
-                    const deptCard = document.getElementById(deptId);
-                    deptCard.classList.remove('active');
+                // Reset all agents
+                const agents = ['researchAgent', 'financialAgent', 'marketingAgent', 'legalAgent'];
+                agents.forEach(agentId => {
+                    const agent = document.getElementById(agentId);
+                    const progressBar = document.getElementById(agentId.replace('Agent', 'Progress'));
+                    
+                    agent.classList.remove('active', 'processing');
+                    agent.querySelector('.agent-status').textContent = 'Standby';
+                    progressBar.style.width = '0%';
                 });
 
-                // Reset all agent buttons
-                document.querySelectorAll('.agent-btn').forEach(btn => {
-                    btn.classList.remove('active', 'processing');
-                    if (!btn.classList.contains('border-agent')) {
-                        btn.style.opacity = '0.7';
-                    }
-                });
-
-                // Clear communication log
+                // Clear activity log
                 document.getElementById('logEntries').innerHTML = `
                     <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
-                        Agent communication system initialized and ready.
+                        Agent Communication system initialized and ready.
                     </div>
                 `;
 
@@ -1139,183 +628,201 @@
                 }
             }
 
-            async showMultiAgentInterface() {
+            async initializeAgents() {
                 this.addLogEntry(
                     'System',
-                    'Multi-agent interface activated',
-                    '48 specialists across Finance, HR, Legal, Customer, Engineering, Marketing, Sales, Operations',
-                    95
+                    'Agent Communication network activated',
+                    '48-agent SFHC architecture initialized for real-time communication',
+                    'Initialization'
                 );
 
-                // Highlight all Border agents
-                document.querySelectorAll('.agent-btn.border-agent').forEach(btn => {
-                    btn.classList.add('border-highlight');
+                // Activate all agents briefly
+                const agents = ['researchAgent', 'financialAgent', 'marketingAgent', 'legalAgent'];
+                agents.forEach(agentId => {
+                    document.getElementById(agentId).classList.add('active');
                 });
 
                 await this.delay(2000);
-
-                // Activate first department
-                document.getElementById('financeDept').classList.add('active');
-                
-                await this.delay(1500);
-
-                document.querySelectorAll('#financeDept .agent-btn').forEach(btn => {
-                    btn.classList.add('active');
-                    btn.style.opacity = '1';
-                });
             }
 
-            async initiateCollaborativeTask() {
+            async activateResearchAgent() {
+                this.setAgentActive('researchAgent', 'processing');
+                
+                const researchTasks = [
+                    'Market analysis data collection',
+                    'Competitive landscape research',
+                    'Industry trend identification',
+                    'Customer behavior analysis',
+                    'Technology assessment'
+                ];
+
+                for (let i = 0; i < researchTasks.length; i++) {
+                    if (!this.isRunning) break;
+                    
+                    this.addLogEntry(
+                        'Research Agent',
+                        researchTasks[i],
+                        `Processing research data with 94% accuracy`,
+                        'Research'
+                    );
+                    
+                    this.updateAgentProgress('researchAgent', ((i + 1) / researchTasks.length) * 100);
+                    await this.delay(600);
+                }
+
+                this.setAgentActive('researchAgent', 'active');
+            }
+
+            async activateFinancialAgent() {
+                this.setAgentActive('financialAgent', 'processing');
+                
+                const financialTasks = [
+                    'Budget analysis and allocation',
+                    'Cost-benefit calculations',
+                    'Revenue projection modeling',
+                    'Risk assessment evaluation',
+                    'ROI optimization strategies'
+                ];
+
+                for (let i = 0; i < financialTasks.length; i++) {
+                    if (!this.isRunning) break;
+                    
+                    this.addLogEntry(
+                        'Financial Agent',
+                        financialTasks[i],
+                        `Financial analysis with 96% precision`,
+                        'Financial'
+                    );
+                    
+                    this.updateAgentProgress('financialAgent', ((i + 1) / financialTasks.length) * 100);
+                    await this.delay(600);
+                }
+
+                this.setAgentActive('financialAgent', 'active');
+            }
+
+            async activateMarketingAgent() {
+                this.setAgentActive('marketingAgent', 'processing');
+                
+                const marketingTasks = [
+                    'Target audience identification',
+                    'Campaign strategy development',
+                    'Brand positioning analysis',
+                    'Market penetration planning',
+                    'Customer acquisition optimization'
+                ];
+
+                for (let i = 0; i < marketingTasks.length; i++) {
+                    if (!this.isRunning) break;
+                    
+                    this.addLogEntry(
+                        'Marketing Agent',
+                        marketingTasks[i],
+                        `Marketing strategy development with 92% effectiveness`,
+                        'Marketing'
+                    );
+                    
+                    this.updateAgentProgress('marketingAgent', ((i + 1) / marketingTasks.length) * 100);
+                    await this.delay(600);
+                }
+
+                this.setAgentActive('marketingAgent', 'active');
+            }
+
+            async activateLegalAgent() {
+                this.setAgentActive('legalAgent', 'processing');
+                
+                const legalTasks = [
+                    'Compliance requirement analysis',
+                    'Regulatory framework review',
+                    'Contract evaluation and drafting',
+                    'Risk mitigation strategies',
+                    'Legal documentation preparation'
+                ];
+
+                for (let i = 0; i < legalTasks.length; i++) {
+                    if (!this.isRunning) break;
+                    
+                    this.addLogEntry(
+                        'Legal Agent',
+                        legalTasks[i],
+                        `Legal analysis with 98% compliance accuracy`,
+                        'Legal'
+                    );
+                    
+                    this.updateAgentProgress('legalAgent', ((i + 1) / legalTasks.length) * 100);
+                    await this.delay(600);
+                }
+
+                this.setAgentActive('legalAgent', 'active');
+            }
+
+            async crossAgentCommunication() {
                 this.addLogEntry(
-                    'Finance Border Agent',
-                    'Collaborative task initiated: Product launch optimization',
-                    'Cross-department coordination required for Q1 launch strategy',
-                    92
+                    'Communication Manager',
+                    'Initiating cross-agent communication protocols',
+                    'All agents now sharing data and coordinating decisions',
+                    'Coordination'
                 );
 
-                // Animate task distribution
-                const departments = ['financeDept', 'marketingDept', 'salesDept'];
-                
-                for (const deptId of departments) {
+                // Show all agents communicating
+                const agents = ['researchAgent', 'financialAgent', 'marketingAgent', 'legalAgent'];
+                agents.forEach(agentId => {
+                    const agent = document.getElementById(agentId);
+                    agent.classList.add('processing');
+                });
+
+                const communicationTasks = [
+                    'Research Agent → Financial Agent: Market data shared',
+                    'Financial Agent → Marketing Agent: Budget constraints communicated',
+                    'Marketing Agent → Legal Agent: Campaign requirements discussed',
+                    'Legal Agent → Research Agent: Compliance guidelines provided',
+                    'All Agents: Coordinated decision-making process initiated'
+                ];
+
+                for (let i = 0; i < communicationTasks.length; i++) {
                     if (!this.isRunning) break;
-                    document.getElementById(deptId).classList.add('active');
                     
-                    const borderBtn = document.querySelector(`#${deptId} .border-agent`);
-                    borderBtn.classList.add('processing');
-                    
-                    await this.delay(1000);
-                    
-                    document.querySelectorAll(`#${deptId} .agent-btn`).forEach(btn => {
-                        btn.classList.add('active');
-                        btn.style.opacity = '1';
-                    });
+                    this.addLogEntry(
+                        'Communication Network',
+                        communicationTasks[i],
+                        `Real-time agent coordination with 97% efficiency`,
+                        'Coordination'
+                    );
                     
                     await this.delay(800);
                 }
 
-                this.totalMessages++;
-                this.borderMessages++;
+                // Show all agents as active and communicating
+                agents.forEach(agentId => {
+                    const agent = document.getElementById(agentId);
+                    agent.classList.remove('processing');
+                    agent.classList.add('active');
+                });
             }
 
-            async showRealTimeCommunication() {
-                this.addLogEntry(
-                    'Marketing Border Agent',
-                    'Real-time communication initiated with Finance',
-                    'Budget allocation analysis and campaign ROI projections',
-                    88
-                );
-
-                // Show communication between departments
-                const communicationPairs = [
-                    ['financeDept', 'marketingDept'],
-                    ['salesDept', 'customerDept'],
-                    ['engineeringDept', 'operationsDept']
-                ];
-
-                for (const [dept1, dept2] of communicationPairs) {
-                    if (!this.isRunning) break;
-                    
-                    document.getElementById(dept1).classList.add('active');
-                    document.getElementById(dept2).classList.add('active');
-                    
-                    const borderAgents = [
-                        document.querySelector(`#${dept1} .border-agent`),
-                        document.querySelector(`#${dept2} .border-agent`)
-                    ];
-                    
-                    borderAgents.forEach(btn => btn.classList.add('processing'));
-                    
-                    await this.delay(1500);
-                }
-
-                this.totalMessages += 3;
-                this.borderMessages += 2;
-            }
-
-            async showConversationThreads() {
-                this.addLogEntry(
-                    'Sales Border Agent',
-                    'Conversation thread: Customer acquisition strategy',
-                    'Sharing insights between Sales, Customer, and Marketing agents',
-                    85
-                );
-
-                this.addLogEntry(
-                    'Customer Border Agent',
-                    'Cross-reference: Lead qualification criteria',
-                    'Providing customer feedback data to Sales agents',
-                    91
-                );
-
-                // Activate remaining departments
-                const remainingDepts = ['legalDept', 'hrDept'];
+            setAgentActive(agentId, status) {
+                const agent = document.getElementById(agentId);
+                const statusElement = agent.querySelector('.agent-status');
                 
-                for (const deptId of remainingDepts) {
-                    if (!this.isRunning) break;
-                    document.getElementById(deptId).classList.add('active');
-                    
-                    const borderBtn = document.querySelector(`#${deptId} .border-agent`);
-                    borderBtn.classList.add('processing');
-                    
-                    await this.delay(1200);
-                    
-                    document.querySelectorAll(`#${deptId} .agent-btn`).forEach(btn => {
-                        btn.classList.add('active');
-                        btn.style.opacity = '1';
-                    });
+                // Clear previous state classes
+                agent.classList.remove('active', 'processing');
+                
+                statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+
+                if (status === 'processing') {
+                    agent.classList.add('processing');
+                } else if (status === 'active') {
+                    agent.classList.add('active');
                 }
-
-                this.totalMessages += 2;
-                this.knowledgeTransfers += 2;
             }
 
-            async showTransparentDecision() {
-                this.addLogEntry(
-                    'Legal Border Agent',
-                    'Transparent decision: Compliance framework',
-                    'Providing legal framework for cross-department initiatives',
-                    87
-                );
-
-                // Show all departments active
-                this.departments.forEach(deptId => {
-                    document.getElementById(deptId).classList.add('active');
-                });
-
-                // Show Border agents coordinating
-                document.querySelectorAll('.agent-btn.border-agent').forEach(btn => {
-                    btn.classList.add('processing');
-                });
-
-                await this.delay(2000);
-
-                this.totalMessages++;
+            updateAgentProgress(agentId, percentage) {
+                const progressBar = document.getElementById(agentId.replace('Agent', 'Progress'));
+                progressBar.style.width = percentage + '%';
             }
 
-            async completeCoordination() {
-                this.addLogEntry(
-                    'System Coordinator',
-                    'Coordinated task completion achieved',
-                    'All 48 agents successfully collaborated across 8 departments',
-                    96
-                );
-
-                // Final state - all agents active
-                document.querySelectorAll('.agent-btn').forEach(btn => {
-                    btn.classList.remove('processing');
-                    if (btn.classList.contains('border-agent')) {
-                        btn.classList.add('border-highlight');
-                    } else {
-                        btn.classList.add('active');
-                    }
-                    btn.style.opacity = '1';
-                });
-
-                this.totalMessages++;
-                this.knowledgeTransfers++;
-            }
-
-            addLogEntry(from, message, details, confidence) {
+            addLogEntry(from, message, details, agent) {
                 const logEntries = document.getElementById('logEntries');
                 
                 const time = new Date().toLocaleTimeString('en-US', { 
@@ -1330,7 +837,7 @@
                 logEntry.innerHTML = `
                     <div class="log-header">
                         <div style="color: #00bcd4; font-weight: 600;">${time} - ${from}</div>
-                        <div class="log-confidence">${confidence}%</div>
+                        <div class="log-agent">${agent}</div>
                     </div>
                     <div class="log-content">${message}</div>
                     <div class="log-details">${details}</div>
@@ -1339,24 +846,10 @@
                 logEntries.appendChild(logEntry);
                 logEntries.scrollTop = logEntries.scrollHeight;
 
-                // Update stats
-                this.totalConfidence += confidence;
-                this.confidenceCount++;
-                this.updateStats();
-
                 // Keep only 10 most recent entries
                 while (logEntries.children.length > 10) {
                     logEntries.removeChild(logEntries.firstChild);
                 }
-            }
-
-            updateStats() {
-                document.getElementById('totalMessages').textContent = this.totalMessages;
-                document.getElementById('borderMessages').textContent = this.borderMessages;
-                document.getElementById('knowledgeTransfers').textContent = this.knowledgeTransfers;
-                
-                const avgConfidence = this.confidenceCount > 0 ? (this.totalConfidence / this.confidenceCount) : 0;
-                document.getElementById('avgConfidence').textContent = avgConfidence.toFixed(2);
             }
 
             updatePhaseIndicator(title, description) {
@@ -1370,9 +863,8 @@
 
         // Initialize demo when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            window.agentCommDemo = new DaenaAgentCommunicationDemo();
+            window.agentCommunicationDemo = new DaenaAgentCommunicationDemo();
         });
     </script>
 </body>
 </html>
->>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
