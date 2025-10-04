@@ -1,0 +1,65 @@
+{
+<<<<<<< HEAD
+  "title": "Daena Agent Communication Demo",
+  "audio": "../voice-over-demos/Demo 1 Agent Communication.mp3",
+  "chapters": [
+    { "t": 0, "id": "sec-1", "label": "Welcome to Daena's Agent Communication demonstration" },
+    { "t": 8, "id": "sec-2", "label": "Multiple specialized agents active across departments" },
+    { "t": 18, "id": "sec-3", "label": "Initiating collaborative task demonstration" },
+    { "t": 35, "id": "sec-4", "label": "Communication thread visualization with timestamps" },
+    { "t": 55, "id": "sec-5", "label": "Coordinated response from multiple agents working together" }
+  ],
+  "videoPath": "../../videos/compressed/agent communication.mp4",
+  "description": "Demonstrates seamless agent collaboration with full transparency and coordinated decision-making across specialized AI modules."
+=======
+  "title": "Daena: Agent Communication Demo",
+  "audio": "../voice-over-demos/Demo 1 Agent Communication.mp3",
+  "video": "../../videos/compressed/agent communication.mp4",
+  "chapters": [
+    { "t": 0, "id": "sec-1", "label": "Intro: Agent Communication Demonstration" },
+    { "t": 15, "id": "sec-2", "label": "Multi-agent interface overview" },
+    { "t": 30, "id": "sec-3", "label": "Collaborative task initiation" },
+    { "t": 45, "id": "sec-4", "label": "Real-time communication flow" },
+    { "t": 60, "id": "sec-5", "label": "Transparent decision-making process" },
+    { "t": 75, "id": "sec-6", "label": "Coordinated response generation" }
+  ],
+  "sections": [
+    {
+      "id": "sec-1",
+      "title": "Welcome to Agent Communication",
+      "description": "This demonstration shows how Daena's specialized AI agents communicate and coordinate tasks across multiple departments.",
+      "content": "<h3>🤖 Daena Multi-Agent Architecture</h3><p>Watch as multiple specialized agents work together seamlessly to solve complex business challenges.</p>"
+    },
+    {
+      "id": "sec-2", 
+      "title": "Interface Overview",
+      "description": "The communication interface displays active agents across different departments with real-time status updates.",
+      "content": "<h3>📊 Agent Status Dashboard</h3><p>Each agent shows current status, communication threads, and processing capabilities.</p>"
+    },
+    {
+      "id": "sec-3",
+      "title": "Task Coordination", 
+      "description": "Daena initiates collaborative tasks by distributing work across specialized agents simultaneously.",
+      "content": "<h3>⚡ Intelligent Task Distribution</h3><p>Watchers agents receive assigned tasks and begin processing in parallel with full transparency.</p>"
+    },
+    {
+      "id": "sec-4",
+      "title": "Communication Protocols",
+      "description": "Agents exchange information, context, and decision rationale through structured communication channels.",
+      "content": "<h3>💬 Real-time Communication Flow</h3><p>Agencies share insights, not just data, enabling intelligent collaboration across departments.</p>"
+    },
+    {
+      "id": "sec-5", 
+      "title": "Decision Transparency",
+      "description": "Every agent decision is documented with reasoning, creating audit traces and building trust.",
+      "content": "<h3>🎯 Transparent Decision-Making</h3><p>Witness how Daena maintains full transparency in multi-agent decision processes.</p>"
+    },
+    {
+      "id": "sec-6",
+      "title": "Coordinated Results",
+      "description": "Multiple agents produce integrated results that exceed the sum of individual capabilities.",
+      "content": "<h3>🚀 Unified Output Generation</h3><p>See how coordinated agent collaboration produces comprehensive business solutions.</p>"
+    }
+  ]
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+}

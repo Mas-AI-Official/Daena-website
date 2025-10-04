@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Image Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .slide-preview {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #8b5cf6 100%);
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            border-radius: 10px;
+            position: relative;
+        }
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.5em;
+        }
+        button {
+            background: #00bcd4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0097a7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daena Pitch Deck - Placeholder Image Generator</h1>
+        <p>This tool generates placeholder images for testing the presentation. Click "Generate All Images" to create placeholder slides.</p>
+        
+        <button onclick="generateAllImages()">Generate All Images</button>
+        <button onclick="downloadAllImages()">Download All Images</button>
+        
+        <div id="previews"></div>
+    </div>
+
+    <script>
+        const slideTitles = [
+            "PITCH DECK DAENA",
+            "PROBLEMS",
+            "SOLUTION", 
+            "DAENA VP",
+            "HOW IT WORKS",
+            "MARKET OPPORTUNITY & ROI",
+            "BUSINESS MODEL",
+            "TRACTION",
+            "GO-TO-MARKET STRATEGY",
+            "MARKET SIZE",
+            "TECHNOLOGY COMPARISON",
+            "OUR ASK: $12M + $1M BONUS",
+            "THANK YOU"
+        ];
+
+        function generateAllImages() {
+            const previews = document.getElementById('previews');
+            previews.innerHTML = '';
+            
+            for (let i = 0; i < 13; i++) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1200;
+                canvas.height = 675;
+                const ctx = canvas.getContext('2d');
+                
+                // Background gradient
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, '#1e3a8a');
+                gradient.addColorStop(0.5, '#3b82f6');
+                gradient.addColorStop(1, '#8b5cf6');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Title text
+                ctx.fillStyle = '#00bcd4';
+                ctx.font = 'bold 60px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(slideTitles[i], canvas.width / 2, canvas.height / 2);
+                
+                // Slide number
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(canvas.width - 100, canvas.height - 50, 80, 30);
+                ctx.fillStyle = '#00bcd4';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText((i + 1).toString(), canvas.width - 60, canvas.height - 30);
+                
+                // Convert to image
+                const img = document.createElement('img');
+                img.src = canvas.toDataURL();
+                img.style.width = '100%';
+                img.style.height = '400px';
+                img.style.objectFit = 'cover';
+                img.style.borderRadius = '10px';
+                img.style.margin = '10px 0';
+                
+                const slideDiv = document.createElement('div');
+                slideDiv.innerHTML = `<h3>Slide ${i + 1}: ${slideTitles[i]}</h3>`;
+                slideDiv.appendChild(img);
+                
+                // Download button for individual slide
+                const downloadBtn = document.createElement('button');
+                downloadBtn.textContent = `Download Slide ${i + 1}`;
+                downloadBtn.onclick = () => downloadImage(canvas, `slide-${i + 1}.png`);
+                slideDiv.appendChild(downloadBtn);
+                
+                previews.appendChild(slideDiv);
+            }
+        }
+
+        function downloadImage(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function downloadAllImages() {
+            for (let i = 0; i < 13; i++) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1200;
+                canvas.height = 675;
+                const ctx = canvas.getContext('2d');
+                
+                // Background gradient
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, '#1e3a8a');
+                gradient.addColorStop(0.5, '#3b82f6');
+                gradient.addColorStop(1, '#8b5cf6');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Title text
+                ctx.fillStyle = '#00bcd4';
+                ctx.font = 'bold 60px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(slideTitles[i], canvas.width / 2, canvas.height / 2);
+                
+                // Slide number
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(canvas.width - 100, canvas.height - 50, 80, 30);
+                ctx.fillStyle = '#00bcd4';
+                ctx.font = 'bold 20px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText((i + 1).toString(), canvas.width - 60, canvas.height - 30);
+                
+                // Download with delay to avoid browser blocking
+                setTimeout(() => {
+                    downloadImage(canvas, `slide-${i + 1}.png`);
+                }, i * 500);
+            }
+        }
+    </script>
+</body>
+</html>

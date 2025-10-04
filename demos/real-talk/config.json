@@ -1,0 +1,13 @@
+{
+  "title": "Daena: Real Talk Conversation",
+  "audio": "../voice-over-demos/Real Talk Demo.mp3",
+  "video": "../../videos/compressed/real talk to daena and whole system - Made with Clipchamp.mp4",
+  "chapters": [
+    { "t": 0, "id": "sec-1", "label": "Intro: Authentic Conversation Interface" },
+    { "t": 15, "id": "sec-2", "label": "Question processing demonstration" },
+    { "t": 30, "id": "sec-3", "label": "Contextual analysis response" },
+    { "t": 45, "id": "sec-4", "label": "Context building capabilities" },
+    { "t": 60, "id": "sec-5", "label": "Emotional intelligence demonstration" },
+    { "t": 75, "id": "sec-6", "label": "Strategic interaction examples" }
+  ]
+}

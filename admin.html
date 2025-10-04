@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daena Demo Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 188, 212, 0.3);
+        }
+
+        h1 {
+            color: #FFD700;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .admin-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-section h2 {
+            color: #00bcd4;
+            margin-bottom: 1.5rem;
+        }
+
+        .access-link {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+
+        .access-link a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        .access-link a:hover {
+            color: #00bcd4;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Website</a>
+        
+        <h1>🔐 Daena Demo Admin Panel</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalRequests">0</div>
+                <div class="stat-label">Total Requests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeDemos">0</div>
+                <div class="stat-label">Active Demos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="apiUsage">0%</div>
+                <div class="stat-label">API Usage</div>
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h2>🎯 Quick Access Links</h2>
+            <p>Generate demo access links for specific users:</p>
+            
+            <div class="access-link">
+                <strong>General Demo Access:</strong><br>
+                <a href="index.html?demo=true" target="_blank">https://your-domain.com/index.html?demo=true</a>
+            </div>
+            
+            <div class="access-link">
+                <strong>Investor Demo Access:</strong><br>
+                <a href="index.html?access=granted&type=investor" target="_blank">https://your-domain.com/index.html?access=granted&type=investor</a>
+            </div>
+            
+            <div class="access-link">
+                <strong>Customer Demo Access:</strong><br>
+                <a href="index.html?access=granted&type=customer" target="_blank">https://your-domain.com/index.html?access=granted&type=customer</a>
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h2>⚙️ Demo Settings</h2>
+            <p>Configure demo parameters:</p>
+            
+            <div style="margin: 1rem 0;">
+                <label for="maxMessages">Max Messages per Session:</label>
+                <input type="number" id="maxMessages" value="5" min="1" max="20" style="margin-left: 1rem; padding: 5px; border-radius: 5px; background: rgba(255,255,255,0.1); color: white; border: 1px solid #00bcd4;">
+            </div>
+            
+            <div style="margin: 1rem 0;">
+                <label for="sessionDuration">Session Duration (hours):</label>
+                <input type="number" id="sessionDuration" value="24" min="1" max="168" style="margin-left: 1rem; padding: 5px; border-radius: 5px; background: rgba(255,255,255,0.1); color: white; border: 1px solid #00bcd4;">
+            </div>
+            
+            <button class="btn" onclick="updateSettings()">Update Settings</button>
+        </div>
+
+        <div class="admin-section">
+            <h2>📊 Access Management</h2>
+            <p>Manage demo access requests and approvals:</p>
+            
+            <button class="btn" onclick="grantAccess()">Grant Demo Access</button>
+            <button class="btn" onclick="revokeAccess()">Revoke All Access</button>
+            <button class="btn" onclick="resetCounters()">Reset Counters</button>
+        </div>
+
+        <div class="admin-section">
+            <h2>📧 Email Templates</h2>
+            <p>Quick email templates for demo access:</p>
+            
+            <div style="margin: 1rem 0;">
+                <button class="btn" onclick="copyEmailTemplate('approval')">Copy Approval Email</button>
+                <button class="btn" onclick="copyEmailTemplate('denial')">Copy Denial Email</button>
+            </div>
+            
+            <div id="emailTemplate" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 10px; margin-top: 1rem; display: none;">
+                <pre id="templateContent"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo access management
+        function grantAccess() {
+            if (confirm('Grant demo access to current user?')) {
+                // In a real implementation, this would update the database
+                alert('Demo access granted! User can now access the demo.');
+                updateStats();
+            }
+        }
+
+        function revokeAccess() {
+            if (confirm('Revoke all demo access? This will log out all users.')) {
+                // In a real implementation, this would revoke all tokens
+                alert('All demo access revoked.');
+                updateStats();
+            }
+        }
+
+        function resetCounters() {
+            if (confirm('Reset all counters and statistics?')) {
+                document.getElementById('totalRequests').textContent = '0';
+                document.getElementById('activeDemos').textContent = '0';
+                document.getElementById('apiUsage').textContent = '0%';
+                alert('Counters reset successfully.');
+            }
+        }
+
+        function updateSettings() {
+            const maxMessages = document.getElementById('maxMessages').value;
+            const sessionDuration = document.getElementById('sessionDuration').value;
+            
+            // In a real implementation, this would update the backend settings
+            alert(`Settings updated: Max messages: ${maxMessages}, Session duration: ${sessionDuration} hours`);
+        }
+
+        function updateStats() {
+            // Simulate updating statistics
+            document.getElementById('totalRequests').textContent = Math.floor(Math.random() * 100);
+            document.getElementById('activeDemos').textContent = Math.floor(Math.random() * 20);
+            document.getElementById('apiUsage').textContent = Math.floor(Math.random() * 100) + '%';
+        }
+
+        function copyEmailTemplate(type) {
+            const templates = {
+                approval: `Subject: Daena AI Demo Access Approved
+
+Dear [Name],
+
+Thank you for your interest in Daena AI! Your demo access request has been approved.
+
+Demo Access Link: https://your-domain.com/index.html?access=granted&type=[type]
+
+Demo Features:
+- Live conversation with Daena's 48 AI agents
+- Real-time multi-agent coordination
+- Limited to 5 interactions per session
+- Valid for 24 hours
+
+Best regards,
+Masoud Masoori
+Founder & CEO, Daena AI`,
+
+                denial: `Subject: Daena AI Demo Access Request
+
+Dear [Name],
+
+Thank you for your interest in Daena AI. Unfortunately, we cannot approve your demo access request at this time.
+
+We're currently in a limited beta phase and are prioritizing enterprise customers and investors.
+
+Please contact us directly at masoud.masoori@gmail.com for more information about our upcoming public launch.
+
+Best regards,
+Masoud Masoori
+Founder & CEO, Daena AI`
+            };
+
+            const template = templates[type];
+            document.getElementById('templateContent').textContent = template;
+            document.getElementById('emailTemplate').style.display = 'block';
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(template).then(() => {
+                alert('Email template copied to clipboard!');
+            });
+        }
+
+        // Initialize stats on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "title": "Daena: Enhanced Patent Analysis",
+  "audio": "../voice-over-demos/Demo 5 Patent Technology Enhanced.mp3",
+  "video": "../../videos/compressed/patent Technology - Made with Clipchamp.mp4",
+  "chapters": [
+    { "t": 0, "id": "sec-1", "label": "Intro: Enhanced Patent Interface" },
+    { "t": 18, "id": "sec-2", "label": "Deep technical analysis" },
+    { "t": 35, "id": "sec-3", "label": "Network relationship mapping" },
+    { "t": 52, "id": "sec-4", "label": "Freedom-to-operate analysis" },
+    { "t": 70, "id": "sec-5", "label": "Commercial intelligence evaluation" },
+    { "t": 85, "id": "sec-6", "label": "Strategic IP guidance" }
+  ]
+}

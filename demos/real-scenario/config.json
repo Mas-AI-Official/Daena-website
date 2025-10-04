@@ -1,0 +1,14 @@
+{
+  "title": "Daena: Real World Scenario",
+  "audio": "../voice-over-demos/Real Scenario Demo.mp3",
+  "video": "../../videos/compressed/REAL SENARIO DEMO.mp4",
+  "chapters": [
+    { "t": 0, "id": "sec-1", "label": "Intro: Complex Business Challenge" },
+    { "t": 15, "id": "sec-2", "label": "Multi-agent coordination setup" },
+    { "t": 30, "id": "sec-3", "label": "Strategic pathway analysis" },
+    { "t": 45, "id": "sec-4", "label": "Risk assessment dashboard" },
+    { "t": 60, "id": "sec-5", "label": "Timeline optimization process" },
+    { "t": 75, "id": "sec-6", "label": "Comprehensive strategy delivery" },
+    { "t": 90, "id": "sec-7", "label": "Implementation roadmap" }
+  ]
+}

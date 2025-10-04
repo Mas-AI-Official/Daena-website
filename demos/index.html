@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daena AI Interactive Demos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            color: #bbb;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .patent-notice {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .patent-notice h3 {
+            color: #FF6B35;
+            margin-bottom: 1rem;
+        }
+
+        .patent-notice p {
+            color: #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        /* Demo Grid */
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .demo-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .demo-title {
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-description {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .demo-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+
+        .demo-duration {
+            background: rgba(0, 188, 212, 0.2);
+            padding: 4px 8px;
+            border-radius: 10px;
+            color: #00bcd cd;
+            font-weight: bold;
+        }
+
+        .demo-stats {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .demo-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            flex: 1;
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            min-width: 120px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .demo-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .demo-btn.secondary:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .demos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .demo-card {
+                padding: 1.5rem;
+            }
+            
+            .demo-actions {
+                flex-direction: column;
+            }
+            
+            .demo-btn {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <a href="../index.html" class="back-btn">← Back to Daena</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="hero-section">
+                <h1 class="hero-title">🎬 Interactive Daena Demos</h1>
+                <p class="hero-subtitle">Experience Daena's Revolutionary AI Capabilities</p>
+                <p class="hero-description">
+                    Watch professional demonstrations showcasing Daena's specialized AI agents, 
+                    autonomous decision-making, and real-world business intelligence capabilities. 
+                    Each demo includes synchronized voice-over narration and interactive features.
+                </p>
+            </div>
+
+            <div class="patent-notice">
+                <h3>🔒 Patent Protected Technology</h3>
+                <p>All demonstrations contain proprietary technology protected under patent provisional pending status. These interactive demos showcase Daena's revolutionary SFHC multi-agent architecture and autonomous business intelligence capabilities.</p>
+            </div>
+
+            <div class="demos-grid">
+                <!-- Demo 1: Agent Communication -->
+                <div class="demo-card">
+                    <span class="demo-icon">🤖</span>
+                    <h3 class="demo-title">Agent Communication</h3>
+                    <p class="demo-description">
+                        Watch how Daena's specialized AI agents communicate and collaborate in real-time to solve complex business problems. See seamless coordination and transparent decision-making across multiple departments.
+                    </p>
+                    <div class="demo-meta">
+                        <span class="demo-duration">1:15</span>
+                        <div class="demo-stats">
+                            <span>📊 Multi-agent coordination</span>
+                        </div>
+                    </div>
+                    <div class="demo-actions">
+                        <a href="agent-communication/demo.html" class="demo-btn">🎥 Interactive Demo</a>
+                        <a href="agent-communication/voice.html" class="demo-btn secondary">🎵 Voice-Over Only</a>
+                    </div>
+                </div>
+
+                <!-- Demo 2: Budget Calculation -->
+                <div class="demo-card">
+                    <span class="demo-icon">💰</span>
+                    <h3 class="demo-title">Budget Calculation</h3>
+                    <p class="demo-description">
+                        Experience Daena's financial intelligence in action. See comprehensive budget analysis, cost optimization, and strategic financial insights generated autonomously with 99.4% accuracy.
+                    </p>
+                    <div class="demo-meta">
+                        <span class="demo-duration">1:20</span>
+                        <div class="demo-stats">
+                            <span>📈 Strategic analysis</span>
+                        </div>
+                    </div>
+                    <div class="demo-actions">
+                        <a href="budget-calculation/demo.html" class="demo-btn">🎥 Interactive Demo</a>
+                        <a href="budget-calculation/voice.html" class="demo-btn secondary">🎵 Voice-Over Only</a>
+                    </div>
+                </div>
+
+                <!-- Demo 3: CMP Pipeline -->
+                <div class="demo-card">
+                    <span class="demo-icon">⚙️</span>
+                    <h3 class="demo-title">CMP Pipeline Management</h3>
+                    <p class="demo-description">
+                        Discover Daena's project management capabilities through the Comprehensive Management Pipeline. Watch autonomous resource allocation and intelligent workflow optimization.
+                    </p>
+                    <div class="demo-meta">
+                        <span class="demo-duration">1:30</span>
+                        <div class="demo-stats">
+                            <span>🔄 Workflow automation</span>
+                        </div>
+                    </div>
+                    <div class="demo-actions">
+                        <a href="cmp-pipeline/demo.html" class="demo-btn">🎥 Interactive Demo</a>
+                        <a href="cmp-pipeline/voice.html" class="demo-btn secondary">🎵 Voice-Over Only</a>
+                    </div>
+                </div>
+
+                <!-- Demo 4: Patent Technology -->
+                <div class="demo-card">
+                    <span class="demo-icon">💡</span>
+                    <h3 class="demo-title">Patent Technology Analysis</h3>
+                    <p class="demo-description">
+                        Explore Daena's proprietary patent technology and intellectual property management. See automated prior art searches, claim generation, and strategic patent analysis.
+                    </p>
+                    <div class="demo-meta">
+                        <span class="demo-duration">1:25</span>
+                        <div class="demo-stats">
+                            <span>🔍 IP intelligence</span>
+                        </div>
+                    </div>
+                    <div class="demo-actions">
+                        <a href="patent-technology/demo.html" class="demo-btn">🎥 Interactive Demo</a>
+                        <a href="patent-technology/voice.html" class="demo-btn secondary">🎵 Voice-Over Only</a>
+                    </div>
+                </div>
+
+                <!-- Demo 5: Enhanced Patent Technology -->
+                <div class="demo-card">
+                    <span class="demo-icon">🚀</span>
+                    <h3 class="demo-title">Enhanced Patent Analysis</h3>
+                    <p class="demo-description">
+                        Advanced demonstration of Daena's patent technology with enhanced capabilities. See freedom-to-operate analysis, commercial intelligence, and predictive IP insights.
+                    </p>
+                    <div class="demo-meta">
+                        <span class="demo-duration">1:25</span>
+                        <div class="demo-stats">
+                            <span>🎯 Advanced analytics</span>
+                        </div>
+                    </div>
+                    <div class="demo-actions">
+                        <a href="patent-enhanced/demo.html" class="demo-btn">🎥 Interactive Demo</a>
+                        <a href="patent-enhanced/voice.html" class="demo-btn secondary">🎵 Voice-Over Only</a>
+                    </div>
+                </div>
+
+                <!-- Demo 6: Real Scenario -->
+                <div class="demo-card">
+                    <span class="demo-icon">🎯</span>
+                    <h3 class="demo-title">Real World Scenario</h3>
+                    <p class="demo-description">
+                        Watch Daena handle complex business challenges with autonomous rulebook-making and problem-solving. Experience cross-departmental coordination and strategic decision-making.
+                    </p>
+                    <div class="demo-meta">
+                        <span class="demo-duration">1:45</span>
+                        <div class="demo-stats">
+                            <span>🎪 Business intelligence</span>
+                        </div>
+                    </div>
+                    <div class="demo-actions">
+                        <a href="real-scenario/demo.html" class="demo-btn">🎥 Interactive Demo</a>
+                        <a href="real-scenario/voice.html" class="demo-btn secondary">🎵 Voice-Over Only</a>
+                    </div>
+                </div>
+
+                <!-- Demo 7: Real Talk to Daena -->
+                <div class="demo-card">
+                    <span class="demo-icon">💬</span>
+                    <h3 class="demo-title">Real Talk to Daena</h3>
+                    <p class="demo-description">
+                        Experience authentic conversation with Daena demonstrating natural language understanding, contextual awareness, emotional intelligence, and strategic thinking capabilities.
+                    </p>
+                    <div class="demo-meta">
+                        <span class="demo-duration">1:20</span>
+                        <div class="demo-stats">
+                            <script-github.com/mas-AI-Official/Daena-website/tree/main/demos/voice-over-demos" class="demo-btn">🎵 Voice-Over Only</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Add smooth scrolling and interactive enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to demo cards
+            const cards = document.querySelectorAll('.demo-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-10px) scale(1)';
+                });
+            });
+
+            // Add click tracking for analytics
+            const demoLinks = document.querySelectorAll('.demo-btn');
+            demoLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const demoType = this.href.includes('voice.html') ? 'voice-over' : 'interactive';
+                    const demoName = this.closest('.demo-card').querySelector('.demo-title').textContent;
+                    
+                    console.log(`Demo accessed: ${demoName} (${demoType})`);
+                    
+                    // You can add analytics tracking here
+                    // analytics.track('demo_accessed', {
+                    //     demo_name: demoName,
+                    //     demo_type: demoType
+                    // });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+    <title>Agent Communication - Voice Only - Daena AI</title>
+=======
+    <title>Daena: Agent Communication - Voice-Over Only</title>
+    <link rel="stylesheet" href="../voice-player.css">
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            color: white;
+<<<<<<< HEAD
+=======
+            min-height: 100vh;
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+            line-height: 1.6;
+        }
+
+        .header {
+<<<<<<< HEAD
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+=======
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+<<<<<<< HEAD
+            font-size: 2rem;
+=======
+            font-size: 1.8rem;
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+<<<<<<< HEAD
+        .back-btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 12px 24px;
+=======
+        .nav-btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-navigation {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .demo-nav-btn {
+            background: rgba(0, 188, 212, 0.2);
+            color: #00bcd4;
+            padding: 10px 20px;
+            border: 2px solid rgba(0, 188, 212, 0.5);
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+<<<<<<< HEAD
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .voice-header {
+            margin-bottom: 3rem;
+        }
+
+        .voice-title {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .voice-icon {
+            font-size: 3rem;
+        }
+
+        .voice-description {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            margin-bottom: 2rem;
+        }
+
+        .transcript-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+
+        .transcript-title {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .transcript-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .transcript-chapter {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .transcript-chapter.active {
+            border-left-color: #00bcd4;
+            background: rgba(0, 188, 212, 0.1);
+        }
+
+        .chapter-time {
+            color: #00bcd4;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-text {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .patent-notice {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .patent-notice h3 {
+            color: #FF6B35;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .voice-title {
+                font-size: 2rem;
+                flex-direction: column;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .transcript-section {
+                padding: 1rem;
+=======
+        .demo-nav-btn:hover {
+            background: rgba(0, 188, 212, 0.3);
+            border-color: #00bcd4;
+            transform: translateY(-2px);
+        }
+
+        .demo-nav-btn.active {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .demo-navigation {
+                flex-direction: column;
+                align-items: center;
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+<<<<<<< HEAD
+        <div class="header-content">
+            <div class="logo">Daena AI</div>
+            <a href="../index.html" class="back-btn">← Back to Demos</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="voice-header">
+            <h1 class="voice-title">
+                <span class="voice-icon">🎧</span>
+                Agent Communication
+            </h1>
+            <p class="voice-description">
+                Voice-over narration with transcript for easy following and note-taking
+            </p>
+        </div>
+
+        <!-- Voice-over Player -->
+        <div id="voicePlayer"></div>
+
+        <!-- Transcript Section -->
+        <div class="transcript-section">
+            <h2 class="transcript-title">📝 Complete Transcript</h2>
+            <div class="transcript-content" id="fullTranscript">
+                <div class="transcript-chapter">
+                    <div class="chapter-time">0:00</div>
+                    <div class="chapter-text">Welcome to Daena's Agent Communication demonstration. Let me clearly explain what you're about to see - this is a focused demonstration of how my specialized AI agents communicate and coordinate tasks in real-time.</div>
+                </div>
+
+                <div class="transcript-chapter">
+                    <div class="chapter-time">0:08</div>
+                    <div class="chapter-text">The screen shows Daena's communication interface. You can see multiple agent modules active across different departments. Notice how each agent has a clear status indicator and communication thread.</div>
+                </div>
+
+                <div class="transcript-chapter">
+                    <div class="chapter-time">0:18</div>
+                    <div class="chapter-text">Here's the key demonstration: I'm going to initiate a collaborative task. Watch as the Research Agent receives a market analysis request and immediately begins processing. Notice how it sends status updates to the Financial Agent, who starts calculating associated costs.</div>
+                </div>
+
+                <div class="transcript-chapter">
+                    <div class="chapter-time">0:35</div>
+                    <div class="chapter-text">Look at this conversation panel - each message exchange is clearly visible with timestamps. The agents are not just sending data, they're sharing context and decision-making rationale. This transparency is what sets Daena apart from traditional systems.</div>
+                </div>
+
+                <div class="transcript-chapter">
+                    <div class="chapter-time">0:55</div>
+                    <div class="chapter-text">The result appears here - a coordinated response generated by multiple agents working together. What you've seen demonstrates seamless agent collaboration with full transparency and coordinated decision-making.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patent Notice -->
+        <div class="patent-notice">
+            <h3>🔒 Patent Protected Technology</h3>
+            <p>This voice-over describes Daena's proprietary SFHC (Self-Fulfilling Hierarchical Communication) 
+            architecture protected under patent provisional pending status.</p>
+        </div>
+    </main>
+
+    <script src="../voice-player.js"></script>
+    <script>
+        // Load demo configuration
+        fetch('config.json')
+            .then(response => response.json())
+            .then(config => {
+                // Initialize voice-over player
+                const voicePlayer = new VoiceOverPlayer('voicePlayer', config, {
+                    autoPlay: false,
+                    showTranscript: true,
+                    smoothScroll: false // Don't scroll on voice-only page
+                });
+
+                // Update transcript highlighting based on current chapter
+                voicePlayer.audio.addEventListener('timeupdate', () => {
+                    const chapters = document.querySelectorAll('.transcript-chapter');
+                    chapters.forEach(chapter => chapter.classList.remove('active'));
+                    
+                    const currentTime = voicePlayer.audio.currentTime;
+                    for (let i = config.chapters.length - 1; i >= 0; i--) {
+                        if (currentTime >= config.chapters[i].t) {
+                            if (chapters[i]) chapters[i].classList.add('active');
+                            break;
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error loading demo configuration:', error);
+                document.getElementById('voicePlayer').innerHTML = 
+                    '<div class="error-message">Voice-over configuration could not be loaded.</div>';
+            });
+=======
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div>
+                    <a href="demo.html" class="nav-btn">🎥 Full Interactive Demo</a>
+                    <a href="../index.html" class="nav-btn">← Demos Gallery</a>
+                    <a href="../index.html" class="nav-btn">🏠 Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <div class="hero-section">
+                <span class="hero-icon">🤖</span>
+                <h1 class="hero-title">Agent Communication</h1>
+                <p class="hero-description">
+                    Listen to the voice-over narration explaining Daena's multi-agent communication capabilities. 
+                    This audio-only experience focuses on the strategic advantages of Daena's SFHC architecture 
+                    in enabling seamless agent collaboration across business departments.
+                </p>
+                
+                <div class="demo-navigation">
+                    <a href="demo.html" class="demo-nav-btn">🎥 Interactive Demo</a>
+                    <span class="demo-nav-btn active">🎵 Voice-Over Only</span>
+                </div>
+            </div>
+
+            <!-- Voice Player -->
+            <div id="daena-voice-player"></div>
+        </main>
+    </div>
+
+    <!-- Load Config -->
+    <script type="application/json" src="config.json"></script>
+    
+    <!-- Voice Player -->
+    <script src="../voice-player.js"></script>
+
+    <!-- Page Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load config and initialize voice player
+            fetch('config.json')
+                .then(response => response.json())
+                .then(config => {
+                    // Initialize voice player
+                    if (config.audio) {
+                        const player = new DaenaVoicePlayer('daena-voice-player', config);
+                        
+                        // Add enhanced functionality for voice-only mode
+                        player.container.querySelector('.daena-voice-player').style.maxWidth = '100%';
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to load demo config:', error);
+                    document.querySelector('#daena-voice-player').innerHTML = `
+                        <div style="background: rgba(255,107,107,0.1); border: 2px solid rgba(255,107,107,0.3); border-radius: 15px; padding: 2rem; text-align: center;">
+                            <h3 style="color: #ff6b6b; margin-bottom: 1rem;">Voice-Over Not Available</h3>
+                            <p style="color: #e0e0e0;">The audio file for this demo is currently unavailable. Please try the interactive demo instead.</p>
+                            <a href="demo.html" style="display: inline-block; margin-top: 1rem; background: linear-gradient(45deg, #FFD700, #00bcd4); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none;">Go to Interactive Demo</a>
+                        </div>
+                    `;
+                });
+        });
+>>>>>>> 2b5950eba8e8a9391cafaaa9a54ace106df9bc7b
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Talk to Daena - Voice Over Only</title>
+    <link rel="stylesheet" href="../voice-player.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a3a 0%, #2a1a4a 50%, #3a1a5a 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #FFD700, #FF8C00);
+            color: #1a1a3a;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .voice-section {
+            background: linear-gradient(145deg, rgba(30, 30, 50, 0.9), rgba(45, 45, 65, 0.8));
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .voice-title {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .voice-description {
+            color: #B8BCC8;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .transcript-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .transcript-title {
+            color: #00bcd4;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .transcript-text {
+            color: #E6E8EA;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div>
+                    <a href="../index.html" class="nav-btn">← Demos Gallery</a>
+                    <a href="../demo.html" class="nav-btn">🎥 View Interactive Demo</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="voice-section">
+                <h1 class="voice-title">Real Talk to Daena</h1>
+                <p class="voice-description">Listen to the complete voice-over narration</p>
+                
+                <div id="daena-voice-player"></div>
+
+                <div class="transcript-section">
+                    <h2 class="transcript-title">📄 Transcript</h2>
+                    <div class="transcript-text">
+                        Welcome to Demo 2: Real Talk to Daena.<br><br>
+                        
+                        Meet Daena—your CEO advisor.<br><br>
+                        
+                        Here's how Daena answers your questions:<br><br>
+                        
+                        📊 **Consultation Interface**: Click the message box, type your question.<br><br>
+                        
+                        🤖 **Real-Time Conversation**: Daena responds instantly, like ChatGPT.<br><br>
+                        
+                        📈 **Practical Business Advice**: Daena provides actionable insights based on your query input.<br><br>
+                        
+                        ⚡ **Smart Recommendations**: Daena analyzes your question and suggests relevant follow-up actions.<br><br>
+                        
+                        🔒 **Secure & Private**: Your conversation with Daena is encrypted end-to-end.<br><br>
+                        
+                        💡 **Strategic Answers**: Daena provides tailored advice for your business scenarios.<br><br>
+                        
+                        📝 **Memory Management**: Your conversation history is secured on SFHC servers.<br><br>
+                        
+                        🚀 **Ready-to-Use**: Simply ask Daena any business question and receive real-time expert-level responses.<br><br>
+                        
+                        Click "Send Message," and Daena will answer your question.<br><br>
+                        
+                        Daena: Real Talk. Real AI. Real Results.<br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../voice-player.js"></script>
+    <script>
+        function initializeRealTalkVoice() {
+            fetch('config.json')
+                .then(response => response.json())
+                .then(config => {
+                    if (config.audio) {
+                        const player = new DaenaVoicePlayer('daena-voice-player', config);
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to load voice config:', error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeRealTalkVoice);
+    </script>
+</body>
+</html>
