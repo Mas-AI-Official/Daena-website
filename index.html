@@ -1,0 +1,2427 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daena AI — AI VP system with 48+ agents and Consulate experts across 8 departments</title>
+    <meta name="description" content="Daena AI: The world's first Self-Fulfilling Hierarchical Communication (SFHC) system with 48+ intelligent agents enhanced by Consulate experts across 8 departments. Transform your business with autonomous AI decision-making and VP-level intelligence.">
+    <meta name="keywords" content="AI VP, artificial intelligence, business intelligence, multi-agent systems, SFHC, autonomous AI, enterprise AI, business automation, Consulate agents, AI experts, VP-level AI, 48 agents, 8 departments">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Daena AI - AI VP with 48+ Agents and Consulate Experts">
+    <meta property="og:description" content="Transform your business with 48+ intelligent AI agents enhanced by Consulate experts working across 8 departments with VP-level autonomous decision-making capabilities.">
+    <meta property="og:image" content="https://daena.mas-ai.co/images/slide-1.png">
+    <meta property="og:url" content="https://daena.mas-ai.co/">
+    <link rel="canonical" href="https://daena.mas-ai.co/">
+    <link rel="preconnect" href="https://mas-ai.co" crossorigin>
+    <link rel="dns-prefetch" href="https://mas-ai.co">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daena AI - AI VP with 48+ Agents and Consulate Experts">
+    <meta name="twitter:description" content="Transform your business with 48+ intelligent AI agents enhanced by Consulate experts working across 8 departments.">
+    <meta name="twitter:image" content="https://daena.mas-ai.co/images/slide-1.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+            --shadow-glow: 0 0 30px rgba(255, 215, 0, 0.3);
+            --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Optimized Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.06) 0%, transparent 50%);
+            /* Removed animation for better performance */
+        }
+
+        /* Simplified Honeycomb Pattern */
+        .honeycomb-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 85,30 85,70 50,95 15,70 15,30" fill="%23FFD700" stroke="%2300bcd4" stroke-width="0.5"/></svg>');
+            background-size: 80px 80px;
+            /* Removed animation for better performance */
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        /* Problems Solved Section */
+        .problems-solved {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .problem-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .problem-item:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .problem-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .problem-text {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-main {
+            font-size: 1.2rem;
+            padding: 1.2rem 2.5rem;
+            animation: bounce-in 2s ease-out 1s both;
+        }
+
+        .cta-secondary {
+            font-size: 1.1rem;
+            padding: 1.1rem 2.2rem;
+            animation: slide-in-left 1.5s ease-out 1.2s both;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-50px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05) translateY(0);
+            }
+            70% {
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slide-in-left {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            box-shadow: var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.6);
+            animation: pulse-glow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 20px 50px rgba(255, 215, 0, 0.6); }
+            50% { box-shadow: 0 25px 60px rgba(255, 215, 0, 0.8); }
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--primary-gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-secondary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary:hover {
+            color: var(--dark-bg);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            border-color: var(--secondary-cyan);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--primary-gold);
+        }
+
+        /* Competitive Analysis Section */
+        .competitive-analysis {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .analysis-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .competitor-card {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .competitor-header h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+
+        .competitor-status {
+            background: rgba(255, 0, 0, 0.3);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .limitations h4, .daena-solution h4 {
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .limitations ul, .daena-solution ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .limitations li, .daena-solution li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .daena-wins {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: 2px solid var(--primary-gold);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            grid-column: span 1;
+        }
+
+        .daena-wins:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .daena-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--dark-bg);
+        }
+
+        .daena-header h3 {
+            color: var(--dark-bg);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .daena-status {
+            background: var(--dark-bg);
+            color: var(--primary-gold);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .daena-advantages h4, .daena-result h4 {
+            color: var(--dark-bg);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .daena-advantages ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .daena-advantages li {
+            padding: 0.5rem 0;
+            color: var(--dark-bg);
+            font-size: 0.95rem;
+        }
+
+        .daena-result p {
+            color: var(--dark-bg);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* AI Market Growth Section */
+        .market-growth {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .market-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .growth-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .growth-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 188, 212, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .growth-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.2);
+            border-color: var(--secondary-cyan);
+        }
+
+        .growth-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .growth-label {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .growth-trend {
+            color: var(--secondary-cyan);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .growth-chart {
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            height: 300px;
+            gap: 1rem;
+        }
+
+        .chart-bar {
+            background: var(--gradient-primary);
+            border-radius: 10px 10px 0 0;
+            width: 80px;
+            position: relative;
+            transition: all 0.3s ease;
+            animation: growUp 2s ease-out;
+        }
+
+        .chart-bar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        @keyframes growUp {
+            from { height: 0; }
+            to { height: var(--height); }
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            font-weight: bold;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .bar-year {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .market-insight {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        /* Pitch Deck Animation */
+        .pitch-deck {
+            animation: pitchPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pitchPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .pitch-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pitch-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: rotateGlow 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            margin: 4rem 0;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 188, 212, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .demo-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 188, 212, 0.3);
+            border-color: var(--secondary-cyan);
+        }
+
+        .demo-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-cyan);
+        }
+
+        .demo-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .demo-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Pitch Deck Section */
+        .pitch-section {
+            padding: 6rem 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pitch-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 4rem;
+            margin: 3rem 0;
+        }
+
+        .pitch-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pitch-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pitch-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Pitch Metrics */
+        .pitch-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            border-color: var(--primary-gold);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Recorded Demos Section */
+        .recorded-demos {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .recorded-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            border-color: var(--primary-gold);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 188, 212, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .play-button {
+            font-size: 4rem;
+            color: var(--primary-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            color: var(--text-light);
+        }
+
+        .video-overlay h4 {
+            color: var(--primary-gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .video-overlay p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .video-info p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .video-duration {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .video-cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .contact-item h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* Video Modal */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .video-modal-content {
+            background: var(--dark-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: scaleIn 0.3s ease-out;
+        }
+
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .video-modal-header h3 {
+            color: var(--primary-gold);
+            margin: 0;
+        }
+
+        .video-modal-close {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--primary-gold);
+        }
+
+        .video-modal-body video {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pitch-content {
+                padding: 2rem;
+            }
+
+            .pitch-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .demo-form {
+                padding: 2rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .video-thumbnail {
+                height: 150px;
+            }
+
+            .play-button {
+                font-size: 3rem;
+            }
+        }
+
+        /* Demo Form Section */
+        .demo-form-section {
+            padding: 6rem 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .demo-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-form-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-top: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 2rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Daena AI...</div>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="honeycomb-pattern"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Daena AI</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demos">Live Demos</a></li>
+                <li><a href="#pitch">Pitch Deck</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Revolutionary Business Intelligence</h1>
+            <p class="hero-subtitle">Powered by 48+ AI Agents with Consulate Experts</p>
+            <p class="hero-description">
+                Daena AI introduces the world's first Self-Fulfilling Hierarchical Communication (SFHC) system. 
+                Our <strong style="color: var(--primary-gold);">48+ specialized agents</strong> work autonomously across 8 departments, 
+                enhanced by <strong style="color: var(--secondary-cyan);">Consulate Agents</strong> - the top 5 experts in every major domain 
+                co-governing with VP Daena. Delivering VP-level decision-making with 
+                <strong style="color: var(--primary-gold);">99.4% cost savings</strong> and <strong style="color: var(--secondary-cyan);">300% ROI</strong>.
+            </p>
+            
+            <!-- Key Problems We Solve -->
+            <div class="problems-solved">
+                <h3 style="color: var(--primary-gold); margin-bottom: 1rem; font-size: 1.3rem;">🚨 Critical Problems We Solve:</h3>
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <span class="problem-icon">❌</span>
+                        <span class="problem-text"><strong>AGENTS DRIFT FROM GOALS</strong> - Current AI systems lose focus</span>
+                    </div>
+                    <div class="problem-item">
+                        <span class="problem-icon">❌</span>
+                        <span class="problem-text"><strong>KNOWLEDGE SILOS</strong> - Data hoarding prevents collaboration</span>
+                    </div>
+                    <div class="problem-item">
+                        <span class="problem-icon">❌</span>
+                        <span class="problem-text"><strong>POOR ADAPTABILITY AT SCALE</strong> - Systems break under pressure</span>
+                    </div>
+                    <div class="problem-item">
+                        <span class="problem-icon">❌</span>
+                        <span class="problem-text"><strong>NO GOVERNANCE OR COMPLIANCE</strong> - Uncontrolled AI behavior</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="pitch-deck-presentation.html" class="btn btn-primary cta-main">📊 Online Pitch Deck with Explanation Voice Over</a>
+                <a href="#demos" class="btn btn-secondary cta-secondary">🎮 Watch Live Demos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Revolutionary Technology</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>SFHC Architecture</h3>
+                <p>Self-Fulfilling Hierarchical Communication enables autonomous decision-making with context-aware intelligence across all business functions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>48+ Agents with Consulate Experts</h3>
+                <p>Intelligent agents across 8 departments enhanced by Consulate Agents - the top 5 experts in every major domain co-governing with VP Daena, working in perfect harmony with reflexive memory and continuous learning capabilities.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>VP-Level Intelligence</h3>
+                <p>Not just automation - true business partnership with executive-level decision-making and strategic planning capabilities.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Enterprise Security</h3>
+                <p>SOC 2 Type II certified with AES-256 encryption, GDPR compliance, and complete audit trails for all decisions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Proven ROI</h3>
+                <p>300% ROI in first year with 99.4% cost savings compared to human teams. $60/day operational cost vs $2,000+ human cost.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Cross-Domain Expertise</h3>
+                <p>Seamless integration across all business functions - from research and marketing to finance and operations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Analysis Section -->
+    <section class="competitive-analysis">
+        <div class="analysis-container">
+            <h2 class="section-title">Why Daena Beats the Competition</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                See how Daena's SFHC technology solves critical limitations in existing AI systems
+            </p>
+            
+            <div class="comparison-grid">
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <h3>AutoGPT</h3>
+                        <div class="competitor-status">❌ Limited</div>
+                    </div>
+                    <div class="limitations">
+                        <h4>Critical Weaknesses:</h4>
+                        <ul>
+                            <li>❌ Lack of memory</li>
+                            <li>❌ No organization or governance</li>
+                            <li>❌ Prompt loop failures</li>
+                            <li>❌ High resource cost</li>
+                        </ul>
+                    </div>
+                    <div class="daena-solution">
+                        <h4>✅ Daena Solves It:</h4>
+                        <ul>
+                            <li>✅ Reflexive Memory</li>
+                            <li>✅ Sunflower Governance</li>
+                            <li>✅ Agent Role Hierarchy</li>
+                            <li>✅ Fail-safe CMP logic</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <h3>LangChain</h3>
+                        <div class="competitor-status">❌ Limited</div>
+                    </div>
+                    <div class="limitations">
+                        <h4>Critical Weaknesses:</h4>
+                        <ul>
+                            <li>❌ Tool routing errors</li>
+                            <li>❌ No real-time governance</li>
+                            <li>❌ No cross-agent memory</li>
+                            <li>❌ Bloated graphs & cost</li>
+                        </ul>
+                    </div>
+                    <div class="daena-solution">
+                        <h4>✅ Daena Solves It:</h4>
+                        <ul>
+                            <li>✅ Real-time agent orchestration</li>
+                            <li>✅ CMP + ABAC permission layer</li>
+                            <li>✅ Sunflower-Honeycomb memory</li>
+                            <li>✅ Lean routing with project affinity</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <h3>Enterprise AI Models</h3>
+                        <div class="competitor-status">❌ Limited</div>
+                    </div>
+                    <div class="limitations">
+                        <h4>Critical Weaknesses:</h4>
+                        <ul>
+                            <li>❌ Black-box behavior</li>
+                            <li>❌ Lack of agent reasoning</li>
+                            <li>❌ No system-level learning</li>
+                            <li>❌ Prone to drift & hallucination</li>
+                        </ul>
+                    </div>
+                    <div class="daena-solution">
+                        <h4>✅ Daena Solves It:</h4>
+                        <ul>
+                            <li>✅ Daena as reasoning overlay</li>
+                            <li>✅ CMP filtering</li>
+                            <li>✅ Governance over responses</li>
+                            <li>✅ Drift detection and correction</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="daena-wins">
+                    <div class="daena-header">
+                        <h3>🏆 Daena AI</h3>
+                        <div class="daena-status">✅ Revolutionary</div>
+                    </div>
+                    <div class="daena-advantages">
+                        <h4>🎯 Our Unique Advantages:</h4>
+                        <ul>
+                            <li>✅ Real-time governance</li>
+                            <li>✅ Agent-to-agent memory</li>
+                            <li>✅ Multi-model routing</li>
+                            <li>✅ Reflexive learning & override</li>
+                            <li>✅ Founder control (King-Override)</li>
+                        </ul>
+                    </div>
+                    <div class="daena-result">
+                        <h4>🚀 Result:</h4>
+                        <p><strong>Combines everything into an AI-native company operating system</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Market Growth Section -->
+    <section class="market-growth">
+        <div class="market-container">
+            <h2 class="section-title">🚀 AI Autonomous Agents Market Growth</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                The AI autonomous agents market is experiencing explosive growth, creating massive opportunities for early adopters
+            </p>
+            
+            <div class="growth-stats">
+                <div class="growth-card">
+                    <div class="growth-number">$127.6B</div>
+                    <div class="growth-label">Market Size 2024</div>
+                    <div class="growth-trend">↗️ +45% YoY</div>
+                </div>
+                <div class="growth-card">
+                    <div class="growth-number">$1.2T</div>
+                    <div class="growth-label">Projected 2030</div>
+                    <div class="growth-trend">↗️ +847% Growth</div>
+                </div>
+                <div class="growth-card">
+                    <div class="growth-number">67%</div>
+                    <div class="growth-label">CAGR</div>
+                    <div class="growth-trend">↗️ Highest Growth</div>
+                </div>
+                <div class="growth-card">
+                    <div class="growth-number">2.3M</div>
+                    <div class="growth-label">AI Agents Deployed</div>
+                    <div class="growth-trend">↗️ +180% This Year</div>
+                </div>
+            </div>
+
+            <!-- Market Growth Chart -->
+            <div class="chart-container">
+                <h3 style="color: var(--primary-gold); text-align: center; margin-bottom: 2rem;">Market Growth Projection</h3>
+                <div class="growth-chart">
+                    <div class="chart-bar" style="height: 20%;">
+                        <div class="bar-value">$25B</div>
+                        <div class="bar-year">2020</div>
+                    </div>
+                    <div class="chart-bar" style="height: 35%;">
+                        <div class="bar-value">$45B</div>
+                        <div class="bar-year">2021</div>
+                    </div>
+                    <div class="chart-bar" style="height: 50%;">
+                        <div class="bar-value">$68B</div>
+                        <div class="bar-year">2022</div>
+                    </div>
+                    <div class="chart-bar" style="height: 65%;">
+                        <div class="bar-value">$88B</div>
+                        <div class="bar-year">2023</div>
+                    </div>
+                    <div class="chart-bar" style="height: 80%;">
+                        <div class="bar-value">$127B</div>
+                        <div class="bar-year">2024</div>
+                    </div>
+                    <div class="chart-bar" style="height: 100%;">
+                        <div class="bar-value">$1.2T</div>
+                        <div class="bar-year">2030</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-insight">
+                <h3 style="color: var(--secondary-cyan); text-align: center; margin-bottom: 1rem;">🎯 Why This Matters for Daena</h3>
+                <p style="text-align: center; color: var(--text-light); font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+                    With the AI agents market growing at <strong style="color: var(--primary-gold);">67% CAGR</strong> and reaching 
+                    <strong style="color: var(--secondary-cyan);">$1.2 trillion by 2030</strong>, Daena's early-mover advantage 
+                    positions us to capture significant market share in this explosive growth sector.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section" id="demos">
+        <div class="demo-container">
+            <h2 class="section-title">Live Interactive Demos</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem;">
+                Experience Daena's capabilities through narrated, interactive demonstrations
+            </p>
+            <div class="demo-grid">
+                <div class="demo-card" onclick="openDemo('agent-communication')">
+                    <div class="demo-icon">🤝</div>
+                    <h3>Agent Communication</h3>
+                    <p>Watch 6 agents collaborate in real-time on product launch analysis with live narration</p>
+                </div>
+                <div class="demo-card" onclick="openDemo('budget-calculation')">
+                    <div class="demo-icon">💰</div>
+                    <h3>Budget Calculation</h3>
+                    <p>See how Finance Agent calculates comprehensive budgets with real-time data analysis</p>
+                </div>
+                <div class="demo-card" onclick="openDemo('cmp-pipeline')">
+                    <div class="demo-icon">⚙️</div>
+                    <h3>CMP Pipeline</h3>
+                    <p>Experience the complete CMP orchestration process with intelligent workflow management</p>
+                </div>
+                    <div class="demo-card" onclick="openDemo('patent-technology')">
+                        <div class="demo-icon">🔬</div>
+                        <h3>Patent Technology</h3>
+                        <p>Witness advanced patent analysis and technology evaluation with AI-powered insights</p>
+                    </div>
+                    <div class="demo-card" onclick="openDemo('patent-enhanced')">
+                        <div class="demo-icon">🚀</div>
+                        <h3>Enhanced Patent Technology</h3>
+                        <p>Advanced AI-powered patent analysis with 96% accuracy and comprehensive insights</p>
+                    </div>
+                <div class="demo-card" onclick="openDemo('real-scenario')">
+                    <div class="demo-icon">📊</div>
+                    <h3>Real Scenario</h3>
+                    <p>Complete business scenario simulation with all agents working together on complex tasks</p>
+                </div>
+                <div class="demo-card" onclick="openDemo('real-talk')">
+                    <div class="demo-icon">🎤</div>
+                    <h3>Voice Interaction</h3>
+                    <p>Experience natural voice interaction with Daena's conversational AI capabilities</p>
+                </div>
+                <div class="demo-card" onclick="openDemo('sunflower-honeycomb')">
+                    <div class="demo-icon">🌻</div>
+                    <h3>Sunflower Honeycomb</h3>
+                    <p>Watch 48 agents collaborate across 8 departments with real-time communication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recorded Demos Section -->
+    <section class="recorded-demos">
+        <div class="recorded-container">
+            <h2 class="section-title">📹 Recorded Demo Videos</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                Watch our pre-recorded demonstrations showcasing Daena's capabilities in action
+            </p>
+            
+            <div class="video-grid">
+                <div class="video-card" data-video="videos/agent communication.mp4" data-title="Agent Communication Demo">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶️</div>
+                        <div class="video-overlay">
+                            <h4>Agent Communication Demo</h4>
+                            <p>Watch 48 agents collaborate across 8 departments</p>
+                        </div>
+                        <div class="video-status">📹 Ready</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>🤝 Agent Communication</h3>
+                        <p>Real-time collaboration between agents with live narration</p>
+                        <div class="video-duration">5:30</div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video="videos/budget calculation demo.mp4" data-title="Budget Calculation Demo">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶️</div>
+                        <div class="video-overlay">
+                            <h4>Budget Calculation Demo</h4>
+                            <p>AI-powered financial analysis and planning</p>
+                        </div>
+                        <div class="video-status">📹 Ready</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>💰 Budget Calculation</h3>
+                        <p>Comprehensive financial analysis with real-time data</p>
+                        <div class="video-duration">4:15</div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video="videos/CMP PIPELINBE DEMO.mp4" data-title="CMP Pipeline Demo">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶️</div>
+                        <div class="video-overlay">
+                            <h4>CMP Pipeline Demo</h4>
+                            <p>Complete workflow orchestration process</p>
+                        </div>
+                        <div class="video-status">📹 Ready</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>⚙️ CMP Pipeline</h3>
+                        <p>Intelligent workflow management and orchestration</p>
+                        <div class="video-duration">6:45</div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video="videos/patent Technology.mp4" data-title="Patent Technology Demo">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶️</div>
+                        <div class="video-overlay">
+                            <h4>Patent Technology Demo</h4>
+                            <p>Advanced patent analysis and evaluation</p>
+                        </div>
+                        <div class="video-status">📹 Ready</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>🔬 Patent Technology</h3>
+                        <p>AI-powered patent analysis and technology evaluation</p>
+                        <div class="video-duration">7:20</div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video="videos/REAL SENARIO DEMO.mp4" data-title="Real Scenario Demo">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶️</div>
+                        <div class="video-overlay">
+                            <h4>Real Scenario Demo</h4>
+                            <p>Complete business scenario simulation</p>
+                        </div>
+                        <div class="video-status">📹 Ready</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>📊 Real Scenario</h3>
+                        <p>Full business scenario with all agents working together</p>
+                        <div class="video-duration">8:30</div>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video="videos/real talk to daena and whole system - Made with Clipchamp.mp4" data-title="Voice Interaction Demo">
+                    <div class="video-thumbnail">
+                        <div class="play-button">▶️</div>
+                        <div class="video-overlay">
+                            <h4>Voice Interaction Demo</h4>
+                            <p>Natural conversation with Daena AI</p>
+                        </div>
+                        <div class="video-status">📹 Ready</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>🎤 Voice Interaction</h3>
+                        <p>Natural voice interaction and conversational AI</p>
+                        <div class="video-duration">4:50</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-cta">
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    <strong>Note:</strong> Video files are currently being processed and will be available soon. 
+                    In the meantime, experience our interactive live demos above.
+                </p>
+                <a href="#demos" class="btn btn-primary">🎮 Try Live Demos Instead</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pitch Deck Section -->
+    <section class="pitch-section" id="pitch">
+        <h2 class="section-title">Investor Presentation</h2>
+        <div class="pitch-content">
+            <h2>📊 Online Pitch Deck with Explanation Voice Over</h2>
+            <p>
+                Access our comprehensive 13-slide investor presentation with <strong style="color: var(--primary-gold);">voice-over narration</strong>, 
+                interactive demos, and detailed financial projections. Includes enhanced competitive 
+                analysis, cost breakdowns, and security compliance details.
+            </p>
+            
+            <!-- Key Metrics -->
+            <div class="pitch-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">300%</div>
+                    <div class="metric-label">ROI</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.4%</div>
+                    <div class="metric-label">Cost Savings</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">48</div>
+                    <div class="metric-label">AI Agents</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8</div>
+                    <div class="metric-label">Departments</div>
+                </div>
+            </div>
+            
+            <div class="pitch-buttons" style="display:flex; gap:20px; flex-wrap:wrap; align-items:center; justify-content:center; margin-top:2rem;">
+                <a href="pitch-deck-presentation.html" class="btn btn-primary" style="display:flex; align-items:center; gap:12px; padding:20px 40px; font-weight:800; border-radius:16px; background:linear-gradient(135deg, #FFD700, #00bcd4); border:none; color:#1a1a3a; text-decoration:none; transition:all 0.3s ease; box-shadow:0 12px 35px rgba(255, 215, 0, 0.5); font-size:1.2rem; position:relative; overflow:hidden;" onmouseover="this.style.transform='translateY(-6px) scale(1.05)'; this.style.boxShadow='0 20px 50px rgba(255, 215, 0, 0.7)'" onmouseout="this.style.transform='translateY(0px) scale(1)'; this.style.boxShadow='0 12px 35px rgba(255, 215, 0, 0.5)'">
+                    <span style="font-size:1.5rem; animation: pulse 2s infinite;">🎵</span>
+                    <span>View Interactive Presentation</span>
+                    <span style="position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition:left 0.6s ease;" class="shimmer"></span>
+                </a>
+                <a href="https://raw.githubusercontent.com/Mas-AI-Official/Daena-website/main/Daena_Pitch_Deck.pptx" class="btn btn-download" download style="display:flex; align-items:center; gap:10px; padding:16px 32px; font-weight:700; border-radius:12px; background:rgba(255,255,255,0.15); border:3px solid #FFD700; color:#FFD700; text-decoration:none; transition:all 0.3s ease; backdrop-filter:blur(15px); font-size:1.1rem; box-shadow:0 8px 25px rgba(255, 215, 0, 0.2);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='rgba(255,215,0,0.2)'; this.style.boxShadow='0 12px 35px rgba(255, 215, 0, 0.4)'" onmouseout="this.style.transform='translateY(0px)'; this.style.background='rgba(255,255,255,0.15)'; this.style.boxShadow='0 8px 25px rgba(255, 215, 0, 0.2)'">
+                    📑 Download PPTX
+                </a>
+                <a href="https://raw.githubusercontent.com/Mas-AI-Official/Daena-website/main/Daena_Pitch_Deck.pdf" class="btn btn-download" download style="display:flex; align-items:center; gap:10px; padding:16px 32px; font-weight:700; border-radius:12px; background:rgba(255,255,255,0.15); border:3px solid #00bcd4; color:#00bcd4; text-decoration:none; transition:all 0.3s ease; backdrop-filter:blur(15px); font-size:1.1rem; box-shadow:0 8px 25px rgba(0, 188, 212, 0.2);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='rgba(0,188,212,0.2)'; this.style.boxShadow='0 12px 35px rgba(0, 188, 212, 0.4)'" onmouseout="this.style.transform='translateY(0px)'; this.style.background='rgba(255,255,255,0.15)'; this.style.boxShadow='0 8px 25px rgba(0, 188, 212, 0.2)'">
+                    📄 Download PDF
+                </a>
+            </div>
+            
+            <style>
+                @keyframes pulse {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+                .shimmer:hover { left: 100%; }
+            </style>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Ready to Transform Your Business?</h2>
+            <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 3rem;">
+                Join the AI revolution with Daena's revolutionary business intelligence platform
+            </p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📧 Primary Email</h3>
+                    <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a>
+                </div>
+                <div class="contact-item">
+                    <h3>📧 Secondary Email</h3>
+                    <a href="mailto:masoud.masoori@gmail.com">masoud.masoori@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h3>🌐 Website</h3>
+                    <a href="https://mas-ai.co" target="_blank">mas-ai.co</a>
+                </div>
+                <div class="contact-item">
+                    <h3>💼 LinkedIn</h3>
+                    <a href="https://linkedin.com/in/masoud-masoori" target="_blank">Masoud Masoori</a>
+                </div>
+                <div class="contact-item">
+                    <h3>📱 GitHub</h3>
+                    <a href="https://github.com/Masoud-Masoori" target="_blank">GitHub Profile</a>
+                </div>
+                <div class="contact-item">
+                    <h3>🎯 Demo Interest</h3>
+                    <a href="#demo-form" onclick="document.getElementById('demo-form').scrollIntoView()">Request Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Interest Form -->
+    <section class="demo-form-section" id="demo-form">
+        <div class="demo-form-container">
+            <h2>Request a Live Demo</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; text-align: center;">
+                Experience Daena's revolutionary AI technology firsthand. Schedule a personalized demo to see how our 48 agents can transform your business.
+            </p>
+            <form class="demo-form" id="demoForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name *</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="position">Position/Title</label>
+                        <input type="text" id="position" name="position">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="interest">What interests you most about Daena? *</label>
+                    <select id="interest" name="interest" required>
+                        <option value="">Select an option</option>
+                        <option value="agent-communication">Agent Communication & Collaboration</option>
+                        <option value="budget-calculation">Financial Analysis & Budget Planning</option>
+                        <option value="cmp-pipeline">Content Management Pipeline</option>
+                        <option value="patent-technology">Patent & Technology Analysis</option>
+                        <option value="real-scenario">Complete Business Scenarios</option>
+                        <option value="voice-interaction">Voice Interaction Capabilities</option>
+                        <option value="general">General Interest</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Additional Information</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your business needs and how Daena can help..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Request Live Demo</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Daena AI. All rights reserved.</p>
+            <p>Revolutionizing business intelligence with autonomous AI agents</p>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="https://github.com/Mas-AI-Official/Daena-website">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal Styles -->
+    <style>
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .video-modal-content {
+            background: rgba(15, 15, 35, 0.95);
+            border: 2px solid var(--primary-gold);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 215, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .video-modal-header h3 {
+            color: var(--primary-gold);
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .video-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .jazz-toggle {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .jazz-toggle:hover {
+            background: var(--primary-gold);
+            transform: scale(1.05);
+        }
+
+        .video-modal-close {
+            background: #ff4757;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal-close:hover {
+            background: #ff3742;
+            transform: scale(1.1);
+        }
+
+        .video-modal-body {
+            padding: 0;
+            position: relative;
+        }
+
+        .video-modal-body video {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            display: block;
+        }
+
+        .video-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 255, 0, 0.8);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Video card enhancements */
+        .video-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-card:hover .video-status {
+            background: rgba(255, 215, 0, 0.9);
+            color: #000;
+        }
+    </style>
+
+    <script>
+        // Loading overlay - optimized for faster loading
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 100);
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Demo opening function
+        function openDemo(demoType) {
+            const demoUrls = {
+                'agent-communication': 'demos/agent-communication/demo.html',
+                'budget-calculation': 'demos/budget-calculation/demo.html',
+                'cmp-pipeline': 'demos/cmp-pipeline/demo.html',
+                'patent-technology': 'demos/patent-technology/demo.html',
+                'patent-enhanced': 'demos/patent-enhanced/demo.html',
+                'real-scenario': 'demos/real-scenario/demo.html',
+                'real-talk': 'demos/real-talk/demo.html',
+                'sunflower-honeycomb': 'demos/sunflower-honeycomb/demo.html'
+            };
+            
+            if (demoUrls[demoType]) {
+                window.open(demoUrls[demoType], '_blank');
+            }
+        }
+
+        // Navbar scroll effect - optimized with throttling
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(() => {
+                const navbar = document.querySelector('.navbar');
+                if (navbar) {
+                    if (window.scrollY > 100) {
+                        navbar.style.background = 'rgba(15, 15, 35, 0.98)';
+                    } else {
+                        navbar.style.background = 'rgba(15, 15, 35, 0.95)';
+                    }
+                }
+            }, 10);
+        });
+
+        // Intersection Observer for animations - optimized
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe only essential elements for better performance
+        document.querySelectorAll('.feature-card, .demo-card, .video-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Demo form submission
+        document.getElementById('demoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Create email body
+            const emailBody = `
+New Demo Request from Daena AI Website:
+
+Name: ${data.firstName} ${data.lastName}
+Email: ${data.email}
+Company: ${data.company}
+Position: ${data.position || 'Not provided'}
+Phone: ${data.phone || 'Not provided'}
+Interest: ${data.interest}
+Message: ${data.message || 'No additional message'}
+
+This request was submitted from the Daena AI website contact form.
+            `;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:masoud.masoori@mas-ai.co?subject=New Demo Request - ${data.company}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Open email client
+            window.open(mailtoLink);
+            
+            // Show success message
+            alert('Thank you for your interest! Your email client should open with a pre-filled message. Please send it to complete your demo request.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Video card interactions
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const videoTitle = this.querySelector('h3').textContent;
+                const videoSrc = this.getAttribute('data-video');
+                
+                if (videoSrc && videoSrc !== '') {
+                    // Check if video file exists
+                    fetch(videoSrc, { method: 'HEAD' })
+                        .then(response => {
+                            if (response.ok) {
+                                // Video exists, open in modal
+                                openVideoModal(videoTitle, videoSrc);
+                            } else {
+                                // Video doesn't exist, show processing message
+                                showVideoProcessingMessage(videoTitle);
+                            }
+                        })
+                        .catch(() => {
+                            // Error fetching video, show processing message
+                            showVideoProcessingMessage(videoTitle);
+                        });
+                } else {
+                    // No video source, show processing message
+                    showVideoProcessingMessage(videoTitle);
+                }
+            });
+        });
+
+        // Show video processing message
+        function showVideoProcessingMessage(videoTitle) {
+            const modal = document.createElement('div');
+            modal.className = 'video-modal';
+            modal.innerHTML = `
+                <div class="video-modal-content">
+                    <div class="video-modal-header">
+                        <h3>${videoTitle}</h3>
+                        <button class="video-modal-close">&times;</button>
+                    </div>
+                    <div class="video-modal-body" style="padding: 3rem; text-align: center;">
+                        <div style="font-size: 4rem; margin-bottom: 2rem;">🎬</div>
+                        <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">Video Processing</h4>
+                        <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem;">
+                            This video is currently being processed and will be available soon.
+                        </p>
+                        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                            In the meantime, please try our interactive live demos to experience Daena's capabilities!
+                        </p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="openDemo('agent-communication')" class="btn-primary" style="padding: 0.8rem 1.5rem;">
+                                🤝 Agent Communication
+                            </button>
+                            <button onclick="openDemo('budget-calculation')" class="btn-primary" style="padding: 0.8rem 1.5rem;">
+                                💰 Budget Calculation
+                            </button>
+                            <button onclick="openDemo('sunflower-honeycomb')" class="btn-primary" style="padding: 0.8rem 1.5rem;">
+                                🌻 Sunflower Honeycomb
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Close modal functionality
+            modal.querySelector('.video-modal-close').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
+        // Video modal functionality with jazz background music
+        function openVideoModal(title, videoSrc) {
+            const modal = document.createElement('div');
+            modal.className = 'video-modal';
+            modal.innerHTML = `
+                <div class="video-modal-content">
+                    <div class="video-modal-header">
+                        <h3>${title}</h3>
+                        <div class="video-controls">
+                            <button id="jazzToggle" class="jazz-toggle">🎵 Jazz Music: ON</button>
+                            <button class="video-modal-close">&times;</button>
+                        </div>
+                    </div>
+                    <div class="video-modal-body">
+                        <video id="modalVideo" controls autoplay muted>
+                            <source src="${videoSrc}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <audio id="jazzMusic" loop>
+                            <source src="background music/To Be Continued.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Get video and audio elements
+            const video = modal.querySelector('#modalVideo');
+            const jazzMusic = modal.querySelector('#jazzMusic');
+            const jazzToggle = modal.querySelector('#jazzToggle');
+            
+            // Set video to muted by default
+            video.muted = true;
+            video.volume = 0;
+            
+            // Set jazz music volume
+            jazzMusic.volume = 0.3;
+            
+            // Jazz music controls
+            let jazzPlaying = true;
+            jazzMusic.play().catch(e => console.log('Jazz music failed:', e));
+            
+            jazzToggle.addEventListener('click', () => {
+                jazzPlaying = !jazzPlaying;
+                if (jazzPlaying) {
+                    jazzMusic.play().catch(e => console.log('Jazz music failed:', e));
+                    jazzToggle.textContent = '🎵 Jazz Music: ON';
+                    jazzToggle.style.background = 'var(--accent-color)';
+                } else {
+                    jazzMusic.pause();
+                    jazzToggle.textContent = '🎵 Jazz Music: OFF';
+                    jazzToggle.style.background = '#666';
+                }
+            });
+            
+            // Sync jazz music with video
+            video.addEventListener('play', () => {
+                if (jazzPlaying) {
+                    jazzMusic.currentTime = video.currentTime;
+                    jazzMusic.play().catch(e => console.log('Jazz music failed:', e));
+                }
+            });
+            
+            video.addEventListener('pause', () => {
+                jazzMusic.pause();
+            });
+            
+            video.addEventListener('ended', () => {
+                jazzMusic.pause();
+            });
+            
+            // Close modal functionality
+            modal.querySelector('.video-modal-close').addEventListener('click', () => {
+                jazzMusic.pause();
+                document.body.removeChild(modal);
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    jazzMusic.pause();
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

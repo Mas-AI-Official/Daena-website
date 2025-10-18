@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daena AI - Investor Pitch Deck</title>
+    <meta name="description" content="Daena AI Pitch Deck: Revolutionary SFHC technology with 48 AI agents delivering 300% ROI and 99.4% cost savings">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+            --shadow-glow: 0 0 30px rgba(255, 215, 0, 0.3);
+            --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-20px) translateY(-10px); }
+            50% { transform: translateX(20px) translateY(10px); }
+            75% { transform: translateX(-10px) translateY(20px); }
+        }
+
+        /* Honeycomb Pattern */
+        .honeycomb-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 85,30 85,70 50,95 15,70 15,30" fill="%23FFD700" stroke="%2300bcd4" stroke-width="1"/></svg>');
+            background-size: 60px 60px;
+            animation: honeycombFloat 15s linear infinite;
+        }
+
+        @keyframes honeycombFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-60px); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .back-button {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Presentation Container */
+        .presentation-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .slide-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide img {
+            width: 85%;
+            height: 60%;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: var(--shadow-strong);
+            margin-top: -80px;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: var(--secondary-cyan);
+            font-size: 1rem;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            z-index: 100;
+            border: 2px solid rgba(0, 188, 212, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Enhanced Audio Controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 58, 0.9) 100%);
+            padding: 20px 30px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 188, 212, 0.3);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .audio-controls button {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .audio-controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .audio-controls button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .audio-controls button.active {
+            background: var(--secondary-cyan);
+            color: var(--text-light);
+        }
+
+        .audio-controls button.loading {
+            background: var(--text-muted);
+            color: var(--text-light);
+            cursor: not-allowed;
+        }
+
+        /* Speed Control */
+        .speed-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .speed-controls label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-right: 5px;
+        }
+
+        .speed-controls select {
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .slide-counter {
+            color: var(--secondary-cyan);
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .time-display {
+            color: var(--text-muted);
+            font-size: 14px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        /* Loading and Error States */
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--secondary-cyan);
+            z-index: 2000;
+        }
+
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.9);
+            color: var(--text-light);
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 2000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slide img {
+                width: 95%;
+                height: 70%;
+            }
+            
+            .audio-controls {
+                bottom: 10px;
+                padding: 10px 15px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .progress-bar {
+                width: 150px;
+            }
+            
+            .back-button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .speed-controls {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Jazz Background Music Indicator */
+        .music-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--text-light);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 1000;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .music-indicator.playing {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--primary-gold);
+        }
+
+        /* Enhanced Slide Transitions */
+        .slide-enter {
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        .slide-exit {
+            animation: slideOutLeft 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">Loading Daena Pitch Deck...</div>
+    <div class="error-message" id="errorMessage">Error loading presentation. Please check your internet connection.</div>
+    
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="honeycomb-pattern"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Daena AI</a>
+            <a href="index.html" class="back-button">← Back to Website</a>
+        </div>
+    </nav>
+
+    
+    <div class="presentation-container" id="presentation" style="display: none;">
+        <div class="slide-container">
+            <!-- Slide 1 -->
+            <div class="slide active" id="slide-1">
+                <img src="images/slide-1.png" alt="Slide 1" onerror="this.style.display='none';">
+                <div class="slide-number">1</div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide" id="slide-2">
+                <img src="images/slide-2.png" alt="Slide 2" onerror="this.style.display='none';">
+                <div class="slide-number">2</div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide" id="slide-3">
+                <img src="images/slide-3.png" alt="Slide 3" onerror="this.style.display='none';">
+                <div class="slide-number">3</div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="slide" id="slide-4">
+                <img src="images/slide-4.png" alt="Slide 4" onerror="this.style.display='none';">
+                <div class="slide-number">4</div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="slide" id="slide-5">
+                <img src="images/slide-5.png" alt="Slide 5" onerror="this.style.display='none';">
+                <div class="slide-number">5</div>
+            </div>
+            
+            <!-- Slide 6 -->
+            <div class="slide" id="slide-6">
+                <img src="images/slide-6.png" alt="Slide 6" onerror="this.style.display='none';">
+                <div class="slide-number">6</div>
+            </div>
+            
+            <!-- Slide 7 -->
+            <div class="slide" id="slide-7">
+                <img src="images/slide-7.png" alt="Slide 7" onerror="this.style.display='none';">
+                <div class="slide-number">7</div>
+            </div>
+            
+            <!-- Slide 8 -->
+            <div class="slide" id="slide-8">
+                <img src="images/slide-8.png" alt="Slide 8" onerror="this.style.display='none';">
+                <div class="slide-number">8</div>
+            </div>
+            
+            <!-- Slide 9 -->
+            <div class="slide" id="slide-9">
+                <img src="images/slide-9.png" alt="Slide 9" onerror="this.style.display='none';">
+                <div class="slide-number">9</div>
+            </div>
+            
+            <!-- Slide 10 -->
+            <div class="slide" id="slide-10">
+                <img src="images/slide-10.png" alt="Slide 10" onerror="this.style.display='none';">
+                <div class="slide-number">10</div>
+            </div>
+            
+            <!-- Slide 11 - Enhanced Technology Comparison -->
+            <div class="slide" id="slide-11">
+                <img src="images/slide-11.png" alt="Slide 11" onerror="this.style.display='none';">
+                <div class="slide-number">11</div>
+            </div>
+            
+            <!-- Slide 12 - Enhanced Funding Ask -->
+            <div class="slide" id="slide-12">
+                <img src="images/slide-12.png" alt="Slide 12" onerror="this.style.display='none';">
+                <div class="slide-number">12</div>
+            </div>
+            
+            <!-- Slide 13 -->
+            <div class="slide" id="slide-13">
+                <img src="images/slide-13.png" alt="Slide 13" onerror="this.style.display='none';">
+                <div class="slide-number">13</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="audio-controls">
+        <button id="playPauseBtn">▶ Play</button>
+        <button id="prevBtn">⏮ Previous</button>
+        <button id="nextBtn">Next ⏭</button>
+        
+        <!-- Speed Controls -->
+        <div class="speed-controls">
+            <label for="speedSelect">Speed:</label>
+            <select id="speedSelect">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+            </select>
+        </div>
+        
+        <!-- Download Button -->
+        <button id="downloadBtn" onclick="window.open('Daena_Pitch_Deck.pptx', '_blank')" style="background: var(--gradient-primary); color: var(--dark-bg); border: none; padding: 8px 16px; border-radius: 15px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;">
+            📥 Download PPTX
+        </button>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="slide-counter" id="slideCounter">1/13</div>
+            <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" preload="auto"></audio>
+
+    <script>
+        class EnhancedPresentationController {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.totalSlides = this.slides.length;
+                this.currentSlide = 0;
+                this.isPlaying = false;
+                this.audioPlayer = document.getElementById('audioPlayer');
+                this.playPauseBtn = document.getElementById('playPauseBtn');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.progressFill = document.getElementById('progressFill');
+                this.slideCounter = document.getElementById('slideCounter');
+                this.timeDisplay = document.getElementById('timeDisplay');
+                this.speedSelect = document.getElementById('speedSelect');
+                this.progressBar = document.getElementById('progressBar');
+                this.loading = document.getElementById('loading');
+                this.presentation = document.getElementById('presentation');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.musicIndicator = document.getElementById('musicIndicator');
+
+                // Audio files for each slide
+                this.audioFiles = [
+                    'audio/slide-1.mp3',
+                    'audio/slide-2.mp3',
+                    'audio/slide-3.mp3',
+                    'audio/slide-4.mp3',
+                    'audio/slide-5.mp3',
+                    'audio/slide-6.mp3',
+                    'audio/slide-7.mp3',
+                    'audio/slide-8.mp3',
+                    'audio/slide-9.mp3',
+                    'audio/slide-10.mp3',
+                    'audio/slide-11.mp3',
+                    'audio/slide-12.mp3',
+                    'audio/slide-13.mp3'
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.showSlide(0);
+                this.hideLoading();
+            }
+
+            setupEventListeners() {
+                this.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
+                this.prevBtn.addEventListener('click', () => this.previousSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                this.speedSelect.addEventListener('change', () => this.changeSpeed());
+                this.progressBar.addEventListener('click', (e) => this.seekTo(e));
+
+                // Keyboard controls
+                document.addEventListener('keydown', (e) => {
+                    switch(e.key) {
+                        case ' ':
+                            e.preventDefault();
+                            this.togglePlayPause();
+                            break;
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            this.previousSlide();
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            this.nextSlide();
+                            break;
+                        case 'Escape':
+                            e.preventDefault();
+                            this.stop();
+                            break;
+                    }
+                });
+
+                // Audio events
+                this.audioPlayer.addEventListener('timeupdate', () => this.updateProgress());
+                this.audioPlayer.addEventListener('ended', () => this.onAudioEnd());
+                this.audioPlayer.addEventListener('error', () => this.onAudioError());
+                this.audioPlayer.addEventListener('loadedmetadata', () => this.updateTimeDisplay());
+            }
+
+            showSlide(slideIndex) {
+                // Remove active class from all slides
+                this.slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Add active class to current slide
+                if (this.slides[slideIndex]) {
+                    this.slides[slideIndex].classList.add('active');
+                }
+                
+                this.currentSlide = slideIndex;
+                this.updateSlideCounter();
+            }
+
+            loadAudioForSlide(slideIndex) {
+                if (this.audioFiles[slideIndex]) {
+                    // Pause and reset current audio
+                    this.audioPlayer.pause();
+                    this.audioPlayer.currentTime = 0;
+                    
+                    // Load new audio
+                    this.audioPlayer.src = this.audioFiles[slideIndex];
+                    this.audioPlayer.load();
+                    
+                    // Reset progress bar
+                    this.progressFill.style.width = '0%';
+                }
+            }
+
+            togglePlayPause() {
+                if (this.isPlaying) {
+                    this.audioPlayer.pause();
+                    this.isPlaying = false;
+                    this.playPauseBtn.textContent = '▶ Play';
+                    this.playPauseBtn.classList.remove('active', 'loading');
+                } else {
+                    // Show loading state
+                    this.playPauseBtn.textContent = '⏳ Loading...';
+                    this.playPauseBtn.classList.add('loading');
+                    
+                    // Ensure we have the correct audio for current slide
+                    this.loadAudioForSlide(this.currentSlide);
+                    
+                    // Wait for audio to load, then play
+                    this.audioPlayer.addEventListener('canplaythrough', () => {
+                        this.audioPlayer.play().catch(e => {
+                            console.log('Auto-play failed:', e);
+                            this.playPauseBtn.textContent = '▶ Play';
+                            this.playPauseBtn.classList.remove('loading');
+                        });
+                    }, { once: true });
+                    
+                    // If audio is already loaded, play immediately
+                    if (this.audioPlayer.readyState >= 3) {
+                        this.audioPlayer.play().catch(e => {
+                            console.log('Auto-play failed:', e);
+                            this.playPauseBtn.textContent = '▶ Play';
+                            this.playPauseBtn.classList.remove('loading');
+                        });
+                    }
+                    
+                    this.isPlaying = true;
+                    this.playPauseBtn.textContent = '⏸ Pause';
+                    this.playPauseBtn.classList.remove('loading');
+                    this.playPauseBtn.classList.add('active');
+                }
+            }
+
+            nextSlide() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    // Stop current audio
+                    this.audioPlayer.pause();
+                    this.audioPlayer.currentTime = 0;
+                    
+                    // Move to next slide
+                    this.showSlide(this.currentSlide + 1);
+                    
+                    // Load and play audio for new slide
+                    this.loadAudioForSlide(this.currentSlide);
+                    if (this.isPlaying) {
+                        // Show loading state
+                        this.playPauseBtn.textContent = '⏳ Loading...';
+                        this.playPauseBtn.classList.add('loading');
+                        
+                        // Wait for audio to load, then play
+                        this.audioPlayer.addEventListener('canplaythrough', () => {
+                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
+                            this.playPauseBtn.textContent = '⏸ Pause';
+                            this.playPauseBtn.classList.remove('loading');
+                        }, { once: true });
+                        
+                        // If audio is already loaded, play immediately
+                        if (this.audioPlayer.readyState >= 3) {
+                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
+                            this.playPauseBtn.textContent = '⏸ Pause';
+                            this.playPauseBtn.classList.remove('loading');
+                        }
+                    }
+                }
+            }
+
+            previousSlide() {
+                if (this.currentSlide > 0) {
+                    // Stop current audio
+                    this.audioPlayer.pause();
+                    this.audioPlayer.currentTime = 0;
+                    
+                    // Move to previous slide
+                    this.showSlide(this.currentSlide - 1);
+                    
+                    // Load and play audio for new slide
+                    this.loadAudioForSlide(this.currentSlide);
+                    if (this.isPlaying) {
+                        // Show loading state
+                        this.playPauseBtn.textContent = '⏳ Loading...';
+                        this.playPauseBtn.classList.add('loading');
+                        
+                        // Wait for audio to load, then play
+                        this.audioPlayer.addEventListener('canplaythrough', () => {
+                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
+                            this.playPauseBtn.textContent = '⏸ Pause';
+                            this.playPauseBtn.classList.remove('loading');
+                        }, { once: true });
+                        
+                        // If audio is already loaded, play immediately
+                        if (this.audioPlayer.readyState >= 3) {
+                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
+                            this.playPauseBtn.textContent = '⏸ Pause';
+                            this.playPauseBtn.classList.remove('loading');
+                        }
+                    }
+                }
+            }
+
+            changeSpeed() {
+                const speed = parseFloat(this.speedSelect.value);
+                this.audioPlayer.playbackRate = speed;
+            }
+
+            seekTo(event) {
+                if (!this.audioPlayer.duration) return;
+                
+                const rect = this.progressBar.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const percentage = clickX / rect.width;
+                const newTime = percentage * this.audioPlayer.duration;
+                
+                this.audioPlayer.currentTime = newTime;
+            }
+
+            updateProgress() {
+                if (this.audioPlayer.duration) {
+                    const progress = (this.audioPlayer.currentTime / this.audioPlayer.duration) * 100;
+                    this.progressFill.style.width = progress + '%';
+                    this.updateTimeDisplay();
+                }
+            }
+
+            updateTimeDisplay() {
+                if (this.audioPlayer.duration) {
+                    const current = this.formatTime(this.audioPlayer.currentTime);
+                    const total = this.formatTime(this.audioPlayer.duration);
+                    this.timeDisplay.textContent = `${current} / ${total}`;
+                }
+            }
+
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            updateSlideCounter() {
+                this.slideCounter.textContent = `${this.currentSlide + 1}/${this.totalSlides}`;
+            }
+
+            onAudioEnd() {
+                // Reset progress bar
+                this.progressFill.style.width = '0%';
+                
+                setTimeout(() => {
+                    if (this.isPlaying && this.currentSlide < this.totalSlides - 1) {
+                        this.nextSlide();
+                    } else if (this.isPlaying) {
+                        // End of presentation
+                        this.isPlaying = false;
+                        this.playPauseBtn.textContent = '▶ Play';
+                        this.playPauseBtn.classList.remove('active');
+                        this.audioPlayer.currentTime = 0;
+                    }
+                }, 1000); // Reduced delay for smoother transitions
+            }
+
+            onAudioError() {
+                console.log('Audio loading failed for slide', this.currentSlide + 1);
+                // Continue to next slide even if audio fails
+                if (this.isPlaying) {
+                    setTimeout(() => {
+                        if (this.currentSlide < this.totalSlides - 1) {
+                            this.nextSlide();
+                        }
+                    }, 3000);
+                }
+            }
+
+            stop() {
+                this.audioPlayer.pause();
+                this.isPlaying = false;
+                this.playPauseBtn.textContent = '▶ Play';
+                this.playPauseBtn.classList.remove('active');
+            }
+
+            hideLoading() {
+                setTimeout(() => {
+                    this.loading.style.display = 'none';
+                    this.presentation.style.display = 'flex';
+                }, 2000);
+            }
+        }
+
+        // Initialize presentation when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new EnhancedPresentationController();
+        });
+    </script>
+</body>
+</html>

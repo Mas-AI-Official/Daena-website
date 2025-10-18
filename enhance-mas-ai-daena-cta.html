@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Mas-AI Daena CTA</title>
+    <style>
+        /* Enhanced Daena Exploration CTA Styles */
+        .daena-explore-enhanced {
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50, #FFD700);
+            background-size: 300% 300%;
+            color: white;
+            padding: 30px 60px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 15px 40px rgba(255, 215, 0, 0.4),
+                0 0 0 4px rgba(255, 215, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+            animation: gradientShift 3s ease-in-out infinite, float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            text-align: center;
+            min-width: 400px;
+        }
+
+        .daena-explore-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .daena-explore-enhanced:hover::before {
+            left: 100%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .daena-explore-enhanced:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 
+                0 20px 50px rgba(255, 215, 0, 0.5),
+                0 0 0 6px rgba(255, 215, 0, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .daena-explore-enhanced .icon {
+            margin-right: 20px;
+            font-size: 2.5rem;
+            display: inline-block;
+            animation: bounce 2s infinite, rotate 4s linear infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-8px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .daena-explore-enhanced .text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .daena-explore-enhanced .subtitle {
+            display: block;
+            font-size: 1rem;
+            font-weight: normal;
+            margin-top: 5px;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hero section enhancement */
+        .hero-enhanced {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 26, 58, 0.9) 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(76, 175, 80, 0.08) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero-content-enhanced {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-enhanced h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50, #FFD700);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .hero-enhanced .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #00bcd4;
+            font-weight: 300;
+            text-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 188, 212, 0.5); }
+            to { text-shadow: 0 0 30px rgba(0, 188, 212, 0.8); }
+        }
+
+        .hero-enhanced p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .daena-explore-enhanced {
+                font-size: 1.8rem;
+                padding: 25px 40px;
+                min-width: 300px;
+            }
+            
+            .daena-explore-enhanced .icon {
+                font-size: 2rem;
+                margin-right: 15px;
+            }
+            
+            .hero-enhanced h1 {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-enhanced">
+        <div class="hero-content-enhanced">
+            <h1>Leading AI Innovation for Enterprise</h1>
+            <div class="subtitle">Introducing Daena AI - The World's First AI Vice President</div>
+            <p>Mas-AI is at the forefront of artificial intelligence innovation, developing cutting-edge AI solutions that transform how businesses operate and compete in the digital age.</p>
+            
+            <a href="https://daena.mas-ai.co" class="daena-explore-enhanced">
+                <span class="icon">🚀</span>
+                <span class="text">
+                    Explore Daena AI
+                    <span class="subtitle">The Revolutionary AI VP System</span>
+                </span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

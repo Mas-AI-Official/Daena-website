@@ -1,0 +1,12 @@
+{
+  "title": "Daena: Budget Calculation Demo",
+  "audio": "../voice-over-demos/Demo 2 Budget Calculation.mp3",
+  "video": "../../videos/compressed/budget calculation demo.mp4",
+  "chapters": [
+    { "t": 0, "id": "sec-1", "label": "Intro: Financial Intelligence Demonstration" },
+    { "t": 15, "id": "sec-2", "label": "Dashboard interface overview" },
+    { "t": 30, "id": "sec-3", "label": "Data processing and analysis" },
+    { "t": 45, "id": "sec-4", "label": "Intelligent recommendations" },
+    { "t": 60, "id": "sec-5", "label": "Strategic financial insights" }
+  ]
+}
