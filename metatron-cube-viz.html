@@ -1,0 +1,260 @@
+<!-- Metatron's Cube Visualization Component -->
+<!-- This can be embedded in both websites -->
+
+<style>
+    .metatron-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        height: 600px;
+        margin: 2rem auto;
+        background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .metatron-svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+    }
+
+    .metatron-circle {
+        fill: none;
+        stroke: #FFD700;
+        stroke-width: 2;
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+        animation: pulse-circle 3s ease-in-out infinite;
+    }
+
+    .metatron-circle-center {
+        fill: rgba(255, 215, 0, 0.2);
+        stroke: #FFD700;
+        stroke-width: 3;
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+        animation: pulse-center 2s ease-in-out infinite;
+    }
+
+    .metatron-line {
+        stroke: #00bcd4;
+        stroke-width: 1.5;
+        opacity: 0.6;
+        filter: drop-shadow(0 0 4px rgba(0, 188, 212, 0.5));
+    }
+
+    .metatron-line-animated {
+        stroke: #FFD700;
+        stroke-width: 2;
+        opacity: 0.8;
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+        stroke-dasharray: 10 5;
+        animation: flow-data 2s linear infinite;
+    }
+
+    .metatron-node {
+        fill: #FFD700;
+        stroke: #00bcd4;
+        stroke-width: 2;
+        filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+        animation: pulse-node 2s ease-in-out infinite;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .metatron-node:hover {
+        fill: #00bcd4;
+        stroke: #FFD700;
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 20px rgba(0, 188, 212, 1));
+    }
+
+    .metatron-node-center {
+        fill: #FFD700;
+        stroke: #00bcd4;
+        stroke-width: 3;
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+        animation: pulse-center-node 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-circle {
+        0%, 100% { opacity: 0.6; stroke-width: 2; }
+        50% { opacity: 1; stroke-width: 3; }
+    }
+
+    @keyframes pulse-center {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.05); }
+    }
+
+    @keyframes pulse-node {
+        0%, 100% { opacity: 0.8; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    @keyframes pulse-center-node {
+        0%, 100% { opacity: 0.9; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    @keyframes flow-data {
+        0% { stroke-dashoffset: 0; }
+        100% { stroke-dashoffset: 15; }
+    }
+
+    .metatron-label {
+        fill: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        text-anchor: middle;
+        pointer-events: none;
+        filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
+    }
+
+    .metatron-info {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(15, 15, 35, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 10px;
+        padding: 1rem;
+        color: #ffffff;
+        font-size: 0.9rem;
+        text-align: center;
+        max-width: 90%;
+    }
+
+    .metatron-info strong {
+        color: #FFD700;
+    }
+</style>
+
+<div class="metatron-container">
+    <svg class="metatron-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+        <!-- Metatron's Cube Structure -->
+        <!-- Center circle -->
+        <circle class="metatron-circle-center" cx="400" cy="300" r="40"/>
+        <circle class="metatron-node-center" cx="400" cy="300" r="8"/>
+        <text class="metatron-label" x="400" y="305">Center</text>
+
+        <!-- Inner hexagon (6 circles) -->
+        <circle class="metatron-circle" cx="400" cy="200" r="30"/>
+        <circle class="metatron-node" cx="400" cy="200" r="6" data-agent="advisor_a"/>
+        <text class="metatron-label" x="400" y="205">A1</text>
+
+        <circle class="metatron-circle" cx="500" cy="250" r="30"/>
+        <circle class="metatron-node" cx="500" cy="250" r="6" data-agent="advisor_b"/>
+        <text class="metatron-label" x="500" y="255">A2</text>
+
+        <circle class="metatron-circle" cx="500" cy="350" r="30"/>
+        <circle class="metatron-node" cx="500" cy="350" r="6" data-agent="scout_internal"/>
+        <text class="metatron-label" x="500" y="355">S1</text>
+
+        <circle class="metatron-circle" cx="400" cy="400" r="30"/>
+        <circle class="metatron-node" cx="400" cy="400" r="6" data-agent="scout_external"/>
+        <text class="metatron-label" x="400" y="405">S2</text>
+
+        <circle class="metatron-circle" cx="300" cy="350" r="30"/>
+        <circle class="metatron-node" cx="300" cy="350" r="6" data-agent="synth"/>
+        <text class="metatron-label" x="300" y="355">Syn</text>
+
+        <circle class="metatron-circle" cx="300" cy="250" r="30"/>
+        <circle class="metatron-node" cx="300" cy="250" r="6" data-agent="executor"/>
+        <text class="metatron-label" x="300" y="255">Ex</text>
+
+        <!-- Outer hexagon (6 circles) -->
+        <circle class="metatron-circle" cx="400" cy="120" r="25"/>
+        <circle class="metatron-node" cx="400" cy="120" r="5"/>
+        <text class="metatron-label" x="400" y="125">O1</text>
+
+        <circle class="metatron-circle" cx="560" cy="200" r="25"/>
+        <circle class="metatron-node" cx="560" cy="200" r="5"/>
+        <text class="metatron-label" x="560" y="205">O2</text>
+
+        <circle class="metatron-circle" cx="560" cy="400" r="25"/>
+        <circle class="metatron-node" cx="560" cy="400" r="5"/>
+        <text class="metatron-label" x="560" y="405">O3</text>
+
+        <circle class="metatron-circle" cx="400" cy="480" r="25"/>
+        <circle class="metatron-node" cx="400" cy="480" r="5"/>
+        <text class="metatron-label" x="400" y="485">O4</text>
+
+        <circle class="metatron-circle" cx="240" cy="400" r="25"/>
+        <circle class="metatron-node" cx="240" cy="400" r="5"/>
+        <text class="metatron-label" x="240" y="405">O5</text>
+
+        <circle class="metatron-circle" cx="240" cy="200" r="25"/>
+        <circle class="metatron-node" cx="240" cy="200" r="5"/>
+        <text class="metatron-label" x="240" y="205">O6</text>
+
+        <!-- Lines connecting all nodes (Metatron's Cube pattern) -->
+        <!-- Center to inner hexagon -->
+        <line class="metatron-line-animated" x1="400" y1="300" x2="400" y2="200"/>
+        <line class="metatron-line-animated" x1="400" y1="300" x2="500" y2="250"/>
+        <line class="metatron-line-animated" x1="400" y1="300" x2="500" y2="350"/>
+        <line class="metatron-line-animated" x1="400" y1="300" x2="400" y2="400"/>
+        <line class="metatron-line-animated" x1="400" y1="300" x2="300" y2="350"/>
+        <line class="metatron-line-animated" x1="400" y1="300" x2="300" y2="250"/>
+
+        <!-- Inner hexagon connections -->
+        <line class="metatron-line" x1="400" y1="200" x2="500" y2="250"/>
+        <line class="metatron-line" x1="500" y1="250" x2="500" y2="350"/>
+        <line class="metatron-line" x1="500" y1="350" x2="400" y2="400"/>
+        <line class="metatron-line" x1="400" y1="400" x2="300" y2="350"/>
+        <line class="metatron-line" x1="300" y1="350" x2="300" y2="250"/>
+        <line class="metatron-line" x1="300" y1="250" x2="400" y2="200"/>
+
+        <!-- Inner to outer hexagon -->
+        <line class="metatron-line-animated" x1="400" y1="200" x2="400" y2="120"/>
+        <line class="metatron-line-animated" x1="500" y1="250" x2="560" y2="200"/>
+        <line class="metatron-line-animated" x1="500" y1="350" x2="560" y2="400"/>
+        <line class="metatron-line-animated" x1="400" y1="400" x2="400" y2="480"/>
+        <line class="metatron-line-animated" x1="300" y1="350" x2="240" y2="400"/>
+        <line class="metatron-line-animated" x1="300" y1="250" x2="240" y2="200"/>
+
+        <!-- Outer hexagon connections -->
+        <line class="metatron-line" x1="400" y1="120" x2="560" y2="200"/>
+        <line class="metatron-line" x1="560" y1="200" x2="560" y2="400"/>
+        <line class="metatron-line" x1="560" y1="400" x2="400" y2="480"/>
+        <line class="metatron-line" x1="400" y1="480" x2="240" y2="400"/>
+        <line class="metatron-line" x1="240" y1="400" x2="240" y2="200"/>
+        <line class="metatron-line" x1="240" y1="200" x2="400" y2="120"/>
+
+        <!-- Additional interconnections (complete Metatron's Cube) -->
+        <line class="metatron-line" x1="400" y1="200" x2="560" y2="200"/>
+        <line class="metatron-line" x1="500" y1="250" x2="400" y2="120"/>
+        <line class="metatron-line" x1="500" y1="350" x2="400" y2="480"/>
+        <line class="metatron-line" x1="400" y1="400" x2="240" y2="400"/>
+        <line class="metatron-line" x1="300" y1="350" x2="400" y2="480"/>
+        <line class="metatron-line" x1="300" y1="250" x2="400" y2="120"/>
+    </svg>
+    <div class="metatron-info">
+        <strong>Metatron's Cube Communication Pattern</strong><br>
+        Golden lines represent <strong>live data flow</strong> between agents. Each node represents an agent role within a department.
+        Hover over nodes to see agent details.
+    </div>
+</div>
+
+<script>
+    // Add interactivity
+    document.querySelectorAll('.metatron-node').forEach(node => {
+        node.addEventListener('mouseenter', function() {
+            const agent = this.getAttribute('data-agent');
+            if (agent) {
+                const agentNames = {
+                    'advisor_a': 'Advisor A - Strategic Planning',
+                    'advisor_b': 'Advisor B - Risk Assessment',
+                    'scout_internal': 'Scout Internal - Internal Intelligence',
+                    'scout_external': 'Scout External - Market Intelligence',
+                    'synth': 'Synthesizer - Knowledge Integration',
+                    'executor': 'Executor - Action Implementation'
+                };
+                this.setAttribute('title', agentNames[agent] || agent);
+            }
+        });
+    });
+</script>
+
