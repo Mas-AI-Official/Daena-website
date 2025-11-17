@@ -58,7 +58,7 @@
             overflow-x: hidden;
         }
 
-        /* Metatron's Cube Background - Reduced Visibility */
+        /* Metatron's Cube Background */
         .metatron-bg {
             position: fixed;
             top: 0;
@@ -67,12 +67,12 @@
             height: 100%;
             z-index: -3;
             background: 
-                radial-gradient(ellipse at center, rgba(255, 215, 0, 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
                 linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 58, 0.95) 50%, rgba(42, 26, 74, 0.95) 100%);
             pointer-events: none;
         }
 
-        /* Metatron's Cube Pattern Background Image - Reduced Visibility */
+        /* Metatron's Cube Pattern Background Image */
         .metatron-pattern-bg {
             position: fixed;
             top: 0;
@@ -80,10 +80,10 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            opacity: 0.08;
+            opacity: 0.1;
             background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="40" fill="none" stroke="%23FFD700" stroke-width="2" opacity="0.3"/><circle cx="200" cy="120" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="280" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="280" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="200" cy="280" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="120" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="120" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><line x1="200" y1="200" x2="200" y2="120" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="280" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="280" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="200" y2="280" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="120" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="120" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.15"/></svg>');
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="40" fill="none" stroke="%23FFD700" stroke-width="2" opacity="0.6"/><circle cx="200" cy="120" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="280" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="280" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="200" cy="280" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="120" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="120" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><line x1="200" y1="200" x2="200" y2="120" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="280" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="280" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="200" y2="280" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="120" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="120" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.4"/></svg>');
             background-size: 600px 600px;
             background-position: center;
             background-repeat: repeat;
@@ -96,28 +96,14 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Hexagonal Node Network Canvas - Reduced Visibility */
+        /* Hexagonal Node Network Canvas */
         #metatron-hex-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        /* Full Page Glassy Black Overlay - Covers Everything */
-        .page-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
+            z-index: -1;
             pointer-events: none;
         }
 
@@ -203,9 +189,6 @@
             padding: 120px 2rem 0 2rem;
             position: relative;
             margin-top: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(3px);
-            z-index: 1;
         }
 
         .hero-content {
@@ -224,21 +207,13 @@
             background-clip: text;
             line-height: 1.2;
             animation: fadeInUp 1s ease-out;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.9);
-            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.9));
-            position: relative;
-            z-index: 10;
         }
 
         .hero-subtitle {
             font-size: 1.5rem;
-            color: var(--text-light);
+            color: var(--text-muted);
             margin-bottom: 2rem;
             animation: fadeInUp 1s ease-out 0.2s both;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-            position: relative;
-            z-index: 10;
         }
 
         .hero-description {
@@ -249,10 +224,6 @@
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 1s ease-out 0.4s both;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-            position: relative;
-            z-index: 10;
-            font-weight: 500;
         }
 
         /* Problems Solved Section */
@@ -488,7 +459,7 @@
         /* Competitive Analysis Section */
         .competitive-analysis {
             padding: 6rem 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .analysis-container {
@@ -619,7 +590,7 @@
         /* AI Market Growth Section */
         .market-growth {
             padding: 6rem 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .market-container {
@@ -794,7 +765,7 @@
         /* Demo Section */
         .demo-section {
             padding: 6rem 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             margin: 4rem 0;
         }
 
@@ -953,7 +924,7 @@
         /* Recorded Demos Section */
         .recorded-demos {
             padding: 6rem 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .recorded-container {
@@ -1064,7 +1035,7 @@
         /* Contact Section */
         .contact {
             padding: 6rem 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             text-align: center;
         }
 
@@ -1443,7 +1414,7 @@
         /* Demo Form Section */
         .demo-form-section {
             padding: 6rem 2rem;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             text-align: center;
         }
 
@@ -1574,8 +1545,6 @@
     <div class="metatron-bg"></div>
     <div class="metatron-pattern-bg"></div>
     <canvas id="metatron-hex-canvas"></canvas>
-    <!-- Full Page Darker Overlay - Covers Everything -->
-    <div class="page-overlay"></div>
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div>
@@ -1605,7 +1574,7 @@
             <p class="hero-subtitle">Powered by 48 AI Agents + Council Agents (Fibonacci Growth - Infinite Scalability) with Revolutionary NBMF Memory & Hex-Mesh Communication</p>
             <p class="hero-description">
                 Daena AI introduces the world's first Self-Fulfilling Hierarchical Communication (SFHC) system with revolutionary <strong style="color: var(--primary-gold);">NBMF Memory</strong> and <strong style="color: var(--secondary-cyan);">Hex-Mesh Communication</strong>. 
-                Our <strong style="color: var(--primary-gold);">48 AI Agents + Council Agents</strong> (Fibonacci Growth - Infinite Scalability) work autonomously with 
+                Our <strong style="color: var(--primary-gold);">48 specialized agents</strong> (6 per department × 8 departments) work autonomously with 
                 <strong style="color: var(--secondary-cyan);">phase-locked council rounds</strong>, <strong style="color: var(--primary-gold);">quorum consensus</strong>, and 
                 <strong style="color: var(--secondary-cyan);">token-based backpressure</strong>. Enhanced by Consulate Agents - the top 5 experts in every major domain 
                 co-governing with VP Daena. Delivering VP-level decision-making with 
@@ -1643,7 +1612,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features" id="features" style="padding-top: 100px; background: rgba(0, 0, 0, 0.5); padding: 6rem 2rem;">
+    <section class="features" id="features" style="padding-top: 100px; background: rgba(0, 0, 0, 0.4); padding: 6rem 2rem;">
         <h2 class="section-title">Revolutionary Technology</h2>
         <div class="features-grid">
             <div class="feature-card">
@@ -1680,7 +1649,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="features" id="testimonials" style="padding: 6rem 2rem 4rem; background: rgba(0, 0, 0, 0.5); padding-top: 100px; position: relative; z-index: 1;">
+    <section class="features" id="testimonials" style="padding: 6rem 2rem 4rem; background: rgba(0, 0, 0, 0.4); padding-top: 100px;">
         <h2 class="section-title">🌟 Recognition & Expert Testimonials</h2>
         <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             Industry leaders and academic experts are excited about Daena's revolutionary technology
@@ -1732,7 +1701,7 @@
     <!-- Competitive Analysis Section -->
 
     <!-- Latest Features Section -->
-    <section class="features" id="latest-features" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.5); padding-top: 100px; position: relative; z-index: 1;">
+    <section class="features" id="latest-features" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.4); padding-top: 100px;">
         <h2 class="section-title">🚀 Latest Revolutionary Features</h2>
         <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             Daena continues to evolve with cutting-edge technology that sets new industry standards
@@ -1814,7 +1783,7 @@
     </section>
 
     <!-- Metatron's Cube Visualization Section -->
-    <section class="metatron-section" id="agent-communication-viz" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.5); padding-top: 100px; position: relative; z-index: 1;">
+    <section class="metatron-section" id="agent-communication-viz" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.4); padding-top: 100px; position: relative; z-index: 1;">
         <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
             <h2 class="section-title" style="position: relative; z-index: 3;">🌐 Agent Communication Visualization</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; position: relative; z-index: 3;">
@@ -2884,19 +2853,6 @@ This request was submitted from the Daena AI website contact form.
                 document.body.removeChild(modal);
             });
             
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    jazzMusic.pause();
-                    document.body.removeChild(modal);
-                }
-            });
-        }
-    </script>
-    <!-- Metatron Hexagonal Node Network -->
-    <script src="metatron-hex-network.js"></script>
-</body>
-</html>
-
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     jazzMusic.pause();
