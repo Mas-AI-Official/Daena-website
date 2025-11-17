@@ -1763,14 +1763,14 @@
     </section>
 
     <!-- Agent Communication Visualization Section -->
-    <section id="agent-communication-viz" style="padding: 6rem 2rem; padding-top: 100px; position: relative; overflow: hidden; min-height: 80vh;">
+    <section id="agent-communication-viz" style="padding: 6rem 2rem; padding-top: 100px; position: relative; overflow: visible; min-height: 80vh;">
         <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
             <h2 class="section-title" style="margin-bottom: 1rem; color: #FFD700;">🌐 Agent Communication Visualization</h2>
             <p style="text-align: center; color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                 Experience Daena's revolutionary hexagonal communication pattern - showing how 6 agents within each department communicate with live data flow
             </p>
             
-            <div style="position: relative; width: 100%; max-width: 700px; height: 700px; margin: 3rem auto; overflow: visible;">
+            <div style="position: relative; width: 100%; max-width: 700px; height: 700px; margin: 3rem auto 8rem auto; overflow: visible;">
                 <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
                     <defs>
                         <!-- Glow filter for golden lines -->
@@ -1825,7 +1825,9 @@
                              fill="none" stroke="#FFD700" stroke-width="2.5" opacity="0.5" filter="url(#glow-golden)"/>
                     
                     <!-- Connections: Each node connected to all 5 others (15 connections total) -->
-                    <!-- Node 1 (550,350) to others -->
+                    <!-- ALL connections must be present - each node to all 5 others -->
+                    
+                    <!-- Node 1 (550,350) to all 5 others -->
                     <line x1="550" y1="350" x2="523.2" y2="176.8" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" repeatCount="indefinite"/>
                     </line>
@@ -1842,7 +1844,7 @@
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.8s" repeatCount="indefinite"/>
                     </line>
                     
-                    <!-- Node 2 (523.2,176.8) to others (excluding already drawn) -->
+                    <!-- Node 2 (523.2,176.8) to all 5 others (excluding Node 1 already drawn) -->
                     <line x1="523.2" y1="176.8" x2="176.8" y2="176.8" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.1s" repeatCount="indefinite"/>
                     </line>
@@ -1856,7 +1858,7 @@
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.7s" repeatCount="indefinite"/>
                     </line>
                     
-                    <!-- Node 3 (176.8,176.8) to others (excluding already drawn) -->
+                    <!-- Node 3 (176.8,176.8) to all 5 others (excluding Node 1,2 already drawn) -->
                     <line x1="176.8" y1="176.8" x2="150" y2="350" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.2s" repeatCount="indefinite"/>
                     </line>
@@ -1867,7 +1869,7 @@
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.6s" repeatCount="indefinite"/>
                     </line>
                     
-                    <!-- Node 4 (150,350) to others (excluding already drawn) -->
+                    <!-- Node 4 (150,350) to all 5 others (excluding Node 1,2,3 already drawn) -->
                     <line x1="150" y1="350" x2="176.8" y2="523.2" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.3s" repeatCount="indefinite"/>
                     </line>
@@ -1881,15 +1883,15 @@
                     </line>
                 </svg>
                 
-                <!-- Info box -->
-                <div style="position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%); background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(15px); border: 2px solid rgba(255, 215, 0, 0.5); border-radius: 12px; padding: 1.2rem 2rem; color: #ffffff; font-size: 0.95rem; text-align: center; max-width: 90%; z-index: 10; box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);">
+                <!-- Info box - moved further down to prevent overlap -->
+                <div style="position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%); background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(15px); border: 2px solid rgba(255, 215, 0, 0.5); border-radius: 12px; padding: 1.2rem 2rem; color: #ffffff; font-size: 0.95rem; text-align: center; max-width: 90%; z-index: 10; box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);">
                     <strong style="color: #FFD700; font-size: 1.1rem;">Hexagonal Communication Pattern</strong><br>
                     <span style="color: rgba(255, 255, 255, 0.9); margin-top: 0.5rem; display: block;">Golden lines represent <strong style="color: #FFD700;">live data flow</strong> between agents. Each node represents an agent role within a department. All 6 nodes are interconnected.</span>
                 </div>
             </div>
             
-            <!-- Feature cards -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 8rem;">
+            <!-- Feature cards - moved further down to prevent overlap -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 10rem;">
                 <div class="feature-card" style="text-align: center;">
                     <div class="feature-icon">⚡</div>
                     <h3>Live Data Flow</h3>
