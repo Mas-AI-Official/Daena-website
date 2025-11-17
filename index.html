@@ -1783,14 +1783,14 @@
     </section>
 
     <!-- Metatron's Cube Visualization Section -->
-    <section class="metatron-section" id="agent-communication-viz" style="padding: 6rem 2rem; background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%); padding-top: 100px;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 class="section-title">🌐 Agent Communication Visualization</h2>
-            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+    <section class="metatron-section" id="agent-communication-viz" style="padding: 6rem 2rem; background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%); padding-top: 100px; position: relative; z-index: 1;">
+        <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
+            <h2 class="section-title" style="position: relative; z-index: 3;">🌐 Agent Communication Visualization</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; position: relative; z-index: 3;">
                 Experience Daena's revolutionary Metatron's Cube communication pattern - showing how 6 agents within each department communicate with live data flow
             </p>
             
-            <div class="metatron-container" style="position: relative; width: 100%; max-width: 800px; height: 600px; margin: 2rem auto; background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%); border-radius: 20px; overflow: hidden;">
+            <div class="metatron-container" style="position: relative; width: 100%; max-width: 800px; height: 600px; margin: 2rem auto; background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%); border-radius: 20px; overflow: hidden; z-index: 3;">
                 <svg class="metatron-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));">
                     <!-- Center circle -->
                     <circle class="metatron-circle-center" cx="400" cy="300" r="40" style="fill: rgba(255, 215, 0, 0.2); stroke: #FFD700; stroke-width: 3; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); animation: pulse-center 2s ease-in-out infinite;"/>
@@ -1886,18 +1886,18 @@
                 </div>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <div class="feature-card" style="text-align: center;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; position: relative; z-index: 10; background: rgba(15, 15, 35, 0.7); backdrop-filter: blur(10px); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255, 215, 0, 0.2);">
+                <div class="feature-card" style="text-align: center; position: relative; z-index: 11;">
                     <div class="feature-icon">⚡</div>
                     <h3>Live Data Flow</h3>
                     <p>Golden animated lines represent real-time data flowing between agents</p>
                 </div>
-                <div class="feature-card" style="text-align: center;">
+                <div class="feature-card" style="text-align: center; position: relative; z-index: 11;">
                     <div class="feature-icon">🔗</div>
                     <h3>13 Interconnected Nodes</h3>
                     <p>Center + 6 inner + 6 outer agents forming Metatron's Cube pattern</p>
                 </div>
-                <div class="feature-card" style="text-align: center;">
+                <div class="feature-card" style="text-align: center; position: relative; z-index: 11;">
                     <div class="feature-icon">🎯</div>
                     <h3>6 Agent Roles</h3>
                     <p>Advisor A/B, Scout Internal/External, Synthesizer, Executor</p>
