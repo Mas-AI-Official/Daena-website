@@ -198,7 +198,6 @@ class MetatronHexNetwork {
         // Draw connecting lines - Reduced visibility
         ctx.strokeStyle = '#FFD700';
         ctx.lineWidth = 0.3;
-        ctx.globalAlpha = 0.03;
         circles.forEach((circle, i) => {
             circles.slice(i + 1).forEach(otherCircle => {
                 ctx.beginPath();
@@ -218,9 +217,6 @@ class MetatronHexNetwork {
         if (!fromNode || !toNode) return;
         
         const ctx = this.ctx;
-        ctx.save();
-        ctx.globalAlpha = 0.2; // Reduced visibility
-        
         const dx = toNode.x - fromNode.x;
         const dy = toNode.y - fromNode.y;
         const length = Math.sqrt(dx * dx + dy * dy);
@@ -238,13 +234,13 @@ class MetatronHexNetwork {
         
         gradient.addColorStop(0, `rgba(255, 215, 0, 0)`);
         gradient.addColorStop(Math.max(0, progress - 0.2), `rgba(255, 215, 0, 0)`);
-        gradient.addColorStop(progress, `rgba(255, 215, 0, ${conn.glow * 0.3})`);
-        gradient.addColorStop(Math.min(1, progress + 0.2), `rgba(0, 188, 212, ${conn.glow * 0.2})`);
+        gradient.addColorStop(progress, `rgba(255, 215, 0, ${conn.glow * 0.5})`);
+        gradient.addColorStop(Math.min(1, progress + 0.2), `rgba(0, 188, 212, ${conn.glow * 0.4})`);
         gradient.addColorStop(1, `rgba(0, 188, 212, 0)`);
         
         ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1;
-        ctx.shadowBlur = 5;
+        ctx.lineWidth = 1.5;
+        ctx.shadowBlur = 8;
         ctx.shadowColor = '#FFD700';
         
         ctx.beginPath();
@@ -252,16 +248,15 @@ class MetatronHexNetwork {
         ctx.lineTo(toNode.x, toNode.y);
         ctx.stroke();
         
-        // Draw flowing particle - Reduced size and glow
-        ctx.fillStyle = `rgba(255, 215, 0, ${conn.glow * 0.4})`;
-        ctx.shadowBlur = 8;
+        // Draw flowing particle - Reduced brightness
+        ctx.fillStyle = `rgba(255, 215, 0, ${conn.glow * 0.6})`;
+        ctx.shadowBlur = 10;
         ctx.shadowColor = '#FFD700';
         ctx.beginPath();
-        ctx.arc(x, y, 2, 0, Math.PI * 2);
+        ctx.arc(x, y, 2.5, 0, Math.PI * 2);
         ctx.fill();
         
         ctx.shadowBlur = 0;
-        ctx.restore();
         
         // Update progress
         conn.progress += conn.speed;
@@ -272,16 +267,14 @@ class MetatronHexNetwork {
     
     drawNode(node, index) {
         const ctx = this.ctx;
-        ctx.save();
-        ctx.globalAlpha = 0.3; // Reduced visibility
         
         // Outer glow - Reduced intensity
         const gradient = ctx.createRadialGradient(
             node.x, node.y, 0,
             node.x, node.y, node.radius * 3
         );
-        gradient.addColorStop(0, `rgba(255, 215, 0, ${node.glow * 0.2})`);
-        gradient.addColorStop(0.5, `rgba(0, 188, 212, ${node.glow * 0.1})`);
+        gradient.addColorStop(0, `rgba(255, 215, 0, ${node.glow * 0.3})`);
+        gradient.addColorStop(0.5, `rgba(0, 188, 212, ${node.glow * 0.15})`);
         gradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
         
         ctx.fillStyle = gradient;
@@ -289,19 +282,18 @@ class MetatronHexNetwork {
         ctx.arc(node.x, node.y, node.radius * 3, 0, Math.PI * 2);
         ctx.fill();
         
-        // Node circle - Reduced glow
-        ctx.fillStyle = `rgba(255, 215, 0, ${node.glow * 0.5})`;
-        ctx.shadowBlur = 5;
+        // Node circle - Reduced brightness
+        ctx.fillStyle = `rgba(255, 215, 0, ${node.glow * 0.6})`;
+        ctx.shadowBlur = 8;
         ctx.shadowColor = '#FFD700';
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fill();
         
-        // Pulsing effect - Reduced range
+        // Reduced pulsing effect
         node.glow = 0.4 + Math.sin(Date.now() * 0.003 + index) * 0.2;
         
         ctx.shadowBlur = 0;
-        ctx.restore();
     }
     
     animate() {

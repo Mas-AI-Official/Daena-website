@@ -72,7 +72,7 @@
             pointer-events: none;
         }
 
-        /* Metatron's Cube Pattern Background Image - Much Less Visible */
+        /* Metatron's Cube Pattern Background Image - Reduced Visibility */
         .metatron-pattern-bg {
             position: fixed;
             top: 0;
@@ -80,10 +80,10 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            opacity: 0.05;
+            opacity: 0.08;
             background-image: 
                 radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="40" fill="none" stroke="%23FFD700" stroke-width="2" opacity="0.3"/><circle cx="200" cy="120" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="280" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="280" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="200" cy="280" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="120" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="120" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><line x1="200" y1="200" x2="200" y2="120" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="280" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="280" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="200" y2="280" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="120" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="120" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.2"/></svg>');
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="40" fill="none" stroke="%23FFD700" stroke-width="2" opacity="0.3"/><circle cx="200" cy="120" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="280" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="280" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="200" cy="280" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="120" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><circle cx="120" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.2"/><line x1="200" y1="200" x2="200" y2="120" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="280" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="280" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="200" y2="280" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="120" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.15"/><line x1="200" y1="200" x2="120" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.15"/></svg>');
             background-size: 600px 600px;
             background-position: center;
             background-repeat: repeat;
@@ -116,7 +116,7 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(2px);
             pointer-events: none;
         }
@@ -203,19 +203,15 @@
             padding: 120px 2rem 0 2rem;
             position: relative;
             margin-top: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 1;
         }
 
         .hero-content {
             max-width: 1000px;
             z-index: 10;
             position: relative;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .hero h1 {
@@ -1572,8 +1568,6 @@
     <div class="metatron-bg"></div>
     <div class="metatron-pattern-bg"></div>
     <canvas id="metatron-hex-canvas"></canvas>
-    <!-- Full Page Glassy Black Overlay -->
-    <div class="page-overlay"></div>
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
         <div>
@@ -1597,14 +1591,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" style="position: relative; z-index: 1;">
+    <section class="hero">
         <div class="hero-content">
             <h1>Revolutionary Business Intelligence</h1>
-            <p class="hero-subtitle" style="font-size: 1.6rem; font-weight: 600; color: var(--text-light); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);">48 AI Agents + Council Agents • Infinite Scalable Growth (Fibonacci) • Revolutionary NBMF Memory & Hex-Mesh Communication</p>
+            <p class="hero-subtitle">Powered by 48 AI Agents (6×8) with Revolutionary NBMF Memory & Hex-Mesh Communication</p>
             <p class="hero-description">
                 Daena AI introduces the world's first Self-Fulfilling Hierarchical Communication (SFHC) system with revolutionary <strong style="color: var(--primary-gold);">NBMF Memory</strong> and <strong style="color: var(--secondary-cyan);">Hex-Mesh Communication</strong>. 
-                Our <strong style="color: var(--primary-gold);">48 specialized agents</strong> (6 per department × 8 departments) plus <strong style="color: var(--secondary-cyan);">Council Agents</strong> work autonomously with 
-                <strong style="color: var(--primary-gold);">infinite scalable growth</strong> (Fibonacci pattern) - agents can grow infinitely by need. They work with 
+                Our <strong style="color: var(--primary-gold);">48 specialized agents</strong> (6 per department × 8 departments) work autonomously with 
                 <strong style="color: var(--secondary-cyan);">phase-locked council rounds</strong>, <strong style="color: var(--primary-gold);">quorum consensus</strong>, and 
                 <strong style="color: var(--secondary-cyan);">token-based backpressure</strong>. Enhanced by Consulate Agents - the top 5 experts in every major domain 
                 co-governing with VP Daena. Delivering VP-level decision-making with 
@@ -1960,7 +1953,7 @@
     </style>
 
     <!-- Competitive Analysis Section -->
-    <section class="competitive-analysis" style="padding-top: 100px; position: relative; z-index: 1;">
+    <section class="competitive-analysis" style="padding-top: 100px;">
         <div class="analysis-container">
             <h2 class="section-title">Why Daena Beats the Competition</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
@@ -2068,7 +2061,7 @@
     </section>
 
     <!-- AI Market Growth Section -->
-    <section class="market-growth" style="padding-top: 100px; position: relative; z-index: 1;">
+    <section class="market-growth" style="padding-top: 100px;">
         <div class="market-container">
             <h2 class="section-title">🚀 AI Autonomous Agents Market Growth</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
@@ -2193,7 +2186,7 @@
     </section>
 
     <!-- Recorded Demos Section -->
-    <section class="recorded-demos" style="position: relative; z-index: 1;">
+    <section class="recorded-demos">
         <div class="recorded-container">
             <h2 class="section-title">📹 Recorded Demo Videos</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
@@ -2309,7 +2302,7 @@
     </section>
 
     <!-- Pitch Deck Section -->
-    <section class="pitch-section" id="pitch" style="position: relative; z-index: 1;">
+    <section class="pitch-section" id="pitch">
         <h2 class="section-title">Investor Presentation</h2>
         <div class="pitch-content">
             <h2>📊 Online Pitch Deck with Explanation Voice Over</h2>
@@ -2364,7 +2357,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact" style="position: relative; z-index: 1;">
+    <section class="contact" id="contact">
         <div class="contact-content">
             <h2>Ready to Transform Your Business?</h2>
             <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 3rem;">
@@ -2400,7 +2393,7 @@
     </section>
 
     <!-- Demo Interest Form -->
-    <section class="demo-form-section" id="demo-form" style="position: relative; z-index: 1;">
+    <section class="demo-form-section" id="demo-form">
         <div class="demo-form-container">
             <h2>Request a Live Demo</h2>
             <p style="color: var(--text-muted); margin-bottom: 2rem; text-align: center;">
@@ -2883,6 +2876,19 @@ This request was submitted from the Daena AI website contact form.
                 document.body.removeChild(modal);
             });
             
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    jazzMusic.pause();
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+    </script>
+    <!-- Metatron Hexagonal Node Network -->
+    <script src="metatron-hex-network.js"></script>
+</body>
+</html>
+
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     jazzMusic.pause();
