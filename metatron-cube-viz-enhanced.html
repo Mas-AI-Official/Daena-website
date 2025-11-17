@@ -1,0 +1,322 @@
+<!-- Enhanced Metatron's Cube Visualization - Exact Pattern Match -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metatron's Cube - Daena AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0f0f23;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .metatron-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            overflow: hidden;
+        }
+        
+        .metatron-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        }
+        
+        /* Animated golden lines */
+        .metatron-line {
+            stroke: #FFD700;
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+            animation: linePulse 2s ease-in-out infinite;
+        }
+        
+        .metatron-line-dashed {
+            stroke: #FFD700;
+            stroke-width: 2;
+            stroke-dasharray: 5,5;
+            fill: none;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.4));
+            animation: linePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes linePulse {
+            0%, 100% {
+                opacity: 0.4;
+                stroke-width: 2;
+            }
+            50% {
+                opacity: 1;
+                stroke-width: 3;
+            }
+        }
+        
+        /* Nodes */
+        .metatron-node {
+            fill: #FFD700;
+            stroke: #00bcd4;
+            stroke-width: 2;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+            animation: nodePulse 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        .metatron-node-center {
+            fill: #FFD700;
+            stroke: #00bcd4;
+            stroke-width: 3;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+            animation: nodePulseCenter 1.5s ease-in-out infinite;
+        }
+        
+        .metatron-node:hover {
+            fill: #00bcd4;
+            stroke: #FFD700;
+            filter: drop-shadow(0 0 25px rgba(0, 188, 212, 1));
+        }
+        
+        @keyframes nodePulse {
+            0%, 100% {
+                r: 6;
+                opacity: 0.8;
+            }
+            50% {
+                r: 8;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes nodePulseCenter {
+            0%, 100% {
+                r: 10;
+                opacity: 1;
+            }
+            50% {
+                r: 12;
+                opacity: 1;
+            }
+        }
+        
+        /* Cyan intersection dots */
+        .metatron-intersection {
+            fill: #00bcd4;
+            stroke: #FFD700;
+            stroke-width: 1;
+            filter: drop-shadow(0 0 8px rgba(0, 188, 212, 0.8));
+            animation: intersectionPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes intersectionPulse {
+            0%, 100% {
+                r: 3;
+                opacity: 0.6;
+            }
+            50% {
+                r: 4;
+                opacity: 1;
+            }
+        }
+        
+        /* Labels */
+        .metatron-label {
+            fill: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-anchor: middle;
+            pointer-events: none;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8));
+        }
+        
+        /* Info box */
+        .metatron-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            color: #ffffff;
+            font-size: 0.9rem;
+            text-align: center;
+            max-width: 90%;
+            z-index: 1000;
+        }
+        
+        .metatron-info strong {
+            color: #FFD700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="metatron-container">
+        <svg class="metatron-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Define gradients and filters -->
+            <defs>
+                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.8" />
+                    <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0.8" />
+                </linearGradient>
+                
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            
+            <!-- Center Node -->
+            <circle class="metatron-node-center" cx="400" cy="300" r="10"/>
+            <text class="metatron-label" x="400" y="305">Center</text>
+            
+            <!-- Inner 6 Nodes (A1, A2, S1, S2, Syn, Ex) -->
+            <circle class="metatron-node" cx="400" cy="200" r="6" data-agent="A1"/>
+            <text class="metatron-label" x="400" y="195">A1</text>
+            
+            <circle class="metatron-node" cx="500" cy="250" r="6" data-agent="A2"/>
+            <text class="metatron-label" x="500" y="245">A2</text>
+            
+            <circle class="metatron-node" cx="500" cy="350" r="6" data-agent="S1"/>
+            <text class="metatron-label" x="500" y="345">S1</text>
+            
+            <circle class="metatron-node" cx="400" cy="400" r="6" data-agent="S2"/>
+            <text class="metatron-label" x="400" y="395">S2</text>
+            
+            <circle class="metatron-node" cx="300" cy="350" r="6" data-agent="Syn"/>
+            <text class="metatron-label" x="300" y="345">Syn</text>
+            
+            <circle class="metatron-node" cx="300" cy="250" r="6" data-agent="Ex"/>
+            <text class="metatron-label" x="300" y="245">Ex</text>
+            
+            <!-- Outer 6 Nodes (O1-O6) -->
+            <circle class="metatron-node" cx="400" cy="120" r="5" data-agent="O1"/>
+            <text class="metatron-label" x="400" y="115">O1</text>
+            
+            <circle class="metatron-node" cx="560" cy="200" r="5" data-agent="O2"/>
+            <text class="metatron-label" x="560" y="195">O2</text>
+            
+            <circle class="metatron-node" cx="560" cy="400" r="5" data-agent="O3"/>
+            <text class="metatron-label" x="560" y="395">O3</text>
+            
+            <circle class="metatron-node" cx="400" cy="480" r="5" data-agent="O4"/>
+            <text class="metatron-label" x="400" y="475">O4</text>
+            
+            <circle class="metatron-node" cx="240" cy="400" r="5" data-agent="O5"/>
+            <text class="metatron-label" x="240" y="395">O5</text>
+            
+            <circle class="metatron-node" cx="240" cy="200" r="5" data-agent="O6"/>
+            <text class="metatron-label" x="240" y="195">O6</text>
+            
+            <!-- Lines connecting Center to Inner 6 -->
+            <line class="metatron-line" x1="400" y1="300" x2="400" y2="200"/>
+            <line class="metatron-line" x1="400" y1="300" x2="500" y2="250"/>
+            <line class="metatron-line" x1="400" y1="300" x2="500" y2="350"/>
+            <line class="metatron-line" x1="400" y1="300" x2="400" y2="400"/>
+            <line class="metatron-line" x1="400" y1="300" x2="300" y2="350"/>
+            <line class="metatron-line" x1="400" y1="300" x2="300" y2="250"/>
+            
+            <!-- Lines connecting Inner 6 to each other (hexagon) -->
+            <line class="metatron-line" x1="400" y1="200" x2="500" y2="250"/>
+            <line class="metatron-line" x1="500" y1="250" x2="500" y2="350"/>
+            <line class="metatron-line" x1="500" y1="350" x2="400" y2="400"/>
+            <line class="metatron-line" x1="400" y1="400" x2="300" y2="350"/>
+            <line class="metatron-line" x1="300" y1="350" x2="300" y2="250"/>
+            <line class="metatron-line" x1="300" y1="250" x2="400" y2="200"/>
+            
+            <!-- Lines connecting Inner 6 to Outer 6 -->
+            <line class="metatron-line" x1="400" y1="200" x2="400" y2="120"/>
+            <line class="metatron-line" x1="500" y1="250" x2="560" y2="200"/>
+            <line class="metatron-line" x1="500" y1="350" x2="560" y2="400"/>
+            <line class="metatron-line" x1="400" y1="400" x2="400" y2="480"/>
+            <line class="metatron-line" x1="300" y1="350" x2="240" y2="400"/>
+            <line class="metatron-line" x1="300" y1="250" x2="240" y2="200"/>
+            
+            <!-- Lines connecting Outer 6 to each other (outer hexagon) -->
+            <line class="metatron-line-dashed" x1="400" y1="120" x2="560" y2="200"/>
+            <line class="metatron-line-dashed" x1="560" y1="200" x2="560" y2="400"/>
+            <line class="metatron-line-dashed" x1="560" y1="400" x2="400" y2="480"/>
+            <line class="metatron-line-dashed" x1="400" y1="480" x2="240" y2="400"/>
+            <line class="metatron-line-dashed" x1="240" y1="400" x2="240" y2="200"/>
+            <line class="metatron-line-dashed" x1="240" y1="200" x2="400" y2="120"/>
+            
+            <!-- Lines connecting Outer nodes to non-adjacent Inner nodes (creating star pattern) -->
+            <line class="metatron-line-dashed" x1="400" y1="120" x2="300" y2="250"/>
+            <line class="metatron-line-dashed" x1="560" y1="200" x2="400" y2="400"/>
+            <line class="metatron-line-dashed" x1="560" y1="400" x2="300" y2="350"/>
+            <line class="metatron-line-dashed" x1="400" y1="480" x2="500" y2="250"/>
+            <line class="metatron-line-dashed" x1="240" y1="400" x2="400" y2="200"/>
+            <line class="metatron-line-dashed" x1="240" y1="200" x2="500" y2="350"/>
+            
+            <!-- Cyan intersection dots at key points -->
+            <circle class="metatron-intersection" cx="400" cy="250" r="3"/>
+            <circle class="metatron-intersection" cx="450" cy="225" r="3"/>
+            <circle class="metatron-intersection" cx="450" cy="375" r="3"/>
+            <circle class="metatron-intersection" cx="400" cy="350" r="3"/>
+            <circle class="metatron-intersection" cx="350" cy="375" r="3"/>
+            <circle class="metatron-intersection" cx="350" cy="225" r="3"/>
+            <circle class="metatron-intersection" cx="480" cy="300" r="3"/>
+            <circle class="metatron-intersection" cx="320" cy="300" r="3"/>
+        </svg>
+        
+        <div class="metatron-info">
+            <strong>Metatron's Cube Communication Pattern</strong>
+            <p>Golden lines represent live data flow between agents.</p>
+            <p>Each node represents an agent role within a department.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Add interactivity
+        document.querySelectorAll('.metatron-node').forEach(node => {
+            node.addEventListener('mouseenter', function() {
+                this.style.fill = '#00bcd4';
+                this.style.stroke = '#FFD700';
+            });
+            
+            node.addEventListener('mouseleave', function() {
+                this.style.fill = '#FFD700';
+                this.style.stroke = '#00bcd4';
+            });
+        });
+        
+        // Animate line flow (simulate data movement)
+        function animateDataFlow() {
+            const lines = document.querySelectorAll('.metatron-line, .metatron-line-dashed');
+            lines.forEach((line, index) => {
+                const delay = index * 100;
+                setTimeout(() => {
+                    line.style.opacity = '1';
+                    line.style.strokeWidth = '3';
+                    setTimeout(() => {
+                        line.style.opacity = '0.6';
+                        line.style.strokeWidth = '2';
+                    }, 500);
+                }, delay);
+            });
+        }
+        
+        // Continuous animation
+        setInterval(animateDataFlow, 3000);
+    </script>
+</body>
+</html>
+
