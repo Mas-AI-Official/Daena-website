@@ -1824,6 +1824,40 @@
                     <polygon points="550,350 523.2,176.8 176.8,176.8 150,350 176.8,523.2 523.2,523.2" 
                              fill="none" stroke="#FFD700" stroke-width="2.5" opacity="0.5" filter="url(#glow-golden)"/>
                     
+                    <!-- Adjacent node connections (hexagon perimeter) - these were missing -->
+                    <!-- Top: Node 2 to Node 3 -->
+                    <line x1="523.2" y1="176.8" x2="176.8" y2="176.8" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.15s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Right: Node 1 to Node 6 -->
+                    <line x1="550" y1="350" x2="523.2" y2="523.2" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.85s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Bottom: Node 5 to Node 6 -->
+                    <line x1="176.8" y1="523.2" x2="523.2" y2="523.2" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.4s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Left: Node 3 to Node 4 -->
+                    <line x1="176.8" y1="176.8" x2="150" y2="350" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.2s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Top-left diagonal: Node 2 to Node 1 -->
+                    <line x1="523.2" y1="176.8" x2="550" y2="350" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Top-right diagonal: Node 3 to Node 4 -->
+                    <line x1="176.8" y1="176.8" x2="150" y2="350" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.2s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Bottom-left diagonal: Node 4 to Node 5 -->
+                    <line x1="150" y1="350" x2="176.8" y2="523.2" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+                    </line>
+                    <!-- Bottom-right diagonal: Node 6 to Node 1 -->
+                    <line x1="523.2" y1="523.2" x2="550" y2="350" stroke="#FFD700" stroke-width="2.5" opacity="0.9" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                        <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.8s" repeatCount="indefinite"/>
+                    </line>
+                    
                     <!-- Connections: Each node connected to all 5 others (15 connections total) -->
                     <!-- ALL connections must be present - each node to all 5 others -->
                     
