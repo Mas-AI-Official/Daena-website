@@ -1814,92 +1814,93 @@
                         </filter>
                     </defs>
                     
-                    <!-- Perfect Hexagon: 6 nodes with equal distances -->
-                    <!-- Center: 400, 350 | Radius: 100 -->
-                    <!-- Perfect hexagon formula: 60° intervals, radius = 100 -->
+                    <!-- Perfect Hexagon: 6 nodes with EQUAL distances -->
+                    <!-- Center: 400, 350 | Radius: 100px (all sides equal) -->
+                    <!-- Perfect hexagon: 60° intervals, all distances from center = 100px -->
+                    <!-- Formula: x = cx + r*cos(angle), y = cy + r*sin(angle) -->
                     <!-- Node 1: Top (0°) -->
                     <circle cx="400" cy="250" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
                         <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite"/>
                     </circle>
-                    <!-- Node 2: Top-right (60°) -->
-                    <circle cx="486.6" cy="286.6" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
+                    <!-- Node 2: Top-right (60°) = (400+50, 350+86.6) = (450, 436.6) -->
+                    <circle cx="450" cy="436.6" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
                         <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" begin="0.5s" repeatCount="indefinite"/>
                     </circle>
-                    <!-- Node 3: Bottom-right (120°) -->
-                    <circle cx="486.6" cy="413.4" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
+                    <!-- Node 3: Bottom-right (120°) = (400-50, 350+86.6) = (350, 436.6) -->
+                    <circle cx="350" cy="436.6" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
                         <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" begin="1s" repeatCount="indefinite"/>
                     </circle>
                     <!-- Node 4: Bottom (180°) -->
                     <circle cx="400" cy="450" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
                         <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" begin="1.5s" repeatCount="indefinite"/>
                     </circle>
-                    <!-- Node 5: Bottom-left (240°) -->
-                    <circle cx="313.4" cy="413.4" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
+                    <!-- Node 5: Bottom-left (240°) = (400-50, 350-86.6) = (350, 263.4) -->
+                    <circle cx="350" cy="263.4" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
                         <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" begin="2s" repeatCount="indefinite"/>
                     </circle>
-                    <!-- Node 6: Top-left (300°) -->
-                    <circle cx="313.4" cy="286.6" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
+                    <!-- Node 6: Top-left (300°) = (400+50, 350-86.6) = (450, 263.4) -->
+                    <circle cx="450" cy="263.4" r="16" fill="#FFD700" filter="url(#glow-node)" style="opacity: 1;">
                         <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" begin="2.5s" repeatCount="indefinite"/>
                     </circle>
                     
-                    <!-- Perfect hexagonal outline (honeycomb shape) -->
-                    <polygon points="400,250 486.6,286.6 486.6,413.4 400,450 313.4,413.4 313.4,286.6" 
+                    <!-- Perfect hexagonal outline (honeycomb shape) - All sides equal -->
+                    <polygon points="400,250 450,263.4 450,436.6 400,450 350,436.6 350,263.4" 
                              fill="none" stroke="#FFD700" stroke-width="3" opacity="0.5" filter="url(#glow-golden)"/>
                     
                     <!-- Connections: Each node connected to all 5 others (15 connections total) -->
-                    <!-- Perfect hexagon with equal distances - all sides = 100px -->
+                    <!-- Perfect hexagon: All nodes equidistant from center (100px radius) -->
                     <!-- Node 1 (400,250) to others -->
-                    <line x1="400" y1="250" x2="486.6" y2="286.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="400" y1="250" x2="450" y2="263.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="400" y1="250" x2="486.6" y2="413.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="400" y1="250" x2="450" y2="436.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.2s" repeatCount="indefinite"/>
                     </line>
                     <line x1="400" y1="250" x2="400" y2="450" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.4s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="400" y1="250" x2="313.4" y2="413.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="400" y1="250" x2="350" y2="436.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.6s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="400" y1="250" x2="313.4" y2="286.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="400" y1="250" x2="350" y2="263.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.8s" repeatCount="indefinite"/>
                     </line>
                     
-                    <!-- Node 2 (486.6,286.6) to others (excluding already drawn) -->
-                    <line x1="486.6" y1="286.6" x2="486.6" y2="413.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <!-- Node 2 (450,263.4) to others (excluding already drawn) -->
+                    <line x1="450" y1="263.4" x2="450" y2="436.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.1s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="486.6" y1="286.6" x2="400" y2="450" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="450" y1="263.4" x2="400" y2="450" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.3s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="486.6" y1="286.6" x2="313.4" y2="413.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="450" y1="263.4" x2="350" y2="436.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.5s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="486.6" y1="286.6" x2="313.4" y2="286.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="450" y1="263.4" x2="350" y2="263.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.7s" repeatCount="indefinite"/>
                     </line>
                     
-                    <!-- Node 3 (486.6,413.4) to others (excluding already drawn) -->
-                    <line x1="486.6" y1="413.4" x2="400" y2="450" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <!-- Node 3 (450,436.6) to others (excluding already drawn) -->
+                    <line x1="450" y1="436.6" x2="400" y2="450" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.2s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="486.6" y1="413.4" x2="313.4" y2="413.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="450" y1="436.6" x2="350" y2="436.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.4s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="486.6" y1="413.4" x2="313.4" y2="286.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="450" y1="436.6" x2="350" y2="263.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.6s" repeatCount="indefinite"/>
                     </line>
                     
                     <!-- Node 4 (400,450) to others (excluding already drawn) -->
-                    <line x1="400" y1="450" x2="313.4" y2="413.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="400" y1="450" x2="350" y2="436.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.3s" repeatCount="indefinite"/>
                     </line>
-                    <line x1="400" y1="450" x2="313.4" y2="286.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <line x1="400" y1="450" x2="350" y2="263.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.5s" repeatCount="indefinite"/>
                     </line>
                     
-                    <!-- Node 5 (313.4,413.4) to Node 6 (last connection) -->
-                    <line x1="313.4" y1="413.4" x2="313.4" y2="286.6" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
+                    <!-- Node 5 (350,436.6) to Node 6 (last connection) -->
+                    <line x1="350" y1="436.6" x2="350" y2="263.4" stroke="#FFD700" stroke-width="2.5" opacity="0.85" filter="url(#glow-golden)" stroke-dasharray="20 5">
                         <animate attributeName="stroke-dashoffset" values="0;25" dur="2s" begin="0.4s" repeatCount="indefinite"/>
                     </line>
                 </svg>
