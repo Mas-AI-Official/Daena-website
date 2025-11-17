@@ -203,12 +203,19 @@
             padding: 120px 2rem 0 2rem;
             position: relative;
             margin-top: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
         }
 
         .hero-content {
             max-width: 1000px;
             z-index: 10;
             position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
         .hero h1 {
@@ -221,13 +228,17 @@
             background-clip: text;
             line-height: 1.2;
             animation: fadeInUp 1s ease-out;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.9));
         }
 
         .hero-subtitle {
             font-size: 1.5rem;
-            color: var(--text-muted);
+            color: var(--text-light);
             margin-bottom: 2rem;
             animation: fadeInUp 1s ease-out 0.2s both;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .hero-description {
@@ -238,6 +249,8 @@
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 1s ease-out 0.4s both;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+            font-weight: 500;
         }
 
         /* Problems Solved Section */
