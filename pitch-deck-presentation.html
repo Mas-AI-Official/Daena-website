@@ -558,6 +558,8 @@
                 this.presentation = document.getElementById('presentation');
                 this.errorMessage = document.getElementById('errorMessage');
                 this.musicIndicator = document.getElementById('musicIndicator');
+                this.loadedSlideIndex = null;
+                this.currentAudioSrc = '';
 
                 // Audio files for each slide
                 this.audioFiles = [
@@ -636,122 +638,64 @@
                 this.updateSlideCounter();
             }
 
-            loadAudioForSlide(slideIndex) {
-                if (this.audioFiles[slideIndex]) {
-                    // Pause and reset current audio
+            loadAudioForSlide(slideIndex, { resetPosition = true } = {}) {
+                const audioSrc = this.audioFiles[slideIndex];
+                if (!audioSrc) return;
+
+                if (this.currentAudioSrc !== audioSrc) {
                     this.audioPlayer.pause();
-                    this.audioPlayer.currentTime = 0;
-                    
-                    // Load new audio
-                    this.audioPlayer.src = this.audioFiles[slideIndex];
-                    this.audioPlayer.load();
-                    
-                    // Reset progress bar
-                    this.progressFill.style.width = '0%';
+                    this.audioPlayer.src = audioSrc;
+                    this.currentAudioSrc = audioSrc;
+                    resetPosition = true;
                 }
+
+                if (resetPosition) {
+                    this.audioPlayer.currentTime = 0;
+                    this.progressFill.style.width = '0%';
+                    this.updateTimeDisplay();
+                }
+
+                this.loadedSlideIndex = slideIndex;
             }
 
             togglePlayPause() {
                 if (this.isPlaying) {
-                    this.audioPlayer.pause();
-                    this.isPlaying = false;
-                    this.playPauseBtn.textContent = '▶ Play';
-                    this.playPauseBtn.classList.remove('active', 'loading');
+                    this.pausePlayback();
                 } else {
-                    // Show loading state
-                    this.playPauseBtn.textContent = '⏳ Loading...';
-                    this.playPauseBtn.classList.add('loading');
-                    
-                    // Ensure we have the correct audio for current slide
-                    this.loadAudioForSlide(this.currentSlide);
-                    
-                    // Wait for audio to load, then play
-                    this.audioPlayer.addEventListener('canplaythrough', () => {
-                        this.audioPlayer.play().catch(e => {
-                            console.log('Auto-play failed:', e);
-                            this.playPauseBtn.textContent = '▶ Play';
-                            this.playPauseBtn.classList.remove('loading');
-                        });
-                    }, { once: true });
-                    
-                    // If audio is already loaded, play immediately
-                    if (this.audioPlayer.readyState >= 3) {
-                        this.audioPlayer.play().catch(e => {
-                            console.log('Auto-play failed:', e);
-                            this.playPauseBtn.textContent = '▶ Play';
-                            this.playPauseBtn.classList.remove('loading');
-                        });
+                    const needsReload = this.loadedSlideIndex !== this.currentSlide || !this.currentAudioSrc;
+                    if (needsReload) {
+                        this.loadAudioForSlide(this.currentSlide, { resetPosition: true });
+                        this.startPlayback(true);
+                    } else {
+                        this.startPlayback(false);
                     }
-                    
-                    this.isPlaying = true;
-                    this.playPauseBtn.textContent = '⏸ Pause';
-                    this.playPauseBtn.classList.remove('loading');
-                    this.playPauseBtn.classList.add('active');
                 }
             }
 
             nextSlide() {
                 if (this.currentSlide < this.totalSlides - 1) {
-                    // Stop current audio
                     this.audioPlayer.pause();
-                    this.audioPlayer.currentTime = 0;
-                    
-                    // Move to next slide
                     this.showSlide(this.currentSlide + 1);
-                    
-                    // Load and play audio for new slide
-                    this.loadAudioForSlide(this.currentSlide);
+                    this.loadAudioForSlide(this.currentSlide, { resetPosition: true });
+
                     if (this.isPlaying) {
-                        // Show loading state
-                        this.playPauseBtn.textContent = '⏳ Loading...';
-                        this.playPauseBtn.classList.add('loading');
-                        
-                        // Wait for audio to load, then play
-                        this.audioPlayer.addEventListener('canplaythrough', () => {
-                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
-                            this.playPauseBtn.textContent = '⏸ Pause';
-                            this.playPauseBtn.classList.remove('loading');
-                        }, { once: true });
-                        
-                        // If audio is already loaded, play immediately
-                        if (this.audioPlayer.readyState >= 3) {
-                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
-                            this.playPauseBtn.textContent = '⏸ Pause';
-                            this.playPauseBtn.classList.remove('loading');
-                        }
+                        this.startPlayback(true);
+                    } else {
+                        this.pausePlayback();
                     }
                 }
             }
 
             previousSlide() {
                 if (this.currentSlide > 0) {
-                    // Stop current audio
                     this.audioPlayer.pause();
-                    this.audioPlayer.currentTime = 0;
-                    
-                    // Move to previous slide
                     this.showSlide(this.currentSlide - 1);
-                    
-                    // Load and play audio for new slide
-                    this.loadAudioForSlide(this.currentSlide);
+                    this.loadAudioForSlide(this.currentSlide, { resetPosition: true });
+
                     if (this.isPlaying) {
-                        // Show loading state
-                        this.playPauseBtn.textContent = '⏳ Loading...';
-                        this.playPauseBtn.classList.add('loading');
-                        
-                        // Wait for audio to load, then play
-                        this.audioPlayer.addEventListener('canplaythrough', () => {
-                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
-                            this.playPauseBtn.textContent = '⏸ Pause';
-                            this.playPauseBtn.classList.remove('loading');
-                        }, { once: true });
-                        
-                        // If audio is already loaded, play immediately
-                        if (this.audioPlayer.readyState >= 3) {
-                            this.audioPlayer.play().catch(e => console.log('Auto-play failed:', e));
-                            this.playPauseBtn.textContent = '⏸ Pause';
-                            this.playPauseBtn.classList.remove('loading');
-                        }
+                        this.startPlayback(true);
+                    } else {
+                        this.pausePlayback();
                     }
                 }
             }
@@ -806,10 +750,7 @@
                     if (this.isPlaying && this.currentSlide < this.totalSlides - 1) {
                         this.nextSlide();
                     } else if (this.isPlaying) {
-                        // End of presentation
-                        this.isPlaying = false;
-                        this.playPauseBtn.textContent = '▶ Play';
-                        this.playPauseBtn.classList.remove('active');
+                        this.pausePlayback();
                         this.audioPlayer.currentTime = 0;
                     }
                 }, 1000); // Reduced delay for smoother transitions
@@ -828,10 +769,7 @@
             }
 
             stop() {
-                this.audioPlayer.pause();
-                this.isPlaying = false;
-                this.playPauseBtn.textContent = '▶ Play';
-                this.playPauseBtn.classList.remove('active');
+                this.pausePlayback();
             }
 
             hideLoading() {
@@ -839,6 +777,46 @@
                     this.loading.style.display = 'none';
                     this.presentation.style.display = 'flex';
                 }, 2000);
+            }
+
+            startPlayback(resetPosition = false) {
+                if (resetPosition) {
+                    this.audioPlayer.currentTime = 0;
+                    this.progressFill.style.width = '0%';
+                    this.updateTimeDisplay();
+                }
+
+                this.playPauseBtn.textContent = '⏳ Loading...';
+                this.playPauseBtn.classList.add('loading');
+
+                const playAudio = () => {
+                    this.audioPlayer.play().then(() => {
+                        this.isPlaying = true;
+                        this.playPauseBtn.textContent = '⏸ Pause';
+                        this.playPauseBtn.classList.add('active');
+                        this.playPauseBtn.classList.remove('loading');
+                    }).catch(e => {
+                        console.log('Auto-play failed:', e);
+                        this.pausePlayback();
+                    });
+                };
+
+                if (this.audioPlayer.readyState >= 3) {
+                    playAudio();
+                } else {
+                    const handler = () => {
+                        this.audioPlayer.removeEventListener('canplaythrough', handler);
+                        playAudio();
+                    };
+                    this.audioPlayer.addEventListener('canplaythrough', handler);
+                }
+            }
+
+            pausePlayback() {
+                this.audioPlayer.pause();
+                this.isPlaying = false;
+                this.playPauseBtn.textContent = '▶ Play';
+                this.playPauseBtn.classList.remove('active', 'loading');
             }
         }
 
