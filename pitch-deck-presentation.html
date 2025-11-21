@@ -663,7 +663,11 @@
                     this.playPauseBtn.classList.add('loading');
                     
                     // Ensure we have the correct audio for current slide
-                    this.loadAudioForSlide(this.currentSlide);
+                    // Only load if it's not already the correct source
+                    const currentAudioFile = this.audioFiles[this.currentSlide];
+                    if (!this.audioPlayer.src.endsWith(currentAudioFile)) {
+                        this.loadAudioForSlide(this.currentSlide);
+                    }
                     
                     // Wait for audio to load, then play
                     this.audioPlayer.addEventListener('canplaythrough', () => {
