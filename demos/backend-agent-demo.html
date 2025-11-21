@@ -726,6 +726,7 @@
                 this.activeAgents = 0;
                 this.messagesExchanged = 0;
                 this.taskCompletion = 0;
+                this.agentIds = ['researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent', 'executiveAgent'];
                 
                 this.phases = [
                     {
@@ -1077,12 +1078,12 @@
             stopDemo() {
                 this.isRunning = false;
                 
-                this.startBtn.style.display = 'inline-block';
-                this.stopBtn.style.display = 'none';
+                if (this.startBtn) this.startBtn.style.display = 'inline-block';
+                if (this.stopBtn) this.stopBtn.style.display = 'none';
 
                 // Reset all agents to active state but keep logs
-                Object.keys(this.activeAgents).forEach(agentKey => {
-                    this.setAgentState(agentKey, 'active');
+                this.agentIds.forEach(agentId => {
+                    this.setAgentState(agentId, 'active');
                 });
             }
 
@@ -1098,8 +1099,7 @@
                 this.phaseIndex = 0;
 
                 // Reset all agents to standby
-                const agentIds = ['researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent', 'executiveAgent'];
-                agentIds.forEach(agentId => {
+                this.agentIds.forEach(agentId => {
                     this.setAgentState(agentId, 'standby');
                     this.clearAgentActivity(agentId);
                 });
