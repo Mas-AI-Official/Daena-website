@@ -1253,12 +1253,14 @@
             // Try to load voice player config
             const voicePlayerElement = document.getElementById('daena-voice-player');
             if (voicePlayerElement) {
-                // This would load the voice-over configuration
-                // For now, just show a placeholder
                 voicePlayerElement.innerHTML = `
                     <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; padding: 1rem;">
-                        <div style="color: #FFD700; font-weight: 600; margin-bottom: 0.5rem;">🎧 Voice-Over Integration</div>
-                        <div style="color: #97A1A9; font-size： 0.8rem;">Voice narration synchronization will be added here to match live backend activities.</div>
+                        <div style="color: #FFD700; font-weight: 600; margin-bottom: 0.5rem;">🎧 Voice-Over Coming Soon</div>
+                        <div style="color: #97A1A9; font-size: 0.85rem;">
+                            Record a narration for this backend demo using the Daena voice you cloned in Eleven Labs.
+                            Follow the storytelling tone used in <code>voice-over-scripts.md</code> (describe the 8 backend phases, SFHC handshakes, and governance cues)
+                            so we can drop the audio file into <code>demos/voice-over-demos/</code> and wire it up instantly.
+                        </div>
                     </div>
                 `;
             }
