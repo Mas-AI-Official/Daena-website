@@ -13,8 +13,14 @@
 
             this.config = config;
             this.title = config.title || 'Daena Voice Demonstration';
-            this.audioSrc = config.audio || '';
-            this.chapters = Array.isArray(config.chapters) ? config.chapters : [];
+            this.audioConfig = this.normalizeAudioConfig(config.audio);
+            this.audioSrc = this.audioConfig?.src || '';
+            this.chapters = this.normalizeChapters(config.chapters);
+            this.defaultCaption = config.caption || config.description || this.audioConfig?.description || 'Voice-over ready. Press play to begin.';
+
+            if (this.audioConfig?.title && !config.title) {
+                this.title = this.audioConfig.title;
+            }
             this.playbackRates = Array.isArray(config.playbackRates) && config.playbackRates.length
                 ? config.playbackRates
                 : [0.75, 1, 1.25, 1.5];
@@ -50,8 +56,8 @@
                 ? this.chapters.map((chapter, index) => `
                     <div class="chapter-item" data-chapter-index="${index}">
                         <button class="chapter-btn" type="button">
-                            <span class="chapter-time">${this.formatTime(chapter.t || 0)}</span>
-                            <span class="chapter-label">${chapter.label || `Chapter ${index + 1}`}</span>
+                            <span class="chapter-time">${this.formatTime(chapter.t)}</span>
+                            <span class="chapter-label">${chapter.label}</span>
                             ${chapter.id ? `<span class="chapter-id">${chapter.id}</span>` : ''}
                         </button>
                     </div>
@@ -88,7 +94,7 @@
                         </select>
                     </div>
                     <div class="current-caption">
-                        <div class="caption-text">Voice-over ready. Press play to begin.</div>
+                        <div class="caption-text">${this.defaultCaption}</div>
                     </div>
                     <div class="chapters-list">
                         <div class="chapters-header">Chapters</div>
@@ -200,9 +206,10 @@
         decorateChapters() {
             this.chapterButtons = Array.from(this.container.querySelectorAll('.chapter-btn'));
             this.chapterButtons.forEach((button, index) => {
-                const chapter = this.chapters[index] || {};
-                button.dataset.time = chapter.t || 0;
-                button.dataset.label = chapter.label || `Chapter ${index + 1}`;
+                const chapter = this.chapters[index];
+                if (!chapter) return;
+                button.dataset.time = chapter.t;
+                button.dataset.label = chapter.label;
             });
         }
 
@@ -306,7 +313,7 @@
 
             let newIndex = -1;
             for (let i = 0; i < this.chapters.length; i++) {
-                if (currentTime >= (this.chapters[i].t || 0)) {
+                if (currentTime >= this.chapters[i].t) {
                     newIndex = i;
                 } else {
                     break;
@@ -330,7 +337,7 @@
 
         setStatusMessage(message) {
             if (this.captionText) {
-                this.captionText.textContent = message;
+                this.captionText.textContent = message || this.defaultCaption;
             }
         }
 
@@ -372,6 +379,34 @@
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        normalizeAudioConfig(audio) {
+            if (!audio) return null;
+            if (typeof audio === 'string') {
+                return { src: audio };
+            }
+            if (typeof audio === 'object') {
+                const normalized = { ...audio };
+                if (!normalized.src && normalized.url) {
+                    normalized.src = normalized.url;
+                }
+                return normalized.src ? normalized : null;
+            }
+            return null;
+        }
+
+        normalizeChapters(chapters) {
+            if (!Array.isArray(chapters)) return [];
+            return chapters.map((chapter, index) => {
+                const timeValue = chapter.t ?? chapter.time ?? chapter.start ?? 0;
+                const numericTime = typeof timeValue === 'number' ? timeValue : parseFloat(timeValue) || 0;
+                return {
+                    t: Math.max(0, numericTime),
+                    label: chapter.label || chapter.title || `Chapter ${index + 1}`,
+                    id: chapter.id || chapter.slug || ''
+                };
+            }).sort((a, b) => a.t - b.t);
         }
     }
 
