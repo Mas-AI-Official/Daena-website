@@ -1252,15 +1252,20 @@
 
             // Try to load voice player config
             const voicePlayerElement = document.getElementById('daena-voice-player');
-            if (voicePlayerElement) {
-                // This would load the voice-over configuration
-                // For now, just show a placeholder
-                voicePlayerElement.innerHTML = `
-                    <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; padding: 1rem;">
-                        <div style="color: #FFD700; font-weight: 600; margin-bottom: 0.5rem;">🎧 Voice-Over Integration</div>
-                        <div style="color: #97A1A9; font-size： 0.8rem;">Voice narration synchronization will be added here to match live backend activities.</div>
-                    </div>
-                `;
+            if (voicePlayerElement && typeof DaenaVoicePlayer !== 'undefined') {
+                const config = {
+                    title: "Agent Communication Demo",
+                    audio: "voice-over-demos/Demo 1 Agent Communication.mp3",
+                    chapters: [
+                        { start: 0, label: "Backend Connection" },
+                        { start: 10, label: "Task Initiation" },
+                        { start: 25, label: "Research Engagement" },
+                        { start: 45, label: "Marketing & Finance" },
+                        { start: 70, label: "Operations & Sales" },
+                        { start: 90, label: "Final Synthesis" }
+                    ]
+                };
+                window.liveVoicePlayer = new DaenaVoicePlayer('daena-voice-player', config);
             }
         });
     </script>
