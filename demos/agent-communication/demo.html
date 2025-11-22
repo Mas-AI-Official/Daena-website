@@ -1224,7 +1224,7 @@
                     const border = dept.agents.find(a => a.endsWith('border'));
                     if (border) this.setAgentStatus(border, 'communicating');
                 });
-                this.addCommunicationLog('Border Network', 'Handshake established across all departments');
+                this.addCommunicationLog('Border Network', 'Handshake established across all departments', 'CROSS_DEPT', 0.95);
                 await this.delay(1200);
 
                 // 1) Iterate departments and align narration
@@ -1236,12 +1236,38 @@
 
                     this.updateNarration(`${dept.name} is activating agents and sharing data.`);
                     deptAgents.forEach(agentId => this.setAgentStatus(agentId, 'active'));
-                    this.addCommunicationLog(`${dept.name}`, 'Agents active and coordinating');
+                    this.addCommunicationLog(`${dept.name}`, 'Agents active and coordinating', 'COORDINATION', 0.88);
                     await this.delay(1000);
+
+                    // Add cross-department messages between departments
+                    if (i > 0) {
+                        const prevDept = this.departments[departments[i - 1]];
+                        this.addCommunicationMessage(
+                            `${prevDept.name}`, 
+                            `${dept.name}`, 
+                            `Sharing data and insights for coordination`, 
+                            'DATA_SHARE', 
+                            0.87
+                        );
+                        await this.delay(500);
+                    }
 
                     // Communication burst in this department
                     deptAgents.slice(0, 3).forEach(agentId => this.setAgentStatus(agentId, 'communicating'));
-                    await this.delay(900);
+                    
+                    // Add knowledge transfer messages within department
+                    if (deptAgents.length >= 3) {
+                        this.addCommunicationMessage(
+                            `${dept.name} Strategic`, 
+                            `${dept.name} Exec`, 
+                            `Knowledge transfer: Strategic insights compiled`, 
+                            'KNOWLEDGE_TRANSFER', 
+                            0.89
+                        );
+                        await this.delay(400);
+                    }
+                    
+                    await this.delay(500);
                 }
 
                 // 2) Final coordination phase - all departments working together
@@ -1249,8 +1275,38 @@
                 Object.values(this.departments).forEach(dept => {
                     dept.agents.forEach(agentId => this.setAgentStatus(agentId, 'communicating'));
                 });
-                this.addCommunicationLog('Daena Core', 'All 48+ agents across 8 departments now coordinating in real-time');
-                await this.delay(1500);
+                
+                // Add multiple cross-department coordination messages
+                const deptNames = Object.values(this.departments).map(d => d.name);
+                for (let i = 0; i < Math.min(5, deptNames.length - 1); i++) {
+                    this.addCommunicationMessage(
+                        deptNames[i], 
+                        deptNames[i + 1], 
+                        `Cross-department coordination: Real-time data sync`, 
+                        'CROSS_DEPT', 
+                        0.91
+                    );
+                    await this.delay(300);
+                }
+                
+                // Add knowledge transfers
+                for (let i = 0; i < 3; i++) {
+                    const fromDept = deptNames[Math.floor(Math.random() * deptNames.length)];
+                    const toDept = deptNames[Math.floor(Math.random() * deptNames.length)];
+                    if (fromDept !== toDept) {
+                        this.addCommunicationMessage(
+                            `${fromDept} Research`, 
+                            `${toDept} Strategic`, 
+                            `Knowledge transfer: Research findings and analysis`, 
+                            'KNOWLEDGE_TRANSFER', 
+                            0.88
+                        );
+                        await this.delay(300);
+                    }
+                }
+                
+                this.addCommunicationLog('Daena Core', 'All 48+ agents across 8 departments now coordinating in real-time', 'SYSTEM', 0.94);
+                await this.delay(500);
 
                 // Final narration
                 this.updateNarration("Demo complete! This showcases how Daena's 48+ agents with Consulate experts collaborate across 8 departments under VP Daena.");
@@ -1465,17 +1521,28 @@
             }
 
             // Simple log appender used by the scenario above
-            addCommunicationLog(source, message) {
+            addCommunicationLog(source, message, type = 'SYSTEM', confidence = 0.90) {
                 const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
                 const logEntry = document.createElement('div');
                 logEntry.className = 'log-entry';
                 logEntry.innerHTML = `
                     <div class="log-time">${time}</div>
                     <div class="log-message"><strong>${source}</strong>: ${message}</div>
-                    <div class="log-type">SYSTEM</div>
+                    <div class="log-type">${type}</div>
                 `;
                 this.communicationLog.appendChild(logEntry);
                 this.communicationLog.scrollTop = this.communicationLog.scrollHeight;
+                
+                // Update stats based on message type
+                this.messageCount++;
+                if (type === 'CROSS_DEPT' || type === 'DATA_SHARE' || source.includes('Network') || message.includes('coordinating')) {
+                    this.crossDeptCount++;
+                }
+                if (type === 'KNOWLEDGE_TRANSFER' || message.includes('sharing') || message.includes('transfer')) {
+                    this.knowledgeTransfers++;
+                }
+                this.totalConfidence += confidence;
+                this.updateStats();
             }
 
             updateNarration(text) {
