@@ -185,6 +185,24 @@
             height: 70%;
         }
         
+        /* Hide Metatron background in fullscreen */
+        body:fullscreen .metatron-bg,
+        body:-webkit-full-screen .metatron-bg,
+        body:-moz-full-screen .metatron-bg,
+        body:-ms-fullscreen .metatron-bg,
+        body:fullscreen .metatron-pattern-bg,
+        body:-webkit-full-screen .metatron-pattern-bg,
+        body:-moz-full-screen .metatron-pattern-bg,
+        body:-ms-fullscreen .metatron-pattern-bg,
+        body:fullscreen #metatron-hex-canvas,
+        body:-webkit-full-screen #metatron-hex-canvas,
+        body:-moz-full-screen #metatron-hex-canvas,
+        body:-ms-fullscreen #metatron-hex-canvas {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
         /* Keep controls visible in fullscreen */
         body:fullscreen .audio-controls,
         body:-webkit-full-screen .audio-controls,
