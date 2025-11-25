@@ -349,7 +349,7 @@
         
         /* Glassmorphism Section Card - unified styling for all content containers */
         .section-card {
-            background: var(--glass-bg);
+            background: rgba(5, 8, 20, 0.85);
             border-radius: 24px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
@@ -359,6 +359,9 @@
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            box-sizing: border-box;
         }
         
         /* Section wrapper - transparent, content in glass cards */
@@ -366,6 +369,8 @@
             padding: 6rem 2rem;
             background: transparent;
             position: relative;
+            overflow-x: hidden;
+            box-sizing: border-box;
         }
 
         /* Metatron's Cube Pattern Background Image */
@@ -1596,6 +1601,45 @@
             .metatron-container {
                 padding-bottom: 2rem !important;
             }
+            
+            /* Mobile-friendly section cards */
+            .section-card {
+                padding: 2rem 1rem !important;
+                margin: 0 0.5rem !important;
+                border-radius: 16px !important;
+                max-width: calc(100% - 1rem) !important;
+                overflow-x: hidden !important;
+                word-wrap: break-word !important;
+            }
+            
+            .section-wrapper {
+                padding: 3rem 0.5rem !important;
+                overflow-x: hidden !important;
+            }
+            
+            /* Fix text overflow on mobile */
+            .feature-card {
+                padding: 1.5rem 1rem !important;
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.2rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            .feature-card p {
+                font-size: 0.95rem !important;
+                line-height: 1.6 !important;
+            }
+            
+            /* Fix long text in investor section */
+            #benefits .feature-card p,
+            #investor-value .feature-card p {
+                font-size: 0.9rem !important;
+                line-height: 1.7 !important;
+            }
 
             .competitive-analysis {
                 padding: 4rem 1rem !important;
@@ -1700,6 +1744,36 @@
             .features {
                 padding: 3rem 0.75rem !important;
                 padding-top: 110px !important;
+            }
+            
+            /* Extra small mobile - tighter spacing */
+            .section-card {
+                padding: 1.5rem 0.75rem !important;
+                margin: 0 0.25rem !important;
+                border-radius: 12px !important;
+            }
+            
+            .section-wrapper {
+                padding: 2rem 0.25rem !important;
+            }
+            
+            .feature-card {
+                padding: 1.25rem 0.75rem !important;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.1rem !important;
+            }
+            
+            .feature-card p {
+                font-size: 0.85rem !important;
+            }
+            
+            /* Fix long paragraphs */
+            #benefits .feature-card p,
+            #investor-value .feature-card p {
+                font-size: 0.8rem !important;
+                line-height: 1.6 !important;
             }
 
             .metatron-section {
@@ -1952,7 +2026,7 @@
                     🔬 PATENT-PENDING TECHNOLOGY
                 </span>
                 <h2 class="section-title" style="margin-bottom: 24px;">NBMF Memory: The Innovation That Changes Everything</h2>
-                <p style="font-size: 1.3rem; color: var(--text-muted); max-width: 900px; margin: 0 auto; line-height: 1.8;">
+                <p style="font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-light); max-width: 900px; margin: 0 auto; line-height: 1.8;">
                     <strong style="color: var(--primary-gold);">Neural-Backed Memory Fabric (NBMF)</strong> is Daena's revolutionary patent-pending memory architecture that delivers <strong style="color: var(--secondary-cyan);">60%+ cost savings</strong> through intelligent 3-tier compression (L1 Hot / L2 Warm / L3 Cold) with CAS + SimHash technology.
                 </p>
             </div>
@@ -1996,12 +2070,12 @@
                 <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0,188,212,0.2);">
                     <div class="feature-icon">🏢</div>
                     <h3>For Businesses</h3>
-                    <p><strong>Executive Intelligence:</strong> VP-level decision-making at $60/day vs $2,000+ for human VPs. <strong>24/7 Operations:</strong> Never miss a decision, never lose context with NBMF memory. <strong>Multi-Department Coordination:</strong> 8 departments (Engineering, Product, Sales, Marketing, Finance, HR, Legal, Customer) working in perfect harmony. <strong>Enterprise Security:</strong> AES-256 encryption, multi-tenant isolation, compliance automation, complete audit trails. <strong>API-First Design:</strong> Integrate Daena into any existing workflow.</p>
+                    <p style="color: var(--text-light); line-height: 1.8;"><strong style="color: var(--secondary-cyan);">Executive Intelligence:</strong> VP-level decision-making at $60/day vs $2,000+ for human VPs.<br><br><strong style="color: var(--secondary-cyan);">24/7 Operations:</strong> Never miss a decision, never lose context with NBMF memory.<br><br><strong style="color: var(--secondary-cyan);">Multi-Department Coordination:</strong> 8 departments (Engineering, Product, Sales, Marketing, Finance, HR, Legal, Customer) working in perfect harmony.<br><br><strong style="color: var(--secondary-cyan);">Enterprise Security:</strong> AES-256 encryption, multi-tenant isolation, compliance automation, complete audit trails.<br><br><strong style="color: var(--secondary-cyan);">API-First Design:</strong> Integrate Daena into any existing workflow.</p>
                 </div>
                 <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2);">
                     <div class="feature-icon">🚀</div>
                     <h3>For Founders</h3>
-                    <p><strong>Operate AI-Native:</strong> Build companies that run on autonomous intelligence from day one. <strong>Scale Without Hiring:</strong> Add departments and capabilities without adding headcount - Daena grows with Fibonacci pattern. <strong>Focus on Strategy:</strong> Let Daena handle operations, finance, marketing, and customer service while you focus on growth. <strong>Competitive Edge:</strong> Technology that gives you an unfair advantage. <strong>7 Integration Modes:</strong> Embed Daena as API, SaaS, white-label, marketplace, training platform, co-pilot, or full autonomy.</p>
+                    <p style="color: var(--text-light); line-height: 1.8;"><strong style="color: var(--primary-gold);">Operate AI-Native:</strong> Build companies that run on autonomous intelligence from day one.<br><br><strong style="color: var(--primary-gold);">Scale Without Hiring:</strong> Add departments and capabilities without adding headcount - Daena grows with Fibonacci pattern.<br><br><strong style="color: var(--primary-gold);">Focus on Strategy:</strong> Let Daena handle operations, finance, marketing, and customer service while you focus on growth.<br><br><strong style="color: var(--primary-gold);">Competitive Edge:</strong> Technology that gives you an unfair advantage.<br><br><strong style="color: var(--primary-gold);">7 Integration Modes:</strong> Embed Daena as API, SaaS, white-label, marketplace, training platform, co-pilot, or full autonomy.</p>
                 </div>
             </div>
         </div>
