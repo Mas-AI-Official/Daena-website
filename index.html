@@ -1482,6 +1482,13 @@
         }
 
         /* Responsive Design */
+        /* Metric boxes responsive */
+        @media (max-width: 1024px) {
+            #investor-value .metric-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero {
                 padding: 140px 1rem 2rem !important;
@@ -1507,7 +1514,11 @@
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
+            }
+
+            #investor-value .metric-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
             }
 
             .nav-links {
@@ -1853,29 +1864,48 @@
     </section>
 
     <!-- Investor Value Proposition Section -->
-    <section class="features" id="investor-value" style="padding-top: 100px; background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(0,188,212,0.1) 100%); padding: 6rem 2rem; border-top: 3px solid rgba(255,215,0,0.3);">
+    <section class="features" id="investor-value" style="padding-top: 100px; background: rgba(0, 0, 0, 0.4); padding: 6rem 2rem;">
         <h2 class="section-title" style="margin-bottom: 48px;">Why Investors Choose Daena</h2>
-        <div style="max-width: 1000px; margin: 0 auto 64px; text-align: center;">
-            <p style="font-size: 1.4rem; color: var(--text-light); line-height: 1.8; margin-bottom: 32px;">
+        <div style="max-width: 1200px; margin: 0 auto 64px; text-align: center;">
+            <p style="font-size: 1.4rem; color: var(--text-light); line-height: 1.8; margin-bottom: 48px;">
                 Daena transforms how businesses operate, delivering <strong style="color: var(--primary-gold);">300% ROI</strong> and <strong style="color: var(--secondary-cyan);">60%+ cost savings</strong> through revolutionary patent-pending technology. 
                 At just <strong style="color: var(--primary-gold);">$60/day operational cost</strong> versus <strong style="color: var(--text-muted);">$2,000+ for human VPs</strong>, Daena makes executive-level intelligence accessible to every business.
             </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 48px;">
-                <div style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.3); border-radius: 16px; padding: 32px; text-align: center;">
-                    <div style="font-size: 48px; font-weight: 800; color: var(--primary-gold); margin-bottom: 8px;">300%</div>
-                    <div style="color: var(--text-light); font-weight: 600; font-size: 1.1rem;">ROI in First Year</div>
+            <div class="metric-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+                <div style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.3); border-radius: 16px; padding: 28px 16px; text-align: center; min-width: 0;">
+                    <div style="font-size: clamp(32px, 3.5vw, 48px); font-weight: 800; color: var(--primary-gold); margin-bottom: 8px; line-height: 1.1;">300%</div>
+                    <div style="color: var(--text-light); font-weight: 600; font-size: clamp(0.85rem, 1.1vw, 1.1rem); line-height: 1.3;">ROI in First Year</div>
                 </div>
-                <div style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.3); border-radius: 16px; padding: 32px; text-align: center;">
-                    <div style="font-size: 48px; font-weight: 800; color: var(--secondary-cyan); margin-bottom: 8px;">60%+</div>
-                    <div style="color: var(--text-light); font-weight: 600; font-size: 1.1rem;">Cost Savings</div>
+                <div style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.3); border-radius: 16px; padding: 28px 16px; text-align: center; min-width: 0;">
+                    <div style="font-size: clamp(32px, 3.5vw, 48px); font-weight: 800; color: var(--secondary-cyan); margin-bottom: 8px; line-height: 1.1;">60%+</div>
+                    <div style="color: var(--text-light); font-weight: 600; font-size: clamp(0.85rem, 1.1vw, 1.1rem); line-height: 1.3;">Cost Savings</div>
                 </div>
-                <div style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.3); border-radius: 16px; padding: 32px; text-align: center;">
-                    <div style="font-size: 48px; font-weight: 800; color: var(--primary-gold); margin-bottom: 8px;">99.4%</div>
-                    <div style="color: var(--text-light); font-weight: 600; font-size: 1.1rem;">Accuracy Rate</div>
+                <div style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.3); border-radius: 16px; padding: 28px 16px; text-align: center; min-width: 0;">
+                    <div style="font-size: clamp(32px, 3.5vw, 48px); font-weight: 800; color: var(--primary-gold); margin-bottom: 8px; line-height: 1.1;">99.4%</div>
+                    <div style="color: var(--text-light); font-weight: 600; font-size: clamp(0.85rem, 1.1vw, 1.1rem); line-height: 1.3;">Accuracy Rate</div>
                 </div>
-                <div style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.3); border-radius: 16px; padding: 32px; text-align: center;">
-                    <div style="font-size: 48px; font-weight: 800; color: var(--secondary-cyan); margin-bottom: 8px;">$60</div>
-                    <div style="color: var(--text-light); font-weight: 600; font-size: 1.1rem;">Daily Cost vs $2,000+</div>
+                <div style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.3); border-radius: 16px; padding: 28px 16px; text-align: center; min-width: 0;">
+                    <div style="font-size: clamp(32px, 3.5vw, 48px); font-weight: 800; color: var(--secondary-cyan); margin-bottom: 8px; line-height: 1.1;">$60</div>
+                    <div style="color: var(--text-light); font-weight: 600; font-size: clamp(0.85rem, 1.1vw, 1.1rem); line-height: 1.3;">Daily Cost vs $2,000+</div>
+                </div>
+            </div>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto; padding-top: 48px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 32px;">
+                <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2);">
+                    <div class="feature-icon">🚀</div>
+                    <h3>5 Revenue Streams</h3>
+                    <p>Multiple monetization vectors: SaaS subscriptions, API-as-a-Service, Agent Marketplace, White-Label Licensing, and NBMF Memory licensing. Target: $10M ARR Year 1, $100M ARR Year 3.</p>
+                </div>
+                <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0,188,212,0.2);">
+                    <div class="feature-icon">🌐</div>
+                    <h3>7 Integration Modes</h3>
+                    <p>Daena can be embedded into any business through API integrations, SaaS portals, white-label solutions, agent marketplaces, training platforms, real-time co-pilots, and full autonomous operations.</p>
+                </div>
+                <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2);">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Multi-Tenant Architecture</h3>
+                    <p>Built for scale from day one. Complete tenant isolation with secure data separation, allowing Daena to serve thousands of businesses simultaneously while maintaining enterprise-grade security.</p>
                 </div>
             </div>
         </div>
@@ -1919,24 +1949,24 @@
     </section>
 
     <!-- What Daena Can Do For You Section -->
-    <section class="features" id="benefits" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.4);">
+    <section class="features" id="benefits" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.6); border-top: 3px solid rgba(255,215,0,0.3);">
         <h2 class="section-title" style="margin-bottom: 48px;">What Daena Can Do For You</h2>
         <div style="max-width: 1200px; margin: 0 auto;">
             <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px;">
-                <div class="feature-card" style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,215,0,0.2);">
+                <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2);">
                     <div class="feature-icon">💼</div>
                     <h3>For Investors</h3>
-                    <p><strong>Proven ROI:</strong> 300% return in first year. <strong>Scalable Technology:</strong> Patent-pending NBMF reduces costs by 60%+ as you scale. <strong>Market Leadership:</strong> World's first AI VP system with 48+ autonomous agents. <strong>Competitive Moat:</strong> Unique technology that competitors can't easily replicate.</p>
+                    <p><strong>Proven ROI:</strong> 300% return in first year with clear path to $10M ARR. <strong>Scalable Technology:</strong> Patent-pending NBMF reduces infrastructure costs by 60%+ as you scale. <strong>Market Leadership:</strong> World's first AI VP system with 48+ autonomous agents. <strong>Competitive Moat:</strong> Unique technology stack (NBMF, Council System, Sunflower Topology) that competitors can't easily replicate. <strong>Multiple Revenue Streams:</strong> 5 distinct monetization vectors from day one.</p>
                 </div>
-                <div class="feature-card" style="background: rgba(255,255,255,0.05); border: 2px solid rgba(0,188,212,0.2);">
+                <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0,188,212,0.2);">
                     <div class="feature-icon">🏢</div>
                     <h3>For Businesses</h3>
-                    <p><strong>Executive Intelligence:</strong> VP-level decision-making at $60/day vs $2,000+ for human VPs. <strong>24/7 Operations:</strong> Never miss a decision, never lose context. <strong>Multi-Department Coordination:</strong> 8 departments working in perfect harmony. <strong>Enterprise Security:</strong> AES-256 encryption, compliance automation, complete audit trails.</p>
+                    <p><strong>Executive Intelligence:</strong> VP-level decision-making at $60/day vs $2,000+ for human VPs. <strong>24/7 Operations:</strong> Never miss a decision, never lose context with NBMF memory. <strong>Multi-Department Coordination:</strong> 8 departments (Engineering, Product, Sales, Marketing, Finance, HR, Legal, Customer) working in perfect harmony. <strong>Enterprise Security:</strong> AES-256 encryption, multi-tenant isolation, compliance automation, complete audit trails. <strong>API-First Design:</strong> Integrate Daena into any existing workflow.</p>
                 </div>
-                <div class="feature-card" style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,215,0,0.2);">
+                <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2);">
                     <div class="feature-icon">🚀</div>
                     <h3>For Founders</h3>
-                    <p><strong>Operate AI-Native:</strong> Build companies that run on autonomous intelligence from day one. <strong>Scale Without Hiring:</strong> Add departments and capabilities without adding headcount. <strong>Focus on Strategy:</strong> Let Daena handle operations while you focus on growth. <strong>Competitive Edge:</strong> Technology that gives you an unfair advantage.</p>
+                    <p><strong>Operate AI-Native:</strong> Build companies that run on autonomous intelligence from day one. <strong>Scale Without Hiring:</strong> Add departments and capabilities without adding headcount - Daena grows with Fibonacci pattern. <strong>Focus on Strategy:</strong> Let Daena handle operations, finance, marketing, and customer service while you focus on growth. <strong>Competitive Edge:</strong> Technology that gives you an unfair advantage. <strong>7 Integration Modes:</strong> Embed Daena as API, SaaS, white-label, marketplace, training platform, co-pilot, or full autonomy.</p>
                 </div>
             </div>
         </div>
