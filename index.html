@@ -1062,8 +1062,10 @@
         }
 
         .feature-card p {
-            color: var(--text-muted);
-            line-height: 1.6;
+            color: var(--text-light);
+            line-height: 1.7;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         /* Demo Section */
@@ -1639,6 +1641,16 @@
             #investor-value .feature-card p {
                 font-size: 0.9rem !important;
                 line-height: 1.7 !important;
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+                padding: 0 0.5rem !important;
+            }
+            
+            /* Fix long text blocks */
+            #benefits .feature-card,
+            #investor-value .feature-card {
+                min-width: 0 !important;
+                overflow: hidden !important;
             }
 
             .competitive-analysis {
