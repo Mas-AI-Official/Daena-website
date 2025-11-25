@@ -301,6 +301,11 @@
             --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
             --shadow-glow: 0 0 30px rgba(255, 215, 0, 0.3);
             --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.5);
+            /* Glassmorphism variables */
+            --glass-bg: rgba(5, 8, 20, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+            --glass-blur: blur(18px);
         }
 
         body {
@@ -312,7 +317,7 @@
             position: relative;
         }
         
-        /* Cover whole site with consistent background */
+        /* Cover whole site with consistent background - unified black glassy universe */
         body::before {
             content: '';
             position: fixed;
@@ -320,12 +325,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: 
+                radial-gradient(circle at top, rgba(255, 215, 0, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at bottom, rgba(0, 188, 212, 0.08) 0%, transparent 60%),
+                #02030a;
             z-index: -5;
             pointer-events: none;
         }
 
-        /* Metatron's Cube Background */
+        /* Metatron's Cube Background - unified continuous background */
         .metatron-bg {
             position: fixed;
             top: 0;
@@ -337,6 +345,27 @@
                 radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
                 linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 58, 0.95) 50%, rgba(42, 26, 74, 0.95) 100%);
             pointer-events: none;
+        }
+        
+        /* Glassmorphism Section Card - unified styling for all content containers */
+        .section-card {
+            background: var(--glass-bg);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Section wrapper - transparent, content in glass cards */
+        .section-wrapper {
+            padding: 6rem 2rem;
+            background: transparent;
+            position: relative;
         }
 
         /* Metatron's Cube Pattern Background Image */
@@ -1866,9 +1895,10 @@
     </section>
 
     <!-- Investor Value Proposition Section -->
-    <section class="features" id="investor-value" style="padding-top: 100px; background: rgba(0, 0, 0, 0.4); padding: 6rem 2rem;">
-        <h2 class="section-title" style="margin-bottom: 48px;">Why Investors Choose Daena</h2>
-        <div style="max-width: 1200px; margin: 0 auto 64px; text-align: center;">
+    <section class="section-wrapper" id="investor-value">
+        <div class="section-card">
+            <h2 class="section-title" style="margin-bottom: 48px;">Why Investors Choose Daena</h2>
+            <div style="max-width: 100%; margin: 0 auto 64px; text-align: center;">
             <p style="font-size: 1.4rem; color: var(--text-light); line-height: 1.8; margin-bottom: 48px;">
                 Daena transforms how businesses operate, delivering <strong style="color: var(--primary-gold);">300% ROI</strong> and <strong style="color: var(--secondary-cyan);">60%+ cost savings</strong> through revolutionary patent-pending technology. 
                 At just <strong style="color: var(--primary-gold);">$60/day operational cost</strong> versus <strong style="color: var(--text-muted);">$2,000+ for human VPs</strong>, Daena makes executive-level intelligence accessible to every business.
@@ -1911,11 +1941,12 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- NBMF Memory - Revolutionary Innovation Section -->
-    <section class="features" id="nbmf" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.6); border-top: 3px solid rgba(255,215,0,0.3);">
-        <div style="max-width: 1200px; margin: 0 auto;">
+    <section class="section-wrapper" id="nbmf">
+        <div class="section-card">
             <div style="text-align: center; margin-bottom: 48px;">
                 <span style="display: inline-block; background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(0,188,212,0.2)); color: var(--primary-gold); padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(255,215,0,0.3); margin-bottom: 24px;">
                     🔬 PATENT-PENDING TECHNOLOGY
@@ -1948,12 +1979,14 @@
                 </p>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- What Daena Can Do For You Section -->
-    <section class="features" id="benefits" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.6); border-top: 3px solid rgba(255,215,0,0.3);">
-        <h2 class="section-title" style="margin-bottom: 48px;">What Daena Can Do For You</h2>
-        <div style="max-width: 1200px; margin: 0 auto;">
+    <section class="section-wrapper" id="benefits">
+        <div class="section-card">
+            <h2 class="section-title" style="margin-bottom: 48px;">What Daena Can Do For You</h2>
+            <div style="max-width: 100%; margin: 0 auto;">
             <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px;">
                 <div class="feature-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,215,0,0.2);">
                     <div class="feature-icon">💼</div>
@@ -1972,12 +2005,14 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features" id="features" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.6); border-top: 3px solid rgba(255,215,0,0.3);">
-        <h2 class="section-title">Revolutionary Technology</h2>
-        <div class="features-grid">
+    <section class="section-wrapper" id="features">
+        <div class="section-card">
+            <h2 class="section-title">Revolutionary Technology</h2>
+            <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🧠</div>
                 <h3>SFHC Architecture</h3>
@@ -2009,11 +2044,13 @@
                 <p>Seamless integration across all business functions - from research and marketing to finance and operations.</p>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section class="features" id="testimonials" style="padding: 6rem 2rem 4rem; background: rgba(0, 0, 0, 0.4); padding-top: 100px;">
-        <h2 class="section-title">🌟 Recognition & Expert Testimonials</h2>
+    <section class="section-wrapper" id="testimonials">
+        <div class="section-card">
+            <h2 class="section-title">🌟 Recognition & Expert Testimonials</h2>
         <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             Industry leaders and academic experts are excited about Daena's revolutionary technology
         </p>
@@ -2064,8 +2101,9 @@
     <!-- Competitive Analysis Section -->
 
     <!-- Latest Features Section -->
-    <section class="features" id="latest-features" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.4); padding-top: 100px;">
-        <h2 class="section-title">🚀 Latest Revolutionary Features</h2>
+    <section class="section-wrapper" id="latest-features">
+        <div class="section-card">
+            <h2 class="section-title">🚀 Latest Revolutionary Features</h2>
         <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             Daena continues to evolve with cutting-edge technology that sets new industry standards
         </p>
@@ -2143,11 +2181,12 @@
                 </ul>
             </div>
         </div>
+        </div>
     </section>
 
     <!-- Metatron's Cube Visualization Section -->
-    <section class="metatron-section" id="agent-communication-viz" style="padding: 6rem 2rem; background: rgba(0, 0, 0, 0.4); padding-top: 100px; position: relative; z-index: 1;">
-        <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;">
+    <section class="section-wrapper metatron-section" id="agent-communication-viz" style="position: relative; z-index: 1;">
+        <div class="section-card" style="position: relative; z-index: 2;">
             <h2 class="section-title" style="position: relative; z-index: 3;">🌐 Agent Communication Visualization</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; position: relative; z-index: 3;">
                 Experience Daena's revolutionary Metatron's Cube communication pattern - showing how 6 agents within each department communicate with live data flow
@@ -2642,8 +2681,9 @@
     </section>
 
     <!-- Pitch Deck Section -->
-    <section class="pitch-section" id="pitch" style="padding-top: 100px;">
-        <h2 class="section-title">Investor Presentation</h2>
+    <section class="section-wrapper" id="pitch">
+        <div class="section-card">
+            <h2 class="section-title">Investor Presentation</h2>
         <div class="pitch-content">
             <h2>📊 Online Pitch Deck with Explanation Voice Over</h2>
             <p>
