@@ -29,52 +29,76 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--gradient-bg);
+            background: #02030a;
             color: var(--text-light);
             overflow: hidden;
             height: 100vh;
+            position: relative;
         }
-
-        /* Animated Background */
-        .animated-bg {
+        
+        /* Cover whole site with consistent background - unified black glassy universe */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
-            animation: backgroundShift 20s ease-in-out infinite;
+                radial-gradient(circle at top, rgba(255, 215, 0, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at bottom, rgba(0, 188, 212, 0.08) 0%, transparent 60%),
+                #02030a;
+            z-index: -5;
+            pointer-events: none;
         }
 
-        @keyframes backgroundShift {
-            0%, 100% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(-20px) translateY(-10px); }
-            50% { transform: translateX(20px) translateY(10px); }
-            75% { transform: translateX(-10px) translateY(20px); }
+        /* Metatron's Cube Background - unified continuous background */
+        .metatron-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
+                linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 58, 0.95) 50%, rgba(42, 26, 74, 0.95) 100%);
+            pointer-events: none;
         }
 
-        /* Honeycomb Pattern */
-        .honeycomb-pattern {
+        /* Metatron's Cube Pattern Background Image */
+        .metatron-pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="40" fill="none" stroke="%23FFD700" stroke-width="2" opacity="0.6"/><circle cx="200" cy="120" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="280" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="280" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="200" cy="280" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="120" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><circle cx="120" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.5"/><line x1="200" y1="200" x2="200" y2="120" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="280" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="280" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="200" y2="280" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="120" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.4"/><line x1="200" y1="200" x2="120" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.4"/></svg>');
+            background-size: 600px 600px;
+            background-position: center;
+            background-repeat: repeat;
+            pointer-events: none;
+            animation: metatronRotate 60s linear infinite;
+        }
+
+        @keyframes metatronRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Hexagonal Node Network Canvas */
+        #metatron-hex-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.05;
-            background-image: 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,5 85,30 85,70 50,95 15,70 15,30" fill="%23FFD700" stroke="%2300bcd4" stroke-width="1"/></svg>');
-            background-size: 60px 60px;
-            animation: honeycombFloat 15s linear infinite;
-        }
-
-        @keyframes honeycombFloat {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-60px); }
+            pointer-events: none;
         }
 
         /* Navigation */
@@ -405,12 +429,13 @@
     </style>
 </head>
 <body>
+    <!-- Metatron's Cube Background Layers -->
+    <div class="metatron-bg"></div>
+    <div class="metatron-pattern-bg"></div>
+    <canvas id="metatron-hex-canvas"></canvas>
+    
     <div class="loading" id="loading">Loading Daena Pitch Deck...</div>
     <div class="error-message" id="errorMessage">Error loading presentation. Please check your internet connection.</div>
-    
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
-    <div class="honeycomb-pattern"></div>
     
     <!-- Navigation -->
     <nav class="navbar">
@@ -860,5 +885,7 @@
             new EnhancedPresentationController();
         });
     </script>
+    <!-- Metatron Hexagonal Node Network -->
+    <script src="metatron-hex-network.js"></script>
 </body>
 </html>
