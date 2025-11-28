@@ -616,11 +616,19 @@
             }
             
             .hero h1 {
-                font-size: 3rem;
+                font-size: clamp(2.5rem, 5vw, 3rem);
             }
             
             .section-title {
-                font-size: 2.5rem;
+                font-size: clamp(2rem, 4vw, 2.5rem);
+            }
+            
+            .hero-subtitle {
+                font-size: clamp(1.3rem, 3vw, 1.8rem);
+            }
+            
+            .hero-description {
+                font-size: clamp(1rem, 2vw, 1.2rem);
             }
         }
 
@@ -629,36 +637,200 @@
                 display: none;
             }
             
+            .hero {
+                padding: 100px 0 60px !important;
+            }
+            
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: clamp(2rem, 6vw, 2.5rem);
             }
             
             .hero-subtitle {
-                font-size: 1.4rem;
+                font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .hero-description {
+                font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+                margin-bottom: 2rem !important;
+                padding: 0 1rem;
             }
             
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem !important;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                padding: 16px 32px !important;
+                font-size: clamp(0.95rem, 2.5vw, 1.1rem) !important;
+            }
+            
+            .stats-section {
+                padding: 3rem 0 !important;
+                margin: 2rem 0 !important;
             }
             
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem !important;
+            }
+            
+            .stat-item {
+                padding: 1.5rem !important;
+            }
+            
+            .stat-number {
+                font-size: clamp(2rem, 5vw, 3rem) !important;
+            }
+            
+            .stat-label {
+                font-size: clamp(0.9rem, 2vw, 1.1rem) !important;
+            }
+            
+            .about-section, .founder-section, .daena-showcase, .contact-section {
+                padding: 4rem 0 !important;
+                margin: 2rem 0 !important;
+            }
+            
+            .section-title {
+                font-size: clamp(1.8rem, 5vw, 2.5rem) !important;
+                margin-bottom: 2rem !important;
+            }
+            
+            .about-text h3 {
+                font-size: clamp(1.5rem, 4vw, 2rem) !important;
+            }
+            
+            .about-text p {
+                font-size: clamp(1rem, 2.5vw, 1.1rem) !important;
             }
             
             .daena-features {
                 grid-template-columns: 1fr;
+                gap: 1.5rem !important;
+            }
+            
+            .daena-feature {
+                padding: 1.5rem !important;
+            }
+            
+            .daena-feature-icon {
+                font-size: 2.5rem !important;
+            }
+            
+            .daena-feature h4 {
+                font-size: clamp(1.1rem, 3vw, 1.3rem) !important;
+            }
+            
+            .daena-feature p {
+                font-size: clamp(0.9rem, 2vw, 1rem) !important;
+            }
+            
+            .founder-avatar {
+                width: 150px !important;
+                height: 150px !important;
+                font-size: 3rem !important;
+            }
+            
+            .founder-info h3 {
+                font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+            }
+            
+            .founder-bio {
+                font-size: clamp(1rem, 2.5vw, 1.1rem) !important;
+            }
+            
+            .feature-item, .credential-item {
+                padding: 1rem !important;
+            }
+            
+            .feature-icon, .credential-icon {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 1.5rem !important;
+            }
+            
+            .feature-content h4 {
+                font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
+            }
+            
+            .feature-content p {
+                font-size: clamp(0.85rem, 2vw, 0.95rem) !important;
+            }
+            
+            .container {
+                padding: 0 15px !important;
             }
         }
 
         @media (max-width: 480px) {
+            .hero {
+                padding: 90px 0 50px !important;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem !important;
+            }
+            
+            .hero-description {
+                font-size: 0.9rem !important;
+            }
+            
             .stats-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem !important;
+            }
+            
+            .stat-item {
+                padding: 1.25rem !important;
+            }
+            
+            .stat-number {
+                font-size: 2rem !important;
             }
             
             .contact-info {
                 grid-template-columns: 1fr;
+                gap: 1.5rem !important;
             }
+            
+            .contact-item {
+                padding: 1.5rem !important;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem !important;
+            }
+            
+            .about-content, .founder-content {
+                gap: 2rem !important;
+            }
+        }
+        
+        /* Cross-browser compatibility */
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        header {
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
         }
     </style>
 </head>
