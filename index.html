@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena AI VP — World's First AI VP System | 48 Agents (6×8) | MAS-AI | NBMF Memory & Hex-Mesh Communication</title>
     <meta name="description" content="Daena AI VP by MAS-AI Inc: The world's first Self-Fulfilling Hierarchical Communication (SFHC) system with 48 specialized agents (6×8), revolutionary patent-pending NBMF Memory, Hex-Mesh Communication, and Trust & Governance Pipeline. Transform your business with autonomous AI decision-making and VP-level intelligence. Built by MAS-AI, the world's first AI-native autonomous company.">
     <meta name="keywords" content="Daena AI, Daena multi-agent system, Daena AI VP, MAS-AI, MAS AI, MAS-AI Inc, AI VP system, Sunflower Architecture AI, Honeycomb Governance AI, Multi-agent orchestration platform, AI VP, artificial intelligence VP, business intelligence AI, multi-agent systems, SFHC, Self-Fulfilling Hierarchical Communication, autonomous AI, enterprise AI, business automation, Consulate agents, AI experts, VP-level AI, 48 AI agents, 8 departments, NBMF Memory, Neural-Backed Memory Fabric, Hex-Mesh Communication, Sunflower-Honeycomb architecture, patent pending AI, AI governance, trust pipeline, phase-locked rounds, quorum consensus, backpressure, presence beacons, Fibonacci growth, infinite scalability, L1 L2 L3 memory, CAS SimHash, cost savings AI, semantic fidelity, Scout Debate Commit, AI decision making, autonomous business intelligence, LLM orchestration, AI-native company OS, Agent collaboration system">
@@ -2344,7 +2344,92 @@
 
         @keyframes pulse {
             0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            50% { opacity: 1;             }
+        }
+        
+        /* Cross-browser compatibility */
+        @supports not (backdrop-filter: blur(20px)) {
+            .nav, .stat-card, .project-card, .section-card {
+                background: rgba(5, 8, 20, 0.95) !important;
+            }
+        }
+        
+        /* Smooth scroll for all browsers */
+        @media (prefers-reduced-motion: no-preference) {
+            html {
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .section-card {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+            
+            input, textarea, select, button {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+        }
+        
+        /* Touch-friendly elements */
+        @media (hover: none) and (pointer: coarse) {
+            .btn, a, button {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 12px 24px;
+            }
+            
+            .feature-card, .project-card {
+                cursor: pointer;
+            }
+        }
+        
+        /* Firefox specific fixes */
+        @-moz-document url-prefix() {
+            .section-card {
+                background: rgba(5, 8, 20, 0.9);
+            }
+        }
+        
+        /* Edge/IE fallbacks */
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            .section-card {
+                background: rgba(5, 8, 20, 0.95);
+            }
+            
+            .daena-features, .features-grid {
+                display: -ms-grid;
+                -ms-grid-columns: 1fr 1fr 1fr;
+            }
+        }
+        
+        /* Additional mobile breakpoints */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.75rem !important;
+            }
+            
+            .section-card {
+                padding: 1rem 0.5rem !important;
+            }
+            
+            .btn {
+                font-size: 0.9rem !important;
+                padding: 10px 16px !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .section-card {
+                padding: 3rem 1.5rem;
+            }
+            
+            .daena-features, .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
