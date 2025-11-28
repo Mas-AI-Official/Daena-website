@@ -2052,6 +2052,32 @@
                 line-height: 1.5 !important;
             }
             
+            /* Revolutionary Technology - Mobile Layout */
+            #features .features-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            #features .feature-card {
+                padding: 1.5rem !important;
+            }
+            
+            #features .feature-icon {
+                font-size: 2.5rem !important;
+            }
+            
+            /* How Daena Improves - Mobile Layout */
+            #how-daena-improves .features-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            /* NBMF Section - Mobile Layout */
+            #nbmf .features-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
             /* Proof & Validation - Mobile Layout */
             #proof-validation [style*="grid-template-columns: repeat(2"] {
                 grid-template-columns: 1fr !important;
@@ -2428,7 +2454,7 @@
                 </span>
                 <h2 class="section-title" style="margin-bottom: 24px;">NBMF Memory: The Innovation That Changes Everything</h2>
                 <p style="font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-light); max-width: 900px; margin: 0 auto; line-height: 1.8;">
-                    <strong style="color: var(--primary-gold);">Neural-Backed Memory Fabric (NBMF)</strong> is Daena's revolutionary patent-pending memory architecture that delivers <strong style="color: var(--secondary-cyan);">60%+ cost savings</strong> through intelligent 3-tier compression (L1 Hot / L2 Warm / L3 Cold) with CAS + SimHash technology.
+                    <strong style="color: var(--primary-gold);">Neural-Backed Memory Fabric (NBMF)</strong> is Daena's revolutionary <strong style="color: var(--secondary-cyan);">patent-pending memory architecture</strong> that delivers <strong style="color: var(--primary-gold);">60%+ cost savings</strong> through <strong style="color: var(--secondary-cyan);">intelligent 3-tier compression</strong> (L1 Hot / L2 Warm / L3 Cold) with <strong style="color: var(--primary-gold);">CAS + SimHash technology</strong>. Optimized for <strong style="color: var(--secondary-cyan);">CPU, GPU, and TPU</strong> acceleration.
                 </p>
             </div>
             <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
@@ -2448,9 +2474,9 @@
                     <p>Highly compressed long-term archives with maximum efficiency, ensuring complete business intelligence retention.</p>
                 </div>
             </div>
-            <div style="margin-top: 48px; padding: 32px; background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); border-radius: 12px;">
+            <div style="margin-top: 48px; padding: 32px; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(0,188,212,0.1)); border-left: 4px solid var(--primary-gold); border-radius: 12px; box-shadow: 0 8px 25px rgba(255,215,0,0.15);">
                 <p style="margin: 0; color: var(--text-light); font-size: 1.1rem; line-height: 1.8;">
-                    <strong style="color: var(--primary-gold);">Why NBMF Matters for Investors:</strong> Unlike traditional AI systems that store everything in expensive vector databases, NBMF intelligently compresses and tiers memory based on usage patterns. This means <strong style="color: var(--secondary-cyan);">60%+ lower infrastructure costs</strong> while maintaining <strong style="color: var(--primary-gold);">99.4% accuracy</strong> - a competitive advantage that scales with every customer.
+                    <strong style="color: var(--primary-gold); font-size: 1.2rem;">Why NBMF Matters for Investors:</strong> Unlike <strong style="color: var(--secondary-cyan);">traditional AI systems</strong> that store everything in <strong style="color: var(--primary-gold);">expensive vector databases</strong>, NBMF <strong style="color: var(--secondary-cyan);">intelligently compresses</strong> and tiers memory based on <strong style="color: var(--primary-gold);">usage patterns</strong>. This means <strong style="color: var(--secondary-cyan);">60%+ lower infrastructure costs</strong> while maintaining <strong style="color: var(--primary-gold);">99.4% accuracy</strong> - a <strong style="color: var(--secondary-cyan);">competitive advantage</strong> that scales with every customer. <strong style="color: var(--primary-gold);">Hardware acceleration</strong> (CPU/GPU/TPU) further optimizes performance and costs.
                 </p>
             </div>
         </div>
@@ -2487,41 +2513,44 @@
     <section class="section-wrapper" id="features">
         <div class="section-card">
             <h2 class="section-title">Revolutionary Technology</h2>
-            <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3>SFHC Architecture</h3>
-                <p>Self-Fulfilling Hierarchical Communication enables autonomous decision-making with context-aware intelligence across all business functions.</p>
+            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+                Daena combines <strong style="color: var(--primary-gold);">patent-pending innovations</strong> with <strong style="color: var(--secondary-cyan);">cutting-edge hardware support</strong> to deliver unmatched performance and efficiency.
+            </p>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+            <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.3);">
+                <div class="feature-icon" style="font-size: 3rem;">🧠</div>
+                <h3 style="color: var(--primary-gold); margin: 1rem 0;">SFHC Architecture</h3>
+                <p style="line-height: 1.8;"><strong style="color: var(--primary-gold);">Self-Fulfilling Hierarchical Communication</strong> enables <strong style="color: var(--secondary-cyan);">autonomous decision-making</strong> with <strong style="color: var(--primary-gold);">context-aware intelligence</strong> across all business functions. Every decision improves the next.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>48+ Agents with Consulate Experts</h3>
-                <p>Intelligent agents across 8 departments enhanced by Consulate Agents - the top 5 experts in every major domain co-governing with VP Daena, working in perfect harmony with reflexive memory and continuous learning capabilities.</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.3);">
+                <div class="feature-icon" style="font-size: 3rem;">⚡</div>
+                <h3 style="color: var(--secondary-cyan); margin: 1rem 0;">48+ Agents with Consulate Experts</h3>
+                <p style="line-height: 1.8;"><strong style="color: var(--secondary-cyan);">Intelligent agents</strong> across <strong style="color: var(--primary-gold);">8 departments</strong> enhanced by <strong style="color: var(--secondary-cyan);">Consulate Agents</strong> - the top 5 experts in every major domain co-governing with VP Daena, working in perfect harmony with <strong style="color: var(--primary-gold);">reflexive memory</strong> and <strong style="color: var(--secondary-cyan);">continuous learning</strong> capabilities.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🚀</div>
-                <h3>Multi-Device Hardware Support</h3>
-                <p>Seamlessly runs on CPU, GPU, and TPU with automatic device detection and routing. Optimized batch processing for TPU (128× multiplier), GPU acceleration, and CPU fallback. No code changes required - Daena adapts to your infrastructure.</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(0,188,212,0.1)); border: 2px solid rgba(255,215,0,0.4); box-shadow: 0 8px 25px rgba(255,215,0,0.2);">
+                <div class="feature-icon" style="font-size: 3rem;">🚀</div>
+                <h3 style="color: var(--primary-gold); margin: 1rem 0;">Multi-Device Hardware Support</h3>
+                <p style="line-height: 1.8;"><strong style="color: var(--primary-gold);">Seamlessly runs on CPU, GPU, and TPU</strong> with <strong style="color: var(--secondary-cyan);">automatic device detection</strong> and routing. <strong style="color: var(--primary-gold);">Optimized batch processing</strong> for TPU (<strong style="color: var(--secondary-cyan);">128× multiplier</strong>), <strong style="color: var(--primary-gold);">GPU acceleration</strong>, and <strong style="color: var(--secondary-cyan);">CPU fallback</strong>. <strong style="color: var(--primary-gold);">No code changes required</strong> - Daena adapts to your infrastructure automatically.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>VP-Level Intelligence</h3>
-                <p>Not just automation - true business partnership with executive-level decision-making and strategic planning capabilities.</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.3);">
+                <div class="feature-icon" style="font-size: 3rem;">🎯</div>
+                <h3 style="color: var(--secondary-cyan); margin: 1rem 0;">VP-Level Intelligence</h3>
+                <p style="line-height: 1.8;">Not just automation - <strong style="color: var(--secondary-cyan);">true business partnership</strong> with <strong style="color: var(--primary-gold);">executive-level decision-making</strong> and <strong style="color: var(--secondary-cyan);">strategic planning</strong> capabilities. Think like a VP, act like a VP, deliver like a VP.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Enterprise Security & Governance</h3>
-                <p>AES-256 encryption at rest, quarantine store with trust scoring, ledger with Merkle roots, ABAC policy enforcement, and weekly automated compliance drills. Complete audit trails for all decisions.</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.3);">
+                <div class="feature-icon" style="font-size: 3rem;">🔒</div>
+                <h3 style="color: var(--primary-gold); margin: 1rem 0;">Enterprise Security & Governance</h3>
+                <p style="line-height: 1.8;"><strong style="color: var(--primary-gold);">AES-256 encryption</strong> at rest, <strong style="color: var(--secondary-cyan);">quarantine store</strong> with trust scoring, <strong style="color: var(--primary-gold);">ledger with Merkle roots</strong>, <strong style="color: var(--secondary-cyan);">ABAC policy enforcement</strong>, and <strong style="color: var(--primary-gold);">weekly automated compliance drills</strong>. <strong style="color: var(--secondary-cyan);">Complete audit trails</strong> for all decisions.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <h3>Proven ROI & Cost Efficiency</h3>
-                <p>300% ROI in first year with 60%+ cost savings from CAS + SimHash reuse. 99.4% accuracy with patent technology. $60/day operational cost vs $2,000+ human cost.</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.3);">
+                <div class="feature-icon" style="font-size: 3rem;">💰</div>
+                <h3 style="color: var(--secondary-cyan); margin: 1rem 0;">Proven ROI & Cost Efficiency</h3>
+                <p style="line-height: 1.8;"><strong style="color: var(--primary-gold);">300% ROI</strong> in first year with <strong style="color: var(--secondary-cyan);">60%+ cost savings</strong> from CAS + SimHash reuse. <strong style="color: var(--primary-gold);">99.4% accuracy</strong> with patent technology. <strong style="color: var(--secondary-cyan);">$60/day</strong> operational cost vs <strong style="color: var(--primary-gold);">$2,000+</strong> human cost.</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🚀</div>
-                <h3>Cross-Domain Expertise</h3>
-                <p>Seamless integration across all business functions - from research and marketing to finance and operations.</p>
+            <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(0,188,212,0.1)); border: 2px solid rgba(255,215,0,0.4); grid-column: span 1;">
+                <div class="feature-icon" style="font-size: 3rem;">🌐</div>
+                <h3 style="color: var(--primary-gold); margin: 1rem 0;">Cross-Domain Expertise</h3>
+                <p style="line-height: 1.8;"><strong style="color: var(--primary-gold);">Seamless integration</strong> across all business functions - from <strong style="color: var(--secondary-cyan);">research and marketing</strong> to <strong style="color: var(--primary-gold);">finance and operations</strong>. <strong style="color: var(--secondary-cyan);">Unified intelligence</strong> that understands every department's needs and coordinates perfectly.</p>
             </div>
         </div>
         </div>
@@ -2532,46 +2561,46 @@
         <div class="section-card">
             <h2 class="section-title">How Daena Thinks</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
-                Daena's decision-making process follows a structured flow from intake to final decision, 
-                leveraging multi-agent coordination, memory, and governance at every step.
+                Daena's decision-making process follows a <strong style="color: var(--primary-gold);">structured flow</strong> from intake to final decision, 
+                leveraging <strong style="color: var(--secondary-cyan);">multi-agent coordination</strong>, <strong style="color: var(--primary-gold);">memory</strong>, and <strong style="color: var(--secondary-cyan);">governance</strong> at every step.
             </p>
             <div style="max-width: 1200px; margin: 0 auto;">
                 <!-- Top Row: 3 Cards -->
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
-                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem; box-shadow: 0 8px 25px rgba(255,215,0,0.15);">
                         <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">📥</div>
-                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem;">1. Intake</h3>
-                        <p style="color: var(--text-light); line-height: 1.6;">Questions, tasks, or decisions enter the system through natural language interface or API.</p>
+                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem; font-weight: 700;">1. Intake</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;"><strong style="color: var(--primary-gold);">Questions, tasks, or decisions</strong> enter the system through <strong style="color: var(--secondary-cyan);">natural language interface</strong> or <strong style="color: var(--primary-gold);">API</strong>. Every input is captured with full context.</p>
                     </div>
-                    <div class="feature-card" style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.4); text-align: center; padding: 2rem;">
+                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.15), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.4); text-align: center; padding: 2rem; box-shadow: 0 8px 25px rgba(0,188,212,0.15);">
                         <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">🔄</div>
-                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0; font-size: 1.4rem;">2. Routing</h3>
-                        <p style="color: var(--text-light); line-height: 1.6;">CMP (Context-Model-Purpose) router analyzes context and routes to appropriate agents and LLMs.</p>
+                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0; font-size: 1.4rem; font-weight: 700;">2. Routing</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;"><strong style="color: var(--secondary-cyan);">CMP (Context-Model-Purpose)</strong> router analyzes context and routes to <strong style="color: var(--primary-gold);">appropriate agents</strong> and <strong style="color: var(--secondary-cyan);">optimal compute devices</strong> (CPU/GPU/TPU) for maximum efficiency.</p>
                     </div>
-                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem;">
+                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem; box-shadow: 0 8px 25px rgba(255,215,0,0.15);">
                         <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">🤖</div>
-                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem;">3. Agents</h3>
-                        <p style="color: var(--text-light); line-height: 1.6;">48 specialized agents across 8 departments process the request using their domain expertise.</p>
+                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem; font-weight: 700;">3. Agents</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;"><strong style="color: var(--primary-gold);">48 specialized agents</strong> across <strong style="color: var(--secondary-cyan);">8 departments</strong> process the request using their <strong style="color: var(--primary-gold);">domain expertise</strong> with optimized hardware acceleration.</p>
                     </div>
                 </div>
                 <!-- Bottom Row: 2 Cards Centered -->
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto;">
-                    <div class="feature-card" style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.4); text-align: center; padding: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 900px; margin: 0 auto;">
+                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.15), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.4); text-align: center; padding: 2rem; box-shadow: 0 8px 25px rgba(0,188,212,0.15);">
                         <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">🧠</div>
-                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0; font-size: 1.4rem;">4. Memory & Governance</h3>
-                        <p style="color: var(--text-light); line-height: 1.6;">Reflexive memory provides context, governance ensures compliance, drift prevention maintains alignment.</p>
+                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0; font-size: 1.4rem; font-weight: 700;">4. Memory & Governance</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;"><strong style="color: var(--secondary-cyan);">Reflexive memory</strong> provides context, <strong style="color: var(--primary-gold);">governance ensures compliance</strong>, <strong style="color: var(--secondary-cyan);">drift prevention</strong> maintains alignment. Every decision is <strong style="color: var(--primary-gold);">audit-ready</strong>.</p>
                     </div>
-                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem;">
+                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem; box-shadow: 0 8px 25px rgba(255,215,0,0.15);">
                         <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">✅</div>
-                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem;">5. Decision</h3>
-                        <p style="color: var(--text-light); line-height: 1.6;">Multi-LLM consensus merges responses into a single, optimized, governed decision with audit trail.</p>
+                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem; font-weight: 700;">5. Decision</h3>
+                        <p style="color: var(--text-light); line-height: 1.8;"><strong style="color: var(--primary-gold);">Multi-LLM consensus</strong> merges responses into a single, <strong style="color: var(--secondary-cyan);">optimized, governed decision</strong> with <strong style="color: var(--primary-gold);">complete audit trail</strong>. Ready for execution.</p>
                     </div>
                 </div>
-                <div style="background: rgba(0,188,212,0.1); border-left: 4px solid var(--secondary-cyan); border-radius: 12px; padding: 2rem; margin-top: 2rem;">
+                <div style="background: linear-gradient(135deg, rgba(0,188,212,0.15), rgba(255,215,0,0.1)); border-left: 4px solid var(--secondary-cyan); border-radius: 12px; padding: 2rem; margin-top: 2rem; box-shadow: 0 8px 25px rgba(0,188,212,0.1);">
                     <p style="margin: 0; color: var(--text-light); font-size: 1.1rem; line-height: 1.8;">
-                        <strong style="color: var(--secondary-cyan);">Key Differentiator:</strong> Unlike single-LLM tools or basic orchestrators, 
-                        Daena's process ensures every decision is memory-aware, multi-model validated, and governance-compliant. 
-                        This creates decisions that improve over time, not just outputs.
+                        <strong style="color: var(--secondary-cyan); font-size: 1.2rem;">Key Differentiator:</strong> Unlike <strong style="color: var(--primary-gold);">single-LLM tools</strong> or <strong style="color: var(--primary-gold);">basic orchestrators</strong>, 
+                        Daena's process ensures every decision is <strong style="color: var(--secondary-cyan);">memory-aware</strong>, <strong style="color: var(--primary-gold);">multi-model validated</strong>, and <strong style="color: var(--secondary-cyan);">governance-compliant</strong>. 
+                        This creates <strong style="color: var(--primary-gold);">decisions that improve over time</strong>, not just outputs.
                     </p>
                 </div>
             </div>
@@ -2583,7 +2612,7 @@
         <div class="section-card">
             <h2 class="section-title">How Daena Improves Decisions Over Time</h2>
             <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
-                Daena's reflexive memory system enables continuous learning and improvement, making each decision better than the last.
+                Daena's <strong style="color: var(--primary-gold);">reflexive memory system</strong> enables <strong style="color: var(--secondary-cyan);">continuous learning</strong> and improvement, making <strong style="color: var(--primary-gold);">each decision better</strong> than the last.
             </p>
             <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                 <div class="feature-card" style="background: rgba(255,215,0,0.05); border: 2px solid rgba(255,215,0,0.3);">
@@ -2617,11 +2646,11 @@
                     <p>Memory tiering (L1/L2/L3) and CAS + SimHash deduplication reduce costs by 60%+ while maintaining semantic fidelity. This means better decisions at lower cost as the system scales.</p>
                 </div>
             </div>
-            <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); border-radius: 12px; padding: 2rem; margin-top: 3rem;">
+            <div style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(0,188,212,0.1)); border-left: 4px solid var(--primary-gold); border-radius: 12px; padding: 2rem; margin-top: 3rem; box-shadow: 0 8px 25px rgba(255,215,0,0.15);">
                 <p style="margin: 0; color: var(--text-light); font-size: 1.1rem; line-height: 1.8;">
-                    <strong style="color: var(--primary-gold);">The Result:</strong> Daena doesn't just execute tasks—it learns from every interaction, 
-                    improving decision quality, reducing errors, and optimizing costs. This creates a competitive moat that strengthens over time, 
-                    as no competitor can match Daena's combination of reflexive memory, multi-LLM consensus, and governance.
+                    <strong style="color: var(--primary-gold); font-size: 1.2rem;">The Result:</strong> Daena doesn't just <strong style="color: var(--secondary-cyan);">execute tasks</strong>—it <strong style="color: var(--primary-gold);">learns from every interaction</strong>, 
+                    improving <strong style="color: var(--secondary-cyan);">decision quality</strong>, reducing <strong style="color: var(--primary-gold);">errors</strong>, and optimizing <strong style="color: var(--secondary-cyan);">costs</strong>. This creates a <strong style="color: var(--primary-gold);">competitive moat</strong> that strengthens over time, 
+                    as no competitor can match Daena's combination of <strong style="color: var(--secondary-cyan);">reflexive memory</strong>, <strong style="color: var(--primary-gold);">multi-LLM consensus</strong>, <strong style="color: var(--secondary-cyan);">hardware optimization</strong>, and <strong style="color: var(--primary-gold);">governance</strong>.
                 </p>
             </div>
         </div>
@@ -2648,10 +2677,11 @@
                                 <span style="color: var(--secondary-cyan);">✅ Implemented & Verified:</span>
                             </p>
                             <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-light); line-height: 1.8;">
-                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">48 agents</strong> across 8 departments</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">48 agents</strong> across <strong style="color: var(--secondary-cyan);">8 departments</strong></li>
                                 <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">Multi-LLM integration</strong> (GPT-4, Claude, Gemini, DeepSeek, Grok)</li>
                                 <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">Patent-pending</strong> Sunflower-Honeycomb architecture</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">NBMF memory system</strong></li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">NBMF memory system</strong> with <strong style="color: var(--secondary-cyan);">3-tier architecture</strong></li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">Multi-Device Support</strong> - <strong style="color: var(--secondary-cyan);">CPU, GPU, and TPU</strong> with automatic routing</li>
                                 <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">FastAPI backend</strong> (25+ routers, 500+ endpoints)</li>
                                 <li>• <strong style="color: var(--primary-gold);">Real-time WebSocket</strong> communication</li>
                             </ul>
