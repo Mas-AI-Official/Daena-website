@@ -778,12 +778,27 @@
             margin-top: 3rem;
         }
 
+        /* Competitor Cards - Mobile Optimized */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
         .competitor-card {
             background: rgba(255, 0, 0, 0.1);
             border: 2px solid rgba(255, 0, 0, 0.3);
             border-radius: 15px;
             padding: 2rem;
             transition: all 0.3s ease;
+            min-width: 0;
+            word-wrap: break-word;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .competitor-card:hover {
@@ -798,11 +813,16 @@
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .competitor-header h3 {
             color: var(--text-light);
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin: 0;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
         .competitor-status {
@@ -811,84 +831,157 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-weight: bold;
+            font-size: clamp(0.85rem, 2vw, 0.9rem);
+            white-space: nowrap;
         }
 
-        .limitations h4, .daena-solution h4 {
+        .limitations {
+            margin-bottom: 1.5rem;
+        }
+
+        .limitations h4 {
+            color: rgba(255, 0, 0, 0.9);
+            margin-bottom: 1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+        }
+
+        .daena-solution {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid var(--primary-gold);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .daena-solution h4 {
             color: var(--primary-gold);
             margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            font-weight: 600;
         }
 
         .limitations ul, .daena-solution ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .limitations li, .daena-solution li {
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: clamp(0.95rem, 2.5vw, 1rem);
+            line-height: 1.6;
+            font-weight: 500;
         }
 
+        /* Daena Wins Card - Mobile Optimized */
         .daena-wins {
             background: var(--gradient-primary);
             color: var(--dark-bg);
             border: 2px solid var(--primary-gold);
-            border-radius: 15px;
-            padding: 2rem;
+            border-radius: 20px;
+            padding: 2.5rem;
             transition: all 0.3s ease;
-            grid-column: span 1;
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            text-align: center;
         }
 
         .daena-wins:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.5);
         }
 
         .daena-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--dark-bg);
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .daena-header h3 {
             color: var(--dark-bg);
-            font-size: 1.8rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: bold;
+            margin: 0;
+            line-height: 1.2;
         }
 
         .daena-status {
             background: var(--dark-bg);
             color: var(--primary-gold);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
             font-weight: bold;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            white-space: nowrap;
         }
 
-        .daena-advantages h4, .daena-result h4 {
+        .daena-advantages {
+            margin-bottom: 2rem;
+        }
+
+        .daena-advantages h4 {
+            color: var(--dark-bg);
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .advantage-item {
+            background: rgba(15, 15, 35, 0.25);
+            color: var(--dark-bg);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            font-weight: 600;
+            line-height: 1.5;
+            text-align: left;
+            transition: all 0.3s ease;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .advantage-item:hover {
+            background: rgba(15, 15, 35, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .daena-result {
+            background: rgba(15, 15, 35, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .daena-result h4 {
             color: var(--dark-bg);
             margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .daena-advantages ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .daena-advantages li {
-            padding: 0.5rem 0;
-            color: var(--dark-bg);
-            font-size: 0.95rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 700;
         }
 
         .daena-result p {
             color: var(--dark-bg);
-            font-size: 1.1rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
             font-weight: bold;
+            margin: 0;
+            line-height: 1.6;
         }
 
         /* AI Market Growth Section */
@@ -1553,8 +1646,22 @@
             }
             
             /* Competitive Analysis - Tablet Layout */
-            #how-we-compare [style*="grid-template-columns: repeat(3"] {
+            .competitor-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1.75rem !important;
+            }
+            
+            .competitor-card {
+                padding: 1.75rem !important;
+            }
+            
+            .daena-wins {
+                padding: 2.25rem 2rem !important;
+            }
+            
+            .advantages-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem !important;
             }
 
             .hero-subtitle {
@@ -1811,12 +1918,82 @@
             }
             
             /* Competitive Analysis - Mobile Layout */
-            #how-we-compare [style*="grid-template-columns: repeat(3"] {
+            .competitor-grid {
                 grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
             }
             
-            #how-we-compare [style*="grid-template-columns: repeat(2"] {
+            .competitor-card {
+                padding: 1.5rem !important;
+            }
+            
+            .competitor-header {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 0.75rem !important;
+            }
+            
+            .competitor-header h3 {
+                font-size: 1.3rem !important;
+            }
+            
+            .competitor-status {
+                font-size: 0.85rem !important;
+                padding: 0.4rem 0.8rem !important;
+            }
+            
+            .limitations li, .daena-solution li {
+                font-size: 0.95rem !important;
+                padding: 0.6rem 0 !important;
+                line-height: 1.5 !important;
+            }
+            
+            .daena-wins {
+                padding: 2rem 1.5rem !important;
+                border-radius: 15px !important;
+            }
+            
+            .daena-header {
+                flex-direction: column;
+                align-items: center !important;
+                text-align: center !important;
+                gap: 1rem !important;
+            }
+            
+            .daena-header h3 {
+                font-size: 1.6rem !important;
+            }
+            
+            .daena-status {
+                font-size: 0.9rem !important;
+                padding: 0.6rem 1.2rem !important;
+            }
+            
+            .advantages-grid {
                 grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
+            }
+            
+            .advantage-item {
+                padding: 1rem 1.25rem !important;
+                font-size: 1rem !important;
+                text-align: center !important;
+            }
+            
+            .daena-advantages h4 {
+                font-size: 1.2rem !important;
+            }
+            
+            .daena-result {
+                padding: 1.5rem !important;
+            }
+            
+            .daena-result h4 {
+                font-size: 1.1rem !important;
+            }
+            
+            .daena-result p {
+                font-size: 1.1rem !important;
             }
             
             .feature-card p {
@@ -2702,117 +2879,109 @@
     <section class="section-wrapper" id="how-we-compare" style="padding-top: 100px;">
         <div class="section-card">
             <h2 class="section-title">Why Daena Beats the Competition</h2>
-            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <p style="text-align: center; color: var(--text-muted); font-size: clamp(1rem, 2.5vw, 1.2rem); margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.6;">
                 See how Daena's AI Decision-Orchestration Platform solves critical limitations in existing AI systems
             </p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+            <div class="competitor-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
                 <!-- AutoGPT -->
-                <div class="feature-card" style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,0,0,0.3);">
-                        <h3 style="color: var(--text-light); font-size: 1.3rem; margin: 0;">AutoGPT</h3>
-                        <span style="background: rgba(255,0,0,0.3); color: var(--text-light); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">❌ Limited</span>
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <h3>AutoGPT</h3>
+                        <div class="competitor-status">❌ Limited</div>
                     </div>
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.8rem; font-size: 1.1rem;">Critical Weaknesses:</h4>
-                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Lack of memory</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No organization or governance</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Prompt loop failures</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ High resource cost</li>
+                    <div class="limitations">
+                        <h4>Critical Weaknesses:</h4>
+                        <ul>
+                            <li>❌ Lack of memory</li>
+                            <li>❌ No organization or governance</li>
+                            <li>❌ Prompt loop failures</li>
+                            <li>❌ High resource cost</li>
                         </ul>
                     </div>
-                    <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
-                        <h4 style="color: var(--primary-gold); margin-bottom: 0.8rem; font-size: 1.1rem;">✅ Daena Solves It:</h4>
-                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Reflexive Memory</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Sunflower Governance</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Agent Role Hierarchy</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Fail-safe CMP logic</li>
+                    <div class="daena-solution">
+                        <h4>✅ Daena Solves It:</h4>
+                        <ul>
+                            <li>✅ Reflexive Memory</li>
+                            <li>✅ Sunflower Governance</li>
+                            <li>✅ Agent Role Hierarchy</li>
+                            <li>✅ Fail-safe CMP logic</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- LangChain -->
-                <div class="feature-card" style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,0,0,0.3);">
-                        <h3 style="color: var(--text-light); font-size: 1.3rem; margin: 0;">LangChain</h3>
-                        <span style="background: rgba(255,0,0,0.3); color: var(--text-light); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">❌ Limited</span>
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <h3>LangChain</h3>
+                        <div class="competitor-status">❌ Limited</div>
                     </div>
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.8rem; font-size: 1.1rem;">Critical Weaknesses:</h4>
-                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Tool routing errors</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No real-time governance</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No cross-agent memory</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Bloated graphs & cost</li>
+                    <div class="limitations">
+                        <h4>Critical Weaknesses:</h4>
+                        <ul>
+                            <li>❌ Tool routing errors</li>
+                            <li>❌ No real-time governance</li>
+                            <li>❌ No cross-agent memory</li>
+                            <li>❌ Bloated graphs & cost</li>
                         </ul>
                     </div>
-                    <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
-                        <h4 style="color: var(--primary-gold); margin-bottom: 0.8rem; font-size: 1.1rem;">✅ Daena Solves It:</h4>
-                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Real-time agent orchestration</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ CMP + ABAC permission layer</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Sunflower-Honeycomb memory</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Lean routing with project affinity</li>
+                    <div class="daena-solution">
+                        <h4>✅ Daena Solves It:</h4>
+                        <ul>
+                            <li>✅ Real-time agent orchestration</li>
+                            <li>✅ CMP + ABAC permission layer</li>
+                            <li>✅ Sunflower-Honeycomb memory</li>
+                            <li>✅ Lean routing with project affinity</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Enterprise AI Models -->
-                <div class="feature-card" style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,0,0,0.3);">
-                        <h3 style="color: var(--text-light); font-size: 1.3rem; margin: 0;">Enterprise AI</h3>
-                        <span style="background: rgba(255,0,0,0.3); color: var(--text-light); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">❌ Limited</span>
+                <div class="competitor-card">
+                    <div class="competitor-header">
+                        <h3>Enterprise AI</h3>
+                        <div class="competitor-status">❌ Limited</div>
                     </div>
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.8rem; font-size: 1.1rem;">Critical Weaknesses:</h4>
-                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Black-box behavior</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Lack of agent reasoning</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No system-level learning</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Prone to drift & hallucination</li>
+                    <div class="limitations">
+                        <h4>Critical Weaknesses:</h4>
+                        <ul>
+                            <li>❌ Black-box behavior</li>
+                            <li>❌ Lack of agent reasoning</li>
+                            <li>❌ No system-level learning</li>
+                            <li>❌ Prone to drift & hallucination</li>
                         </ul>
                     </div>
-                    <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
-                        <h4 style="color: var(--primary-gold); margin-bottom: 0.8rem; font-size: 1.1rem;">✅ Daena Solves It:</h4>
-                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Daena as reasoning overlay</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ CMP filtering</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Governance over responses</li>
-                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Drift detection and correction</li>
+                    <div class="daena-solution">
+                        <h4>✅ Daena Solves It:</h4>
+                        <ul>
+                            <li>✅ Daena as reasoning overlay</li>
+                            <li>✅ CMP filtering</li>
+                            <li>✅ Governance over responses</li>
+                            <li>✅ Drift detection and correction</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <!-- Daena Wins Card - Full Width -->
-            <div style="background: var(--gradient-primary); border: 2px solid var(--primary-gold); border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--dark-bg); flex-wrap: wrap; gap: 1rem;">
-                    <h3 style="color: var(--dark-bg); font-size: 2rem; font-weight: bold; margin: 0;">🏆 Daena AI</h3>
-                    <span style="background: var(--dark-bg); color: var(--primary-gold); padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; font-size: 1.1rem;">✅ Revolutionary</span>
+            <div class="daena-wins">
+                <div class="daena-header">
+                    <h3>🏆 Daena AI</h3>
+                    <div class="daena-status">✅ Revolutionary</div>
                 </div>
-                <div style="text-align: left; max-width: 800px; margin: 0 auto 2rem;">
-                    <h4 style="color: var(--dark-bg); margin-bottom: 1.5rem; font-size: 1.5rem; text-align: center;">🎯 Our Unique Advantages:</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                        <div style="background: rgba(15, 15, 35, 0.2); padding: 1.5rem; border-radius: 12px;">
-                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Real-time governance</div>
-                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Agent-to-agent memory</div>
-                        </div>
-                        <div style="background: rgba(15, 15, 35, 0.2); padding: 1.5rem; border-radius: 12px;">
-                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Multi-model routing</div>
-                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Reflexive learning & override</div>
-                        </div>
-                        <div style="background: rgba(15, 15, 35, 0.2); padding: 1.5rem; border-radius: 12px;">
-                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600;">✅ Founder control (King-Override)</div>
-                        </div>
+                <div class="daena-advantages">
+                    <h4>🎯 Our Unique Advantages:</h4>
+                    <div class="advantages-grid">
+                        <div class="advantage-item">✅ Real-time governance</div>
+                        <div class="advantage-item">✅ Agent-to-agent memory</div>
+                        <div class="advantage-item">✅ Multi-model routing</div>
+                        <div class="advantage-item">✅ Reflexive learning & override</div>
+                        <div class="advantage-item">✅ Founder control (King-Override)</div>
                     </div>
                 </div>
-                <div style="background: rgba(15, 15, 35, 0.3); border-radius: 15px; padding: 2rem; margin-top: 2rem;">
-                    <h4 style="color: var(--dark-bg); margin-bottom: 1rem; font-size: 1.3rem;">🚀 Result:</h4>
-                    <p style="color: var(--dark-bg); font-size: 1.3rem; font-weight: bold; margin: 0; line-height: 1.6;">
-                        <strong>Combines everything into an AI-native company operating system</strong>
-                    </p>
+                <div class="daena-result">
+                    <h4>🚀 Result:</h4>
+                    <p><strong>Combines everything into an AI-native company operating system</strong></p>
                 </div>
             </div>
         </div>
