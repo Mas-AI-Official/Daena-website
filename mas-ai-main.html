@@ -814,6 +814,17 @@
             .about-content, .founder-content {
                 gap: 2rem !important;
             }
+            
+            /* Patent Section - Mobile Layout */
+            [style*="grid-template-columns: repeat(auto-fit, minmax(400px"] {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            .daena-features {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
         }
         
         /* Cross-browser compatibility */
@@ -831,6 +842,14 @@
         header {
             -webkit-backdrop-filter: blur(15px);
             backdrop-filter: blur(15px);
+        }
+        
+        /* Patent Section Responsive */
+        @media (max-width: 768px) {
+            [style*="grid-template-columns: repeat(auto-fit, minmax(400px"] {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
         }
     </style>
 </head>
@@ -1314,9 +1333,14 @@
                     </div>
                 </div>
                 
-                <!-- Patent-Pending Technologies Section -->
+                <!-- Patent-Pending Technologies Section - Matching Daena Style -->
                 <div style="margin-top: 3rem;">
-                    <h3 style="color: #FFD700; margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">🔬 Patent-Pending Technologies</h3>
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <span style="display: inline-block; background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(0,188,212,0.2)); color: #FFD700; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(255,215,0,0.3); margin-bottom: 24px;">
+                            🔬 PATENT-PENDING TECHNOLOGIES
+                        </span>
+                        <h3 style="color: #FFD700; margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">Patent-Pending Technologies</h3>
+                    </div>
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
                         <!-- Patent 1: NBMF Memory System -->
