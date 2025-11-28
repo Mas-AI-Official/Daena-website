@@ -1537,6 +1537,25 @@
                 font-size: 2.5rem;
                 margin-bottom: 1rem;
             }
+            
+            /* How Daena Thinks - Tablet Layout */
+            #how-daena-thinks [style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            #how-daena-thinks [style*="grid-template-columns: repeat(2"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Proof & Validation - Tablet Layout */
+            #proof-validation [style*="grid-template-columns: repeat(2"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Competitive Analysis - Tablet Layout */
+            #how-we-compare [style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
 
             .hero-subtitle {
                 font-size: 1.2rem;
@@ -1777,6 +1796,29 @@
                 font-size: 1.1rem !important;
             }
             
+            /* How Daena Thinks - Mobile Layout */
+            #how-daena-thinks .feature-card {
+                margin-bottom: 1rem;
+            }
+            
+            /* Proof & Validation - Mobile Layout */
+            #proof-validation [style*="grid-template-columns: repeat(2"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            #proof-validation [style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Competitive Analysis - Mobile Layout */
+            #how-we-compare [style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            #how-we-compare [style*="grid-template-columns: repeat(2"] {
+                grid-template-columns: 1fr !important;
+            }
+            
             .feature-card p {
                 font-size: 0.85rem !important;
             }
@@ -1971,18 +2013,21 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Meet Daena</h1>
-            <p class="hero-subtitle">AI Decision-Orchestration Platform</p>
-            <p class="hero-description">
-                <strong>Daena is the AI Decision-Orchestration Platform</strong> — not just an orchestrator or multi-agent framework. 
-                While other AI tools generate outputs, Daena generates governed, memory-aligned decisions that get more accurate over time. 
-                This isn't just automation—this is autonomous business intelligence with VP-level decision-making capabilities.
+            <p class="hero-subtitle">World's First AI Decision-Orchestration Platform as VP of Company</p>
+            <p class="hero-description" style="font-size: clamp(18px, 2.5vw, 24px); line-height: 1.8;">
+                <strong style="color: var(--primary-gold); font-size: 1.2em;">Daena is the AI Decision-Orchestration Platform</strong> — not just an orchestrator or multi-agent framework. 
+                While other AI tools generate outputs, Daena generates <strong style="color: var(--secondary-cyan);">governed, memory-aligned decisions</strong> that get <strong style="color: var(--primary-gold);">more accurate over time</strong>. 
+                This isn't just automation—this is <strong style="color: var(--secondary-cyan);">autonomous business intelligence</strong> with <strong style="color: var(--primary-gold);">VP-level decision-making capabilities</strong>.
             </p>
-            <p class="hero-description" style="margin-top: 1.5rem; font-size: clamp(16px, 2vw, 20px);">
-                Daena coordinates 48 specialized agents across 8 departments using <strong style="color: var(--primary-gold);">unified multi-agent orchestration</strong>, 
-                <strong style="color: var(--secondary-cyan);">reflexive memory (departmental + global)</strong>, 
-                <strong style="color: var(--primary-gold);">multi-LLM consensus</strong>, and 
-                <strong style="color: var(--secondary-cyan);">governance with drift prevention</strong>.
-            </p>
+            <div style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 2rem; margin-top: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <p style="margin: 0; font-size: clamp(16px, 2vw, 20px); line-height: 1.8; color: var(--text-light);">
+                    Daena coordinates <strong style="color: var(--primary-gold); font-size: 1.1em;">48 specialized agents</strong> across <strong style="color: var(--secondary-cyan);">8 departments</strong> using 
+                    <strong style="color: var(--primary-gold);">unified multi-agent orchestration</strong>, 
+                    <strong style="color: var(--secondary-cyan);">reflexive memory (departmental + global)</strong>, 
+                    <strong style="color: var(--primary-gold);">multi-LLM consensus</strong>, and 
+                    <strong style="color: var(--secondary-cyan);">governance with drift prevention</strong>.
+                </p>
+            </div>
             <div class="cta-buttons">
                 <a href="/demos/" class="btn btn-primary cta-main">Watch Demos</a>
                 <a href="/pitch-deck-presentation.html" class="btn btn-secondary cta-secondary">Watch Daena Pitch Deck</a>
@@ -2151,32 +2196,36 @@
                 Daena's decision-making process follows a structured flow from intake to final decision, 
                 leveraging multi-agent coordination, memory, and governance at every step.
             </p>
-            <div style="max-width: 1000px; margin: 0 auto;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                    <div class="feature-card" style="background: rgba(255,215,0,0.05); border: 2px solid rgba(255,215,0,0.3);">
-                        <div class="feature-icon" style="font-size: 3rem;">📥</div>
-                        <h3 style="color: var(--primary-gold); margin: 1rem 0;">1. Intake</h3>
-                        <p>Questions, tasks, or decisions enter the system through natural language interface or API.</p>
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <!-- Top Row: 3 Cards -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem;">
+                        <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">📥</div>
+                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem;">1. Intake</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">Questions, tasks, or decisions enter the system through natural language interface or API.</p>
                     </div>
-                    <div class="feature-card" style="background: rgba(0,188,212,0.05); border: 2px solid rgba(0,188,212,0.3);">
-                        <div class="feature-icon" style="font-size: 3rem;">🔄</div>
-                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0;">2. Routing</h3>
-                        <p>CMP (Context-Model-Purpose) router analyzes context and routes to appropriate agents and LLMs.</p>
+                    <div class="feature-card" style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.4); text-align: center; padding: 2rem;">
+                        <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">🔄</div>
+                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0; font-size: 1.4rem;">2. Routing</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">CMP (Context-Model-Purpose) router analyzes context and routes to appropriate agents and LLMs.</p>
                     </div>
-                    <div class="feature-card" style="background: rgba(255,215,0,0.05); border: 2px solid rgba(255,215,0,0.3);">
-                        <div class="feature-icon" style="font-size: 3rem;">🤖</div>
-                        <h3 style="color: var(--primary-gold); margin: 1rem 0;">3. Agents</h3>
-                        <p>48 specialized agents across 8 departments process the request using their domain expertise.</p>
+                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem;">
+                        <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">🤖</div>
+                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem;">3. Agents</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">48 specialized agents across 8 departments process the request using their domain expertise.</p>
                     </div>
-                    <div class="feature-card" style="background: rgba(0,188,212,0.05); border: 2px solid rgba(0,188,212,0.3);">
-                        <div class="feature-icon" style="font-size: 3rem;">🧠</div>
-                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0;">4. Memory & Governance</h3>
-                        <p>Reflexive memory provides context, governance ensures compliance, drift prevention maintains alignment.</p>
+                </div>
+                <!-- Bottom Row: 2 Cards Centered -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto;">
+                    <div class="feature-card" style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.4); text-align: center; padding: 2rem;">
+                        <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">🧠</div>
+                        <h3 style="color: var(--secondary-cyan); margin: 1rem 0; font-size: 1.4rem;">4. Memory & Governance</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">Reflexive memory provides context, governance ensures compliance, drift prevention maintains alignment.</p>
                     </div>
-                    <div class="feature-card" style="background: rgba(255,215,0,0.05); border: 2px solid rgba(255,215,0,0.3);">
-                        <div class="feature-icon" style="font-size: 3rem;">✅</div>
-                        <h3 style="color: var(--primary-gold); margin: 1rem 0;">5. Decision</h3>
-                        <p>Multi-LLM consensus merges responses into a single, optimized, governed decision with audit trail.</p>
+                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.4); text-align: center; padding: 2rem;">
+                        <div class="feature-icon" style="font-size: 3.5rem; margin-bottom: 1rem;">✅</div>
+                        <h3 style="color: var(--primary-gold); margin: 1rem 0; font-size: 1.4rem;">5. Decision</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">Multi-LLM consensus merges responses into a single, optimized, governed decision with audit trail.</p>
                     </div>
                 </div>
                 <div style="background: rgba(0,188,212,0.1); border-left: 4px solid var(--secondary-cyan); border-radius: 12px; padding: 2rem; margin-top: 2rem;">
@@ -2239,108 +2288,6 @@
         </div>
     </section>
 
-    <!-- How We Compare Section -->
-    <section class="section-wrapper" id="how-we-compare">
-        <div class="section-card">
-            <h2 class="section-title">How We Compare to Other Approaches</h2>
-            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
-                We've evaluated existing solutions. Here's how Daena's AI Decision-Orchestration Platform compares.
-            </p>
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <div style="display: grid; gap: 2rem; margin-bottom: 3rem;">
-                    <!-- Single-LLM Tools -->
-                    <div style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3); border-radius: 15px; padding: 2rem;">
-                        <h3 style="color: var(--text-light); margin-bottom: 1rem; font-size: 1.5rem;">Single-LLM Tools (ChatGPT, Claude, Gemini)</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                            <div>
-                                <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.5rem;">Limitations:</h4>
-                                <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                                    <li style="margin-bottom: 0.5rem;">❌ Single model, no consensus</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ No agent coordination</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ No reflexive memory</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ No governance or drift prevention</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ Tool-only, not business partner</li>
-                                </ul>
-                            </div>
-                            <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
-                                <h4 style="color: var(--primary-gold); margin-bottom: 0.5rem;">Daena's Advantage:</h4>
-                                <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                                    <li style="margin-bottom: 0.5rem;">✅ Multi-LLM consensus (5+ models)</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ 48 coordinated agents</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Reflexive memory system</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Built-in governance</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ VP-level business partner</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Plain Orchestrators -->
-                    <div style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3); border-radius: 15px; padding: 2rem;">
-                        <h3 style="color: var(--text-light); margin-bottom: 1rem; font-size: 1.5rem;">Plain Orchestrators (LangChain, LangGraph)</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                            <div>
-                                <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.5rem;">Limitations:</h4>
-                                <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                                    <li style="margin-bottom: 0.5rem;">❌ Developer-focused, not business-ready</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ No memory-aware decisions</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ Manual configuration required</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ No governance framework</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ Single-LLM or basic routing</li>
-                                </ul>
-                            </div>
-                            <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
-                                <h4 style="color: var(--primary-gold); margin-bottom: 0.5rem;">Daena's Advantage:</h4>
-                                <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                                    <li style="margin-bottom: 0.5rem;">✅ Business-native, executive interface</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Memory-aligned decision engine</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Self-organizing architecture</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Built-in governance & compliance</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Multi-LLM consensus engine</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Agent Sandboxes -->
-                    <div style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3); border-radius: 15px; padding: 2rem;">
-                        <h3 style="color: var(--text-light); margin-bottom: 1rem; font-size: 1.5rem;">Agent Sandboxes Without Governance (AutoGPT, CrewAI)</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                            <div>
-                                <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.5rem;">Limitations:</h4>
-                                <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                                    <li style="margin-bottom: 0.5rem;">❌ Chaotic agent spawning</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ No governance or drift prevention</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ No structured memory</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ Deadlock-prone communication</li>
-                                    <li style="margin-bottom: 0.5rem;">❌ Not enterprise-ready</li>
-                                </ul>
-                            </div>
-                            <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
-                                <h4 style="color: var(--primary-gold); margin-bottom: 0.5rem;">Daena's Advantage:</h4>
-                                <ul style="list-style: none; padding: 0; color: var(--text-light);">
-                                    <li style="margin-bottom: 0.5rem;">✅ Structured 6×8 hexagonal organization</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Governance + drift-proof agents</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Reflexive memory system (NBMF)</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Phase-locked council rounds</li>
-                                    <li style="margin-bottom: 0.5rem;">✅ Enterprise-grade security & compliance</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.3); border-radius: 15px; padding: 2rem; text-align: center;">
-                    <h3 style="color: var(--secondary-cyan); margin-bottom: 1rem;">Daena's Unique Position</h3>
-                    <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin: 0;">
-                        <strong style="color: var(--secondary-cyan);">Daena is the only system</strong> that combines governed, memory-aware, 
-                        multi-LLM, multi-agent decision orchestration into a single platform. This isn't a feature list—it's a category. 
-                        While others build smarter agents or better orchestrators, Daena builds the governed brain that runs them, 
-                        making decisions that improve over time.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Proof & Validation Section -->
     <section class="section-wrapper" id="proof-validation">
@@ -2350,36 +2297,116 @@
                 We're building Daena step-by-step with measurable experiments, transparent evaluation, and real-world feedback.
             </p>
             <div style="max-width: 1200px; margin: 0 auto;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                    <div class="feature-card" style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.3);">
-                        <div class="feature-icon">✅</div>
-                        <h3>Current MVP Capabilities</h3>
-                        <p><strong>Implemented & Verified:</strong> 48 agents across 8 departments, multi-LLM integration (GPT-4, Claude, Gemini, DeepSeek, Grok), patent-pending Sunflower-Honeycomb architecture, NBMF memory system, FastAPI backend (25+ routers, 500+ endpoints), real-time WebSocket communication.</p>
-                        <p style="margin-top: 1rem;"><strong>Measured Performance:</strong> API response <200ms average, 1,000+ concurrent users supported, memory latency <25ms L1, <120ms L2, 60%+ cost savings on LLM calls.</p>
+                <!-- Top Row: 2 Cards -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                    <div style="background: linear-gradient(135deg, rgba(0,188,212,0.15), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.4); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,188,212,0.2);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem;">✅</div>
+                            <h3 style="color: var(--secondary-cyan); font-size: 1.5rem; margin: 0;">Current MVP Capabilities</h3>
+                        </div>
+                        <div style="background: rgba(0,188,212,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
+                                <span style="color: var(--secondary-cyan);">✅ Implemented & Verified:</span>
+                            </p>
+                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-light); line-height: 1.8;">
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">48 agents</strong> across 8 departments</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">Multi-LLM integration</strong> (GPT-4, Claude, Gemini, DeepSeek, Grok)</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">Patent-pending</strong> Sunflower-Honeycomb architecture</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">NBMF memory system</strong></li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">FastAPI backend</strong> (25+ routers, 500+ endpoints)</li>
+                                <li>• <strong style="color: var(--primary-gold);">Real-time WebSocket</strong> communication</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-gold);">
+                            <p style="color: var(--text-light); margin: 0 0 0.8rem 0; font-weight: 600; font-size: 1.1rem;">
+                                <span style="color: var(--primary-gold);">📊 Measured Performance:</span>
+                            </p>
+                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-light); line-height: 1.8;">
+                                <li style="margin-bottom: 0.5rem;">• API response <strong style="color: var(--secondary-cyan);"><200ms</strong> average</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--secondary-cyan);">1,000+</strong> concurrent users supported</li>
+                                <li style="margin-bottom: 0.5rem;">• Memory latency <strong style="color: var(--secondary-cyan);"><25ms L1</strong>, <strong style="color: var(--secondary-cyan);"><120ms L2</strong></li>
+                                <li>• <strong style="color: var(--secondary-cyan);">60%+</strong> cost savings on LLM calls</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.3);">
-                        <div class="feature-icon">📊</div>
-                        <h3>Planned Pilot Programs</h3>
-                        <p><strong>Target:</strong> 3-5 enterprise pilot programs to measure decision-making time reduction, cost savings vs. human teams, accuracy rates, and user satisfaction.</p>
-                        <p style="margin-top: 1rem;"><em>Target outcomes: 50%+ faster decisions, 90%+ cost savings, 90%+ accuracy, 4.5/5.0+ user satisfaction.</em></p>
-                    </div>
-                    <div class="feature-card" style="background: rgba(0,188,212,0.1); border: 2px solid rgba(0,188,212,0.3);">
-                        <div class="feature-icon">🔬</div>
-                        <h3>Competitive Analysis</h3>
-                        <p><strong>In Progress:</strong> Evaluating 12 existing solutions (AutoGPT, LangChain, Microsoft Copilot, Anthropic Claude, OpenAI GPT, Enterprise AI platforms) to document feature comparison, performance benchmarks, and market positioning.</p>
-                        <p style="margin-top: 1rem;"><em>This will demonstrate Daena's unique advantages in multi-agent orchestration, memory, governance, and decision quality.</em></p>
-                    </div>
-                    <div class="feature-card" style="background: rgba(255,215,0,0.1); border: 2px solid rgba(255,215,0,0.3);">
-                        <div class="feature-icon">📈</div>
-                        <h3>Market Validation Survey</h3>
-                        <p><strong>Planned:</strong> Surveying 500+ enterprise AI decision-makers to validate pain points (fragmentation, integration, cost, scalability), willingness to pay ($1K+/month), and interest in unified platform.</p>
-                        <p style="margin-top: 1rem;"><em>Target: 90%+ want unified platform, validating market demand and TAM/SAM/SOM.</em></p>
+                    <div style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(255,215,0,0.2);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem;">📊</div>
+                            <h3 style="color: var(--primary-gold); font-size: 1.5rem; margin: 0;">Planned Pilot Programs</h3>
+                        </div>
+                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
+                                <span style="color: var(--primary-gold);">🎯 Target:</span>
+                            </p>
+                            <p style="color: var(--text-light); line-height: 1.8; margin: 0;">
+                                3-5 enterprise pilot programs to measure decision-making time reduction, cost savings vs. human teams, accuracy rates, and user satisfaction.
+                            </p>
+                        </div>
+                        <div style="background: rgba(0,188,212,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--secondary-cyan);">
+                            <p style="color: var(--text-light); margin: 0 0 0.8rem 0; font-weight: 600; font-size: 1.1rem;">
+                                <span style="color: var(--secondary-cyan);">📈 Target Outcomes:</span>
+                            </p>
+                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-light); line-height: 1.8;">
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">50%+</strong> faster decisions</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">90%+</strong> cost savings</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">90%+</strong> accuracy</li>
+                                <li>• <strong style="color: var(--primary-gold);">4.5/5.0+</strong> user satisfaction</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); border-radius: 12px; padding: 2rem; margin-top: 2rem;">
-                    <p style="margin: 0; color: var(--text-light); font-size: 1.1rem; line-height: 1.8;">
-                        <strong style="color: var(--primary-gold);">Academic Feedback Addressed:</strong> Earlier academic reviews highlighted that our claims were ambitious but needed more evidence and comparisons. 
-                        Since then, we have defined clearer experiments, documented competitive baselines, and started building a more evidence-backed roadmap. 
+                <!-- Bottom Row: 2 Cards -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                    <div style="background: linear-gradient(135deg, rgba(0,188,212,0.15), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.4); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,188,212,0.2);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem;">🔬</div>
+                            <h3 style="color: var(--secondary-cyan); font-size: 1.5rem; margin: 0;">Competitive Analysis</h3>
+                        </div>
+                        <div style="background: rgba(0,188,212,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
+                                <span style="color: var(--secondary-cyan);">🔄 In Progress:</span>
+                            </p>
+                            <p style="color: var(--text-light); line-height: 1.8; margin: 0 0 1rem 0;">
+                                Evaluating 12 existing solutions (AutoGPT, LangChain, Microsoft Copilot, Anthropic Claude, OpenAI GPT, Enterprise AI platforms) to document feature comparison, performance benchmarks, and market positioning.
+                            </p>
+                        </div>
+                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-gold);">
+                            <p style="color: var(--text-light); line-height: 1.8; margin: 0; font-style: italic;">
+                                This will demonstrate Daena's unique advantages in <strong style="color: var(--primary-gold);">multi-agent orchestration</strong>, <strong style="color: var(--primary-gold);">memory</strong>, <strong style="color: var(--primary-gold);">governance</strong>, and <strong style="color: var(--primary-gold);">decision quality</strong>.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(255,215,0,0.2);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="font-size: 3rem;">📈</div>
+                            <h3 style="color: var(--primary-gold); font-size: 1.5rem; margin: 0;">Market Validation Survey</h3>
+                        </div>
+                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
+                                <span style="color: var(--primary-gold);">📋 Planned:</span>
+                            </p>
+                            <p style="color: var(--text-light); line-height: 1.8; margin: 0;">
+                                Surveying 500+ enterprise AI decision-makers to validate pain points (fragmentation, integration, cost, scalability), willingness to pay ($1K+/month), and interest in unified platform.
+                            </p>
+                        </div>
+                        <div style="background: rgba(0,188,212,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--secondary-cyan);">
+                            <p style="color: var(--text-light); line-height: 1.8; margin: 0; font-style: italic;">
+                                <strong style="color: var(--secondary-cyan);">Target:</strong> <strong style="color: var(--primary-gold);">90%+</strong> want unified platform, validating market demand and TAM/SAM/SOM.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Academic Feedback Box -->
+                <div style="background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(0,188,212,0.1)); border: 2px solid var(--primary-gold); border-radius: 20px; padding: 2.5rem; margin-top: 2rem; box-shadow: 0 10px 30px rgba(255,215,0,0.3);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 2.5rem;">🎓</div>
+                        <h3 style="color: var(--primary-gold); font-size: 1.5rem; margin: 0;">Academic Feedback Addressed</h3>
+                    </div>
+                    <p style="color: var(--text-light); font-size: 1.1rem; line-height: 1.8; margin: 0;">
+                        Earlier academic reviews highlighted that our claims were ambitious but needed more evidence and comparisons. 
+                        Since then, we have <strong style="color: var(--secondary-cyan);">defined clearer experiments</strong>, 
+                        <strong style="color: var(--secondary-cyan);">documented competitive baselines</strong>, and 
+                        <strong style="color: var(--secondary-cyan);">started building a more evidence-backed roadmap</strong>. 
                         Daena is an ambitious, evolving AI VP. We are building it step-by-step with measurable experiments, transparent evaluation, and real-world feedback.
                     </p>
                 </div>
@@ -2437,8 +2464,6 @@
             </p>
         </div>
     </section>
-
-    <!-- Competitive Analysis Section -->
 
     <!-- Latest Features Section -->
     <section class="section-wrapper" id="latest-features">
@@ -2674,108 +2699,120 @@
     </style>
 
     <!-- Competitive Analysis Section -->
-    <section class="competitive-analysis" style="padding-top: 100px;">
-        <div class="analysis-container">
+    <section class="section-wrapper" id="how-we-compare" style="padding-top: 100px;">
+        <div class="section-card">
             <h2 class="section-title">Why Daena Beats the Competition</h2>
-            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
-                See how Daena's SFHC technology solves critical limitations in existing AI systems
+            <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+                See how Daena's AI Decision-Orchestration Platform solves critical limitations in existing AI systems
             </p>
             
-            <div class="comparison-grid">
-                <div class="competitor-card">
-                    <div class="competitor-header">
-                        <h3>AutoGPT</h3>
-                        <div class="competitor-status">❌ Limited</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <!-- AutoGPT -->
+                <div class="feature-card" style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,0,0,0.3);">
+                        <h3 style="color: var(--text-light); font-size: 1.3rem; margin: 0;">AutoGPT</h3>
+                        <span style="background: rgba(255,0,0,0.3); color: var(--text-light); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">❌ Limited</span>
                     </div>
-                    <div class="limitations">
-                        <h4>Critical Weaknesses:</h4>
-                        <ul>
-                            <li>❌ Lack of memory</li>
-                            <li>❌ No organization or governance</li>
-                            <li>❌ Prompt loop failures</li>
-                            <li>❌ High resource cost</li>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.8rem; font-size: 1.1rem;">Critical Weaknesses:</h4>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Lack of memory</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No organization or governance</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Prompt loop failures</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ High resource cost</li>
                         </ul>
                     </div>
-                    <div class="daena-solution">
-                        <h4>✅ Daena Solves It:</h4>
-                        <ul>
-                            <li>✅ Reflexive Memory</li>
-                            <li>✅ Sunflower Governance</li>
-                            <li>✅ Agent Role Hierarchy</li>
-                            <li>✅ Fail-safe CMP logic</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="competitor-card">
-                    <div class="competitor-header">
-                        <h3>LangChain</h3>
-                        <div class="competitor-status">❌ Limited</div>
-                    </div>
-                    <div class="limitations">
-                        <h4>Critical Weaknesses:</h4>
-                        <ul>
-                            <li>❌ Tool routing errors</li>
-                            <li>❌ No real-time governance</li>
-                            <li>❌ No cross-agent memory</li>
-                            <li>❌ Bloated graphs & cost</li>
-                        </ul>
-                    </div>
-                    <div class="daena-solution">
-                        <h4>✅ Daena Solves It:</h4>
-                        <ul>
-                            <li>✅ Real-time agent orchestration</li>
-                            <li>✅ CMP + ABAC permission layer</li>
-                            <li>✅ Sunflower-Honeycomb memory</li>
-                            <li>✅ Lean routing with project affinity</li>
+                    <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
+                        <h4 style="color: var(--primary-gold); margin-bottom: 0.8rem; font-size: 1.1rem;">✅ Daena Solves It:</h4>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Reflexive Memory</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Sunflower Governance</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Agent Role Hierarchy</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Fail-safe CMP logic</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="competitor-card">
-                    <div class="competitor-header">
-                        <h3>Enterprise AI Models</h3>
-                        <div class="competitor-status">❌ Limited</div>
+                <!-- LangChain -->
+                <div class="feature-card" style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,0,0,0.3);">
+                        <h3 style="color: var(--text-light); font-size: 1.3rem; margin: 0;">LangChain</h3>
+                        <span style="background: rgba(255,0,0,0.3); color: var(--text-light); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">❌ Limited</span>
                     </div>
-                    <div class="limitations">
-                        <h4>Critical Weaknesses:</h4>
-                        <ul>
-                            <li>❌ Black-box behavior</li>
-                            <li>❌ Lack of agent reasoning</li>
-                            <li>❌ No system-level learning</li>
-                            <li>❌ Prone to drift & hallucination</li>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.8rem; font-size: 1.1rem;">Critical Weaknesses:</h4>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Tool routing errors</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No real-time governance</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No cross-agent memory</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Bloated graphs & cost</li>
                         </ul>
                     </div>
-                    <div class="daena-solution">
-                        <h4>✅ Daena Solves It:</h4>
-                        <ul>
-                            <li>✅ Daena as reasoning overlay</li>
-                            <li>✅ CMP filtering</li>
-                            <li>✅ Governance over responses</li>
-                            <li>✅ Drift detection and correction</li>
+                    <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
+                        <h4 style="color: var(--primary-gold); margin-bottom: 0.8rem; font-size: 1.1rem;">✅ Daena Solves It:</h4>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Real-time agent orchestration</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ CMP + ABAC permission layer</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Sunflower-Honeycomb memory</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Lean routing with project affinity</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="daena-wins">
-                    <div class="daena-header">
-                        <h3>🏆 Daena AI</h3>
-                        <div class="daena-status">✅ Revolutionary</div>
+                <!-- Enterprise AI Models -->
+                <div class="feature-card" style="background: rgba(255,0,0,0.1); border: 2px solid rgba(255,0,0,0.3);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,0,0,0.3);">
+                        <h3 style="color: var(--text-light); font-size: 1.3rem; margin: 0;">Enterprise AI</h3>
+                        <span style="background: rgba(255,0,0,0.3); color: var(--text-light); padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">❌ Limited</span>
                     </div>
-                    <div class="daena-advantages">
-                        <h4>🎯 Our Unique Advantages:</h4>
-                        <ul>
-                            <li>✅ Real-time governance</li>
-                            <li>✅ Agent-to-agent memory</li>
-                            <li>✅ Multi-model routing</li>
-                            <li>✅ Reflexive learning & override</li>
-                            <li>✅ Founder control (King-Override)</li>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="color: rgba(255,0,0,0.8); margin-bottom: 0.8rem; font-size: 1.1rem;">Critical Weaknesses:</h4>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Black-box behavior</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Lack of agent reasoning</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ No system-level learning</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">❌ Prone to drift & hallucination</li>
                         </ul>
                     </div>
-                    <div class="daena-result">
-                        <h4>🚀 Result:</h4>
-                        <p><strong>Combines everything into an AI-native company operating system</strong></p>
+                    <div style="background: rgba(255,215,0,0.1); border-left: 4px solid var(--primary-gold); padding: 1rem; border-radius: 8px;">
+                        <h4 style="color: var(--primary-gold); margin-bottom: 0.8rem; font-size: 1.1rem;">✅ Daena Solves It:</h4>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light);">
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Daena as reasoning overlay</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ CMP filtering</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Governance over responses</li>
+                            <li style="margin-bottom: 0.6rem; padding-left: 1.5rem; position: relative;">✅ Drift detection and correction</li>
+                        </ul>
                     </div>
+                </div>
+            </div>
+
+            <!-- Daena Wins Card - Full Width -->
+            <div style="background: var(--gradient-primary); border: 2px solid var(--primary-gold); border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--dark-bg); flex-wrap: wrap; gap: 1rem;">
+                    <h3 style="color: var(--dark-bg); font-size: 2rem; font-weight: bold; margin: 0;">🏆 Daena AI</h3>
+                    <span style="background: var(--dark-bg); color: var(--primary-gold); padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; font-size: 1.1rem;">✅ Revolutionary</span>
+                </div>
+                <div style="text-align: left; max-width: 800px; margin: 0 auto 2rem;">
+                    <h4 style="color: var(--dark-bg); margin-bottom: 1.5rem; font-size: 1.5rem; text-align: center;">🎯 Our Unique Advantages:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div style="background: rgba(15, 15, 35, 0.2); padding: 1.5rem; border-radius: 12px;">
+                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Real-time governance</div>
+                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Agent-to-agent memory</div>
+                        </div>
+                        <div style="background: rgba(15, 15, 35, 0.2); padding: 1.5rem; border-radius: 12px;">
+                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Multi-model routing</div>
+                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">✅ Reflexive learning & override</div>
+                        </div>
+                        <div style="background: rgba(15, 15, 35, 0.2); padding: 1.5rem; border-radius: 12px;">
+                            <div style="color: var(--dark-bg); font-size: 1.1rem; font-weight: 600;">✅ Founder control (King-Override)</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: rgba(15, 15, 35, 0.3); border-radius: 15px; padding: 2rem; margin-top: 2rem;">
+                    <h4 style="color: var(--dark-bg); margin-bottom: 1rem; font-size: 1.3rem;">🚀 Result:</h4>
+                    <p style="color: var(--dark-bg); font-size: 1.3rem; font-weight: bold; margin: 0; line-height: 1.6;">
+                        <strong>Combines everything into an AI-native company operating system</strong>
+                    </p>
                 </div>
             </div>
         </div>
