@@ -738,6 +738,47 @@
             position: relative;
             overflow: hidden;
         }
+        
+        /* Daena Feature Cards - Matching mas-ai design */
+        .daena-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .daena-feature {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .daena-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .daena-feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .daena-feature h4 {
+            font-size: 1.3rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .daena-feature p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
 
         .feature-card::before {
             content: '';
@@ -2687,28 +2728,28 @@
             </div>
         </div>
         
-        <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <div class="feature-card" style="text-align: left;">
-                <div class="feature-icon">👨‍🏫</div>
-                <h3>Dr. Mohammad Mostafanejad</h3>
+        <div class="daena-features" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="daena-feature" style="text-align: left;">
+                <div class="daena-feature-icon">👨‍🏫</div>
+                <h4>Dr. Mohammad Mostafanejad</h4>
                 <p style="font-style: italic; color: var(--text-muted); margin-top: 1rem;">
                     "Daena represents a paradigm shift in AI architecture. The Sunflower-Honeycomb structure and NBMF Memory System demonstrate exceptional innovation. This is exactly the kind of breakthrough technology that will define the next generation of AI systems."
                 </p>
                 <p style="margin-top: 1rem; color: var(--primary-gold); font-weight: 600;">— Dr. Mohammad Mostafanejad</p>
             </div>
             
-            <div class="feature-card" style="text-align: left;">
-                <div class="feature-icon">🎓</div>
-                <h3>Dr. Amit Miraj</h3>
+            <div class="daena-feature" style="text-align: left;">
+                <div class="daena-feature-icon">🎓</div>
+                <h4>Dr. Amit Miraj</h4>
                 <p style="font-style: italic; color: var(--text-muted); margin-top: 1rem;">
                     "This is a good idea and I'm seeing lots of interesting claims in this project. The patent-pending technologies in Daena - particularly the NBMF Memory and Hex-Mesh Communication - address critical problems in multi-agent systems. The combination of reflexive memory, multi-LLM consensus, and governance presents an innovative approach worth exploring further."
                 </p>
                 <p style="margin-top: 1rem; color: var(--primary-gold); font-weight: 600;">— Dr. Amit Miraj</p>
             </div>
             
-            <div class="feature-card" style="text-align: left;">
-                <div class="feature-icon">👨‍🏫</div>
-                <h3>Prof. Asad Norouzi</h3>
+            <div class="daena-feature" style="text-align: left;">
+                <div class="daena-feature-icon">👨‍🏫</div>
+                <h4>Prof. Asad Norouzi</h4>
                 <p style="font-style: italic; color: var(--text-muted); margin-top: 1rem;">
                     "I'm genuinely excited about Daena's potential. The Self-Fulfilling Hierarchical Communication system and the way agents coordinate through the Sunflower-Honeycomb architecture is groundbreaking. This project shows exceptional promise."
                 </p>
