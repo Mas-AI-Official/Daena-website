@@ -1430,16 +1430,21 @@
             window.addEventListener('orientationchange', handleOrientationChange);
             window.addEventListener('resize', handleOrientationChange);
             
+            // Make handleOrientationChange globally accessible
+            window.handleOrientationChange = handleOrientationChange;
+            
             // Initial orientation check
             handleOrientationChange();
             
-            // Also handle orientation when slides change
-            const originalShowSlide = EnhancedPresentationController.prototype.showSlide;
-            EnhancedPresentationController.prototype.showSlide = function(slideIndex) {
-                originalShowSlide.call(this, slideIndex);
-                // Update slide sizing after slide change
-                setTimeout(handleOrientationChange, 200);
-            };
+            // Hook into the presentation controller to handle orientation on slide changes
+            if (presentationController) {
+                const originalShowSlide = presentationController.showSlide.bind(presentationController);
+                presentationController.showSlide = function(slideIndex) {
+                    originalShowSlide(slideIndex);
+                    // Update slide sizing after slide change
+                    setTimeout(handleOrientationChange, 200);
+                };
+            }
         });
     </script>
     <!-- Metatron Hexagonal Node Network -->
