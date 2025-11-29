@@ -983,6 +983,20 @@
             }
         }
 
+        // Handle orientation changes
+        function handleOrientationChange() {
+            const header = document.querySelector('.header');
+            setTimeout(() => {
+                const isLandscape = window.innerWidth > window.innerHeight;
+                if (header) {
+                    header.style.minHeight = isLandscape ? '40px' : '50px';
+                }
+            }, 100);
+        }
+        window.addEventListener('orientationchange', handleOrientationChange);
+        window.addEventListener('resize', handleOrientationChange);
+        handleOrientationChange();
+        
         // Initialize demo when page loads
         document.addEventListener('DOMContentLoaded', function() {
             window.realScenarioDemo = new DaenaRealScenarioDemo();
