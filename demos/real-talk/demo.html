@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena: Real Talk Demo</title>
     <link rel="stylesheet" href="../voice-player.css">
     <style>
@@ -427,9 +427,99 @@
         }
 
         @media (max-width: 768px) {
+            .header {
+                padding: 0.5rem 1rem !important;
+                min-height: 50px !important;
+            }
+            
+            .logo {
+                font-size: 1.2rem !important;
+            }
+            
+            .nav-btn {
+                padding: 8px 16px !important;
+                font-size: 12px !important;
+            }
+            
+            .nav-buttons {
+                gap: 0.5rem !important;
+                flex-wrap: wrap !important;
+            }
+            
+            .container {
+                padding-top: 60px !important;
+            }
+            
+            .demo-title {
+                font-size: 1.8rem !important;
+            }
+            
             .demo-controls {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
+            }
+            
+            .demo-btn, button {
+                padding: 0.8rem 1.5rem !important;
+                font-size: 0.95rem !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+            }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.4rem 0.8rem !important;
+                min-height: 45px !important;
+            }
+            
+            .logo {
+                font-size: 1rem !important;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px !important;
+                font-size: 11px !important;
+            }
+            
+            .demo-title {
+                font-size: 1.5rem !important;
+            }
+        }
+        
+        /* Landscape orientation */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .header {
+                padding: 0.3rem 1rem !important;
+                min-height: 40px !important;
+            }
+            
+            .container {
+                padding-top: 50px !important;
+            }
+        }
+        
+        /* Cross-browser compatibility */
+        @supports not (backdrop-filter: blur(20px)) {
+            .header {
+                background: rgba(15, 15, 35, 0.95) !important;
+            }
+        }
+        
+        /* iOS Safari fixes */
+        @supports (-webkit-touch-callout: none) {
+            input, textarea, select, button {
+                font-size: 16px !important;
+            }
+        }
+        
+        /* Touch-friendly */
+        @media (hover: none) and (pointer: coarse) {
+            .btn, a, button, .nav-btn, .demo-btn {
+                min-height: 44px !important;
+                min-width: 44px !important;
             }
         }
     </style>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena AI - Budget Calculation Demo</title>
     <meta name="description" content="Watch Daena's Finance Agent calculate comprehensive budgets with real-time data analysis and live narration">
     
@@ -565,6 +565,49 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                min-height: 50px;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .back-button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .demo-container {
+                padding-top: 60px;
+            }
+            
+            .demo-title {
+                font-size: 1.8rem;
+            }
+            
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .input-panel, .results-panel {
+                padding: 1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+                min-width: 44px;
+                min-height: 44px;
+            }
+            
             .calculator-container {
                 grid-template-columns: 1fr;
                 padding: 0 1rem;
@@ -583,6 +626,90 @@
 
             .analysis-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.4rem 0.8rem;
+                min-height: 45px;
+            }
+            
+            .logo {
+                font-size: 1rem;
+            }
+            
+            .back-button {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .demo-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Landscape orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .navbar {
+                padding: 0.3rem 1rem;
+                min-height: 40px;
+            }
+            
+            .logo {
+                font-size: 1.1rem;
+            }
+            
+            .back-button {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .demo-container {
+                padding-top: 50px;
+            }
+            
+            .calculator-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+        
+        /* Portrait orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: portrait) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Tablet specific adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .calculator-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Cross-browser compatibility */
+        @supports not (backdrop-filter: blur(20px)) {
+            .navbar, .input-panel, .results-panel {
+                background: rgba(15, 15, 35, 0.95) !important;
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            input, textarea, select, button {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+        }
+        
+        /* Touch-friendly elements */
+        @media (hover: none) and (pointer: coarse) {
+            .btn, a, button {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 12px 24px;
             }
         }
 
@@ -1201,6 +1328,39 @@
         // Initialize demo when page loads
         document.addEventListener('DOMContentLoaded', () => {
             new BudgetCalculationDemo();
+            
+            // Handle orientation changes
+            function handleOrientationChange() {
+                const calculatorContainer = document.querySelector('.calculator-container');
+                const navbar = document.querySelector('.navbar');
+                
+                setTimeout(() => {
+                    const isLandscape = window.innerWidth > window.innerHeight;
+                    
+                    if (calculatorContainer) {
+                        if (isLandscape && window.innerWidth <= 1024) {
+                            calculatorContainer.style.gridTemplateColumns = '1fr 1fr';
+                        } else if (window.innerWidth <= 768) {
+                            calculatorContainer.style.gridTemplateColumns = '1fr';
+                        }
+                    }
+                    
+                    if (navbar) {
+                        if (isLandscape) {
+                            navbar.style.minHeight = '40px';
+                        } else {
+                            navbar.style.minHeight = '50px';
+                        }
+                    }
+                }, 100);
+            }
+            
+            // Listen for orientation changes
+            window.addEventListener('orientationchange', handleOrientationChange);
+            window.addEventListener('resize', handleOrientationChange);
+            
+            // Initial orientation check
+            handleOrientationChange();
         });
     </script>
 </body>

@@ -1,0 +1,122 @@
+/* Mobile and Rotation Support for All Demo Pages */
+
+/* Enhanced viewport meta tag should be: 
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+*/
+
+/* Mobile Responsive - Base */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem !important;
+        min-height: 50px !important;
+    }
+    
+    .logo, .nav-btn {
+        font-size: 1.2rem !important;
+    }
+    
+    .back-button, .nav-btn {
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+    }
+    
+    .nav-buttons, .nav-container {
+        gap: 0.5rem !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .demo-container, body {
+        padding-top: 60px !important;
+    }
+    
+    .demo-title, h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    .btn, button {
+        padding: 0.8rem 1.5rem !important;
+        font-size: 0.95rem !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+    }
+}
+
+/* Extra small mobile */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.4rem 0.8rem !important;
+        min-height: 45px !important;
+    }
+    
+    .logo {
+        font-size: 1rem !important;
+    }
+    
+    .back-button, .nav-btn {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+    }
+    
+    .demo-title, h1 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* Landscape orientation - Mobile & Tablet */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .navbar {
+        padding: 0.3rem 1rem !important;
+        min-height: 40px !important;
+    }
+    
+    .logo {
+        font-size: 1.1rem !important;
+    }
+    
+    .back-button, .nav-btn {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+    }
+    
+    .demo-container, body {
+        padding-top: 50px !important;
+    }
+}
+
+/* Portrait orientation - Mobile & Tablet */
+@media (max-width: 1024px) and (orientation: portrait) {
+    .demo-container, body {
+        padding-top: 60px !important;
+    }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .navbar {
+        padding: 0.6rem 1.5rem !important;
+    }
+}
+
+/* Cross-browser compatibility */
+@supports not (backdrop-filter: blur(20px)) {
+    .navbar {
+        background: rgba(15, 15, 35, 0.95) !important;
+    }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    input, textarea, select, button {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+    }
+}
+
+/* Touch-friendly elements */
+@media (hover: none) and (pointer: coarse) {
+    .btn, a, button, .nav-btn, .back-button {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        padding: 12px 24px !important;
+    }
+}
+

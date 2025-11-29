@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena: Real World Scenario Demo</title>
     <link rel="stylesheet" href="../voice-player.css">
     <style>
@@ -466,6 +466,33 @@
         }
 
         @media (max-width: 768px) {
+            .header {
+                padding: 0.5rem 1rem !important;
+                min-height: 50px !important;
+            }
+            
+            .logo {
+                font-size: 1.2rem !important;
+            }
+            
+            .nav-btn {
+                padding: 8px 16px !important;
+                font-size: 12px !important;
+            }
+            
+            .nav-buttons {
+                gap: 0.5rem !important;
+                flex-wrap: wrap !important;
+            }
+            
+            .container {
+                padding-top: 60px !important;
+            }
+            
+            .demo-title {
+                font-size: 1.8rem !important;
+            }
+            
             .scenario-steps {
                 grid-template-columns: 1fr;
             }
@@ -476,6 +503,7 @@
 
             .demo-controls {
                 flex-direction: column;
+                gap: 1rem;
                 align-items: center;
             }
         }
