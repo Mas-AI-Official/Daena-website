@@ -455,21 +455,35 @@
         @media (max-width: 768px) {
             .navbar {
                 padding: 0.5rem 1rem;
-                height: auto;
-                min-height: 50px;
+                min-height: 55px;
+                max-height: 65px;
+                overflow: visible;
+                display: flex;
+                align-items: center;
+            }
+            
+            .nav-container {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
             }
             
             .logo {
                 font-size: 1.2rem;
+                white-space: nowrap;
             }
             
             .back-button {
-                padding: 6px 12px;
+                padding: 8px 16px;
                 font-size: 12px;
+                white-space: nowrap;
             }
             
             .presentation-container {
-                padding-top: 50px;
+                padding-top: 65px; /* Account for actual navbar height */
                 padding-bottom: 180px; /* Space for controls */
             }
             
@@ -593,21 +607,37 @@
         /* Landscape orientation - Mobile & Tablet */
         @media (max-width: 1024px) and (orientation: landscape) {
             .navbar {
-                padding: 0.3rem 1rem;
-                min-height: 40px;
+                padding: 0.4rem 1rem;
+                min-height: 50px;
+                max-height: 60px;
+                overflow: visible;
+                display: flex;
+                align-items: center;
+            }
+            
+            .nav-container {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: nowrap;
             }
             
             .logo {
                 font-size: 1.1rem;
+                white-space: nowrap;
+                flex-shrink: 0;
             }
             
             .back-button {
-                padding: 5px 12px;
+                padding: 6px 14px;
                 font-size: 11px;
+                white-space: nowrap;
+                flex-shrink: 0;
             }
             
             .presentation-container {
-                padding-top: 40px;
+                padding-top: 60px; /* Account for navbar height */
                 padding-bottom: 120px; /* Less space needed in landscape */
             }
             
@@ -618,7 +648,7 @@
             .slide img {
                 width: 100%;
                 height: auto;
-                max-height: calc(100vh - 160px); /* More space for slide in landscape */
+                max-height: calc(100vh - 180px); /* Account for navbar (60px) + controls (120px) */
                 margin-top: 0;
             }
             
@@ -629,6 +659,7 @@
                 padding: 6px 10px;
                 gap: 5px;
                 flex-wrap: nowrap; /* Keep controls in one row in landscape */
+                max-height: 120px;
             }
             
             .audio-controls button {
@@ -654,12 +685,42 @@
         
         /* Portrait orientation - Mobile & Tablet */
         @media (max-width: 1024px) and (orientation: portrait) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                min-height: 55px;
+                max-height: 65px;
+                overflow: visible;
+                display: flex;
+                align-items: center;
+            }
+            
+            .nav-container {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+                white-space: nowrap;
+            }
+            
+            .back-button {
+                padding: 8px 16px;
+                font-size: 12px;
+                white-space: nowrap;
+            }
+            
             .presentation-container {
+                padding-top: 65px; /* Account for navbar height */
                 padding-bottom: 200px; /* More space for controls in portrait */
             }
             
             .slide img {
-                max-height: calc(100vh - 280px);
+                max-height: calc(100vh - 300px); /* Account for navbar (65px) + controls (200px) + margins */
             }
             
             .audio-controls {
@@ -1389,16 +1450,43 @@
                 const slideImg = document.querySelector('.slide.active img');
                 const presentation = document.getElementById('presentation');
                 const audioControls = document.querySelector('.audio-controls');
+                const navbar = document.querySelector('.navbar');
+                const presentationContainer = document.querySelector('.presentation-container');
                 
                 // Small delay to let browser adjust viewport
                 setTimeout(() => {
+                    const isLandscape = window.innerWidth > window.innerHeight;
+                    const isFullscreen = document.fullscreenElement || 
+                                       document.webkitFullscreenElement || 
+                                       document.mozFullScreenElement;
+                    
+                    // Adjust navbar
+                    if (navbar) {
+                        if (isLandscape) {
+                            navbar.style.minHeight = '50px';
+                            navbar.style.maxHeight = '60px';
+                            navbar.style.padding = '0.4rem 1rem';
+                        } else {
+                            navbar.style.minHeight = '55px';
+                            navbar.style.maxHeight = '65px';
+                            navbar.style.padding = '0.5rem 1rem';
+                        }
+                        navbar.style.overflow = 'visible';
+                        navbar.style.display = 'flex';
+                        navbar.style.alignItems = 'center';
+                    }
+                    
+                    // Adjust presentation container padding
+                    if (presentationContainer) {
+                        if (isLandscape) {
+                            presentationContainer.style.paddingTop = '60px';
+                        } else {
+                            presentationContainer.style.paddingTop = '65px';
+                        }
+                    }
+                    
                     // Recalculate slide sizes
                     if (slideImg) {
-                        const isLandscape = window.innerWidth > window.innerHeight;
-                        const isFullscreen = document.fullscreenElement || 
-                                           document.webkitFullscreenElement || 
-                                           document.mozFullScreenElement;
-                        
                         if (isFullscreen) {
                             if (isLandscape) {
                                 slideImg.style.maxHeight = 'calc(100vh - 140px)';
@@ -1407,23 +1495,22 @@
                             }
                         } else {
                             if (isLandscape) {
-                                slideImg.style.maxHeight = 'calc(100vh - 160px)';
+                                slideImg.style.maxHeight = 'calc(100vh - 180px)';
                             } else {
-                                slideImg.style.maxHeight = 'calc(100vh - 280px)';
+                                slideImg.style.maxHeight = 'calc(100vh - 300px)';
                             }
                         }
                     }
                     
                     // Adjust controls positioning
                     if (audioControls) {
-                        const isLandscape = window.innerWidth > window.innerHeight;
                         if (isLandscape) {
                             audioControls.style.flexWrap = 'nowrap';
                         } else {
                             audioControls.style.flexWrap = 'wrap';
                         }
                     }
-                }, 100);
+                }, 150);
             }
             
             // Listen for orientation changes
