@@ -770,16 +770,55 @@
         
         /* Fullscreen landscape adjustments */
         @media (max-width: 1024px) and (orientation: landscape) {
+            body:fullscreen .navbar,
+            body:-webkit-full-screen .navbar {
+                width: 80px !important;
+                height: 100vh !important;
+                flex-direction: column !important;
+                border-right: 2px solid rgba(255, 215, 0, 0.3) !important;
+                border-bottom: none !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: auto !important;
+            }
+            
+            body:fullscreen .nav-container,
+            body:-webkit-full-screen .nav-container {
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+                gap: 1.5rem !important;
+                padding-top: 1rem !important;
+            }
+            
+            body:fullscreen .logo,
+            body:-webkit-full-screen .logo {
+                writing-mode: vertical-rl !important;
+                text-orientation: mixed !important;
+                transform: rotate(180deg) !important;
+            }
+            
+            body:fullscreen .back-button,
+            body:-webkit-full-screen .back-button {
+                writing-mode: vertical-rl !important;
+                text-orientation: mixed !important;
+                transform: rotate(180deg) !important;
+                width: 60px !important;
+                min-height: 120px !important;
+            }
+            
+            body:fullscreen .presentation-container,
+            body:-webkit-full-screen .presentation-container {
+                padding-left: 80px !important;
+                padding-top: 0 !important;
+                padding-bottom: 120px !important;
+            }
+            
             body:fullscreen .slide img,
             body:-webkit-full-screen .slide img {
                 width: 95%;
                 height: auto;
                 max-height: calc(100vh - 140px);
-            }
-            
-            body:fullscreen .presentation-container,
-            body:-webkit-full-screen .presentation-container {
-                padding-bottom: 120px;
             }
             
             body:fullscreen .slide-container,
