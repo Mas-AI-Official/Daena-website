@@ -113,6 +113,10 @@
             border-bottom: 2px solid rgba(255, 215, 0, 0.3);
             z-index: 1000;
             padding: 1rem 2rem;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            min-height: 70px;
         }
 
         .nav-container {
@@ -121,6 +125,9 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
+            flex-wrap: nowrap;
+            gap: 0.5rem;
         }
 
         .logo {
@@ -131,6 +138,8 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .back-button {
@@ -142,6 +151,8 @@
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-glow);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .back-button:hover {
