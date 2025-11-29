@@ -129,6 +129,58 @@
             flex-wrap: nowrap;
             gap: 0.5rem;
         }
+        
+        /* Landscape mode - Navbar as left sidebar */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .navbar {
+                top: 0;
+                left: 0;
+                right: auto;
+                width: 80px;
+                height: 100vh;
+                min-height: 100vh;
+                max-height: 100vh;
+                padding: 1rem 0.5rem;
+                border-bottom: none;
+                border-right: 2px solid rgba(255, 215, 0, 0.3);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                gap: 1.5rem;
+                padding-top: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+                transform: rotate(180deg);
+                margin: 0;
+                padding: 0.5rem 0;
+            }
+            
+            .back-button {
+                padding: 10px 8px;
+                font-size: 10px;
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+                transform: rotate(180deg);
+                width: 60px;
+                min-height: 120px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 15px;
+            }
+        }
 
         .logo {
             font-size: 1.8rem;
@@ -617,38 +669,9 @@
         
         /* Landscape orientation - Mobile & Tablet */
         @media (max-width: 1024px) and (orientation: landscape) {
-            .navbar {
-                padding: 0.4rem 1rem;
-                min-height: 50px;
-                max-height: 60px;
-                overflow: visible;
-                display: flex;
-                align-items: center;
-            }
-            
-            .nav-container {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-wrap: nowrap;
-            }
-            
-            .logo {
-                font-size: 1.1rem;
-                white-space: nowrap;
-                flex-shrink: 0;
-            }
-            
-            .back-button {
-                padding: 6px 14px;
-                font-size: 11px;
-                white-space: nowrap;
-                flex-shrink: 0;
-            }
-            
             .presentation-container {
-                padding-top: 60px; /* Account for navbar height */
+                padding-top: 0;
+                padding-left: 80px; /* Account for left sidebar navbar */
                 padding-bottom: 120px; /* Less space needed in landscape */
             }
             
@@ -659,7 +682,7 @@
             .slide img {
                 width: 100%;
                 height: auto;
-                max-height: calc(100vh - 180px); /* Account for navbar (60px) + controls (120px) */
+                max-height: calc(100vh - 120px); /* Account for controls (120px) only, navbar is sidebar */
                 margin-top: 0;
             }
             
@@ -1463,6 +1486,7 @@
                 const audioControls = document.querySelector('.audio-controls');
                 const navbar = document.querySelector('.navbar');
                 const presentationContainer = document.querySelector('.presentation-container');
+                const navContainer = document.querySelector('.nav-container');
                 
                 // Small delay to let browser adjust viewport
                 setTimeout(() => {
@@ -1471,28 +1495,67 @@
                                        document.webkitFullscreenElement || 
                                        document.mozFullScreenElement;
                     
-                    // Adjust navbar
+                    // Adjust navbar for sidebar in landscape
                     if (navbar) {
-                        if (isLandscape) {
-                            navbar.style.minHeight = '50px';
-                            navbar.style.maxHeight = '60px';
-                            navbar.style.padding = '0.4rem 1rem';
+                        if (isLandscape && window.innerWidth <= 1024) {
+                            // Sidebar mode
+                            navbar.style.position = 'fixed';
+                            navbar.style.top = '0';
+                            navbar.style.left = '0';
+                            navbar.style.right = 'auto';
+                            navbar.style.width = '80px';
+                            navbar.style.height = '100vh';
+                            navbar.style.flexDirection = 'column';
+                            navbar.style.justifyContent = 'flex-start';
+                            navbar.style.padding = '1rem 0.5rem';
+                            navbar.style.borderBottom = 'none';
+                            navbar.style.borderRight = '2px solid rgba(255, 215, 0, 0.3)';
                         } else {
+                            // Top navbar mode (portrait)
+                            navbar.style.position = 'fixed';
+                            navbar.style.top = '0';
+                            navbar.style.left = '0';
+                            navbar.style.right = '0';
+                            navbar.style.width = 'auto';
+                            navbar.style.height = 'auto';
                             navbar.style.minHeight = '55px';
                             navbar.style.maxHeight = '65px';
+                            navbar.style.flexDirection = 'row';
+                            navbar.style.justifyContent = 'space-between';
                             navbar.style.padding = '0.5rem 1rem';
+                            navbar.style.borderBottom = '2px solid rgba(255, 215, 0, 0.3)';
+                            navbar.style.borderRight = 'none';
                         }
                         navbar.style.overflow = 'visible';
                         navbar.style.display = 'flex';
                         navbar.style.alignItems = 'center';
                     }
                     
+                    // Adjust nav-container
+                    if (navContainer) {
+                        if (isLandscape && window.innerWidth <= 1024) {
+                            navContainer.style.flexDirection = 'column';
+                            navContainer.style.justifyContent = 'flex-start';
+                            navContainer.style.alignItems = 'center';
+                            navContainer.style.gap = '1.5rem';
+                            navContainer.style.paddingTop = '1rem';
+                        } else {
+                            navContainer.style.flexDirection = 'row';
+                            navContainer.style.justifyContent = 'space-between';
+                            navContainer.style.alignItems = 'center';
+                            navContainer.style.gap = '0.5rem';
+                            navContainer.style.paddingTop = '0';
+                        }
+                    }
+                    
                     // Adjust presentation container padding
                     if (presentationContainer) {
-                        if (isLandscape) {
-                            presentationContainer.style.paddingTop = '60px';
+                        if (isLandscape && window.innerWidth <= 1024) {
+                            presentationContainer.style.paddingTop = '0';
+                            presentationContainer.style.paddingLeft = '80px';
                         } else {
                             presentationContainer.style.paddingTop = '65px';
+                            presentationContainer.style.paddingLeft = '0';
                         }
                     }
                     
@@ -1505,8 +1568,8 @@
                                 slideImg.style.maxHeight = 'calc(100vh - 200px)';
                             }
                         } else {
-                            if (isLandscape) {
-                                slideImg.style.maxHeight = 'calc(100vh - 180px)';
+                            if (isLandscape && window.innerWidth <= 1024) {
+                                slideImg.style.maxHeight = 'calc(100vh - 120px)';
                             } else {
                                 slideImg.style.maxHeight = 'calc(100vh - 300px)';
                             }
