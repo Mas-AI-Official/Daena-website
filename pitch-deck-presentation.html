@@ -433,35 +433,140 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .slide img {
-                width: 95%;
-                height: 70%;
+            .navbar {
+                padding: 0.5rem 1rem;
+                height: auto;
+                min-height: 50px;
             }
             
-            .audio-controls {
-                bottom: 10px;
-                padding: 10px 15px;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
-            #fullscreenBtn {
-                font-size: 14px;
-                padding: 6px 12px;
-            }
-            
-            .progress-bar {
-                width: 150px;
+            .logo {
+                font-size: 1.2rem;
             }
             
             .back-button {
-                padding: 8px 15px;
-                font-size: 14px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .presentation-container {
+                padding-top: 50px;
+                padding-bottom: 180px; /* Space for controls */
+            }
+            
+            .slide-container {
+                padding: 10px;
+            }
+            
+            .slide img {
+                width: 100%;
+                height: auto;
+                max-height: calc(100vh - 250px); /* Account for navbar and controls */
+                margin-top: 0;
+            }
+            
+            .audio-controls {
+                bottom: 5px;
+                left: 5px;
+                right: 5px;
+                transform: none;
+                padding: 8px 10px;
+                flex-wrap: wrap;
+                gap: 6px;
+                border-radius: 15px;
+                max-width: calc(100vw - 10px);
+            }
+            
+            .audio-controls button {
+                padding: 8px 12px;
+                font-size: 12px;
+                border-radius: 15px;
+                flex: 1 1 auto;
+                min-width: 60px;
+            }
+            
+            #fullscreenBtn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            
+            .progress-container {
+                width: 100%;
+                order: 10; /* Move to bottom */
+                margin-top: 5px;
+            }
+            
+            .progress-bar {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .slide-counter, .time-display {
+                font-size: 11px;
+                min-width: auto;
             }
 
             .speed-controls {
-                flex-direction: column;
-                gap: 5px;
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+            
+            .speed-controls label {
+                font-size: 11px;
+                margin-right: 3px;
+            }
+            
+            .speed-controls select {
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+            
+            #downloadBtn {
+                padding: 8px 12px !important;
+                font-size: 12px !important;
+            }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.4rem 0.8rem;
+                min-height: 45px;
+            }
+            
+            .logo {
+                font-size: 1rem;
+            }
+            
+            .back-button {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            
+            .presentation-container {
+                padding-top: 45px;
+                padding-bottom: 200px;
+            }
+            
+            .slide img {
+                max-height: calc(100vh - 280px);
+            }
+            
+            .audio-controls {
+                padding: 6px 8px;
+                gap: 4px;
+                bottom: 2px;
+                left: 2px;
+                right: 2px;
+            }
+            
+            .audio-controls button {
+                padding: 6px 10px;
+                font-size: 11px;
+                min-width: 50px;
+            }
+            
+            .slide-counter, .time-display {
+                font-size: 10px;
             }
         }
 
@@ -982,48 +1087,81 @@
             const presentation = document.getElementById('presentation');
             
             function toggleFullscreen() {
-                const elem = document.body;
+                const elem = document.documentElement; // Use documentElement for better mobile support
                 const audioControls = document.querySelector('.audio-controls');
                 const navbar = document.querySelector('.navbar');
                 
-                if (!document.fullscreenElement && !document.webkitFullscreenElement && 
-                    !document.mozFullScreenElement && !document.msFullscreenElement) {
-                    // Enter fullscreen - use body so controls stay visible
-                    if (elem.requestFullscreen) {
-                        elem.requestFullscreen();
-                    } else if (elem.webkitRequestFullscreen) {
-                        elem.webkitRequestFullscreen();
-                    } else if (elem.mozRequestFullScreen) {
-                        elem.mozRequestFullScreen();
-                    } else if (elem.msRequestFullscreen) {
-                        elem.msRequestFullscreen();
-                    }
-                    fullscreenBtn.innerHTML = '⛶ Exit Fullscreen';
+                // Check if already in fullscreen
+                const isFullscreen = document.fullscreenElement || 
+                                    document.webkitFullscreenElement || 
+                                    document.mozFullScreenElement || 
+                                    document.msFullscreenElement ||
+                                    (document.webkitCurrentFullScreenElement !== null);
+                
+                if (!isFullscreen) {
+                    // Enter fullscreen - try multiple methods for cross-browser/mobile support
+                    const enterFullscreen = () => {
+                        if (elem.requestFullscreen) {
+                            return elem.requestFullscreen();
+                        } else if (elem.webkitRequestFullscreen) {
+                            return elem.webkitRequestFullscreen();
+                        } else if (elem.webkitEnterFullscreen) { // iOS Safari
+                            return elem.webkitEnterFullscreen();
+                        } else if (elem.mozRequestFullScreen) {
+                            return elem.mozRequestFullScreen();
+                        } else if (elem.msRequestFullscreen) {
+                            return elem.msRequestFullscreen();
+                        } else if (elem.requestFullscreen) {
+                            return elem.requestFullscreen();
+                        }
+                        return Promise.reject('Fullscreen not supported');
+                    };
                     
-                    // Ensure controls stay visible
-                    if (audioControls) {
-                        audioControls.style.display = 'flex';
-                        audioControls.style.visibility = 'visible';
-                        audioControls.style.opacity = '1';
-                        audioControls.style.zIndex = '10000';
-                    }
-                    if (navbar) {
-                        navbar.style.display = 'block';
-                        navbar.style.visibility = 'visible';
-                        navbar.style.zIndex = '10001';
-                    }
+                    enterFullscreen().then(() => {
+                        fullscreenBtn.innerHTML = '⛶ Exit Fullscreen';
+                        
+                        // Ensure controls stay visible
+                        if (audioControls) {
+                            audioControls.style.display = 'flex';
+                            audioControls.style.visibility = 'visible';
+                            audioControls.style.opacity = '1';
+                            audioControls.style.zIndex = '10000';
+                        }
+                        if (navbar) {
+                            navbar.style.display = 'block';
+                            navbar.style.visibility = 'visible';
+                            navbar.style.zIndex = '10001';
+                        }
+                    }).catch(err => {
+                        console.log('Fullscreen error:', err);
+                        // Fallback: try to maximize viewport on mobile
+                        if (window.innerHeight === screen.height) {
+                            fullscreenBtn.innerHTML = '⛶ Exit Fullscreen';
+                        }
+                    });
                 } else {
                     // Exit fullscreen
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    }
-                    fullscreenBtn.innerHTML = '⛶ Fullscreen';
+                    const exitFullscreen = () => {
+                        if (document.exitFullscreen) {
+                            return document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            return document.webkitExitFullscreen();
+                        } else if (document.webkitCancelFullScreen) {
+                            return document.webkitCancelFullScreen();
+                        } else if (document.mozCancelFullScreen) {
+                            return document.mozCancelFullScreen();
+                        } else if (document.msExitFullscreen) {
+                            return document.msExitFullscreen();
+                        }
+                        return Promise.reject('Exit fullscreen not supported');
+                    };
+                    
+                    exitFullscreen().then(() => {
+                        fullscreenBtn.innerHTML = '⛶ Fullscreen';
+                    }).catch(err => {
+                        console.log('Exit fullscreen error:', err);
+                        fullscreenBtn.innerHTML = '⛶ Fullscreen';
+                    });
                 }
             }
             
