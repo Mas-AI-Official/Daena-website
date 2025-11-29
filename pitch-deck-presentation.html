@@ -589,6 +589,169 @@
                 font-size: 10px;
             }
         }
+        
+        /* Landscape orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .navbar {
+                padding: 0.3rem 1rem;
+                min-height: 40px;
+            }
+            
+            .logo {
+                font-size: 1.1rem;
+            }
+            
+            .back-button {
+                padding: 5px 12px;
+                font-size: 11px;
+            }
+            
+            .presentation-container {
+                padding-top: 40px;
+                padding-bottom: 120px; /* Less space needed in landscape */
+            }
+            
+            .slide-container {
+                padding: 5px;
+            }
+            
+            .slide img {
+                width: 100%;
+                height: auto;
+                max-height: calc(100vh - 160px); /* More space for slide in landscape */
+                margin-top: 0;
+            }
+            
+            .audio-controls {
+                bottom: 5px;
+                left: 5px;
+                right: 5px;
+                padding: 6px 10px;
+                gap: 5px;
+                flex-wrap: nowrap; /* Keep controls in one row in landscape */
+            }
+            
+            .audio-controls button {
+                padding: 6px 10px;
+                font-size: 11px;
+                min-width: 55px;
+            }
+            
+            .progress-container {
+                order: 0; /* Keep progress bar in main row */
+                width: auto;
+                margin-top: 0;
+            }
+            
+            .progress-bar {
+                width: 120px;
+            }
+            
+            .slide-counter, .time-display {
+                font-size: 10px;
+            }
+        }
+        
+        /* Portrait orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: portrait) {
+            .presentation-container {
+                padding-bottom: 200px; /* More space for controls in portrait */
+            }
+            
+            .slide img {
+                max-height: calc(100vh - 280px);
+            }
+            
+            .audio-controls {
+                flex-wrap: wrap; /* Allow wrapping in portrait */
+            }
+            
+            .progress-container {
+                order: 10; /* Move progress to bottom in portrait */
+                width: 100%;
+                margin-top: 5px;
+            }
+        }
+        
+        /* Fullscreen landscape adjustments */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            body:fullscreen .slide img,
+            body:-webkit-full-screen .slide img {
+                width: 95%;
+                height: auto;
+                max-height: calc(100vh - 140px);
+            }
+            
+            body:fullscreen .presentation-container,
+            body:-webkit-full-screen .presentation-container {
+                padding-bottom: 120px;
+            }
+            
+            body:fullscreen .slide-container,
+            body:-webkit-full-screen .slide-container {
+                padding: 10px 10px 120px 10px;
+            }
+        }
+        
+        /* Fullscreen portrait adjustments */
+        @media (max-width: 1024px) and (orientation: portrait) {
+            body:fullscreen .slide img,
+            body:-webkit-full-screen .slide img {
+                width: 100%;
+                height: auto;
+                max-height: calc(100vh - 200px);
+            }
+            
+            body:fullscreen .presentation-container,
+            body:-webkit-full-screen .presentation-container {
+                padding-bottom: 180px;
+            }
+            
+            body:fullscreen .slide-container,
+            body:-webkit-full-screen .slide-container {
+                padding: 10px 10px 160px 10px;
+            }
+        }
+        
+        /* Tablet specific adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .slide img {
+                width: 90%;
+                max-height: calc(100vh - 200px);
+            }
+            
+            .audio-controls {
+                padding: 10px 15px;
+                gap: 8px;
+            }
+            
+            .audio-controls button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+        
+        /* Tablet landscape */
+        @media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
+            .slide img {
+                max-height: calc(100vh - 150px);
+            }
+            
+            .presentation-container {
+                padding-bottom: 130px;
+            }
+        }
+        
+        /* Tablet portrait */
+        @media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+            .slide img {
+                max-height: calc(100vh - 220px);
+            }
+            
+            .presentation-container {
+                padding-bottom: 190px;
+            }
+        }
 
         /* Jazz Background Music Indicator */
         .music-indicator {
@@ -1220,6 +1383,55 @@
             document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
             document.addEventListener('mozfullscreenchange', updateFullscreenButton);
             document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            
+            // Handle orientation changes
+            function handleOrientationChange() {
+                const slideImg = document.querySelector('.slide.active img');
+                const presentation = document.getElementById('presentation');
+                const audioControls = document.querySelector('.audio-controls');
+                
+                // Small delay to let browser adjust viewport
+                setTimeout(() => {
+                    // Recalculate slide sizes
+                    if (slideImg) {
+                        const isLandscape = window.innerWidth > window.innerHeight;
+                        const isFullscreen = document.fullscreenElement || 
+                                           document.webkitFullscreenElement || 
+                                           document.mozFullScreenElement;
+                        
+                        if (isFullscreen) {
+                            if (isLandscape) {
+                                slideImg.style.maxHeight = 'calc(100vh - 140px)';
+                            } else {
+                                slideImg.style.maxHeight = 'calc(100vh - 200px)';
+                            }
+                        } else {
+                            if (isLandscape) {
+                                slideImg.style.maxHeight = 'calc(100vh - 160px)';
+                            } else {
+                                slideImg.style.maxHeight = 'calc(100vh - 280px)';
+                            }
+                        }
+                    }
+                    
+                    // Adjust controls positioning
+                    if (audioControls) {
+                        const isLandscape = window.innerWidth > window.innerHeight;
+                        if (isLandscape) {
+                            audioControls.style.flexWrap = 'nowrap';
+                        } else {
+                            audioControls.style.flexWrap = 'wrap';
+                        }
+                    }
+                }, 100);
+            }
+            
+            // Listen for orientation changes
+            window.addEventListener('orientationchange', handleOrientationChange);
+            window.addEventListener('resize', handleOrientationChange);
+            
+            // Initial orientation check
+            handleOrientationChange();
         });
     </script>
     <!-- Metatron Hexagonal Node Network -->
