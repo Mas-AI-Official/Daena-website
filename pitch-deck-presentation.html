@@ -185,6 +185,26 @@
             height: 70%;
         }
         
+        /* Mobile fullscreen adjustments */
+        @media (max-width: 768px) {
+            body:fullscreen .slide img,
+            body:-webkit-full-screen .slide img {
+                width: 100%;
+                height: auto;
+                max-height: calc(100vh - 200px);
+            }
+            
+            body:fullscreen .presentation-container,
+            body:-webkit-full-screen .presentation-container {
+                padding-bottom: 180px;
+            }
+            
+            body:fullscreen .slide-container,
+            body:-webkit-full-screen .slide-container {
+                padding: 10px 10px 140px 10px;
+            }
+        }
+        
         /* Hide Metatron background in fullscreen */
         body:fullscreen .metatron-bg,
         body:-webkit-full-screen .metatron-bg,
