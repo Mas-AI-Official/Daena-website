@@ -39,12 +39,18 @@
         <a href="/#memory-governance" class="back-link">← Back to Memory & Governance Engine</a>
         <h1>NBMF Memory System - Deep Dive</h1>
         <p style="font-size: 1.2rem; color: #B8BCC8; margin-bottom: 48px;">
-            Comprehensive technical documentation for Daena's Neural-Backed Memory Fabric (NBMF) - the patent-pending memory architecture that delivers 94.3% storage savings with 100% accuracy.
+            Comprehensive technical documentation for Daena's Neural-Backed Memory Fabric (NBMF) - the <strong style="color: #FFD700;">patent-pending</strong> memory architecture that delivers <strong style="color: #FFD700;">94.3% storage savings<sup>†</sup></strong> with <strong style="color: #00bcd4;">100% exact match (lossless mode)<sup>†</sup></strong> or <strong style="color: #00bcd4;">95.28% similarity (semantic mode)<sup>†</sup></strong>.
+        </p>
+        <p style="font-size: 0.9em; color: #B8BCC8; margin-bottom: 24px;">
+            <sup>†</sup> Internal benchmarks. See <a href="#benchmarks" style="color: #00bcd4;">Benchmarks & Technical Documentation</a> section below for full methodology.
         </p>
 
         <div class="section">
             <h2>Overview</h2>
-            <p>NBMF (Neural-Backed Memory Fabric) is Daena's revolutionary 3-tier memory architecture that intelligently compresses and tiers memory based on usage patterns. Unlike traditional AI systems that store everything in expensive vector databases, NBMF delivers 60%+ cost savings while maintaining 99.4% accuracy.</p>
+            <p>NBMF (Neural-Backed Memory Fabric) is Daena's <strong style="color: #FFD700;">patent-pending</strong> 3-tier memory architecture that intelligently compresses and tiers memory based on usage patterns. Unlike traditional AI systems that store everything in expensive vector databases, NBMF delivers <strong style="color: #FFD700;">60%+ cost savings<sup>†</sup></strong> while maintaining high accuracy.</p>
+            <p style="margin-top: 16px; font-size: 0.9em; color: #B8BCC8;">
+                <sup>†</sup> Internal benchmarks. See <a href="#benchmarks" style="color: #00bcd4;">Benchmarks & Technical Documentation</a> section for details.
+            </p>
         </div>
 
         <div class="section">
@@ -53,21 +59,21 @@
                 <div class="tier-card">
                     <h3 style="color: #FFD700; margin-bottom: 12px;">🔥 L1 Hot Memory</h3>
                     <p><strong>Purpose:</strong> Fast-access recent items</p>
-                    <p><strong>Latency:</strong> p95: 0.65ms</p>
+                    <p><strong>Latency:</strong> p95: 0.65ms<sup style="color: #B8BCC8; font-size: 0.8em;">†</sup></p>
                     <p><strong>Content:</strong> Vector embeddings, active decision-making data</p>
                     <p><strong>Retention:</strong> Recent items, frequently accessed</p>
                 </div>
                 <div class="tier-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border-color: rgba(0,188,212,0.3);">
                     <h3 style="color: #00bcd4; margin-bottom: 12px;">💾 L2 Warm Memory</h3>
                     <p><strong>Purpose:</strong> Compressed medium-term storage</p>
-                    <p><strong>Latency:</strong> p95: 2.5ms</p>
+                    <p><strong>Latency:</strong> p95: 2.5ms<sup style="color: #B8BCC8; font-size: 0.8em;">†</sup></p>
                     <p><strong>Technology:</strong> CAS + SimHash compression</p>
-                    <p><strong>Savings:</strong> 60%+ cost reduction, semantic fidelity preserved</p>
+                    <p><strong>Savings:</strong> 60%+ cost reduction<sup style="color: #B8BCC8; font-size: 0.8em;">†</sup>, semantic fidelity preserved</p>
                 </div>
                 <div class="tier-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.05)); border-color: rgba(139,92,246,0.3);">
                     <h3 style="color: #8b5cf6; margin-bottom: 12px;">❄️ L3 Cold Memory</h3>
                     <p><strong>Purpose:</strong> Highly compressed long-term archives</p>
-                    <p><strong>Latency:</strong> p95: 15ms</p>
+                    <p><strong>Latency:</strong> p95: 15ms<sup style="color: #B8BCC8; font-size: 0.8em;">†</sup></p>
                     <p><strong>Content:</strong> Summarized archives, complete retention</p>
                     <p><strong>Efficiency:</strong> Maximum compression, minimal storage</p>
                 </div>
@@ -78,33 +84,45 @@
             <h2>CAS + SimHash Technology</h2>
             <p><strong>Content-Addressable Storage (CAS):</strong> Deduplication at the content level, eliminating redundant storage of identical or near-identical content.</p>
             <p><strong>SimHash:</strong> Locality-sensitive hashing for near-duplicate detection, enabling semantic similarity matching.</p>
-            <p><strong>Combined Effect:</strong> 94.3% storage savings in lossless mode, 74.4% in semantic mode.</p>
+            <p><strong>Combined Effect:</strong> <strong style="color: #FFD700;">94.3% storage savings<sup>†</sup></strong> in lossless mode, <strong style="color: #00bcd4;">74.4% savings<sup>†</sup></strong> in semantic mode.</p>
+            <p style="margin-top: 12px; font-size: 0.9em; color: #B8BCC8;">
+                <sup>†</sup> Internal benchmarks. See <a href="#benchmarks" style="color: #00bcd4;">Benchmarks & Technical Documentation</a> section for methodology.
+            </p>
         </div>
 
         <div class="section">
             <h2>Hardware Acceleration</h2>
             <p>NBMF is optimized for multiple compute devices:</p>
             <ul style="margin-left: 24px; line-height: 2;">
-                <li><strong>CPU:</strong> Universal fallback, 0.65ms p95 encode latency</li>
-                <li><strong>GPU:</strong> Real-time acceleration, 2-5× latency reduction</li>
-                <li><strong>TPU:</strong> 128× batch processing multiplier for massive throughput</li>
+                <li><strong>CPU:</strong> Universal fallback, 0.65ms p95 encode latency<sup style="color: #B8BCC8; font-size: 0.8em;">†</sup></li>
+                <li><strong>GPU:</strong> Real-time acceleration, 2-5× latency reduction<sup style="color: #B8BCC8; font-size: 0.8em;">†</sup></li>
+                <li><strong>TPU / Google TPUs:</strong> Supports modern Google Cloud TPUs with batch-parallel acceleration. Measured batch throughput gains depend on model and shape.<sup style="color: #B8BCC8; font-size: 0.8em;">†</sup></li>
             </ul>
             <p>Automatic device detection and routing - zero configuration required.</p>
+            <p style="margin-top: 12px; font-size: 0.9em; color: #B8BCC8;">
+                <sup>†</sup> Internal benchmarks. Actual performance depends on hardware configuration, model size, and workload characteristics.
+            </p>
         </div>
 
         <div class="section">
-            <h2>Benchmarks</h2>
-            <p>See <a href="/#benchmarks" style="color: #FFD700;">benchmarks section</a> on the main page or view raw data: <a href="/docs/benchmarks/benchmarks.json" style="color: #00bcd4;">benchmarks.json</a></p>
-            <p>Full methodology: <a href="/docs/BENCHMARK_RESULTS.md" style="color: #8b5cf6;">BENCHMARK_RESULTS.md</a></p>
-        </div>
-
-        <div class="section">
-            <h2>Technical Documentation</h2>
-            <ul style="margin-left: 24px; line-height: 2;">
-                <li><a href="/docs/NBMF_MEMORY_PATENT_MATERIAL.md" style="color: #FFD700;">NBMF Patent Material</a></li>
-                <li><a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" style="color: #00bcd4;">Enterprise-DNA Addendum</a></li>
-                <li><a href="/benchmarks/bench_nbmf_vs_ocr.py" style="color: #8b5cf6;">Benchmark Script</a></li>
+            <h2>Benchmarks & Technical Documentation</h2>
+            <p style="margin-bottom: 24px;">See <a href="/#benchmarks" style="color: #FFD700;">benchmarks section</a> on the main page for interactive charts and detailed performance metrics.</p>
+            
+            <h3 style="color: #00bcd4; font-size: 1.3rem; margin: 32px 0 16px;">Benchmark Results</h3>
+            <ul style="margin-left: 24px; line-height: 2; margin-bottom: 32px;">
+                <li><a href="/docs/BENCHMARK_RESULTS.md" style="color: #00bcd4; text-decoration: underline;">Benchmark Results & Methodology</a> - Comprehensive benchmark data with methodology, datasets, and reproducibility notes</li>
             </ul>
+            
+            <h3 style="color: #FFD700; font-size: 1.3rem; margin: 32px 0 16px;">Technical Documentation</h3>
+            <ul style="margin-left: 24px; line-height: 2;">
+                <li><a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" style="color: #FFD700; text-decoration: underline;">Enterprise-DNA Addendum</a> - Technical documentation for Enterprise-DNA layer integration with NBMF</li>
+            </ul>
+            
+            <div style="margin-top: 32px; padding: 20px; background: rgba(255,215,0,0.1); border-left: 4px solid #FFD700; border-radius: 8px;">
+                <p style="color: var(--text-light); font-size: 0.9rem; line-height: 1.7; margin: 0;">
+                    <strong style="color: #FFD700;">Note:</strong> All metrics shown are from internal benchmarks. Performance may vary based on hardware configuration, model size, and workload characteristics. See benchmark results document for full methodology and reproducibility details.
+                </p>
+            </div>
         </div>
     </div>
 </body>
