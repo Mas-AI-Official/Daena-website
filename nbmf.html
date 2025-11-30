@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>NBMF Memory System - Deep Dive | Daena AI VP</title>
+    <meta name="description" content="Deep dive into Daena's Neural-Backed Memory Fabric (NBMF): 3-tier architecture, CAS + SimHash compression, 94.3% storage savings, 100% accuracy, hardware acceleration.">
+    <link rel="canonical" href="https://daena.mas-ai.co/nbmf">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            color: #e9eef6;
+            line-height: 1.6;
+            padding: 120px 20px 40px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #FFD700; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
+        h2 { color: #00bcd4; font-size: clamp(1.5rem, 4vw, 2rem); margin: 48px 0 24px; }
+        .back-link { display: inline-block; margin-bottom: 32px; color: #FFD700; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        .section { background: rgba(255,255,255,0.05); padding: 32px; border-radius: 16px; margin-bottom: 32px; border: 2px solid rgba(255,215,0,0.2); }
+        .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+        .tier-card {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05));
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        code { background: rgba(255,215,0,0.1); padding: 2px 6px; border-radius: 4px; color: #FFD700; }
+        @media (max-width: 768px) {
+            .tier-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/#memory-governance" class="back-link">← Back to Memory & Governance Engine</a>
+        <h1>NBMF Memory System - Deep Dive</h1>
+        <p style="font-size: 1.2rem; color: #B8BCC8; margin-bottom: 48px;">
+            Comprehensive technical documentation for Daena's Neural-Backed Memory Fabric (NBMF) - the patent-pending memory architecture that delivers 94.3% storage savings with 100% accuracy.
+        </p>
+
+        <div class="section">
+            <h2>Overview</h2>
+            <p>NBMF (Neural-Backed Memory Fabric) is Daena's revolutionary 3-tier memory architecture that intelligently compresses and tiers memory based on usage patterns. Unlike traditional AI systems that store everything in expensive vector databases, NBMF delivers 60%+ cost savings while maintaining 99.4% accuracy.</p>
+        </div>
+
+        <div class="section">
+            <h2>3-Tier Architecture</h2>
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <h3 style="color: #FFD700; margin-bottom: 12px;">🔥 L1 Hot Memory</h3>
+                    <p><strong>Purpose:</strong> Fast-access recent items</p>
+                    <p><strong>Latency:</strong> p95: 0.65ms</p>
+                    <p><strong>Content:</strong> Vector embeddings, active decision-making data</p>
+                    <p><strong>Retention:</strong> Recent items, frequently accessed</p>
+                </div>
+                <div class="tier-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border-color: rgba(0,188,212,0.3);">
+                    <h3 style="color: #00bcd4; margin-bottom: 12px;">💾 L2 Warm Memory</h3>
+                    <p><strong>Purpose:</strong> Compressed medium-term storage</p>
+                    <p><strong>Latency:</strong> p95: 2.5ms</p>
+                    <p><strong>Technology:</strong> CAS + SimHash compression</p>
+                    <p><strong>Savings:</strong> 60%+ cost reduction, semantic fidelity preserved</p>
+                </div>
+                <div class="tier-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.05)); border-color: rgba(139,92,246,0.3);">
+                    <h3 style="color: #8b5cf6; margin-bottom: 12px;">❄️ L3 Cold Memory</h3>
+                    <p><strong>Purpose:</strong> Highly compressed long-term archives</p>
+                    <p><strong>Latency:</strong> p95: 15ms</p>
+                    <p><strong>Content:</strong> Summarized archives, complete retention</p>
+                    <p><strong>Efficiency:</strong> Maximum compression, minimal storage</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>CAS + SimHash Technology</h2>
+            <p><strong>Content-Addressable Storage (CAS):</strong> Deduplication at the content level, eliminating redundant storage of identical or near-identical content.</p>
+            <p><strong>SimHash:</strong> Locality-sensitive hashing for near-duplicate detection, enabling semantic similarity matching.</p>
+            <p><strong>Combined Effect:</strong> 94.3% storage savings in lossless mode, 74.4% in semantic mode.</p>
+        </div>
+
+        <div class="section">
+            <h2>Hardware Acceleration</h2>
+            <p>NBMF is optimized for multiple compute devices:</p>
+            <ul style="margin-left: 24px; line-height: 2;">
+                <li><strong>CPU:</strong> Universal fallback, 0.65ms p95 encode latency</li>
+                <li><strong>GPU:</strong> Real-time acceleration, 2-5× latency reduction</li>
+                <li><strong>TPU:</strong> 128× batch processing multiplier for massive throughput</li>
+            </ul>
+            <p>Automatic device detection and routing - zero configuration required.</p>
+        </div>
+
+        <div class="section">
+            <h2>Benchmarks</h2>
+            <p>See <a href="/#benchmarks" style="color: #FFD700;">benchmarks section</a> on the main page or view raw data: <a href="/docs/benchmarks/benchmarks.json" style="color: #00bcd4;">benchmarks.json</a></p>
+            <p>Full methodology: <a href="/docs/BENCHMARK_RESULTS.md" style="color: #8b5cf6;">BENCHMARK_RESULTS.md</a></p>
+        </div>
+
+        <div class="section">
+            <h2>Technical Documentation</h2>
+            <ul style="margin-left: 24px; line-height: 2;">
+                <li><a href="/docs/NBMF_MEMORY_PATENT_MATERIAL.md" style="color: #FFD700;">NBMF Patent Material</a></li>
+                <li><a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" style="color: #00bcd4;">Enterprise-DNA Addendum</a></li>
+                <li><a href="/benchmarks/bench_nbmf_vs_ocr.py" style="color: #8b5cf6;">Benchmark Script</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
