@@ -921,19 +921,22 @@
 
         /* Daena Wins Card - Mobile Optimized */
         .daena-wins {
-            background: var(--gradient-primary);
-            color: var(--dark-bg);
-            border: 2px solid var(--primary-gold);
+            background: linear-gradient(135deg, rgba(15,15,35,0.95), rgba(26,26,58,0.95));
+            color: var(--text-light);
+            border: 2px solid rgba(255,215,0,0.3);
             border-radius: 20px;
             padding: 2.5rem;
             transition: all 0.3s ease;
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 215, 0, 0.1);
             text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         .daena-wins:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.2), inset 0 1px 0 rgba(255, 215, 0, 0.15);
+            border-color: rgba(255,215,0,0.5);
         }
 
         .daena-header {
@@ -942,13 +945,13 @@
             align-items: center;
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 2px solid var(--dark-bg);
+            border-bottom: 2px solid rgba(255,215,0,0.2);
             flex-wrap: wrap;
             gap: 1rem;
         }
 
         .daena-header h3 {
-            color: var(--dark-bg);
+            color: var(--primary-gold);
             font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: bold;
             margin: 0;
@@ -956,13 +959,14 @@
         }
 
         .daena-status {
-            background: var(--dark-bg);
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.1));
             color: var(--primary-gold);
             padding: 0.8rem 1.5rem;
             border-radius: 25px;
             font-weight: bold;
             font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             white-space: nowrap;
+            border: 1px solid rgba(255,215,0,0.3);
         }
 
         .daena-advantages {
@@ -970,7 +974,7 @@
         }
 
         .daena-advantages h4 {
-            color: var(--dark-bg);
+            color: var(--primary-gold);
             margin-bottom: 1.5rem;
             font-size: clamp(1.2rem, 3vw, 1.5rem);
             font-weight: 700;
@@ -1044,38 +1048,37 @@
         }
 
         .advantage-title {
-            color: var(--dark-bg);
+            color: var(--primary-gold);
             font-size: clamp(1rem, 1.8vw, 1.2rem);
             font-weight: 700;
             margin-bottom: 0.75rem;
             line-height: 1.3;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .advantage-description {
-            color: rgba(15, 15, 35, 0.9);
+            color: var(--text-light);
             font-size: clamp(0.85rem, 1.5vw, 0.95rem);
             line-height: 1.5;
             font-weight: 500;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.1);
         }
 
         .daena-result {
-            background: rgba(15, 15, 35, 0.3);
+            background: rgba(255,215,0,0.1);
             border-radius: 15px;
             padding: 2rem;
             margin-top: 2rem;
+            border: 1px solid rgba(255,215,0,0.2);
         }
 
         .daena-result h4 {
-            color: var(--dark-bg);
+            color: var(--primary-gold);
             margin-bottom: 1rem;
             font-size: clamp(1.1rem, 3vw, 1.3rem);
             font-weight: 700;
         }
 
         .daena-result p {
-            color: var(--dark-bg);
+            color: var(--text-light);
             font-size: clamp(1.1rem, 3vw, 1.3rem);
             font-weight: bold;
             margin: 0;
@@ -2645,7 +2648,7 @@
                     <!-- Enterprise-DNA Overlay Layer -->
                     <div style="position: relative; margin-top: 40px; padding-top: 40px; border-top: 2px dashed rgba(139,92,246,0.3);">
                         <h4 style="color: #8b5cf6; margin-bottom: 20px; text-align: center; font-size: 1.3rem;">Enterprise-DNA Governance Layer</h4>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; justify-items: center;">
                             <div class="dna-card" data-dna="genome" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border: 2px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
                                 <div style="font-size: 2.5rem; margin-bottom: 10px;">🧬</div>
                                 <h5 style="color: #8b5cf6; margin-bottom: 8px; font-size: 1rem;">Genome</h5>
@@ -2661,7 +2664,7 @@
                                 <h5 style="color: #8b5cf6; margin-bottom: 8px; font-size: 1rem;">Lineage</h5>
                                 <p style="color: var(--text-light); font-size: 0.85rem;">Merkle-notarized audit trail</p>
                             </div>
-                            <div class="dna-card" data-dna="immune" style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(147,51,234,0.05)); border: 2px solid rgba(147,51,234,0.4); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
+                            <div class="dna-card" data-dna="immune" style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(147,51,234,0.05)); border: 2px solid rgba(147,51,234,0.4); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease; grid-column: 2;">
                                 <div style="font-size: 2.5rem; margin-bottom: 10px;">🛡️</div>
                                 <h5 style="color: #9333ea; margin-bottom: 8px; font-size: 1rem;">Immune</h5>
                                 <p style="color: var(--text-light); font-size: 0.85rem;">Threat detection & response</p>
@@ -2707,10 +2710,20 @@
             <!-- Why It Wins Section -->
             <div style="margin: 64px 0; padding: 48px; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(139,92,246,0.1), rgba(0,188,212,0.1)); border-radius: 20px; border: 2px solid rgba(255,215,0,0.2);">
                 <h3 style="text-align: center; color: var(--primary-gold); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 32px;">Why It Wins</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; justify-items: center;">
                     <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold);">
                         <h5 style="color: var(--primary-gold); margin-bottom: 12px;">💰 Cost Efficiency</h5>
-                        <p style="color: var(--text-light); line-height: 1.7;"><strong style="color: var(--primary-gold);">94.3% storage savings<sup style="color: var(--text-muted); font-size: 0.7em;">†</sup></strong> (lossless) vs traditional vector databases. <strong style="color: var(--secondary-cyan);">60%+ infrastructure cost reduction<sup style="color: var(--text-muted); font-size: 0.7em;">†</sup></strong> that scales with every customer.</p>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 12px; align-items: center;">
+                            <div style="flex: 1; background: rgba(255,215,0,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
+                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary-gold);">94.3%<sup style="font-size: 0.6em;">†</sup></div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Storage Savings</div>
+                            </div>
+                            <div style="flex: 1; background: rgba(0,188,212,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
+                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--secondary-cyan);">60%+<sup style="font-size: 0.6em;">†</sup></div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Cost Reduction</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: 0.9rem; margin: 0;">vs traditional vector databases, scales with every customer.</p>
                     </div>
                     <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid #8b5cf6;">
                         <h5 style="color: #8b5cf6; margin-bottom: 12px;">🔒 Enterprise Security</h5>
@@ -2720,9 +2733,19 @@
                         <h5 style="color: var(--secondary-cyan); margin-bottom: 12px;">⚡ Performance</h5>
                         <p style="color: var(--text-light); line-height: 1.7;"><strong style="color: var(--secondary-cyan);">0.65ms p95<sup style="color: var(--text-muted); font-size: 0.7em;">†</sup></strong> encode latency (L1). <strong style="color: var(--primary-gold);">99.7% uptime<sup style="color: var(--text-muted); font-size: 0.7em;">†</sup></strong> during chaos tests. <strong style="color: var(--secondary-cyan);">Hardware-agnostic</strong> (CPU/GPU/TPU/Google TPUs).</p>
                     </div>
-                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold);">
+                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold); grid-column: 2;">
                         <h5 style="color: var(--primary-gold); margin-bottom: 12px;">📊 Accuracy</h5>
-                        <p style="color: var(--text-light); line-height: 1.7;"><strong style="color: var(--primary-gold);">100% exact match<sup style="color: var(--text-muted); font-size: 0.7em;">†</sup></strong> (lossless mode). <strong style="color: var(--secondary-cyan);">95.28% similarity<sup style="color: var(--text-muted); font-size: 0.7em;">†</sup></strong> (semantic mode). <strong style="color: var(--primary-gold);">Bit-perfect reconstruction</strong> guaranteed in lossless mode.</p>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 12px; align-items: center;">
+                            <div style="flex: 1; background: rgba(255,215,0,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
+                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary-gold);">100%<sup style="font-size: 0.6em;">†</sup></div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Lossless</div>
+                            </div>
+                            <div style="flex: 1; background: rgba(0,188,212,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
+                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--secondary-cyan);">95.28%<sup style="font-size: 0.6em;">†</sup></div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Semantic</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: 0.9rem; margin: 0;"><strong style="color: var(--primary-gold);">Bit-perfect reconstruction</strong> guaranteed in lossless mode.</p>
                     </div>
                 </div>
             </div>
@@ -3079,12 +3102,12 @@
             <div style="max-width: 1200px; margin: 0 auto;">
                 <!-- Top Row: 2 Cards -->
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
-                    <div style="background: linear-gradient(135deg, rgba(0,188,212,0.15), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.4); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,188,212,0.2);">
+                    <div style="background: linear-gradient(135deg, rgba(15,15,35,0.8), rgba(26,26,58,0.8)); border: 2px solid rgba(0,188,212,0.3); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(0,188,212,0.1); backdrop-filter: blur(10px);">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
                             <div style="font-size: 3rem;">✅</div>
                             <h3 style="color: var(--secondary-cyan); font-size: 1.5rem; margin: 0;">Current MVP Capabilities</h3>
                         </div>
-                        <div style="background: rgba(0,188,212,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                        <div style="background: rgba(0,188,212,0.08); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid rgba(0,188,212,0.2);">
                             <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
                                 <span style="color: var(--secondary-cyan);">✅ Implemented & Verified:</span>
                             </p>
@@ -3098,24 +3121,42 @@
                                 <li>• <strong style="color: var(--primary-gold);">Real-time WebSocket</strong> communication</li>
                             </ul>
                         </div>
-                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-gold);">
-                            <p style="color: var(--text-light); margin: 0 0 0.8rem 0; font-weight: 600; font-size: 1.1rem;">
+                        <div style="background: rgba(255,215,0,0.08); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-gold); border: 1px solid rgba(255,215,0,0.2);">
+                            <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
                                 <span style="color: var(--primary-gold);">📊 Measured Performance:</span>
                             </p>
-                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-light); line-height: 1.8;">
-                                <li style="margin-bottom: 0.5rem;">• API response <strong style="color: var(--secondary-cyan);"><200ms</strong> average</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--secondary-cyan);">1,000+</strong> concurrent users supported</li>
-                                <li style="margin-bottom: 0.5rem;">• Memory latency <strong style="color: var(--secondary-cyan);"><25ms L1</strong>, <strong style="color: var(--secondary-cyan);"><120ms L2</strong></li>
-                                <li>• <strong style="color: var(--secondary-cyan);">60%+<sup style="color: var(--text-muted); font-size: 0.7em;">†</sup></strong> cost savings on LLM calls</li>
-                            </ul>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                                <div style="background: rgba(0,188,212,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
+                                    <div style="font-size: 2rem; color: var(--secondary-cyan); margin-bottom: 0.5rem;">⚡</div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary-cyan); margin-bottom: 0.25rem;"><200ms</div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">API Response</div>
+                                </div>
+                                <div style="background: rgba(0,188,212,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
+                                    <div style="font-size: 2rem; color: var(--secondary-cyan); margin-bottom: 0.5rem;">👥</div>
+                                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary-cyan); margin-bottom: 0.25rem;">1,000+</div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">Concurrent Users</div>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 0.5rem;">
+                                <div style="background: rgba(139,92,246,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(139,92,246,0.2);">
+                                    <div style="font-size: 2rem; color: #8b5cf6; margin-bottom: 0.5rem;">🔥</div>
+                                    <div style="font-size: 1.2rem; font-weight: 700; color: #8b5cf6; margin-bottom: 0.25rem;"><25ms L1</div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">Memory Latency</div>
+                                </div>
+                                <div style="background: rgba(255,215,0,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
+                                    <div style="font-size: 2rem; color: var(--primary-gold); margin-bottom: 0.5rem;">💰</div>
+                                    <div style="font-size: 1.2rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 0.25rem;">60%+<sup style="font-size: 0.6em;">†</sup></div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">Cost Savings</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(255,215,0,0.2);">
+                    <div style="background: linear-gradient(135deg, rgba(15,15,35,0.8), rgba(26,26,58,0.8)); border: 2px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,215,0,0.1); backdrop-filter: blur(10px);">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
                             <div style="font-size: 3rem;">📊</div>
                             <h3 style="color: var(--primary-gold); font-size: 1.5rem; margin: 0;">Planned Pilot Programs</h3>
                         </div>
-                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                        <div style="background: rgba(255,215,0,0.08); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid rgba(255,215,0,0.2);">
                             <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
                                 <span style="color: var(--primary-gold);">🎯 Target:</span>
                             </p>
@@ -3123,17 +3164,32 @@
                                 3-5 enterprise pilot programs to measure decision-making time reduction, cost savings vs. human teams, accuracy rates, and user satisfaction. Programs will span <strong style="color: var(--primary-gold);">multiple industries</strong> including <strong style="color: var(--secondary-cyan);">healthcare, finance, technology, and operations</strong> to validate Daena's cross-domain capabilities.
                             </p>
                         </div>
-                        <div style="background: rgba(0,188,212,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--secondary-cyan); margin-bottom: 1rem;">
-                            <p style="color: var(--text-light); margin: 0 0 0.8rem 0; font-weight: 600; font-size: 1.1rem;">
+                        <div style="background: rgba(0,188,212,0.08); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--secondary-cyan); margin-bottom: 1rem; border: 1px solid rgba(0,188,212,0.2);">
+                            <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
                                 <span style="color: var(--secondary-cyan);">📈 Target Outcomes:</span>
                             </p>
-                            <ul style="list-style: none; padding: 0; margin: 0; color: var(--text-light); line-height: 1.8;">
-                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">50%+</strong> faster decisions</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">90%+</strong> cost savings</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">90%+</strong> accuracy</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong style="color: var(--primary-gold);">4.5/5.0+</strong> user satisfaction</li>
-                                <li>• <strong style="color: var(--secondary-cyan);">Multi-device performance</strong> validation (CPU/GPU/TPU optimization)</li>
-                            </ul>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                                <div style="background: rgba(255,215,0,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
+                                    <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 0.5rem;">⚡</div>
+                                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 0.25rem;">50%+</div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">Faster Decisions</div>
+                                </div>
+                                <div style="background: rgba(255,215,0,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
+                                    <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 0.5rem;">💰</div>
+                                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 0.25rem;">90%+</div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">Cost Savings</div>
+                                </div>
+                                <div style="background: rgba(0,188,212,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
+                                    <div style="font-size: 1.8rem; color: var(--secondary-cyan); margin-bottom: 0.5rem;">🎯</div>
+                                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--secondary-cyan); margin-bottom: 0.25rem;">90%+</div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">Accuracy</div>
+                                </div>
+                                <div style="background: rgba(139,92,246,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(139,92,246,0.2);">
+                                    <div style="font-size: 1.8rem; color: #8b5cf6; margin-bottom: 0.5rem;">⭐</div>
+                                    <div style="font-size: 1.3rem; font-weight: 700; color: #8b5cf6; margin-bottom: 0.25rem;">4.5/5.0+</div>
+                                    <div style="font-size: 0.85rem; color: var(--text-muted);">User Satisfaction</div>
+                                </div>
+                            </div>
                         </div>
                         <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-gold);">
                             <p style="color: var(--text-light); margin: 0 0 0.8rem 0; font-weight: 600; font-size: 1.1rem;">
@@ -3160,18 +3216,18 @@
                                 Evaluating 12 existing solutions (AutoGPT, LangChain, Microsoft Copilot, Anthropic Claude, OpenAI GPT, Enterprise AI platforms) to document feature comparison, performance benchmarks, and market positioning.
                             </p>
                         </div>
-                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-gold);">
+                        <div style="background: rgba(255,215,0,0.08); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary-gold); border: 1px solid rgba(255,215,0,0.2);">
                             <p style="color: var(--text-light); line-height: 1.8; margin: 0; font-style: italic;">
                                 This will demonstrate Daena's unique advantages in <strong style="color: var(--primary-gold);">multi-agent orchestration</strong>, <strong style="color: var(--primary-gold);">memory</strong>, <strong style="color: var(--primary-gold);">governance</strong>, and <strong style="color: var(--primary-gold);">decision quality</strong>.
                             </p>
                         </div>
                     </div>
-                    <div style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(255,215,0,0.2);">
+                    <div style="background: linear-gradient(135deg, rgba(15,15,35,0.8), rgba(26,26,58,0.8)); border: 2px solid rgba(255,215,0,0.3); border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,215,0,0.1); backdrop-filter: blur(10px);">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
                             <div style="font-size: 3rem;">📈</div>
                             <h3 style="color: var(--primary-gold); font-size: 1.5rem; margin: 0;">Market Validation Survey</h3>
                         </div>
-                        <div style="background: rgba(255,215,0,0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                        <div style="background: rgba(255,215,0,0.08); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid rgba(255,215,0,0.2);">
                             <p style="color: var(--text-light); margin: 0 0 1rem 0; font-weight: 600; font-size: 1.1rem;">
                                 <span style="color: var(--primary-gold);">📋 Planned:</span>
                             </p>
