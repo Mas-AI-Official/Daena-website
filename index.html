@@ -2775,7 +2775,7 @@
             <!-- Deployment Targets Section -->
             <div style="margin: 64px 0;">
                 <h3 style="text-align: center; color: var(--secondary-cyan); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 48px;">Deployment Targets: CPU / GPU / TPU / Google TPUs</h3>
-                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; justify-items: center;">
+                <div class="features-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; justify-items: center;">
                     <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.3);">
                         <div class="feature-icon" style="font-size: 2.5rem;">💻</div>
                         <h4 style="color: var(--secondary-cyan); margin-bottom: 12px;">CPU</h4>
@@ -2786,7 +2786,7 @@
                         <h4 style="color: var(--primary-gold); margin-bottom: 12px;">GPU</h4>
                         <p style="color: var(--text-light); line-height: 1.8;">Real-time acceleration for low-latency decision-making. <strong style="color: var(--primary-gold);">Further reduces</strong> encode/decode latency by 2-5×.</p>
                     </div>
-                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(147,51,234,0.05)); border: 2px solid rgba(139,92,246,0.3);">
+                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(147,51,234,0.05)); border: 2px solid rgba(139,92,246,0.3); grid-column: 2;">
                         <div class="feature-icon" style="font-size: 2.5rem;">⚡</div>
                         <h4 style="color: #8b5cf6; margin-bottom: 12px;">TPU / Google TPUs</h4>
                         <p style="color: var(--text-light); line-height: 1.8;">Massive parallel operations with <strong style="color: #8b5cf6;">128× batch processing multiplier</strong>. Supports both <strong style="color: #9333ea;">general TPU architectures</strong> and <strong style="color: #8b5cf6;">Google's specialized TPUs</strong> (including latest generations like Trillium and Ironwood). Ideal for large-scale inference and training workloads.</p>
@@ -2823,6 +2823,8 @@
                         <h4 style="color: #9333ea; margin-bottom: 12px;">Compliance Automation</h4>
                         <p style="color: var(--text-light); line-height: 1.8;">Weekly automated compliance drills. <strong style="color: #9333ea;">ABAC policy enforcement</strong>. Signed rotation manifests and governance artifacts.</p>
                     </div>
+                    <!-- Empty placeholder for 4th item to center it -->
+                    <div style="grid-column: 2;"></div>
                 </div>
             </div>
 
