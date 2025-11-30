@@ -2734,10 +2734,16 @@
                     <!-- Charts will be rendered here by JavaScript -->
                 </div>
                 <div style="padding: 24px; background: rgba(0,0,0,0.3); border-radius: 12px; border-left: 4px solid var(--primary-gold); margin-top: 32px;">
-                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;">
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px;">
                         <strong style="color: var(--primary-gold);">Methodology:</strong> <sup>†</sup> Internal benchmarks based on sample documents (33% text, 33% structured JSON, 33% multimodal). 
                         Hardware: Intel/AMD x86_64 CPU (GPU/TPU acceleration further reduces latency). 
                         Full methodology and reproducibility notes: <a href="/docs/BENCHMARK_RESULTS.md" style="color: var(--primary-gold); text-decoration: underline;">BENCHMARK_RESULTS.md</a>
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin: 0;">
+                        <strong style="color: var(--primary-gold);">Metric Definitions:</strong> 
+                        <strong style="color: var(--secondary-cyan);">Reconstruction accuracy (lossless)</strong> = exact byte-match %. 
+                        <strong style="color: var(--secondary-cyan);">Semantic similarity (semantic mode)</strong> = character-level similarity %. 
+                        <strong style="color: var(--secondary-cyan);">Task-level accuracy</strong> = downstream evaluation metrics (varies by task).
                     </p>
                 </div>
             </div>
