@@ -2739,8 +2739,8 @@
                         Hardware: Intel/AMD x86_64 CPU (GPU/TPU acceleration further reduces latency). 
                         Scripts: <code style="background: rgba(255,215,0,0.1); padding: 2px 6px; border-radius: 4px;">Tools/daena_nbmf_benchmark.py</code>, 
                         <code style="background: rgba(255,215,0,0.1); padding: 2px 6px; border-radius: 4px;">benchmarks/bench_nbmf_vs_ocr.py</code>. 
-                        Full methodology: <a href="/docs/benchmarks/benchmarks.json" style="color: var(--primary-gold); text-decoration: underline;">benchmarks.json</a> | 
-                        <a href="/docs/BENCHMARK_RESULTS.md" style="color: var(--secondary-cyan); text-decoration: underline;">BENCHMARK_RESULTS.md</a>
+                        Full methodology: <a href="https://github.com/Masoud-Masoori/daena/tree/feat/enterprise-dna-over-nbmf/docs/benchmarks" style="color: var(--primary-gold); text-decoration: underline;">benchmarks.json</a> | 
+                        <a href="https://github.com/Masoud-Masoori/daena/tree/feat/enterprise-dna-over-nbmf/docs" style="color: var(--secondary-cyan); text-decoration: underline;">Documentation</a>
                     </p>
                 </div>
             </div>
@@ -2765,17 +2765,17 @@
                     </div>
                     <div style="margin-top: 32px; padding: 24px; background: rgba(139,92,246,0.1); border-radius: 12px; text-align: center;">
                         <p style="color: var(--text-light); margin-bottom: 16px;">
-                            <strong style="color: #8b5cf6;">Try it:</strong> Run <code style="background: rgba(139,92,246,0.2); padding: 4px 8px; border-radius: 4px; color: #8b5cf6;">Tools/verify_org_structure.py</code> to see lineage verification in action.
+                            <strong style="color: #8b5cf6;">Governance Features:</strong> Every memory promotion creates a Merkle-notarized lineage record with cryptographic proof. The Immune system automatically detects threats and triggers quarantine/rollback via TrustManager integration.
                         </p>
-                        <a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" style="color: #8b5cf6; text-decoration: underline; font-weight: 600;">View Technical Documentation →</a>
+                        <a href="https://github.com/Masoud-Masoori/daena/tree/feat/enterprise-dna-over-nbmf/docs" style="color: #8b5cf6; text-decoration: underline; font-weight: 600;">View Technical Documentation on GitHub →</a>
                     </div>
                 </div>
             </div>
 
             <!-- Deployment Targets Section -->
             <div style="margin: 64px 0;">
-                <h3 style="text-align: center; color: var(--secondary-cyan); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 48px;">Deployment Targets: CPU / GPU / TPU</h3>
-                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                <h3 style="text-align: center; color: var(--secondary-cyan); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 48px;">Deployment Targets: CPU / GPU / TPU / Google TPUs</h3>
+                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; justify-items: center;">
                     <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.3);">
                         <div class="feature-icon" style="font-size: 2.5rem;">💻</div>
                         <h4 style="color: var(--secondary-cyan); margin-bottom: 12px;">CPU</h4>
@@ -2788,13 +2788,13 @@
                     </div>
                     <div class="feature-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(147,51,234,0.05)); border: 2px solid rgba(139,92,246,0.3);">
                         <div class="feature-icon" style="font-size: 2.5rem;">⚡</div>
-                        <h4 style="color: #8b5cf6; margin-bottom: 12px;">TPU</h4>
-                        <p style="color: var(--text-light); line-height: 1.8;">Massive parallel operations with <strong style="color: #8b5cf6;">128× batch processing multiplier</strong>. Ideal for large-scale inference and training.</p>
+                        <h4 style="color: #8b5cf6; margin-bottom: 12px;">TPU / Google TPUs</h4>
+                        <p style="color: var(--text-light); line-height: 1.8;">Massive parallel operations with <strong style="color: #8b5cf6;">128× batch processing multiplier</strong>. Supports both <strong style="color: #9333ea;">general TPU architectures</strong> and <strong style="color: #8b5cf6;">Google's specialized TPUs</strong> (including latest generations like Trillium and Ironwood). Ideal for large-scale inference and training workloads.</p>
                     </div>
                 </div>
                 <div style="margin-top: 32px; padding: 24px; background: rgba(0,188,212,0.1); border-radius: 12px; text-align: center; border-left: 4px solid var(--secondary-cyan);">
                     <p style="color: var(--text-light); line-height: 1.8;">
-                        <strong style="color: var(--secondary-cyan);">Automatic Routing:</strong> Daena intelligently selects the optimal device (CPU/GPU/TPU) based on workload characteristics. <strong style="color: var(--primary-gold);">Zero configuration required</strong> - Daena adapts automatically to your infrastructure.
+                        <strong style="color: var(--secondary-cyan);">Automatic Routing:</strong> Daena intelligently selects the optimal device (CPU/GPU/TPU/Google TPUs) based on workload characteristics. <strong style="color: var(--primary-gold);">Flexible architecture</strong> supports both general TPU implementations and Google's specialized TPU hardware (Trillium, Ironwood, and future generations). <strong style="color: var(--secondary-cyan);">Zero configuration required</strong> - Daena adapts automatically to your infrastructure.
                     </p>
                 </div>
             </div>
@@ -2802,7 +2802,7 @@
             <!-- Security & Compliance Section -->
             <div id="security-compliance" style="margin: 64px 0; scroll-margin-top: 100px;">
                 <h3 style="text-align: center; color: #8b5cf6; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 48px;">Security & Compliance</h3>
-                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; justify-items: center;">
                     <div class="feature-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.05)); border: 2px solid rgba(139,92,246,0.3);">
                         <div class="feature-icon" style="font-size: 2.5rem;">🔐</div>
                         <h4 style="color: #8b5cf6; margin-bottom: 12px;">AES-256 Encryption</h4>
@@ -2853,8 +2853,8 @@
                         <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
                             <li><a href="/nbmf" style="color: var(--primary-gold); text-decoration: underline;">NBMF Deep Dive →</a></li>
                             <li><a href="/enterprise-dna" style="color: #8b5cf6; text-decoration: underline;">Enterprise-DNA Deep Dive →</a></li>
-                            <li><a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" style="color: var(--secondary-cyan); text-decoration: underline;">Technical Addendum →</a></li>
-                            <li><a href="/docs/benchmarks/benchmarks.json" style="color: var(--primary-gold); text-decoration: underline;">Benchmarks Data →</a></li>
+                            <li><a href="https://github.com/Masoud-Masoori/daena/tree/feat/enterprise-dna-over-nbmf/docs" style="color: var(--secondary-cyan); text-decoration: underline;">Technical Documentation →</a></li>
+                            <li><a href="https://github.com/Masoud-Masoori/daena/tree/feat/enterprise-dna-over-nbmf/docs/benchmarks" style="color: var(--primary-gold); text-decoration: underline;">Benchmarks Data →</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2870,7 +2870,7 @@
                     <a href="#contact" class="btn" style="background: linear-gradient(135deg, var(--primary-gold), #FFA500); color: var(--dark-bg); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255,215,0,0.3);">
                         Request Live Demo
                     </a>
-                    <a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" class="btn" style="background: linear-gradient(135deg, #8b5cf6, #9333ea); color: white; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139,92,246,0.3);">
+                    <a href="https://github.com/Masoud-Masoori/daena/tree/feat/enterprise-dna-over-nbmf/docs" class="btn" style="background: linear-gradient(135deg, #8b5cf6, #9333ea); color: white; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139,92,246,0.3);">
                         Read Technical Docs
                     </a>
                 </div>
@@ -4339,18 +4339,25 @@
                 });
             });
 
-            // Toggle buttons
+            // Toggle buttons - show/hide details
+            let nbmfVisible = true;
+            let dnaVisible = true;
+            
             document.querySelectorAll('.toggle-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const toggle = this.dataset.toggle;
                     if (toggle === 'nbmf') {
+                        nbmfVisible = !nbmfVisible;
                         document.querySelectorAll('.tier-card').forEach(card => {
-                            card.style.opacity = card.style.opacity === '0.5' ? '1' : '0.5';
+                            card.style.display = nbmfVisible ? 'block' : 'none';
                         });
+                        this.textContent = nbmfVisible ? 'Hide NBMF Details' : 'Show NBMF Details';
                     } else if (toggle === 'dna') {
+                        dnaVisible = !dnaVisible;
                         document.querySelectorAll('.dna-card').forEach(card => {
-                            card.style.opacity = card.style.opacity === '0.5' ? '1' : '0.5';
+                            card.style.display = dnaVisible ? 'block' : 'none';
                         });
+                        this.textContent = dnaVisible ? 'Hide DNA Details' : 'Show DNA Details';
                     }
                 });
             });
@@ -4362,17 +4369,48 @@
         // Load benchmarks from JSON and render charts
         async function loadBenchmarks() {
             try {
-                const response = await fetch('/docs/benchmarks/benchmarks.json');
-                if (!response.ok) {
-                    console.warn('Benchmarks JSON not found, using placeholder data');
-                    renderBenchmarkPlaceholders();
-                    return;
+                // Try multiple paths
+                const paths = [
+                    'https://raw.githubusercontent.com/Masoud-Masoori/daena/feat/enterprise-dna-over-nbmf/docs/benchmarks/benchmarks.json',
+                    '/docs/benchmarks/benchmarks.json',
+                    '../docs/benchmarks/benchmarks.json'
+                ];
+                
+                let data = null;
+                for (const path of paths) {
+                    try {
+                        const response = await fetch(path);
+                        if (response.ok) {
+                            data = await response.json();
+                            break;
+                        }
+                    } catch (e) {
+                        continue;
+                    }
                 }
-                const data = await response.json();
-                renderBenchmarks(data);
+                
+                if (data) {
+                    renderBenchmarks(data);
+                } else {
+                    // Use hardcoded data from actual benchmarks
+                    renderBenchmarks({
+                        storage_footprint: {
+                            nbmf_lossless: { savings_percent: 94.3, compression_ratio: 13.30 },
+                            nbmf_semantic: { savings_percent: 74.4, compression_ratio: 2.53 }
+                        },
+                        latency: {
+                            nbmf_read_p95_ms: { l1_hot: 0.65, l2_warm: 2.5, l3_cold: 15.0 }
+                        },
+                        accuracy_fidelity: {
+                            nbmf_lossless: { exact_match_rate: 1.0, similarity_percent: 100.0 },
+                            nbmf_semantic: { mean_similarity: 95.28 }
+                        }
+                    });
+                }
             } catch (error) {
                 console.warn('Failed to load benchmarks:', error);
-                renderBenchmarkPlaceholders();
+                // Render with hardcoded data
+                renderBenchmarks(null);
             }
         }
 
@@ -4380,16 +4418,25 @@
             const container = document.getElementById('benchmarks-container');
             if (!container) return;
 
+            // Use data if available, otherwise use hardcoded values from actual benchmarks
+            const storageLossless = data?.storage_footprint?.nbmf_lossless?.savings_percent || 94.3;
+            const storageSemantic = data?.storage_footprint?.nbmf_semantic?.savings_percent || 74.4;
+            const l1Latency = data?.latency?.nbmf_read_p95_ms?.l1_hot || 0.65;
+            const l2Latency = data?.latency?.nbmf_read_p95_ms?.l2_warm || 2.5;
+            const l3Latency = data?.latency?.nbmf_read_p95_ms?.l3_cold || 15.0;
+            const losslessAccuracy = (data?.accuracy_fidelity?.nbmf_lossless?.similarity_percent || 100.0);
+            const semanticAccuracy = (data?.accuracy_fidelity?.nbmf_semantic?.mean_similarity || 95.28);
+
             // Storage Footprint Chart
             const storageCard = createBenchmarkCard(
                 'Storage Footprint',
                 'Compression vs Baseline',
                 [
-                    { label: 'Baseline', value: 100, color: '#666' },
-                    { label: 'NBMF Lossless', value: 5.6, color: '#FFD700' },
-                    { label: 'NBMF Semantic', value: 39.5, color: '#00bcd4' }
+                    { label: 'Baseline', value: 100, color: '#666', unit: '%' },
+                    { label: 'NBMF Lossless', value: (100 - storageLossless).toFixed(1), color: '#FFD700', unit: '%' },
+                    { label: 'NBMF Semantic', value: (100 - storageSemantic).toFixed(1), color: '#00bcd4', unit: '%' }
                 ],
-                `94.3% savings (lossless), 74.4% savings (semantic)`
+                `${storageLossless}% savings (lossless), ${storageSemantic}% savings (semantic)`
             );
 
             // Latency Chart
@@ -4397,12 +4444,12 @@
                 'Latency Performance',
                 'p95 Read Latency (ms)',
                 [
-                    { label: 'L1 Hot', value: 0.65, color: '#FFD700' },
-                    { label: 'L2 Warm', value: 2.5, color: '#00bcd4' },
-                    { label: 'L3 Cold', value: 15.0, color: '#8b5cf6' },
-                    { label: 'OCR Baseline', value: 320, color: '#666' }
+                    { label: 'L1 Hot', value: l1Latency, color: '#FFD700', unit: 'ms' },
+                    { label: 'L2 Warm', value: l2Latency, color: '#00bcd4', unit: 'ms' },
+                    { label: 'L3 Cold', value: l3Latency, color: '#8b5cf6', unit: 'ms' },
+                    { label: 'OCR Baseline', value: 320, color: '#666', unit: 'ms' }
                 ],
-                `Target: L1 <25ms (achieved: 96% faster)`
+                `Target: L1 <25ms (achieved: ${((25 - l1Latency) / 25 * 100).toFixed(0)}% faster)`
             );
 
             // Accuracy Chart
@@ -4410,11 +4457,11 @@
                 'Accuracy & Fidelity',
                 'Reconstruction Accuracy (%)',
                 [
-                    { label: 'NBMF Lossless', value: 100, color: '#FFD700' },
-                    { label: 'NBMF Semantic', value: 95.28, color: '#00bcd4' },
-                    { label: 'OCR Baseline', value: 85, color: '#666' }
+                    { label: 'NBMF Lossless', value: losslessAccuracy, color: '#FFD700', unit: '%' },
+                    { label: 'NBMF Semantic', value: semanticAccuracy, color: '#00bcd4', unit: '%' },
+                    { label: 'OCR Baseline', value: 85, color: '#666', unit: '%' }
                 ],
-                `100% exact match (lossless), 95.28% similarity (semantic)`
+                `${losslessAccuracy}% exact match (lossless), ${semanticAccuracy}% similarity (semantic)`
             );
 
             container.innerHTML = storageCard + latencyCard + accuracyCard;
@@ -4424,11 +4471,12 @@
             const maxValue = Math.max(...data.map(d => d.value));
             const bars = data.map(d => {
                 const width = (d.value / maxValue) * 100;
+                const unit = d.unit || (d.value < 100 ? 'ms' : '%');
                 return `
                     <div style="margin-bottom: 16px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                             <span style="color: var(--text-light); font-size: 0.9rem;">${d.label}</span>
-                            <span style="color: ${d.color}; font-weight: 600; font-size: 0.9rem;">${d.value}${d.value < 100 ? 'ms' : '%'}</span>
+                            <span style="color: ${d.color}; font-weight: 600; font-size: 0.9rem;">${d.value}${unit}</span>
                         </div>
                         <div style="background: rgba(255,255,255,0.1); border-radius: 4px; height: 24px; overflow: hidden;">
                             <div style="background: linear-gradient(90deg, ${d.color}, ${d.color}dd); height: 100%; width: ${width}%; transition: width 0.5s ease; border-radius: 4px;"></div>
@@ -4448,13 +4496,8 @@
         }
 
         function renderBenchmarkPlaceholders() {
-            const container = document.getElementById('benchmarks-container');
-            if (!container) return;
-            container.innerHTML = `
-                <div style="padding: 32px; background: rgba(255,255,255,0.05); border-radius: 16px; border: 2px solid rgba(255,215,0,0.2); text-align: center;">
-                    <p style="color: var(--text-muted);">Benchmarks data loading... <a href="/docs/benchmarks/benchmarks.json" style="color: var(--primary-gold);">View raw data</a></p>
-                </div>
-            `;
+            // If placeholder is shown, render with hardcoded data instead
+            renderBenchmarks(null);
         }
 
         // Demo form submission
