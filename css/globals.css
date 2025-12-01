@@ -643,12 +643,14 @@ br {
 
 /* Anchor headings - scroll offset for sticky header */
 :target,
+[id],
 [id][tabindex="-1"] {
     scroll-margin-top: 84px;
 }
 
 @media (max-width: 767.98px) {
     :target,
+    [id],
     [id][tabindex="-1"] {
         scroll-margin-top: 72px;
     }
