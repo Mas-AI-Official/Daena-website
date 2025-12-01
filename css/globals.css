@@ -603,10 +603,11 @@ br {
     
     p:has(a[href*="security"]) .mobile-break {
         display: block !important;
-        height: 0.5em !important;
-        line-height: 0.5em !important;
+        height: 0.4em !important;
+        line-height: 0.4em !important;
         margin: 0 !important;
         padding: 0 !important;
+        content: "" !important;
     }
     
     p:has(a[href*="security"]) span {
@@ -616,6 +617,7 @@ br {
     
     p:has(a[href*="security"]) a {
         white-space: nowrap !important;
+        display: inline-block !important;
     }
     
     /* Fix revenue streams text wrapping */
