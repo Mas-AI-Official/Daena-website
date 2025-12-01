@@ -1751,14 +1751,107 @@
         }
 
         @media (max-width: 768px) {
+            /* Mobile-specific fixes */
+            body {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            
+            /* Fix text truncation */
+            .section-card, .feature-card, .daena-feature {
+                padding: 1.5rem 1rem !important;
+                margin: 0.5rem 0 !important;
+                overflow: visible !important;
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+            }
+            
+            /* Fix grid layouts */
+            .features-grid, .daena-features, [style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            /* Fix cards with multiple columns */
+            [style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            [style*="grid-template-columns: repeat(4"] {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Ensure all text is visible */
+            p, span, div, li {
+                white-space: normal !important;
+                text-overflow: clip !important;
+                overflow: visible !important;
+            }
+            
+            /* Fix flex containers */
+            [style*="display: flex"] {
+                flex-wrap: wrap !important;
+            }
+            
+            /* Fix metric boxes */
+            [style*="display: flex; gap"] {
+                flex-direction: column !important;
+                gap: 0.75rem !important;
+            }
+            
+            /* Fix icon sizes */
+            .feature-icon, [style*="font-size: 3rem"], [style*="font-size: 2.5rem"] {
+                font-size: 2rem !important;
+            }
+            
+            /* Fix headings */
+            h1 { font-size: clamp(1.75rem, 5vw, 2.5rem) !important; }
+            h2 { font-size: clamp(1.5rem, 4vw, 2rem) !important; }
+            h3 { font-size: clamp(1.25rem, 3vw, 1.75rem) !important; }
+            h4 { font-size: clamp(1.1rem, 2.5vw, 1.5rem) !important; }
+            
+            /* Fix buttons and links */
+            .btn, button, a[class*="btn"] {
+                min-width: 44px;
+                min-height: 44px;
+                padding: 0.75rem 1.5rem !important;
+                font-size: 0.95rem !important;
+                touch-action: manipulation;
+            }
+            
+            /* Fix navigation */
+            nav, .navbar {
+                padding: 0.75rem 1rem !important;
+            }
+            
+            /* Fix containers */
+            .container, [style*="max-width"] {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            /* Fix breadcrumbs */
+            .breadcrumb {
+                font-size: 0.85rem !important;
+                word-wrap: break-word !important;
+            }
+            
+            /* Fix back links */
+            .back-link {
+                display: block;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+            }
+            
             .hero {
                 padding: 140px 1rem 2rem !important;
                 min-height: auto;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: clamp(2rem, 5vw, 2.5rem) !important;
                 margin-bottom: 1rem;
+                word-wrap: break-word !important;
             }
             
             /* How Daena Thinks - Tablet Layout */
