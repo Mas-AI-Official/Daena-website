@@ -1713,6 +1713,35 @@
             }
         }
 
+        /* Global Mobile Fixes */
+        * {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        body {
+            overflow-x: hidden;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        
+        /* Ensure all text containers wrap properly */
+        p, span, div, li, td, th {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+        
+        /* Fix for long words */
+        h1, h2, h3, h4, h5, h6 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
         /* Responsive Design */
         /* Metric boxes responsive */
         @media (max-width: 1024px) {

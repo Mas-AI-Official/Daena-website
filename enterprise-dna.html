@@ -28,9 +28,76 @@
             border-radius: 12px;
             padding: 24px;
         }
-        code { background: rgba(139,92,246,0.2); padding: 2px 6px; border-radius: 4px; color: #8b5cf6; }
+        code { background: rgba(139,92,246,0.2); padding: 2px 6px; border-radius: 4px; color: #8b5cf6; word-wrap: break-word; }
+        
+        /* Global mobile fixes */
+        * {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        body {
+            overflow-x: hidden;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        p, span, div, li, h1, h2, h3, h4, h5, h6 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+        
         @media (max-width: 768px) {
-            .dna-grid { grid-template-columns: 1fr; }
+            .container { 
+                padding: 0 1rem !important; 
+                max-width: 100% !important;
+            }
+            .dna-grid { 
+                grid-template-columns: 1fr !important; 
+                gap: 1.5rem !important;
+            }
+            
+            h1 { font-size: clamp(1.75rem, 5vw, 2.5rem) !important; }
+            h2 { font-size: clamp(1.5rem, 4vw, 2rem) !important; }
+            h3 { font-size: clamp(1.25rem, 3vw, 1.75rem) !important; }
+            
+            .section {
+                padding: 1.5rem 1rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .dna-card {
+                padding: 1.5rem 1rem !important;
+            }
+            
+            p, li {
+                font-size: 0.95rem !important;
+                line-height: 1.6 !important;
+            }
+            
+            .breadcrumb {
+                font-size: 0.85rem !important;
+                word-wrap: break-word !important;
+            }
+            
+            .back-link {
+                display: block;
+                margin-bottom: 1rem;
+                word-wrap: break-word;
+                font-size: 0.9rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 0 0.75rem !important; }
+            h1 { font-size: clamp(1.5rem, 6vw, 2rem) !important; }
+            h2 { font-size: clamp(1.25rem, 5vw, 1.75rem) !important; }
+            .section { padding: 1.25rem 0.75rem !important; }
+            .dna-card { padding: 1.25rem 0.75rem !important; }
+            p, li { font-size: 0.9rem !important; }
         }
     </style>
 </head>
