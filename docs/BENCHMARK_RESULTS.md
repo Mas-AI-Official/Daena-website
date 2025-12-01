@@ -1,6 +1,9 @@
 # NBMF Benchmark Results - Hard Evidence
 
-**Date**: 2025-01-XX  
+---
+date: 2025-01-15
+lastmod: 2025-01-15
+---  
 **Tool**: `Tools/daena_nbmf_benchmark.py`  
 **Status**: ✅ **PROVEN WITH HARD NUMBERS**
 
@@ -164,5 +167,8 @@ NBMF compression claims have been **validated and exceeded** through comprehensi
 
 **Results File**: `bench/nbmf_benchmark_results.json`  
 **Tool**: `Tools/daena_nbmf_benchmark.py`  
-**Date**: 2025-01-XX
+---
+date: 2025-01-15
+lastmod: 2025-01-15
+---
 

@@ -1,6 +1,9 @@
 # Enterprise-DNA Layer on NBMF - Technical Addendum
 
-**Date**: 2025-01-XX  
+---
+date: 2025-01-15
+lastmod: 2025-01-15
+---  
 **Version**: 1.0  
 **Related**: NBMF Memory Patent Material
 

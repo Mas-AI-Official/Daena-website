@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Daena AI VP — Unique AI VP System | 48 Agents (6×8) | MAS-AI | NBMF Memory & Hex-Mesh Communication</title>
     <meta name="description" content="Daena AI VP by MAS-AI Inc: A unique combination of Self-Fulfilling Hierarchical Communication (SFHC) with 48+ specialized agents (6×8), revolutionary patent-pending Memory & Governance Engine (NBMF + Enterprise-DNA), Hex-Mesh Communication, and Trust & Governance Pipeline. Transform your business with autonomous AI decision-making and VP-level intelligence. Built by MAS-AI, an AI-native autonomous company.">
     <meta name="keywords" content="Daena AI, Daena multi-agent system, Daena AI VP, MAS-AI, MAS AI, MAS-AI Inc, AI VP system, Sunflower Architecture AI, Honeycomb Governance AI, Multi-agent orchestration platform, AI VP, artificial intelligence VP, business intelligence AI, multi-agent systems, SFHC, Self-Fulfilling Hierarchical Communication, autonomous AI, enterprise AI, business automation, Consulate agents, AI experts, VP-level AI, 48+ AI agents, 8 departments, NBMF Memory, Neural-Backed Memory Fabric, Enterprise-DNA, Genome, Epigenome, Lineage, Immune system, Hex-Mesh Communication, Sunflower-Honeycomb architecture, patent pending AI, AI governance, trust pipeline, phase-locked rounds, quorum consensus, backpressure, presence beacons, Fibonacci growth, infinite scalability, L1 L2 L3 memory, CAS SimHash, cost savings AI, semantic fidelity, Scout Debate Commit, AI decision making, autonomous business intelligence, LLM orchestration, AI-native company OS, Agent collaboration system, Merkle-notarized lineage, prompt injection detection">
@@ -1728,11 +1728,18 @@
             hyphens: auto;
         }
         
+        /* Prevent writing-mode for body copy */
+        body, p, span, div, li, td, th, h1, h2, h3, h4, h5, h6 {
+            writing-mode: horizontal-tb !important;
+        }
+        
         /* Ensure all text containers wrap properly */
         p, span, div, li, td, th {
             word-wrap: break-word;
-            overflow-wrap: break-word;
+            overflow-wrap: anywhere;
+            word-break: break-word;
             max-width: 100%;
+            white-space: normal !important;
         }
         
         /* Fix for long words */
@@ -1740,6 +1747,22 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             hyphens: auto;
+            white-space: normal !important;
+        }
+        
+        /* Responsive images and media */
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Fluid type scale */
+        :root {
+            --step--1: clamp(0.875rem, 0.83rem + 0.2vw, 0.975rem);
+            --step-0: clamp(1rem, 0.9rem + 0.6vw, 1.125rem);
+            --step-1: clamp(1.25rem, 1.1rem + 0.9vw, 1.5rem);
+            --step-2: clamp(1.563rem, 1.2rem + 1.4vw, 1.95rem);
+            --step-3: clamp(1.953rem, 1.4rem + 2.2vw, 2.44rem);
         }
         
         /* Responsive Design */
@@ -2807,7 +2830,7 @@
             </div>
 
             <!-- What It Is Section -->
-            <div style="margin: 64px 0;">
+            <div id="what-it-is" style="margin: 64px 0; scroll-margin-top: 100px;">
                 <h3 style="text-align: center; color: var(--primary-gold); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 48px;">What It Is</h3>
                 <div class="features-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; justify-items: center;">
                     <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.3);">
@@ -2831,7 +2854,7 @@
             </div>
 
             <!-- Why It Wins Section -->
-            <div style="margin: 64px 0; padding: 48px; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(139,92,246,0.1), rgba(0,188,212,0.1)); border-radius: 20px; border: 2px solid rgba(255,215,0,0.2);">
+            <div id="why-it-wins" style="margin: 64px 0; padding: 48px; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(139,92,246,0.1), rgba(0,188,212,0.1)); border-radius: 20px; border: 2px solid rgba(255,215,0,0.2); scroll-margin-top: 100px;">
                 <h3 style="text-align: center; color: var(--primary-gold); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 32px;">Why It Wins</h3>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; justify-items: center;">
                     <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold);">
