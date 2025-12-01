@@ -540,6 +540,27 @@ br {
     *::after {
         content: none !important;
     }
+    
+    /* Hide any special characters that might show as cross icons or line break indicators */
+    * {
+        font-variant-ligatures: none !important;
+        text-rendering: optimizeLegibility !important;
+    }
+    
+    /* Ensure no invisible characters show */
+    p::before, p::after,
+    span::before, span::after,
+    div::before, div::after,
+    li::before, li::after {
+        content: none !important;
+        display: none !important;
+    }
+    
+    /* Fix any zero-width characters or special Unicode */
+    * {
+        unicode-bidi: normal !important;
+        direction: ltr !important;
+    }
 }
 
 /* Fix text overlap in Enterprise-DNA section */
