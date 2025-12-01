@@ -2193,6 +2193,38 @@
                 font-size: 1.1rem !important;
             }
             
+            /* Ensure all text is readable and visible */
+            p, span, div, li {
+                font-size: clamp(0.85rem, 2.5vw, 0.95rem) !important;
+                line-height: 1.6 !important;
+                white-space: normal !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
+            }
+            
+            /* Fix any remaining writing-mode issues */
+            * {
+                writing-mode: horizontal-tb !important;
+            }
+            
+            /* Prevent any vertical text */
+            [style*="writing-mode: vertical"] {
+                writing-mode: horizontal-tb !important;
+            }
+            
+            /* Fix any column layouts */
+            [style*="column"] {
+                column-count: 1 !important;
+                column-width: auto !important;
+            }
+            
+            /* Ensure all containers are full width */
+            .container, [style*="max-width"] {
+                max-width: 100% !important;
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+            
             /* How Daena Thinks - Mobile Layout */
             #how-daena-thinks [style*="grid-template-columns: repeat(3"] {
                 grid-template-columns: 1fr !important;
