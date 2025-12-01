@@ -694,6 +694,29 @@ br {
     }
 }
 
+/* Images & charts - responsive */
+img, svg, canvas, video {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+@media (max-width: 767.98px) {
+    img, svg, canvas, video {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    /* Remove fixed heights on mobile */
+    img[height],
+    svg[height],
+    canvas[height],
+    video[height] {
+        height: auto !important;
+    }
+}
+
 /* Footnote styling for † characters */
 .fn,
 sup.fn {
