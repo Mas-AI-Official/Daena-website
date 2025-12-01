@@ -2867,27 +2867,27 @@
 
                     <!-- Enterprise-DNA Overlay Layer -->
                     <div style="position: relative; margin-top: 40px; padding-top: 40px; border-top: 2px dashed rgba(139,92,246,0.3);">
-                        <h4 style="color: #8b5cf6; margin-bottom: 20px; text-align: center; font-size: 1.3rem;">Enterprise-DNA Governance Layer</h4>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; justify-items: center;">
-                            <div class="dna-card" data-dna="genome" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border: 2px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
-                                <div style="font-size: 2.5rem; margin-bottom: 10px;">🧬</div>
-                                <h5 style="color: #8b5cf6; margin-bottom: 8px; font-size: 1rem;">Genome</h5>
-                                <p style="color: var(--text-light); font-size: 0.85rem;">Agent capabilities schema</p>
+                        <h4 style="color: #8b5cf6; margin-bottom: 20px; text-align: center; font-size: clamp(1.1rem, 2.5vw, 1.3rem);">Enterprise-DNA Governance Layer</h4>
+                        <div class="grid-cards cards" style="justify-items: center;">
+                            <div class="dna-card card" data-dna="genome" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border: 2px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s ease; width: 100%;">
+                                <div style="font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px;">🧬</div>
+                                <h5 style="color: #8b5cf6; margin-bottom: 8px; font-size: clamp(0.9rem, 2vw, 1rem);">Genome</h5>
+                                <p style="color: var(--text-light); font-size: clamp(0.8rem, 1.8vw, 0.85rem); line-height: 1.5;">Agent capabilities schema</p>
                             </div>
-                            <div class="dna-card" data-dna="epigenome" style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(147,51,234,0.05)); border: 2px solid rgba(147,51,234,0.4); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
-                                <div style="font-size: 2.5rem; margin-bottom: 10px;">⚙️</div>
-                                <h5 style="color: #9333ea; margin-bottom: 8px; font-size: 1rem;">Epigenome</h5>
-                                <p style="color: var(--text-light); font-size: 0.85rem;">Tenant policies & SLO/SLA</p>
+                            <div class="dna-card card" data-dna="epigenome" style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(147,51,234,0.05)); border: 2px solid rgba(147,51,234,0.4); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s ease; width: 100%;">
+                                <div style="font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px;">⚙️</div>
+                                <h5 style="color: #9333ea; margin-bottom: 8px; font-size: clamp(0.9rem, 2vw, 1rem);">Epigenome</h5>
+                                <p style="color: var(--text-light); font-size: clamp(0.8rem, 1.8vw, 0.85rem); line-height: 1.5;">Tenant policies & SLO/SLA</p>
                             </div>
-                            <div class="dna-card" data-dna="lineage" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border: 2px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
-                                <div style="font-size: 2.5rem; margin-bottom: 10px;">📜</div>
-                                <h5 style="color: #8b5cf6; margin-bottom: 8px; font-size: 1rem;">Lineage</h5>
-                                <p style="color: var(--text-light); font-size: 0.85rem;">Merkle-notarized audit trail</p>
+                            <div class="dna-card card" data-dna="lineage" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05)); border: 2px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s ease; width: 100%;">
+                                <div style="font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px;">📜</div>
+                                <h5 style="color: #8b5cf6; margin-bottom: 8px; font-size: clamp(0.9rem, 2vw, 1rem);">Lineage</h5>
+                                <p style="color: var(--text-light); font-size: clamp(0.8rem, 1.8vw, 0.85rem); line-height: 1.5;">Merkle-notarized audit trail</p>
                             </div>
-                            <div class="dna-card" data-dna="immune" style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(147,51,234,0.05)); border: 2px solid rgba(147,51,234,0.4); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease; grid-column: 2;">
-                                <div style="font-size: 2.5rem; margin-bottom: 10px;">🛡️</div>
-                                <h5 style="color: #9333ea; margin-bottom: 8px; font-size: 1rem;">Immune</h5>
-                                <p style="color: var(--text-light); font-size: 0.85rem;">Threat detection & response</p>
+                            <div class="dna-card card" data-dna="immune" style="background: linear-gradient(135deg, rgba(147,51,234,0.15), rgba(147,51,234,0.05)); border: 2px solid rgba(147,51,234,0.4); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s ease; width: 100%;">
+                                <div style="font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 10px;">🛡️</div>
+                                <h5 style="color: #9333ea; margin-bottom: 8px; font-size: clamp(0.9rem, 2vw, 1rem);">Immune</h5>
+                                <p style="color: var(--text-light); font-size: clamp(0.8rem, 1.8vw, 0.85rem); line-height: 1.5;">Threat detection & response</p>
                             </div>
                         </div>
                     </div>
@@ -2906,18 +2906,20 @@
             <!-- What It Is Section -->
             <div id="what-it-is" style="margin: 64px 0; scroll-margin-top: 100px;">
                 <h3 style="text-align: center; color: var(--primary-gold); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 48px;">What It Is</h3>
-                <div class="features-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; justify-items: center;">
-                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.3);">
-                        <div class="feature-icon" style="font-size: 2.5rem;">🧠</div>
-                        <h4 style="color: var(--primary-gold); margin-bottom: 12px;">NBMF Memory System</h4>
-                        <p style="color: var(--text-light); line-height: 1.8;">3-tier intelligent compression (L1 Hot / L2 Warm / L3 Cold) with CAS + SimHash technology. Delivers <strong style="color: var(--primary-gold);">94.3% storage savings<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> in lossless mode and <strong style="color: var(--secondary-cyan);">74.4% savings<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> in semantic mode while maintaining <strong style="color: var(--primary-gold);">100% exact match<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> (lossless) or <strong style="color: var(--secondary-cyan);">95.28% similarity<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> (semantic).</p>
-                        <a href="/nbmf" style="color: var(--primary-gold); text-decoration: none; font-weight: 600; margin-top: 12px; display: inline-block;">Deep dive →</a>
+                <div class="features-grid grid-cards cards" style="justify-items: center;">
+                    <div class="feature-card card" style="background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05)); border: 2px solid rgba(255,215,0,0.3);">
+                        <div class="mobile-badge">NBMF Memory System</div>
+                        <div class="feature-icon" style="font-size: clamp(2rem, 4vw, 2.5rem);">🧠</div>
+                        <h4 style="color: var(--primary-gold); margin-bottom: 12px; font-size: clamp(1.1rem, 2.5vw, 1.3rem);">NBMF Memory System</h4>
+                        <p style="color: var(--text-light); line-height: 1.8; font-size: clamp(0.9rem, 2vw, 1rem);">3-tier intelligent compression (L1 Hot / L2 Warm / L3 Cold) with CAS + SimHash technology. Delivers <strong style="color: var(--primary-gold);">94.3% storage savings<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> in lossless mode and <strong style="color: var(--secondary-cyan);">74.4% savings<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> in semantic mode while maintaining <strong style="color: var(--primary-gold);">100% exact match<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> (lossless) or <strong style="color: var(--secondary-cyan);">95.28% similarity<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> (semantic).</p>
+                        <a href="/nbmf" class="deep-dive-link" style="display: inline-block; margin-top: 16px; padding: 10px 20px; background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.1)); border: 2px solid rgba(255,215,0,0.4); border-radius: 8px; color: var(--primary-gold); text-decoration: none; font-weight: 700; font-size: clamp(0.9rem, 2vw, 1rem); transition: all 0.3s ease; text-align: center;">📖 Deep dive →</a>
                     </div>
-                    <div class="feature-card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(147,51,234,0.05)); border: 2px solid rgba(139,92,246,0.3); grid-column: 2;">
-                        <div class="feature-icon" style="font-size: 2.5rem;">🧬</div>
-                        <h4 style="color: #8b5cf6; margin-bottom: 12px;">Enterprise-DNA Layer</h4>
-                        <p style="color: var(--text-light); line-height: 1.8;">Governance and portability layer with <strong style="color: #8b5cf6;">Genome</strong> (capabilities), <strong style="color: #9333ea;">Epigenome</strong> (policies), <strong style="color: #8b5cf6;">Lineage</strong> (Merkle-notarized audit trail), and <strong style="color: #9333ea;">Immune system</strong> (threat detection). Enables <strong style="color: #8b5cf6;">safe cross-tenant learning</strong> and <strong style="color: #9333ea;">enterprise-grade auditability</strong>.</p>
-                        <a href="/enterprise-dna" style="color: #8b5cf6; text-decoration: none; font-weight: 600; margin-top: 12px; display: inline-block;">Deep dive →</a>
+                    <div class="feature-card card" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(147,51,234,0.05)); border: 2px solid rgba(139,92,246,0.3);">
+                        <div class="mobile-badge">Enterprise-DNA Layer</div>
+                        <div class="feature-icon" style="font-size: clamp(2rem, 4vw, 2.5rem);">🧬</div>
+                        <h4 style="color: #8b5cf6; margin-bottom: 12px; font-size: clamp(1.1rem, 2.5vw, 1.3rem);">Enterprise-DNA Layer</h4>
+                        <p style="color: var(--text-light); line-height: 1.8; font-size: clamp(0.9rem, 2vw, 1rem);">Governance and portability layer with <strong style="color: #8b5cf6;">Genome</strong> (capabilities), <strong style="color: #9333ea;">Epigenome</strong> (policies), <strong style="color: #8b5cf6;">Lineage</strong> (Merkle-notarized audit trail), and <strong style="color: #9333ea;">Immune system</strong> (threat detection). Enables <strong style="color: #8b5cf6;">safe cross-tenant learning</strong> and <strong style="color: #9333ea;">enterprise-grade auditability</strong>.</p>
+                        <a href="/enterprise-dna" class="deep-dive-link" style="display: inline-block; margin-top: 16px; padding: 10px 20px; background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(147,51,234,0.1)); border: 2px solid rgba(139,92,246,0.4); border-radius: 8px; color: #8b5cf6; text-decoration: none; font-weight: 700; font-size: clamp(0.9rem, 2vw, 1rem); transition: all 0.3s ease; text-align: center;">📖 Deep dive →</a>
                     </div>
                     <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,188,212,0.1), rgba(0,188,212,0.05)); border: 2px solid rgba(0,188,212,0.3);">
                         <div class="feature-icon" style="font-size: 2.5rem;">⚡</div>
