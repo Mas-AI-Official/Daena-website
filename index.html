@@ -3414,24 +3414,24 @@
                                 <span style="color: var(--secondary-cyan);">📈 Target Outcomes:</span>
                             </p>
                             <div class="grid-cards cards" style="gap: 1rem;">
-                                <div style="background: rgba(255,215,0,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
+                                <div class="card metric" style="background: rgba(255,215,0,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
                                     <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 0.5rem;">⚡</div>
-                                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 0.25rem;">50%+</div>
+                                    <div style="font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 700; color: var(--primary-gold); margin-bottom: 0.25rem;">50%+</div>
                                     <div style="font-size: 0.85rem; color: var(--text-muted);">Faster Decisions</div>
                                 </div>
-                                <div style="background: rgba(255,215,0,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
+                                <div class="card metric" style="background: rgba(255,215,0,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
                                     <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 0.5rem;">💰</div>
-                                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 0.25rem;">90%+</div>
+                                    <div style="font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 700; color: var(--primary-gold); margin-bottom: 0.25rem;">90%+</div>
                                     <div style="font-size: 0.85rem; color: var(--text-muted);">Cost Savings</div>
                                 </div>
-                                <div style="background: rgba(0,188,212,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
+                                <div class="card metric" style="background: rgba(0,188,212,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
                                     <div style="font-size: 1.8rem; color: var(--secondary-cyan); margin-bottom: 0.5rem;">🎯</div>
-                                    <div style="font-size: 1.3rem; font-weight: 700; color: var(--secondary-cyan); margin-bottom: 0.25rem;">90%+</div>
+                                    <div style="font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 700; color: var(--secondary-cyan); margin-bottom: 0.25rem;">90%+</div>
                                     <div style="font-size: 0.85rem; color: var(--text-muted);">Accuracy</div>
                                 </div>
-                                <div style="background: rgba(139,92,246,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(139,92,246,0.2);">
+                                <div class="card metric" style="background: rgba(139,92,246,0.1); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid rgba(139,92,246,0.2);">
                                     <div style="font-size: 1.8rem; color: #8b5cf6; margin-bottom: 0.5rem;">⭐</div>
-                                    <div style="font-size: 1.3rem; font-weight: 700; color: #8b5cf6; margin-bottom: 0.25rem;">4.5/5.0+</div>
+                                    <div style="font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 700; color: #8b5cf6; margin-bottom: 0.25rem;">4.5/5.0+</div>
                                     <div style="font-size: 0.85rem; color: var(--text-muted);">User Satisfaction</div>
                                 </div>
                             </div>
@@ -5099,6 +5099,9 @@ This request was submitted from the Daena AI website contact form.
             });
         }
     </script>
+
+    <!-- Bottom spacer for mobile to prevent overlap -->
+    <div class="bottom-spacer"></div>
 
     <!-- Metatron Hexagonal Node Network -->
     <script src="metatron-hex-network.js"></script>
