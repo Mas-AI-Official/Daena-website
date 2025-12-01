@@ -170,7 +170,7 @@ img, svg, canvas, video {
     white-space: nowrap;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
     .rail {
         writing-mode: initial;
         text-orientation: initial;
