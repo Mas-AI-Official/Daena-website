@@ -508,12 +508,38 @@ br {
     display: block;
     content: "";
     margin: 0;
+    line-height: 0;
+    height: 0;
 }
 
 /* Ensure no special characters show as visible text */
 ::before,
 ::after {
     white-space: normal;
+}
+
+/* Fix line break rendering on mobile */
+@media (max-width: 768px) {
+    br {
+        display: block;
+        margin: 0;
+        padding: 0;
+        line-height: 0.5em;
+        height: 0.5em;
+    }
+    
+    /* Ensure text flows naturally without visible break characters */
+    p, span, div, li, td, th {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow-wrap: anywhere !important;
+    }
+    
+    /* Remove any pseudo-elements that might show line break indicators */
+    *::before,
+    *::after {
+        content: none !important;
+    }
 }
 
 /* Fix text overlap in Enterprise-DNA section */
