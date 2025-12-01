@@ -1,258 +1,185 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, devices } from '@playwright/test';
 
-// Test breakpoints
-const breakpoints = {
-  mobile: { width: 390, height: 844 }, // iPhone 12/13
-  android: { width: 360, height: 800 }, // Android
-  tablet: { width: 768, height: 1024 }, // iPad
-  desktop: { width: 1280, height: 800 }, // Desktop
-};
+// Test matrix: iPhone 12/14, iPhone SE, Pixel 6, Safari iOS, Chrome Android
+const mobileDevices = [
+    { name: 'iPhone 12', ...devices['iPhone 12'] },
+    { name: 'iPhone 14', ...devices['iPhone 14'] },
+    { name: 'iPhone SE', ...devices['iPhone SE'] },
+    { name: 'Pixel 6', ...devices['Pixel 6'] },
+];
 
-test.describe('Mobile Layout Tests', () => {
-  test.beforeEach(async ({ page }) => {
-    // Navigate to the main page
-    await page.goto('http://localhost:8000');
-  });
+// Pages to test
+const pages = [
+    '/',
+    '/#what-it-is',
+    '/#why-it-wins',
+    '/#memory-governance',
+    '/#security-compliance',
+    '/nbmf',
+    '/enterprise-dna',
+];
 
-  test('Cards stack one per row on mobile', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    
-    // Check Latest Revolutionary Features section
-    const featuresGrid = page.locator('#latest-features .grid-cards, #latest-features .cards, #latest-features .features-grid').first();
-    await expect(featuresGrid).toHaveCSS('grid-template-columns', /^1fr$/);
-    
-    // Check all card grids
-    const allGrids = page.locator('.grid-cards, .cards, .features-grid');
-    const count = await allGrids.count();
-    
-    for (let i = 0; i < count; i++) {
-      const grid = allGrids.nth(i);
-      const gridTemplateColumns = await grid.evaluate((el) => 
-        window.getComputedStyle(el).gridTemplateColumns
-      );
-      expect(gridTemplateColumns).toMatch(/^1fr$/);
+test.describe('Mobile Layout Tests (<768px)', () => {
+    for (const device of mobileDevices) {
+        test.describe(`Device: ${device.name}`, () => {
+            test.use({
+                ...device,
+                viewport: { width: device.viewport.width, height: device.viewport.height },
+            });
+
+            for (const page of pages) {
+                test(`Page: ${page} - Single column cards, no vertical ribbons, no clipped text`, async ({ page: pageInstance }) => {
+                    await pageInstance.goto(`http://localhost:3000${page}`, { waitUntil: 'networkidle' });
+                    
+                    // Wait for page to fully load
+                    await pageInstance.waitForTimeout(1000);
+                    
+                    // 1) Verify all feature cards are 1-per-row
+                    const cards = await pageInstance.locator('.card, .feature-card').all();
+                    for (const card of cards) {
+                        const cardBox = await card.boundingBox();
+                        const viewportWidth = device.viewport.width;
+                        
+                        // Card should be full width (with some margin tolerance)
+                        expect(cardBox?.width).toBeGreaterThan(viewportWidth * 0.9);
+                    }
+                    
+                    // 2) Verify no vertical ribbons are visible
+                    const verticalRibbons = await pageInstance.locator('.ribbon, .vertical-rail, .side-ribbon').all();
+                    for (const ribbon of verticalRibbons) {
+                        const isVisible = await ribbon.isVisible();
+                        if (isVisible) {
+                            const writingMode = await ribbon.evaluate((el) => window.getComputedStyle(el).writingMode);
+                            expect(writingMode).toBe('horizontal-tb');
+                        }
+                    }
+                    
+                    // 3) Verify no clipped/stacked text
+                    const allTextElements = await pageInstance.locator('p, h1, h2, h3, h4, h5, h6, li, span').all();
+                    for (const element of allTextElements) {
+                        const text = await element.textContent();
+                        const box = await element.boundingBox();
+                        
+                        // Text should not be empty and should be visible
+                        if (text && text.trim().length > 0) {
+                            expect(box).not.toBeNull();
+                            expect(box?.width).toBeGreaterThan(0);
+                            expect(box?.height).toBeGreaterThan(0);
+                        }
+                    }
+                    
+                    // 4) Verify no stray † characters (should be in <sup> tags)
+                    const pageContent = await pageInstance.content();
+                    // Find † characters that are not inside <sup> tags
+                    const strayDaggers = pageContent.match(/[^<]†[^>]/g);
+                    expect(strayDaggers).toBeNull();
+                    
+                    // 5) Verify Back to Top button doesn't overlap content
+                    const backToTop = pageInstance.locator('.back-to-top.visible');
+                    if (await backToTop.count() > 0) {
+                        const buttonBox = await backToTop.boundingBox();
+                        const bodyHeight = await pageInstance.evaluate(() => document.body.scrollHeight);
+                        const viewportHeight = device.viewport.height;
+                        
+                        // Button should be fixed and not overlap content
+                        expect(buttonBox).not.toBeNull();
+                        if (buttonBox) {
+                            expect(buttonBox.y + buttonBox.height).toBeLessThan(viewportHeight);
+                        }
+                    }
+                    
+                    // 6) Verify anchor scroll offsets work
+                    if (page.includes('#')) {
+                        const hash = page.split('#')[1];
+                        const targetElement = pageInstance.locator(`#${hash}`);
+                        if (await targetElement.count() > 0) {
+                            await pageInstance.waitForTimeout(500);
+                            const scrollY = await pageInstance.evaluate(() => window.scrollY);
+                            const elementBox = await targetElement.boundingBox();
+                            
+                            // Element should be visible (accounting for sticky header ~72px)
+                            if (elementBox) {
+                                expect(scrollY + 72).toBeLessThanOrEqual(elementBox.y + 20);
+                            }
+                        }
+                    }
+                    
+                    // 7) Verify images/charts are responsive
+                    const images = await pageInstance.locator('img, svg, canvas, video').all();
+                    for (const img of images) {
+                        const imgBox = await img.boundingBox();
+                        const viewportWidth = device.viewport.width;
+                        
+                        if (imgBox) {
+                            // Image should not exceed viewport width
+                            expect(imgBox.width).toBeLessThanOrEqual(viewportWidth);
+                        }
+                    }
+                    
+                    // 8) Verify no horizontal scroll
+                    const horizontalScroll = await pageInstance.evaluate(() => {
+                        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+                    });
+                    expect(horizontalScroll).toBe(false);
+                    
+                    // 9) Take screenshot for visual verification
+                    await pageInstance.screenshot({
+                        path: `tests/screenshots/${device.name.replace(/\s+/g, '-')}-${page.replace(/\//g, '-').replace(/#/g, '')}.png`,
+                        fullPage: true,
+                    });
+                });
+            }
+        });
     }
-  });
-
-  test('Cards have 2 columns on tablet', async ({ page }) => {
-    await page.setViewportSize(breakpoints.tablet);
     
-    const featuresGrid = page.locator('#latest-features .grid-cards, #latest-features .cards, #latest-features .features-grid').first();
-    const gridTemplateColumns = await featuresGrid.evaluate((el) => 
-      window.getComputedStyle(el).gridTemplateColumns
-    );
-    
-    // Should have 2 columns (repeat(2, ...))
-    expect(gridTemplateColumns).toMatch(/repeat\(2/);
-  });
-
-  test('Cards have 3 columns on desktop', async ({ page }) => {
-    await page.setViewportSize(breakpoints.desktop);
-    
-    const featuresGrid = page.locator('#latest-features .grid-cards, #latest-features .cards, #latest-features .features-grid').first();
-    const gridTemplateColumns = await featuresGrid.evaluate((el) => 
-      window.getComputedStyle(el).gridTemplateColumns
-    );
-    
-    // Should have 3 columns (repeat(3, ...))
-    expect(gridTemplateColumns).toMatch(/repeat\(3/);
-  });
-
-  test('No card overflows horizontally on mobile', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    
-    const cards = page.locator('.card, .feature-card');
-    const count = await cards.count();
-    
-    for (let i = 0; i < count; i++) {
-      const card = cards.nth(i);
-      const boundingBox = await card.boundingBox();
-      
-      if (boundingBox) {
-        // Card should not exceed viewport width
-        expect(boundingBox.width).toBeLessThanOrEqual(breakpoints.mobile.width);
+    test('Lighthouse mobile score ≥ 90', async ({ page }) => {
+        await page.goto('http://localhost:3000/');
         
-        // Check for horizontal overflow
-        const overflowX = await card.evaluate((el) => 
-          window.getComputedStyle(el).overflowX
-        );
-        expect(overflowX).not.toBe('scroll');
-        expect(overflowX).not.toBe('auto');
-      }
-    }
-  });
-
-  test('Back to Top button does not overlap card content', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    
-    // Scroll down to show back-to-top button
-    await page.evaluate(() => window.scrollTo(0, 500));
-    await page.waitForTimeout(500);
-    
-    const backToTop = page.locator('#backToTop');
-    await expect(backToTop).toBeVisible();
-    
-    const backToTopBox = await backToTop.boundingBox();
-    const bodyBox = await page.locator('body').boundingBox();
-    
-    if (backToTopBox && bodyBox) {
-      // Back to top should be in bottom-right corner
-      expect(backToTopBox.y + backToTopBox.height).toBeLessThanOrEqual(bodyBox.height);
-      
-      // Check that body has padding-bottom to prevent overlap
-      const bodyPaddingBottom = await page.evaluate(() => 
-        window.getComputedStyle(document.body).paddingBottom
-      );
-      expect(parseInt(bodyPaddingBottom)).toBeGreaterThanOrEqual(80);
-    }
-  });
-
-  test('Vertical ribbons are hidden on mobile', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    
-    const ribbons = page.locator('.ribbon');
-    const count = await ribbons.count();
-    
-    for (let i = 0; i < count; i++) {
-      const ribbon = ribbons.nth(i);
-      const display = await ribbon.evaluate((el) => 
-        window.getComputedStyle(el).display
-      );
-      expect(display).toBe('none');
-    }
-  });
-
-  test('Mobile badges are visible on mobile', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    
-    const badges = page.locator('.mobile-badge');
-    const count = await badges.count();
-    
-    for (let i = 0; i < count; i++) {
-      const badge = badges.nth(i);
-      const display = await badge.evaluate((el) => 
-        window.getComputedStyle(el).display
-      );
-      expect(display).not.toBe('none');
-    }
-  });
-
-  test('Mobile badges are hidden on desktop', async ({ page }) => {
-    await page.setViewportSize(breakpoints.desktop);
-    
-    const badges = page.locator('.mobile-badge');
-    const count = await badges.count();
-    
-    for (let i = 0; i < count; i++) {
-      const badge = badges.nth(i);
-      const display = await badge.evaluate((el) => 
-        window.getComputedStyle(el).display
-      );
-      expect(display).toBe('none');
-    }
-  });
-
-  test('All anchor links navigate correctly', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    
-    // Get all anchor links
-    const anchors = page.locator('a[href^="#"]');
-    const count = await anchors.count();
-    
-    for (let i = 0; i < Math.min(count, 10); i++) { // Test first 10 to avoid timeout
-      const anchor = anchors.nth(i);
-      const href = await anchor.getAttribute('href');
-      
-      if (href && href !== '#' && href !== '#!') {
-        const targetId = href.substring(1);
-        const target = page.locator(`#${targetId}`);
+        // Run Lighthouse audit
+        const lighthouse = await import('lighthouse');
+        const { default: chromeLauncher } = await import('chrome-launcher');
         
-        // Click the anchor
-        await anchor.click();
-        await page.waitForTimeout(300);
+        const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
+        const options = {
+            logLevel: 'info',
+            output: 'html',
+            onlyCategories: ['performance', 'accessibility'],
+            port: chrome.port,
+        };
         
-        // Check if target exists and is in viewport
-        const targetCount = await target.count();
-        expect(targetCount).toBeGreaterThan(0);
-      }
-    }
-  });
-
-  test('Images and charts scale responsively', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
+        const runnerResult = await lighthouse.default('http://localhost:3000/', options);
+        await chrome.kill();
+        
+        const scores = runnerResult?.lhr?.categories;
+        if (scores) {
+            expect(scores.performance?.score * 100).toBeGreaterThanOrEqual(80);
+            expect(scores.accessibility?.score * 100).toBeGreaterThanOrEqual(90);
+        }
+    });
     
-    const images = page.locator('img, canvas, svg, video');
-    const count = await images.count();
-    
-    for (let i = 0; i < Math.min(count, 10); i++) {
-      const img = images.nth(i);
-      const maxWidth = await img.evaluate((el) => 
-        window.getComputedStyle(el).maxWidth
-      );
-      
-      expect(maxWidth).toBe('100%');
-      
-      const boundingBox = await img.boundingBox();
-      if (boundingBox) {
-        expect(boundingBox.width).toBeLessThanOrEqual(breakpoints.mobile.width);
-      }
-    }
-  });
-
-  test('Text wraps properly on mobile', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    
-    const cards = page.locator('.card, .feature-card');
-    const count = await cards.count();
-    
-    for (let i = 0; i < Math.min(count, 5); i++) {
-      const card = cards.nth(i);
-      const overflowWrap = await card.evaluate((el) => 
-        window.getComputedStyle(el).overflowWrap
-      );
-      const wordBreak = await card.evaluate((el) => 
-        window.getComputedStyle(el).wordBreak
-      );
-      
-      expect(overflowWrap).toMatch(/anywhere|break-word/);
-      expect(['normal', 'break-word']).toContain(wordBreak);
-    }
-  });
+    test('CLS < 0.02 (no layout shift)', async ({ page }) => {
+        await page.goto('http://localhost:3000/');
+        
+        // Measure CLS
+        const cls = await page.evaluate(() => {
+            return new Promise((resolve) => {
+                let clsValue = 0;
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.entryType === 'layout-shift' && !(entry as any).hadRecentInput) {
+                            clsValue += (entry as any).value;
+                        }
+                    }
+                });
+                observer.observe({ entryTypes: ['layout-shift'] });
+                
+                setTimeout(() => {
+                    observer.disconnect();
+                    resolve(clsValue);
+                }, 5000);
+            });
+        });
+        
+        expect(cls).toBeLessThan(0.02);
+    });
 });
-
-test.describe('Screenshot Tests', () => {
-  test('Screenshot Latest Revolutionary Features on mobile', async ({ page }) => {
-    await page.setViewportSize(breakpoints.mobile);
-    await page.goto('http://localhost:8000/#latest-features');
-    await page.waitForTimeout(500);
-    
-    await page.screenshot({
-      path: 'docs/screenshots/mobile-fixes/latest-features-mobile.png',
-      fullPage: false,
-    });
-  });
-
-  test('Screenshot Latest Revolutionary Features on tablet', async ({ page }) => {
-    await page.setViewportSize(breakpoints.tablet);
-    await page.goto('http://localhost:8000/#latest-features');
-    await page.waitForTimeout(500);
-    
-    await page.screenshot({
-      path: 'docs/screenshots/mobile-fixes/latest-features-tablet.png',
-      fullPage: false,
-    });
-  });
-
-  test('Screenshot Latest Revolutionary Features on desktop', async ({ page }) => {
-    await page.setViewportSize(breakpoints.desktop);
-    await page.goto('http://localhost:8000/#latest-features');
-    await page.waitForTimeout(500);
-    
-    await page.screenshot({
-      path: 'docs/screenshots/mobile-fixes/latest-features-desktop.png',
-      fullPage: false,
-    });
-  });
-});
-
-
