@@ -104,19 +104,32 @@
             </p>
         </div>
 
-        <div class="section">
+        <div class="section" id="benchmarks">
             <h2>Benchmarks & Technical Documentation</h2>
             <p style="margin-bottom: 24px;">See <a href="/#benchmarks" style="color: #FFD700;">benchmarks section</a> on the main page for interactive charts and detailed performance metrics.</p>
             
-            <h3 style="color: #00bcd4; font-size: 1.3rem; margin: 32px 0 16px;">Benchmark Results</h3>
-            <ul style="margin-left: 24px; line-height: 2; margin-bottom: 32px;">
-                <li><a href="/docs/BENCHMARK_RESULTS.md" style="color: #00bcd4; text-decoration: underline;">Benchmark Results & Methodology</a> - Comprehensive benchmark data with methodology, datasets, and reproducibility notes</li>
-            </ul>
+            <h3 style="color: #00bcd4; font-size: 1.3rem; margin: 32px 0 16px;">📊 Benchmark Results</h3>
+            <div style="background: rgba(0,188,212,0.1); padding: 24px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(0,188,212,0.2);">
+                <p style="margin-bottom: 16px;"><strong style="color: #00bcd4;">Comprehensive Benchmark Data:</strong></p>
+                <ul style="margin-left: 24px; line-height: 2; margin-bottom: 16px;">
+                    <li><strong style="color: #FFD700;">Compression:</strong> 13.30× (lossless), 2.53× (semantic) - <strong style="color: #00bcd4;">94.3% storage savings†</strong></li>
+                    <li><strong style="color: #FFD700;">Accuracy:</strong> 100% exact match (lossless), 95.28% similarity (semantic)†</li>
+                    <li><strong style="color: #FFD700;">Latency:</strong> 0.65ms p95 encode (L1), sub-millisecond decode†</li>
+                    <li><strong style="color: #FFD700;">Token Reduction:</strong> 94.3% (lossless), 74.4% (semantic) - exceptional cost savings†</li>
+                </ul>
+                <p style="font-size: 0.9em; color: #B8BCC8; margin: 0;">
+                    <sup>†</sup> Internal benchmarks. See <a href="/docs/BENCHMARK_RESULTS.md" style="color: #00bcd4; text-decoration: underline;">full benchmark results document</a> for methodology, datasets, and reproducibility notes.
+                </p>
+            </div>
             
-            <h3 style="color: #FFD700; font-size: 1.3rem; margin: 32px 0 16px;">Technical Documentation</h3>
-            <ul style="margin-left: 24px; line-height: 2;">
-                <li><a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" style="color: #FFD700; text-decoration: underline;">Enterprise-DNA Addendum</a> - Technical documentation for Enterprise-DNA layer integration with NBMF</li>
-            </ul>
+            <h3 style="color: #FFD700; font-size: 1.3rem; margin: 32px 0 16px;">📖 Technical Documentation</h3>
+            <div style="background: rgba(255,215,0,0.1); padding: 24px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(255,215,0,0.2);">
+                <p style="margin-bottom: 16px;"><strong style="color: #FFD700;">Enterprise-DNA Integration:</strong></p>
+                <p style="margin-bottom: 16px;">Enterprise-DNA layer provides governance and portability on top of NBMF, including Genome (capabilities), Epigenome (policies), Lineage (Merkle-notarized audit trail), and Immune system (threat detection).</p>
+                <p style="font-size: 0.9em; color: #B8BCC8; margin: 0;">
+                    See <a href="/docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md" style="color: #FFD700; text-decoration: underline;">Enterprise-DNA Addendum</a> for technical documentation on integration with NBMF.
+                </p>
+            </div>
             
             <div style="margin-top: 32px; padding: 20px; background: rgba(255,215,0,0.1); border-left: 4px solid #FFD700; border-radius: 8px;">
                 <p style="color: var(--text-light); font-size: 0.9rem; line-height: 1.7; margin: 0;">
