@@ -76,8 +76,8 @@ lastmod: 2025-01-15
 - ✅ 50+ API Endpoints
 - ✅ 15+ CLI Tools
 - ✅ 40+ Test Suites
-- ✅ 99.4% Accuracy
-- ✅ 300% ROI
+- ✅ 95–100% Accuracy (lossless & semantic modes)
+- ✅ 2–3× ROI Potential (target range)
 
 ---
 

@@ -124,7 +124,7 @@
         <nav class="breadcrumb" style="margin-bottom: 32px; font-size: 0.9rem; color: #B8BCC8;">
             <a href="/" style="color: #FFD700; text-decoration: none;">Home</a> / <a href="/#for-developers" style="color: #FFD700; text-decoration: none;">For Developers</a> / Enterprise-DNA Deep Dive
         </nav>
-        <a href="/#what-it-is" class="back-link" id="backLink">← Back to What It Is</a>
+        <a href="/#for-developers" class="back-link" id="backLink">← Back to For Developers</a>
         <script>
             // Smart back navigation: return to exact section user came from
             (function() {
@@ -137,11 +137,18 @@
                     if (referrerUrl.hash) {
                         backLink.href = '/' + referrerUrl.hash;
                         backLink.textContent = '← Back to ' + referrerUrl.hash.substring(1).replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                    } else if (referrer.includes('#what-it-is') || referrer.includes('#memory-governance')) {
-                        backLink.href = '/#what-it-is';
+                    } else if (referrer.includes('#for-developers') || referrer.includes('#what-it-is') || referrer.includes('#memory-governance')) {
+                        backLink.href = '/#for-developers';
+                        backLink.textContent = '← Back to For Developers';
                     } else {
-                        backLink.href = '/#what-it-is';
+                        // Default to for-developers section
+                        backLink.href = '/#for-developers';
+                        backLink.textContent = '← Back to For Developers';
                     }
+                } else {
+                    // Default to for-developers section
+                    backLink.href = '/#for-developers';
+                    backLink.textContent = '← Back to For Developers';
                 }
             })();
         </script>

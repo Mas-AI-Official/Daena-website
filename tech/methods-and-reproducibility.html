@@ -213,21 +213,26 @@
                         backLink.href = '/#investor-value';
                         backLink.textContent = '← Back to Why Investors Choose Daena';
                     }
+                    // If came from for-developers section
+                    else if (referrerUrl.hash === '#for-developers' || referrer.includes('#for-developers')) {
+                        backLink.href = '/#for-developers';
+                        backLink.textContent = '← Back to For Developers';
+                    }
                     // If came from what-it-is section
                     else if (referrerUrl.hash === '#what-it-is' || referrer.includes('#what-it-is')) {
-                        backLink.href = '/#what-it-is';
-                        backLink.textContent = '← Back to What It Is';
+                        backLink.href = '/#for-developers';
+                        backLink.textContent = '← Back to For Developers';
                     }
-                    // Default to benchmarks (most common source)
+                    // Default to for-developers (most common source for tech pages)
                     else {
-                        backLink.href = '/#benchmarks';
-                        backLink.textContent = '← Back to Benchmarks';
+                        backLink.href = '/#for-developers';
+                        backLink.textContent = '← Back to For Developers';
                     }
                 }
             })();
         </script>
         <nav class="breadcrumb">
-            <a href="/">Home</a> / <a href="/#memory-governance">Tech</a> / Methods & Reproducibility
+            <a href="/">Home</a> / <a href="/#for-developers">For Developers</a> / Methods & Reproducibility
         </nav>
         
         <h1>Methods & Reproducibility</h1>

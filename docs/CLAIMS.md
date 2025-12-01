@@ -91,10 +91,10 @@ This document tracks all numerical claims and metrics used on the Daena website,
 - **Status**: ⚠️ Needs source citation
 - **Action**: Add market research source or mark as "illustrative estimate"
 
-### 300% ROI
-- **Source**: ⚠️ Needs verification
-- **Status**: ⚠️ Needs source documentation
-- **Action**: Document ROI calculation methodology or mark as "target (illustrative)"
+### 2–3× ROI Potential (Target Range)
+- **Source**: ⚠️ Internal financial modeling (illustrative)
+- **Status**: ⚠️ Needs formal documentation
+- **Action**: Document ROI calculation methodology and ensure investor materials clearly mark this as a target range, not historical performance
 
 ## Token Reduction
 

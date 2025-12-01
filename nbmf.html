@@ -124,7 +124,7 @@
         <nav class="breadcrumb" style="margin-bottom: 32px; font-size: 0.9rem; color: #B8BCC8;">
             <a href="/" style="color: #FFD700; text-decoration: none;">Home</a> / <a href="/#for-developers" style="color: #FFD700; text-decoration: none;">For Developers</a> / NBMF Deep Dive
         </nav>
-        <a href="/#what-it-is" class="back-link" id="backLink">← Back to What It Is</a>
+        <a href="/#for-developers" class="back-link" id="backLink" style="display: none;">← Back to For Developers</a>
         <script>
             // Smart back navigation: return to exact section user came from
             (function() {
@@ -132,29 +132,33 @@
                 const referrer = document.referrer;
                 const currentHash = window.location.hash;
                 
+                // If on benchmarks section, hide main back button (benchmarks section has its own)
+                if (currentHash === '#benchmarks') {
+                    backLink.style.display = 'none';
+                    return; // Don't process further, benchmarks section handles its own back button
+                }
+                
+                // Show main back button for other sections
+                backLink.style.display = 'inline-block';
+                
                 // If coming from main page with a hash, go back to that section
                 if (referrer.includes('daena.mas-ai.co') && !referrer.includes('/nbmf') && !referrer.includes('/enterprise-dna')) {
-                    // Check if referrer had a hash (like #benchmarks)
                     const referrerUrl = new URL(referrer);
                     if (referrerUrl.hash) {
                         backLink.href = '/' + referrerUrl.hash;
                         backLink.textContent = '← Back to ' + referrerUrl.hash.substring(1).replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                    } else if (referrer.includes('#what-it-is') || referrer.includes('#memory-governance')) {
-                        backLink.href = '/#what-it-is';
+                    } else if (referrer.includes('#for-developers') || referrer.includes('#what-it-is') || referrer.includes('#memory-governance')) {
+                        backLink.href = '/#for-developers';
+                        backLink.textContent = '← Back to For Developers';
                     } else {
-                        // Default to what-it-is section
-                        backLink.href = '/#what-it-is';
+                        // Default to for-developers section
+                        backLink.href = '/#for-developers';
+                        backLink.textContent = '← Back to For Developers';
                     }
-                }
-                
-                // If on benchmarks section of NBMF page, offer back to main benchmarks
-                if (currentHash === '#benchmarks') {
-                    const benchmarksBack = document.createElement('a');
-                    benchmarksBack.href = '/#benchmarks';
-                    benchmarksBack.className = 'back-link';
-                    benchmarksBack.style.marginTop = '16px';
-                    benchmarksBack.textContent = '← Back to Benchmarks (Main Page)';
-                    backLink.parentNode.insertBefore(benchmarksBack, backLink.nextSibling);
+                } else {
+                    // Default to for-developers section
+                    backLink.href = '/#for-developers';
+                    backLink.textContent = '← Back to For Developers';
                 }
             })();
         </script>
