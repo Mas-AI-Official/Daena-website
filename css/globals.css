@@ -50,21 +50,25 @@ body {
 h1 {
     font-size: clamp(24px, 5vw, 44px);
     line-height: 1.1;
+    text-wrap: balance;
 }
 
 h2 {
-    font-size: clamp(20px, 3.6vw, 32px);
+    font-size: clamp(1.15rem, 2.5vw, 1.75rem);
     line-height: 1.2;
+    text-wrap: balance;
 }
 
 h3 {
     font-size: clamp(18px, 3vw, 24px);
     line-height: 1.3;
+    text-wrap: balance;
 }
 
 h4 {
     font-size: clamp(16px, 2.5vw, 20px);
     line-height: 1.4;
+    text-wrap: balance;
 }
 
 /* Ensure headings wrap properly */
@@ -72,6 +76,14 @@ h1, h2, h3, h4, h5, h6 {
     word-wrap: break-word;
     overflow-wrap: anywhere;
     white-space: normal;
+}
+
+/* Paragraph and list typography */
+p, li {
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    line-height: 1.55;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* Prevent Writing-Mode for Body Copy */
@@ -89,17 +101,26 @@ body, p, span, div, li, td, th, h1, h2, h3, h4, h5, h6 {
 /* Responsive Images & Media */
 img, svg, canvas, video {
     max-width: 100%;
+    width: 100%;
     height: auto;
+    object-fit: contain;
     display: block;
 }
 
 /* Vertical Ribbon Component (Hidden on Mobile, Badge Shown Instead) */
-.ribbon {
-    display: none;
+.ribbon,
+.vertical-rail {
+    display: none !important;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     padding: 12px 8px;
     white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+    .ribbon {
+        display: none;
+    }
 }
 
 @media (min-width: 768px) {
@@ -160,29 +181,65 @@ img, svg, canvas, video {
     }
 }
 
-/* Chip Scroll Container */
+/* Chip Scroll Container - Stack on Mobile, Scroll on Tablet+ */
 .chip-scroll {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+@media (min-width: 768px) {
+    .chip-scroll {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        overflow-x: visible;
+    }
+}
+
+/* Alternative: Horizontal scroll on mobile */
+.chip-scroll.horizontal {
+    flex-direction: row;
     overflow-x: auto;
     white-space: nowrap;
-    padding: 8px 0;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
 }
 
 .chip-scroll > * {
     flex-shrink: 0;
+    min-width: max-content;
+    scroll-snap-align: start;
+}
+
+.chip-scroll.horizontal > * {
     scroll-snap-align: start;
 }
 
 /* Card Grids - Responsive (Mobile-First) */
 .grid-cards,
 .cards,
-.features-grid {
+.features-grid,
+.grid-2,
+.grid-3,
+.cards-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+}
+
+/* Force single column on small screens */
+@media (max-width: 640px) {
+    .grid-2,
+    .grid-3,
+    .cards-grid,
+    [style*="grid-template-columns: repeat(2"],
+    [style*="grid-template-columns: repeat(3"],
+    [style*="grid-template-columns: repeat(4"],
+    [style*="grid-template-columns: repeat(5"] {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 @media (min-width: 768px) {
@@ -205,16 +262,22 @@ img, svg, canvas, video {
 
 /* Card Component */
 .card,
-.feature-card {
+.feature-card,
+.prose,
+.metric-card {
     min-width: 0;
+    width: 100%;
+    max-width: 100%;
     padding: 16px;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     word-wrap: break-word;
     overflow-wrap: anywhere;
+    word-break: normal;
     hyphens: auto;
-    break-words: break-word;
+    min-height: 0;
+    height: auto;
 }
 
 @media (min-width: 768px) {
@@ -233,12 +296,12 @@ img, svg, canvas, video {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Back to Top Button - Fixed with Safe Area (No Overlap) */
+/* Back to Top Button - Sticky with Safe Area (No Overlap) */
 .back-to-top {
-    position: fixed;
-    bottom: 24px;
+    position: sticky;
+    bottom: max(16px, env(safe-area-inset-bottom, 16px));
     right: 16px;
-    z-index: 60;
+    z-index: 40;
     background: var(--primary-gold, #FFD700);
     color: var(--dark-bg, #0f0f23);
     padding: 10px 14px;
@@ -250,29 +313,49 @@ img, svg, canvas, video {
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
     transition: all 0.3s ease;
     width: fit-content;
+    margin-left: auto;
+    margin-top: -60px;
+    float: right;
 }
 
 .back-to-top.visible {
     display: block;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .back-to-top {
+        transform: scale(0.92);
         font-size: 12px;
         padding: 8px 12px;
-        bottom: 16px;
+        bottom: max(12px, env(safe-area-inset-bottom, 12px));
         right: 12px;
     }
 }
 
 /* Prevent Back-to-Top from overlapping content */
-body {
-    padding-bottom: 96px;
+body,
+.page,
+main {
+    padding-bottom: max(96px, env(safe-area-inset-bottom, 96px));
 }
 
 @media (min-width: 768px) {
-    body {
-        padding-bottom: 80px;
+    body,
+    .page,
+    main {
+        padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+    }
+}
+
+/* Bottom spacer for mobile (hidden on desktop) */
+.bottom-spacer {
+    display: block;
+    height: 96px;
+}
+
+@media (min-width: 768px) {
+    .bottom-spacer {
+        display: none;
     }
 }
 

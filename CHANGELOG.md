@@ -1,56 +1,68 @@
-# Changelog - Mobile-First Fixes & Cross-Browser Compatibility
+# Changelog
 
-## 2025-01-15
+## 2025-01-15 – Mobile fix pack shipped
 
 ### Fixed
-- **Viewport Meta Tags**: Updated all pages to use `width=device-width, initial-scale=1, viewport-fit=cover` (removed `maximum-scale` and `user-scalable` for better mobile behavior)
-- **Text Truncation**: Fixed text truncation on mobile by:
-  - Adding `overflow-wrap: anywhere` and `word-break: break-word` globally
-  - Preventing `writing-mode: vertical` for body copy
-  - Ensuring all text containers use `white-space: normal`
-  - Removing `text-overflow: ellipsis` that was clipping text
-- **Date Formats**: Fixed all `.md` files to use ISO 8601 format with front-matter:
-  - `docs/BENCHMARK_RESULTS.md`: Added front-matter with `date: 2025-01-15`
-  - `docs/NBMF_ENTERPRISE_DNA_ADDENDUM.md`: Added front-matter
-  - `METATRON_UPDATE.md`: Added front-matter
-  - `FINAL_UPDATE_COMPLETE.md`: Added front-matter
-  - `WEBSITE_UPDATES_COMPLETE.md`: Added front-matter
-- **Mobile Layout**: 
-  - Fixed grid layouts to stack to single column on mobile (`grid-template-columns: 1fr`)
-  - Fixed flex containers to wrap properly
-  - Fixed metric boxes to stack vertically on mobile
-  - Removed fixed widths/heights, replaced with responsive containers
-- **Navigation**: 
-  - Added anchor IDs for sub-sections (`#what-it-is`, `#why-it-wins`)
-  - Added smooth scroll behavior for anchor links
-  - Added sticky "Back to Top" button
-  - Fixed "Back to For Developers" links on deep-dive pages
-- **Cross-Browser**: 
-  - Added `-webkit-text-size-adjust`, `-moz-text-size-adjust`, `-ms-text-size-adjust`
-  - Added fluid type scale using CSS `clamp()`
-  - Fixed Safari flex/grid issues
-- **Accessibility**: 
-  - Added `aria-label` to charts and visualizations
-  - Ensured proper heading hierarchy
-  - Added responsive font sizes with `clamp()`
-- **Images & Media**: 
-  - Added `max-width: 100%; height: auto;` to all images and videos
-  - Added `loading="lazy"` support
+- **Grid Layouts**: All multi-column grids now stack to single column on mobile (<640px)
+  - Added `!important` override for all `repeat()` grid patterns on mobile
+  - Applied responsive classes to Security & Compliance, Proof & Validation, and all feature sections
+  - Cards now use `width: 100%; max-width: 100%` on mobile
+
+- **Vertical Rails**: Completely hidden on mobile (<640px)
+  - Rails hidden with `display: none !important` on mobile
+  - Mobile badges shown instead above each card
+  - Applied to Security & Compliance (AES-256, Audit Trails, etc.)
+
+- **Chip Scroll**: Converted to vertical stack on mobile
+  - Latest Revolutionary Features chips now stack vertically on mobile
+  - Horizontal scroll/wrap on tablet+ (≥768px)
+  - Chips don't push under content
+
+- **Back to Top Button**: Fixed overlap issues
+  - Changed to `position: sticky` with safe-area padding
+  - Added `bottom: max(16px, env(safe-area-inset-bottom))`
+  - Body padding: `max(96px, env(safe-area-inset-bottom))` on mobile
+  - Button scales to 0.92 on mobile (<640px)
+  - Added bottom spacer div for mobile
+
+- **Text Overflow**: Fixed all text clipping
+  - Applied `overflow-wrap: anywhere; word-break: normal; hyphens: auto` to all cards
+  - Removed all fixed widths/heights from cards
+  - Added `min-width: 0; height: auto` to prevent flex/grid overflow
+  - Typography uses `clamp()` for fluid scaling
+
+- **Typography**: Improved mobile readability
+  - h2: `clamp(1.15rem, 2.5vw, 1.75rem)` with `text-wrap: balance`
+  - p, li: `clamp(0.95rem, 2vw, 1.05rem)` with `line-height: 1.55`
+  - All headings have proper word wrapping
+
+- **Images & Charts**: Fully responsive
+  - All images/charts use `max-width: 100%; width: 100%; object-fit: contain`
+  - Chart containers have `overflow-x: auto` for horizontal scroll if needed
+
+- **Security & Compliance Section**: Mobile-optimized
+  - Applied responsive grid classes
+  - Added mobile badges for all cards
+  - Removed vertical rails on mobile
+  - Cards stack one per row on mobile
+
+- **Proof & Validation Section**: Mobile-optimized
+  - All nested grids use responsive classes
+  - Metric boxes stack properly on mobile
+  - Removed fixed padding, uses responsive padding
 
 ### Changed
-- **Memory & Governance Section**: Already unified into single hero section with sub-sections
-- **Agent Count**: Updated from "48 agents" to "48+ agents" to include council expert agents
-- **Back Links**: Changed from "Back to Memory & Governance Engine" to "Back to For Developers"
-
-### Removed
-- Removed `maximum-scale=5.0` and `user-scalable=yes` from viewport (better mobile UX)
-- Removed any `writing-mode: vertical` for body text
-- Removed fixed pixel widths that caused horizontal scroll
+- **Breakpoint**: Changed mobile breakpoint from 768px to 640px for better iPhone support
+- **Chip Scroll**: Changed from horizontal scroll to vertical stack on mobile
+- **Back to Top**: Changed from `fixed` to `sticky` with safe-area support
 
 ### Added
-- Fluid type scale CSS variables (`--step--1` through `--step-3`)
-- Global mobile fixes for text wrapping
-- Responsive breakpoints (sm: 360-480px, md: 768px, lg: 1024px, xl: 1280px+)
-- Back-to-top button with smooth scroll
-- Smooth scroll behavior for all anchor links
+- Mobile badges for Security & Compliance cards
+- Bottom spacer div for mobile to prevent button overlap
+- CSS overrides for all `repeat()` grid patterns on mobile
+- `text-wrap: balance` for headings (where supported)
 
+### Removed
+- Fixed pixel widths from card containers
+- Fixed heights from cards
+- Vertical rails on mobile
