@@ -458,3 +458,76 @@ img[loading="lazy"].loaded {
 .p-3 { padding: 1.5rem; }
 .p-4 { padding: 2rem; }
 
+/* Why It Wins Section - Mobile Responsive */
+#why-it-wins .card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Metric boxes - stack on mobile */
+.metric-boxes {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .metric-boxes {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .metric-boxes > div {
+        width: 100% !important;
+    }
+}
+
+/* Accuracy boxes - always stack vertically */
+.accuracy-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.accuracy-boxes > div {
+    width: 100%;
+}
+
+/* Prevent unwanted line break characters from showing */
+body, p, span, div, h1, h2, h3, h4, h5, h6, li, td, th {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Remove any visible line break indicators */
+br {
+    display: block;
+    content: "";
+    margin: 0;
+}
+
+/* Ensure no special characters show as visible text */
+::before,
+::after {
+    white-space: normal;
+}
+
+/* Fix text overlap in Enterprise-DNA section */
+#memory-governance .dna-card,
+#what-it-is .feature-card {
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 640px) {
+    #memory-governance .dna-card,
+    #what-it-is .feature-card {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+}
+

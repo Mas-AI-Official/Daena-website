@@ -117,3 +117,4 @@ Comprehensive site audit and fixes completed per requirements. All sensitive inf
 4. Verify all anchors work correctly
 5. Test investor portal form submission
 
+

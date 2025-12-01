@@ -2931,44 +2931,48 @@
             </div>
 
             <!-- Why It Wins Section -->
-            <div id="why-it-wins" style="margin: 64px 0; padding: 48px; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(139,92,246,0.1), rgba(0,188,212,0.1)); border-radius: 20px; border: 2px solid rgba(255,215,0,0.2); scroll-margin-top: 100px;">
+            <div id="why-it-wins" style="margin: 64px 0; padding: clamp(24px, 4vw, 48px); background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(139,92,246,0.1), rgba(0,188,212,0.1)); border-radius: 20px; border: 2px solid rgba(255,215,0,0.2); scroll-margin-top: 100px;">
                 <h3 style="text-align: center; color: var(--primary-gold); font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 32px;">Why It Wins</h3>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; justify-items: center;">
-                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold);">
-                        <h5 style="color: var(--primary-gold); margin-bottom: 12px;">💰 Cost Efficiency</h5>
-                        <div style="display: flex; gap: 1rem; margin-bottom: 12px; align-items: center;">
-                            <div style="flex: 1; background: rgba(255,215,0,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary-gold);">94.3%<sup style="font-size: 0.6em;">†</sup></div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Storage Savings</div>
+                <div class="grid-cards cards" style="justify-items: center;">
+                    <div class="card" style="padding: clamp(16px, 3vw, 24px); background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold); width: 100%;">
+                        <div class="mobile-badge">Cost Efficiency</div>
+                        <h5 style="color: var(--primary-gold); margin-bottom: 12px; font-size: clamp(1rem, 2.5vw, 1.2rem);">💰 Cost Efficiency</h5>
+                        <div class="metric-boxes" style="display: flex; flex-direction: row; gap: 1rem; margin-bottom: 12px; align-items: stretch;">
+                            <div style="flex: 1; background: rgba(255,215,0,0.1); padding: clamp(0.5rem, 2vw, 0.75rem); border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2); min-width: 0;">
+                                <div style="font-size: clamp(1.4rem, 4vw, 1.8rem); font-weight: 700; color: var(--primary-gold); word-break: break-word;">94.3%<sup style="font-size: 0.6em;">†</sup></div>
+                                <div style="font-size: clamp(0.7rem, 1.8vw, 0.75rem); color: var(--text-muted); margin-top: 4px;">Storage Savings</div>
                             </div>
-                            <div style="flex: 1; background: rgba(0,188,212,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--secondary-cyan);">60%+<sup style="font-size: 0.6em;"><a href="/tech/methods-and-reproducibility#storage-savings" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Cost Reduction</div>
-                            </div>
-                        </div>
-                        <p style="color: var(--text-light); line-height: 1.7; font-size: 0.9rem; margin: 0;">vs traditional vector databases, scales with every customer.</p>
-                    </div>
-                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid #8b5cf6;">
-                        <h5 style="color: #8b5cf6; margin-bottom: 12px;">🔒 Enterprise Security</h5>
-                        <p style="color: var(--text-light); line-height: 1.7;"><strong style="color: #8b5cf6;">Merkle-notarized lineage</strong> for cryptographic audit trails. <strong style="color: #9333ea;">Automatic threat detection</strong> with quarantine and rollback capabilities.</p>
-                    </div>
-                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--secondary-cyan);">
-                        <h5 style="color: var(--secondary-cyan); margin-bottom: 12px;">⚡ Performance</h5>
-                        <p style="color: var(--text-light); line-height: 1.7;"><strong style="color: var(--secondary-cyan);">0.65ms p95<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> encode latency (L1). <strong style="color: var(--primary-gold);">99.7% uptime<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> during chaos tests. <strong style="color: var(--secondary-cyan);">Hardware-agnostic</strong> (CPU/GPU/TPU/Google TPUs).</p>
-                    </div>
-                    <div style="padding: 24px; background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold); grid-column: 2;">
-                        <h5 style="color: var(--primary-gold); margin-bottom: 12px;">📊 Accuracy</h5>
-                        <div style="display: flex; gap: 1rem; margin-bottom: 12px; align-items: center;">
-                            <div style="flex: 1; background: rgba(255,215,0,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2);">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary-gold);">100%<sup style="font-size: 0.6em;">†</sup></div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Lossless</div>
-                            </div>
-                            <div style="flex: 1; background: rgba(0,188,212,0.1); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2);">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--secondary-cyan);">95.28%<sup style="font-size: 0.6em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Semantic</div>
+                            <div style="flex: 1; background: rgba(0,188,212,0.1); padding: clamp(0.5rem, 2vw, 0.75rem); border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2); min-width: 0;">
+                                <div style="font-size: clamp(1.4rem, 4vw, 1.8rem); font-weight: 700; color: var(--secondary-cyan); word-break: break-word;">60%+<sup style="font-size: 0.6em;"><a href="/tech/methods-and-reproducibility#storage-savings" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></div>
+                                <div style="font-size: clamp(0.7rem, 1.8vw, 0.75rem); color: var(--text-muted); margin-top: 4px;">Cost Reduction</div>
                             </div>
                         </div>
-                        <p style="color: var(--text-light); line-height: 1.7; font-size: 0.9rem; margin: 0;"><strong style="color: var(--primary-gold);">Bit-perfect reconstruction</strong> guaranteed in lossless mode.</p>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.85rem, 2vw, 0.9rem); margin: 0; word-wrap: break-word; overflow-wrap: anywhere;">vs traditional vector databases, scales with every customer.</p>
+                    </div>
+                    <div class="card" style="padding: clamp(16px, 3vw, 24px); background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid #8b5cf6; width: 100%;">
+                        <div class="mobile-badge">Enterprise Security</div>
+                        <h5 style="color: #8b5cf6; margin-bottom: 12px; font-size: clamp(1rem, 2.5vw, 1.2rem);">🔒 Enterprise Security</h5>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.9rem, 2vw, 1rem); word-wrap: break-word; overflow-wrap: anywhere;"><strong style="color: #8b5cf6;">Merkle-notarized lineage</strong> for cryptographic audit trails. <strong style="color: #9333ea;">Automatic threat detection</strong> with quarantine and rollback capabilities.</p>
+                    </div>
+                    <div class="card" style="padding: clamp(16px, 3vw, 24px); background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--secondary-cyan); width: 100%;">
+                        <div class="mobile-badge">Performance</div>
+                        <h5 style="color: var(--secondary-cyan); margin-bottom: 12px; font-size: clamp(1rem, 2.5vw, 1.2rem);">⚡ Performance</h5>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.9rem, 2vw, 1rem); word-wrap: break-word; overflow-wrap: anywhere;"><strong style="color: var(--secondary-cyan);">0.65ms p95<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> encode latency (L1). <strong style="color: var(--primary-gold);">99.7% uptime<sup style="color: var(--text-muted); font-size: 0.7em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></strong> during chaos tests. <strong style="color: var(--secondary-cyan);">Hardware-agnostic</strong> (CPU/GPU/TPU/Google TPUs).</p>
+                    </div>
+                    <div class="card" style="padding: clamp(16px, 3vw, 24px); background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--primary-gold); width: 100%;">
+                        <div class="mobile-badge">Accuracy</div>
+                        <h5 style="color: var(--primary-gold); margin-bottom: 12px; font-size: clamp(1rem, 2.5vw, 1.2rem);">📊 Accuracy</h5>
+                        <div class="accuracy-boxes" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 12px;">
+                            <div style="background: rgba(255,215,0,0.1); padding: clamp(0.75rem, 2vw, 1rem); border-radius: 8px; text-align: center; border: 1px solid rgba(255,215,0,0.2); width: 100%;">
+                                <div style="font-size: clamp(1.4rem, 4vw, 1.8rem); font-weight: 700; color: var(--primary-gold); word-break: break-word;">100%<sup style="font-size: 0.6em;">†</sup></div>
+                                <div style="font-size: clamp(0.7rem, 1.8vw, 0.75rem); color: var(--text-muted); margin-top: 4px;">Lossless</div>
+                            </div>
+                            <div style="background: rgba(0,188,212,0.1); padding: clamp(0.75rem, 2vw, 1rem); border-radius: 8px; text-align: center; border: 1px solid rgba(0,188,212,0.2); width: 100%;">
+                                <div style="font-size: clamp(1.4rem, 4vw, 1.8rem); font-weight: 700; color: var(--secondary-cyan); word-break: break-word;">95.28%<sup style="font-size: 0.6em;"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup></div>
+                                <div style="font-size: clamp(0.7rem, 1.8vw, 0.75rem); color: var(--text-muted); margin-top: 4px;">Semantic</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.85rem, 2vw, 0.9rem); margin: 0; word-wrap: break-word; overflow-wrap: anywhere;"><strong style="color: var(--primary-gold);">Bit-perfect reconstruction</strong> guaranteed in lossless mode.</p>
                     </div>
                 </div>
             </div>
