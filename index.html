@@ -2994,7 +2994,7 @@
                     <div class="card" style="padding: clamp(16px, 3vw, 24px); background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid #8b5cf6; width: 100%;">
                         <div class="mobile-badge">Enterprise Security</div>
                         <h5 style="color: #8b5cf6; margin-bottom: 12px; font-size: clamp(1rem, 2.5vw, 1.2rem);">🔒 Enterprise Security</h5>
-                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.9rem, 2vw, 1rem); word-wrap: break-word; overflow-wrap: anywhere;"><strong style="color: #8b5cf6;">Merkle-notarized lineage</strong> for cryptographic audit trails. <strong style="color: #9333ea;">Automatic threat detection</strong> with quarantine and rollback capabilities.</p>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.9rem, 2vw, 1rem); word-wrap: break-word; overflow-wrap: break-word; word-break: normal;"><strong style="color: #8b5cf6;">Merkle-notarized lineage</strong> for cryptographic audit trails. <strong style="color: #9333ea;">Automatic threat detection</strong> with quarantine and rollback capabilities.</p>
                     </div>
                     <div class="card" style="padding: clamp(16px, 3vw, 24px); background: rgba(255,255,255,0.05); border-radius: 12px; border-left: 4px solid var(--secondary-cyan); width: 100%;">
                         <div class="mobile-badge">Performance</div>
@@ -3018,7 +3018,7 @@
                                 <div style="font-size: clamp(0.7rem, 1.8vw, 0.75rem); color: var(--text-muted); margin-top: 4px;">Semantic</div>
                             </div>
                         </div>
-                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.85rem, 2vw, 0.9rem); margin: 0; word-wrap: break-word; overflow-wrap: anywhere;"><strong style="color: var(--primary-gold);">Bit-perfect reconstruction</strong> guaranteed in lossless mode.</p>
+                        <p style="color: var(--text-light); line-height: 1.7; font-size: clamp(0.85rem, 2vw, 0.9rem); margin: 0; word-wrap: break-word; overflow-wrap: break-word; word-break: normal;"><strong style="color: var(--primary-gold);">Bit-perfect reconstruction</strong> guaranteed in lossless mode.</p>
                     </div>
                 </div>
             </div>
@@ -3033,12 +3033,12 @@
                     <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px; word-break: normal; overflow-wrap: break-word;">
                         <strong style="color: var(--primary-gold); white-space: nowrap;">Methodology:</strong> <sup class="fn"><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods & reproducibility">*</a></sup> Internal benchmarks based on sample documents (33% text, 33% structured JSON, 33% multimodal). Hardware: Intel/AMD x86_64 CPU (GPU/TPU acceleration further reduces latency). Full methodology and reproducibility notes: <a href="/docs/BENCHMARK_RESULTS.md" style="color: var(--primary-gold); text-decoration: underline;">BENCHMARK_RESULTS.md</a>
                     </p>
-                    <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin: 0;">
-                        <strong style="color: var(--primary-gold);">Metric Definitions:</strong> 
-                        <strong style="color: var(--secondary-cyan);">Reconstruction accuracy (lossless)</strong> = exact byte-match %. 
-                        <strong style="color: var(--secondary-cyan);">Semantic similarity (semantic mode)</strong> = character-level similarity %. 
-                        <strong style="color: var(--secondary-cyan);">Task-level accuracy</strong> = downstream evaluation metrics (varies by task).
-                    </p>
+                    <div style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin: 0; word-break: normal; overflow-wrap: break-word;">
+                        <div style="margin-bottom: 0.5em;"><strong style="color: var(--primary-gold);">Metric Definitions:</strong></div>
+                        <div style="margin-bottom: 0.4em;"><strong style="color: var(--secondary-cyan); white-space: nowrap;">Reconstruction accuracy (lossless)</strong> = exact byte-match %</div>
+                        <div style="margin-bottom: 0.4em;"><strong style="color: var(--secondary-cyan); white-space: nowrap;">Semantic similarity (semantic mode)</strong> = character-level similarity %</div>
+                        <div><strong style="color: var(--secondary-cyan); white-space: nowrap;">Task-level accuracy</strong> = downstream evaluation metrics (varies by task)</div>
+                    </div>
                 </div>
             </div>
 
