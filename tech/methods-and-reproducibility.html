@@ -23,6 +23,26 @@
         }
         .breadcrumb a { color: #FFD700; text-decoration: none; }
         .breadcrumb a:hover { text-decoration: underline; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.1));
+            border: 2px solid rgba(255,215,0,0.4);
+            border-radius: 8px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+            background: linear-gradient(135deg, rgba(255,215,0,0.3), rgba(255,215,0,0.2));
+        }
         h1 { color: #FFD700; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
         h2 { color: #00bcd4; font-size: clamp(1.5rem, 4vw, 2rem); margin: 48px 0 24px; }
         h3 { color: #8b5cf6; font-size: clamp(1.2rem, 3vw, 1.5rem); margin: 32px 0 16px; }
@@ -166,6 +186,46 @@
 </head>
 <body>
     <div class="container">
+        <a href="/#benchmarks" class="back-link" id="backLink">← Back to Benchmarks</a>
+        <script>
+            // Smart back navigation: return to exact section user came from
+            (function() {
+                const backLink = document.getElementById('backLink');
+                const referrer = document.referrer;
+                const currentHash = window.location.hash;
+                
+                // Determine where user came from based on referrer
+                if (referrer.includes('daena.mas-ai.co')) {
+                    const referrerUrl = new URL(referrer);
+                    
+                    // If came from benchmarks section
+                    if (referrerUrl.hash === '#benchmarks' || referrer.includes('#benchmarks')) {
+                        backLink.href = '/#benchmarks';
+                        backLink.textContent = '← Back to Benchmarks';
+                    }
+                    // If came from NBMF page
+                    else if (referrer.includes('/nbmf')) {
+                        backLink.href = '/nbmf';
+                        backLink.textContent = '← Back to NBMF Deep Dive';
+                    }
+                    // If came from investor section
+                    else if (referrerUrl.hash === '#investor-value' || referrer.includes('#investor-value')) {
+                        backLink.href = '/#investor-value';
+                        backLink.textContent = '← Back to Why Investors Choose Daena';
+                    }
+                    // If came from what-it-is section
+                    else if (referrerUrl.hash === '#what-it-is' || referrer.includes('#what-it-is')) {
+                        backLink.href = '/#what-it-is';
+                        backLink.textContent = '← Back to What It Is';
+                    }
+                    // Default to benchmarks (most common source)
+                    else {
+                        backLink.href = '/#benchmarks';
+                        backLink.textContent = '← Back to Benchmarks';
+                    }
+                }
+            })();
+        </script>
         <nav class="breadcrumb">
             <a href="/">Home</a> / <a href="/#memory-governance">Tech</a> / Methods & Reproducibility
         </nav>

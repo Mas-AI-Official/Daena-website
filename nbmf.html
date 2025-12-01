@@ -18,8 +18,26 @@
         .container { max-width: 1200px; margin: 0 auto; }
         h1 { color: #FFD700; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 24px; }
         h2 { color: #00bcd4; font-size: clamp(1.5rem, 4vw, 2rem); margin: 48px 0 24px; }
-        .back-link { display: inline-block; margin-bottom: 32px; color: #FFD700; text-decoration: none; }
-        .back-link:hover { text-decoration: underline; }
+        .back-link { 
+            display: inline-block; 
+            margin-bottom: 32px; 
+            padding: 10px 20px; 
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.1)); 
+            border: 2px solid rgba(255,215,0,0.4); 
+            border-radius: 8px; 
+            color: #FFD700; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: clamp(0.9rem, 2vw, 1rem); 
+            transition: all 0.3s ease; 
+            text-align: center; 
+            white-space: nowrap;
+        }
+        .back-link:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+            background: linear-gradient(135deg, rgba(255,215,0,0.3), rgba(255,215,0,0.2));
+        }
         .section { background: rgba(255,255,255,0.05); padding: 32px; border-radius: 16px; margin-bottom: 32px; border: 2px solid rgba(255,215,0,0.2); }
         .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
         .tier-card {
@@ -106,7 +124,40 @@
         <nav class="breadcrumb" style="margin-bottom: 32px; font-size: 0.9rem; color: #B8BCC8;">
             <a href="/" style="color: #FFD700; text-decoration: none;">Home</a> / <a href="/#for-developers" style="color: #FFD700; text-decoration: none;">For Developers</a> / NBMF Deep Dive
         </nav>
-        <a href="/#what-it-is" class="back-link">← Back to What It Is</a>
+        <a href="/#what-it-is" class="back-link" id="backLink">← Back to What It Is</a>
+        <script>
+            // Smart back navigation: return to exact section user came from
+            (function() {
+                const backLink = document.getElementById('backLink');
+                const referrer = document.referrer;
+                const currentHash = window.location.hash;
+                
+                // If coming from main page with a hash, go back to that section
+                if (referrer.includes('daena.mas-ai.co') && !referrer.includes('/nbmf') && !referrer.includes('/enterprise-dna')) {
+                    // Check if referrer had a hash (like #benchmarks)
+                    const referrerUrl = new URL(referrer);
+                    if (referrerUrl.hash) {
+                        backLink.href = '/' + referrerUrl.hash;
+                        backLink.textContent = '← Back to ' + referrerUrl.hash.substring(1).replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    } else if (referrer.includes('#what-it-is') || referrer.includes('#memory-governance')) {
+                        backLink.href = '/#what-it-is';
+                    } else {
+                        // Default to what-it-is section
+                        backLink.href = '/#what-it-is';
+                    }
+                }
+                
+                // If on benchmarks section of NBMF page, offer back to main benchmarks
+                if (currentHash === '#benchmarks') {
+                    const benchmarksBack = document.createElement('a');
+                    benchmarksBack.href = '/#benchmarks';
+                    benchmarksBack.className = 'back-link';
+                    benchmarksBack.style.marginTop = '16px';
+                    benchmarksBack.textContent = '← Back to Benchmarks (Main Page)';
+                    backLink.parentNode.insertBefore(benchmarksBack, backLink.nextSibling);
+                }
+            })();
+        </script>
         <h1>NBMF Memory System - Deep Dive</h1>
         <p style="font-size: 1.2rem; color: #B8BCC8; margin-bottom: 48px;">
             Comprehensive technical documentation for Daena's Neural-Backed Memory Fabric (NBMF) - the <strong style="color: #FFD700;">patent-pending</strong> memory architecture that delivers <strong style="color: #FFD700;">94.3% storage savings<sup>†</sup></strong> with <strong style="color: #00bcd4;">100% exact match (lossless mode)<sup>†</sup></strong> or <strong style="color: #00bcd4;">95.28% similarity (semantic mode)<sup>†</sup></strong>.
