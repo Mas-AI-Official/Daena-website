@@ -11,12 +11,13 @@
 - Anchor links scroll correctly with offset
 
 ### 2. Smart Back Navigation ✅
-- **NBMF Deep Dive** → Returns to `/#what-it-is` or detected section
-- **Enterprise-DNA Deep Dive** → Returns to `/#what-it-is` or detected section
-- **Methods & Reproducibility** → Returns to benchmarks/NBMF/investor based on referrer
+- **NBMF Deep Dive** → Returns to `/#for-developers` (unified section)
+- **Enterprise-DNA Deep Dive** → Returns to `/#for-developers` (unified section)
+- **Methods & Reproducibility** → Returns to `/#for-developers` or benchmarks/investor based on referrer
 - **NBMF Benchmarks Section** → Returns to `/#benchmarks` on main page
 - **Investor Portal** → Returns to `/#investor-value`
 - **Security & Compliance** → Returns to `/#security-compliance`
+- **Sections Merged** → "What It Is" and "For Developers" combined into single unified section
 
 ### 3. Consistent Metrics & Claims ✅
 - ROI: `2–3× ROI (target range)` - consistent across all pages
@@ -40,7 +41,7 @@
 ## 📊 Current Status
 
 **Branch:** `main`  
-**Last Commit:** `10f93a8` - feat: add back button to NBMF benchmarks section  
+**Last Commit:** `bb5978d` - refactor: merge What It Is and For Developers into single section  
 **Status:** All changes committed and pushed to GitHub
 
 ## 🚀 Next Steps
