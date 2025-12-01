@@ -48,6 +48,9 @@
     <meta name="theme-color" content="#0f0f23">
     <link rel="alternate" hreflang="en" href="https://daena.mas-ai.co/">
     
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/css/globals.css">
+    
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -1733,20 +1736,21 @@
             writing-mode: horizontal-tb !important;
         }
         
-        /* Ensure all text containers wrap properly */
+        /* Ensure all text containers wrap properly - NO HYPHENATION */
         p, span, div, li, td, th {
             word-wrap: break-word;
             overflow-wrap: anywhere;
-            word-break: break-word;
+            word-break: normal;
+            hyphens: none !important;
             max-width: 100%;
             white-space: normal !important;
         }
         
-        /* Fix for long words */
+        /* Fix for long words - NO HYPHENATION */
         h1, h2, h3, h4, h5, h6 {
             word-wrap: break-word;
             overflow-wrap: break-word;
-            hyphens: auto;
+            hyphens: none !important;
             white-space: normal !important;
         }
         
@@ -3592,8 +3596,18 @@
         <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             Daena continues to evolve with cutting-edge technology that sets new industry standards
         </p>
+        <!-- Rail labels converted to chips on mobile -->
+        <div class="rail chip-scroll no-hyphens" style="margin-bottom: 24px;">
+            <span>NBMF Memory System</span>
+            <span>Hex-Mesh Communication</span>
+            <span>Trust & Governance Pipeline</span>
+            <span>Presence Beacons</span>
+            <span>Abstract + Lossless Pattern</span>
+            <span>Compliance Automation</span>
+            <span>Enterprise-DNA Layer</span>
+        </div>
         
-            <div class="features-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; justify-items: center;">
+            <div class="features-grid grid-cards" style="justify-items: center;">
             <div class="feature-card">
                 <div class="feature-icon">🧠</div>
                 <h3>NBMF Memory System</h3>
@@ -5008,27 +5022,30 @@ This request was submitted from the Daena AI website contact form.
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#" id="backToTop" style="position: fixed; bottom: 32px; right: 32px; background: var(--primary-gold); color: var(--dark-bg); padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; display: none; z-index: 1000; box-shadow: 0 4px 15px rgba(255,215,0,0.4); transition: all 0.3s ease;">
+    <a href="#" id="backToTop" class="back-to-top" aria-label="Back to top">
         ↑ Back to Top
     </a>
     
     <script>
-        // Back to top functionality
+        // Back to top functionality with prefers-reduced-motion support
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
+        
         window.addEventListener('scroll', function() {
             const backToTop = document.getElementById('backToTop');
             if (window.pageYOffset > 300) {
-                backToTop.style.display = 'block';
+                backToTop.classList.add('visible');
             } else {
-                backToTop.style.display = 'none';
+                backToTop.classList.remove('visible');
             }
         });
         
         document.getElementById('backToTop').addEventListener('click', function(e) {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: scrollBehavior });
         });
         
-        // Smooth scroll for anchor links
+        // Smooth scroll for anchor links with prefers-reduced-motion support
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
@@ -5039,12 +5056,22 @@ This request was submitted from the Daena AI website contact form.
                         const offsetTop = target.offsetTop - 100; // Account for fixed nav
                         window.scrollTo({
                             top: offsetTop,
-                            behavior: 'smooth'
+                            behavior: scrollBehavior
                         });
                     }
                 }
             });
         });
+        
+        // Lazy load images
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.classList.add('loaded');
+                });
+            });
+        }
     </script>
 
     <!-- Metatron Hexagonal Node Network -->
