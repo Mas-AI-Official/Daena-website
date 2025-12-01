@@ -572,6 +572,54 @@ br {
         line-height: 1.35 !important;
     }
     
+    /* Prevent gaps around superscript footnotes */
+    sup, .fn, sup a {
+        display: inline !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+    }
+    
+    /* Keep text with footnotes together */
+    strong sup, 
+    strong .fn,
+    strong sup a,
+    span sup,
+    span .fn {
+        white-space: nowrap !important;
+    }
+    
+    /* Prevent line breaks between text and footnote */
+    p strong:has(sup),
+    p strong:has(.fn) {
+        white-space: nowrap !important;
+    }
+    
+    /* Keep "See our" and links together - Security & Compliance */
+    p:has(a[href*="security"]) {
+        word-break: normal !important;
+    }
+    
+    p:has(a[href*="security"]) .mobile-break {
+        display: block !important;
+    }
+    
+    p:has(a[href*="security"]) span {
+        display: inline !important;
+    }
+    
+    /* Fix revenue streams text wrapping */
+    .feature-card p {
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Keep methodology text together */
+    p:has(strong:contains("Methodology")) {
+        word-break: keep-all !important;
+    }
+    
     /* Remove <br> line breaks inside ribbon labels/headings */
     .ribbon br,
     .side-ribbon br,
