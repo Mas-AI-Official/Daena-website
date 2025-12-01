@@ -46,14 +46,14 @@ body {
     padding-bottom: var(--safe-bottom);
 }
 
-/* Fluid Typography */
+/* Fluid Typography - Mobile-First */
 h1 {
-    font-size: clamp(28px, 5vw, 44px);
+    font-size: clamp(24px, 5vw, 44px);
     line-height: 1.1;
 }
 
 h2 {
-    font-size: clamp(22px, 3.6vw, 32px);
+    font-size: clamp(20px, 3.6vw, 32px);
     line-height: 1.2;
 }
 
@@ -65,6 +65,13 @@ h3 {
 h4 {
     font-size: clamp(16px, 2.5vw, 20px);
     line-height: 1.4;
+}
+
+/* Ensure headings wrap properly */
+h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    white-space: normal;
 }
 
 /* Prevent Writing-Mode for Body Copy */
@@ -86,7 +93,41 @@ img, svg, canvas, video {
     display: block;
 }
 
-/* Rail Component (Desktop Vertical, Mobile Horizontal Chips) */
+/* Vertical Ribbon Component (Hidden on Mobile, Badge Shown Instead) */
+.ribbon {
+    display: none;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 12px 8px;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .ribbon {
+        display: block;
+    }
+}
+
+/* Mobile Badge (Shown on Mobile, Hidden on Desktop) */
+.mobile-badge {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .mobile-badge {
+        display: none;
+    }
+}
+
+/* Rail Component (Desktop Vertical, Mobile Horizontal Chips) - Legacy Support */
 .rail {
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -94,7 +135,7 @@ img, svg, canvas, video {
     white-space: nowrap;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .rail {
         writing-mode: initial;
         text-orientation: initial;
@@ -135,40 +176,50 @@ img, svg, canvas, video {
     scroll-snap-align: start;
 }
 
-/* Card Grids - Responsive */
-.grid-cards {
+/* Card Grids - Responsive (Mobile-First) */
+.grid-cards,
+.cards,
+.features-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 1rem;
 }
 
 @media (min-width: 768px) {
-    .grid-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+    .grid-cards,
+    .cards,
+    .features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
     }
 }
 
-@media (min-width: 1024px) {
-    .grid-cards {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
+@media (min-width: 1280px) {
+    .grid-cards,
+    .cards,
+    .features-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2rem;
     }
 }
 
 /* Card Component */
-.card {
+.card,
+.feature-card {
+    min-width: 0;
     padding: 16px;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     word-wrap: break-word;
     overflow-wrap: anywhere;
-    hyphens: none;
+    hyphens: auto;
+    break-words: break-word;
 }
 
 @media (min-width: 768px) {
-    .card {
+    .card,
+    .feature-card {
         padding: 24px;
     }
 }
@@ -182,12 +233,12 @@ img, svg, canvas, video {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Back to Top Button - Sticky with Safe Area */
+/* Back to Top Button - Fixed with Safe Area (No Overlap) */
 .back-to-top {
-    position: sticky;
-    bottom: calc(16px + var(--safe-bottom));
-    right: calc(16px + var(--safe-right));
-    z-index: 30;
+    position: fixed;
+    bottom: 24px;
+    right: 16px;
+    z-index: 60;
     background: var(--primary-gold, #FFD700);
     color: var(--dark-bg, #0f0f23);
     padding: 10px 14px;
@@ -198,7 +249,6 @@ img, svg, canvas, video {
     display: none;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
     transition: all 0.3s ease;
-    margin-left: auto;
     width: fit-content;
 }
 
@@ -210,8 +260,19 @@ img, svg, canvas, video {
     .back-to-top {
         font-size: 12px;
         padding: 8px 12px;
-        bottom: calc(12px + var(--safe-bottom));
-        right: calc(12px + var(--safe-right));
+        bottom: 16px;
+        right: 12px;
+    }
+}
+
+/* Prevent Back-to-Top from overlapping content */
+body {
+    padding-bottom: 96px;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-bottom: 80px;
     }
 }
 
