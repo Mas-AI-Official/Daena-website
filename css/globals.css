@@ -643,12 +643,35 @@ br {
     /* Fix text wrapping in cards */
     .card,
     .card * {
-        overflow-wrap: anywhere !important;
+        overflow-wrap: break-word !important;
         word-break: normal !important;
         hyphens: auto !important;
         white-space: normal !important;
-        line-height: 1.35 !important;
+        line-height: 1.5 !important;
         letter-spacing: normal !important;
+    }
+    
+    /* Ensure all paragraphs flow properly to next line */
+    p, .market-insight p, .section-card p, .feature-card p {
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        line-height: 1.6 !important;
+        margin-bottom: 1em !important;
+    }
+    
+    /* Ensure text in market insight flows properly */
+    .market-insight p {
+        text-align: center !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Ensure all divs with text flow properly */
+    div:not(.chart-bar):not(.bar-value):not(.bar-year):not(.mobile-badge) {
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
     }
     
     /* Remove fixed heights from card content */
@@ -692,7 +715,24 @@ br {
     p, span, div, li, td, th {
         white-space: normal !important;
         word-wrap: break-word !important;
-        overflow-wrap: anywhere !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Ensure all text blocks flow to next line when needed */
+    p, div, span, li {
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+    
+    /* Prevent gaps in text - ensure continuous flow */
+    p strong, div strong, span strong {
+        white-space: normal !important;
+    }
+    
+    /* Exception: keep numbers and percentages together - only for elements with explicit white-space: nowrap */
+    strong[style*="white-space: nowrap"] {
+        white-space: nowrap !important;
     }
     
     /* Remove any pseudo-elements that might show line break indicators */
