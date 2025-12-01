@@ -4953,6 +4953,46 @@ This request was submitted from the Daena AI website contact form.
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" style="position: fixed; bottom: 32px; right: 32px; background: var(--primary-gold); color: var(--dark-bg); padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; display: none; z-index: 1000; box-shadow: 0 4px 15px rgba(255,215,0,0.4); transition: all 0.3s ease;">
+        ↑ Back to Top
+    </a>
+    
+    <script>
+        // Back to top functionality
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        document.getElementById('backToTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '#!') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        const offsetTop = target.offsetTop - 100; // Account for fixed nav
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+
     <!-- Metatron Hexagonal Node Network -->
     <script src="metatron-hex-network.js"></script>
 </body>
