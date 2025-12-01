@@ -596,17 +596,26 @@ br {
         white-space: nowrap !important;
     }
     
-    /* Keep "See our" and links together - Security & Compliance */
+    /* Security & Compliance - Force line breaks on mobile */
     p:has(a[href*="security"]) {
         word-break: normal !important;
     }
     
     p:has(a[href*="security"]) .mobile-break {
         display: block !important;
+        height: 0.5em !important;
+        line-height: 0.5em !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     p:has(a[href*="security"]) span {
         display: inline !important;
+        white-space: nowrap !important;
+    }
+    
+    p:has(a[href*="security"]) a {
+        white-space: nowrap !important;
     }
     
     /* Fix revenue streams text wrapping */
