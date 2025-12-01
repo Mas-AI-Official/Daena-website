@@ -107,10 +107,12 @@ img, svg, canvas, video {
     display: block;
 }
 
-/* Vertical Ribbon Component - Horizontal on Mobile */
+/* Vertical Ribbon Component - Hidden on Mobile, Replaced by H3 */
 .ribbon,
 .vertical-rail,
-.side-ribbon {
+.side-ribbon,
+.side-label,
+.spine-label {
     writing-mode: vertical-rl;
     text-orientation: mixed;
     padding: 12px 8px;
@@ -118,27 +120,25 @@ img, svg, canvas, video {
 }
 
 @media (max-width: 767.98px) {
-    .ribbon,
     .vertical-rail,
+    .side-label,
+    .spine-label,
+    .ribbon,
     .side-ribbon,
     [class*="ribbon"],
-    [class*="rail"] {
-        writing-mode: horizontal-tb !important;
-        transform: none !important;
-        white-space: normal !important;
-        margin: 0 0 8px 0 !important;
-        width: auto !important;
-        height: auto !important;
-        padding: 8px 12px !important;
-        display: block !important;
-        text-align: center !important;
+    [class*="rail"],
+    [style*="writing-mode: vertical-rl"],
+    [style*="writing-mode: vertical-lr"] {
+        display: none !important;
     }
 }
 
 @media (min-width: 768px) {
     .ribbon,
     .vertical-rail,
-    .side-ribbon {
+    .side-ribbon,
+    .side-label,
+    .spine-label {
         display: block;
     }
 }
@@ -195,40 +195,36 @@ img, svg, canvas, video {
     }
 }
 
-/* Chip Scroll Container - Stack on Mobile, Scroll on Tablet+ */
+/* Pill Tabs / Chip Scroll Container - Horizontal scroll on mobile */
+.pill-tabs,
 .chip-scroll {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 8px 0;
-}
-
-@media (min-width: 768px) {
-    .chip-scroll {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px;
-        overflow-x: visible;
-    }
-}
-
-/* Alternative: Horizontal scroll on mobile */
-.chip-scroll.horizontal {
-    flex-direction: row;
+    gap: 0.5rem;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    padding: 0 0.5rem 0.5rem;
     scroll-snap-type: x mandatory;
 }
 
+.pill-tabs::-webkit-scrollbar,
+.chip-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.pill-tabs > *,
 .chip-scroll > * {
     flex-shrink: 0;
     min-width: max-content;
     scroll-snap-align: start;
 }
 
-.chip-scroll.horizontal > * {
-    scroll-snap-align: start;
+@media (min-width: 768px) {
+    .pill-tabs,
+    .chip-scroll {
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
 }
 
 /* Card Grids - Responsive (Mobile-First) */
@@ -247,27 +243,44 @@ img, svg, canvas, video {
 
 /* Force single column on mobile (<768px) */
 @media (max-width: 767.98px) {
+    .grid-2,
+    .grid-3,
     .feature-grid,
     .cards-grid,
+    .compliance-grid,
+    .governance-grid,
     [data-grid="features"],
     .grid-cards,
     .cards,
     .features-grid,
-    .grid-2,
-    .grid-3,
+    .growth-stats,
     [style*="grid-template-columns: repeat(2"],
     [style*="grid-template-columns: repeat(3"],
     [style*="grid-template-columns: repeat(4"],
-    [style*="grid-template-columns: repeat(5"] {
+    [style*="grid-template-columns: repeat(5"],
+    [style*="grid-template-columns: repeat(auto-fit"],
+    /* Proof & Validation section inline grids */
+    #proof-validation [style*="grid-template-columns: repeat(2"],
+    #proof-validation [style*="grid-template-columns: repeat(3"],
+    #proof-validation [style*="grid-template-columns: repeat(4"] {
         display: grid !important;
         grid-template-columns: 1fr !important;
-        gap: 16px !important;
+        gap: 1rem !important;
     }
     
     .card {
+        margin: 0 0 1rem 0 !important;
+        min-height: auto !important;
         min-width: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
+        overflow: visible !important;
+    }
+    
+    /* Fix nested grids in Proof & Validation */
+    #proof-validation .grid-cards,
+    #proof-validation .cards {
+        grid-template-columns: 1fr !important;
     }
 }
 
@@ -330,7 +343,7 @@ img, svg, canvas, video {
     position: fixed !important;
     right: 16px;
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-    z-index: 1000 !important;
+    z-index: 50 !important;
     background: var(--primary-gold, #FFD700);
     color: var(--dark-bg, #0f0f23);
     padding: 10px 14px;
@@ -369,8 +382,11 @@ main {
 @media (max-width: 767.98px) {
     body,
     .page,
-    main {
-        padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+    main,
+    .section-wrapper,
+    .section-card,
+    .market-container {
+        padding-bottom: 96px !important;
     }
 }
 
@@ -547,6 +563,15 @@ br {
 
 /* Text wrapping, hyphenation, and broken lines - Mobile Fix */
 @media (max-width: 767.98px) {
+    /* Global text wrapping */
+    *,
+    p, li, .card p, .card li {
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        hyphens: auto !important;
+        line-height: 1.35 !important;
+    }
+    
     /* Remove <br> line breaks inside ribbon labels/headings */
     .ribbon br,
     .side-ribbon br,
@@ -563,14 +588,27 @@ br {
         word-break: normal !important;
         hyphens: auto !important;
         white-space: normal !important;
-        line-height: 1.45 !important;
+        line-height: 1.35 !important;
         letter-spacing: normal !important;
     }
     
+    /* Remove fixed heights from card content */
+    .card,
+    .card > * {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+    }
+    
     /* Headings - prevent breaking */
-    h1, h2, h3, .card-title {
+    h1, h2, h3, .card-title,
+    h2.section-title {
         word-break: keep-all !important;
-        font-size: clamp(18px, 5vw, 24px) !important;
+        font-size: clamp(20px, 5vw, 28px) !important;
+    }
+    
+    h3 {
+        font-size: clamp(18px, 4.5vw, 24px) !important;
     }
     
     /* Paragraphs and lists */
@@ -579,7 +617,7 @@ br {
     }
     
     /* Ensure no nowrap unless badge/number */
-    .card *:not(.badge):not(.number):not(.stat-value):not(.stat-label) {
+    .card *:not(.badge):not(.number):not(.stat-value):not(.stat-label):not(.bar-value):not(.bar-year) {
         white-space: normal !important;
     }
     
