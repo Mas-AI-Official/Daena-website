@@ -107,24 +107,38 @@ img, svg, canvas, video {
     display: block;
 }
 
-/* Vertical Ribbon Component (Hidden on Mobile, Badge Shown Instead) */
+/* Vertical Ribbon Component - Hidden on Mobile, Replaced by H3 */
 .ribbon,
-.vertical-rail {
-    display: none !important;
+.vertical-rail,
+.side-ribbon,
+.side-label,
+.spine-label {
     writing-mode: vertical-rl;
     text-orientation: mixed;
     padding: 12px 8px;
     white-space: nowrap;
 }
 
-@media (min-width: 640px) {
-    .ribbon {
-        display: none;
+@media (max-width: 767.98px) {
+    .vertical-rail,
+    .side-label,
+    .spine-label,
+    .ribbon,
+    .side-ribbon,
+    [class*="ribbon"],
+    [class*="rail"],
+    [style*="writing-mode: vertical-rl"],
+    [style*="writing-mode: vertical-lr"] {
+        display: none !important;
     }
 }
 
 @media (min-width: 768px) {
-    .ribbon {
+    .ribbon,
+    .vertical-rail,
+    .side-ribbon,
+    .side-label,
+    .spine-label {
         display: block;
     }
 }
@@ -156,7 +170,7 @@ img, svg, canvas, video {
     white-space: nowrap;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
     .rail {
         writing-mode: initial;
         text-orientation: initial;
@@ -181,40 +195,36 @@ img, svg, canvas, video {
     }
 }
 
-/* Chip Scroll Container - Stack on Mobile, Scroll on Tablet+ */
+/* Pill Tabs / Chip Scroll Container - Horizontal scroll on mobile */
+.pill-tabs,
 .chip-scroll {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 8px 0;
-}
-
-@media (min-width: 768px) {
-    .chip-scroll {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px;
-        overflow-x: visible;
-    }
-}
-
-/* Alternative: Horizontal scroll on mobile */
-.chip-scroll.horizontal {
-    flex-direction: row;
+    gap: 0.5rem;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    padding: 0 0.5rem 0.5rem;
     scroll-snap-type: x mandatory;
 }
 
+.pill-tabs::-webkit-scrollbar,
+.chip-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.pill-tabs > *,
 .chip-scroll > * {
     flex-shrink: 0;
     min-width: max-content;
     scroll-snap-align: start;
 }
 
-.chip-scroll.horizontal > * {
-    scroll-snap-align: start;
+@media (min-width: 768px) {
+    .pill-tabs,
+    .chip-scroll {
+        flex-wrap: wrap;
+        overflow-x: visible;
+    }
 }
 
 /* Card Grids - Responsive (Mobile-First) */
@@ -223,21 +233,53 @@ img, svg, canvas, video {
 .features-grid,
 .grid-2,
 .grid-3,
-.cards-grid {
+.cards-grid,
+.feature-grid,
+[data-grid="features"] {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
 }
 
-/* Force single column on small screens */
-@media (max-width: 640px) {
+/* Force single column on mobile (<768px) */
+@media (max-width: 767.98px) {
     .grid-2,
     .grid-3,
+    .feature-grid,
     .cards-grid,
+    .compliance-grid,
+    .governance-grid,
+    [data-grid="features"],
+    .grid-cards,
+    .cards,
+    .features-grid,
+    .growth-stats,
     [style*="grid-template-columns: repeat(2"],
     [style*="grid-template-columns: repeat(3"],
     [style*="grid-template-columns: repeat(4"],
-    [style*="grid-template-columns: repeat(5"] {
+    [style*="grid-template-columns: repeat(5"],
+    [style*="grid-template-columns: repeat(auto-fit"],
+    /* Proof & Validation section inline grids */
+    #proof-validation [style*="grid-template-columns: repeat(2"],
+    #proof-validation [style*="grid-template-columns: repeat(3"],
+    #proof-validation [style*="grid-template-columns: repeat(4"] {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    .card {
+        margin: 0 0 1rem 0 !important;
+        min-height: auto !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+    
+    /* Fix nested grids in Proof & Validation */
+    #proof-validation .grid-cards,
+    #proof-validation .cards {
         grid-template-columns: 1fr !important;
     }
 }
@@ -296,12 +338,12 @@ img, svg, canvas, video {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Back to Top Button - Sticky with Safe Area (No Overlap) */
+/* Back to Top Button - Fixed Floating Action Button */
 .back-to-top {
-    position: sticky;
-    bottom: max(16px, env(safe-area-inset-bottom, 16px));
+    position: fixed !important;
     right: 16px;
-    z-index: 40;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 50 !important;
     background: var(--primary-gold, #FFD700);
     color: var(--dark-bg, #0f0f23);
     padding: 10px 14px;
@@ -313,22 +355,20 @@ img, svg, canvas, video {
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
     transition: all 0.3s ease;
     width: fit-content;
-    margin-left: auto;
-    margin-top: -60px;
-    float: right;
+    margin: 0;
+    float: none;
 }
 
 .back-to-top.visible {
     display: block;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767.98px) {
     .back-to-top {
-        transform: scale(0.92);
-        font-size: 12px;
-        padding: 8px 12px;
-        bottom: max(12px, env(safe-area-inset-bottom, 12px));
-        right: 12px;
+        transform: scale(0.9) !important;
+        padding: 10px 14px !important;
+        right: 16px;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
 }
 
@@ -336,14 +376,17 @@ img, svg, canvas, video {
 body,
 .page,
 main {
-    padding-bottom: max(96px, env(safe-area-inset-bottom, 96px));
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
 }
 
-@media (min-width: 768px) {
+@media (max-width: 767.98px) {
     body,
     .page,
-    main {
-        padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+    main,
+    .section-wrapper,
+    .section-card,
+    .market-container {
+        padding-bottom: 96px !important;
     }
 }
 
@@ -518,8 +561,125 @@ br {
     white-space: normal;
 }
 
-/* Fix line break rendering on mobile */
-@media (max-width: 768px) {
+/* Text wrapping, hyphenation, and broken lines - Mobile Fix */
+@media (max-width: 767.98px) {
+    /* Global text wrapping */
+    *,
+    p, li, .card p, .card li {
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        hyphens: auto !important;
+        line-height: 1.35 !important;
+    }
+    
+    /* Prevent gaps around superscript footnotes */
+    sup, .fn, sup a {
+        display: inline !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+    }
+    
+    /* Keep text with footnotes together */
+    strong sup, 
+    strong .fn,
+    strong sup a,
+    span sup,
+    span .fn {
+        white-space: nowrap !important;
+    }
+    
+    /* Prevent line breaks between text and footnote */
+    p strong:has(sup),
+    p strong:has(.fn) {
+        white-space: nowrap !important;
+    }
+    
+    /* Security & Compliance - Force line breaks on mobile */
+    p:has(a[href*="security"]) {
+        word-break: normal !important;
+    }
+    
+    p:has(a[href*="security"]) .mobile-break {
+        display: block !important;
+        height: 0.4em !important;
+        line-height: 0.4em !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        content: "" !important;
+    }
+    
+    p:has(a[href*="security"]) span {
+        display: inline !important;
+        white-space: nowrap !important;
+    }
+    
+    p:has(a[href*="security"]) a {
+        white-space: nowrap !important;
+        display: inline-block !important;
+    }
+    
+    /* Fix revenue streams text wrapping */
+    .feature-card p {
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Keep methodology text together */
+    p:has(strong:contains("Methodology")) {
+        word-break: keep-all !important;
+    }
+    
+    /* Remove <br> line breaks inside ribbon labels/headings */
+    .ribbon br,
+    .side-ribbon br,
+    .vertical-rail br,
+    h1 br, h2 br, h3 br, h4 br, h5 br, h6 br,
+    .card-title br {
+        display: none !important;
+    }
+    
+    /* Fix text wrapping in cards */
+    .card,
+    .card * {
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+        hyphens: auto !important;
+        white-space: normal !important;
+        line-height: 1.35 !important;
+        letter-spacing: normal !important;
+    }
+    
+    /* Remove fixed heights from card content */
+    .card,
+    .card > * {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+    }
+    
+    /* Headings - prevent breaking */
+    h1, h2, h3, .card-title,
+    h2.section-title {
+        word-break: keep-all !important;
+        font-size: clamp(20px, 5vw, 28px) !important;
+    }
+    
+    h3 {
+        font-size: clamp(18px, 4.5vw, 24px) !important;
+    }
+    
+    /* Paragraphs and lists */
+    p, li {
+        font-size: clamp(14px, 4.2vw, 17px) !important;
+    }
+    
+    /* Ensure no nowrap unless badge/number */
+    .card *:not(.badge):not(.number):not(.stat-value):not(.stat-label):not(.bar-value):not(.bar-year) {
+        white-space: normal !important;
+    }
+    
     br {
         display: block;
         margin: 0;
@@ -575,6 +735,75 @@ br {
     #what-it-is .feature-card {
         padding: 12px;
         margin-bottom: 12px;
+    }
+}
+
+/* Anchor headings - scroll offset for sticky header */
+:target,
+[id],
+[id][tabindex="-1"] {
+    scroll-margin-top: 84px;
+}
+
+@media (max-width: 767.98px) {
+    :target,
+    [id],
+    [id][tabindex="-1"] {
+        scroll-margin-top: 72px;
+    }
+}
+
+/* Images & charts - responsive */
+img, svg, canvas, video {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+@media (max-width: 767.98px) {
+    img, svg, canvas, video {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+    
+    /* Remove fixed heights on mobile */
+    img[height],
+    svg[height],
+    canvas[height],
+    video[height] {
+        height: auto !important;
+    }
+}
+
+/* Footnote styling for † characters */
+.fn,
+sup.fn {
+    font-size: 0.7em;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 2px;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Prefers reduced motion for mobile */
+@media (max-width: 767.98px) and (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Mute heavy background animations */
+    .metatron-bg,
+    .metatron-pattern-bg,
+    #metatron-hex-canvas {
+        animation: none !important;
+        opacity: 0.3 !important;
     }
 }
 
