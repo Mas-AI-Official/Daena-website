@@ -107,6 +107,16 @@
                 word-wrap: break-word;
                 font-size: 0.9rem !important;
             }
+            
+            /* Stack back buttons vertically on mobile */
+            #benchmarks .back-link {
+                margin-bottom: 0.75rem !important;
+            }
+            
+            #benchmarks div[style*="flex-direction"] {
+                flex-direction: column !important;
+                gap: 0.75rem !important;
+            }
         }
         
         @media (max-width: 480px) {
