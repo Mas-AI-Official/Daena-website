@@ -230,21 +230,20 @@
         </div>
 
         <div class="section" id="benchmarks">
-            <a href="/#benchmarks" class="back-link" style="margin-bottom: 24px; display: block;">← Back to Benchmarks (Main Page)</a>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+                <a href="/#for-developers" class="back-link" style="display: block;">← Back to For Developers</a>
+                <a href="/#benchmarks" class="back-link" style="display: block;">← Back to Benchmarks (Main Page)</a>
+            </div>
             <h2>Benchmarks & Technical Documentation</h2>
-            <p style="margin-bottom: 24px;">See <a href="/#benchmarks" style="color: #FFD700;">benchmarks section</a> on the main page for interactive charts and detailed performance metrics.</p>
-            
-            <h3 style="color: #00bcd4; font-size: 1.3rem; margin: 32px 0 16px;">📊 Benchmark Results</h3>
             <div style="background: rgba(0,188,212,0.1); padding: 24px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(0,188,212,0.2);">
-                <p style="margin-bottom: 16px;"><strong style="color: #00bcd4;">Comprehensive Benchmark Data:</strong></p>
-                <ul style="margin-left: 24px; line-height: 2; margin-bottom: 16px;">
-                    <li><strong style="color: #FFD700;">Compression:</strong> 13.30× (lossless), 2.53× (semantic) - <strong style="color: #00bcd4;">94.3% storage savings†</strong></li>
-                    <li><strong style="color: #FFD700;">Accuracy:</strong> 100% exact match (lossless), 95.28% similarity (semantic)†</li>
-                    <li><strong style="color: #FFD700;">Latency:</strong> 0.65ms p95 encode (L1), sub-millisecond decode†</li>
-                    <li><strong style="color: #FFD700;">Token Reduction:</strong> 94.3% (lossless), 74.4% (semantic) - exceptional cost savings†</li>
-                </ul>
-                <p style="font-size: 0.9em; color: #B8BCC8; margin: 0;">
-                    <sup><a href="/tech/methods-and-reproducibility" style="color: inherit; text-decoration: none;" title="See methods">†</a></sup> Internal benchmarks. See <a href="/tech/methods-and-reproducibility" style="color: #00bcd4; text-decoration: underline;">methods & reproducibility page</a> for methodology, datasets, and reproducibility notes.
+                <p style="margin-bottom: 16px; color: var(--text-light); line-height: 1.8;">
+                    For interactive charts and detailed performance metrics, see the <a href="/#benchmarks" style="color: #00bcd4; text-decoration: underline; font-weight: 600;">benchmarks section on the main page</a>.
+                </p>
+                <p style="margin-bottom: 16px; color: var(--text-light); line-height: 1.8;">
+                    For comprehensive methodology, datasets, and reproducibility notes, see the <a href="/tech/methods-and-reproducibility" style="color: #00bcd4; text-decoration: underline; font-weight: 600;">methods & reproducibility page</a>.
+                </p>
+                <p style="margin-bottom: 16px; color: var(--text-light); line-height: 1.8;">
+                    For detailed benchmark results in markdown format, see <a href="/docs/BENCHMARK_RESULTS.md" style="color: #00bcd4; text-decoration: underline; font-weight: 600;">BENCHMARK_RESULTS.md</a>.
                 </p>
             </div>
             
