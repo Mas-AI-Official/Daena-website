@@ -730,11 +730,8 @@ br {
         white-space: normal !important;
     }
     
-    /* Exception: keep numbers and percentages together */
-    strong:has-text("67%"), 
-    strong:has-text("$1.2"), 
-    strong:has-text("CAGR"),
-    strong:has-text("2030") {
+    /* Exception: keep numbers and percentages together - only for elements with explicit white-space: nowrap */
+    strong[style*="white-space: nowrap"] {
         white-space: nowrap !important;
     }
     
