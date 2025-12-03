@@ -420,13 +420,14 @@ img, svg, canvas, video {
     
     .kpi-label {
         font-size: clamp(14px, 3.2vw, 16px);
+        hyphens: auto;
+    }
+    
+    .kpi-details {
+        min-height: 0;
+        height: auto;
     }
 }
-    hyphens: auto;
-    min-height: 0;
-    height: auto;
-}
-
 @media (min-width: 768px) {
     .card,
     .feature-card {
@@ -951,4 +952,3 @@ sup.fn {
         opacity: 0.3 !important;
     }
 }
-

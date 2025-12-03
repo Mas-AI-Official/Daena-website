@@ -1,5 +1,8 @@
 import { test, expect, devices } from '@playwright/test';
 
+// Base URL for testing
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+
 // Test matrix: iPhone 12/14, iPhone SE, Pixel 6, Safari iOS, Chrome Android
 const mobileDevices = [
     { name: 'iPhone 12', ...devices['iPhone 12'] },
@@ -146,8 +149,8 @@ test.describe('Mobile Layout Tests (<768px)', () => {
             
             const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless'] });
             const options = {
-                logLevel: 'info',
-                output: 'html',
+                logLevel: 'info' as const,
+                output: 'html' as const,
                 onlyCategories: ['performance', 'accessibility'],
                 port: chrome.port,
             };
@@ -157,8 +160,14 @@ test.describe('Mobile Layout Tests (<768px)', () => {
             
             const scores = runnerResult?.lhr?.categories;
             if (scores) {
-                expect(scores.performance?.score * 100).toBeGreaterThanOrEqual(80);
-                expect(scores.accessibility?.score * 100).toBeGreaterThanOrEqual(90);
+                const perfScore = scores.performance?.score;
+                const a11yScore = scores.accessibility?.score;
+                if (perfScore !== null && perfScore !== undefined) {
+                    expect(perfScore * 100).toBeGreaterThanOrEqual(80);
+                }
+                if (a11yScore !== null && a11yScore !== undefined) {
+                    expect(a11yScore * 100).toBeGreaterThanOrEqual(90);
+                }
             }
         } catch (error) {
             console.warn('Lighthouse test skipped - packages not installed');

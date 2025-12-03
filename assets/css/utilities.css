@@ -1,0 +1,217 @@
+/**
+ * Utility CSS for Daena Developer Pages
+ * Mobile-first responsive utilities and accessibility enhancements
+ */
+
+/* Mobile-first card utilities */
+.kv-card {
+    transition: all 0.3s ease;
+}
+
+.kv-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 640px) {
+    .kv-card {
+        padding: 1rem !important;
+    }
+    
+    /* Stack 2-up cards vertically on mobile */
+    .grid-cols-2 > .kv-card,
+    .grid-cols-3 > .kv-card,
+    .grid-cols-4 > .kv-card {
+        grid-column: span 1;
+    }
+}
+
+/* Metric note (footnote marker) styling */
+.metric-note {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fbbf24; /* gold-400 */
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: rgba(251, 191, 36, 0.1);
+}
+
+.metric-note:hover {
+    background: rgba(251, 191, 36, 0.2);
+    transform: scale(1.1);
+}
+
+.metric-note:focus {
+    outline: 2px solid #fbbf24;
+    outline-offset: 2px;
+}
+
+.metric-note:active {
+    transform: scale(0.95);
+}
+
+/* Ribbon styling - vertical labels become top badges on mobile */
+.ribbon-sm {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 640px) {
+    /* Replace vertical ribbons with top badges */
+    .ribbon-sm {
+        position: static;
+        transform: none;
+        writing-mode: horizontal-tb;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Prevent text overflow */
+.break-words {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.hyphens-auto {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+}
+
+.leading-snug {
+    line-height: 1.375;
+}
+
+/* Accessibility: Focus rings */
+*:focus-visible {
+    outline: 2px solid #22d3ee; /* cyan-400 */
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Color contrast utilities - ensure ≥ 4.5:1 */
+.text-slate-300 {
+    color: #cbd5e1; /* WCAG AA compliant on dark backgrounds */
+}
+
+.text-slate-400 {
+    color: #94a3b8; /* WCAG AA compliant on dark backgrounds */
+}
+
+/* Mobile-specific figure adjustments */
+@media (max-width: 640px) {
+    figure {
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }
+    
+    figure img {
+        border-radius: 0;
+    }
+    
+    figcaption {
+        padding: 0 1rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* HTMX loading states */
+.htmx-request {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.htmx-swapping {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Popover styling for metric notes */
+#metric-popover {
+    position: relative;
+    animation: fadeIn 0.2s ease;
+}
+
+#metric-popover:not(.hidden) {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Container utilities */
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .container {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .metric-note {
+        display: none;
+    }
+    
+    #metric-popover {
+        display: none !important;
+    }
+}
+

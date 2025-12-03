@@ -1,0 +1,18 @@
+{
+  "throughput": {
+    "title": "Token Throughput",
+    "description": "Measured on NatureHive NLP (v3-v7) using standard benchmark datasets. Throughput improvement of ≈2.4× compared to GPT-2 baseline, enabling faster processing of large documents and reduced latency for real-time applications.",
+    "source": "Daena: The Auditable AI Vice President, page 5"
+  },
+  "perplexity": {
+    "title": "Perplexity Reduction",
+    "description": "Perplexity measured on standard language modeling benchmarks. ≈35% reduction compared to GPT-2 baseline indicates improved language modeling accuracy and better prediction of next-token probabilities, leading to more coherent outputs.",
+    "source": "Daena: The Auditable AI Vice President, page 5"
+  },
+  "cost": {
+    "title": "Cost Savings",
+    "description": "Cost reduction achieved through Content-Addressable Storage (CAS) and SimHash deduplication strategies. CAS eliminates redundant storage, while SimHash enables efficient similarity detection, reducing both storage and compute costs by 60%+ in production deployments.",
+    "source": "Daena: The Auditable AI Vice President, page 5"
+  }
+}
+
