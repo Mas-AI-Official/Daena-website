@@ -2,245 +2,346 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Developers - Daena AI</title>
-    <meta name="description" content="Developer documentation and resources for Daena AI platform. Explore architecture, APIs, and integration guides.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Daena AI VP For Developers | API Documentation & Integration</title>
+    <meta name="description" content="Developer resources for Daena AI VP including API documentation, integration guides, SDKs, and technical specifications.">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- HTMX -->
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    
-    <!-- Utilities CSS -->
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/css/globals.css">
     <link rel="stylesheet" href="/assets/css/utilities.css">
     
-    <!-- Custom Styles -->
     <style>
         :root {
-            --cyan: #22d3ee;
-            --gold: #fbbf24;
-            --purple: #a78bfa;
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+            --glass-bg: rgba(5, 8, 20, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+            --glass-blur: blur(18px);
         }
-        
+
         body {
-            background: #0f172a; /* slate-900 */
-            color: #e2e8f0; /* slate-200 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* HTMX loading indicator */
-        .htmx-indicator {
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at top, rgba(255, 215, 0, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at bottom, rgba(0, 188, 212, 0.08) 0%, transparent 60%),
+                #02030a;
+            z-index: -5;
+            pointer-events: none;
         }
-        
-        .htmx-request .htmx-indicator {
-            opacity: 1;
+
+        .metatron-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(ellipse at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%),
+                linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 58, 0.95) 50%, rgba(42, 26, 74, 0.95) 100%);
+            pointer-events: none;
+        }
+
+        .metatron-pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.05;
+            pointer-events: none;
+            animation: metatronRotate 60s linear infinite;
+        }
+
+        @keyframes metatronRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .section-wrapper {
+            padding: 6rem 2rem;
+            background: transparent;
+            position: relative;
+        }
+
+        .section-card {
+            background: rgba(5, 8, 20, 0.85);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .dev-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .dev-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .dev-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        .dev-card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .dev-card .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .dev-card .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--secondary-cyan);
+        }
+
+        @media (max-width: 640px) {
+            .section-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .dev-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Background Layers -->
+    <div class="metatron-bg"></div>
+    <div class="metatron-pattern-bg"></div>
+    
     <!-- Navigation -->
-    <nav class="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <a href="/" class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-gold-400 bg-clip-text text-transparent">
-                    Daena AI
-                </a>
-                <div class="flex gap-6">
-                    <a href="/" class="text-slate-300 hover:text-white transition-colors">Home</a>
-                    <a href="/overview.html" class="text-slate-300 hover:text-white transition-colors">Overview</a>
-                    <a href="/for-developers.html" class="text-cyan-400 font-semibold">Developers</a>
-                </div>
-            </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Daena AI</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/overview.html">Overview</a></li>
+                <li><a href="/for-developers.html">For Developers</a></li>
+                <li><a href="/technical.html">Technical</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Hero Video Section -->
-    <section class="relative isolate max-w-7xl mx-auto px-4 py-8" id="video-hero" style="margin-top: 80px;">
-        <div class="aspect-video rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-xl bg-slate-900" style="aspect-ratio: 16/9;">
-            <video
-                class="h-full w-full object-cover"
-                src="videos/daena_intro.mp4"
-                poster="images/slide-1.png"
-                autoplay
-                muted
-                loop
-                playsinline
-                controls
-                controlsList="playpause volume speed"
-                preload="metadata"
-                aria-label="Daena AI introduction video"
-                id="daena-video-dev"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-            >
-                <source src="videos/daena_intro.webm" type="video/webm">
-                <source src="videos/daena_intro.mp4" type="video/mp4">
-                <track label="English" kind="captions" srclang="en" src="videos/daena_en.vtt" default>
-                Your browser does not support the video tag.
-            </video>
-            <div style="display:none; padding: 2rem; text-align: center; background: rgba(0,0,0,0.5); border-radius: 12px;">
-                <h3 style="color: white; margin-bottom: 1rem;">Video Loading</h3>
-                <p style="color: #94a3b8;">If the video doesn't load, please refresh the page.</p>
+    <!-- Hero Section -->
+    <section class="section-wrapper" style="padding-top: 120px;">
+        <div class="section-card">
+            <h1 class="section-title">Developer Resources</h1>
+            <p style="text-align: center; font-size: 1.25rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 3rem;">
+                Build powerful AI applications with Daena's comprehensive developer tools, APIs, and SDKs.
+            </p>
+            
+            <div class="dev-grid">
+                <div class="dev-card">
+                    <h3>📚 API Documentation</h3>
+                    <p>Complete REST API reference with authentication, endpoints, and examples.</p>
+                    <a href="/api-docs" class="btn">View Docs</a>
+                </div>
+                
+                <div class="dev-card">
+                    <h3>🔧 SDKs & Libraries</h3>
+                    <p>Official SDKs for Python, JavaScript, and other popular languages.</p>
+                    <a href="/sdk" class="btn">Get SDK</a>
+                </div>
+                
+                <div class="dev-card">
+                    <h3>🚀 Quick Start Guide</h3>
+                    <p>Get up and running with Daena in minutes with our step-by-step guide.</p>
+                    <a href="/quickstart" class="btn">Start Now</a>
+                </div>
+                
+                <div class="dev-card">
+                    <h3>💡 Code Examples</h3>
+                    <p>Real-world code examples and integration patterns for common use cases.</p>
+                    <a href="/examples" class="btn">View Examples</a>
+                </div>
+                
+                <div class="dev-card">
+                    <h3>🔐 Authentication</h3>
+                    <p>Learn how to authenticate and secure your API requests with OAuth and JWT.</p>
+                    <a href="/auth" class="btn">Learn More</a>
+                </div>
+                
+                <div class="dev-card">
+                    <h3>📊 Webhooks</h3>
+                    <p>Set up webhooks to receive real-time notifications from Daena events.</p>
+                    <a href="/webhooks" class="btn">Configure</a>
+                </div>
             </div>
         </div>
-        
-        <!-- Why It Matters - 3 Bullet Strip -->
-        <div class="grid gap-4 md:grid-cols-3 mt-6" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-            <div class="rounded-xl p-4 bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition-colors">
-                <div class="text-2xl mb-2">⚡</div>
-                <h3 class="text-lg font-semibold text-white mb-2" style="font-size: clamp(1rem, 2vw, 1.125rem);">Multi-LLM Orchestration</h3>
-                <p class="text-sm text-slate-300 leading-snug break-words" style="font-size: clamp(0.875rem, 1.5vw, 0.9375rem);">Smart routing across OpenAI, DeepSeek, Qwen, Mistral, Gemini, and Yi with consensus merging and guardrails.</p>
-            </div>
-            <div class="rounded-xl p-4 bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition-colors">
-                <div class="text-2xl mb-2">🛡️</div>
-                <h3 class="text-lg font-semibold text-white mb-2" style="font-size: clamp(1rem, 2vw, 1.125rem);">eDNA Governance & Lineage</h3>
-                <p class="text-sm text-slate-300 leading-snug break-words" style="font-size: clamp(0.875rem, 1.5vw, 0.9375rem);">Complete auditability with Merkle-notarized lineage, ABAC tiers, and automated compliance enforcement.</p>
-            </div>
-            <div class="rounded-xl p-4 bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition-colors">
-                <div class="text-2xl mb-2">💾</div>
-                <h3 class="text-lg font-semibold text-white mb-2" style="font-size: clamp(1rem, 2vw, 1.125rem);">NBMF Memory: Fast, Accountable</h3>
-                <p class="text-sm text-slate-300 leading-snug break-words" style="font-size: clamp(0.875rem, 1.5vw, 0.9375rem);">Sunflower-Honeycomb architecture with reflexive memory hooks, enabling fast retrieval and complete accountability.</p>
-            </div>
-        </div>
-        
-        <!-- Transcript & Details Accordion -->
-        <details class="mt-6 group">
-            <summary class="cursor-pointer text-teal-300 hover:text-teal-200 font-semibold text-lg py-3 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-slate-900 rounded-lg px-4 transition-colors" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                <span class="flex items-center gap-2">
-                    <span>Read transcript & technical details</span>
-                    <span class="transform transition-transform group-open:rotate-180">▼</span>
-                </span>
-            </summary>
-            <div class="prose prose-invert mt-4 p-6 bg-slate-800/50 rounded-lg border border-slate-700 max-w-none" id="video-transcript" style="color: #cbd5e1;">
-                <h3 class="text-2xl font-bold text-white mb-4" style="font-size: clamp(1.5rem, 3vw, 2rem);">Daena: The Auditable AI Vice President</h3>
-                
-                <p class="text-slate-300 leading-relaxed mb-4" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    <strong class="text-teal-400">Daena is the AI Decision-Orchestration Platform</strong> — not just an orchestrator or multi-agent framework. 
-                    While other AI tools generate outputs, Daena generates <strong class="text-gold-400">governed, memory-aligned decisions</strong> that get 
-                    <strong class="text-teal-400">more accurate over time</strong>.
-                </p>
-                
-                <p class="text-slate-300 leading-relaxed mb-4" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    This isn't just automation. This is <strong class="text-teal-400">autonomous business intelligence</strong> with 
-                    <strong class="text-gold-400">VP-level decision-making capabilities</strong>.
-                </p>
-                
-                <h4 class="text-xl font-semibold text-white mt-6 mb-3" style="font-size: clamp(1.25rem, 2.5vw, 1.5rem);">Core Architecture</h4>
-                <p class="text-slate-300 leading-relaxed mb-4" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    Daena coordinates <strong class="text-gold-400">48+ specialized agents</strong> across <strong class="text-teal-400">8 departments</strong> using 
-                    unified multi-agent orchestration, reflexive memory (departmental + global), multi-LLM consensus, and governance with drift prevention.
-                </p>
-                
-                <h4 class="text-xl font-semibold text-white mt-6 mb-3" style="font-size: clamp(1.25rem, 2.5vw, 1.5rem);">Patent-Pending Technology</h4>
-                <ul class="list-disc list-inside text-slate-300 space-y-2 mb-4" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    <li><strong class="text-gold-400">Sunflower-Honeycomb Memory Architecture:</strong> Composable agent memory with reflexive memory hooks, ABAC tiers, and CMP message bus for auditability and governance.</li>
-                    <li><strong class="text-teal-400">NBMF (Neuro-Bio Matrix Fusion):</strong> Oscillatory gating and memory-slot fusion over recursive topology to stabilize long-context LLM reasoning across L1, L2, and L3 layers.</li>
-                    <li><strong class="text-purple-400">Enterprise DNA (eDNA):</strong> Genome, Epigenome, Lineage, and Immune system components providing complete governance framework.</li>
-                </ul>
-                
-                <h4 class="text-xl font-semibold text-white mt-6 mb-3" style="font-size: clamp(1.25rem, 2.5vw, 1.5rem);">Performance Metrics</h4>
-                <ul class="list-disc list-inside text-slate-300 space-y-2 mb-4" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    <li><strong class="text-gold-400">≈2.4× token throughput</strong> improvement vs GPT-2 baseline</li>
-                    <li><strong class="text-teal-400">≈35% lower perplexity</strong> compared to GPT-2 baseline</li>
-                    <li><strong class="text-purple-400">60%+ cost savings</strong> through CAS (Content-Addressable Storage) and SimHash deduplication</li>
-                    <li><strong class="text-gold-400">95-100% accuracy</strong> (lossless & semantic)</li>
-                </ul>
-                
-                <h4 class="text-xl font-semibold text-white mt-6 mb-3" style="font-size: clamp(1.25rem, 2.5vw, 1.5rem);">Security & Governance</h4>
-                <p class="text-slate-300 leading-relaxed mb-4" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    Enterprise-grade security with <strong class="text-teal-400">AES-256 encryption</strong> at rest, quarantine store with trust scoring, 
-                    ledger with Merkle roots, <strong class="text-gold-400">ABAC policy enforcement</strong>, and weekly automated compliance drills. 
-                    Complete audit trails for all decisions with Merkle-notarized lineage tracking.
-                </p>
-                
-                <h4 class="text-xl font-semibold text-white mt-6 mb-3" style="font-size: clamp(1.25rem, 2.5vw, 1.5rem);">Multi-LLM Orchestration</h4>
-                <p class="text-slate-300 leading-relaxed mb-4" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    Intelligent routing across <strong class="text-teal-400">OpenAI, DeepSeek, Qwen, Mistral, Gemini, and Yi</strong> with guardrails, 
-                    audits, and explainability. Model switching with consensus/merge capabilities for optimal performance and cost efficiency.
-                </p>
-                
-                <p class="text-slate-300 leading-relaxed mt-6" style="font-size: clamp(1rem, 2vw, 1.125rem);">
-                    <strong class="text-gold-400">Learn more:</strong> <a href="/for-developers.html" class="text-teal-400 hover:text-teal-300 underline">Developer Documentation</a> | 
-                    <a href="/#proof-validation" class="text-teal-400 hover:text-teal-300 underline">Proof & Validation</a>
-                </p>
-            </div>
-        </details>
     </section>
-    
-    <!-- Concise Proof Blocks -->
-    <div hx-get="/templates/partials/daena/proof-blocks.html" hx-trigger="load" hx-swap="innerHTML"></div>
+
+    <!-- API Example Section -->
+    <section class="section-wrapper">
+        <div class="section-card">
+            <h2 class="section-title">Quick API Example</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                Here's a simple example of how to interact with Daena's API:
+            </p>
+            
+            <div class="code-block">
+<pre>import requests
+
+# Initialize Daena client
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+}
+
+# Create a new agent task
+response = requests.post(
+    'https://api.daena.mas-ai.co/v1/agents/task',
+    headers=headers,
+    json={
+        'department': 'strategy',
+        'task': 'Analyze market trends for Q1 2025',
+        'priority': 'high'
+    }
+)
+
+result = response.json()
+print(f"Task ID: {result['task_id']}")
+print(f"Status: {result['status']}")</pre>
+            </div>
+        </div>
+    </section>
 
     <!-- Architecture Section -->
-    <div hx-get="/templates/partials/daena/architecture.html" hx-trigger="load" hx-swap="innerHTML"></div>
-
-    <!-- NBMF Section -->
-    <div hx-get="/templates/partials/daena/nbmf.html" hx-trigger="load" hx-swap="innerHTML"></div>
-
-    <!-- Enterprise DNA Section -->
-    <div hx-get="/templates/partials/daena/edna.html" hx-trigger="load" hx-swap="innerHTML"></div>
-
-    <!-- Benchmarks Section -->
-    <div hx-get="/templates/partials/daena/benchmarks.html" hx-trigger="load" hx-swap="innerHTML"></div>
-
-    <!-- Audits Section -->
-    <div hx-get="/templates/partials/daena/audits.html" hx-trigger="load" hx-swap="innerHTML"></div>
-
-    <!-- Pilots Section -->
-    <div hx-get="/templates/partials/daena/pilots.html" hx-trigger="load" hx-swap="innerHTML"></div>
-
-    <!-- CTA Section -->
-    <div hx-get="/templates/partials/daena/cta.html" hx-trigger="load" hx-swap="innerHTML"></div>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-700 py-12">
-        <div class="container mx-auto px-4 text-center text-slate-400">
-            <p>&copy; 2025 MAS-AI Inc. All rights reserved.</p>
+    <section class="section-wrapper">
+        <div class="section-card">
+            <h2 class="section-title">System Architecture</h2>
+            <figure class="content-figure" aria-describedby="arch-caption">
+                <img src="/fig/daena/fig-01.svg" alt="Daena Architecture Overview" loading="lazy">
+                <figcaption id="arch-caption">
+                    Complete Daena AI system architecture showing all components and data flows.
+                    <cite>Source: Page 1, Daena The Auditable AI Vice President</cite>
+                </figcaption>
+            </figure>
         </div>
-    </footer>
-
-    <!-- HTMX metric popover handler -->
-    <script>
-        // Handle metric note clicks for static site
-        document.body.addEventListener('click', function(e) {
-            if (e.target.classList.contains('metric-note')) {
-                const metricId = e.target.getAttribute('hx-get')?.match(/id=(\w+)/)?.[1];
-                if (metricId) {
-                    fetch('/public/metrics.json')
-                        .then(r => r.json())
-                        .then(metrics => {
-                            const metric = metrics[metricId];
-                            if (metric) {
-                                const popover = document.getElementById('metric-popover');
-                                if (popover) {
-                                    popover.innerHTML = `
-                                        <div class="metric-details">
-                                            <h4 class="font-semibold text-white mb-2">${metric.title}</h4>
-                                            <p class="text-slate-300 text-sm leading-snug mb-2">${metric.description}</p>
-                                            <p class="text-slate-400 text-xs italic">Source: ${metric.source}</p>
-                                        </div>
-                                    `;
-                                    popover.classList.remove('hidden');
-                                    
-                                    // Close on outside click
-                                    setTimeout(() => {
-                                        document.addEventListener('click', function closePopover(ev) {
-                                            if (!popover.contains(ev.target) && !e.target.contains(ev.target)) {
-                                                popover.classList.add('hidden');
-                                                document.removeEventListener('click', closePopover);
-                                            }
-                                        }, { once: true });
-                                    }, 100);
-                                }
-                            }
-                        });
-                }
-            }
-        });
-    </script>
-    
-    <!-- Video Controls Enhancement -->
-    <script src="assets/js/video-controls.js"></script>
+    </section>
 </body>
 </html>
 

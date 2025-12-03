@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Daena AI VP Technical Specifications | Benchmarks & Performance</title>
+    <meta name="description" content="Technical specifications, performance benchmarks, and detailed metrics for Daena AI VP including ROI, cost analysis, and audit capabilities.">
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/css/globals.css">
+    <link rel="stylesheet" href="/assets/css/utilities.css">
+    
+    <style>
+        /* Import styles from index.html */
+        :root {
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+            --glass-bg: rgba(5, 8, 20, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+            --glass-blur: blur(18px);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at top, rgba(255, 215, 0, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at bottom, rgba(0, 188, 212, 0.08) 0%, transparent 60%),
+                #02030a;
+            z-index: -5;
+            pointer-events: none;
+        }
+
+        .metatron-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(ellipse at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%),
+                linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 58, 0.95) 50%, rgba(42, 26, 74, 0.95) 100%);
+            pointer-events: none;
+        }
+
+        .metatron-pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.05;
+            pointer-events: none;
+            animation: metatronRotate 60s linear infinite;
+        }
+
+        @keyframes metatronRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .section-wrapper {
+            padding: 6rem 2rem;
+            background: transparent;
+            position: relative;
+        }
+
+        .section-card {
+            background: rgba(5, 8, 20, 0.85);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .content-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        figure img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        figcaption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        figcaption cite {
+            font-style: normal;
+            color: var(--secondary-cyan);
+        }
+
+        @media (max-width: 640px) {
+            .section-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Layers -->
+    <div class="metatron-bg"></div>
+    <div class="metatron-pattern-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Daena AI</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/overview.html">Overview</a></li>
+                <li><a href="/for-developers.html">For Developers</a></li>
+                <li><a href="/technical.html">Technical</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Benchmarks Section -->
+    <section class="section-wrapper" id="benchmarks">
+        <div class="section-card">
+            <h2 class="section-title">Performance Benchmarks</h2>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p class="text-safe leading-snug">
+                        Daena demonstrates superior performance across multiple metrics compared to baseline systems,
+                        with significant improvements in throughput, latency, and cost efficiency.
+                    </p>
+                    <div class="benchmark-metrics two-up">
+                        <div class="kv-card">
+                            <dt>Token Throughput</dt>
+                            <dd>
+                                2.4× improvement<span class="metric-note">
+                                    <a href="#" class="metric-note-marker" aria-label="Footnote 1">†</a>
+                                    <span class="metric-note-popover">Compared to GPT-2 baseline on NatureHive NLP v3-v7</span>
+                                </span>
+                            </dd>
+                        </div>
+                        <div class="kv-card">
+                            <dt>Perplexity Reduction</dt>
+                            <dd>
+                                35% lower<span class="metric-note">
+                                    <a href="#" class="metric-note-marker" aria-label="Footnote 2">†</a>
+                                    <span class="metric-note-popover">Perplexity reduction vs GPT-2 baseline</span>
+                                </span>
+                            </dd>
+                        </div>
+                        <div class="kv-card">
+                            <dt>Cost Savings</dt>
+                            <dd>
+                                99.4% reduction<span class="metric-note">
+                                    <a href="#" class="metric-note-marker" aria-label="Footnote 3">†</a>
+                                    <span class="metric-note-popover">Operational cost savings vs traditional AI systems</span>
+                                </span>
+                            </dd>
+                        </div>
+                        <div class="kv-card">
+                            <dt>ROI</dt>
+                            <dd>
+                                300% return<span class="metric-note">
+                                    <a href="#" class="metric-note-marker" aria-label="Footnote 4">†</a>
+                                    <span class="metric-note-popover">Return on investment from pilot deployments</span>
+                                </span>
+                            </dd>
+                        </div>
+                    </div>
+                </div>
+                <figure class="content-figure" aria-describedby="bench-caption">
+                    <img src="/fig/daena/fig-05.svg" alt="Performance Benchmarks" loading="lazy">
+                    <figcaption id="bench-caption">
+                        Performance benchmarks comparing Daena against baseline systems.
+                        <cite>Source: Page 5, Daena The Auditable AI Vice President</cite>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audits Section -->
+    <section class="section-wrapper" id="audits">
+        <div class="section-card">
+            <h2 class="section-title">Merkle Lineage & Audit Trail</h2>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p class="text-safe leading-snug">
+                        Every decision, action, and data access in Daena is recorded in an immutable Merkle tree structure,
+                        providing complete lineage tracking and auditability for compliance and governance.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Immutable Merkle tree structure</li>
+                        <li>Complete decision lineage tracking</li>
+                        <li>Real-time audit logging</li>
+                        <li>Compliance-ready reporting</li>
+                        <li>Tamper-proof verification</li>
+                    </ul>
+                </div>
+                <figure class="content-figure" aria-describedby="audit-caption">
+                    <img src="/fig/daena/fig-06.svg" alt="Merkle Lineage & Audit Trail" loading="lazy">
+                    <figcaption id="audit-caption">
+                        Merkle tree-based audit trail ensuring complete lineage tracking.
+                        <cite>Source: Page 6, Daena The Auditable AI Vice President</cite>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilots Section -->
+    <section class="section-wrapper" id="pilots">
+        <div class="section-card">
+            <h2 class="section-title">Pilot ROI & Cost Analysis</h2>
+            <div class="content-grid">
+                <div class="content-text">
+                    <p class="text-safe leading-snug">
+                        Real-world pilot deployments demonstrate significant ROI and cost efficiency, with operational
+                        costs as low as $60/day while delivering enterprise-grade AI capabilities.
+                    </p>
+                    <div class="pilot-metrics two-up">
+                        <div class="kv-card">
+                            <dt>Daily Operational Cost</dt>
+                            <dd>$60/day<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="Cost footnote">†</a>
+                                <span class="metric-note-popover">Includes all infrastructure, API calls, and compute resources</span>
+                            </span></dd>
+                        </div>
+                        <div class="kv-card">
+                            <dt>Cost per Request</dt>
+                            <dd>$0.002<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="Request cost footnote">†</a>
+                                <span class="metric-note-popover">Average cost per API request across all services</span>
+                            </span></dd>
+                        </div>
+                        <div class="kv-card">
+                            <dt>ROI</dt>
+                            <dd>300%<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="ROI footnote">†</a>
+                                <span class="metric-note-popover">Return on investment from pilot deployments</span>
+                            </span></dd>
+                        </div>
+                        <div class="kv-card">
+                            <dt>Cost Savings</dt>
+                            <dd>99.4%<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="Savings footnote">†</a>
+                                <span class="metric-note-popover">Compared to traditional enterprise AI solutions</span>
+                            </span></dd>
+                        </div>
+                    </div>
+                </div>
+                <div class="pilot-figures two-up">
+                    <figure class="content-figure" aria-describedby="roi-caption">
+                        <img src="/fig/daena/fig-07.svg" alt="Pilot ROI Metrics" loading="lazy">
+                        <figcaption id="roi-caption">
+                            ROI metrics from pilot deployments showing cost savings and efficiency gains.
+                            <cite>Source: Page 7, Daena The Auditable AI Vice President</cite>
+                        </figcaption>
+                    </figure>
+                    <figure class="content-figure" aria-describedby="cost-caption">
+                        <img src="/fig/daena/fig-08.svg" alt="Cost Analysis Dashboard" loading="lazy">
+                        <figcaption id="cost-caption">
+                            Cost analysis dashboard with per-day and per-request breakdowns.
+                            <cite>Source: Page 8, Daena The Auditable AI Vice President</cite>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+

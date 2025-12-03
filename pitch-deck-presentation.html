@@ -348,6 +348,104 @@
             margin-top: -80px;
         }
 
+        /* Video Slide Styles */
+        .slide-with-video {
+            flex-direction: column;
+        }
+
+        .slide-content-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 90%;
+            height: 70%;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .slide-video-section {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-video {
+            width: 100%;
+            height: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: var(--shadow-strong);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-image-section {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-image-section img {
+            width: 100%;
+            height: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            margin-top: 0;
+        }
+
+        /* Mobile: Stack video and image vertically */
+        @media (max-width: 768px) {
+            .slide-content-split {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 1rem;
+                width: 95%;
+                height: 75%;
+            }
+
+            .slide-video,
+            .slide-image-section img {
+                max-height: 250px;
+            }
+        }
+
+        /* Landscape mobile: Keep side-by-side but smaller */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .slide-content-split {
+                gap: 1rem;
+                width: 95%;
+            }
+
+            .slide-video,
+            .slide-image-section img {
+                max-height: 300px;
+            }
+        }
+
+        /* Fullscreen adjustments for video slides */
+        body:fullscreen .slide-content-split,
+        body:-webkit-full-screen .slide-content-split,
+        body:-moz-full-screen .slide-content-split,
+        body:-ms-fullscreen .slide-content-split {
+            width: 95%;
+            height: 75%;
+        }
+
+        body:fullscreen .slide-video,
+        body:-webkit-full-screen .slide-video,
+        body:-moz-full-screen .slide-video,
+        body:-ms-fullscreen .slide-video,
+        body:fullscreen .slide-image-section img,
+        body:-webkit-full-screen .slide-image-section img,
+        body:-moz-full-screen .slide-image-section img,
+        body:-ms-fullscreen .slide-image-section img {
+            max-height: calc(100vh - 250px);
+        }
+
         .slide-number {
             position: absolute;
             bottom: 20px;
@@ -965,15 +1063,37 @@
                 <div class="slide-number">1</div>
             </div>
             
-            <!-- Slide 2 -->
-            <div class="slide" id="slide-2">
-                <img src="images/slide-2.png" alt="Slide 2" onerror="this.style.display='none';">
+            <!-- Slide 2 - With Video -->
+            <div class="slide slide-with-video" id="slide-2">
+                <div class="slide-content-split">
+                    <div class="slide-video-section">
+                        <video id="video-2" class="slide-video" controls preload="metadata" playsinline>
+                            <source src="videos/daena_intro.mp4" type="video/mp4">
+                            <source src="diveo/Daena 1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="slide-image-section">
+                        <img src="images/slide-2.png" alt="Slide 2" onerror="this.style.display='none';">
+                    </div>
+                </div>
                 <div class="slide-number">2</div>
             </div>
             
-            <!-- Slide 3 -->
-            <div class="slide" id="slide-3">
-                <img src="images/slide-3.png" alt="Slide 3" onerror="this.style.display='none';">
+            <!-- Slide 3 - With Video -->
+            <div class="slide slide-with-video" id="slide-3">
+                <div class="slide-content-split">
+                    <div class="slide-video-section">
+                        <video id="video-3" class="slide-video" controls preload="metadata" playsinline>
+                            <source src="videos/daena_intro.mp4" type="video/mp4">
+                            <source src="diveo/Daena 1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="slide-image-section">
+                        <img src="images/slide-3.png" alt="Slide 3" onerror="this.style.display='none';">
+                    </div>
+                </div>
                 <div class="slide-number">3</div>
             </div>
             
@@ -1166,6 +1286,12 @@
             }
 
             showSlide(slideIndex) {
+                // Pause all videos when changing slides
+                document.querySelectorAll('.slide-video').forEach(video => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+                
                 // Remove active class from all slides
                 this.slides.forEach(slide => {
                     slide.classList.remove('active');
@@ -1174,6 +1300,12 @@
                 // Add active class to current slide
                 if (this.slides[slideIndex]) {
                     this.slides[slideIndex].classList.add('active');
+                    
+                    // If this slide has a video, prepare it (but don't autoplay)
+                    const video = this.slides[slideIndex].querySelector('.slide-video');
+                    if (video) {
+                        video.load(); // Preload video
+                    }
                 }
                 
                 this.currentSlide = slideIndex;

@@ -1,88 +1,59 @@
 <!-- Benchmarks Section -->
-<section id="benchmarks" class="py-16 md:py-24 bg-slate-800">
-    <div class="container mx-auto px-4 md:px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-white">
-                Performance Benchmarks
-            </h2>
-            <p class="text-slate-300 text-center mb-12 max-w-3xl mx-auto leading-snug break-words">
-                Comprehensive performance metrics comparing Daena against baseline systems across 
-                multiple dimensions.
-            </p>
-            
-            <figure class="mb-8" aria-describedby="bench-caption">
-                <div class="bg-slate-900 rounded-lg p-4 md:p-8 border border-slate-700">
-                    <img 
-                        src="/fig/daena/fig-05.svg" 
-                        alt="Performance benchmarks comparing Daena against baseline systems"
-                        loading="lazy"
-                        class="w-full h-auto rounded"
-                    />
-                </div>
-                <figcaption id="bench-caption" class="mt-4 text-sm text-slate-400 text-center max-w-3xl mx-auto">
-                    <strong>Figure 5:</strong> Performance benchmarks comparing Daena against baseline systems. 
-                    Source: <cite>Daena: The Auditable AI Vice President</cite>, page 5.
-                </figcaption>
-            </figure>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-                <div class="kv-card bg-slate-900 p-6 rounded-lg border border-slate-700">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-white">Token Throughput</h3>
-                        <span class="metric-note text-xs text-gold-400 cursor-pointer" 
-                              hx-get="/notes/metric?id=throughput" 
-                              hx-target="#metric-popover" 
-                              hx-swap="innerHTML"
-                              role="button"
-                              tabindex="0"
-                              aria-label="View metric details">†</span>
+<section class="section-wrapper" id="benchmarks">
+    <div class="section-card">
+        <h2 class="section-title">Performance Benchmarks</h2>
+        <div class="content-grid">
+            <div class="content-text">
+                <p class="text-safe leading-snug">
+                    Daena demonstrates superior performance across multiple metrics compared to baseline systems,
+                    with significant improvements in throughput, latency, and cost efficiency.
+                </p>
+                <div class="benchmark-metrics two-up">
+                    <div class="kv-card">
+                        <dt>Token Throughput</dt>
+                        <dd>
+                            2.4× improvement<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="Footnote 1">†</a>
+                                <span class="metric-note-popover">Compared to GPT-2 baseline on NatureHive NLP v3-v7</span>
+                            </span>
+                        </dd>
                     </div>
-                    <p class="text-3xl font-bold text-cyan-400 mb-2">≈2.4×</p>
-                    <p class="text-slate-300 text-sm leading-snug break-words">
-                        Improved token throughput compared to GPT-2 baseline, enabling faster 
-                        processing of large documents.
-                    </p>
-                </div>
-                
-                <div class="kv-card bg-slate-900 p-6 rounded-lg border border-slate-700">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-white">Perplexity Reduction</h3>
-                        <span class="metric-note text-xs text-gold-400 cursor-pointer" 
-                              hx-get="/notes/metric?id=perplexity" 
-                              hx-target="#metric-popover" 
-                              hx-swap="innerHTML"
-                              role="button"
-                              tabindex="0"
-                              aria-label="View metric details">†</span>
+                    <div class="kv-card">
+                        <dt>Perplexity Reduction</dt>
+                        <dd>
+                            35% lower<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="Footnote 2">†</a>
+                                <span class="metric-note-popover">Perplexity reduction vs GPT-2 baseline</span>
+                            </span>
+                        </dd>
                     </div>
-                    <p class="text-3xl font-bold text-gold-400 mb-2">≈35%</p>
-                    <p class="text-slate-300 text-sm leading-snug break-words">
-                        Lower perplexity vs GPT-2 baseline, indicating improved language modeling 
-                        and prediction accuracy.
-                    </p>
-                </div>
-                
-                <div class="kv-card bg-slate-900 p-6 rounded-lg border border-slate-700">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-white">Cost Savings</h3>
-                        <span class="metric-note text-xs text-gold-400 cursor-pointer" 
-                              hx-get="/notes/metric?id=cost" 
-                              hx-target="#metric-popover" 
-                              hx-swap="innerHTML"
-                              role="button"
-                              tabindex="0"
-                              aria-label="View metric details">†</span>
+                    <div class="kv-card">
+                        <dt>Cost Savings</dt>
+                        <dd>
+                            99.4% reduction<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="Footnote 3">†</a>
+                                <span class="metric-note-popover">Operational cost savings vs traditional AI systems</span>
+                            </span>
+                        </dd>
                     </div>
-                    <p class="text-3xl font-bold text-purple-400 mb-2">60%+</p>
-                    <p class="text-slate-300 text-sm leading-snug break-words">
-                        Cost reduction through CAS (Content-Addressable Storage) and SimHash 
-                        deduplication strategies.
-                    </p>
+                    <div class="kv-card">
+                        <dt>ROI</dt>
+                        <dd>
+                            300% return<span class="metric-note">
+                                <a href="#" class="metric-note-marker" aria-label="Footnote 4">†</a>
+                                <span class="metric-note-popover">Return on investment from pilot deployments</span>
+                            </span>
+                        </dd>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Metric Popover (hidden by default, shown via HTMX) -->
-            <div id="metric-popover" class="hidden mt-6 p-4 bg-slate-800 border border-slate-700 rounded-lg text-sm text-slate-300"></div>
+            <figure class="content-figure" aria-describedby="bench-caption">
+                <img src="/fig/daena/fig-05.svg" alt="Performance Benchmarks" loading="lazy">
+                <figcaption id="bench-caption">
+                    Performance benchmarks comparing Daena against baseline systems.
+                    <cite>Source: Page 5, Daena The Auditable AI Vice President</cite>
+                </figcaption>
+            </figure>
         </div>
     </div>
 </section>
