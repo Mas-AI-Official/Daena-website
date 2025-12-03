@@ -2789,9 +2789,24 @@
         </div>
     </nav>
 
-    <!-- Hero Video Section -->
-    <section class="relative isolate max-w-7xl mx-auto px-4 py-8" id="video-hero" style="margin-top: 80px;">
-        <div class="aspect-video rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-xl bg-slate-900" style="aspect-ratio: 16/9;">
+    <!-- Hero Section (Video Removed - Moved to Demos) -->
+    <section class="hero" style="padding-top: 100px;">
+        <div class="hero-content">
+            <h1>Meet Daena</h1>
+            <p class="hero-subtitle">The Auditable AI Vice President</p>
+            <p class="hero-description" style="font-size: clamp(18px, 2.5vw, 24px); line-height: 1.8; text-align: center; max-width: 1000px; margin: 0 auto;">
+                <strong style="color: var(--primary-gold); font-size: 1.2em;">Daena is the AI Decision-Orchestration Platform</strong><br>
+                <span style="color: var(--text-light);">48+ specialized agents across 8 departments with VP-level decision-making capabilities.</span>
+            </p>
+            <div class="cta-buttons">
+                <a href="#demos" class="btn btn-primary cta-main">Watch Demos</a>
+                <a href="/for-developers.html" class="btn btn-secondary cta-secondary">For Developers</a>
+                <a href="/proof.html" class="btn btn-secondary cta-secondary">Proof & Validation</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Section Removed - See Recorded Demo Videos section below -->
             <video
                 class="h-full w-full object-cover"
                 src="videos/daena_intro.mp4"
@@ -2805,12 +2820,17 @@
                 preload="metadata"
                 aria-label="Daena AI introduction video"
                 id="daena-video-hero"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
             >
                 <source src="videos/daena_intro.webm" type="video/webm">
                 <source src="videos/daena_intro.mp4" type="video/mp4">
                 <track label="English" kind="captions" srclang="en" src="videos/daena_en.vtt" default>
                 Your browser does not support the video tag.
             </video>
+            <div style="display:none; padding: 2rem; text-align: center; background: rgba(0,0,0,0.5); border-radius: 12px;">
+                <h3 style="color: white; margin-bottom: 1rem;">Video Loading</h3>
+                <p style="color: #94a3b8;">If the video doesn't load, please refresh the page.</p>
+            </div>
         </div>
         
         <!-- Why It Matters - 3 Bullet Strip -->
@@ -2896,7 +2916,8 @@
         </details>
     </section>
     
-    <!-- Concise Proof Blocks -->
+    <!-- Proof Blocks - MOVED TO /proof.html -->
+    <!--
     <section class="py-12 md:py-16 bg-slate-900" id="proof-blocks">
         <div class="container mx-auto px-4 md:px-6 max-w-7xl">
             <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-white" style="font-size: clamp(1.875rem, 4vw, 2.25rem);">Proof & Validation</h2>
