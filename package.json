@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "playwright test",
-    "extract:pdf": "node scripts/pdf_to_svg.mjs"
+    "extract:pdf": "node scripts/pdf_to_svg.mjs",
+    "test:mobile": "node scripts/test-mobile-accessibility.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

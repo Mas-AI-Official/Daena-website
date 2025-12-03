@@ -223,6 +223,20 @@
                 padding: 2rem 1.5rem;
             }
         }
+        
+        /* Focus styles for accessibility */
+        a:focus-visible,
+        button:focus-visible,
+        .btn:focus-visible {
+            outline: 2px solid var(--primary-gold);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        
+        .metric-note-marker:focus-visible {
+            outline: 2px solid var(--primary-gold);
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body>
