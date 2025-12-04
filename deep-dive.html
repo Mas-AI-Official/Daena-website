@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Technical Deep Dive | Daena AI VP</title>
+    <meta name="description" content="Comprehensive technical documentation for Daena AI VP: Memory & Governance Engine, Benchmarks, Security & Compliance, How Daena Thinks, and more.">
+    <meta name="keywords" content="Daena AI technical documentation, NBMF Memory, Enterprise-DNA, Benchmarks, Security, Compliance, How Daena Thinks">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Daena AI Technical Deep Dive | MAS-AI">
+    <meta property="og:description" content="Comprehensive technical documentation for Daena AI VP's revolutionary technologies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://daena.mas-ai.co/deep-dive">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daena AI Technical Deep Dive | MAS-AI">
+    <meta name="twitter:description" content="Comprehensive technical documentation for Daena AI VP's revolutionary technologies.">
+    
+    <link rel="canonical" href="https://daena.mas-ai.co/deep-dive">
+    <link rel="stylesheet" href="/css/globals.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: anywhere;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            hyphens: none;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at top, rgba(255, 215, 0, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at bottom, rgba(0, 188, 212, 0.08) 0%, transparent 60%),
+                #02030a;
+            z-index: -5;
+            pointer-events: none;
+        }
+
+        .metatron-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                radial-gradient(ellipse at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%),
+                linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 58, 0.95) 50%, rgba(42, 26, 74, 0.95) 100%);
+            pointer-events: none;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--primary-gold);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-gold);
+            border-bottom: 2px solid var(--primary-gold);
+        }
+
+        /* Table of Contents - Sticky on desktop, collapsible on mobile */
+        .toc-container {
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            background: rgba(5, 8, 20, 0.85);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc-toggle {
+            display: none;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .toc {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .toc a:hover {
+            color: var(--primary-gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .toc a.active {
+            color: var(--primary-gold);
+            background: rgba(255, 215, 0, 0.15);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .section-wrapper {
+            padding: 4rem 0;
+            scroll-margin-top: 120px;
+        }
+
+        .section-card {
+            background: rgba(5, 8, 20, 0.85);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: none;
+            white-space: normal;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--primary-gold);
+            margin: 3rem 0 1.5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: none;
+            white-space: normal;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--secondary-cyan);
+            margin: 2rem 0 1rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: none;
+            white-space: normal;
+        }
+
+        p, li {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            word-wrap: break-word;
+            overflow-wrap: anywhere;
+            hyphens: auto;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        .footnote-mark {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            vertical-align: super;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .toc-container {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+
+            .toc-toggle {
+                display: block;
+            }
+
+            .toc {
+                display: none;
+            }
+
+            .toc.expanded {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 100px 1rem 2rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: clamp(1.75rem, 5vw, 2.5rem);
+            }
+
+            h2 {
+                font-size: clamp(1.5rem, 4vw, 2rem);
+            }
+
+            h3 {
+                font-size: clamp(1.2rem, 3vw, 1.5rem);
+            }
+
+            p, li {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Hide vertical ribbons on mobile */
+        .vertical-ribbon {
+            display: none;
+        }
+
+        @media (min-width: 769px) {
+            .vertical-ribbon {
+                display: flex;
+            }
+        }
+
+        /* Text overflow fixes */
+        .prose p {
+            overflow-wrap: anywhere;
+            word-break: normal;
+            hyphens: auto;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 4rem;
+            right: 2rem;
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: none;
+            z-index: 40;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+        }
+
+        .back-to-top.visible {
+            display: block;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="metatron-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">Daena AI</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/demos">Demos</a></li>
+                <li><a href="/pitch-deck">Pitch Deck</a></li>
+                <li><a href="/deep-dive" class="active">Deep Dive</a></li>
+                <li><a href="/docs">Docs</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Table of Contents -->
+        <aside class="toc-container">
+            <button class="toc-toggle" onclick="toggleTOC()">📑 Table of Contents</button>
+            <ul class="toc" id="toc">
+                <li><a href="#memory-governance">Memory & Governance</a></li>
+                <li><a href="#why-it-wins">Why It Wins</a></li>
+                <li><a href="#benchmarks">Benchmarks</a></li>
+                <li><a href="#governance-demo">Governance Demo</a></li>
+                <li><a href="#deployment-targets">Deployment Targets</a></li>
+                <li><a href="#security-compliance">Security & Compliance</a></li>
+                <li><a href="#how-daena-thinks">How Daena Thinks</a></li>
+                <li><a href="#how-daena-improves">How Daena Improves</a></li>
+                <li><a href="#proof-validation">Proof & Validation</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="section-wrapper" id="memory-governance">
+                <div class="section-card">
+                    <h1 class="section-title">Memory & Governance Engine</h1>
+                    <p style="text-align: center; font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-bottom: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                        Daena's revolutionary <strong style="color: var(--primary-gold);">Memory & Governance Engine</strong> combines <strong style="color: var(--secondary-cyan);">NBMF (Neural-Backed Memory Fabric)</strong> with <strong style="color: #8b5cf6;">Enterprise-DNA</strong> to deliver <strong style="color: var(--primary-gold);">60%+ cost savings</strong>, <strong style="color: var(--secondary-cyan);">complete audit trails</strong>, and <strong style="color: #8b5cf6;">enterprise-grade governance</strong>.
+                    </p>
+                    <p style="text-align: center; margin-bottom: 2rem;">
+                        <a href="/nbmf" style="color: var(--secondary-cyan); text-decoration: underline;">NBMF Deep Dive →</a> | 
+                        <a href="/enterprise-dna" style="color: #8b5cf6; text-decoration: underline;">Enterprise-DNA Deep Dive →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="why-it-wins">
+                <div class="section-card">
+                    <h2 class="section-title">Why It Wins</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        Daena's Memory & Governance Engine delivers superior performance, cost efficiency, and enterprise-grade security.
+                    </p>
+                    <!-- Content will be added from existing pages -->
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="benchmarks">
+                <div class="section-card">
+                    <h2 class="section-title">Benchmarks</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        Comprehensive performance benchmarks and validation results.
+                    </p>
+                    <!-- Content will be added from existing pages -->
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="governance-demo">
+                <div class="section-card">
+                    <h2 class="section-title">Governance Demo: Merkle Proof & Rollback</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        See how Daena's governance system ensures complete auditability and enables instant rollback.
+                    </p>
+                    <!-- Content will be added from existing pages -->
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="deployment-targets">
+                <div class="section-card">
+                    <h2 class="section-title">Deployment Targets: CPU / GPU / TPU / Google TPUs</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        Daena's multi-device hardware support with automatic routing and optimization.
+                    </p>
+                    <!-- Content will be added from existing pages -->
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="security-compliance">
+                <div class="section-card">
+                    <h2 class="section-title">Security & Compliance</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        Enterprise-grade security features and compliance capabilities.
+                    </p>
+                    <p style="text-align: center; margin-bottom: 2rem;">
+                        <a href="/security-and-compliance" style="color: var(--secondary-cyan); text-decoration: underline;">Full Security & Compliance Documentation →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="how-daena-thinks">
+                <div class="section-card">
+                    <h2 class="section-title">How Daena Thinks</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        Daena's decision-making process follows a structured flow from intake to final decision.
+                    </p>
+                    <!-- Content will be added from existing pages -->
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="how-daena-improves">
+                <div class="section-card">
+                    <h2 class="section-title">How Daena Improves Decisions Over Time</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        Daena's reflexive memory system enables continuous learning and improvement.
+                    </p>
+                    <!-- Content will be added from existing pages -->
+                </div>
+            </div>
+
+            <div class="section-wrapper" id="proof-validation">
+                <div class="section-card">
+                    <h2 class="section-title">Proof & Validation</h2>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin-bottom: 3rem;">
+                        Measurable experiments, transparent evaluation, and real-world feedback.
+                    </p>
+                    <!-- Content will be added from existing pages -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="backToTop" class="back-to-top" aria-label="Back to top">
+        ↑ Back to Top
+    </a>
+
+    <script>
+        // TOC Toggle for mobile
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('expanded');
+        }
+
+        // Active TOC link highlighting
+        const sections = document.querySelectorAll('.section-wrapper');
+        const tocLinks = document.querySelectorAll('.toc a');
+
+        function updateActiveTOC() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveTOC);
+        updateActiveTOC();
+
+        // Back to top functionality
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '#!') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        const offsetTop = target.offsetTop - 100;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
