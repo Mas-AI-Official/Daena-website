@@ -2,20 +2,15 @@
   "name": "daena-website",
   "version": "1.0.0",
   "description": "Daena website test suite",
-  "type": "module",
   "scripts": {
-    "test": "playwright test",
-    "extract:pdf": "node scripts/pdf_to_svg.mjs",
-    "test:mobile": "node scripts/test-mobile-accessibility.mjs"
+    "test": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
     "@types/node": "^20.0.0",
     "lighthouse": "^11.0.0",
     "chrome-launcher": "^1.0.0",
-    "typescript": "^5.0.0",
-    "pdf-lib": "^1.17.1",
-    "svgo": "^3.3.2"
+    "typescript": "^5.0.0"
   }
 }
 
