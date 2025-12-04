@@ -2,6 +2,16 @@
    Global CSS - Glass Effects & Background
    ============================================ */
 
+:root {
+    --nav-h: 72px;
+    --hero-pad: 24px;
+}
+
+/* ensure anchors don't hide behind the fixed nav */
+html, body {
+    scroll-padding-top: var(--nav-h);
+}
+
 /* Metatron Background Layers */
 .metatron-bg {
     position: fixed;

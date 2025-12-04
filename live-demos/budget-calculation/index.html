@@ -7,7 +7,8 @@
   <meta name="description" content="See how Daena's Finance agents analyze and calculate budgets with real-time decision-making" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/assets/css/global.css">
-  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/assets/css/live-demos.css">
+
   <link rel="stylesheet" href="/live-demos/budget-calculation/live-demo.css">
 
   <link rel="stylesheet" href="/live-demos/voice-player.css">
@@ -795,11 +796,15 @@
     </div>
   </nav>
   
-  <main class="container" style="margin-top: 100px; padding: 2rem 1rem;">
-    <a class="back-link" href="/docs.html#advanced-demos" id="back-to-demos" style="display: inline-block; margin-bottom: 1rem; padding: 0.5rem 1rem; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; text-decoration: none; color: #FFD700; transition: all 0.3s;">â† Back to Advanced Interactive Demos</a>
-    <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.5rem;">Budget Calculation</h1>
-    <p class="subtle" style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem;">See how Daena's Finance agents analyze and calculate budgets with real-time decision-making</p>
-    <div class="glass-card" style="padding: 2rem; margin-top: 1rem; overflow: visible;">
+  <main class="page">
+    <header class="demo-header">
+      <a class="btn-back" href="/docs.html#advanced-demos">â† Back to Advanced Interactive Demos</a>
+    </header>
+    
+    <div class="card glass">
+      <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.5rem; margin-top: 0;">Budget Calculation</h1>
+      <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem; margin-top: 0;">See how Daena's Finance agents analyze and calculate budgets with real-time decision-making</p>
+      
 
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
@@ -1036,7 +1041,7 @@
                 this.narrationAudio.addEventListener('ended', () => this.onNarrationEnd());
 
                 // Load narration audio
-                this.narrationAudio.src = '../live-demos/audio/Demo 2 Budget Calculation.mp3';
+                this.narrationAudio.src = '../voice-over-demos/Demo 2 Budget Calculation.mp3';
                 this.narrationAudio.volume = 0.8;
             }
 
@@ -1403,10 +1408,12 @@
     </div>
   </main>
   
-  <script src/metatron-hex-network.js"></script>
+  <script src="/js/metatron-hex-network.js"></script>
 
-  
-  
+  <script src="/live-demos/budget-calculation/live-demo.js" defer></script>
+
+  <link rel="stylesheet" href="/live-demos/voice-player.css">
+  <script src="/live-demos/voice-player.js"></script>
   <script>
 
         class BudgetCalculationDemo {
@@ -1481,7 +1488,7 @@
                 this.narrationAudio.addEventListener('ended', () => this.onNarrationEnd());
 
                 // Load narration audio
-                this.narrationAudio.src = '../live-demos/audio/Demo 2 Budget Calculation.mp3';
+                this.narrationAudio.src = '../voice-over-demos/Demo 2 Budget Calculation.mp3';
                 this.narrationAudio.volume = 0.8;
             }
 
@@ -1850,13 +1857,15 @@
     (function() {
       sessionStorage.setItem('returnSection', 'advanced-demos');
       sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
-      const backBtn = document.getElementById('back-to-demos');
+      
+      const backBtn = document.querySelector('.btn-back');
       if (backBtn) {
         backBtn.addEventListener('click', function(e) {
           e.preventDefault();
           window.location.href = '/docs.html#advanced-demos';
         });
       }
+      
       const mobileMenuBtn = document.getElementById('mobile-menu-btn');
       const mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenuBtn && mobileMenu) {
@@ -1866,6 +1875,5 @@
       }
     })();
   </script>
-  <script src="/live-demos/budget-calculation/live-demo.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daena: Real Backend Agent Communication Demo</title>
+    <link rel="stylesheet" href="voice-player.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #00bcd4, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        .demo-interface {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .backend-demo-title {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .backend-demo-subtitle {
+            color: #00bcd4;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .demo-btn {
+            background: linear-gradient(45deg, #FFD700, #00bcd4);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            min-width: 180px;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .demo-btn::before-demo-btn.executing {
+            background: linear-gradient(45deg, #dc267f, #00bcd4);
+            animation: pulse 1s infinite;
+        }
+
+        /* Backend API Status Panel */
+        .backend-status {
+            background: rgba(55, 55, 84, 0.6);
+            border: 1px solid rgba(142, 153, 167, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .backend-status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .backend-status-title {
+            color: #E6E8EA;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .backend-status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #97A1A9;
+        }
+
+        .status-dot.active {
+            background: #4caf50;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-dot.connecting {
+            background: #FFD700;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-text {
+            color: #B8BCC8;
+            font-size: 0.9rem;
+        }
+
+        /* SFHC Agent Network */
+        .agent-network {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .agent-node {
+            background: rgba(55, 55, 84, 0.6);
+            border: 2px solid rgba(142, 153, 167, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-node.active {
+            border-color: #00bcd4;
+            background: rgba(0, 188, 212, 0.1);
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+        }
+
+        .agent-node.processing {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            animation: processingPulse 2s infinite;
+        }
+
+        .agent-node.communicating {
+            border-color: #4caf50;
+            background: rgba(76, 175, 80, 0.1);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        @keyframes processingPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .agent-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .agent-node.active::before,
+        .agent-node.processing::before,
+        .agent-node.communicating::before {
+            opacity: 1;
+        }
+
+        .agent-info {
+            position: relative;
+            z-index: 2;
+        }
+
+        .agent-name {
+            color: #FFD700;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-type {
+            color: #00bcd4;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .agent-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .agent-status-text {
+            color: #B8BCC8;
+            font-size: 0.8rem;
+        }
+
+        .agent-capabilities {
+            color: #B8BCC8;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .agent-activity {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 80px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            color: #B8BCC8;
+            font-size: 0.75rem;
+            padding: 2px 0;
+            border-bottom: 1px solid rgba(142, 153, 167, 0.2);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-time {
+            color: #97A1A9;
+            font-family: monospace;
+        }
+
+        /* Communication Log */
+        .communication-log {
+            background: rgba(55, 55, 84, 0.6);
+            border: 1px solid rgba(142, 153, 167, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .communication-log-title {
+            color: #E6E8EA;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .communication-entries {
+            max-height: 300px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 215, 0, 0.3) transparent;
+        }
+
+        .communication-entries::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .communication-entries::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .communication-entries::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        .communication-entry {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid rgba(255, 215, 0, 0.6);
+        }
+
+        .communication-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .communication-agents {
+            color: #00bcd4;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .communication-time {
+            color: #97A1A9;
+            font-size: 0.75rem;
+            font-family: monospace;
+        }
+
+        .communication-content {
+            color: #B8BCC8;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .communication-metadata {
+            color: #97A1A9;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Voice-over Panel */
+        .voice-controls {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .voice-hint {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .voice-hint h3 {
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .voice-hint p {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        /* Backend Statistics */
+        .backend-stats {
+            background: rgba(55, 55, 84, 0.6);
+            border: 1px solid rgba(142, 153, 167, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            color: #FFD700;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: #B8BCC8;
+            font-size: 0.8rem;
+        }
+
+        .demo-scenario {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .scenario-title {
+            color: #FFE700;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scenario-description {
+            color: #B8BCC8;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            '.voice-controls {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .demo-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .agent-network {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">{{Daena AI Backend Demo}}</div>
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-btn">← Demos Gallery</a>
+                    <a href="../index.html" class="nav-btn">🏠 Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="demo-interface">
+                <!-- Demo Title -->
+                <h1 class="backend-demo-title">🔴 Daena Real Backend Communication Demo</h1>
+                <p class="backend-demo-subtitle">Experience LIVE agent communication through SFHC backend architecture</p>
+
+                <!-- Demo Controls -->
+                <div class="demo-controls">
+                    <button id="startBackendDemo" class="demo-btn">▶️ START REAL TIME DEMO</button>
+                    <button id="stopBackendDemo" class="demo-btn" style="display: none;">⏸ STOP DEMO</button>
+                    <button id="resetBackendDemo" class="demo-btn">🔄 RESET DEMO</button>
+                </div>
+
+                <!-- Current Scenario -->
+                <div class="demo-scenario">
+                    <div class="scenario-title">📋 Current Scenario: Product Launch Analysis</div>
+                    <div class="scenario-description">
+                        Daena's SFHC agents will collaborate on a comprehensive product launched analysis. Watch as agents communicate through the Sunflower-Honeycomb architecture, sharing context and distributing tasks across specialized AI components.
+                    </div>
+                </div>
+
+                <!-- Backend Status Panel -->
+                <div class="backend-status">
+                    <div class="backend-status-header">
+                        <div class="backend-status-title">🌐 Backend Connection Status</div>
+                        <div class="backend-status-indicator">
+                            <div id="statusDot" class="status-dot"></div>
+                            <div id="statusText" class="status-text">Ready to connect</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Statistics -->
+                <div class="backend-stats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div id="totalRequests" class="stat-value">0</div>
+                            <div class="stat-label">API Commands</div>
+                        </div>
+                        <div class="stat-item">
+                            <div id="activeAgents" class="stat-value">0</div>
+                            <div class="stat-label">Active Agents</div>
+                        </div>
+                        <div class="stat-item">
+                            <div id="messagesExchanged" class="stat-value">0</div>
+                            <div class="stat-label">Messages</div>
+                        </div>
+                        <div class="stat-item">
+                            <div id="taskCompletion" class="stat-value">0%</div>
+                            <div class="stat-label">Tasks Complete</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SFHC Agent Network -->
+                <div class="agent-network">
+                    <!-- Research Agent -->
+                    <div id="researchAgent" class="agent-node">
+                        <div class="agent-info">
+                            <div class="agent-name">🔬 Research Agent</div>
+                            <div class="agent-type">Sunflower-Honeycomb Core</div>
+                            <div class="agent-status">
+                                <div class="status-dot"></div>
+                                <div class="status-text">Standby</div>
+                            </div>
+                            <div class="agent-capabilities">
+                                Market analysis, competitor research, data collection
+                            </div>
+                            <div class="agent-activity" id="researchActivity">
+                                <div class="activity-item">Idle</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Agent -->
+                    <div id="marketingAgent" class="agent-node">
+                        <div class="agent-info">
+                            <div class="agent-name">📊 Marketing Agent</div>
+                            <div class="agent-type">Sunflower-Honeycomb Core</div>
+                            <div class="agent-status">
+                                <div class="status-dot"></div>
+                                <div class="status-text">Standby</div>
+                            </div>
+                            <div class="agent-capabilities">
+                                Campaign strategy, customer analysis, brand positioning
+                            </div>
+                            <div class="agent-activity" id="marketingActivity">
+                                <div class="activity-item">Idle</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Finance Agent -->
+                    <div id="financeAgent" class="agent-node">
+                        <div class="agent-info">
+                            <div class="agent-name">💰 Finance Agent</div>
+                            <div class="agent-type">Sunflower-Honeycomb Core</div>
+                            <div class="agent-status">
+                                <div class="status-dot"></div>
+                                <div class="status-text">Standby</div>
+                            </div>
+                            <div class="agent-capabilities">
+                                Budget analysis, P&L projections, cost optimization
+                            </div>
+                            <div class="agent-activity" id="financeActivity">
+                                <div class="activity-item">Idle</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operations Agent -->
+                    <div id="operationsAgent" class="agent-node">
+                        <div class="agent-info">
+                            <div class="agent-name">⚙️ Operations Agent</div>
+                            <div class="agent-type">Sunflower-Honeycomb Core</div>
+                            <div class="agent-status">
+                                <div class="status-dot"></div>
+                                <div class="status-text">Standby</div>
+                            </div>
+                            <div class="agent-capabilities">
+                                Resource allocation, timeline management, logistics
+                            </div>
+                            <div class="agent-activity" id="operationsActivity">
+                                <div class="activity-item">Idle</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sales Agent -->
+                    <div id="salesAgent" class="agent-node">
+                        <div class="agent-info">
+                            <div class="agent-name">📈 Sales Agent</div>
+                            <div class="agent-type">Sunflower-Honeycomb Core</div>
+                            <div class="agent-status">
+                                <div class="status-dot"></div>
+                                <div class="status-text">Standby</div>
+                            </div>
+                            <div class="agent-capabilities">
+                                Customer acquisition, pricing strategy, market penetration
+                            </div>
+                            <div class="agent-activity" id="salesActivity">
+                                <div class="activity-item">Idle</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Executive Agent -->
+                    <div id="executiveAgent" class="agent-node">
+                        <div class="agent-info">
+                            <div class="agent-name">🎯 Executive Agent</div>
+                            <div class="agent-type">Sunflower-Honeycomb Orchestrator</div>
+                            <div class="agent-status">
+                                <div class="status-dot"></div>
+                                <div class="status-text">Standby</div>
+                            </div>
+                            <div class="agent-capabilities">
+                                Strategic decision-making, task coordination, final synthesis
+                            </div>
+                            <div class="agent-activity" id="executiveActivity">
+                                <div class="activity-item">Idle</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Communication Log -->
+                <div class="communication-log">
+                    <div class="communication-log-title">
+                        💬 Real-time SFHC Communication Log
+                    </div>
+                    <div id="communicationEntries" class="communication-entries">
+                        <p style="color: #97A1A9; text-align: center; padding: 2rem; font-style: italic;">
+                            Communication log will appear here when backend demo starts...
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice-over Controls -->
+            <div class="voice-controls">
+                <div class="voice-hint">
+                    <h3>🎧 Synchronized Voice-Over</h3>
+                    <p>The voice narration will synchronize with the live backend agent activities.</p>
+                </div>
+
+                <!-- Voice Player -->
+                <div id="daena-voice-player"></div>
+
+                <!-- Current Phase Indicator -->
+                <div id="currentPhase" class="voice-hint" style="margin-top: 1rem;">
+                    <h3>📖 Current Demo Phase</h3>
+                    <p id="phaseText">Ready to start product launch analysis...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backend Demo Script -->
+    <script src="voice-player.js"></script>
+    <script>
+        class DaenaBackendDemo {
+            constructor() {
+                this.isRunning = false;
+                this.phaseIndex = 0;
+                this.totalRequests = 0;
+                this.activeAgents = 0;
+                this.messagesExchanged = 0;
+                this.taskCompletion = 0;
+                this.agentIds = ['researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent', 'executiveAgent'];
+                
+                this.phases = [
+                    {
+                        name: "Backend Connection",
+                        description: "Establishing connection to SFHC backend systems...",
+                        duration: 2000,
+                        agents: ['executiveAgent'],
+                        action: this.connectToBackend.bind(this)
+                    },
+                    {
+                        name: "Task Initiation",
+                        description: "Executive Agent initiating product launch analysis...",
+                        duration: 3000,
+                        agents: ['executiveAgent'],
+                        action: this.initiateTask.bind(this)
+                    },
+                    {
+                        name: "Research Engagement",
+                        description: "Research Agent connecting to market data APIs...",
+                        duration: 4000,
+                        agents: ['researchAgent', 'executiveAgent'],
+                        action: this.activateResearchAgent.bind(this)
+                    },
+                    {
+                        name: "Marketing Activation",
+                        description: "Marketing Agent developing campaign strategy...",
+                        duration: 3500,
+                        agents: ['marketingAgent', 'researchAgent'],
+                        action: this.activateMarketingAgent.bind(this)
+                    },
+                    {
+                        name: "Financial Processing",
+                        description: "Finance Agent calculating budget and ROI projections...",
+                        duration: 4000,
+                        agents: ['financeAgent', 'researchAgent', 'marketingAgent'],
+                        action: this.activateFinanceAgent.bind(this)
+                    },
+                    {
+                        name: "Operations Coordination",
+                        description: "Operations Agent planning resource allocation...",
+                        duration: 3000,
+                        agents: ['operationsAgent', 'financeAgent'],
+                        action: this.activateOperationsAgent.bind(this)
+                    },
+                    {
+                        name: "Sales Preparation",
+                        description: "Sales Agent optimizing customer acquisition...",
+                        duration: 3500,
+                        agents: ['salesAgent', 'marketingAgent', 'operationsAgent'],
+                        action: this.activateSalesAgent.bind(this)
+                    },
+                    {
+                        name: "Final Synthesis",
+                        description: "Executive Agent synthesizing comprehensive analysis...",
+                        duration: 4000,
+                        agents: ['executiveAgent', 'researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent'],
+                        action: this.finalizeResults.bind(this)
+                    }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.startBtn = document.getElementById('startBackendDemo');
+                this.stopBtn = document.getElementById('stopBackendDemo');
+                this.resetBtn = document.getElementById('resetBackendDemo');
+                this.statusDot = document.getElementById('statusDot');
+                this.statusText = document.getElementById('statusText');
+                this.communicationEntries = document.getElementById('communicationEntries');
+
+                this.startBtn.addEventListener('click', () => this.startDemo());
+                this.stopBtn.addEventListener('click', () => this.stopDemo());
+                this.resetBtn.addEventListener('click', () => this.resetDemo());
+
+                this.resetDemo();
+            }
+
+            async startDemo() {
+                this.isRunning = true;
+                this.startBtn.style.display = 'none';
+                this.stopBtn.style.display = 'inline-block';
+
+                this.updateStatus('connecting', 'Establishing SFHC backend connection...');
+
+                for (const phase of this.phases) {
+                    if (!this.isRunning) break;
+
+                    await this.executePhase(phase);
+                    await this.delay(1000);
+                }
+
+                if (this.isRunning) {
+                    this.completeDemo();
+                }
+            }
+
+            async executePhase(phase) {
+                this.updatePhaseIndicator(phase.name, phase.description);
+
+                // Communicate SFHC process
+                this.addCommunicationLog(
+                    `SFHC Backend`,
+                    `Phase: ${phase.name}`,
+                    `${phase.description}`,
+                    `Backend`
+                );
+
+                // Activate phase animation
+                await phase.action();
+
+                this.taskCompletion += 12.5; // 100% / 8 phases
+                this.updateStats();
+            }
+
+            async connectToBackend() {
+                this.updateStatus('connecting', 'Connecting to SFHC backend...');
+                
+                await this.delay(1500);
+                
+                this.updateStatus('active', 'Backend connected successfully');
+                this.totalRequests++;
+                this.activeAgents++;
+            }
+
+            async initiateTask() {
+                this.setAgentState('executiveAgent', 'processing');
+                this.addAgentActivity('executiveAgent', 'Establishing secure SFHC connection to backend services', '(Backend API Call)');
+                
+                await this.delay(1000);
+                
+                this.messagesExchanged++;
+                this.addCommunicationLog(
+                    'Executive Agent',
+                    'SFHC Backend',
+                    'Initiating product launch analysis request',
+                    'API Command'
+                );
+
+                await this.delay(2000);
+                
+                this.setAgentState('executiveAgent', 'active');
+                this.updateStats();
+            }
+
+            async activateResearchAgent() {
+                const agents = ['researchAgent', 'executiveAgent'];
+                
+                agents.forEach(agent => this.setAgentState(agent, 'processing'));
+                
+                this.addAgentActivity('researchAgent', 'Connecting to market data APIs and research databases', '(Backend Data Fetch)');
+                
+                await this.delay(1500);
+                
+                this.messagesExchanged += 2;
+                this.addCommunicationLog(
+                    'Executive Agent',
+                    'Research Agent',
+                    'Product market research request dispatched',
+                    'SFHC Command'
+                );
+                
+                this.addCommunicationLog(
+                    'Research Agent',
+                    'Market APIs',
+                    'Fetching competitive landscape data',
+                    'Data Query'
+                );
+
+                await this.delay(2500);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'communicating'));
+                this.addAgentActivity('researchAgent', 'Market analysis complete - data ready for coordination', '(Research Results)');
+                
+                await this.delay(1000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'active'));
+                this.updateStats();
+            }
+
+            async activateMarketingAgent() {
+                const agents = ['marketingAgent', 'researchAgent'];
+                
+                agents.forEach(agent => this.setAgentState(agent, 'processing'));
+                
+                this.addAgentActivity('marketingAgent', 'Processing market insights and developing campaign strategy', '(Strategy Generation)');
+                
+                await this.delay(1500);
+                
+                this.messagesExchanged += 2;
+                this.addCommunicationLog(
+                    'Research Agent',
+                    'Marketing Agent',
+                    'Market insights transferred: customer segments identified',
+                    'Coordined Data'
+                );
+                
+                this.addCommunicationLog(
+                    'Marketing Agent',
+                    'Campaign Engine',
+                    'Generating targeted marketing campaigns',
+                    'Strategy Synthesis'
+                );
+
+                await this.delay(2000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'communicating'));
+                this.addAgentActivity('marketingAgent', 'Marketing strategy formulated with targeted campaigns', '(Campaign Results)');
+                
+                await this.delay(1000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'active'));
+                this.updateStats();
+            }
+
+            async activateFinanceAgent() {
+                const agents = ['financeAgent', 'researchAgent', 'marketingAgent'];
+                
+                agents.forEach(agent => this.setAgentState(agent, 'processing'));
+                
+                this.addAgentActivity('financeAgent', 'Calculating budget projections and financial modeling', '(Financial Analysis)');
+                
+                await this.delay(1500);
+                
+                this.messagesExchanged += 3;
+                this.addCommunicationLog(
+                    'Finance Agent',
+                    'Budget Engine',
+                    'Calculating comprehensive financial projections',
+                    'Financial Processing'
+                );
+                
+                this.addCommunicationLog(
+                    'Marketing Agent',
+                    'Finance Agent',
+                    'Campaign budget requirements shared',
+                    'Cross-Agent Coordination'
+                );
+
+                await this.delay(2500);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'communicating'));
+                this.addAgentActivity('financeAgent', 'Financial analysis complete - ROI projections ready', '(Finance Results)');
+                
+                await this.delay(1000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'active'));
+                this.updateStats();
+            }
+
+            async activateOperationsAgent() {
+                const agents = ['operationsAgent', 'financeAgent'];
+                
+                agents.forEach(agent => this.setAgentState(agent, 'processing'));
+                
+                this.addAgentActivity('operationsAgent', 'Planning resource allocation and operational timelines', '(Operations Planning)');
+                
+                await this.delay(1500);
+                
+                this.messagesExchanged += 2;
+                this.addCommunicationLog(
+                    'Finance Agent',
+                    'Operations Agent',
+                    'Budget allocations and resource requirements',
+                    'Resource Coordination'
+                );
+
+                await this.delay(2000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'communicating'));
+                this.addAgentActivity('operationsAgent', 'Operations plan complete - resources allocated', '(Operations Results)');
+                
+                await this.delay(1000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'active'));
+                this.updateStats();
+            }
+
+            async activateSalesAgent() {
+                const agents = ['salesAgent', 'marketingAgent', 'operationsAgent'];
+                
+                agents.forEach(agent => this.setAgentState(agent, 'processing'));
+                
+                this.addAgentActivity('salesAgent', 'Optimizing customer acquisition strategies', '(Sales Optimization)');
+                
+                await this.delay(1500);
+                
+                this.messagesExchanged += 3;
+                this.addCommunicationLog(
+                    'Sales Agent',
+                    'Customer Database',
+                    'Analyzing customer acquisition channels',
+                    'Data Analysis'
+                );
+
+                await this.delay(2000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'communicating'));
+                this.addAgentActivity('salesAgent', 'Sales strategy optimized - targets aligned', '(Sales Results)');
+                
+                await this.delay(1000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'active'));
+                this.updateStats();
+            }
+
+            async finalizeResults() {
+                const agents = ['executiveAgent', 'researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent'];
+                
+                agents.forEach(agent => this.setAgentState(agent, 'processing'));
+                
+                this.addAgentActivity('executiveAgent', 'Synthesizing comprehensive analysis from all agents', '(Final Synthesis)');
+                
+                await this.delay(2000);
+                
+                this.messagesExchanged += 6;
+                this.addCommunicationLog(
+                    'Executive Agent',
+                    'All Agents',
+                    'Coordinating final synthesis and report generation',
+                    'Comprehensive Analysis'
+                );
+
+                await this.delay(3000);
+                
+                agents.forEach(agent => this.setAgentState(agent, 'active'));
+                this.addAgentActivity('executiveAgent', 'COMPLETE: Product launch analysis finalized with strategic recommendations', '(COMPLETE RESULT)');
+                
+                await this.delay(1000);
+                
+                this.taskCompletion = 100;
+                this.updateStats();
+            }
+
+            completeDemo() {
+                this.updateStatus('active', 'Demo completed successfully - Check results');
+                
+                setTimeout(() => {
+                    this.stopDemo();
+                    this.addCommunicationLog(
+                        'SFHC Demo System',
+                        'User',
+                        'Product launch analysis completed. All agents coordinated successfully through SFHC backend.',
+                        'Demo Complete'
+                    );
+                }, 2000);
+            }
+
+            stopDemo() {
+                this.isRunning = false;
+                
+                if (this.startBtn) this.startBtn.style.display = 'inline-block';
+                if (this.stopBtn) this.stopBtn.style.display = 'none';
+
+                // Reset all agents to active state but keep logs
+                this.agentIds.forEach(agentId => {
+                    this.setAgentState(agentId, 'active');
+                });
+            }
+
+            resetDemo() {
+                this.stopDemo();
+                
+                // Reset statistics
+                this.totalRequests = 0;
+                this.activeAgents = 0;
+                this.messagesExchanged = 0;
+                this.taskCompletion = 0;
+                this.taskCompletion = 0;
+                this.phaseIndex = 0;
+
+                // Reset all agents to standby
+                this.agentIds.forEach(agentId => {
+                    this.setAgentState(agentId, 'standby');
+                    this.clearAgentActivity(agentId);
+                });
+
+                // Clear communication log
+                this.communicationEntries.innerHTML = `
+                    <p style="color: #97A1A9; text-align: center; padding: 2rem; font-style: italic;">
+                        Communication log will appear here when backend demo starts...
+                    </p>
+                `;
+
+                // Reset status
+                this.updateStatus('ready', 'Ready to connect');
+                this.updatePhaseIndicator('Ready', 'System ready to execute product launch analysis');
+                this.updateStats();
+            }
+
+            setAgentState(agentId, state) {
+                const agentElement = document.getElementById(agentId);
+                const statusDot = agentElement.querySelector('.status-dot');
+                const statusText = agentElement.querySelector('.status-text');
+
+                agentElement.className = `agent-node ${state}`;
+                
+                const states = {
+                    'standby': { text: 'Standby', color: '#97A1A9' },
+                    'processing': { text: 'Processing', color: '#00bcd4' },
+                    'communicating': { text: 'Communicating', color: '#4caf50' },
+                    'active': { text: 'Active', color: '#FFD700' }
+                };
+
+                statusDot.style.background = states[state].color;
+                statusText.textContent = states[state].text;
+            }
+
+            addAgentActivity(agentId, activity, type = 'Activity') {
+                const activityContainer = document.getElementById(agentId + 'Activity');
+                
+                const time = new Date().toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
+                });
+
+                const activityItem = document.createElement('div');
+                activityItem.className = 'activity-item';
+                activityItem.innerHTML = `
+                    <span class="activity-time">${time}</span> - ${activity} ${type ? `(${type})` : ''}
+                `;
+
+                // Remove "Idle" item if present
+                const idleItem = activityContainer.querySelector('.activity-item');
+                if (idleItem && idleItem.textContent === 'Idle') {
+                    idleItem.remove();
+                }
+
+                if (activityContainer.children.length >= 5) {
+                    activityContainer.removeChild(activityContainer.firstChild);
+                }
+
+                activityContainer.appendChild(activityItem);
+                activityContainer.scrollTop = activityContainer.scrollHeight;
+            }
+
+            clearAgentActivity(agentId) {
+                const activityContainer = document.getElementById(agentId + 'Activity');
+                activityContainer.innerHTML = '<div class="activity-item">Idle</div>';
+            }
+
+            addCommunicationLog(from, to, message, type) {
+                const time = new Date().toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
+                });
+
+                const logEntry = document.createElement('div');
+                logEntry.className = 'communication-entry';
+                logEntry.innerHTML = `
+                    <div class="communication-header">
+                        <div class="communication-agents">${from} → ${to}</div>
+                        <div class="communication-time">${time}</div>
+                    </div>
+                    <div class="communication-content">${message}</div>
+                    <div class="communication-metadata">Type: ${type} | Source: SFHC Backend</div>
+                `;
+
+                // Remove placeholder if it exists
+                const placeholder = this.communicationEntries.querySelector('p[style*="italic"]');
+                if (placeholder) {
+                    placeholder.remove();
+                }
+
+                this.communicationEntries.appendChild(logEntry);
+                this.communicationEntries.scrollTop = this.communicationEntries.scrollHeight;
+
+                // Limit to 10 entries
+                if (this.communicationEntries.children.length > 10) {
+                    this.communicationEntries.removeChild(this.communicationEntries.firstChild);
+                }
+            }
+
+            updateStatus(type, message) {
+                this.statusText.textContent = message;
+                
+                const statusTypes = {
+                    'ready': { color: '#97A1A9' },
+                    'connecting': { color: '#FFD700' },
+                    'active': { color: '#4caf50' },
+                    'error': { color: '#f44336' }
+                };
+
+                this.statusDot.style.background = statusTypes[type].color;
+                this.statusDot.className = `status-dot ${type}`;
+            }
+
+            updatePhaseIndicator(title, description) {
+                document.querySelector('.scenario-title').textContent = `📋 Current Phase: ${title}`;
+                document.querySelector('.scenario-description').textContent = description;
+                document.getElementById('phaseText').textContent = description;
+                
+                // Try to sync with voice player if available
+                if (window.liveVoicePlayer && window.liveVoicePlayer.setPhase) {
+                    window.liveVoicePlayer.setPhase(title, description);
+                }
+            }
+
+            updateStats() {
+                document.getElementById('totalRequests').textContent = this.totalRequests;
+                document.getElementById('activeAgents').textContent = this.activeAgents;
+                document.getElementById('messagesExchanged').textContent = this.messagesExchanged;
+                document.getElementById('taskCompletion').textContent = `${Math.round(this.taskCompletion)}%`;
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Initialize demo when page loads
+        function initializeBackendDemo() {
+            window.backendDemo = new DaenaBackendDemo();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize backend demo
+            initializeBackendDemo();
+
+            // Try to load voice player config
+            const voicePlayerElement = document.getElementById('daena-voice-player');
+            if (voicePlayerElement) {
+                voicePlayerElement.innerHTML = `
+                    <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; padding: 1rem;">
+                        <div style="color: #FFD700; font-weight: 600; margin-bottom: 0.5rem;">🎧 Voice-Over Coming Soon</div>
+                        <div style="color: #97A1A9; font-size: 0.85rem;">
+                            Record a narration for this backend demo using the Daena voice you cloned in Eleven Labs.
+                            Follow the storytelling tone used in <code>voice-over-scripts.md</code> (describe the 8 backend phases, SFHC handshakes, and governance cues)
+                            so we can drop the audio file into <code>demos/voice-over-demos/</code> and wire it up instantly.
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
