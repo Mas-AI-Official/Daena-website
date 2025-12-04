@@ -154,7 +154,9 @@ class CustomVideoPlayer {
         if (this.controls.time) {
             const current = this.formatTime(this.video.currentTime);
             const total = this.formatTime(this.video.duration);
+            // Use monospace font for proper alignment
             this.controls.time.textContent = `${current} / ${total}`;
+            this.controls.time.style.fontVariantNumeric = 'tabular-nums';
         }
     }
     
