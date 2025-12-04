@@ -1795,8 +1795,56 @@
   
   <script src="/live-demos/agent-communication/live-demo.js" defer></script>
 
+  
   <!-- Removed duplicate EnhancedAgentDemo class - using the one defined earlier in the file -->
-            constructor() {
+        // Initialize demo when page loads (only once)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                if (!window.demoInstance) {
+                    window.demoInstance = new EnhancedAgentDemo();
+                }
+            });
+        } else {
+            if (!window.demoInstance) {
+                window.demoInstance = new EnhancedAgentDemo();
+            }
+        }
+
+        // Handle orientation changes
+        function handleOrientationChange() {
+            const agentGrid = document.querySelector('.agent-grid');
+            const navbar = document.querySelector('.navbar');
+            
+            setTimeout(() => {
+                const isLandscape = window.innerWidth > window.innerHeight;
+                
+                if (agentGrid) {
+                    if (isLandscape && window.innerWidth <= 1024) {
+                        agentGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                    } else if (window.innerWidth <= 768) {
+                        agentGrid.style.gridTemplateColumns = '1fr';
+                    }
+                }
+                
+                if (navbar) {
+                    if (isLandscape) {
+                        navbar.style.minHeight = '40px';
+                    } else {
+                        navbar.style.minHeight = '50px';
+                    }
+                }
+            }, 100);
+        }
+        
+        // Listen for orientation changes
+        window.addEventListener('orientationchange', handleOrientationChange);
+        window.addEventListener('resize', handleOrientationChange);
+        
+        // Initial orientation check
+        handleOrientationChange();
+  </script>
+  <script>
+        // Removed orphaned constructor and methods - duplicate code
                 this.isExecuting = false;
                 this.messageCount = 0;
                 this.crossDeptCount = 0;
