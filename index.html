@@ -92,6 +92,34 @@
             flex-shrink: 0;
         }
         
+        /* Big play button styling */
+        #big-play-button {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        #big-play-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+        
+        #big-play-button:active {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            #big-play-button {
+                width: 4rem;
+                height: 4rem;
+            }
+            #big-play-button svg {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+        
         /* Video controls - Always visible, positioned below video */
         .video-controls {
             display: flex !important;
@@ -483,43 +511,66 @@
                 </div>
                 <div class="video-container order-1 md:order-2 w-full">
                     <div data-player-container class="w-full relative">
-                        <div class="absolute top-2 right-2 z-10 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold opacity-0 transition-opacity duration-300" id="video-playing-indicator">
-                            ▶ Playing
-                        </div>
-                        <video 
-                            data-player
-                            src="/videos/why-investors.mp4"
-                            poster="/assets/img/why-investors.jpg"
-                            class="w-full h-full object-contain"
-                            preload="metadata"
-                            playsinline
-                            webkit-playsinline
-                            x5-playsinline
-                            style="width: 100%; height: 100%; max-width: 100%;"
-                        >
-                            <source src="/videos/why-investors.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <noscript>
-                            <video controls src="/videos/why-investors.mp4" poster="/assets/img/why-investors.jpg" class="w-full h-full" playsinline>
+                        <!-- Video wrapper with big play button overlay -->
+                        <div class="relative w-full" style="aspect-ratio: 16/9; background: #000; border-radius: 1rem; overflow: hidden;">
+                            <video 
+                                data-player
+                                id="why-investors-video"
+                                src="/videos/why-investors.mp4"
+                                poster="/assets/img/why-investors.jpg"
+                                class="w-full h-full object-contain"
+                                preload="metadata"
+                                playsinline
+                                webkit-playsinline
+                                x5-playsinline
+                                style="width: 100%; height: 100%; display: block;"
+                            >
                                 <source src="/videos/why-investors.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
                             </video>
-                        </noscript>
-                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
-                            <button data-control="play-pause" aria-label="Play/Pause" aria-pressed="false" type="button">
-                                <svg fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                            
+                            <!-- Big center play button overlay (visible when paused/not started) -->
+                            <button 
+                                id="big-play-button"
+                                data-control="big-play"
+                                class="absolute inset-0 m-auto h-20 w-20 md:h-24 md:w-24 rounded-full bg-white/95 hover:bg-white text-black grid place-items-center shadow-2xl hover:scale-110 transition-all duration-300 z-20"
+                                aria-label="Play video"
+                                style="display: flex; align-items: center; justify-content: center;"
+                            >
+                                <svg class="w-10 h-10 md:w-12 md:w-12 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
                                 </svg>
                             </button>
-                            <input type="range" data-control="seek" min="0" max="100" value="0" step="0.1" aria-label="Seek" class="seek-bar">
-                            <span data-control="time" class="time-display">0:00 / 0:00</span>
-                            <input type="range" data-control="volume" min="0" max="100" value="100" step="1" aria-label="Volume" class="volume-bar">
-                            <button data-control="mute" aria-label="Mute" aria-pressed="false" type="button">
-                                <svg fill="currentColor" viewBox="0 0 20 20">
+                            
+                            <!-- Playing indicator (top right) -->
+                            <div class="absolute top-2 right-2 z-10 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold opacity-0 transition-opacity duration-300 pointer-events-none" id="video-playing-indicator">
+                                ▶ Playing
+                            </div>
+                        </div>
+                        
+                        <!-- Persistent controls bar (always visible in inline mode) -->
+                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important; margin-top: 0.5rem;">
+                            <button data-control="play-pause" aria-label="Play/Pause" aria-pressed="false" type="button" class="play-pause-btn">
+                                <svg class="play-icon" fill="currentColor" viewBox="0 0 20 20" style="display: block;">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
+                                </svg>
+                                <svg class="pause-icon" fill="currentColor" viewBox="0 0 20 20" style="display: none;">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                            <span data-control="time-current" class="time-display tabular-nums">0:00</span>
+                            <input type="range" data-control="seek" min="0" max="100" value="0" step="0.1" aria-label="Seek" class="seek-bar flex-1">
+                            <span data-control="time-total" class="time-display tabular-nums">0:00</span>
+                            <button data-control="mute" aria-label="Mute" aria-pressed="false" type="button" class="mute-btn">
+                                <svg class="unmuted-icon" fill="currentColor" viewBox="0 0 20 20" style="display: block;">
+                                    <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/>
+                                </svg>
+                                <svg class="muted-icon" fill="currentColor" viewBox="0 0 20 20" style="display: none;">
                                     <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/>
                                 </svg>
                             </button>
-                            <button data-control="speed" aria-label="Playback Speed" type="button">1×</button>
+                            <input type="range" data-control="volume" min="0" max="100" value="100" step="1" aria-label="Volume" class="volume-bar" style="width: 80px;">
+                            <button data-control="speed" aria-label="Playback Speed" type="button" class="speed-btn">1×</button>
                             <button data-control="pip" aria-label="Picture in Picture" type="button" style="display: none;">
                                 <svg fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/>
@@ -530,6 +581,11 @@
                                     <path d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13 5.586V4zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z"/>
                                 </svg>
                             </button>
+                            <a href="/videos/why-investors.mp4" download="why-investors-choose-daena.mp4" class="download-btn" aria-label="Download video" style="display: flex; align-items: center; justify-content: center; min-width: 2.5rem; height: 2.5rem; padding: 0.5rem; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 0.375rem; color: white; text-decoration: none; transition: all 0.2s ease;">
+                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 1.25rem; height: 1.25rem;">
+                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>

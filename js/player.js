@@ -11,8 +11,10 @@ class CustomVideoPlayer {
         
         this.controls = {
             playPause: container.querySelector('[data-control="play-pause"]'),
+            bigPlay: container.querySelector('[data-control="big-play"]'),
             seek: container.querySelector('[data-control="seek"]'),
-            time: container.querySelector('[data-control="time"]'),
+            timeCurrent: container.querySelector('[data-control="time-current"]'),
+            timeTotal: container.querySelector('[data-control="time-total"]'),
             volume: container.querySelector('[data-control="volume"]'),
             mute: container.querySelector('[data-control="mute"]'),
             speed: container.querySelector('[data-control="speed"]'),
@@ -32,19 +34,26 @@ class CustomVideoPlayer {
             this.controls.playPause.addEventListener('click', () => this.togglePlay());
         }
         
-        // Seek
-        if (this.controls.seek) {
-            this.controls.seek.addEventListener('input', (e) => {
-                const time = (e.target.value / 100) * this.video.duration;
-                this.video.currentTime = time;
-            });
-            
-            this.video.addEventListener('timeupdate', () => {
-                const percent = (this.video.currentTime / this.video.duration) * 100;
-                this.controls.seek.value = percent || 0;
-                this.updateTime();
+        // Big play button
+        if (this.controls.bigPlay) {
+            this.controls.bigPlay.addEventListener('click', () => {
+                this.video.play();
+                this.hideBigPlayButton();
             });
         }
+        
+        // Video click to play/pause
+        this.video.addEventListener('click', () => {
+            if (this.video.paused) {
+                this.video.play();
+                this.hideBigPlayButton();
+            } else {
+                this.video.pause();
+                this.showBigPlayButton();
+            }
+        });
+        
+        // Seek is handled in loadedmetadata section below
         
         // Volume
         if (this.controls.volume) {
@@ -123,16 +132,54 @@ class CustomVideoPlayer {
             }
         });
         
-        // Update time display
-        this.video.addEventListener('loadedmetadata', () => this.updateTime());
-        this.video.addEventListener('timeupdate', () => this.updateTime());
+        // Update time display and handle seek bar
+        this.video.addEventListener('loadedmetadata', () => {
+            this.updateTime();
+            // Set seek max to duration (use seconds, not percentage)
+            if (this.controls.seek) {
+                this.controls.seek.max = this.video.duration || 100;
+                this.controls.seek.step = 0.1;
+            }
+        });
+        
+        // Handle seek bar (use duration in seconds, not percentage)
+        if (this.controls.seek) {
+            this.controls.seek.addEventListener('input', (e) => {
+                const time = Number(e.target.value);
+                if (!isNaN(time) && isFinite(time)) {
+                    this.video.currentTime = time;
+                }
+            });
+            
+            this.video.addEventListener('timeupdate', () => {
+                if (!this.controls.seek.matches(':active')) {
+                    this.controls.seek.value = this.video.currentTime || 0;
+                }
+                this.updateTime();
+            });
+        }
+        
+        // Auto-generate poster if missing
+        this.video.addEventListener('loadeddata', () => {
+            if (!this.video.getAttribute('poster') && this.video.videoWidth > 0) {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = this.video.videoWidth;
+                    canvas.height = this.video.videoHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(this.video, 0, 0, canvas.width, canvas.height);
+                    this.video.setAttribute('poster', canvas.toDataURL('image/jpeg', 0.8));
+                    this.video.currentTime = 0;
+                } catch(e) {
+                    console.warn('Could not generate poster:', e);
+                }
+            }
+        }, { once: true });
         
         // Update play/pause button and playing indicator
         this.video.addEventListener('play', () => {
-            if (this.controls.playPause) {
-                this.controls.playPause.setAttribute('aria-pressed', 'true');
-                this.controls.playPause.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>';
-            }
+            this.updatePlayPauseButton(true);
+            this.hideBigPlayButton();
             // Show playing indicator
             const indicator = this.container.querySelector('#video-playing-indicator');
             if (indicator) {
@@ -141,10 +188,8 @@ class CustomVideoPlayer {
         });
         
         this.video.addEventListener('pause', () => {
-            if (this.controls.playPause) {
-                this.controls.playPause.setAttribute('aria-pressed', 'false');
-                this.controls.playPause.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>';
-            }
+            this.updatePlayPauseButton(false);
+            this.showBigPlayButton();
             // Hide playing indicator
             const indicator = this.container.querySelector('#video-playing-indicator');
             if (indicator) {
@@ -153,6 +198,8 @@ class CustomVideoPlayer {
         });
         
         this.video.addEventListener('ended', () => {
+            this.updatePlayPauseButton(false);
+            this.showBigPlayButton();
             const indicator = this.container.querySelector('#video-playing-indicator');
             if (indicator) {
                 indicator.style.opacity = '0';
@@ -187,11 +234,12 @@ class CustomVideoPlayer {
     updateMuteButton() {
         if (this.controls.mute) {
             this.controls.mute.setAttribute('aria-pressed', this.video.muted ? 'true' : 'false');
-            // Muted icon (speaker with X)
-            const mutedIcon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/></svg>';
-            // Unmuted icon (speaker)
-            const unmutedIcon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/></svg>';
-            this.controls.mute.innerHTML = this.video.muted ? mutedIcon : unmutedIcon;
+            const unmutedIcon = this.controls.mute.querySelector('.unmuted-icon');
+            const mutedIcon = this.controls.mute.querySelector('.muted-icon');
+            if (unmutedIcon && mutedIcon) {
+                unmutedIcon.style.display = this.video.muted ? 'none' : 'block';
+                mutedIcon.style.display = this.video.muted ? 'block' : 'none';
+            }
             // Visual feedback
             this.controls.mute.style.background = this.video.muted 
                 ? 'rgba(255, 0, 0, 0.2)' 
@@ -276,13 +324,36 @@ class CustomVideoPlayer {
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
     
+    updatePlayPauseButton(playing) {
+        if (this.controls.playPause) {
+            this.controls.playPause.setAttribute('aria-pressed', playing ? 'true' : 'false');
+            const playIcon = this.controls.playPause.querySelector('.play-icon');
+            const pauseIcon = this.controls.playPause.querySelector('.pause-icon');
+            if (playIcon && pauseIcon) {
+                playIcon.style.display = playing ? 'none' : 'block';
+                pauseIcon.style.display = playing ? 'block' : 'none';
+            }
+        }
+    }
+    
+    showBigPlayButton() {
+        if (this.controls.bigPlay && this.video.paused) {
+            this.controls.bigPlay.style.display = 'flex';
+        }
+    }
+    
+    hideBigPlayButton() {
+        if (this.controls.bigPlay) {
+            this.controls.bigPlay.style.display = 'none';
+        }
+    }
+    
     updateTime() {
-        if (this.controls.time) {
-            const current = this.formatTime(this.video.currentTime);
-            const total = this.formatTime(this.video.duration);
-            // Use monospace font for proper alignment
-            this.controls.time.textContent = `${current} / ${total}`;
-            this.controls.time.style.fontVariantNumeric = 'tabular-nums';
+        if (this.controls.timeCurrent) {
+            this.controls.timeCurrent.textContent = this.formatTime(this.video.currentTime);
+        }
+        if (this.controls.timeTotal) {
+            this.controls.timeTotal.textContent = this.formatTime(this.video.duration);
         }
     }
     
