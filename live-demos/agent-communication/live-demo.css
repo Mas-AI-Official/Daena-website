@@ -73,18 +73,10 @@
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255<｜tool▁sep｜>215, 0, 0); }
+    0%   { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+    70%  { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
 }
-
-.agent-name {
-    color: #E6E8EA;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.agent-status {
     font-size: 0.75rem;
     font-weight: 500;
     padding: 4px 8px;
