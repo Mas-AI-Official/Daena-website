@@ -1,5 +1,11 @@
 /* Agent Communication Demo - Complete CSS extracted from old demo */
 
+/* Ensure demo container is properly styled within glass-card */
+.glass-card .demo-container {
+    position: relative;
+    z-index: 1;
+}
+
 :root {
     --primary-gold: #FFD700;
     --secondary-cyan: #00bcd4;
