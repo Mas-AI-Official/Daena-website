@@ -1796,30 +1796,59 @@
                 setTimeout(() => {
                     if (!window.demoInstance) {
                         try {
+                            // Verify critical elements exist before initializing
+                            const executeBtn = document.getElementById('executeBtn');
+                            const resetBtn = document.getElementById('resetBtn');
+                            const narrationText = document.getElementById('narrationText');
+                            const communicationLog = document.getElementById('communication-log');
+                            
+                            if (!executeBtn || !resetBtn || !narrationText || !communicationLog) {
+                                console.warn('Elements not ready, retrying...', {
+                                    executeBtn: !!executeBtn,
+                                    resetBtn: !!resetBtn,
+                                    narrationText: !!narrationText,
+                                    communicationLog: !!communicationLog
+                                });
+                                setTimeout(() => initDemo(), 300);
+                                return;
+                            }
+                            
                             window.demoInstance = new EnhancedAgentDemo();
+                            console.log('✅ Demo initialized successfully');
                         } catch (e) {
-                            console.error('Demo initialization error:', e);
+                            console.error('❌ Demo initialization error:', e);
                             // Retry after a short delay
                             setTimeout(() => {
                                 if (!window.demoInstance) {
-                                    window.demoInstance = new EnhancedAgentDemo();
+                                    try {
+                                        window.demoInstance = new EnhancedAgentDemo();
+                                        console.log('✅ Demo initialized on retry');
+                                    } catch (e2) {
+                                        console.error('❌ Retry failed:', e2);
+                                    }
                                 }
                             }, 500);
                         }
                     }
-                }, 100);
+                }, 200);
             }
         }
 
+        // Initialize on DOM ready
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initDemo);
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('📄 DOMContentLoaded - initializing demo');
+                initDemo();
+            });
         } else {
+            console.log('📄 DOM already ready - initializing demo');
             initDemo();
         }
         
         // Also try on window load as a fallback
         window.addEventListener('load', () => {
             if (!window.demoInstance) {
+                console.log('🪟 Window load - initializing demo as fallback');
                 initDemo();
             }
         });
