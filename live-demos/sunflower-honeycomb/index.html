@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sunflower-Honeycomb â€¢ Live Demo</title>
+  <title>Sunflower-Honeycomb • Live Demo</title>
   <link rel="stylesheet" href="/assets/css/global.css">
   <link rel="stylesheet" href="/live-demos/_shared.css">
   <link rel="stylesheet" href="/live-demos/sunflower-honeycomb/live-demo.css">
@@ -26,42 +26,32 @@
     </nav>
   </header>
   <main class="container">
-    <a class="back-link" href="/docs.html#advanced-demos" id="back-to-demos">← Back to Demos</a>
+    <a class="back-link" href="/docs.html#advanced-demos" id="back-to-demos">← Back to Advanced Interactive Demos</a>
     <h1>Sunflower-Honeycomb</h1>
     <p class="subtle">Visualize the core architecture that powers Daena's decision-making</p>
-    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
-      
-    <div class="animated-bg"></div>
-    
-    <header class="header">
-        <div class="logo">Daena AI</div>
-        <div class="nav-buttons">
-            <a href="../../index.html#demos" class="back-btn">← Demos Gallery</a>
-            <a href="../../index.html" class="back-btn">ðŸ  Back to Daena</a>
-        </div>
-    </header>
-
-    <div class="container">
+    <div class="glass-card" style="padding: 2rem; margin-top: 1rem; overflow: visible;">
+      <div class="animated-bg"></div>
+      <div class="container">
         <div class="demo-header">
-            <h1 class="demo-title">Daena AI - Agent Communication Demo</h1>
+            <h1 class="demo-title">🌻 Sunflower Honeycomb Architecture</h1>
             <div class="status-badges">
                 <div class="status-badge patent-badge">PATENT PENDING</div>
                 <div class="status-badge azure-badge">Azure API Connected</div>
             </div>
-            <p class="demo-subtitle">6 Specialized Agents | Real-time Communication | Cross-Department Collaboration</p>
+            <p class="demo-subtitle">48 Autonomous Agents across 8 Departments | Real-time Communication | Cross-Department Collaboration</p>
         </div>
 
         <div class="control-panel">
             <div class="control-buttons">
-                <button id="executeBtn" class="btn btn-primary">ðŸš€ START DEMO</button>
-                <button id="resetBtn" class="btn btn-secondary">ðŸ”„ Reset Demo</button>
+                <button id="executeBtn" class="btn btn-primary">🚀 START DEMO</button>
+                <button id="resetBtn" class="btn btn-secondary">🔄 Reset Demo</button>
             </div>
-            <p style="color: var(--text-muted); margin-bottom: 0;">Watch 6 specialized agents collaborate on product launch analysis</p>
+            <p style="color: var(--text-muted); margin-bottom: 0;">Watch 48 specialized agents collaborate on product launch analysis</p>
         </div>
 
         <div class="honeycomb-container">
-            <h2 class="honeycomb-title">ðŸ¤ Agent Communication Architecture</h2>
-            <p class="honeycomb-subtitle">6 Specialized Agents across 8 Departments with Real-time Communication</p>
+            <h2 class="honeycomb-title">🤝 Agent Communication Architecture</h2>
+            <p class="honeycomb-subtitle">48 Specialized Agents across 8 Departments with Real-time Communication</p>
             
             <!-- Timeline / Progress -->
             <div class="timeline-container">
@@ -103,49 +93,48 @@
         </div>
 
         <div class="communication-log">
-            <h3 class="log-title">ðŸ“¡ Real-time Communication Log</h3>
+            <h3 class="log-title">📡 Real-time Communication Log</h3>
             <div id="communicationLog">
                 <p style="color: #999; font-style: italic; text-align: center; padding: 2rem;">Agent communications will appear here when demo executes...</p>
             </div>
         </div>
 
         <div class="audio-controls">
-            <button id="playNarrationBtn" class="audio-btn">ðŸŽµ Play Narration</button>
-            <button id="playMusicBtn" class="audio-btn">ðŸŽ¶ Background Music</button>
+            <button id="playNarrationBtn" class="audio-btn">🎵 Play Narration</button>
+            <button id="playMusicBtn" class="audio-btn">🎶 Background Music</button>
             <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
         </div>
+      </div>
     </div>
 
     <!-- Audio Elements -->
     <audio id="narrationAudio" preload="auto"></audio>
     <audio id="backgroundMusic" loop preload="auto"></audio>
 
-  <script src="/js/metatron-hex-network.js"></script>
-  <script src="/live-demos/sunflower-honeycomb/demo-full.js"></script>
-  <script>
-    // Initialize demo when page loads
-    document.addEventListener('DOMContentLoaded', () => {
-        new SunflowerHoneycombDemo();
-    });
-  </script>
-  <script>
-    // Smart back navigation - always return to docs.html#advanced-demos
-    (function() {
-      // Always return to docs.html#advanced-demos for Advanced Interactive Demos
-      sessionStorage.setItem('returnSection', 'advanced-demos');
-      sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
-      
-      const backBtn = document.getElementById('back-to-demos');
-      if (backBtn) {
-        backBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.location.href = '/docs.html#advanced-demos';
-        });
-      }
-    })();
-  </script>
+    <!-- Scripts -->
+    <script src="/js/metatron-hex-network.js"></script>
+    <script src="/live-demos/sunflower-honeycomb/demo-full.js"></script>
+    <script>
+      // Initialize demo when page loads
+      document.addEventListener('DOMContentLoaded', () => {
+          new SunflowerHoneycombDemo();
+      });
+    </script>
+    <script>
+      // Smart back navigation - always return to docs.html#advanced-demos
+      (function() {
+        // Always return to docs.html#advanced-demos for Advanced Interactive Demos
+        sessionStorage.setItem('returnSection', 'advanced-demos');
+        sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        
+        const backBtn = document.getElementById('back-to-demos');
+        if (backBtn) {
+          backBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/docs.html#advanced-demos';
+          });
+        }
+      })();
+    </script>
 </body>
 </html>
-
-
-
