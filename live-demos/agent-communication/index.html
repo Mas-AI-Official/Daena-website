@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agent Communication • Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/agent-communication/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">← Back to Demos</a>
+    <h1>Agent Communication</h1>
+    <p class="subtle">Visualize the Metatron mesh and observe messages traversing 13 interconnected nodes (center + 6 inner + 6 outer).</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem;">
+      <!-- Legacy demo content (migrated from /old demoes/agent-communication/demo.html) -->
+      <div id="demo-content-wrapper">
+        <!-- Content will be loaded from original demo -->
+      </div>
+    </div>
+    <!-- Optional narration control if you have voiceover -->
+    <audio controls src="/old demoes/voice-over-demos/Demo 1 Agent Communication.mp3" style="margin-top:1rem;width:100%; display: none;" id="narration-audio"></audio>
+  </main>
+  
+  <script src="/js/metatron-hex-network.js"></script>
+  <script src="/old demoes/agent-communication/live-demo.js"></script>
+  <script>
+    // Smart back navigation
+    (function() {
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = returnPage;
+      });
+      
+      // Load demo content
+      fetch('/old demoes/agent-communication/demo.html')
+        .then(r => r.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const demoContent = doc.querySelector('.demo-container');
+          if (demoContent) {
+            document.getElementById('demo-content-wrapper').innerHTML = demoContent.innerHTML;
+            // Reinitialize any scripts
+            if (window.enhancedAgentDemo) {
+              new window.enhancedAgentDemo();
+            }
+          }
+        })
+        .catch(err => console.error('Failed to load demo content:', err));
+    })();
+  </script>
+</body>
+</html>
+

@@ -1,145 +1,152 @@
-function initDaenaPlayer(root){
-  const vid = root.querySelector('.daena-video');
-  const overlay = root.querySelector('.daena-video-overlay');
-  const playBtn = root.querySelector('.ctrl.play');
-  const muteBtn = root.querySelector('.ctrl.mute');
-  const seek = root.querySelector('.seek');
-  const cur = root.querySelector('.time .current');
-  const dur = root.querySelector('.time .duration');
-  const rateBtn = root.querySelector('.ctrl.rate');
-  const fsBtn = root.querySelector('.ctrl.fs');
-
-  if (!vid || !overlay || !playBtn) return; // Safety check
-
-  const fmt = s => {
-    s = Math.max(0, Math.floor(s || 0));
-    const m = Math.floor(s/60), ss = String(s%60).padStart(2,'0');
-    return `${m}:${ss}`;
-  };
-
-  const setPlayIcon = () => {
-    if (playBtn) playBtn.textContent = vid.paused ? '▶︎' : '⏸';
-  };
-  
-  const setMuteIcon = () => {
-    if (muteBtn) muteBtn.textContent = vid.muted ? '🔇' : '🔈';
-  };
-
-  function updateSeek(){
-    if (!isFinite(vid.duration)) return;
-    if (seek) seek.value = (vid.currentTime / vid.duration) * 100;
-    if (cur) cur.textContent = fmt(vid.currentTime);
+(function () {
+  function formatTime(s) {
+    s = Math.max(0, s | 0);
+    const m = (s / 60) | 0;
+    const r = (s % 60) | 0;
+    return m + ":" + (r < 10 ? "0" + r : r);
   }
 
-  function updateDur(){
-    if (isFinite(vid.duration) && dur) dur.textContent = fmt(vid.duration);
-  }
+  function init(el) {
+    const video = el.querySelector("video");
+    const overlayPlay = el.querySelector(".overlay-play");
+    const btnPlay = el.querySelector('[data-action="play"]');
+    const btnMute = el.querySelector('[data-action="mute"]');
+    const btnFS = el.querySelector('[data-action="fs"]');
+    const seek = el.querySelector(".seek");
+    const vol = el.querySelector(".volume");
+    const tNow = el.querySelector('[data-time="current"]');
+    const tDur = el.querySelector('[data-time="duration"]');
 
-  // Overlay click
-  overlay.addEventListener('click', () => {
-    overlay.style.display = 'none';
-    vid.play().catch(()=>{}); // iOS may require user gesture—overlay counts
-  });
+    if (!video || !overlayPlay || !btnPlay) return; // Safety check
 
-  // Buttons
-  if (playBtn) {
-    playBtn.addEventListener('click', () => vid.paused ? vid.play() : vid.pause());
-  }
-  
-  if (muteBtn) {
-    muteBtn.addEventListener('click', () => { 
-      vid.muted = !vid.muted; 
-      setMuteIcon(); 
+    // Attach source & poster
+    video.src = el.dataset.video;
+    video.setAttribute("poster", el.dataset.poster);
+
+    // Restore volume
+    const savedVol = +localStorage.getItem("daena:vid:vol");
+    if (!Number.isNaN(savedVol)) video.volume = Math.min(1, Math.max(0, savedVol));
+    vol.value = video.volume;
+
+    let seekDragging = false;
+
+    function setState() {
+      el.classList.toggle("playing", !video.paused);
+      el.classList.toggle("paused", video.paused);
+      el.classList.toggle("muted", video.muted || video.volume === 0);
+    }
+
+    function togglePlay() {
+      if (video.paused) video.play();
+      else video.pause();
+    }
+
+    overlayPlay.addEventListener("click", togglePlay);
+    btnPlay.addEventListener("click", togglePlay);
+    video.addEventListener("play", setState);
+    video.addEventListener("pause", setState);
+    setState();
+
+    // Time + seek
+    video.addEventListener("loadedmetadata", () => {
+      if (tDur) tDur.textContent = formatTime(video.duration);
     });
-  }
-  
-  if (rateBtn) {
-    rateBtn.addEventListener('click', () => {
-      const rates = [1, 1.25, 1.5, 2];
-      const i = rates.indexOf(vid.playbackRate);
-      vid.playbackRate = rates[(i+1)%rates.length];
-      rateBtn.textContent = `${vid.playbackRate}×`;
+
+    video.addEventListener("timeupdate", () => {
+      if (tNow) tNow.textContent = formatTime(video.currentTime);
+      if (!seekDragging && video.duration && seek) {
+        seek.value = (video.currentTime / video.duration) * 1000;
+      }
     });
-  }
-  
-  if (fsBtn) {
-    fsBtn.addEventListener('click', () => {
-      const c = root.querySelector('.daena-video-frame');
-      if (!document.fullscreenElement) {
-        if (c.requestFullscreen) c.requestFullscreen();
-        else if (c.webkitRequestFullscreen) c.webkitRequestFullscreen();
-        else if (c.mozRequestFullScreen) c.mozRequestFullScreen();
-        else if (c.msRequestFullscreen) c.msRequestFullscreen();
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
+
+    if (seek) {
+      seek.addEventListener("input", () => {
+        if (!video.duration) return;
+        seekDragging = true;
+        const p = +seek.value / 1000;
+        video.currentTime = p * video.duration;
+      });
+      seek.addEventListener("change", () => {
+        seekDragging = false;
+      });
+    }
+
+    // Volume
+    if (vol) {
+      vol.addEventListener("input", () => {
+        video.volume = +vol.value;
+        video.muted = (video.volume === 0);
+        localStorage.setItem("daena:vid:vol", video.volume.toFixed(2));
+        setState();
+      });
+    }
+
+    if (btnMute) {
+      btnMute.addEventListener("click", () => {
+        video.muted = !video.muted;
+        if (!video.muted && video.volume === 0) {
+          video.volume = 0.4;
+          if (vol) vol.value = 0.4;
+        }
+        setState();
+      });
+    }
+
+    // Fullscreen (make the container fullscreen so controls remain visible)
+    if (btnFS) {
+      btnFS.addEventListener("click", () => {
+        const container = el;
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+          if (document.exitFullscreen) document.exitFullscreen();
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+          else if (document.msExitFullscreen) document.msExitFullscreen();
+        } else {
+          if (container.requestFullscreen) container.requestFullscreen();
+          else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+          else if (container.mozRequestFullScreen) container.mozRequestFullScreen();
+          else if (container.msRequestFullscreen) container.msRequestFullscreen();
+        }
+      });
+    }
+
+    // Keyboard controls when focused
+    el.tabIndex = 0;
+    el.addEventListener("keydown", (e) => {
+      switch (e.key.toLowerCase()) {
+        case " ":
+        case "enter":
+          e.preventDefault(); 
+          togglePlay(); 
+          break;
+        case "arrowleft":
+          video.currentTime = Math.max(0, video.currentTime - 5); 
+          break;
+        case "arrowright":
+          video.currentTime = Math.min(video.duration || 0, video.currentTime + 5); 
+          break;
+        case "arrowup":
+          video.volume = Math.min(1, video.volume + 0.05); 
+          if (vol) vol.value = video.volume; 
+          setState(); 
+          break;
+        case "arrowdown":
+          video.volume = Math.max(0, video.volume - 0.05); 
+          if (vol) vol.value = video.volume; 
+          setState(); 
+          break;
+        case "m":
+          video.muted = !video.muted; 
+          setState(); 
+          break;
+        case "f":
+          if (btnFS) btnFS.click(); 
+          break;
       }
     });
   }
 
-  // Seek
-  let dragging = false;
-  if (seek) {
-    seek.addEventListener('input', () => {
-      dragging = true;
-      if (isFinite(vid.duration)) vid.currentTime = (seek.value/100) * vid.duration;
-      updateSeek();
-    });
-    seek.addEventListener('change', () => dragging = false);
-  }
-
-  // Video events
-  vid.addEventListener('play', () => {
-    setPlayIcon();
-    if (overlay) overlay.style.display = 'none';
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".daena-video").forEach(init);
   });
-  
-  vid.addEventListener('pause', setPlayIcon);
-  
-  vid.addEventListener('timeupdate', () => { 
-    if (!dragging) updateSeek(); 
-  });
-  
-  vid.addEventListener('loadedmetadata', () => { 
-    updateDur(); 
-    updateSeek(); 
-  });
-  
-  vid.addEventListener('ended', () => { 
-    if (overlay) overlay.style.display = '';
-    setPlayIcon(); 
-  });
-
-  // Keyboard shortcuts (when card is focused)
-  root.tabIndex = 0;
-  root.addEventListener('keydown', (e)=>{
-    if (['Space','KeyK'].includes(e.code)){ 
-      e.preventDefault(); 
-      vid.paused ? vid.play() : vid.pause(); 
-    }
-    if (e.code==='ArrowRight'){ 
-      vid.currentTime = Math.min(vid.currentTime + 5, vid.duration); 
-    }
-    if (e.code==='ArrowLeft'){ 
-      vid.currentTime = Math.max(vid.currentTime - 5, 0); 
-    }
-    if (e.code==='KeyM'){ 
-      vid.muted = !vid.muted; 
-      setMuteIcon(); 
-    }
-  });
-
-  // Start with poster visible and controls ready
-  setPlayIcon(); 
-  setMuteIcon(); 
-  updateDur(); 
-  updateSeek();
-}
-
-// Auto-init any players on the page
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.daena-video-card').forEach(initDaenaPlayer);
-});
-
+})();

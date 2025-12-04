@@ -571,34 +571,37 @@
                     </div>
                 </div>
                 <div class="order-1 md:order-2 w-full">
-                    <div class="daena-video-card">
-                        <div class="daena-video-frame">
-                            <video
-                                class="daena-video"
-                                src="/videos/why-investors.mp4"
-                                preload="metadata"
-                                playsinline
-                                webkit-playsinline
-                                crossorigin="anonymous"
-                                poster="/assets/img/why-investors.jpg"
-                            ></video>
-                            
-                            <!-- Poster overlay with big Play -->
-                            <button class="daena-video-overlay" aria-label="Play video">
-                                <svg viewBox="0 0 64 64" class="icon"><polygon points="24,18 50,32 24,46"></polygon></svg>
-                                <span>Watch: Why Investors Choose Daena</span>
+                    <!-- Custom Daena video player -->
+                    <div class="daena-video" data-video="/videos/why-investors.mp4" data-poster="/videos/play.png" aria-label="Why Investors Choose Daena video">
+                        <div class="video-frame">
+                            <video preload="metadata" playsinline></video>
+                            <!-- Center play overlay -->
+                            <button class="overlay-play" aria-label="Play video">
+                                <!-- triangular play icon -->
+                                <svg viewBox="0 0 24 24" width="56" height="56" aria-hidden="true">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                                <span>Watch 4:38</span>
                             </button>
                         </div>
-                        
-                        <!-- Persistent control bar BELOW the frame -->
-                        <div class="daena-controls" role="group" aria-label="Video controls">
-                            <button class="ctrl play" aria-label="Play/Pause">▶︎</button>
-                            <button class="ctrl mute" aria-label="Mute/Unmute">🔈</button>
-                            <input class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek">
-                            <div class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></div>
-                            <button class="ctrl rate" aria-label="Playback speed">1×</button>
-                            <button class="ctrl fs" aria-label="Fullscreen">⛶</button>
-                            <a class="ctrl dl" href="/videos/why-investors.mp4" download>⇩</a>
+                        <!-- Always-visible controls under the frame -->
+                        <div class="controls" data-controls>
+                            <button class="btn" data-action="play" aria-label="Play/Pause">
+                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>
+                            </button>
+                            <span class="time" data-time="current">0:00</span>
+                            <input class="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
+                            <span class="time" data-time="duration">0:00</span>
+                            <div class="spacer"></div>
+                            <button class="btn" data-action="mute" aria-label="Mute/Unmute">
+                                <svg class="icon-vol" viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6L7 10H3z"></path></svg>
+                                <svg class="icon-vol-mute" viewBox="0 0 24 24"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5L16.5 12z"></path></svg>
+                            </button>
+                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+                            <button class="btn" data-action="fs" aria-label="Toggle Fullscreen">
+                                <svg class="icon-fs" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm0-4h3V7h2V2H7v3H5v5h2V6zM17 5h-3V3h5v5h-2V5zm-3 14h3v-3h2v5h-5v-2z"></path></svg>
+                            </button>
                         </div>
                     </div>
                 </div>
