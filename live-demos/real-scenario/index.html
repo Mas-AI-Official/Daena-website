@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Real Scenario â€¢ Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/real-scenario/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">â† Back to Demos</a>
+    <h1>Real Scenario</h1>
+    <p class="subtle">See Daena handle complex real-world business scenarios</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
+      
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div class="nav-buttons">
+                    <a href="../../index.html#demos" class="nav-btn">â† Demos Gallery</a>
+                    <a href="../../index.html" class="nav-btn">ðŸ  Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="demo-interface">
+                <h1 class="demo-title">ðŸŽ¯ Real World Scenario Demo</h1>
+                <p class="demo-subtitle">48-agent SFHC architecture handling complex business scenarios autonomously</p>
+
+                <div class="demo-controls">
+                    <button id="startBackendDemo" class="demo-btn">â–¶ï¸ START REAL TIME DEMO</button>
+                    <button id="stopBackendDemo" class="demo-btn" style="display: none;">â¸ STOP DEMO</button>
+                    <button id="resetBackendDemo" class="demo-btn">ðŸ”„ RESET DEMO</button>
+                </div>
+
+                <!-- Statistics Dashboard -->
+                <div class="stats-dashboard">
+                    <div class="stat-card">
+                        <div id="scenariosProcessed" class="stat-value">0</div>
+                        <div class="stat-label">Scenarios Processed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="decisionAccuracy" class="stat-value">0%</div>
+                        <div class="stat-label">Decision Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="responseTime" class="stat-value">0s</div>
+                        <div class="stat-label">Response Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="successRate" class="stat-value">0%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+
+                <!-- Scenario Display -->
+                <div class="scenario-display">
+                    <h2 class="scenario-title">ðŸŒ Real World Scenario Processing</h2>
+                    <div class="scenario-steps">
+                        <!-- Problem Analysis -->
+                        <div id="problemAnalysis" class="scenario-step">
+                            <div class="step-icon">ðŸ”</div>
+                            <div class="step-name">Problem Analysis</div>
+                            <div class="step-status">Standby</div>
+                            <div class="step-progress">
+                                <div class="step-progress-bar" id="problemAnalysisProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Solution Design -->
+                        <div id="solutionDesign" class="scenario-step">
+                            <div class="step-icon">ðŸ’¡</div>
+                            <div class="step-name">Solution Design</div>
+                            <div class="step-status">Standby</div>
+                            <div class="step-progress">
+                                <div class="step-progress-bar" id="solutionDesignProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Implementation -->
+                        <div id="implementation" class="scenario-step">
+                            <div class="step-icon">âš¡</div>
+                            <div class="step-name">Implementation</div>
+                            <div class="step-status">Standby</div>
+                            <div class="step-progress">
+                                <div class="step-progress-bar" id="implementationProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Results -->
+                <div class="decision-results">
+                    <h2 class="results-title">ðŸ“Š Scenario Decision Results</h2>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label">Scenario Type</div>
+                            <div id="scenarioType" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Complexity Level</div>
+                            <div id="complexityLevel" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Recommended Action</div>
+                            <div id="recommendedAction" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Expected Outcome</div>
+                            <div id="expectedOutcome" class="result-value">Pending Analysis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="activity-log">
+                    <h2 class="log-title">ðŸ“‹ Real Scenario Activity Log</h2>
+                    <div id="logEntries" class="log-entries">
+                        <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
+                            Real World Scenario processing system initialized and ready.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Controls -->
+            <div class="voice-controls">
+                <div class="voice-player-wrapper">
+                    <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">ðŸŽ§ Real Scenario Demo</h3>
+                    <div id="daena-voice-player"></div>
+                </div>
+
+                <div class="current-phase">
+                    <div class="phase-title">ðŸ“– Current Demo Phase</div>
+                    <div id="phaseDescription" class="phase-description">Ready to show Real World Scenario processing...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Script -->
+    <script src="../voice-player.js"></script>
+      <script>
+    // Smart back navigation - returns to exact origin
+    (function() {
+      // Store where we came from when page loads
+      if (document.referrer) {
+        if (document.referrer.includes('docs.html')) {
+          sessionStorage.setItem('returnSection', 'advanced-demos');
+          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        } else if (document.referrer.includes('live-demos')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/live-demos/');
+        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/#live-demos');
+        }
+      }
+      
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = targetPage;
+      });
+    })();
+  </script>
+</body>
+</html>
+

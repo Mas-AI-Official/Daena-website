@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patent Technology â€¢ Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/patent-technology/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">â† Back to Demos</a>
+    <h1>Patent Technology</h1>
+    <p class="subtle">Explore Daena's patent-pending NBMF and Enterprise-DNA technologies</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
+      
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div class="nav-buttons">
+                    <a href="../../index.html#demos" class="nav-btn">â† Demos Gallery</a>
+                    <a href="../../index.html" class="nav-btn">ðŸ  Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="demo-interface">
+                <h1 class="demo-title">ðŸ’¡ Patent Technology Demo</h1>
+                <p class="demo-subtitle">48-agent SFHC architecture analyzing and managing intellectual property</p>
+
+                <div class="demo-controls">
+                    <button id="startBackendDemo" class="demo-btn">â–¶ï¸ START REAL TIME DEMO</button>
+                    <button id="stopBackendDemo" class="demo-btn" style="display: none;">â¸ STOP DEMO</button>
+                    <button id="resetBackendDemo" class="demo-btn">ðŸ”„ RESET DEMO</button>
+                </div>
+
+                <!-- Statistics Dashboard -->
+                <div class="stats-dashboard">
+                    <div class="stat-card">
+                        <div id="patentsAnalyzed" class="stat-value">0</div>
+                        <div class="stat-label">Patents Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="similarityScore" class="stat-value">0%</div>
+                        <div class="stat-label">Similarity Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="noveltyIndex" class="stat-value">0.0</div>
+                        <div class="stat-label">Novelty Index</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="processingTime" class="stat-value">0s</div>
+                        <div class="stat-label">Processing Time</div>
+                    </div>
+                </div>
+
+                <!-- Patent Analysis Display -->
+                <div class="patent-display">
+                    <h2 class="patent-title">ðŸ” Patent Analysis Categories</h2>
+                    <div class="patent-categories">
+                        <!-- Technology Analysis -->
+                        <div id="technologyAnalysis" class="patent-category">
+                            <div class="category-icon">ðŸ”¬</div>
+                            <div class="category-name">Technology</div>
+                            <div class="category-status">Standby</div>
+                            <div class="category-progress">
+                                <div class="category-progress-bar" id="technologyProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Prior Art Search -->
+                        <div id="priorArtSearch" class="patent-category">
+                            <div class="category-icon">ðŸ“š</div>
+                            <div class="category-name">Prior Art</div>
+                            <div class="category-status">Standby</div>
+                            <div class="category-progress">
+                                <div class="category-progress-bar" id="priorArtProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Novelty Assessment -->
+                        <div id="noveltyAssessment" class="patent-category">
+                            <div class="category-icon">âœ¨</div>
+                            <div class="category-name">Novelty</div>
+                            <div class="category-status">Standby</div>
+                            <div class="category-progress">
+                                <div class="category-progress-bar" id="noveltyProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patent Results -->
+                <div class="patent-results">
+                    <h2 class="results-title">ðŸ“Š Analysis Results</h2>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label">Patent Classification</div>
+                            <div id="patentClassification" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Innovation Level</div>
+                            <div id="innovationLevel" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Market Potential</div>
+                            <div id="marketPotential" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Competitive Advantage</div>
+                            <div id="competitiveAdvantage" class="result-value">Pending Analysis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="activity-log">
+                    <h2 class="log-title">ðŸ“‹ Patent Analysis Log</h2>
+                    <div id="logEntries" class="log-entries">
+                        <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
+                            Patent Technology analysis system initialized and ready.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Controls -->
+            <div class="voice-controls">
+                <div class="voice-player-wrapper">
+                    <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">ðŸŽ§ Patent Technology Demo</h3>
+                    <div id="daena-voice-player"></div>
+                </div>
+
+                <div class="current-phase">
+                    <div class="phase-title">ðŸ“– Current Demo Phase</div>
+                    <div id="phaseDescription" class="phase-description">Ready to show Patent Technology analysis...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Script -->
+    <script src="../voice-player.js"></script>
+      <script>
+    // Smart back navigation - returns to exact origin
+    (function() {
+      // Store where we came from when page loads
+      if (document.referrer) {
+        if (document.referrer.includes('docs.html')) {
+          sessionStorage.setItem('returnSection', 'advanced-demos');
+          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        } else if (document.referrer.includes('live-demos')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/live-demos/');
+        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/#live-demos');
+        }
+      }
+      
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = targetPage;
+      });
+    })();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sunflower-Honeycomb â€¢ Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/sunflower-honeycomb/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">â† Back to Demos</a>
+    <h1>Sunflower-Honeycomb</h1>
+    <p class="subtle">Visualize the core architecture that powers Daena's decision-making</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
+      
+    <div class="animated-bg"></div>
+    
+    <header class="header">
+        <div class="logo">Daena AI</div>
+        <div class="nav-buttons">
+            <a href="../../index.html#demos" class="back-btn">â† Demos Gallery</a>
+            <a href="../../index.html" class="back-btn">ðŸ  Back to Daena</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="demo-header">
+            <h1 class="demo-title">Daena AI - Agent Communication Demo</h1>
+            <div class="status-badges">
+                <div class="status-badge patent-badge">PATENT PENDING</div>
+                <div class="status-badge azure-badge">Azure API Connected</div>
+            </div>
+            <p class="demo-subtitle">6 Specialized Agents | Real-time Communication | Cross-Department Collaboration</p>
+        </div>
+
+        <div class="control-panel">
+            <div class="control-buttons">
+                <button id="executeBtn" class="btn btn-primary">ðŸš€ START DEMO</button>
+                <button id="resetBtn" class="btn btn-secondary">ðŸ”„ Reset Demo</button>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 0;">Watch 6 specialized agents collaborate on product launch analysis</p>
+        </div>
+
+        <div class="honeycomb-container">
+            <h2 class="honeycomb-title">ðŸ¤ Agent Communication Architecture</h2>
+            <p class="honeycomb-subtitle">6 Specialized Agents across 8 Departments with Real-time Communication</p>
+            
+            <!-- Timeline / Progress -->
+            <div class="timeline-container">
+                <div class="timeline-header">
+                    <div><span class="timeline-phase" id="timelinePhase">Idle</span></div>
+                    <div>
+                        <span id="elapsedTime">00:00</span>
+                        <span style="margin: 0 6px; color: var(--text-muted);">/</span>
+                        <span id="remainingTime">--:--</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <div class="departments-grid" id="departmentsGrid">
+                <!-- Departments will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <div class="stat-value" id="activeAgents">0</div>
+                <div class="stat-label">Active Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="messagesSent">0</div>
+                <div class="stat-label">Messages Sent</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="crossDept">0</div>
+                <div class="stat-label">Cross-Department</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgConfidence">0%</div>
+                <div class="stat-label">Avg Confidence</div>
+            </div>
+        </div>
+
+        <div class="communication-log">
+            <h3 class="log-title">ðŸ“¡ Real-time Communication Log</h3>
+            <div id="communicationLog">
+                <p style="color: #999; font-style: italic; text-align: center; padding: 2rem;">Agent communications will appear here when demo executes...</p>
+            </div>
+        </div>
+
+        <div class="audio-controls">
+            <button id="playNarrationBtn" class="audio-btn">ðŸŽµ Play Narration</button>
+            <button id="playMusicBtn" class="audio-btn">ðŸŽ¶ Background Music</button>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="narrationAudio" preload="auto"></audio>
+    <audio id="backgroundMusic" loop preload="auto"></audio>
+
+      <script>
+    // Smart back navigation - returns to exact origin
+    (function() {
+      // Store where we came from when page loads
+      if (document.referrer) {
+        if (document.referrer.includes('docs.html')) {
+          sessionStorage.setItem('returnSection', 'advanced-demos');
+          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        } else if (document.referrer.includes('live-demos')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/live-demos/');
+        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/#live-demos');
+        }
+      }
+      
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = targetPage;
+      });
+    })();
+  </script>
+</body>
+</html>
+

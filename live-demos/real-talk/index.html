@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Real Talk â€¢ Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/real-talk/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">â† Back to Demos</a>
+    <h1>Real Talk</h1>
+    <p class="subtle">Natural conversation with Daena demonstrating VP-level intelligence</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
+      
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div class="nav-buttons">
+                    <a href="../../index.html#demos" class="nav-btn">â† Demos Gallery</a>
+                    <a href="../../index.html" class="nav-btn">ðŸ  Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="demo-interface">
+                <h1 class="demo-title">ðŸ’¬ Real Talk Demo</h1>
+                <p class="demo-subtitle">48-agent SFHC architecture with natural language understanding and conversation</p>
+
+                <div class="demo-controls">
+                    <button id="startBackendDemo" class="demo-btn">â–¶ï¸ START REAL TIME DEMO</button>
+                    <button id="stopBackendDemo" class="demo-btn" style="display: none;">â¸ STOP DEMO</button>
+                    <button id="resetBackendDemo" class="demo-btn">ðŸ”„ RESET DEMO</button>
+                </div>
+
+                <!-- Statistics Dashboard -->
+                <div class="stats-dashboard">
+                    <div class="stat-card">
+                        <div id="messagesProcessed" class="stat-value">0</div>
+                        <div class="stat-label">Messages Processed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="understandingAccuracy" class="stat-value">0%</div>
+                        <div class="stat-label">Understanding Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="responseTime" class="stat-value">0s</div>
+                        <div class="stat-label">Response Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="conversationQuality" class="stat-value">0.0</div>
+                        <div class="stat-label">Conversation Quality</div>
+                    </div>
+                </div>
+
+                <!-- Conversation Display -->
+                <div class="conversation-display">
+                    <h2 class="conversation-title">ðŸ—£ï¸ Natural Language Processing</h2>
+                    <div class="conversation-modes">
+                        <!-- Voice Processing -->
+                        <div id="voiceProcessing" class="conversation-mode">
+                            <div class="mode-icon">ðŸŽ¤</div>
+                            <div class="mode-name">Voice Processing</div>
+                            <div class="mode-status">Standby</div>
+                            <div class="mode-progress">
+                                <div class="mode-progress-bar" id="voiceProcessingProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Text Understanding -->
+                        <div id="textUnderstanding" class="conversation-mode">
+                            <div class="mode-icon">ðŸ“</div>
+                            <div class="mode-name">Text Understanding</div>
+                            <div class="mode-status">Standby</div>
+                            <div class="mode-progress">
+                                <div class="mode-progress-bar" id="textUnderstandingProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Interface -->
+                <div class="chat-interface">
+                    <h2 class="chat-title">ðŸ’¬ Real Talk Conversation</h2>
+                    <div id="chatMessages" class="chat-messages">
+                        <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
+                            Real Talk conversation system initialized and ready.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Controls -->
+            <div class="voice-controls">
+                <div class="voice-player-wrapper">
+                    <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">ðŸŽ§ Real Talk Demo</h3>
+                    <div id="daena-voice-player"></div>
+                </div>
+
+                <div class="current-phase">
+                    <div class="phase-title">ðŸ“– Current Demo Phase</div>
+                    <div id="phaseDescription" class="phase-description">Ready to show Real Talk conversation...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Script -->
+    <script src="../voice-player.js"></script>
+      <script>
+    // Smart back navigation - returns to exact origin
+    (function() {
+      // Store where we came from when page loads
+      if (document.referrer) {
+        if (document.referrer.includes('docs.html')) {
+          sessionStorage.setItem('returnSection', 'advanced-demos');
+          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        } else if (document.referrer.includes('live-demos')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/live-demos/');
+        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/#live-demos');
+        }
+      }
+      
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = targetPage;
+      });
+    })();
+  </script>
+</body>
+</html>
+

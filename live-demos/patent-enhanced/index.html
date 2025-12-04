@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patent Technology Enhanced â€¢ Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/patent-enhanced/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">â† Back to Demos</a>
+    <h1>Patent Technology Enhanced</h1>
+    <p class="subtle">Deep dive into enhanced patent-pending technologies</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
+      
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div class="nav-buttons">
+                    <a href="../../index.html#demos" class="nav-btn">â† Demos Gallery</a>
+                    <a href="../../index.html" class="nav-btn">ðŸ  Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="demo-interface">
+                <h1 class="demo-title">ðŸš€ Enhanced Patent Technology Demo</h1>
+                <p class="demo-subtitle">Advanced AI-powered patent analysis with 96% accuracy and comprehensive insights</p>
+
+                <div class="demo-controls">
+                    <button id="startEnhancedDemo" class="demo-btn">â–¶ï¸ START ENHANCED DEMO</button>
+                    <button id="stopEnhancedDemo" class="demo-btn" style="display: none;">â¸ STOP DEMO</button>
+                    <button id="resetEnhancedDemo" class="demo-btn">ðŸ”„ RESET DEMO</button>
+                </div>
+
+                <!-- Enhanced Statistics Dashboard -->
+                <div class="stats-dashboard">
+                    <div class="stat-card">
+                        <div id="enhancedPatentsAnalyzed" class="stat-value">0</div>
+                        <div class="stat-label">Patents Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="enhancedAccuracy" class="stat-value">0%</div>
+                        <div class="stat-label">AI Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="enhancedNoveltyIndex" class="stat-value">0.0</div>
+                        <div class="stat-label">Novelty Index</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="enhancedProcessingTime" class="stat-value">0s</div>
+                        <div class="stat-label">Processing Time</div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Patent Analysis Display -->
+                <div class="patent-display">
+                    <h2 class="patent-title">ðŸ”¬ Enhanced Patent Analysis Categories</h2>
+                    <div class="patent-categories">
+                        <!-- Advanced Technology Analysis -->
+                        <div id="advancedTechnologyAnalysis" class="patent-category">
+                            <div class="category-icon">ðŸ¤–</div>
+                            <div class="category-name">AI Technology</div>
+                            <div class="category-status">Standby</div>
+                            <div class="category-progress">
+                                <div class="category-progress-bar" id="advancedTechnologyProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Prior Art Search -->
+                        <div id="enhancedPriorArtSearch" class="patent-category">
+                            <div class="category-icon">ðŸ”</div>
+                            <div class="category-name">Smart Search</div>
+                            <div class="category-status">Standby</div>
+                            <div class="category-progress">
+                                <div class="category-progress-bar" id="enhancedPriorArtProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- ML-Powered Novelty Assessment -->
+                        <div id="mlNoveltyAssessment" class="patent-category">
+                            <div class="category-icon">ðŸ§ </div>
+                            <div class="category-name">ML Novelty</div>
+                            <div class="category-status">Standby</div>
+                            <div class="category-progress">
+                                <div class="category-progress-bar" id="mlNoveltyProgress"></div>
+                            </div>
+                        </div>
+
+                        <!-- Strategic Market Analysis -->
+                        <div id="strategicMarketAnalysis" class="patent-category">
+                            <div class="category-icon">ðŸ“ˆ</div>
+                            <div class="category-name">Market Intel</div>
+                            <div class="category-status">Standby</div>
+                            <div class="category-progress">
+                                <div class="category-progress-bar" id="strategicMarketProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Patent Results -->
+                <div class="patent-results">
+                    <h2 class="results-title">ðŸ“Š Enhanced Analysis Results</h2>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label">AI Classification</div>
+                            <div id="enhancedPatentClassification" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Innovation Score</div>
+                            <div id="enhancedInnovationLevel" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Market Potential</div>
+                            <div id="enhancedMarketPotential" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Strategic Advantage</div>
+                            <div id="enhancedCompetitiveAdvantage" class="result-value">Pending Analysis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Activity Log -->
+                <div class="activity-log">
+                    <h2 class="log-title">ðŸ“‹ Enhanced Patent Analysis Log</h2>
+                    <div id="enhancedLogEntries" class="log-entries">
+                        <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
+                            Enhanced Patent Technology analysis system initialized and ready.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Controls -->
+            <div class="voice-controls">
+                <div class="voice-player-wrapper">
+                    <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">ðŸŽ§ Enhanced Patent Technology Demo</h3>
+                    <div id="daena-voice-player"></div>
+                </div>
+
+                <div class="current-phase">
+                    <div class="phase-title">ðŸ“– Current Demo Phase</div>
+                    <div id="enhancedPhaseDescription" class="phase-description">Ready to show Enhanced Patent Technology analysis...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Script -->
+    <script src="../voice-player.js"></script>
+      <script>
+    // Smart back navigation - returns to exact origin
+    (function() {
+      // Store where we came from when page loads
+      if (document.referrer) {
+        if (document.referrer.includes('docs.html')) {
+          sessionStorage.setItem('returnSection', 'advanced-demos');
+          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        } else if (document.referrer.includes('live-demos')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/live-demos/');
+        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/#live-demos');
+        }
+      }
+      
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = targetPage;
+      });
+    })();
+  </script>
+</body>
+</html>
+

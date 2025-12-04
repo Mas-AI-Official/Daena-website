@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CMP Pipeline â€¢ Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/cmp-pipeline/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">â† Back to Demos</a>
+    <h1>CMP Pipeline</h1>
+    <p class="subtle">Experience the complete Council-Memory-Process pipeline in action</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
+      
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading CMP Pipeline Demo...</div>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Daena AI</a>
+            <div class="nav-buttons">
+                <a href="../../index.html#demos" class="back-button">â† Demos Gallery</a>
+                <a href="../../index.html" class="back-button">ðŸ  Back to Daena</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Demo Container -->
+    <div class="demo-container">
+        <!-- Demo Header -->
+        <div class="demo-header">
+            <h1 class="demo-title">CMP Pipeline Demo</h1>
+            <p class="demo-subtitle">
+                Experience Daena's complete CMP (Content Management Pipeline) orchestration process. 
+                Watch how intelligent workflow management coordinates multiple agents for seamless content processing.
+            </p>
+        </div>
+
+        <!-- Narration Panel -->
+        <div class="narration-panel">
+            <div class="narration-text" id="narrationText">
+                <span class="narration-indicator"></span>
+                Welcome to Daena's CMP Pipeline Demo. I'll demonstrate how our intelligent workflow management system orchestrates content processing across multiple agents with seamless coordination.
+            </div>
+        </div>
+
+        <!-- Demo Controls -->
+        <div class="demo-controls">
+            <button class="btn btn-primary" id="executeBtn">âš™ï¸ EXECUTE CMP PIPELINE</button>
+            <button class="btn btn-secondary" id="resetBtn">ðŸ”„ Reset Demo</button>
+        </div>
+
+        <!-- Process Flow -->
+        <div class="process-flow">
+            <div class="flow-item">
+                <div class="flow-node" id="flow-1">ðŸ“¥</div>
+            </div>
+            <div class="flow-arrow">â†’</div>
+            <div class="flow-item">
+                <div class="flow-node" id="flow-2">ðŸ”</div>
+            </div>
+            <div class="flow-arrow">â†’</div>
+            <div class="flow-item">
+                <div class="flow-node" id="flow-3">âš™ï¸</div>
+            </div>
+            <div class="flow-arrow">â†’</div>
+            <div class="flow-item">
+                <div class="flow-node" id="flow-4">ðŸ“Š</div>
+            </div>
+            <div class="flow-arrow">â†’</div>
+            <div class="flow-item">
+                <div class="flow-node" id="flow-5">ðŸ“¤</div>
+            </div>
+        </div>
+
+        <!-- Pipeline Stages -->
+        <div class="pipeline-container">
+            <!-- Stage 1: Input Processing -->
+            <div class="pipeline-stage" id="stage-1">
+                <div class="stage-header">
+                    <div class="stage-icon">ðŸ“¥</div>
+                    <div class="stage-title">Input Processing</div>
+                    <div class="stage-status status-pending" id="status-1">PENDING</div>
+                </div>
+                <div class="stage-description">
+                    Receiving and validating input content from multiple sources including documents, images, and data streams.
+                </div>
+                <div class="stage-progress">
+                    <div class="stage-progress-fill" id="progress-1"></div>
+                </div>
+                <div class="stage-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Files Processed</div>
+                        <div class="detail-value" id="files-1">0</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Processing Time</div>
+                        <div class="detail-value" id="time-1">0ms</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Success Rate</div>
+                        <div class="detail-value" id="success-1">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 2: Content Analysis -->
+            <div class="pipeline-stage" id="stage-2">
+                <div class="stage-header">
+                    <div class="stage-icon">ðŸ”</div>
+                    <div class="stage-title">Content Analysis</div>
+                    <div class="stage-status status-pending" id="status-2">PENDING</div>
+                </div>
+                <div class="stage-description">
+                    Analyzing content structure, extracting key information, and identifying processing requirements.
+                </div>
+                <div class="stage-progress">
+                    <div class="stage-progress-fill" id="progress-2"></div>
+                </div>
+                <div class="stage-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Content Types</div>
+                        <div class="detail-value" id="types-2">0</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Analysis Time</div>
+                        <div class="detail-value" id="time-2">0ms</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Accuracy</div>
+                        <div class="detail-value" id="accuracy-2">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 3: Processing Orchestration -->
+            <div class="pipeline-stage" id="stage-3">
+                <div class="stage-header">
+                    <div class="stage-icon">âš™ï¸</div>
+                    <div class="stage-title">Processing Orchestration</div>
+                    <div class="stage-status status-pending" id="status-3">PENDING</div>
+                </div>
+                <div class="stage-description">
+                    Coordinating multiple agents to process content according to identified requirements and business rules.
+                </div>
+                <div class="stage-progress">
+                    <div class="stage-progress-fill" id="progress-3"></div>
+                </div>
+                <div class="stage-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Agents Active</div>
+                        <div class="detail-value" id="agents-3">0</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Processing Time</div>
+                        <div class="detail-value" id="time-3">0ms</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Efficiency</div>
+                        <div class="detail-value" id="efficiency-3">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 4: Quality Assurance -->
+            <div class="pipeline-stage" id="stage-4">
+                <div class="stage-header">
+                    <div class="stage-icon">ðŸ“Š</div>
+                    <div class="stage-title">Quality Assurance</div>
+                    <div class="stage-status status-pending" id="status-4">PENDING</div>
+                </div>
+                <div class="stage-description">
+                    Validating processed content, ensuring quality standards, and performing final checks before output.
+                </div>
+                <div class="stage-progress">
+                    <div class="stage-progress-fill" id="progress-4"></div>
+                </div>
+                <div class="stage-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Quality Score</div>
+                        <div class="detail-value" id="quality-4">0%</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Validation Time</div>
+                        <div class="detail-value" id="time-4">0ms</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Issues Found</div>
+                        <div class="detail-value" id="issues-4">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 5: Output Generation -->
+            <div class="pipeline-stage" id="stage-5">
+                <div class="stage-header">
+                    <div class="stage-icon">ðŸ“¤</div>
+                    <div class="stage-title">Output Generation</div>
+                    <div class="stage-status status-pending" id="status-5">PENDING</div>
+                </div>
+                <div class="stage-description">
+                    Generating final output in required formats and delivering to designated destinations.
+                </div>
+                <div class="stage-progress">
+                    <div class="stage-progress-fill" id="progress-5"></div>
+                </div>
+                <div class="stage-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Output Files</div>
+                        <div class="detail-value" id="outputs-5">0</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Generation Time</div>
+                        <div class="detail-value" id="time-5">0ms</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Delivery Status</div>
+                        <div class="detail-value" id="delivery-5">Pending</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Dashboard -->
+        <div class="stats-dashboard">
+            <div class="stat-card">
+                <div class="stat-value" id="total-processed">0</div>
+                <div class="stat-label">Total Processed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="processing-time">0s</div>
+                <div class="stat-label">Processing Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="success-rate">0%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="efficiency">0%</div>
+                <div class="stat-label">Efficiency</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button id="playNarrationBtn">ðŸŽµ Play Narration</button>
+        <button id="playMusicBtn">ðŸŽ¶ Background Music</button>
+        <div class="volume-control">
+            <span>ðŸ”Š</span>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="narrationAudio" preload="auto"></audio>
+    <audio id="backgroundMusic" loop preload="auto"></audio>
+
+      <script>
+    // Smart back navigation - returns to exact origin
+    (function() {
+      // Store where we came from when page loads
+      if (document.referrer) {
+        if (document.referrer.includes('docs.html')) {
+          sessionStorage.setItem('returnSection', 'advanced-demos');
+          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        } else if (document.referrer.includes('live-demos')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/live-demos/');
+        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/#live-demos');
+        }
+      }
+      
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = targetPage;
+      });
+    })();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Budget Calculation â€¢ Live Demo</title>
+  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/old demoes/budget-calculation/live-demo.css">
+</head>
+<body class="metatron-bg">
+  <!-- Metatron Background Layers -->
+  <div class="metatron-bg"></div>
+  <div class="metatron-pattern-bg"></div>
+  <canvas id="metatron-hex-canvas"></canvas>
+  
+  <header class="topbar glass">
+    <a class="brand" href="/">Daena</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/demos.html">Demos</a>
+      <a href="/pitch-deck.html">Pitch Deck</a>
+      <a class="active" href="/live-demos/">Live Demos</a>
+      <a href="/docs.html">Docs & Benchmarks</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="container">
+    <a class="back-link" href="/live-demos/" id="back-to-demos">â† Back to Demos</a>
+    <h1>Budget Calculation</h1>
+    <p class="subtle">Watch Daena's Finance agents analyze and calculate budgets with precision</p>
+    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
+      
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Budget Calculation Demo...</div>
+                </div>
+            </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Daena AI</a>
+            <div class="nav-buttons">
+                <a href="../../index.html#demos" class="back-button">â† Demos Gallery</a>
+                <a href="../../index.html" class="back-button">ðŸ  Back to Daena</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Demo Container -->
+    <div class="demo-container">
+        <!-- Demo Header -->
+        <div class="demo-header">
+            <h1 class="demo-title">Budget Calculation Demo</h1>
+            <p class="demo-subtitle">
+                Watch Daena's Finance Agent calculate comprehensive budgets with real-time data analysis. 
+                See how it processes market data, calculates ROI projections, and provides detailed financial insights.
+            </p>
+                    </div>
+
+        <!-- Narration Panel -->
+        <div class="narration-panel">
+            <div class="narration-text" id="narrationText">
+                <span class="narration-indicator"></span>
+                Welcome to Daena's Budget Calculation Demo. Watch as our Finance Agent processes market data and calculates comprehensive budget projections with real-time analysis and live narration.
+                            </div>
+                            </div>
+
+        <!-- Demo Controls -->
+        <div class="demo-controls">
+            <button class="btn btn-primary" id="executeBtn">ðŸ’° EXECUTE BUDGET CALCULATION</button>
+            <button class="btn btn-secondary" id="resetBtn">ðŸ”„ Reset Demo</button>
+                            </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+            <div class="progress-text" id="progressText">Ready to calculate budget...</div>
+                            </div>
+
+        <!-- Calculator Interface -->
+        <div class="calculator-container">
+            <!-- Input Panel -->
+            <div class="input-panel">
+                <h3>ðŸ“Š Budget Parameters</h3>
+                <div class="input-group">
+                    <label for="projectType">Project Type</label>
+                    <select id="projectType">
+                        <option value="product-launch">Product Launch</option>
+                        <option value="marketing-campaign">Marketing Campaign</option>
+                        <option value="r&d-project">R&D Project</option>
+                        <option value="expansion">Business Expansion</option>
+                    </select>
+                        </div>
+                <div class="input-group">
+                    <label for="budgetRange">Budget Range</label>
+                    <select id="budgetRange">
+                        <option value="small">Small ($10K - $100K)</option>
+                        <option value="medium">Medium ($100K - $1M)</option>
+                        <option value="large">Large ($1M - $10M)</option>
+                        <option value="enterprise">Enterprise ($10M+)</option>
+                    </select>
+                    </div>
+                <div class="input-group">
+                    <label for="timeline">Timeline (Months)</label>
+                    <input type="number" id="timeline" value="12" min="1" max="60">
+                </div>
+                <div class="input-group">
+                    <label for="teamSize">Team Size</label>
+                    <input type="number" id="teamSize" value="10" min="1" max="100">
+                    </div>
+                    </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <h3>ðŸ’¡ Calculated Results</h3>
+                <div id="budgetResults">
+                    <div class="budget-item">
+                        <span class="budget-label">Market Research</span>
+                        <span class="budget-value" id="marketResearch">$0</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Development</span>
+                        <span class="budget-value" id="development">$0</span>
+                    </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Marketing</span>
+                        <span class="budget-value" id="marketing">$0</span>
+                </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Operations</span>
+                        <span class="budget-value" id="operations">$0</span>
+                        </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Personnel</span>
+                        <span class="budget-value" id="personnel">$0</span>
+                        </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Infrastructure</span>
+                        <span class="budget-value" id="infrastructure">$0</span>
+                        </div>
+                    <div class="budget-item">
+                        <span class="budget-label">Contingency</span>
+                        <span class="budget-value" id="contingency">$0</span>
+                        </div>
+                    <div class="total-budget">
+                        <div class="label">Total Budget</div>
+                        <div class="value" id="totalBudget">$0</div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+        <!-- Analysis Panel -->
+        <div class="analysis-panel">
+            <h3>ðŸ“ˆ Financial Analysis</h3>
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h4>ROI Projection</h4>
+                    <div class="value" id="roiProjection">0%</div>
+                    <div class="description">Expected return on investment</div>
+                        </div>
+                <div class="analysis-card">
+                    <h4>Payback Period</h4>
+                    <div class="value" id="paybackPeriod">0 months</div>
+                    <div class="description">Time to recover investment</div>
+                    </div>
+                <div class="analysis-card">
+                    <h4>Risk Level</h4>
+                    <div class="value" id="riskLevel">Low</div>
+                    <div class="description">Investment risk assessment</div>
+                        </div>
+                <div class="analysis-card">
+                    <h4>Confidence Score</h4>
+                    <div class="value" id="confidenceScore">0%</div>
+                    <div class="description">Analysis confidence level</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Audio Controls -->
+        <div class="audio-controls">
+            <div class="narration-controls">
+                <button id="playNarrationBtn">ðŸŽµ Play Narration</button>
+                <button id="rewindBtn" title="Rewind 10s">âª</button>
+                <button id="speedBtn" title="Speed: 1x">1x</button>
+                <button id="forwardBtn" title="Forward 10s">â©</button>
+                <div class="progress-container">
+                    <div class="progress-bar" id="narrationProgress">
+                        <div class="progress-fill" id="narrationProgressFill"></div>
+                </div>
+                    <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="narrationAudio" preload="auto"></audio>
+
+      <script>
+    // Smart back navigation - returns to exact origin
+    (function() {
+      // Store where we came from when page loads
+      if (document.referrer) {
+        if (document.referrer.includes('docs.html')) {
+          sessionStorage.setItem('returnSection', 'advanced-demos');
+          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+        } else if (document.referrer.includes('live-demos')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/live-demos/');
+        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+          sessionStorage.setItem('returnSection', 'live-demos');
+          sessionStorage.setItem('returnPage', '/#live-demos');
+        }
+      }
+      
+      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
+      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      
+      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+        sessionStorage.removeItem('returnSection');
+        sessionStorage.removeItem('returnPage');
+        window.location.href = targetPage;
+      });
+    })();
+  </script>
+</body>
+</html>
+
