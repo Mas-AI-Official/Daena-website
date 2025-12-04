@@ -38,6 +38,8 @@
             background: var(--gradient-bg);
             color: var(--text-light);
             overflow-x: hidden;
+            overflow-y: auto;
+            min-height: 100vh;
         }
 
         /* Animated Background */
@@ -1790,12 +1792,10 @@
   </main>
   
   <script src="/js/metatron-hex-network.js"></script>
-
+  
   <script src="/live-demos/agent-communication/live-demo.js" defer></script>
 
-  <script>
-
-        class EnhancedAgentDemo {
+  <!-- Removed duplicate EnhancedAgentDemo class - using the one defined earlier in the file -->
             constructor() {
                 this.isExecuting = false;
                 this.messageCount = 0;
