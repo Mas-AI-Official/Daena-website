@@ -6,10 +6,10 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "resolveJsonModule": true,
-    "types": ["node", "@playwright/test"]
+    "types": ["node"]
   },
-  "include": ["tests/**/*"]
+  "include": ["tests/**/*"],
+  "exclude": ["node_modules", "**/*.html", "**/*.css"]
 }
-

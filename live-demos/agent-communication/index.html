@@ -1116,6 +1116,17 @@
             }
 
             init() {
+                // Check if required DOM elements exist before initializing
+                const requiredElements = ['executeBtn', 'resetBtn', 'narrationText', 'communication-log', 'narrationAudio', 'playNarrationBtn'];
+                const missingElements = requiredElements.filter(id => !document.getElementById(id));
+                
+                if (missingElements.length > 0) {
+                    console.warn('Missing required elements:', missingElements);
+                    // Retry after a short delay
+                    setTimeout(() => this.init(), 200);
+                    return;
+                }
+
                 // Initialize departments and their agents
                 this.departments = {
                     'engineering': {
