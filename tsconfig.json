@@ -10,6 +10,6 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["tests/**/*"],
-  "exclude": ["node_modules", "**/*.html", "**/*.css"]
+  "include": [],
+  "exclude": ["node_modules", "**/*.html", "**/*.css", "**/*.js"]
 }
