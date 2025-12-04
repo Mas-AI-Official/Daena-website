@@ -86,11 +86,16 @@ class CustomVideoPlayer {
         this.video.addEventListener('loadedmetadata', () => this.updateTime());
         this.video.addEventListener('timeupdate', () => this.updateTime());
         
-        // Update play/pause button
+        // Update play/pause button and playing indicator
         this.video.addEventListener('play', () => {
             if (this.controls.playPause) {
                 this.controls.playPause.setAttribute('aria-pressed', 'true');
                 this.controls.playPause.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>';
+            }
+            // Show playing indicator
+            const indicator = this.container.querySelector('#video-playing-indicator');
+            if (indicator) {
+                indicator.style.opacity = '1';
             }
         });
         
@@ -98,6 +103,18 @@ class CustomVideoPlayer {
             if (this.controls.playPause) {
                 this.controls.playPause.setAttribute('aria-pressed', 'false');
                 this.controls.playPause.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>';
+            }
+            // Hide playing indicator
+            const indicator = this.container.querySelector('#video-playing-indicator');
+            if (indicator) {
+                indicator.style.opacity = '0';
+            }
+        });
+        
+        this.video.addEventListener('ended', () => {
+            const indicator = this.container.querySelector('#video-playing-indicator');
+            if (indicator) {
+                indicator.style.opacity = '0';
             }
         });
     }

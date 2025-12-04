@@ -198,9 +198,9 @@
     <div class="metatron-pattern-bg"></div>
     <canvas id="metatron-hex-canvas"></canvas>
     
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50" role="navigation" aria-label="Main navigation">
-        <div class="max-w-7xl mx-auto px-4 pt-4">
+    <!-- Navigation - Always visible -->
+    <nav class="fixed top-0 left-0 right-0 z-50" role="navigation" aria-label="Main navigation" style="pointer-events: none;">
+        <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
             <div class="glass-card flex items-center justify-between p-4">
             <a href="/" class="text-xl font-bold">Daena</a>
             <div class="hidden md:flex items-center gap-6">
@@ -232,14 +232,14 @@
             <p class="text-yellow-400 text-sm uppercase tracking-wider mb-4">The Auditable AI Vice President</p>
             <h1 class="text-4xl md:text-6xl font-bold mb-6">Meet Daena</h1>
             <div class="space-y-4 mb-8">
-                <p class="text-xl md:text-2xl text-gray-300">
+                <p class="text-xl md:text-2xl text-white font-semibold">
                     Unique AI Decision-Orchestration Platform — your AI VP.
                 </p>
-                <p class="text-lg md:text-xl text-gray-400">
+                <p class="text-lg md:text-xl text-gray-200">
                     Not just agents. Governed, memory-aligned, self-improving decisions.
                 </p>
             </div>
-            <p class="text-sm text-gray-500 mb-8">
+            <p class="text-sm text-yellow-400 mb-8 font-medium">
                 Patent-pending: Sunflower–Honeycomb architecture + NBMF / Enterprise-DNA
             </p>
             <div class="flex flex-wrap justify-center gap-4">
@@ -265,7 +265,10 @@
                     </div>
                 </div>
                 <div class="video-container order-1 md:order-2">
-                    <div data-player-container class="w-full">
+                    <div data-player-container class="w-full relative">
+                        <div class="absolute top-2 right-2 z-10 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold opacity-0 transition-opacity duration-300" id="video-playing-indicator">
+                            ▶ Playing
+                        </div>
                         <video 
                             data-player
                             src="/videos/why-investors.mp4"
@@ -318,7 +321,10 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Demos</h2>
-                <a href="/docs.html" class="text-sm text-yellow-400 hover:underline">See all technical details →</a>
+                <a href="/docs.html" class="inline-flex items-center gap-2 text-sm font-semibold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-3 group">
+                    <span>See all technical details</span>
+                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </a>
             </div>
             <div id="demos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Demos will be loaded from /data/demos.json -->
@@ -383,25 +389,61 @@
             })
             .catch(err => console.error('Failed to load demos:', err));
         
-        // Demo modal
+        // Demo modal with jazz background music
         function openDemoModal(videoSrc, title) {
             const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4';
+            modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4';
+            
+            // Create background music (subtle jazz)
+            const bgMusic = document.createElement('audio');
+            bgMusic.loop = true;
+            bgMusic.volume = 0.15; // Subtle background
+            // Using a free jazz music URL - you can replace with your own
+            bgMusic.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+            bgMusic.play().catch(() => {}); // Auto-play might be blocked, that's okay
+            
             modal.innerHTML = `
                 <div class="relative max-w-4xl w-full">
-                    <button onclick="this.closest('.fixed').remove()" class="absolute -top-10 right-0 text-white hover:text-yellow-400 text-2xl" aria-label="Close">×</button>
-                    <div class="bg-black rounded-lg overflow-hidden">
-                        <video controls autoplay class="w-full" src="${videoSrc}">
+                    <button onclick="this.closest('.fixed').remove(); this.querySelector('audio')?.pause();" class="absolute -top-10 right-0 text-white hover:text-yellow-400 text-2xl font-bold z-10" aria-label="Close">×</button>
+                    <div class="bg-black rounded-lg overflow-hidden glass-card">
+                        <video controls autoplay class="w-full" src="${videoSrc}" id="demo-video">
                             <source src="${videoSrc}" type="video/mp4">
                         </video>
                     </div>
                     <h3 class="text-white text-xl font-bold mt-4">${title}</h3>
+                    <p class="text-gray-400 text-sm mt-2">Background music enabled for better experience</p>
                 </div>
             `;
+            
+            // Add music to modal
+            const musicContainer = document.createElement('div');
+            musicContainer.style.display = 'none';
+            musicContainer.appendChild(bgMusic);
+            modal.querySelector('.relative').appendChild(musicContainer);
+            
             document.body.appendChild(modal);
+            
+            // Stop music when modal closes
+            const closeBtn = modal.querySelector('button');
+            closeBtn.onclick = function() {
+                bgMusic.pause();
+                modal.remove();
+            };
+            
             modal.addEventListener('click', (e) => {
-                if (e.target === modal) modal.remove();
+                if (e.target === modal) {
+                    bgMusic.pause();
+                    modal.remove();
+                }
             });
+            
+            // Stop music when video ends
+            const video = modal.querySelector('#demo-video');
+            if (video) {
+                video.addEventListener('ended', () => {
+                    bgMusic.pause();
+                });
+            }
         }
     </script>
 </body>

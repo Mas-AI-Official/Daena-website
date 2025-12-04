@@ -336,17 +336,146 @@
     <!-- Live Demo -->
     <section class="px-4 py-12" id="live">
         <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 mb-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Live Demo</h2>
-            <div class="space-y-6 text-gray-300">
-                <p>Experience Daena in action with our live demo system.</p>
-                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20">
-                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Getting Started</h3>
-                    <p class="mb-4">To access the live demo, please contact us at <a href="mailto:info@mas-ai.co" class="text-yellow-400 hover:underline">info@mas-ai.co</a> for credentials and setup instructions.</p>
-                    <p>Alternatively, explore our recorded demos on the <a href="/#demos" class="text-yellow-400 hover:underline">homepage</a>.</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Live Demos</h2>
+            <div class="space-y-6 text-gray-300 mb-8">
+                <p>Experience Daena workflows in action. Click any demo below to see how Daena orchestrates decisions and manages business operations.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Council Synthesis Workflow -->
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer" onclick="openLiveDemo('council-synthesis')">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Council Synthesis</h3>
+                    <p class="text-sm mb-4">Watch how Daena's multi-LLM council reaches consensus through Scout→Debate→Commit phases.</p>
+                    <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                        <span>Launch Demo</span>
+                        <span>→</span>
+                    </div>
                 </div>
+                
+                <!-- Memory & Governance Workflow -->
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer" onclick="openLiveDemo('memory-governance')">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Memory & Governance</h3>
+                    <p class="text-sm mb-4">See NBMF compression in action: 13.30× compression with 100% accuracy.</p>
+                    <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                        <span>Launch Demo</span>
+                        <span>→</span>
+                    </div>
+                </div>
+                
+                <!-- Agent Communication Workflow -->
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer" onclick="openLiveDemo('agent-communication')">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Agent Communication</h3>
+                    <p class="text-sm mb-4">Observe Hex-Mesh communication between 48 specialized agents.</p>
+                    <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                        <span>Launch Demo</span>
+                        <span>→</span>
+                    </div>
+                </div>
+                
+                <!-- Decision Orchestration Workflow -->
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer" onclick="openLiveDemo('decision-orchestration')">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Decision Orchestration</h3>
+                    <p class="text-sm mb-4">Experience how Daena makes VP-level decisions with full audit trail.</p>
+                    <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                        <span>Launch Demo</span>
+                        <span>→</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white/5 p-6 rounded-lg border border-yellow-400/20">
+                <h3 class="text-xl font-bold text-yellow-400 mb-3">Full System Access</h3>
+                <p class="mb-4">For full system access and custom demos, contact us at <a href="mailto:info@mas-ai.co" class="text-yellow-400 hover:underline font-semibold">info@mas-ai.co</a></p>
+                <p class="text-sm text-gray-400">Explore recorded demos on the <a href="/#demos" class="text-yellow-400 hover:underline">homepage</a>.</p>
             </div>
         </div>
     </section>
+    
+    <script>
+        function openLiveDemo(demoType) {
+            // Create interactive demo modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4';
+            
+            const demos = {
+                'council-synthesis': {
+                    title: 'Council Synthesis Workflow',
+                    steps: [
+                        { title: 'Scout Phase', desc: 'Agents gather information from multiple sources', time: 2000 },
+                        { title: 'Debate Phase', desc: 'Multi-LLM council debates the decision', time: 3000 },
+                        { title: 'Commit Phase', desc: 'Consensus reached and decision committed', time: 2000 }
+                    ]
+                },
+                'memory-governance': {
+                    title: 'Memory & Governance Workflow',
+                    steps: [
+                        { title: 'Input Document', desc: 'Receiving 10KB document', time: 1500 },
+                        { title: 'NBMF Encoding', desc: 'Compressing with 13.30× ratio', time: 2000 },
+                        { title: 'Storage', desc: '94.3% storage savings achieved', time: 1500 },
+                        { title: 'Retrieval', desc: '100% accurate reconstruction', time: 1500 }
+                    ]
+                },
+                'agent-communication': {
+                    title: 'Agent Communication Workflow',
+                    steps: [
+                        { title: 'Request Initiated', desc: 'User request received', time: 1500 },
+                        { title: 'Hex-Mesh Routing', desc: '48 agents coordinate via Hex-Mesh', time: 2500 },
+                        { title: 'Response Synthesized', desc: 'Unified response from multiple agents', time: 2000 }
+                    ]
+                },
+                'decision-orchestration': {
+                    title: 'Decision Orchestration Workflow',
+                    steps: [
+                        { title: 'Decision Request', desc: 'Business decision needed', time: 1500 },
+                        { title: 'Analysis', desc: 'Agents analyze across departments', time: 3000 },
+                        { title: 'Merkle Notarization', desc: 'Decision recorded in audit trail', time: 2000 },
+                        { title: 'Execution', desc: 'Decision executed with full traceability', time: 2000 }
+                    ]
+                }
+            };
+            
+            const demo = demos[demoType];
+            let currentStep = 0;
+            
+            function showStep() {
+                if (currentStep >= demo.steps.length) {
+                    modal.remove();
+                    return;
+                }
+                
+                const step = demo.steps[currentStep];
+                modal.innerHTML = `
+                    <div class="relative max-w-2xl w-full glass-card p-8 text-center">
+                        <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-white hover:text-yellow-400 text-2xl font-bold" aria-label="Close">×</button>
+                        <div class="mb-6">
+                            <div class="text-yellow-400 text-sm font-semibold mb-2">Step ${currentStep + 1} of ${demo.steps.length}</div>
+                            <h3 class="text-3xl font-bold mb-4">${step.title}</h3>
+                            <p class="text-gray-300 text-lg">${step.desc}</p>
+                        </div>
+                        <div class="w-full bg-white/10 rounded-full h-2 mb-4">
+                            <div class="bg-yellow-400 h-2 rounded-full transition-all duration-300" style="width: ${((currentStep + 1) / demo.steps.length) * 100}%"></div>
+                        </div>
+                        <div class="flex justify-center gap-4">
+                            <button onclick="this.closest('.fixed').remove()" class="glass-button">Close</button>
+                        </div>
+                    </div>
+                `;
+                
+                currentStep++;
+                if (currentStep < demo.steps.length) {
+                    setTimeout(showStep, step.time);
+                } else {
+                    setTimeout(() => {
+                        const closeBtn = modal.querySelector('button');
+                        if (closeBtn) closeBtn.textContent = 'Complete - Close';
+                    }, 1000);
+                }
+            }
+            
+            document.body.appendChild(modal);
+            showStep();
+        }
+    </script>
     
     <!-- Footer -->
     <footer class="px-4 py-12 text-center text-sm text-gray-500">
