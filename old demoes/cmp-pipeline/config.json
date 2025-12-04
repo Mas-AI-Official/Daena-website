@@ -1,0 +1,13 @@
+{
+  "title": "Daena: CMP Pipeline Management",
+  "audio": "../voice-over-demos/Demo 3 CMP Pipeline.mp3",
+  "video": "../../videos/compressed/CMP PIPELINBE DEMO.mp4",
+  "chapters": [
+    { "t": 0, "id": "sec-1", "label": "Intro: CMP Pipeline Overview" },
+    { "t": 15, "id": "sec-2", "label": "Department coordination setup" },
+    { "t": 30, "id": "sec-3", "label": "Workflow visualization" },
+    { "t": 45, "id": "sec-4", "label": "Dependency management" },
+    { "t": 60, "id": "sec-5", "label": "Timeline optimization" },
+    { "t": 75, "id": "sec-6", "label": "Risk mitigation strategies" }
+  ]
+}

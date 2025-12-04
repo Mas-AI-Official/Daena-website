@@ -340,10 +340,10 @@
     <div class="metatron-pattern-bg"></div>
     <canvas id="metatron-hex-canvas"></canvas>
     
-    <!-- Navigation - Always visible -->
-    <nav class="fixed top-0 left-0 right-0 z-50" role="navigation" aria-label="Main navigation" style="pointer-events: none;">
+    <!-- Navigation - Always visible, never disappears -->
+    <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" aria-label="Main navigation" style="pointer-events: none;">
         <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
-            <div class="glass-card flex items-center justify-between p-4">
+            <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
             <a href="/" class="text-xl font-bold">Daena</a>
             <div class="hidden md:flex items-center gap-6">
                 <a href="#demos" class="hover:text-yellow-400 transition">Demos</a>
@@ -467,7 +467,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Demos</h2>
-                <a href="/docs.html" class="inline-flex items-center gap-2 text-sm font-semibold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-3 group">
+                <a href="/docs.html" class="inline-flex items-center gap-2 px-4 py-2 glass-button text-sm font-semibold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-3 group border border-yellow-400/30 hover:border-yellow-400/60">
                     <span>See all technical details</span>
                     <span class="group-hover:translate-x-1 transition-transform">→</span>
                 </a>

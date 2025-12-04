@@ -1,0 +1,17 @@
+{
+  "title": "Daena: Real Scenario Orchestration",
+  "audio": {
+    "src": "../voice-over-demos/Demo 7 Real Scenario.mp3",
+    "title": "Enterprise Scenario Walkthrough",
+    "description": "How Daena's SFHC architecture handles a multi-market operating review."
+  },
+  "video": "../../videos/compressed/REAL SENARIO DEMO.mp4",
+  "chapters": [
+    { "t": 0, "id": "rs-1", "label": "Executive brief & intent capture" },
+    { "t": 20, "id": "rs-2", "label": "Scout and debate agent activation" },
+    { "t": 42, "id": "rs-3", "label": "CMP pipeline orchestration" },
+    { "t": 64, "id": "rs-4", "label": "Operations & marketing coordination" },
+    { "t": 86, "id": "rs-5", "label": "Risk beacons and trust pipeline" },
+    { "t": 108, "id": "rs-6", "label": "Commit packet & enterprise sync" }
+  ]
+}

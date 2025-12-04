@@ -395,85 +395,238 @@
         function openLiveDemo(demoType) {
             // Create interactive demo modal
             const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4';
+            modal.className = 'fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-4 overflow-y-auto';
+            modal.style.pointerEvents = 'auto';
             
             const demos = {
                 'council-synthesis': {
                     title: 'Council Synthesis Workflow',
+                    subtitle: 'Scout → Debate → Commit',
                     steps: [
-                        { title: 'Scout Phase', desc: 'Agents gather information from multiple sources', time: 2000 },
-                        { title: 'Debate Phase', desc: 'Multi-LLM council debates the decision', time: 3000 },
-                        { title: 'Commit Phase', desc: 'Consensus reached and decision committed', time: 2000 }
+                        { 
+                            title: 'Scout Phase', 
+                            desc: '6 agents gather information from multiple sources',
+                            details: 'Agents query databases, APIs, and memory stores',
+                            visual: '🔍',
+                            time: 2500 
+                        },
+                        { 
+                            title: 'Debate Phase', 
+                            desc: 'Multi-LLM council debates using 5 different models',
+                            details: 'GPT-4, Gemini, Claude, DeepSeek, and Grok analyze and debate',
+                            visual: '💬',
+                            time: 3500 
+                        },
+                        { 
+                            title: 'Consensus Reached', 
+                            desc: 'Quorum achieved with 4/5 models agreeing',
+                            details: 'Confidence: 0.92 | Consensus: 0.88',
+                            visual: '✅',
+                            time: 2000 
+                        },
+                        { 
+                            title: 'Commit Phase', 
+                            desc: 'Decision committed to NBMF with Merkle notarization',
+                            details: 'Audit trail created | Status: APPROVED',
+                            visual: '📝',
+                            time: 2000 
+                        }
                     ]
                 },
                 'memory-governance': {
                     title: 'Memory & Governance Workflow',
+                    subtitle: 'NBMF Compression Demo',
                     steps: [
-                        { title: 'Input Document', desc: 'Receiving 10KB document', time: 1500 },
-                        { title: 'NBMF Encoding', desc: 'Compressing with 13.30× ratio', time: 2000 },
-                        { title: 'Storage', desc: '94.3% storage savings achieved', time: 1500 },
-                        { title: 'Retrieval', desc: '100% accurate reconstruction', time: 1500 }
+                        { 
+                            title: 'Input Document', 
+                            desc: 'Receiving 10KB business document',
+                            details: 'Original size: 10,240 bytes',
+                            visual: '📄',
+                            time: 1500 
+                        },
+                        { 
+                            title: 'NBMF Encoding', 
+                            desc: 'Neural encoder compresses document',
+                            details: 'Lossless mode: 13.30× compression ratio',
+                            visual: '⚙️',
+                            time: 2500 
+                        },
+                        { 
+                            title: 'Storage Optimization', 
+                            desc: '94.3% storage savings achieved',
+                            details: 'Compressed: 770 bytes | Savings: 9,470 bytes',
+                            visual: '💾',
+                            time: 2000 
+                        },
+                        { 
+                            title: 'Retrieval & Verification', 
+                            desc: '100% accurate reconstruction verified',
+                            details: 'Hash match: ✓ | Exact match: ✓ | Latency: 0.09ms',
+                            visual: '🔍',
+                            time: 2000 
+                        }
                     ]
                 },
                 'agent-communication': {
                     title: 'Agent Communication Workflow',
+                    subtitle: 'Hex-Mesh Routing',
                     steps: [
-                        { title: 'Request Initiated', desc: 'User request received', time: 1500 },
-                        { title: 'Hex-Mesh Routing', desc: '48 agents coordinate via Hex-Mesh', time: 2500 },
-                        { title: 'Response Synthesized', desc: 'Unified response from multiple agents', time: 2000 }
+                        { 
+                            title: 'Request Initiated', 
+                            desc: 'User request: "Analyze Q4 budget"',
+                            details: 'Request received by central coordinator',
+                            visual: '📥',
+                            time: 1500 
+                        },
+                        { 
+                            title: 'Hex-Mesh Routing', 
+                            desc: '48 agents coordinate via Hex-Mesh network',
+                            details: '6 agents × 8 departments | Each agent connects to 5 neighbors',
+                            visual: '🕸️',
+                            time: 3000 
+                        },
+                        { 
+                            title: 'Parallel Processing', 
+                            desc: 'Agents process in parallel with phase-locked rounds',
+                            details: 'Finance agents: Budget analysis | Engineering: Resource allocation',
+                            visual: '⚡',
+                            time: 2500 
+                        },
+                        { 
+                            title: 'Response Synthesized', 
+                            desc: 'Unified response from multiple agents',
+                            details: 'Consensus reached | Response ready',
+                            visual: '📤',
+                            time: 2000 
+                        }
                     ]
                 },
                 'decision-orchestration': {
                     title: 'Decision Orchestration Workflow',
+                    subtitle: 'VP-Level Decision Making',
                     steps: [
-                        { title: 'Decision Request', desc: 'Business decision needed', time: 1500 },
-                        { title: 'Analysis', desc: 'Agents analyze across departments', time: 3000 },
-                        { title: 'Merkle Notarization', desc: 'Decision recorded in audit trail', time: 2000 },
-                        { title: 'Execution', desc: 'Decision executed with full traceability', time: 2000 }
+                        { 
+                            title: 'Decision Request', 
+                            desc: 'Business decision needed: "Approve $50K infrastructure spend"',
+                            details: 'Impact assessment: HIGH | Requires approval',
+                            visual: '🎯',
+                            time: 1500 
+                        },
+                        { 
+                            title: 'Multi-Department Analysis', 
+                            desc: 'Agents analyze across 8 departments',
+                            details: 'Finance: Budget check | Engineering: Feasibility | Legal: Compliance',
+                            visual: '🏢',
+                            time: 3500 
+                        },
+                        { 
+                            title: 'Merkle Notarization', 
+                            desc: 'Decision recorded in immutable audit trail',
+                            details: 'Merkle hash: 0x7a3f... | Timestamp: 2025-01-XX',
+                            visual: '🔐',
+                            time: 2000 
+                        },
+                        { 
+                            title: 'Execution & Monitoring', 
+                            desc: 'Decision executed with full traceability',
+                            details: 'Status: EXECUTED | Rollback available | Audit log complete',
+                            visual: '✅',
+                            time: 2000 
+                        }
                     ]
                 }
             };
             
             const demo = demos[demoType];
             let currentStep = 0;
+            let autoAdvance = true;
             
             function showStep() {
                 if (currentStep >= demo.steps.length) {
-                    modal.remove();
+                    modal.innerHTML = `
+                        <div class="relative max-w-2xl w-full glass-card p-8 text-center">
+                            <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-white hover:text-yellow-400 text-2xl font-bold z-10" aria-label="Close">×</button>
+                            <div class="mb-6">
+                                <div class="text-6xl mb-4">🎉</div>
+                                <h3 class="text-3xl font-bold mb-4 text-yellow-400">Workflow Complete!</h3>
+                                <p class="text-gray-300 text-lg">You've seen how ${demo.title} works.</p>
+                            </div>
+                            <button onclick="this.closest('.fixed').remove()" class="glass-button px-8 py-3">Close</button>
+                        </div>
+                    `;
                     return;
                 }
                 
                 const step = demo.steps[currentStep];
+                const progress = ((currentStep + 1) / demo.steps.length) * 100;
+                
                 modal.innerHTML = `
-                    <div class="relative max-w-2xl w-full glass-card p-8 text-center">
-                        <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-white hover:text-yellow-400 text-2xl font-bold" aria-label="Close">×</button>
+                    <div class="relative max-w-3xl w-full glass-card p-6 md:p-8 text-center">
+                        <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-white hover:text-yellow-400 text-2xl font-bold z-10" aria-label="Close">×</button>
                         <div class="mb-6">
-                            <div class="text-yellow-400 text-sm font-semibold mb-2">Step ${currentStep + 1} of ${demo.steps.length}</div>
-                            <h3 class="text-3xl font-bold mb-4">${step.title}</h3>
-                            <p class="text-gray-300 text-lg">${step.desc}</p>
+                            <div class="text-yellow-400 text-sm font-semibold mb-2">${demo.subtitle}</div>
+                            <div class="text-5xl mb-4">${step.visual}</div>
+                            <div class="text-yellow-400 text-xs font-semibold mb-2">Step ${currentStep + 1} of ${demo.steps.length}</div>
+                            <h3 class="text-2xl md:text-3xl font-bold mb-3">${step.title}</h3>
+                            <p class="text-gray-300 text-base md:text-lg mb-2">${step.desc}</p>
+                            <p class="text-gray-400 text-sm md:text-base">${step.details}</p>
                         </div>
-                        <div class="w-full bg-white/10 rounded-full h-2 mb-4">
-                            <div class="bg-yellow-400 h-2 rounded-full transition-all duration-300" style="width: ${((currentStep + 1) / demo.steps.length) * 100}%"></div>
+                        <div class="w-full bg-white/10 rounded-full h-3 mb-6">
+                            <div class="bg-yellow-400 h-3 rounded-full transition-all duration-500" style="width: ${progress}%"></div>
                         </div>
-                        <div class="flex justify-center gap-4">
-                            <button onclick="this.closest('.fixed').remove()" class="glass-button">Close</button>
+                        <div class="flex justify-center gap-4 flex-wrap">
+                            <button onclick="this.closest('.fixed').querySelector('.auto-advance').click()" class="glass-button px-4 py-2 text-sm">
+                                <span class="auto-advance-text">${autoAdvance ? '⏸ Pause' : '▶ Resume'}</span>
+                            </button>
+                            <button onclick="this.closest('.fixed').remove()" class="glass-button px-4 py-2 text-sm">Close</button>
                         </div>
                     </div>
                 `;
                 
+                // Auto-advance logic
+                const autoAdvanceBtn = modal.querySelector('.auto-advance-text');
+                if (autoAdvanceBtn) {
+                    autoAdvanceBtn.closest('button').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        autoAdvance = !autoAdvance;
+                        autoAdvanceBtn.textContent = autoAdvance ? '⏸ Pause' : '▶ Resume';
+                    });
+                }
+                
                 currentStep++;
-                if (currentStep < demo.steps.length) {
+                if (autoAdvance && currentStep < demo.steps.length) {
                     setTimeout(showStep, step.time);
-                } else {
-                    setTimeout(() => {
-                        const closeBtn = modal.querySelector('button');
-                        if (closeBtn) closeBtn.textContent = 'Complete - Close';
-                    }, 1000);
+                } else if (!autoAdvance && currentStep < demo.steps.length) {
+                    // Manual advance button
+                    const manualBtn = document.createElement('button');
+                    manualBtn.className = 'glass-button px-6 py-3 mt-4';
+                    manualBtn.textContent = 'Next Step →';
+                    manualBtn.onclick = () => {
+                        showStep();
+                    };
+                    modal.querySelector('.flex').appendChild(manualBtn);
                 }
             }
             
             document.body.appendChild(modal);
             showStep();
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Cleanup on close
+            const closeBtn = modal.querySelector('button[aria-label="Close"]');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    document.body.style.overflow = '';
+                });
+            }
         }
     </script>
     

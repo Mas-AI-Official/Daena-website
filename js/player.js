@@ -20,7 +20,7 @@ class CustomVideoPlayer {
             fullscreen: container.querySelector('[data-control="fullscreen"]')
         };
         
-        this.speeds = [0.75, 1, 1.25, 1.5];
+        this.speeds = [0.75, 1, 1.25, 1.5, 1.75, 2];
         this.currentSpeedIndex = 1;
         
         this.init();
@@ -142,6 +142,15 @@ class CustomVideoPlayer {
         this.video.playbackRate = this.speeds[this.currentSpeedIndex];
         if (this.controls.speed) {
             this.controls.speed.textContent = `${this.speeds[this.currentSpeedIndex]}×`;
+            // Visual feedback
+            this.controls.speed.style.background = this.speeds[this.currentSpeedIndex] > 1 
+                ? 'rgba(255, 215, 0, 0.2)' 
+                : 'rgba(255, 255, 255, 0.1)';
+            setTimeout(() => {
+                if (this.controls.speed) {
+                    this.controls.speed.style.background = '';
+                }
+            }, 300);
         }
     }
     

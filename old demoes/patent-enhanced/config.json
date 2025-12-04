@@ -1,0 +1,68 @@
+{
+  "audio": {
+    "src": "../voice-over-demos/Demo 5 Patent Technology Enhanced.mp3",
+    "title": "Enhanced Patent Technology Demo",
+    "description": "Advanced AI-powered patent analysis with 96% accuracy"
+  },
+  "video": {
+    "src": "../videos/patent-enhanced-demo.mp4",
+    "poster": "../images/patent-enhanced-poster.png"
+  },
+  "chapters": [
+    {
+      "start": 0,
+      "end": 5,
+      "title": "Introduction",
+      "description": "Enhanced Patent Technology analysis system overview"
+    },
+    {
+      "start": 5,
+      "end": 12,
+      "title": "Advanced Database Integration",
+      "description": "Connecting to enhanced patent databases with real-time updates"
+    },
+    {
+      "start": 12,
+      "end": 20,
+      "title": "AI-Powered Technology Analysis",
+      "description": "Advanced AI algorithm analysis with 96% accuracy"
+    },
+    {
+      "start": 20,
+      "end": 30,
+      "title": "Enhanced Prior Art Search",
+      "description": "Smart search across multiple patent databases"
+    },
+    {
+      "start": 30,
+      "end": 38,
+      "title": "ML-Powered Novelty Assessment",
+      "description": "Machine learning-powered novelty scoring algorithm"
+    },
+    {
+      "start": 38,
+      "end": 45,
+      "title": "Strategic Market Analysis",
+      "description": "Advanced market intelligence with predictive analytics"
+    },
+    {
+      "start": 45,
+      "end": 50,
+      "title": "Advanced Reporting",
+      "description": "Generating comprehensive enhanced patent analysis report"
+    }
+  ],
+  "demo": {
+    "title": "Enhanced Patent Technology Demo",
+    "description": "Advanced AI-powered patent analysis with 96% accuracy and comprehensive insights",
+    "duration": "50 seconds",
+    "features": [
+      "Advanced database integration",
+      "AI-powered technology analysis",
+      "Enhanced prior art search",
+      "ML-powered novelty assessment",
+      "Strategic market analysis",
+      "Advanced reporting"
+    ]
+  }
+}
