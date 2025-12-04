@@ -48,6 +48,8 @@
             max-width: 100%;
             aspect-ratio: 16 / 9;
             overflow: hidden;
+            background: #000;
+            border-radius: 1rem;
         }
         
         .video-container video {
@@ -56,32 +58,51 @@
             border-radius: 1rem;
             display: block;
             object-fit: contain;
+            background: #000;
         }
         
+        /* Ensure video container works on all devices */
         @media (max-width: 768px) {
             .video-container {
                 aspect-ratio: 16 / 9;
                 max-width: 100%;
+                margin: 0 auto;
             }
         }
         
+        @media (max-width: 480px) {
+            .video-container {
+                aspect-ratio: 16 / 9;
+                width: 100%;
+            }
+        }
+        
+        /* Video controls - Always visible, responsive */
         .video-controls {
-            display: flex;
+            display: flex !important;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.875rem 1rem;
-            background: rgba(0, 0, 0, 0.8);
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.95) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 0.5rem;
             margin-top: 0.5rem;
             flex-wrap: wrap;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 10;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         
         .video-controls button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
             padding: 0.5rem;
-            border-radius: 0.25rem;
+            border-radius: 0.375rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -89,69 +110,144 @@
             min-width: 2.5rem;
             height: 2.5rem;
             transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            flex-shrink: 0;
+        }
+        
+        .video-controls button:active {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(0.95);
         }
         
         .video-controls button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 215, 0, 0.6);
         }
         
         .video-controls button svg {
             width: 1.25rem;
             height: 1.25rem;
+            pointer-events: none;
         }
         
         .video-controls input[type="range"] {
-            flex: 1;
-            min-width: 80px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
+            flex: 1 1 auto;
+            min-width: 60px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 3px;
             outline: none;
             cursor: pointer;
             -webkit-appearance: none;
             appearance: none;
+            touch-action: manipulation;
         }
         
         .video-controls input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
             background: #FFD700;
             border-radius: 50%;
             cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .video-controls input[type="range"]::-moz-range-thumb {
-            width: 14px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
             background: #FFD700;
             border-radius: 50%;
             cursor: pointer;
-            border: none;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .video-controls [data-control="time"] {
             color: white;
             font-size: 0.875rem;
             font-variant-numeric: tabular-nums;
-            min-width: 90px;
+            min-width: 85px;
             text-align: center;
             white-space: nowrap;
             font-family: 'Courier New', monospace;
+            flex-shrink: 0;
         }
         
         .video-controls [data-control="speed"] {
-            min-width: 3rem;
+            min-width: 2.75rem;
             font-size: 0.875rem;
             font-weight: 600;
+            flex-shrink: 0;
         }
         
+        /* Tablet (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .video-controls {
+                gap: 0.625rem;
+                padding: 0.875rem;
+            }
+            
+            .video-controls button {
+                min-width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
+        
+        /* Mobile (max-width: 768px) */
         @media (max-width: 768px) {
             .video-controls {
                 gap: 0.5rem;
                 padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+            
+            .video-controls button {
+                min-width: 2.5rem;
+                height: 2.5rem;
+                padding: 0.5rem;
+            }
+            
+            .video-controls button svg {
+                width: 1.125rem;
+                height: 1.125rem;
+            }
+            
+            .video-controls [data-control="time"] {
+                font-size: 0.75rem;
+                min-width: 70px;
+            }
+            
+            .video-controls [data-control="speed"] {
+                min-width: 2.5rem;
+                font-size: 0.75rem;
+            }
+            
+            .video-controls input[type="range"] {
+                min-width: 50px;
+                height: 6px;
+            }
+            
+            .video-controls input[type="range"]::-webkit-slider-thumb {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .video-controls input[type="range"]::-moz-range-thumb {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        
+        /* Small phones (max-width: 480px) */
+        @media (max-width: 480px) {
+            .video-controls {
+                gap: 0.375rem;
+                padding: 0.625rem;
+                font-size: 0.75rem;
             }
             
             .video-controls button {
@@ -166,28 +262,74 @@
             }
             
             .video-controls [data-control="time"] {
-                font-size: 0.75rem;
-                min-width: 75px;
+                font-size: 0.7rem;
+                min-width: 65px;
             }
             
             .video-controls [data-control="speed"] {
-                min-width: 2.5rem;
-                font-size: 0.75rem;
+                min-width: 2.25rem;
+                font-size: 0.7rem;
             }
             
             .video-controls input[type="range"] {
-                min-width: 60px;
+                min-width: 40px;
+                height: 5px;
+            }
+            
+            .video-controls input[type="range"]::-webkit-slider-thumb {
+                width: 14px;
+                height: 14px;
+            }
+            
+            .video-controls input[type="range"]::-moz-range-thumb {
+                width: 14px;
+                height: 14px;
+            }
+            
+            /* Hide PiP on small screens */
+            .video-controls [data-control="pip"] {
+                display: none !important;
+            }
+            
+            /* Stack controls vertically if needed */
+            .video-controls {
+                flex-direction: row;
+                flex-wrap: wrap;
             }
         }
         
-        @media (max-width: 480px) {
+        /* Very small phones (max-width: 360px) */
+        @media (max-width: 360px) {
             .video-controls {
-                gap: 0.375rem;
-                padding: 0.625rem;
+                gap: 0.25rem;
+                padding: 0.5rem;
             }
             
-            .video-controls [data-control="pip"] {
-                display: none !important;
+            .video-controls button {
+                min-width: 2rem;
+                height: 2rem;
+                padding: 0.25rem;
+            }
+            
+            .video-controls [data-control="time"] {
+                font-size: 0.65rem;
+                min-width: 60px;
+            }
+            
+            .video-controls [data-control="speed"] {
+                display: none; /* Hide speed on very small screens */
+            }
+        }
+        
+        /* Landscape orientation on mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .video-controls {
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .video-controls button {
+                min-width: 2.25rem;
+                height: 2.25rem;
             }
         }
     </style>
@@ -264,7 +406,7 @@
                         <p class="text-yellow-400 font-semibold">Rising from it is Daena.</p>
                     </div>
                 </div>
-                <div class="video-container order-1 md:order-2">
+                <div class="video-container order-1 md:order-2 w-full">
                     <div data-player-container class="w-full relative">
                         <div class="absolute top-2 right-2 z-10 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold opacity-0 transition-opacity duration-300" id="video-playing-indicator">
                             ▶ Playing
@@ -275,16 +417,20 @@
                             poster="/assets/img/why-investors.jpg"
                             class="w-full h-full object-contain"
                             preload="metadata"
+                            playsinline
+                            webkit-playsinline
+                            x5-playsinline
+                            style="width: 100%; height: 100%; max-width: 100%;"
                         >
                             <source src="/videos/why-investors.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                         <noscript>
-                            <video controls src="/videos/why-investors.mp4" poster="/assets/img/why-investors.jpg" class="w-full h-full">
+                            <video controls src="/videos/why-investors.mp4" poster="/assets/img/why-investors.jpg" class="w-full h-full" playsinline>
                                 <source src="/videos/why-investors.mp4" type="video/mp4">
                             </video>
                         </noscript>
-                        <div class="video-controls">
+                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
                             <button data-control="play-pause" aria-label="Play/Pause" aria-pressed="false" type="button">
                                 <svg fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
