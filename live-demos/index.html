@@ -84,16 +84,21 @@
       const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
       const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
       
-      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+      const backBtn = document.getElementById('back-to-demos');
+      if (backBtn) {
+        backBtn.addEventListener('click', function(e) {
         e.preventDefault();
         const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
         sessionStorage.removeItem('returnSection');
         sessionStorage.removeItem('returnPage');
         window.location.href = targetPage;
-      });
+        });
+      }
+      }
     })();
   </script>
 </body>
 </html>
+
 
 

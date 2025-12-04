@@ -6,7 +6,7 @@
   <title>CMP Pipeline â€¢ Live Demo</title>
   <link rel="stylesheet" href="/assets/css/global.css">
   <link rel="stylesheet" href="/live-demos/_shared.css">
-  <link rel="stylesheet" href="/old demoes/cmp-pipeline/live-demo.css">
+  <link rel="stylesheet" href="/live-demos/cmp-pipeline/live-demo.css">
 </head>
 <body class="metatron-bg">
   <!-- Metatron Background Layers -->
@@ -42,35 +42,11 @@
     <!-- Animated Background -->
     <div class="animated-bg"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Daena AI</a>
-            <div class="nav-buttons">
-                <a href="../../index.html#demos" class="back-button">â† Demos Gallery</a>
-                <a href="../../index.html" class="back-button">ðŸ  Back to Daena</a>
-            </div>
-        </div>
-    </nav>
+    
 
     <!-- Main Demo Container -->
     <div class="demo-container">
-        <!-- Demo Header -->
-        <div class="demo-header">
-            <h1 class="demo-title">CMP Pipeline Demo</h1>
-            <p class="demo-subtitle">
-                Experience Daena's complete CMP (Content Management Pipeline) orchestration process. 
-                Watch how intelligent workflow management coordinates multiple agents for seamless content processing.
-            </p>
-        </div>
-
-        <!-- Narration Panel -->
-        <div class="narration-panel">
-            <div class="narration-text" id="narrationText">
-                <span class="narration-indicator"></span>
-                Welcome to Daena's CMP Pipeline Demo. I'll demonstrate how our intelligent workflow management system orchestrates content processing across multiple agents with seamless coordination.
-            </div>
-        </div>
+        
 
         <!-- Demo Controls -->
         <div class="demo-controls">
@@ -304,15 +280,20 @@
       const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
       const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
       
-      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+      const backBtn = document.getElementById('back-to-demos'); if (backBtn) { backBtn.addEventListener('click', function(e) {
         e.preventDefault();
         const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
         sessionStorage.removeItem('returnSection');
         sessionStorage.removeItem('returnPage');
         window.location.href = targetPage;
-      });
+        });
+      }
     })();
   </script>
 </body>
 </html>
+
+
+
+
 

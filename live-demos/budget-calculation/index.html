@@ -6,7 +6,7 @@
   <title>Budget Calculation â€¢ Live Demo</title>
   <link rel="stylesheet" href="/assets/css/global.css">
   <link rel="stylesheet" href="/live-demos/_shared.css">
-  <link rel="stylesheet" href="/old demoes/budget-calculation/live-demo.css">
+  <link rel="stylesheet" href="/live-demos/budget-calculation/live-demo.css">
 </head>
 <body class="metatron-bg">
   <!-- Metatron Background Layers -->
@@ -42,35 +42,11 @@
     <!-- Animated Background -->
     <div class="animated-bg"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Daena AI</a>
-            <div class="nav-buttons">
-                <a href="../../index.html#demos" class="back-button">â† Demos Gallery</a>
-                <a href="../../index.html" class="back-button">ðŸ  Back to Daena</a>
-            </div>
-        </div>
-    </nav>
+    
 
     <!-- Main Demo Container -->
     <div class="demo-container">
-        <!-- Demo Header -->
-        <div class="demo-header">
-            <h1 class="demo-title">Budget Calculation Demo</h1>
-            <p class="demo-subtitle">
-                Watch Daena's Finance Agent calculate comprehensive budgets with real-time data analysis. 
-                See how it processes market data, calculates ROI projections, and provides detailed financial insights.
-            </p>
-                    </div>
-
-        <!-- Narration Panel -->
-        <div class="narration-panel">
-            <div class="narration-text" id="narrationText">
-                <span class="narration-indicator"></span>
-                Welcome to Daena's Budget Calculation Demo. Watch as our Finance Agent processes market data and calculates comprehensive budget projections with real-time analysis and live narration.
-                            </div>
-                            </div>
+        
 
         <!-- Demo Controls -->
         <div class="demo-controls">
@@ -227,15 +203,20 @@
       const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
       const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
       
-      document.getElementById('back-to-demos').addEventListener('click', function(e) {
+      const backBtn = document.getElementById('back-to-demos'); if (backBtn) { backBtn.addEventListener('click', function(e) {
         e.preventDefault();
         const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
         sessionStorage.removeItem('returnSection');
         sessionStorage.removeItem('returnPage');
         window.location.href = targetPage;
-      });
+        });
+      }
     })();
   </script>
 </body>
 </html>
+
+
+
+
 
