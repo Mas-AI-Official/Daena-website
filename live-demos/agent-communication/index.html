@@ -1209,6 +1209,12 @@
             }
 
             setupEventListeners() {
+                // Verify elements exist before adding listeners
+                if (!this.executeBtn || !this.resetBtn || !this.narrationAudio) {
+                    console.error('Critical elements missing in setupEventListeners');
+                    return;
+                }
+
                 this.executeBtn.addEventListener('click', () => {
                     if (!this.isExecuting) {
                         this.startDemo();
@@ -1218,13 +1224,24 @@
                 });
 
                 this.resetBtn.addEventListener('click', () => this.resetDemo());
-                this.playNarrationBtn.addEventListener('click', () => this.toggleNarration());
                 
-                // Enhanced audio controls
-                this.rewindBtn.addEventListener('click', () => this.rewindNarration());
-                this.speedBtn.addEventListener('click', () => this.toggleSpeed());
-                this.forwardBtn.addEventListener('click', () => this.forwardNarration());
-                this.narrationProgress.addEventListener('click', (e) => this.seekNarration(e));
+                if (this.playNarrationBtn) {
+                    this.playNarrationBtn.addEventListener('click', () => this.toggleNarration());
+                }
+                
+                // Enhanced audio controls (check if they exist)
+                if (this.rewindBtn) {
+                    this.rewindBtn.addEventListener('click', () => this.rewindNarration());
+                }
+                if (this.speedBtn) {
+                    this.speedBtn.addEventListener('click', () => this.toggleSpeed());
+                }
+                if (this.forwardBtn) {
+                    this.forwardBtn.addEventListener('click', () => this.forwardNarration());
+                }
+                if (this.narrationProgress) {
+                    this.narrationProgress.addEventListener('click', (e) => this.seekNarration(e));
+                }
                 
                 // Audio event listeners
                 this.narrationAudio.addEventListener('timeupdate', () => this.updateProgress());
@@ -1751,17 +1768,40 @@
         }
 
         // Initialize demo when page loads (only once)
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                if (!window.demoInstance) {
-                    window.demoInstance = new EnhancedAgentDemo();
-                }
-            });
-        } else {
+        // Use a more robust initialization that works regardless of how page is accessed
+        function initDemo() {
             if (!window.demoInstance) {
-                window.demoInstance = new EnhancedAgentDemo();
+                // Wait a bit to ensure all DOM elements are ready
+                setTimeout(() => {
+                    if (!window.demoInstance) {
+                        try {
+                            window.demoInstance = new EnhancedAgentDemo();
+                        } catch (e) {
+                            console.error('Demo initialization error:', e);
+                            // Retry after a short delay
+                            setTimeout(() => {
+                                if (!window.demoInstance) {
+                                    window.demoInstance = new EnhancedAgentDemo();
+                                }
+                            }, 500);
+                        }
+                    }
+                }, 100);
             }
         }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initDemo);
+        } else {
+            initDemo();
+        }
+        
+        // Also try on window load as a fallback
+        window.addEventListener('load', () => {
+            if (!window.demoInstance) {
+                initDemo();
+            }
+        });
 
         // Handle orientation changes
         function handleOrientationChange() {
