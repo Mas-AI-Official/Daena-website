@@ -1,0 +1,214 @@
+/* Daena Voice-Over Player Styles */
+.daena-voice-player {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 58, 0.9) 100%);
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid rgba(255, 193, 7, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    margin: 20px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.daena-voice-player .player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.daena-voice-player .demo-title {
+    color: #FFD700;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.daena-voice-player .playback-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #00bcd4;
+}
+
+.daena-voice-player .current-time,
+.daena-voice-player .total-time {
+    font-weight: bold;
+}
+
+.daena-voice-player .playback-rate {
+    background: rgba(0, 188, 212, 0.2);
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+.daena-voice-player .player-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.daena-voice-player .control-btn {
+    background: linear-gradient(135deg, #FFD700, #00bcd4);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.daena-voice-player .control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+}
+
+.daena-voice-player .control-btn:active {
+    transform: translateY(0);
+}
+
+.daena-voice-player .control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.daena-voice-player .rate-select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.daena-voice-player .rate-select:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.daena-voice-player .rate-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.daena-voice-player .progress-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.daena-voice-player .progress-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.daena-voice-player .progress-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #00bcd4);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.daena-voice-player .progress-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+}
+
+.daena-voice-player .progress-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD700, #00bcd4);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.daena-voice-player .progress-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+}
+
+.daena-voice-player .progress-slider:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.daena-voice-player .chapter-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    pointer-events: none;
+}
+
+.daena-voice-player .chapter-marker {
+    position: absolute;
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+}
+
+.daena-voice-player .chapter-marker.active {
+    background: #FFD700;
+    width: 6px;
+    height: 12px;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
+.daena-voice-player .status-message {
+    color: #B8BCC8;
+    font-size: 0.85rem;
+    text-align: center;
+    font-style: italic;
+    min-height: 20px;
+}
+
+@media (max-width: 768px) {
+    .daena-voice-player {
+        padding: 15px;
+    }
+
+    .daena-voice-player .player-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .daena-voice-player .player-controls {
+        flex-wrap: wrap;
+    }
+
+    .daena-voice-player .control-btn {
+        padding: 8px 12px;
+        font-size: 1rem;
+    }
+}
+
