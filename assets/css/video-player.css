@@ -1,0 +1,142 @@
+:root{
+  --glass-bg: rgba(8,10,20,.72);
+  --glass-border: rgba(255,255,255,.08);
+  --accent: #67f1b5;
+  --accent-2: #ffd84a;
+  --text: #e6ecff;
+  --muted: #a9b1c7;
+}
+
+.daena-video-card{
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 16px 16px 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.45);
+}
+
+.daena-video-frame{
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: radial-gradient(1200px 400px at 50% 10%, rgba(103,241,181,.12), rgba(0,0,0,.6));
+}
+
+.daena-video{
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/9;
+  background: #0b0f1a;
+}
+
+.daena-video-overlay{
+  position: absolute; 
+  inset: 0;
+  display: grid; 
+  place-content: center; 
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.45));
+  color: var(--text);
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0,0,0,.6);
+  border: none; 
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease;
+  z-index: 10;
+}
+
+.daena-video-overlay .icon{
+  width: 72px; 
+  height: 72px;
+  fill: var(--accent);
+  filter: drop-shadow(0 6px 18px rgba(103,241,181,.45));
+}
+
+.daena-video-overlay:hover { 
+  transform: scale(1.02); 
+}
+
+.daena-video-overlay:focus-visible { 
+  outline: 2px solid var(--accent-2); 
+  outline-offset: 4px; 
+}
+
+.daena-controls{
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto auto auto;
+  gap: 10px; 
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.daena-controls .ctrl{
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  min-width: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.daena-controls .ctrl:hover{ 
+  background: rgba(255,255,255,.12); 
+}
+
+.daena-controls .seek{
+  appearance: none; 
+  width: 100%; 
+  height: 6px; 
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent) 0% 0%, rgba(255,255,255,.14) 0% 100%);
+  cursor: pointer;
+}
+
+.daena-controls .seek::-webkit-slider-thumb{
+  appearance: none; 
+  width: 14px; 
+  height: 14px; 
+  border-radius: 50%;
+  background: var(--accent-2); 
+  border: 2px solid #111;
+  cursor: pointer;
+}
+
+.daena-controls .seek::-moz-range-thumb{
+  width: 14px; 
+  height: 14px; 
+  border-radius: 50%;
+  background: var(--accent-2); 
+  border: 2px solid #111;
+  cursor: pointer;
+}
+
+.daena-controls .time{ 
+  color: var(--muted); 
+  font-variant-numeric: tabular-nums; 
+  font-size: 14px; 
+  white-space: nowrap;
+}
+
+@media (max-width: 640px){
+  .daena-controls{ 
+    grid-template-columns: auto auto 1fr auto auto; 
+  }
+  .daena-controls .dl, 
+  .daena-controls .rate{ 
+    display: none; 
+  }
+  .daena-video-overlay .icon{
+    width: 56px;
+    height: 56px;
+  }
+  .daena-video-overlay{
+    font-size: 14px;
+    gap: 8px;
+  }
+}
+

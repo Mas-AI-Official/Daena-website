@@ -27,11 +27,14 @@
     <!-- Global CSS -->
     <link rel="stylesheet" href="/assets/css/global.css">
     
+    <!-- Video Player Component CSS -->
+    <link rel="stylesheet" href="/assets/css/video-player.css">
+    
     <!-- Metatron Background Script -->
     <script src="/js/metatron-hex-network.js"></script>
     
-    <!-- Custom Video Player -->
-    <script src="/js/player.js" defer></script>
+    <!-- Custom Video Player Component -->
+    <script src="/assets/js/video-player.js" defer></script>
     
     <style>
         /* Additional inline styles for specific components */
@@ -501,11 +504,12 @@
             <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
             <a href="/" class="text-xl font-bold">Daena</a>
             <div class="hidden md:flex items-center gap-6">
-                <a href="#demos" class="hover:text-yellow-400 transition" data-return-section="hero">Demos</a>
-                <a href="#pitch" class="hover:text-yellow-400 transition" data-return-section="hero">Pitch Deck</a>
-                <a href="/docs.html#live" class="hover:text-yellow-400 transition" data-return-section="hero">Live Demo</a>
-                <a href="/docs.html" class="hover:text-yellow-400 transition" data-return-section="hero">Docs & Benchmarks</a>
-                <a href="#contact" class="hover:text-yellow-400 transition" data-return-section="hero">Contact</a>
+                <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                <a href="/demos.html" class="hover:text-yellow-400 transition">Demos</a>
+                <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
             </div>
             <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -515,11 +519,12 @@
         </div>
         <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
             <div class="flex flex-col gap-4">
-                <a href="#demos" class="hover:text-yellow-400 transition" data-return-section="hero">Demos</a>
-                <a href="#pitch" class="hover:text-yellow-400 transition" data-return-section="hero">Pitch Deck</a>
-                <a href="/docs.html#live" class="hover:text-yellow-400 transition" data-return-section="hero">Live Demo</a>
-                <a href="/docs.html" class="hover:text-yellow-400 transition" data-return-section="hero">Docs & Benchmarks</a>
-                <a href="#contact" class="hover:text-yellow-400 transition" data-return-section="hero">Contact</a>
+                <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                <a href="/demos.html" class="hover:text-yellow-400 transition">Demos</a>
+                <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
             </div>
         </div>
         </div>
@@ -565,83 +570,35 @@
                         <p class="text-yellow-400 font-semibold">Rising from it is Daena.</p>
                     </div>
                 </div>
-                <div class="video-container order-1 md:order-2 w-full">
-                    <div data-player-container class="w-full relative flex flex-col">
-                        <!-- Video wrapper with big play button overlay -->
-                        <div class="relative w-full" style="aspect-ratio: 16/9; background: #000; border-radius: 1rem; overflow: hidden; position: relative; background-image: url('/assets/img/why-investors.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                            <video 
-                                data-player
-                                id="why-investors-video"
+                <div class="order-1 md:order-2 w-full">
+                    <div class="daena-video-card">
+                        <div class="daena-video-frame">
+                            <video
+                                class="daena-video"
                                 src="/videos/why-investors.mp4"
-                                poster="/assets/img/why-investors.jpg"
-                                class="w-full h-full object-cover"
                                 preload="metadata"
                                 playsinline
                                 webkit-playsinline
-                                x5-playsinline
-                                style="width: 100%; height: 100%; display: block;"
-                            >
-                                <source src="/videos/why-investors.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                                crossorigin="anonymous"
+                                poster="/assets/img/why-investors.jpg"
+                            ></video>
                             
-                            <!-- Big center play button overlay (visible when paused/not started) -->
-                            <button 
-                                id="big-play-button"
-                                data-control="big-play"
-                                class="absolute inset-0 m-auto h-20 w-20 md:h-24 md:w-24 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 hover:from-yellow-300 hover:to-yellow-500 text-black grid place-items-center shadow-2xl hover:scale-110 transition-all duration-300 z-20 border-4 border-white/30"
-                                aria-label="Play video"
-                                style="display: flex; align-items: center; justify-content: center; cursor: pointer;"
-                            >
-                                <svg class="w-10 h-10 md:w-12 md:h-12 ml-1 drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
-                                </svg>
+                            <!-- Poster overlay with big Play -->
+                            <button class="daena-video-overlay" aria-label="Play video">
+                                <svg viewBox="0 0 64 64" class="icon"><polygon points="24,18 50,32 24,46"></polygon></svg>
+                                <span>Watch: Why Investors Choose Daena</span>
                             </button>
-                            
-                            <!-- Playing indicator (top right) -->
-                            <div class="absolute top-2 right-2 z-10 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold opacity-0 transition-opacity duration-300 pointer-events-none" id="video-playing-indicator">
-                                ▶ Playing
-                            </div>
                         </div>
                         
-                        <!-- Persistent controls bar (OUTSIDE video box, always visible - positioned below video) -->
-                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important; margin-top: 0.75rem !important; position: relative !important; z-index: 10 !important; width: 100% !important;">
-                            <button data-control="play-pause" aria-label="Play/Pause" aria-pressed="false" type="button" class="play-pause-btn">
-                                <svg class="play-icon" fill="currentColor" viewBox="0 0 20 20" style="display: block;">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                                </svg>
-                                <svg class="pause-icon" fill="currentColor" viewBox="0 0 20 20" style="display: none;">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                                </svg>
-                            </button>
-                            <span data-control="time-current" class="time-display tabular-nums">0:00</span>
-                            <input type="range" data-control="seek" min="0" max="100" value="0" step="0.1" aria-label="Seek" class="seek-bar flex-1">
-                            <span data-control="time-total" class="time-display tabular-nums">0:00</span>
-                            <button data-control="mute" aria-label="Mute" aria-pressed="false" type="button" class="mute-btn">
-                                <svg class="unmuted-icon" fill="currentColor" viewBox="0 0 20 20" style="display: block;">
-                                    <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/>
-                                </svg>
-                                <svg class="muted-icon" fill="currentColor" viewBox="0 0 20 20" style="display: none;">
-                                    <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/>
-                                </svg>
-                            </button>
-                            <input type="range" data-control="volume" min="0" max="100" value="100" step="1" aria-label="Volume" class="volume-bar" style="width: 80px;">
-                            <button data-control="speed" aria-label="Playback Speed" type="button" class="speed-btn">1×</button>
-                            <button data-control="pip" aria-label="Picture in Picture" type="button" style="display: none;">
-                                <svg fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/>
-                                </svg>
-                            </button>
-                            <button data-control="fullscreen" aria-label="Fullscreen" type="button">
-                                <svg fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13 5.586V4zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z"/>
-                                </svg>
-                            </button>
-                            <a href="/videos/why-investors.mp4" download="why-investors-choose-daena.mp4" class="download-btn" aria-label="Download video" style="display: flex; align-items: center; justify-content: center; min-width: 2.5rem; height: 2.5rem; padding: 0.5rem; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 0.375rem; color: white; text-decoration: none; transition: all 0.2s ease;">
-                                <svg fill="currentColor" viewBox="0 0 20 20" style="width: 1.25rem; height: 1.25rem;">
-                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                </svg>
-                            </a>
+                        <!-- Persistent control bar BELOW the frame -->
+                        <div class="daena-controls" role="group" aria-label="Video controls">
+                            <button class="ctrl play" aria-label="Play/Pause">▶︎</button>
+                            <button class="ctrl mute" aria-label="Mute/Unmute">🔈</button>
+                            <input class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+                            <div class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></div>
+                            <button class="ctrl rate" aria-label="Playback speed">1×</button>
+                            <button class="ctrl fs" aria-label="Fullscreen">⛶</button>
+                            <a class="ctrl dl" href="/videos/why-investors.mp4" download>⇩</a>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Demos — Daena AI | MAS-AI</title>
+    <meta name="description" content="Watch recorded demonstrations of Daena's capabilities in action.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    
+    <!-- Video Player Component CSS -->
+    <link rel="stylesheet" href="/assets/css/video-player.css">
+    
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+    
+    <!-- Video Player Component -->
+    <script src="/assets/js/video-player.js" defer></script>
+</head>
+<body class="text-white antialiased">
+    <!-- Metatron Background Layers -->
+    <div class="metatron-bg"></div>
+    <div class="metatron-pattern-bg"></div>
+    <canvas id="metatron-hex-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" aria-label="Main navigation" style="pointer-events: none;">
+        <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
+            <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
+                <a href="/" class="text-xl font-bold">Daena</a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                    <a href="/demos.html" class="hover:text-yellow-400 transition">Demos</a>
+                    <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                    <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                    <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
+                <div class="flex flex-col gap-4">
+                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                    <a href="/demos.html" class="hover:text-yellow-400 transition">Demos</a>
+                    <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                    <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                    <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="px-4 py-20 mt-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="shimmer-text">Recorded Demos</span>
+                </h1>
+                <p class="text-gray-300 text-lg">Watch pre-recorded demonstrations of Daena's capabilities</p>
+            </div>
+            
+            <div id="demos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Demos will be loaded from /data/demos.json -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4" style="background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);">
+        <div class="relative max-w-5xl w-full">
+            <button id="close-modal" class="absolute -top-12 right-0 text-white text-2xl hover:text-yellow-400 transition" aria-label="Close">×</button>
+            <div id="modal-video-container" class="daena-video-card">
+                <!-- Video player will be inserted here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Load demos from JSON
+        async function loadDemos() {
+            try {
+                const response = await fetch('/data/demos.json');
+                const demos = await response.json();
+                const grid = document.getElementById('demos-grid');
+                
+                demos.forEach(demo => {
+                    const card = document.createElement('div');
+                    card.className = 'glass-card p-6 cursor-pointer hover:scale-105 transition-transform';
+                    card.innerHTML = `
+                        <div class="aspect-video bg-black rounded-lg mb-4 flex items-center justify-center relative overflow-hidden" style="background-image: url('${demo.poster || '/assets/img/why-investors.jpg'}'); background-size: cover; background-position: center;">
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-yellow-400">${demo.title}</h3>
+                        <p class="text-gray-300 text-sm mb-4">${demo.blurb}</p>
+                        <div class="flex gap-2">
+                            <button class="glass-button text-sm px-4 py-2" onclick="openVideoModal('${demo.file}', '${demo.title}')">Play</button>
+                            <a href="${demo.file}" download class="glass-button text-sm px-4 py-2" target="_blank">Download</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Failed to load demos:', error);
+            }
+        }
+        
+        function openVideoModal(videoSrc, title) {
+            const modal = document.getElementById('video-modal');
+            const container = document.getElementById('modal-video-container');
+            
+            container.innerHTML = `
+                <div class="daena-video-frame">
+                    <video
+                        class="daena-video"
+                        src="${videoSrc}"
+                        preload="metadata"
+                        playsinline
+                        webkit-playsinline
+                        crossorigin="anonymous"
+                        poster="${videoSrc.replace('.mp4', '-poster.jpg')}"
+                    ></video>
+                    <button class="daena-video-overlay" aria-label="Play video">
+                        <svg viewBox="0 0 64 64" class="icon"><polygon points="24,18 50,32 24,46"></polygon></svg>
+                        <span>Watch: ${title}</span>
+                    </button>
+                </div>
+                <div class="daena-controls" role="group" aria-label="Video controls">
+                    <button class="ctrl play" aria-label="Play/Pause">▶︎</button>
+                    <button class="ctrl mute" aria-label="Mute/Unmute">🔈</button>
+                    <input class="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+                    <div class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></div>
+                    <button class="ctrl rate" aria-label="Playback speed">1×</button>
+                    <button class="ctrl fs" aria-label="Fullscreen">⛶</button>
+                    <a class="ctrl dl" href="${videoSrc}" download>⇩</a>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            
+            // Reinitialize player
+            setTimeout(() => {
+                const card = container.closest('.daena-video-card') || container;
+                if (card.classList.contains('daena-video-card')) {
+                    initDaenaPlayer(card);
+                } else {
+                    // Wrap if needed
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'daena-video-card';
+                    wrapper.innerHTML = container.innerHTML;
+                    container.innerHTML = '';
+                    container.appendChild(wrapper);
+                    initDaenaPlayer(wrapper);
+                }
+            }, 100);
+        }
+        
+        document.getElementById('close-modal')?.addEventListener('click', () => {
+            const modal = document.getElementById('video-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+            const container = document.getElementById('modal-video-container');
+            container.innerHTML = '';
+        });
+        
+        // Close on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('video-modal');
+                if (!modal.classList.contains('hidden')) {
+                    document.getElementById('close-modal')?.click();
+                }
+            }
+        });
+        
+        loadDemos();
+    </script>
+</body>
+</html>
+
