@@ -49,16 +49,35 @@ class CustomVideoPlayer {
         // Volume
         if (this.controls.volume) {
             this.controls.volume.addEventListener('input', (e) => {
-                this.video.volume = e.target.value / 100;
-                if (this.controls.mute) {
-                    this.controls.mute.setAttribute('aria-pressed', this.video.volume === 0 ? 'true' : 'false');
+                const newVolume = e.target.value / 100;
+                this.video.volume = newVolume;
+                // Unmute if volume is increased
+                if (newVolume > 0 && this.video.muted) {
+                    this.video.muted = false;
+                    this.updateMuteButton();
+                }
+                // Update mute button state
+                if (this.controls.mute && newVolume === 0) {
+                    this.video.muted = true;
+                    this.updateMuteButton();
                 }
             });
         }
         
         // Mute
         if (this.controls.mute) {
-            this.controls.mute.addEventListener('click', () => this.toggleMute());
+            this.controls.mute.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.toggleMute();
+            });
+            // Update mute button state when volume changes
+            this.video.addEventListener('volumechange', () => {
+                if (this.controls.mute) {
+                    this.controls.mute.setAttribute('aria-pressed', this.video.muted ? 'true' : 'false');
+                    this.updateMuteButton();
+                }
+            });
         }
         
         // Speed
@@ -129,11 +148,37 @@ class CustomVideoPlayer {
     
     toggleMute() {
         this.video.muted = !this.video.muted;
+        this.updateMuteButton();
+        // Also update volume slider to reflect mute state
+        if (this.controls.volume) {
+            if (this.video.muted) {
+                this.controls.volume.dataset.preMuteVolume = this.video.volume;
+                this.controls.volume.value = 0;
+            } else {
+                const preMuteVolume = parseFloat(this.controls.volume.dataset.preMuteVolume || '1');
+                this.video.volume = preMuteVolume;
+                this.controls.volume.value = preMuteVolume * 100;
+            }
+        }
+    }
+    
+    updateMuteButton() {
         if (this.controls.mute) {
             this.controls.mute.setAttribute('aria-pressed', this.video.muted ? 'true' : 'false');
-            this.controls.mute.innerHTML = this.video.muted 
-                ? '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/></svg>'
-                : '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/></svg>';
+            // Muted icon (speaker with X)
+            const mutedIcon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/></svg>';
+            // Unmuted icon (speaker)
+            const unmutedIcon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/></svg>';
+            this.controls.mute.innerHTML = this.video.muted ? mutedIcon : unmutedIcon;
+            // Visual feedback
+            this.controls.mute.style.background = this.video.muted 
+                ? 'rgba(255, 0, 0, 0.2)' 
+                : '';
+            setTimeout(() => {
+                if (this.controls.mute) {
+                    this.controls.mute.style.background = '';
+                }
+            }, 300);
         }
     }
     
