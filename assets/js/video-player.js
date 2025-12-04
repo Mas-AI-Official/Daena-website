@@ -11,6 +11,7 @@
     const overlayPlay = el.querySelector(".overlay-play");
     const btnPlay = el.querySelector('[data-action="play"]');
     const btnMute = el.querySelector('[data-action="mute"]');
+    const btnSpeed = el.querySelector('[data-action="speed"]');
     const btnFS = el.querySelector('[data-action="fs"]');
     const seek = el.querySelector(".seek");
     const vol = el.querySelector(".volume");
@@ -23,10 +24,24 @@
     video.src = el.dataset.video;
     video.setAttribute("poster", el.dataset.poster);
 
-    // Restore volume
+    // Restore volume and speed
     const savedVol = +localStorage.getItem("daena:vid:vol");
     if (!Number.isNaN(savedVol)) video.volume = Math.min(1, Math.max(0, savedVol));
     vol.value = video.volume;
+    
+    const savedSpeed = +localStorage.getItem("daena:vid:speed");
+    const speeds = [1, 1.25, 1.5, 1.75, 2];
+    let currentSpeedIndex = 0;
+    if (!Number.isNaN(savedSpeed) && speeds.includes(savedSpeed)) {
+      video.playbackRate = savedSpeed;
+      currentSpeedIndex = speeds.indexOf(savedSpeed);
+    } else {
+      video.playbackRate = 1;
+    }
+    if (btnSpeed) {
+      const speedText = btnSpeed.querySelector('.speed-text');
+      if (speedText) speedText.textContent = video.playbackRate + 'x';
+    }
 
     let seekDragging = false;
 
@@ -89,6 +104,18 @@
           if (vol) vol.value = 0.4;
         }
         setState();
+      });
+    }
+
+    // Speed control
+    if (btnSpeed) {
+      btnSpeed.addEventListener("click", () => {
+        currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+        video.playbackRate = speeds[currentSpeedIndex];
+        localStorage.setItem("daena:vid:speed", video.playbackRate.toString());
+        const speedText = btnSpeed.querySelector('.speed-text');
+        if (speedText) speedText.textContent = video.playbackRate + 'x';
+        btnSpeed.setAttribute('title', `Speed: ${video.playbackRate}x`);
       });
     }
 

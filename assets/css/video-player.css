@@ -84,6 +84,12 @@
 
 .daena-video .btn svg { width: 18px; height: 18px; fill: currentColor; }
 
+.daena-video .btn .speed-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e9f0ff;
+}
+
 .daena-video .time { font-variant-numeric: tabular-nums; opacity: .85; min-width: 42px; text-align: center; font-size: 14px; }
 
 .daena-video .seek {

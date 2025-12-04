@@ -121,11 +121,12 @@
     <audio id="backgroundMusic" loop preload="auto"></audio>
 
   <script src="/js/metatron-hex-network.js"></script>
+  <script src="/live-demos/sunflower-honeycomb/demo-full.js"></script>
   <script>
-    // Sunflower Honeycomb Demo JavaScript - Full implementation needed
-    // This demo requires the complete class from old demoes/sunflower-honeycomb/demo.html
-    // Due to length, adding a simplified version that initializes properly
-    console.log('Sunflower Honeycomb Demo - JavaScript needs to be extracted from old demoes/sunflower-honeycomb/demo.html');
+    // Initialize demo when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        new SunflowerHoneycombDemo();
+    });
   </script>
   <script>
     // Smart back navigation - returns to exact origin

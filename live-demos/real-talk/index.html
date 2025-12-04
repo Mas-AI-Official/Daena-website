@@ -129,7 +129,15 @@
 
     <!-- Demo Script -->
     <script src="../voice-player.js"></script>
-      <script>
+  <script src="/js/metatron-hex-network.js"></script>
+  <script src="/live-demos/real-talk/demo-full.js"></script>
+  <script>
+    // Initialize demo when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        window.realTalkDemo = new DaenaRealTalkDemo();
+    });
+  </script>
+  <script>
     // Smart back navigation - returns to exact origin
     (function() {
       // Store where we came from when page loads
