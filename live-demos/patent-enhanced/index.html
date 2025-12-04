@@ -6,6 +6,7 @@
   <title>Patent Technology Enhanced â€¢ Live Demo</title>
   <link rel="stylesheet" href="/assets/css/global.css">
   <link rel="stylesheet" href="/live-demos/_shared.css">
+  <link rel="stylesheet" href="/live-demos/voice-player.css">
   <link rel="stylesheet" href="/live-demos/patent-enhanced/live-demo.css">
 </head>
 <body class="metatron-bg">
@@ -29,9 +30,8 @@
     <a class="back-link" href="/docs.html#advanced-demos" id="back-to-demos">← Back to Demos</a>
     <h1>Patent Technology Enhanced</h1>
     <p class="subtle">Deep dive into enhanced patent-pending technologies</p>
-    <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
-      
-    <header class="header">
+    <div class="glass-card" style="padding: 2rem; margin-top: 1rem; overflow: visible;">
+      <div class="main-content">
         <div class="container">
             <div class="header-content">
                 <div class="logo">Daena AI</div>
@@ -168,11 +168,12 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
 
-    <!-- Demo Script -->
-    <script src="../voice-player.js"></script>
-  <script src="/js/metatron-hex-network.js"></script>
+    <!-- Scripts -->
+    <script src="/js/metatron-hex-network.js"></script>
+    <script src="/live-demos/voice-player.js"></script>
   <script src="/live-demos/patent-enhanced/demo-full.js"></script>
   <script>
     // Initialize demo when page loads
@@ -181,31 +182,17 @@
     });
   </script>
   <script>
-    // Smart back navigation - returns to exact origin
+    // Smart back navigation - always return to docs.html#advanced-demos
     (function() {
-      // Store where we came from when page loads
-      if (document.referrer) {
-        if (document.referrer.includes('docs.html')) {
-          sessionStorage.setItem('returnSection', 'advanced-demos');
-          sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
-        } else if (document.referrer.includes('live-demos')) {
-          sessionStorage.setItem('returnSection', 'live-demos');
-          sessionStorage.setItem('returnPage', '/live-demos/');
-        } else if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
-          sessionStorage.setItem('returnSection', 'live-demos');
-          sessionStorage.setItem('returnPage', '/#live-demos');
-        }
-      }
+      // Always return to docs.html#advanced-demos for Advanced Interactive Demos
+      sessionStorage.setItem('returnSection', 'advanced-demos');
+      sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
       
-      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
-      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
-      
-      const backBtn = document.getElementById('back-to-demos'); if (backBtn) { backBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetPage = sessionStorage.getItem('returnPage') || '/live-demos/';
-        sessionStorage.removeItem('returnSection');
-        sessionStorage.removeItem('returnPage');
-        window.location.href = targetPage;
+      const backBtn = document.getElementById('back-to-demos');
+      if (backBtn) {
+        backBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = '/docs.html#advanced-demos';
         });
       }
     })();
