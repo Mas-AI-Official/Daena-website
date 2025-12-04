@@ -55,9 +55,12 @@ class DaenaRealScenarioDemo {
 
             async loadVoiceConfig() {
                 try {
-                    const response = await fetch('/live-demos/real-scenario//live-demos/real-scenario/config.json');
+                    // Try to load config from old demoes folder
+                    const response = await fetch('/old demoes/real-scenario/config.json');
                     const config = await response.json();
                     if (config.audio) {
+                        // Update audio path to point to live-demos/audio
+                        config.audio = config.audio.replace('../voice-over-demos/', '/live-demos/audio/');
                         this.voicePlayer = new DaenaVoicePlayer('daena-voice-player', config);
                     }
                 } catch (error) {
