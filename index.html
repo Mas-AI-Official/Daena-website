@@ -501,11 +501,11 @@
             <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
             <a href="/" class="text-xl font-bold">Daena</a>
             <div class="hidden md:flex items-center gap-6">
-                <a href="#demos" class="hover:text-yellow-400 transition">Demos</a>
-                <a href="#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-                <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-                <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-                <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
+                <a href="#demos" class="hover:text-yellow-400 transition" data-return-section="hero">Demos</a>
+                <a href="#pitch" class="hover:text-yellow-400 transition" data-return-section="hero">Pitch Deck</a>
+                <a href="/docs.html#live" class="hover:text-yellow-400 transition" data-return-section="hero">Live Demo</a>
+                <a href="/docs.html" class="hover:text-yellow-400 transition" data-return-section="hero">Docs & Benchmarks</a>
+                <a href="#contact" class="hover:text-yellow-400 transition" data-return-section="hero">Contact</a>
             </div>
             <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -515,11 +515,11 @@
         </div>
         <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
             <div class="flex flex-col gap-4">
-                <a href="#demos" class="hover:text-yellow-400 transition">Demos</a>
-                <a href="#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-                <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-                <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-                <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
+                <a href="#demos" class="hover:text-yellow-400 transition" data-return-section="hero">Demos</a>
+                <a href="#pitch" class="hover:text-yellow-400 transition" data-return-section="hero">Pitch Deck</a>
+                <a href="/docs.html#live" class="hover:text-yellow-400 transition" data-return-section="hero">Live Demo</a>
+                <a href="/docs.html" class="hover:text-yellow-400 transition" data-return-section="hero">Docs & Benchmarks</a>
+                <a href="#contact" class="hover:text-yellow-400 transition" data-return-section="hero">Contact</a>
             </div>
         </div>
         </div>
@@ -604,8 +604,8 @@
                             </div>
                         </div>
                         
-                        <!-- Persistent controls bar (OUTSIDE video box, always visible) -->
-                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important; margin-top: 0.75rem; position: relative; z-index: 10;">
+                        <!-- Persistent controls bar (OUTSIDE video box, always visible - positioned below video) -->
+                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important; margin-top: 0.75rem !important; position: relative !important; z-index: 10 !important; width: 100% !important;">
                             <button data-control="play-pause" aria-label="Play/Pause" aria-pressed="false" type="button" class="play-pause-btn">
                                 <svg class="play-icon" fill="currentColor" viewBox="0 0 20 20" style="display: block;">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
