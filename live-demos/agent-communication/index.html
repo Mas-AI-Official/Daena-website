@@ -1803,13 +1803,30 @@
   <script src="/js/metatron-hex-network.js"></script>
   
   <script src="/live-demos/agent-communication/live-demo.js" defer></script>
+  </script>
+  
 
-  
+  <script>
+    (function() {
+      sessionStorage.setItem('returnSection', 'advanced-demos');
+      sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
+      
+      const backBtn = document.querySelector('.btn-back');
+      if (backBtn) {
+        backBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = '/docs.html#advanced-demos';
+        });
+      }
+      
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    })();
   </script>
-  </script>
-  
-  
-  </script>
-  
 </body>
 </html>
