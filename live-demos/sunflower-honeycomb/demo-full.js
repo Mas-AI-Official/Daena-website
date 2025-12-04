@@ -1,5 +1,4 @@
-
-        class SunflowerHoneycombDemo {
+class SunflowerHoneycombDemo {
             constructor() {
                 this.isExecuting = false;
                 this.departments = {};

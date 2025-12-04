@@ -1,5 +1,4 @@
-
-        class DaenaRealTalkDemo {
+class DaenaRealTalkDemo {
             constructor() {
                 this.isRunning = false;
                 this.messagesProcessed = 0;

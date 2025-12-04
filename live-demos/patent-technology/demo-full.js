@@ -1,5 +1,4 @@
-
-        class DaenaPatentTechnologyDemo {
+class DaenaPatentTechnologyDemo {
             constructor() {
                 this.isRunning = false;
                 this.patentsAnalyzed = 0;
@@ -338,4 +337,5 @@
         }
 
         
+
 

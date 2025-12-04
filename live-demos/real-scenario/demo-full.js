@@ -1,5 +1,4 @@
-
-        class DaenaRealScenarioDemo {
+class DaenaRealScenarioDemo {
             constructor() {
                 this.isRunning = false;
                 this.scenariosProcessed = 0;
@@ -355,4 +354,5 @@
         handleOrientationChange();
         
         
+
 
