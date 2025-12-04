@@ -260,7 +260,395 @@
     <audio id="narrationAudio" preload="auto"></audio>
     <audio id="backgroundMusic" loop preload="auto"></audio>
 
-      <script>
+  <script src="/js/metatron-hex-network.js"></script>
+  <script>
+    // CMP Pipeline Demo JavaScript
+    class CMPPipelineDemo {
+        constructor() {
+            this.isExecuting = false;
+            this.currentStage = 0;
+            this.totalStages = 5;
+            this.stageData = {};
+            
+            this.init();
+        }
+
+        init() {
+            this.executeBtn = document.getElementById('executeBtn');
+            this.resetBtn = document.getElementById('resetBtn');
+            this.narrationText = document.getElementById('narrationText');
+            this.narrationAudio = document.getElementById('narrationAudio');
+            this.backgroundMusic = document.getElementById('backgroundMusic');
+            this.volumeSlider = document.getElementById('volumeSlider');
+            this.playNarrationBtn = document.getElementById('playNarrationBtn');
+            this.playMusicBtn = document.getElementById('playMusicBtn');
+
+            // Narration scripts
+            this.narrationScripts = [
+                "Welcome to Daena's CMP Pipeline Demo. I'll demonstrate how our intelligent workflow management system orchestrates content processing across multiple agents.",
+                "Stage 1: Input Processing - Receiving and validating content from multiple sources including documents, images, and data streams.",
+                "Stage 2: Content Analysis - Analyzing content structure and extracting key information to identify processing requirements.",
+                "Stage 3: Processing Orchestration - Coordinating multiple agents to process content according to business rules and requirements.",
+                "Stage 4: Quality Assurance - Validating processed content and ensuring quality standards before final output.",
+                "Stage 5: Output Generation - Generating final output in required formats and delivering to designated destinations.",
+                "CMP Pipeline execution complete! This demonstrates Daena's ability to orchestrate complex workflows with intelligent agent coordination."
+            ];
+
+            this.setupEventListeners();
+            this.resetDemo();
+            this.hideLoading();
+        }
+
+        setupEventListeners() {
+            this.executeBtn.addEventListener('click', () => {
+                if (!this.isExecuting) {
+                    this.startDemo();
+                } else {
+                    this.stopDemo();
+                }
+            });
+
+            this.resetBtn.addEventListener('click', () => this.resetDemo());
+            this.playNarrationBtn.addEventListener('click', () => this.toggleNarration());
+            this.playMusicBtn.addEventListener('click', () => this.toggleBackgroundMusic());
+            this.volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
+
+            // Load narration audio
+            this.narrationAudio.src = '/live-demos/audio/Demo 3 CMP Pipeline.mp3';
+            this.narrationAudio.volume = 0.8;
+        }
+
+        resetDemo() {
+            this.isExecuting = false;
+            this.currentStage = 0;
+            this.executeBtn.textContent = '⚙️ EXECUTE CMP PIPELINE';
+            this.executeBtn.classList.remove('executing');
+            
+            // Reset all stages
+            for (let i = 1; i <= this.totalStages; i++) {
+                this.resetStage(i);
+            }
+
+            // Reset flow nodes
+            for (let i = 1; i <= 5; i++) {
+                const node = document.getElementById(`flow-${i}`);
+                if (node) node.classList.remove('active', 'completed');
+            }
+
+            // Reset stats
+            this.resetStats();
+
+            // Reset narration
+            this.updateNarration(this.narrationScripts[0]);
+        }
+
+        resetStage(stageNumber) {
+            const stage = document.getElementById(`stage-${stageNumber}`);
+            const status = document.getElementById(`status-${stageNumber}`);
+            const progress = document.getElementById(`progress-${stageNumber}`);
+            
+            if (stage) stage.classList.remove('active', 'completed');
+            if (status) {
+                status.textContent = 'PENDING';
+                status.className = 'stage-status status-pending';
+            }
+            if (progress) progress.style.width = '0%';
+
+            // Reset stage details
+            const detailIds = this.getStageDetailIds(stageNumber);
+            detailIds.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (id.includes('time')) {
+                        element.textContent = '0ms';
+                    } else if (id.includes('delivery')) {
+                        element.textContent = 'Pending';
+                    } else {
+                        element.textContent = '0';
+                    }
+                }
+            });
+        }
+
+        getStageDetailIds(stageNumber) {
+            const detailMappings = {
+                1: ['files-1', 'time-1', 'success-1'],
+                2: ['types-2', 'time-2', 'accuracy-2'],
+                3: ['agents-3', 'time-3', 'efficiency-3'],
+                4: ['quality-4', 'time-4', 'issues-4'],
+                5: ['outputs-5', 'time-5', 'delivery-5']
+            };
+            return detailMappings[stageNumber] || [];
+        }
+
+        resetStats() {
+            const totalProcessed = document.getElementById('total-processed');
+            const processingTime = document.getElementById('processing-time');
+            const successRate = document.getElementById('success-rate');
+            const efficiency = document.getElementById('efficiency');
+            
+            if (totalProcessed) totalProcessed.textContent = '0';
+            if (processingTime) processingTime.textContent = '0s';
+            if (successRate) successRate.textContent = '0%';
+            if (efficiency) efficiency.textContent = '0%';
+        }
+
+        async startDemo() {
+            this.isExecuting = true;
+            this.executeBtn.textContent = '⏸ STOP PIPELINE';
+            this.executeBtn.classList.add('executing');
+
+            // Start narration first
+            this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
+            this.playNarrationBtn.textContent = '⏸ Pause Narration';
+
+            // Execute pipeline stages
+            await this.executePipeline();
+        }
+
+        stopDemo() {
+            this.isExecuting = false;
+            this.executeBtn.textContent = '⚙️ EXECUTE CMP PIPELINE';
+            this.executeBtn.classList.remove('executing');
+
+            // Stop background music
+            if (this.backgroundMusic) this.backgroundMusic.pause();
+
+            // Stop narration
+            this.narrationAudio.pause();
+            this.playNarrationBtn.textContent = '🎵 Play Narration';
+        }
+
+        async executePipeline() {
+            const stages = [
+                { number: 1, name: 'Input Processing', duration: 2000 },
+                { number: 2, name: 'Content Analysis', duration: 2500 },
+                { number: 3, name: 'Processing Orchestration', duration: 3000 },
+                { number: 4, name: 'Quality Assurance', duration: 2000 },
+                { number: 5, name: 'Output Generation', duration: 1500 }
+            ];
+
+            for (let i = 0; i < stages.length; i++) {
+                if (!this.isExecuting) break;
+
+                const stage = stages[i];
+                this.currentStage = stage.number;
+
+                // Update narration
+                this.updateNarration(this.narrationScripts[stage.number]);
+
+                // Activate stage
+                await this.activateStage(stage.number);
+
+                // Wait for stage completion
+                await this.delay(stage.duration);
+
+                // Complete stage
+                await this.completeStage(stage.number);
+            }
+
+            // Final narration
+            this.updateNarration(this.narrationScripts[6]);
+        }
+
+        async activateStage(stageNumber) {
+            const stage = document.getElementById(`stage-${stageNumber}`);
+            const status = document.getElementById(`status-${stageNumber}`);
+            const progress = document.getElementById(`progress-${stageNumber}`);
+            const flowNode = document.getElementById(`flow-${stageNumber}`);
+
+            // Activate stage
+            if (stage) stage.classList.add('active');
+            if (status) {
+                status.textContent = 'ACTIVE';
+                status.className = 'stage-status status-active';
+            }
+            if (flowNode) flowNode.classList.add('active');
+
+            // Animate progress
+            await this.animateProgress(stageNumber);
+
+            // Update stage details
+            await this.updateStageDetails(stageNumber);
+        }
+
+        async completeStage(stageNumber) {
+            const stage = document.getElementById(`stage-${stageNumber}`);
+            const status = document.getElementById(`status-${stageNumber}`);
+            const flowNode = document.getElementById(`flow-${stageNumber}`);
+
+            // Complete stage
+            if (stage) {
+                stage.classList.remove('active');
+                stage.classList.add('completed');
+            }
+            if (status) {
+                status.textContent = 'COMPLETED';
+                status.className = 'stage-status status-completed';
+            }
+            if (flowNode) {
+                flowNode.classList.remove('active');
+                flowNode.classList.add('completed');
+            }
+
+            // Update overall stats
+            this.updateOverallStats();
+        }
+
+        async animateProgress(stageNumber) {
+            const progress = document.getElementById(`progress-${stageNumber}`);
+            if (!progress) return;
+            
+            const duration = 1000;
+            const steps = 50;
+            const stepDuration = duration / steps;
+
+            for (let i = 0; i <= steps; i++) {
+                if (!this.isExecuting) break;
+                
+                progress.style.width = `${i}%`;
+                await this.delay(stepDuration);
+            }
+        }
+
+        async updateStageDetails(stageNumber) {
+            const detailIds = this.getStageDetailIds(stageNumber);
+            const stageData = this.generateStageData(stageNumber);
+
+            for (let i = 0; i < detailIds.length; i++) {
+                if (!this.isExecuting) break;
+                
+                const element = document.getElementById(detailIds[i]);
+                if (element) {
+                    await this.animateValue(element, stageData[i]);
+                }
+                await this.delay(200);
+            }
+        }
+
+        generateStageData(stageNumber) {
+            const dataMappings = {
+                1: ['15', '1.2s', '98%'],
+                2: ['8', '0.8s', '95%'],
+                3: ['6', '2.1s', '92%'],
+                4: ['94%', '0.5s', '2'],
+                5: ['12', '0.3s', 'Delivered']
+            };
+            return dataMappings[stageNumber] || ['0', '0ms', '0%'];
+        }
+
+        async animateValue(element, finalValue) {
+            const startValue = element.textContent;
+            const duration = 500;
+            const steps = 20;
+            const stepDuration = duration / steps;
+
+            for (let i = 0; i <= steps; i++) {
+                if (!this.isExecuting) break;
+                
+                const progress = i / steps;
+                const currentValue = this.interpolateValue(startValue, finalValue, progress);
+                element.textContent = currentValue;
+                
+                await this.delay(stepDuration);
+            }
+        }
+
+        interpolateValue(start, end, progress) {
+            if (start.includes('%') && end.includes('%')) {
+                const startNum = parseInt(start) || 0;
+                const endNum = parseInt(end) || 0;
+                return Math.round(startNum + (endNum - startNum) * progress) + '%';
+            } else if (start.includes('s') && end.includes('s')) {
+                const startNum = parseFloat(start) || 0;
+                const endNum = parseFloat(end) || 0;
+                return (startNum + (endNum - startNum) * progress).toFixed(1) + 's';
+            } else if (!isNaN(parseInt(start)) && !isNaN(parseInt(end))) {
+                const startNum = parseInt(start) || 0;
+                const endNum = parseInt(end) || 0;
+                return Math.round(startNum + (endNum - startNum) * progress).toString();
+            } else {
+                return end;
+            }
+        }
+
+        updateOverallStats() {
+            const totalProcessed = this.currentStage * 3;
+            const processingTime = this.currentStage * 0.8;
+            const successRate = Math.min(100, 85 + this.currentStage * 3);
+            const efficiency = Math.min(100, 80 + this.currentStage * 4);
+
+            const totalEl = document.getElementById('total-processed');
+            const timeEl = document.getElementById('processing-time');
+            const successEl = document.getElementById('success-rate');
+            const effEl = document.getElementById('efficiency');
+            
+            if (totalEl) totalEl.textContent = totalProcessed;
+            if (timeEl) timeEl.textContent = processingTime.toFixed(1) + 's';
+            if (successEl) successEl.textContent = successRate + '%';
+            if (effEl) effEl.textContent = efficiency + '%';
+        }
+
+        updateNarration(text) {
+            if (this.narrationText) {
+                this.narrationText.innerHTML = `
+                    <span class="narration-indicator"></span>
+                    ${text}
+                `;
+            }
+        }
+
+        toggleNarration() {
+            if (this.narrationAudio.paused) {
+                this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
+                this.playNarrationBtn.textContent = '⏸ Pause Narration';
+            } else {
+                this.narrationAudio.pause();
+                this.playNarrationBtn.textContent = '🎵 Play Narration';
+            }
+        }
+
+        toggleBackgroundMusic() {
+            if (this.backgroundMusic) {
+                if (this.backgroundMusic.paused) {
+                    this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
+                    this.playMusicBtn.textContent = '⏸ Stop Music';
+                } else {
+                    this.backgroundMusic.pause();
+                    this.playMusicBtn.textContent = '🎶 Background Music';
+                }
+            }
+        }
+
+        setVolume(value) {
+            const volume = value / 100;
+            this.narrationAudio.volume = volume;
+            if (this.backgroundMusic) this.backgroundMusic.volume = volume * 0.3;
+        }
+
+        delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        hideLoading() {
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingOverlay.style.display = 'none';
+                    }, 500);
+                }
+            }, 2000);
+        }
+    }
+
+    // Initialize demo when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        new CMPPipelineDemo();
+    });
+  </script>
+  <script>
     // Smart back navigation - returns to exact origin
     (function() {
       // Store where we came from when page loads
