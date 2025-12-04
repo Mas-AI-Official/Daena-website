@@ -449,8 +449,76 @@
             
             <div class="mt-8 bg-white/5 p-6 rounded-lg border border-yellow-400/20">
                 <h3 class="text-xl font-bold text-yellow-400 mb-3">Full System Access</h3>
-                <p class="mb-4">For full system access and custom demos, contact us at <a href="mailto:info@mas-ai.co" class="text-yellow-400 hover:underline font-semibold">info@mas-ai.co</a></p>
+                <p class="mb-4">For full system access and custom demos, contact us at <a href="mailto:masoud.masoori@mas-ai.co" class="text-yellow-400 hover:underline font-semibold">masoud.masoori@mas-ai.co</a></p>
                 <p class="text-sm text-gray-400">Explore recorded demos on the <a href="/#demos" class="text-yellow-400 hover:underline">homepage</a>.</p>
+            </div>
+            
+            <!-- Advanced Interactive Demos Section -->
+            <div class="mt-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-yellow-400">Advanced Interactive Demos</h2>
+                <p class="text-gray-300 mb-8">Explore detailed, interactive demonstrations of Daena's core technologies.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Agent Communication Demo -->
+                    <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer clickable-link" onclick="window.open('/old demoes/agent-communication/demo.html', '_blank')">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-3">🕸️ Agent Communication</h3>
+                        <p class="text-sm mb-4 text-gray-300">Watch 6 intelligent AI agents collaborate in real-time on product launch analysis with live narration.</p>
+                        <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                            <span>Open Interactive Demo</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Budget Calculation Demo -->
+                    <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer clickable-link" onclick="window.open('/old demoes/budget-calculation/demo.html', '_blank')">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-3">💰 Budget Calculation</h3>
+                        <p class="text-sm mb-4 text-gray-300">See how Daena's Finance agents analyze and calculate budgets with real-time decision-making.</p>
+                        <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                            <span>Open Interactive Demo</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                    
+                    <!-- CMP Pipeline Demo -->
+                    <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer clickable-link" onclick="window.open('/old demoes/cmp-pipeline/demo.html', '_blank')">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-3">⚙️ CMP Pipeline</h3>
+                        <p class="text-sm mb-4 text-gray-300">Experience the complete Council-Memory-Process pipeline in action.</p>
+                        <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                            <span>Open Interactive Demo</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Patent Technology Demo -->
+                    <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer clickable-link" onclick="window.open('/old demoes/patent-technology/demo.html', '_blank')">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-3">🔬 Patent Technology</h3>
+                        <p class="text-sm mb-4 text-gray-300">Explore Daena's patent-pending NBMF and Enterprise-DNA technologies.</p>
+                        <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                            <span>Open Interactive Demo</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Real Talk Demo -->
+                    <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer clickable-link" onclick="window.open('/old demoes/real-talk/demo.html', '_blank')">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-3">💬 Real Talk</h3>
+                        <p class="text-sm mb-4 text-gray-300">Listen to natural conversations between Daena agents discussing business scenarios.</p>
+                        <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                            <span>Open Interactive Demo</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Real Scenario Demo -->
+                    <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20 hover:border-yellow-400/40 transition cursor-pointer clickable-link" onclick="window.open('/old demoes/real-scenario/demo.html', '_blank')">
+                        <h3 class="text-xl font-bold text-yellow-400 mb-3">🎯 Real Scenario</h3>
+                        <p class="text-sm mb-4 text-gray-300">Watch Daena handle real-world business scenarios with multi-agent coordination.</p>
+                        <div class="flex items-center gap-2 text-yellow-400 text-sm font-semibold">
+                            <span>Open Interactive Demo</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1094,7 +1162,13 @@
                     demoState.modal.remove();
                     demoState.modal = null;
                 }
+                // Restore scroll functionality
                 document.body.style.overflow = '';
+                document.body.style.overflowX = 'hidden';
+                document.documentElement.style.overflow = '';
+                document.documentElement.style.overflowX = 'hidden';
+                // Force reflow to ensure changes take effect
+                void document.body.offsetHeight;
             };
             
             // Prevent body scroll when modal is open
@@ -1115,7 +1189,7 @@
         <div class="flex justify-center gap-6">
             <a href="/terms-of-service.html" class="hover:text-yellow-400 transition">Terms</a>
             <a href="/privacy-policy.html" class="hover:text-yellow-400 transition">Privacy</a>
-            <a href="mailto:info@mas-ai.co" class="hover:text-yellow-400 transition">Contact</a>
+            <a href="mailto:masoud.masoori@mas-ai.co" class="hover:text-yellow-400 transition">Contact</a>
         </div>
     </footer>
     
