@@ -53,7 +53,8 @@
 
 .daena-video .overlay-play svg { fill: #e6ff7a; filter: drop-shadow(0 2px 6px rgba(0,0,0,.45)); }
 
-.daena-video.playing .overlay-play { display: none; }
+/* Overlay is controlled by JavaScript - only shows initially and when video ends */
+.daena-video.playing .overlay-play { display: none !important; }
 
 /* Controls bar (always visible) */
 .daena-video .controls {

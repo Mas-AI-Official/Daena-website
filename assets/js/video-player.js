@@ -44,22 +44,39 @@
     }
 
     let seekDragging = false;
+    let hasPlayedOnce = false; // Track if video has been played at least once
 
     function setState() {
       el.classList.toggle("playing", !video.paused);
       el.classList.toggle("paused", video.paused);
       el.classList.toggle("muted", video.muted || video.volume === 0);
+      
+      // Show overlay only if video hasn't been played yet OR if video has ended
+      if (!hasPlayedOnce || video.ended) {
+        overlayPlay.style.display = "grid";
+      } else {
+        overlayPlay.style.display = "none";
+      }
     }
 
     function togglePlay() {
-      if (video.paused) video.play();
-      else video.pause();
+      if (video.paused) {
+        video.play();
+        hasPlayedOnce = true; // Mark as played once user starts playback
+      } else {
+        video.pause();
+      }
     }
 
     overlayPlay.addEventListener("click", togglePlay);
     btnPlay.addEventListener("click", togglePlay);
     video.addEventListener("play", setState);
     video.addEventListener("pause", setState);
+    video.addEventListener("ended", () => {
+      hasPlayedOnce = false; // Reset when video ends so overlay shows again
+      video.currentTime = 0; // Reset to beginning
+      setState();
+    });
     setState();
 
     // Time + seek
