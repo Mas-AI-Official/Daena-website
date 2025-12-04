@@ -250,3 +250,138 @@ p {
     }
 }
 
+/* ============================================
+   Navigation Bar - Always Visible
+   ============================================ */
+nav {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+nav > div {
+    pointer-events: auto;
+}
+
+/* ============================================
+   Video Player Fullscreen Styles
+   ============================================ */
+[data-player-container] {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+[data-player-container] video {
+    width: 100%;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Fullscreen mode - controls at bottom of video */
+[data-player-container].fullscreen-active {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #000 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 9999 !important;
+}
+
+[data-player-container].fullscreen-active video {
+    width: 100% !important;
+    height: auto !important;
+    max-height: calc(100vh - 100px) !important; /* Leave space for controls */
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
+}
+
+[data-player-container].fullscreen-active .video-controls {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-top-left-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: rgba(0, 0, 0, 0.98) !important;
+    padding: 1rem !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10000 !important;
+}
+
+/* Cross-browser fullscreen support */
+:-webkit-full-screen [data-player-container].fullscreen-active {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+:-moz-full-screen [data-player-container].fullscreen-active {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+:-ms-fullscreen [data-player-container].fullscreen-active {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+:fullscreen [data-player-container].fullscreen-active {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+/* Ensure speed control (2x) is always visible */
+.video-controls [data-control="speed"] {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 2.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Mobile fullscreen adjustments */
+@media (max-width: 768px) {
+    [data-player-container].fullscreen-active video {
+        max-height: calc(100vh - 90px) !important;
+    }
+    
+    [data-player-container].fullscreen-active .video-controls {
+        padding: 0.75rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    [data-player-container].fullscreen-active video {
+        max-height: calc(100vh - 85px) !important;
+    }
+    
+    [data-player-container].fullscreen-active .video-controls {
+        padding: 0.625rem !important;
+    }
+    
+    .video-controls [data-control="speed"] {
+        min-width: 2rem;
+        font-size: 0.7rem;
+    }
+}
+

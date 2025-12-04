@@ -77,7 +77,22 @@
             }
         }
         
-        /* Video controls - Always visible, responsive */
+        /* Video container - ensure controls are below video */
+        [data-player-container] {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+        }
+        
+        [data-player-container] video {
+            width: 100%;
+            height: auto;
+            display: block;
+            flex-shrink: 0;
+        }
+        
+        /* Video controls - Always visible, positioned below video */
         .video-controls {
             display: flex !important;
             align-items: center;
@@ -95,6 +110,62 @@
             z-index: 10;
             visibility: visible !important;
             opacity: 1 !important;
+            flex-shrink: 0;
+        }
+        
+        /* Fullscreen mode - controls at bottom of video */
+        [data-player-container].fullscreen-active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+        
+        [data-player-container].fullscreen-active video {
+            width: 100%;
+            height: auto;
+            max-height: calc(100vh - 80px); /* Leave space for controls */
+            object-fit: contain;
+        }
+        
+        [data-player-container].fullscreen-active .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            border-radius: 0;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            width: 100%;
+            max-width: 100%;
+            background: rgba(0, 0, 0, 0.98) !important;
+            padding: 1rem;
+        }
+        
+        /* Ensure navigation stays visible */
+        nav {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            pointer-events: none;
+        }
+        
+        nav > div {
+            pointer-events: auto;
+        }
+        
+        /* Ensure speed button shows 2x */
+        .video-controls [data-control="speed"] {
+            min-width: 2.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            display: inline-block !important;
+            visibility: visible !important;
         }
         
         .video-controls button {
@@ -317,7 +388,9 @@
             }
             
             .video-controls [data-control="speed"] {
-                display: none; /* Hide speed on very small screens */
+                min-width: 2rem;
+                font-size: 0.65rem;
+                display: inline-block !important; /* Keep speed visible, just smaller */
             }
         }
         

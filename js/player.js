@@ -97,9 +97,31 @@ class CustomVideoPlayer {
             this.controls.fullscreen.addEventListener('click', () => this.toggleFullscreen());
         }
         
+        // Fullscreen change listeners for cross-browser compatibility
+        document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
+        document.addEventListener('webkitfullscreenchange', () => this.handleFullscreenChange());
+        document.addEventListener('mozfullscreenchange', () => this.handleFullscreenChange());
+        document.addEventListener('MSFullscreenChange', () => this.handleFullscreenChange());
+        
+        // Ensure controls work in fullscreen - reattach event listeners
+        this.video.addEventListener('click', (e) => {
+            // Allow video click to toggle play/pause in fullscreen
+            if (this.isFullscreen()) {
+                e.preventDefault();
+                this.togglePlay();
+            }
+        });
+        
         // Keyboard shortcuts
         this.video.addEventListener('keydown', (e) => this.handleKeyboard(e));
         this.video.setAttribute('tabindex', '0');
+        
+        // Also listen for keyboard events on document when in fullscreen
+        document.addEventListener('keydown', (e) => {
+            if (this.isFullscreen() && this.container.contains(document.activeElement)) {
+                this.handleKeyboard(e);
+            }
+        });
         
         // Update time display
         this.video.addEventListener('loadedmetadata', () => this.updateTime());
@@ -212,22 +234,38 @@ class CustomVideoPlayer {
     }
     
     toggleFullscreen() {
-        if (!document.fullscreenElement) {
-            this.video.requestFullscreen().catch(err => {
-                console.error('Fullscreen error:', err);
-            });
+        // Handle different fullscreen APIs for cross-browser compatibility
+        const doc = document;
+        const docEl = doc.documentElement;
+        
+        const requestFullscreen = docEl.requestFullscreen || 
+                                  docEl.webkitRequestFullscreen || 
+                                  docEl.mozRequestFullScreen || 
+                                  docEl.msRequestFullscreen;
+        
+        const exitFullscreen = doc.exitFullscreen || 
+                               doc.webkitExitFullscreen || 
+                               doc.mozCancelFullScreen || 
+                               doc.msExitFullscreen;
+        
+        const isFullscreen = doc.fullscreenElement || 
+                            doc.webkitFullscreenElement || 
+                            doc.mozFullScreenElement || 
+                            doc.msFullscreenElement;
+        
+        if (!isFullscreen) {
+            // Request fullscreen on the container (not just video) so controls stay visible
+            const container = this.container;
+            if (requestFullscreen) {
+                requestFullscreen.call(container).catch(err => {
+                    console.error('Fullscreen error:', err);
+                });
+            }
         } else {
-            document.exitFullscreen();
-        }
-    }
-    
-    updateTime() {
-        if (this.controls.time) {
-            const current = this.formatTime(this.video.currentTime);
-            const total = this.formatTime(this.video.duration);
-            // Use monospace font for proper alignment
-            this.controls.time.textContent = `${current} / ${total}`;
-            this.controls.time.style.fontVariantNumeric = 'tabular-nums';
+            // Exit fullscreen quickly
+            if (exitFullscreen) {
+                exitFullscreen.call(doc);
+            }
         }
     }
     
@@ -248,8 +286,38 @@ class CustomVideoPlayer {
         }
     }
     
+    isFullscreen() {
+        const doc = document;
+        return !!(doc.fullscreenElement || 
+                 doc.webkitFullscreenElement || 
+                 doc.mozFullScreenElement || 
+                 doc.msFullscreenElement);
+    }
+    
+    handleFullscreenChange() {
+        const isFullscreen = this.isFullscreen();
+        const container = this.container;
+        
+        if (isFullscreen) {
+            // Ensure controls are visible and positioned correctly in fullscreen
+            container.classList.add('fullscreen-active');
+            // Make sure controls are accessible
+            if (this.controls.playPause) {
+                this.controls.playPause.focus();
+            }
+        } else {
+            container.classList.remove('fullscreen-active');
+        }
+    }
+    
     handleKeyboard(e) {
-        if (e.target !== this.video && !this.container.contains(e.target)) return;
+        // Allow keyboard shortcuts in fullscreen mode
+        const isFullscreen = this.isFullscreen();
+        const isInContainer = this.container.contains(e.target) || 
+                             this.container.contains(document.activeElement) ||
+                             isFullscreen;
+        
+        if (!isInContainer && !isFullscreen) return;
         
         switch(e.key) {
             case ' ':
