@@ -1,4 +1,557 @@
-class SunflowerHoneycombDemo {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena AI - Sunflower Honeycomb Architecture Demo</title>
+    <meta name="description" content="Experience Daena's revolutionary Sunflower-Honeycomb Architecture with 48 agents across 8 departments">`n    <!-- Daena Skin - Unified styling -->`n    <link rel="stylesheet" href="/assets/skin/daena/skin.css">`n    <script defer src="/assets/skin/daena/skin.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+            --shadow-glow: 0 0 30px rgba(255, 215, 0, 0.3);
+            --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .status-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .patent-badge {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+        }
+
+        .azure-badge {
+            background: linear-gradient(135deg, #0078d4, #00bcf2);
+            color: white;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        .btn.executing {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            animation: pulse 1s infinite;
+        }
+
+        /* Sunflower Honeycomb Architecture */
+        .honeycomb-container {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .honeycomb-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+        }
+
+        .honeycomb-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .department-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 188, 212, 0.3);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 188, 212, 0.2);
+            border-color: var(--secondary-cyan);
+        }
+
+        .department-card.active {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .department-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--secondary-cyan);
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .agent-mini {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .agent-mini:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--primary-gold);
+        }
+
+        .agent-mini.active {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border-color: var(--primary-gold);
+            animation: pulse 1s infinite;
+        }
+
+        .agent-mini.communicating {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border-color: var(--secondary-cyan);
+            animation: glow 1s infinite;
+        }
+
+        /* Communication Log */
+        .communication-log {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .log-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-gold);
+            text-align: center;
+        }
+
+        .log-entry {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--secondary-cyan);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 10px 10px 0;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .log-message {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .log-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Panel */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Audio Controls */
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            color: var(--text-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .audio-btn:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+        }
+
+        .volume-slider {
+            width: 150px;
+            margin: 0 1rem;
+        }
+
+        /* Timeline / Progress */
+        .timeline-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .timeline-phase {
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #FFD700, #00bcd4);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            transition: width 0.3s ease;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .departments-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .agents-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .control-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <header class="header">
+        <div class="logo">Daena AI</div>
+        <div class="nav-buttons">
+            <a href="../../index.html#demos" class="back-btn">← Demos Gallery</a>
+            <a href="../../index.html" class="back-btn">🏠 Back to Daena</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="demo-header">
+            <h1 class="demo-title">Daena AI - Agent Communication Demo</h1>
+            <div class="status-badges">
+                <div class="status-badge patent-badge">PATENT PENDING</div>
+                <div class="status-badge azure-badge">Azure API Connected</div>
+            </div>
+            <p class="demo-subtitle">6 Specialized Agents | Real-time Communication | Cross-Department Collaboration</p>
+        </div>
+
+        <div class="control-panel">
+            <div class="control-buttons">
+                <button id="executeBtn" class="btn btn-primary">🚀 START DEMO</button>
+                <button id="resetBtn" class="btn btn-secondary">🔄 Reset Demo</button>
+            </div>
+            <p style="color: var(--text-muted); margin-bottom: 0;">Watch 6 specialized agents collaborate on product launch analysis</p>
+        </div>
+
+        <div class="honeycomb-container">
+            <h2 class="honeycomb-title">🤝 Agent Communication Architecture</h2>
+            <p class="honeycomb-subtitle">6 Specialized Agents across 8 Departments with Real-time Communication</p>
+            
+            <!-- Timeline / Progress -->
+            <div class="timeline-container">
+                <div class="timeline-header">
+                    <div><span class="timeline-phase" id="timelinePhase">Idle</span></div>
+                    <div>
+                        <span id="elapsedTime">00:00</span>
+                        <span style="margin: 0 6px; color: var(--text-muted);">/</span>
+                        <span id="remainingTime">--:--</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <div class="departments-grid" id="departmentsGrid">
+                <!-- Departments will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <div class="stat-value" id="activeAgents">0</div>
+                <div class="stat-label">Active Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="messagesSent">0</div>
+                <div class="stat-label">Messages Sent</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="crossDept">0</div>
+                <div class="stat-label">Cross-Department</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgConfidence">0%</div>
+                <div class="stat-label">Avg Confidence</div>
+            </div>
+        </div>
+
+        <div class="communication-log">
+            <h3 class="log-title">📡 Real-time Communication Log</h3>
+            <div id="communicationLog">
+                <p style="color: #999; font-style: italic; text-align: center; padding: 2rem;">Agent communications will appear here when demo executes...</p>
+            </div>
+        </div>
+
+        <div class="audio-controls">
+            <button id="playNarrationBtn" class="audio-btn">🎵 Play Narration</button>
+            <button id="playMusicBtn" class="audio-btn">🎶 Background Music</button>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="narrationAudio" preload="auto"></audio>
+    <audio id="backgroundMusic" loop preload="auto"></audio>
+
+    <script>
+        class SunflowerHoneycombDemo {
             constructor() {
                 this.isExecuting = false;
                 this.departments = {};
@@ -51,11 +604,11 @@ class SunflowerHoneycombDemo {
                 this.remainingTimeEl = document.getElementById('remainingTime');
 
                 // Load narration audio - Using the correct voice-over for Sunflower Honeycomb
-                this.narrationAudio.src = '/live-demos/audio/Demo 1 Agent Communication.mp3';
+                this.narrationAudio.src = '../voice-over-demos/Demo 1 Agent Communication.mp3';
                 this.narrationAudio.volume = 0.8;
                 
                 // Load background music - using a different audio file to avoid pitch deck voice-over
-                this.backgroundMusic.src = '/live-demos/audio/slide-2.mp3'; // Using slide-2 instead of slide-1
+                this.backgroundMusic.src = '../../audio/slide-2.mp3'; // Using slide-2 instead of slide-1
                 this.backgroundMusic.volume = 0.05; // Lower volume to avoid interference
             }
 
@@ -534,6 +1087,11 @@ class SunflowerHoneycombDemo {
             }
         }
 
-        
-
+        // Initialize demo when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new SunflowerHoneycombDemo();
+        });
+    </script>
+</body>
+</html>
 

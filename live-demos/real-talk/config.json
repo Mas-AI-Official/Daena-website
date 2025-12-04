@@ -1,0 +1,17 @@
+{
+  "title": "Daena: Real Talk Conversation",
+  "audio": {
+    "src": "../voice-over-demos/Demo 6 Real Talk.mp3",
+    "title": "Real Talk Conversational Intelligence",
+    "description": "Walkthrough of Daena's conversational control room powered by the 48-agent SFHC lattice."
+  },
+  "video": "../../videos/compressed/real talk to daena and whole system - Made with Clipchamp.mp4",
+  "chapters": [
+    { "t": 0, "id": "rt-1", "label": "Welcome & context for Real Talk" },
+    { "t": 18, "id": "rt-2", "label": "Routing prompts through 48 agents" },
+    { "t": 38, "id": "rt-3", "label": "Memory retrieval & debate synthesis" },
+    { "t": 60, "id": "rt-4", "label": "Governance, risk scoring, and replies" },
+    { "t": 82, "id": "rt-5", "label": "Triggering workflows & broadcasts" },
+    { "t": 102, "id": "rt-6", "label": "Real Talk as a VP-level control room" }
+  ]
+}

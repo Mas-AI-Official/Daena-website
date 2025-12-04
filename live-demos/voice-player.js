@@ -48,13 +48,30 @@
             const rateOptions = this.playbackRates.map(rate => {
                 const numericRate = Number(rate);
                 const label = Number.isInteger(numericRate) ? `${numericRate}x` : `${numericRate.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')}x`;
-                return `<option value="${numericRate}">${label}</option>`;
+                const selected = numericRate === 1 ? ' selected' : '';
+                return `<option value="${numericRate}"${selected}>${label}</option>`;
             }).join('');
+
+            const chaptersMarkup = this.chapters.length
+                ? this.chapters.map((chapter, index) => `
+                    <div class="chapter-item" data-chapter-index="${index}">
+                        <button class="chapter-btn" type="button">
+                            <span class="chapter-time">${this.formatTime(chapter.t)}</span>
+                            <span class="chapter-label">${chapter.label}</span>
+                            ${chapter.id ? `<span class="chapter-id">${chapter.id}</span>` : ''}
+                        </button>
+                    </div>
+                `).join('')
+                : `
+                    <p class="caption-text" style="margin: 0;">
+                        Chapter markers will appear here when they're available.
+                    </p>
+                `;
 
             this.container.innerHTML = `
                 <div class="daena-voice-player">
                     <div class="player-header">
-                        <h4 class="demo-title">${this.escapeHtml(this.title)}</h4>
+                        <p class="demo-title">${this.title}</p>
                         <div class="playback-info">
                             <span class="current-time">0:00</span>
                             <span>/</span>
@@ -63,182 +80,302 @@
                         </div>
                     </div>
                     <div class="player-controls">
-                        <button class="control-btn rewind" title="Rewind ${this.rewindSeconds}s">⏪</button>
-                        <button class="control-btn play-pause" title="Play/Pause">▶</button>
-                        <button class="control-btn forward" title="Forward ${this.forwardSeconds}s">⏩</button>
-                        <select class="rate-select" title="Playback Speed">${rateOptions}</select>
+                        <button class="control-btn" data-action="rewind" type="button" title="Rewind ${this.rewindSeconds} seconds">⏪ ${this.rewindSeconds}s</button>
+                        <button class="control-btn" data-action="play" type="button" title="Play or pause narration">▶ Play</button>
+                        <div class="seek-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                                <div class="progress-handle"></div>
+                            </div>
+                        </div>
+                        <button class="control-btn" data-action="forward" type="button" title="Forward ${this.forwardSeconds} seconds">⏩ ${this.forwardSeconds}s</button>
+                        <select class="rate-select" title="Playback speed">
+                            ${rateOptions}
+                        </select>
                     </div>
-                    <div class="progress-container">
-                        <input type="range" class="progress-slider" min="0" max="100" value="0" step="0.1" title="Seek">
-                        <div class="chapter-markers"></div>
+                    <div class="current-caption">
+                        <div class="caption-text">${this.defaultCaption}</div>
                     </div>
-                    <div class="status-message">${this.defaultCaption}</div>
+                    <div class="chapters-list">
+                        <div class="chapters-header">Chapters</div>
+                        <div class="chapters-container">
+                            ${chaptersMarkup}
+                        </div>
+                    </div>
                 </div>
             `;
         }
 
         cacheDom() {
-            this.playPauseBtn = this.container.querySelector('.play-pause');
-            this.rewindBtn = this.container.querySelector('.rewind');
-            this.forwardBtn = this.container.querySelector('.forward');
+            this.playerRoot = this.container.querySelector('.daena-voice-player');
+            this.playBtn = this.container.querySelector('[data-action="play"]');
+            this.rewindBtn = this.container.querySelector('[data-action="rewind"]');
+            this.forwardBtn = this.container.querySelector('[data-action="forward"]');
             this.rateSelect = this.container.querySelector('.rate-select');
-            this.progressSlider = this.container.querySelector('.progress-slider');
+            this.progressBar = this.container.querySelector('.progress-bar');
+            this.progressFill = this.container.querySelector('.progress-fill');
+            this.progressHandle = this.container.querySelector('.progress-handle');
             this.currentTimeEl = this.container.querySelector('.current-time');
             this.totalTimeEl = this.container.querySelector('.total-time');
-            this.rateDisplay = this.container.querySelector('.playback-rate');
-            this.statusMessage = this.container.querySelector('.status-message');
-            this.chapterMarkers = this.container.querySelector('.chapter-markers');
+            this.playbackRateEl = this.container.querySelector('.playback-rate');
+            this.captionText = this.container.querySelector('.current-caption .caption-text');
+            this.chaptersContainer = this.container.querySelector('.chapters-container');
         }
 
         initAudio() {
             this.audioPlayer = new Audio();
-            this.audioPlayer.preload = 'metadata';
-            this.audioPlayer.addEventListener('loadedmetadata', () => this.updateTotalTime());
-            this.audioPlayer.addEventListener('timeupdate', () => this.updateProgress());
-            this.audioPlayer.addEventListener('ended', () => this.onEnded());
-            this.audioPlayer.addEventListener('error', (e) => this.onError(e));
+            this.audioPlayer.preload = 'auto';
+            this.audioPlayer.crossOrigin = 'anonymous';
+            this.audioPlayer.volume = typeof this.config.volume === 'number' ? this.config.volume : 0.9;
+            this.audioPlayer.playbackRate = 1;
+        }
+
+        loadAudio(src) {
+            if (!src) {
+                return;
+            }
+
+            this.audioPlayer.src = src;
+            this.audioPlayer.load();
         }
 
         bindUiEvents() {
-            this.playPauseBtn?.addEventListener('click', () => this.togglePlayPause());
-            this.rewindBtn?.addEventListener('click', () => this.rewind());
-            this.forwardBtn?.addEventListener('click', () => this.forward());
-            this.rateSelect?.addEventListener('change', (e) => this.setPlaybackRate(Number(e.target.value)));
-            this.progressSlider?.addEventListener('input', (e) => this.seek(Number(e.target.value)));
+            if (this.playBtn) {
+                this.playBtn.addEventListener('click', () => this.togglePlayback());
+            }
+            if (this.rewindBtn) {
+                this.rewindBtn.addEventListener('click', () => this.rewind());
+            }
+            if (this.forwardBtn) {
+                this.forwardBtn.addEventListener('click', () => this.forward());
+            }
+            if (this.rateSelect) {
+                this.rateSelect.addEventListener('change', (event) => {
+                    const rate = parseFloat(event.target.value);
+                    this.setPlaybackRate(rate);
+                });
+            }
+            if (this.progressBar) {
+                this.progressBar.addEventListener('click', (event) => this.seekFromEvent(event));
+                this.progressBar.addEventListener('touchstart', (event) => this.seekFromEvent(event.touches[0]));
+            }
+            if (this.chaptersContainer) {
+                this.chaptersContainer.addEventListener('click', (event) => {
+                    const button = event.target.closest('.chapter-btn');
+                    if (!button) return;
+                    const targetTime = parseFloat(button.dataset.time || '0');
+                    this.seekTo(targetTime);
+                    if (this.audioPlayer.paused) {
+                        this.setStatusMessage(button.dataset.label || 'Voice-over preview');
+                    }
+                });
+            }
         }
 
         bindAudioEvents() {
-            this.audioPlayer.addEventListener('play', () => {
-                this.playPauseBtn.textContent = '⏸';
-                this.playPauseBtn.title = 'Pause';
+            this.audioPlayer.addEventListener('loadedmetadata', () => {
+                this.enableControls();
+                this.totalTimeEl.textContent = this.formatTime(this.audioPlayer.duration);
+                this.updateProgressUi();
             });
+
+            this.audioPlayer.addEventListener('timeupdate', () => {
+                this.updateProgressUi();
+                this.highlightChapter();
+            });
+
+            this.audioPlayer.addEventListener('ended', () => {
+                this.setPlayState(false);
+                this.audioPlayer.currentTime = 0;
+                this.updateProgressUi();
+            });
+
             this.audioPlayer.addEventListener('pause', () => {
-                this.playPauseBtn.textContent = '▶';
-                this.playPauseBtn.title = 'Play';
+                if (this.audioPlayer.currentTime < this.audioPlayer.duration) {
+                    this.setPlayState(false);
+                }
+            });
+
+            this.audioPlayer.addEventListener('error', () => {
+                console.warn('DaenaVoicePlayer: failed to load audio source', this.audioSrc);
+                this.setStatusMessage('Unable to load voice-over audio.');
+                this.disableControls();
             });
         }
 
-        async loadAudio(src) {
-            try {
-                this.audioPlayer.src = src;
-                await this.audioPlayer.load();
-                this.setStatusMessage('Ready to play.');
-            } catch (error) {
-                console.error('Failed to load audio:', error);
-                this.setStatusMessage('Failed to load audio file.');
-                this.disableControls();
+        decorateChapters() {
+            this.chapterButtons = Array.from(this.container.querySelectorAll('.chapter-btn'));
+            this.chapterButtons.forEach((button, index) => {
+                const chapter = this.chapters[index];
+                if (!chapter) return;
+                button.dataset.time = chapter.t;
+                button.dataset.label = chapter.label;
+            });
+        }
+
+        togglePlayback() {
+            if (!this.audioSrc || this.controlsDisabled) {
+                return;
+            }
+            if (this.audioPlayer.paused) {
+                this.play().catch(() => {});
+            } else {
+                this.pause();
             }
         }
 
-        togglePlayPause() {
-            if (this.audioPlayer.paused) {
-                this.audioPlayer.play().catch(err => {
-                    console.error('Play failed:', err);
-                    this.setStatusMessage('Playback failed. Please check your connection.');
-                });
-            } else {
-                this.audioPlayer.pause();
+        play() {
+            if (!this.audioSrc || this.controlsDisabled) {
+                return Promise.resolve();
             }
+            if (this.playBtn) {
+                this.playBtn.textContent = '⏳ Loading...';
+                this.playBtn.classList.add('loading');
+            }
+            return this.audioPlayer.play()
+                .then(() => {
+                    this.setPlayState(true);
+                    return true;
+                })
+                .catch((error) => {
+                    this.setPlayState(false);
+                    console.warn('DaenaVoicePlayer: unable to start playback', error);
+                    throw error;
+                });
+        }
+
+        pause() {
+            this.audioPlayer.pause();
+            this.setPlayState(false);
         }
 
         rewind() {
+            if (!this.audioPlayer.duration) return;
             this.audioPlayer.currentTime = Math.max(0, this.audioPlayer.currentTime - this.rewindSeconds);
+            this.updateProgressUi();
         }
 
         forward() {
-            this.audioPlayer.currentTime = Math.min(this.audioPlayer.duration || 0, this.audioPlayer.currentTime + this.forwardSeconds);
+            if (!this.audioPlayer.duration) return;
+            const newTime = Math.min(this.audioPlayer.duration, this.audioPlayer.currentTime + this.forwardSeconds);
+            this.audioPlayer.currentTime = newTime;
+            this.updateProgressUi();
+        }
+
+        seekFromEvent(event) {
+            if (!this.audioPlayer.duration || !event) return;
+            const rect = this.progressBar.getBoundingClientRect();
+            const clientX = event.clientX;
+            if (typeof clientX !== 'number') return;
+            const position = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+            const percentage = position / rect.width;
+            this.seekTo(percentage * this.audioPlayer.duration);
+        }
+
+        seekTo(time) {
+            if (!this.audioPlayer.duration && time !== 0) return;
+            const clamped = Math.max(0, Math.min(time, this.audioPlayer.duration || time));
+            this.audioPlayer.currentTime = clamped;
+            this.updateProgressUi();
+            this.highlightChapter(clamped);
         }
 
         setPlaybackRate(rate) {
+            if (!rate || Number.isNaN(rate)) return;
             this.audioPlayer.playbackRate = rate;
-            this.rateDisplay.textContent = `${rate}x`;
-        }
-
-        seek(percentage) {
-            if (this.audioPlayer.duration) {
-                this.audioPlayer.currentTime = (percentage / 100) * this.audioPlayer.duration;
+            if (this.playbackRateEl) {
+                this.playbackRateEl.textContent = `${rate}x`;
             }
         }
 
-        updateProgress() {
-            if (this.audioPlayer.duration) {
-                const percentage = (this.audioPlayer.currentTime / this.audioPlayer.duration) * 100;
-                this.progressSlider.value = percentage;
-                this.updateCurrentTime();
-                this.updateActiveChapter();
+        updateProgressUi() {
+            const duration = this.audioPlayer.duration || 0;
+            const current = this.audioPlayer.currentTime || 0;
+            const percentage = duration ? (current / duration) * 100 : 0;
+
+            if (this.progressFill) {
+                this.progressFill.style.width = `${percentage}%`;
+            }
+            if (this.progressHandle) {
+                this.progressHandle.style.left = `${percentage}%`;
+            }
+            if (this.currentTimeEl) {
+                this.currentTimeEl.textContent = this.formatTime(current);
+            }
+            if (this.totalTimeEl && duration) {
+                this.totalTimeEl.textContent = this.formatTime(duration);
             }
         }
 
-        updateCurrentTime() {
-            const time = this.formatTime(this.audioPlayer.currentTime);
-            this.currentTimeEl.textContent = time;
-        }
+        highlightChapter(forcedTime) {
+            if (!this.chapters.length) return;
+            const currentTime = typeof forcedTime === 'number' ? forcedTime : this.audioPlayer.currentTime;
 
-        updateTotalTime() {
-            const time = this.formatTime(this.audioPlayer.duration);
-            this.totalTimeEl.textContent = time;
-        }
-
-        updateActiveChapter() {
-            const currentTime = this.audioPlayer.currentTime;
-            let newActiveIndex = -1;
+            let newIndex = -1;
             for (let i = 0; i < this.chapters.length; i++) {
                 if (currentTime >= this.chapters[i].t) {
-                    newActiveIndex = i;
+                    newIndex = i;
                 } else {
                     break;
                 }
             }
-            if (newActiveIndex !== this.activeChapterIndex) {
-                this.activeChapterIndex = newActiveIndex;
-                this.decorateChapters();
+
+            if (newIndex === this.activeChapterIndex) return;
+            this.activeChapterIndex = newIndex;
+
+            this.chapterButtons.forEach((button, index) => {
+                const item = button.closest('.chapter-item');
+                if (item) {
+                    item.classList.toggle('active', index === newIndex);
+                }
+            });
+
+            if (newIndex >= 0) {
+                this.setStatusMessage(this.chapters[newIndex].label || `Chapter ${newIndex + 1}`);
             }
         }
 
-        decorateChapters() {
-            if (!this.chapterMarkers || this.chapters.length === 0) return;
-            const markers = this.chapters.map((ch, i) => {
-                const percentage = this.audioPlayer.duration ? (ch.t / this.audioPlayer.duration) * 100 : 0;
-                const isActive = i === this.activeChapterIndex;
-                return `<div class="chapter-marker ${isActive ? 'active' : ''}" style="left: ${percentage}%" title="${this.escapeHtml(ch.label)}"></div>`;
-            }).join('');
-            this.chapterMarkers.innerHTML = markers;
-        }
-
-        onEnded() {
-            this.playPauseBtn.textContent = '▶';
-            this.setStatusMessage('Playback completed.');
-        }
-
-        onError(e) {
-            console.error('Audio error:', e);
-            this.setStatusMessage('Audio playback error occurred.');
-            this.disableControls();
-        }
-
         setStatusMessage(message) {
-            if (this.statusMessage) {
-                this.statusMessage.textContent = message;
+            if (this.captionText) {
+                this.captionText.textContent = message || this.defaultCaption;
+            }
+        }
+
+        setPlayState(isPlaying) {
+            if (!this.playBtn) return;
+            if (isPlaying) {
+                this.playBtn.textContent = '⏸ Pause';
+                this.playBtn.classList.add('active');
+                this.playBtn.classList.remove('loading');
+            } else {
+                this.playBtn.textContent = '▶ Play';
+                this.playBtn.classList.remove('active', 'loading');
             }
         }
 
         disableControls() {
             this.controlsDisabled = true;
-            [this.playPauseBtn, this.rewindBtn, this.forwardBtn, this.rateSelect, this.progressSlider].forEach(el => {
-                if (el) el.disabled = true;
+            [this.playBtn, this.rewindBtn, this.forwardBtn].forEach(btn => {
+                if (btn) btn.disabled = true;
             });
+            if (this.rateSelect) this.rateSelect.disabled = true;
+            if (this.progressBar) this.progressBar.style.pointerEvents = 'none';
         }
 
-        play() {
-            return this.audioPlayer.play();
-        }
-
-        pause() {
-            this.audioPlayer.pause();
+        enableControls() {
+            if (!this.controlsDisabled) return;
+            this.controlsDisabled = false;
+            [this.playBtn, this.rewindBtn, this.forwardBtn].forEach(btn => {
+                if (btn) btn.disabled = false;
+            });
+            if (this.rateSelect) this.rateSelect.disabled = false;
+            if (this.progressBar) this.progressBar.style.pointerEvents = '';
         }
 
         formatTime(seconds) {
-            if (!isFinite(seconds) || isNaN(seconds)) return '0:00';
+            if (!Number.isFinite(seconds) || seconds < 0) {
+                return '0:00';
+            }
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -246,27 +383,32 @@
 
         normalizeAudioConfig(audio) {
             if (!audio) return null;
-            if (typeof audio === 'string') return { src: audio };
-            if (typeof audio === 'object' && audio.src) return audio;
+            if (typeof audio === 'string') {
+                return { src: audio };
+            }
+            if (typeof audio === 'object') {
+                const normalized = { ...audio };
+                if (!normalized.src && normalized.url) {
+                    normalized.src = normalized.url;
+                }
+                return normalized.src ? normalized : null;
+            }
             return null;
         }
 
         normalizeChapters(chapters) {
             if (!Array.isArray(chapters)) return [];
-            return chapters.map(ch => ({
-                t: Number(ch.t) || 0,
-                id: ch.id || '',
-                label: ch.label || ''
-            })).sort((a, b) => a.t - b.t);
-        }
-
-        escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
+            return chapters.map((chapter, index) => {
+                const timeValue = chapter.t ?? chapter.time ?? chapter.start ?? 0;
+                const numericTime = typeof timeValue === 'number' ? timeValue : parseFloat(timeValue) || 0;
+                return {
+                    t: Math.max(0, numericTime),
+                    label: chapter.label || chapter.title || `Chapter ${index + 1}`,
+                    id: chapter.id || chapter.slug || ''
+                };
+            }).sort((a, b) => a.t - b.t);
         }
     }
 
     window.DaenaVoicePlayer = DaenaVoicePlayer;
 })();
-

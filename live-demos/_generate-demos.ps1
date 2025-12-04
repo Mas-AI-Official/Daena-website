@@ -39,19 +39,23 @@ foreach ($demo in $demos) {
   <div class="metatron-pattern-bg"></div>
   <canvas id="metatron-hex-canvas"></canvas>
   
-  <header class="topbar glass">
-    <a class="brand" href="/">Daena</a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/demos.html">Demos</a>
-      <a href="/pitch-deck.html">Pitch Deck</a>
-      <a class="active" href="/live-demos/">Live Demos</a>
-      <a href="/docs.html">Docs & Benchmarks</a>
-      <a href="/#contact">Contact</a>
-    </nav>
-  </header>
-  <main class="container">
-    <a class="back-link" href="/live-demos/" id="back-to-demos">← Back to Demos</a>
+  <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" style="pointer-events: none;">
+    <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
+      <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
+        <a href="/" class="text-xl font-bold">Daena</a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="/" class="hover:text-yellow-400 transition">Home</a>
+          <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
+          <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
+          <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+          <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+          <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <main class="container" style="margin-top: 100px;">
+    <a class="back-link" href="/docs.html#advanced-demos" id="back-to-demos" style="display: inline-block; margin-bottom: 1rem; padding: 0.5rem 1rem; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px; text-decoration: none; color: #FFD700;">← Back to Advanced Interactive Demos</a>
     <h1>$($demo.title)</h1>
     <p class="subtle">$($demo.desc)</p>
     <div class="glass-card" style="padding:1rem; margin-top: 1rem; overflow: visible;">
@@ -65,15 +69,16 @@ foreach ($demo in $demos) {
   <script>
     // Smart back navigation
     (function() {
-      const returnSection = sessionStorage.getItem('returnSection') || 'live-demos';
-      const returnPage = sessionStorage.getItem('returnPage') || '/live-demos/';
+      sessionStorage.setItem('returnSection', 'advanced-demos');
+      sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
       
-      document.getElementById('back-to-demos').addEventListener('click', function(e) {
-        e.preventDefault();
-        sessionStorage.removeItem('returnSection');
-        sessionStorage.removeItem('returnPage');
-        window.location.href = returnPage;
-      });
+      const backBtn = document.getElementById('back-to-demos');
+      if (backBtn) {
+        backBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = '/docs.html#advanced-demos';
+        });
+      }
     })();
   </script>
 </body>
