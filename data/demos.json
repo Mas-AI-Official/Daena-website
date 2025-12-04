@@ -1,0 +1,39 @@
+[
+  {
+    "title": "Agent Communication",
+    "blurb": "See how Daena's agents communicate and collaborate in real-time.",
+    "file": "/videos/agent communication.mp4",
+    "poster": "/assets/img/posters/agent-communication.jpg"
+  },
+  {
+    "title": "Budget Calculation Demo",
+    "blurb": "Watch Daena autonomously calculate and optimize budgets with precision.",
+    "file": "/videos/budget calculation demo.mp4",
+    "poster": "/assets/img/posters/budget-calculation.jpg"
+  },
+  {
+    "title": "CMP Pipeline Demo",
+    "blurb": "Experience Daena's complete management pipeline in action.",
+    "file": "/videos/CMP PIPELINBE DEMO.mp4",
+    "poster": "/assets/img/posters/cmp-pipeline.jpg"
+  },
+  {
+    "title": "Patent Technology",
+    "blurb": "Explore the patent-pending Sunflower-Honeycomb architecture.",
+    "file": "/videos/patent Technology.mp4",
+    "poster": "/assets/img/posters/patent-technology.jpg"
+  },
+  {
+    "title": "Real Scenario Demo",
+    "blurb": "See Daena handle complex real-world business scenarios.",
+    "file": "/videos/REAL SENARIO DEMO.mp4",
+    "poster": "/assets/img/posters/real-scenario.jpg"
+  },
+  {
+    "title": "Real Talk to Daena",
+    "blurb": "Natural conversation with Daena demonstrating VP-level intelligence.",
+    "file": "/videos/real talk to daena and whole system - Made with Clipchamp.mp4",
+    "poster": "/assets/img/posters/real-talk.jpg"
+  }
+]
+

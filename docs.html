@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Daena Docs & Benchmarks | MAS-AI</title>
+    <meta name="description" content="Technical documentation and benchmark results for Daena AI VP: architecture, NBMF memory, Enterprise-DNA governance, security, and deployment.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Daena Docs & Benchmarks">
+    <meta property="og:description" content="Technical documentation and benchmark results for Daena AI VP.">
+    <meta property="og:url" content="https://daena.mas-ai.co/docs.html">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- HTMX CDN -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+    
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+        
+        @media (min-width: 768px) {
+            table {
+                display: table;
+            }
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            word-wrap: break-word;
+        }
+        
+        th {
+            background: rgba(255, 215, 0, 0.1);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="text-white antialiased">
+    <!-- Metatron Background Layers -->
+    <div class="metatron-bg"></div>
+    <div class="metatron-pattern-bg"></div>
+    <canvas id="metatron-hex-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50" role="navigation" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto px-4 pt-4">
+            <div class="glass-card flex items-center justify-between p-4">
+            <a href="/" class="text-xl font-bold">Daena</a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
+                <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                <a href="#live" class="hover:text-yellow-400 transition">Live Demo</a>
+            </div>
+            <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
+            <div class="flex flex-col gap-4">
+                <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
+                <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                <a href="#live" class="hover:text-yellow-400 transition">Live Demo</a>
+            </div>
+        </div>
+        </div>
+    </nav>
+    
+    <!-- Back to Home Button -->
+    <div class="fixed top-20 left-4 z-40">
+        <a href="/" class="glass-button text-sm">← Back to Home</a>
+    </div>
+    
+    <!-- Hero -->
+    <section class="px-4 py-20 mt-20">
+        <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Daena Docs & Benchmarks</h1>
+            <p class="text-gray-400 text-lg">Technical depth, architecture, and performance metrics</p>
+        </div>
+    </section>
+    
+    <!-- Architecture -->
+    <section class="px-4 py-12" id="architecture">
+        <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Architecture</h2>
+            <div class="space-y-6 text-gray-300">
+                <p>Daena is built on the <strong class="text-yellow-400">Sunflower–Honeycomb architecture</strong>, a patent-pending system that combines:</p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li><strong>48 Specialized Agents</strong> organized in 6 agents × 8 departments</li>
+                    <li><strong>Self-Fulfilling Hierarchical Communication (SFHC)</strong> for agent orchestration</li>
+                    <li><strong>Neural-Backed Memory Fabric (NBMF)</strong> for unified memory management</li>
+                    <li><strong>Enterprise-DNA</strong> for governance and portability</li>
+                    <li><strong>Hex-Mesh Communication</strong> for efficient agent-to-agent messaging</li>
+                </ul>
+                <p>The architecture follows a <strong class="text-yellow-400">Fibonacci growth pattern</strong> for infinite scalability, with phase-locked council rounds (Scout→Debate→Commit) ensuring consensus and auditability.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Memory & Governance -->
+    <section class="px-4 py-12" id="memory-governance">
+        <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Memory & Governance</h2>
+            
+            <h3 class="text-2xl font-bold mb-4 text-yellow-400">NBMF (Neural-Backed Memory Fabric)</h3>
+            <div class="space-y-4 text-gray-300 mb-8">
+                <p>NBMF provides a 3-tier memory architecture:</p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li><strong>L1 (Hot Memory):</strong> Sub-millisecond access, CAS + SimHash compression</li>
+                    <li><strong>L2 (Warm Memory):</strong> Fast retrieval with semantic compression</li>
+                    <li><strong>L3 (Cold Memory):</strong> Long-term storage with maximum compression</li>
+                </ul>
+                <p><strong>Key Features:</strong></p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li>13.30× compression ratio (lossless mode)</li>
+                    <li>100% accuracy in lossless mode</li>
+                    <li>94.3% storage savings</li>
+                    <li>Sub-millisecond latency (p95: 0.65ms)</li>
+                </ul>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-4 text-yellow-400">Enterprise-DNA</h3>
+            <div class="space-y-4 text-gray-300">
+                <p>Enterprise-DNA provides governance and portability through four layers:</p>
+                <div class="grid md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-400/20">
+                        <h4 class="font-bold text-yellow-400 mb-2">Genome</h4>
+                        <p class="text-sm">Capabilities schema & versioned behaviors per agent/department. Defines what each agent can do and their memory adapters.</p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-400/20">
+                        <h4 class="font-bold text-yellow-400 mb-2">Epigenome</h4>
+                        <p class="text-sm">Tenant/org policies, feature flags, SLO/SLA, legal constraints. Controls how agents behave within tenant context.</p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-400/20">
+                        <h4 class="font-bold text-yellow-400 mb-2">Lineage</h4>
+                        <p class="text-sm">Provenance & Merkle-notarized promotion history with NBMF ledger pointers. Full audit trail of decisions.</p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-400/20">
+                        <h4 class="font-bold text-yellow-400 mb-2">Immune</h4>
+                        <p class="text-sm">Threat signals + quarantine/rollback paths wired to TrustManager. Detects and mitigates security threats.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benchmarks -->
+    <section class="px-4 py-12" id="benchmarks">
+        <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Benchmarks</h2>
+            
+            <h3 class="text-2xl font-bold mb-4 text-yellow-400">Compression Performance</h3>
+            <div class="overflow-x-auto mb-8">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mode</th>
+                            <th>Compression Ratio</th>
+                            <th>Storage Savings</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lossless</td>
+                            <td>13.30× (mean)</td>
+                            <td>94.3%</td>
+                            <td>✅ EXCEEDS target by 166%</td>
+                        </tr>
+                        <tr>
+                            <td>Semantic</td>
+                            <td>2.53× (mean)</td>
+                            <td>74.4%</td>
+                            <td>✅ MEETS target</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-4 text-yellow-400">Latency Performance</h3>
+            <div class="overflow-x-auto mb-8">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operation</th>
+                            <th>Target</th>
+                            <th>Actual (p95)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Encode (Lossless)</td>
+                            <td>&lt;120ms</td>
+                            <td>0.65ms</td>
+                            <td>✅ 99.5% faster</td>
+                        </tr>
+                        <tr>
+                            <td>Encode (Semantic)</td>
+                            <td>&lt;120ms</td>
+                            <td>0.30ms</td>
+                            <td>✅ 99.7% faster</td>
+                        </tr>
+                        <tr>
+                            <td>Decode (Lossless)</td>
+                            <td>&lt;25ms</td>
+                            <td>0.09ms</td>
+                            <td>✅ 99.6% faster</td>
+                        </tr>
+                        <tr>
+                            <td>Decode (Semantic)</td>
+                            <td>&lt;25ms</td>
+                            <td>0.01ms</td>
+                            <td>✅ 99.96% faster</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-4 text-yellow-400">Accuracy & Reversibility</h3>
+            <div class="overflow-x-auto mb-8">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mode</th>
+                            <th>Exact Match Rate</th>
+                            <th>Similarity</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lossless</td>
+                            <td>100.00% (20/20 tests)</td>
+                            <td>100%</td>
+                            <td>✅ PERFECT</td>
+                        </tr>
+                        <tr>
+                            <td>Semantic</td>
+                            <td>N/A</td>
+                            <td>95.28% (mean)</td>
+                            <td>✅ EXCEEDS target</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-4 text-yellow-400">Token Reduction</h3>
+            <div class="space-y-4 text-gray-300">
+                <p><strong>Lossless Mode:</strong> 94.3% token reduction = 94.3% lower LLM API costs</p>
+                <p><strong>Semantic Mode:</strong> 74.4% token reduction = 74.4% lower LLM API costs</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Security & Compliance -->
+    <section class="px-4 py-12" id="security-compliance">
+        <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Security & Compliance</h2>
+            <div class="space-y-6 text-gray-300">
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Encryption</h3>
+                    <p><strong>AES-256 encryption</strong> for data at rest and in transit. All memory operations are encrypted with tenant-specific keys.</p>
+                </div>
+                
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Merkle-Notarized Lineage</h3>
+                    <p>Every decision and memory operation is recorded in a <strong>Merkle tree structure</strong>, providing cryptographic proof of provenance and enabling full audit trails.</p>
+                </div>
+                
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Audit Trail</h3>
+                    <p>Complete audit trail of all agent decisions, memory accesses, and governance actions. All operations are timestamped and linked to the Merkle lineage.</p>
+                </div>
+                
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Rollback Capability</h3>
+                    <p>Enterprise-DNA Immune system enables <strong>automatic rollback</strong> of decisions when threats are detected. Full state restoration from Merkle-notarized checkpoints.</p>
+                </div>
+                
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Tenant Isolation</h3>
+                    <p><strong>Attribute-Based Access Control (ABAC)</strong> ensures complete tenant isolation. Each tenant's data and agents operate in isolated namespaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Deployment -->
+    <section class="px-4 py-12" id="deployment">
+        <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Deployment</h2>
+            <div class="space-y-6 text-gray-300">
+                <p>Daena supports deployment across multiple hardware targets with automatic routing:</p>
+                <div class="grid md:grid-cols-3 gap-4 mt-6">
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-400/20">
+                        <h4 class="font-bold text-yellow-400 mb-2">CPU</h4>
+                        <p class="text-sm">Standard CPU deployment for general-purpose workloads. Optimized for x86-64 and ARM architectures.</p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-400/20">
+                        <h4 class="font-bold text-yellow-400 mb-2">GPU</h4>
+                        <p class="text-sm">CUDA and ROCm support for accelerated inference. Automatic model offloading to GPU when available.</p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-400/20">
+                        <h4 class="font-bold text-yellow-400 mb-2">TPU</h4>
+                        <p class="text-sm">Google Cloud TPU support for maximum performance. Automatic routing for TPU-optimized operations.</p>
+                    </div>
+                </div>
+                <p class="mt-6"><strong>Multi-Device Support:</strong> Daena automatically routes operations to the optimal hardware based on availability and workload characteristics.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Live Demo -->
+    <section class="px-4 py-12" id="live">
+        <div class="max-w-6xl mx-auto glass-card p-8 md:p-12 mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Live Demo</h2>
+            <div class="space-y-6 text-gray-300">
+                <p>Experience Daena in action with our live demo system.</p>
+                <div class="bg-white/5 p-6 rounded-lg border border-yellow-400/20">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">Getting Started</h3>
+                    <p class="mb-4">To access the live demo, please contact us at <a href="mailto:info@mas-ai.co" class="text-yellow-400 hover:underline">info@mas-ai.co</a> for credentials and setup instructions.</p>
+                    <p>Alternatively, explore our recorded demos on the <a href="/#demos" class="text-yellow-400 hover:underline">homepage</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="px-4 py-12 text-center text-sm text-gray-500">
+        <p class="mb-4">© MAS-AI Technology Inc. • Patent-pending systems: Sunflower–Honeycomb, NBMF, Enterprise-DNA</p>
+        <div class="flex justify-center gap-6">
+            <a href="/terms-of-service.html" class="hover:text-yellow-400 transition">Terms</a>
+            <a href="/privacy-policy.html" class="hover:text-yellow-400 transition">Privacy</a>
+            <a href="mailto:info@mas-ai.co" class="hover:text-yellow-400 transition">Contact</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
