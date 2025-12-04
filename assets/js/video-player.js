@@ -99,6 +99,12 @@
         seekDragging = true;
         const p = +seek.value / 1000;
         video.currentTime = p * video.duration;
+        // If seeking to beginning (0) and video hasn't been played, show overlay
+        if (video.currentTime === 0 && !hasPlayedOnce) {
+          overlayPlay.style.display = "grid";
+        } else if (hasPlayedOnce) {
+          overlayPlay.style.display = "none";
+        }
       });
       seek.addEventListener("change", () => {
         seekDragging = false;
