@@ -1,0 +1,268 @@
+/* ============================================
+   Daena Skin - Unified Demo Page Styling
+   Matches homepage design system
+   ============================================ */
+
+/* Import base fonts and variables from homepage */
+@import url('/assets/css/global.css');
+
+/* Body skin */
+body.daena-skin {
+    background: #02030a;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Metatron Background Layers (same as homepage) */
+.daena-skin .metatron-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    background: 
+        radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(15, 15, 35, 0.95) 0%, rgba(26, 26, 58, 0.95) 50%, rgba(42, 26, 74, 0.95) 100%);
+    pointer-events: none;
+}
+
+.daena-skin .metatron-pattern-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.05;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="40" fill="none" stroke="%23FFD700" stroke-width="2" opacity="0.3"/><circle cx="200" cy="120" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.25"/><circle cx="280" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.25"/><circle cx="280" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.25"/><circle cx="200" cy="280" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.25"/><circle cx="120" cy="240" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.25"/><circle cx="120" cy="160" r="30" fill="none" stroke="%23FFD700" stroke-width="1.5" opacity="0.25"/><line x1="200" y1="200" x2="200" y2="120" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="280" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="280" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="200" y2="280" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="120" y2="240" stroke="%23FFD700" stroke-width="1" opacity="0.2"/><line x1="200" y1="200" x2="120" y2="160" stroke="%23FFD700" stroke-width="1" opacity="0.2"/></svg>');
+    background-size: 600px 600px;
+    background-position: center;
+    background-repeat: repeat;
+    pointer-events: none;
+    animation: metatronRotate 60s linear infinite;
+}
+
+@keyframes metatronRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.daena-skin #metatron-hex-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Glass Panel Utility (matches homepage) */
+.daena-glass {
+    background: rgba(5, 8, 20, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.daena-glass:hover {
+    background: rgba(5, 8, 20, 0.9);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+/* Container */
+.daena-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Breadcrumb Navigation */
+.daena-breadcrumb {
+    position: sticky;
+    top: 76px;
+    z-index: 40;
+    margin-bottom: 1.5rem;
+}
+
+.daena-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    color: white;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+}
+
+.daena-breadcrumb a:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 215, 0, 0.5);
+    color: #FFD700;
+    transform: translateX(-4px);
+}
+
+/* Typography */
+.daena-title {
+    font-size: clamp(24px, 2.2vw, 40px);
+    font-weight: 800;
+    color: #FFD700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.daena-sub {
+    opacity: 0.8;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    font-size: 1.125rem;
+}
+
+/* Demo Shell Container */
+#daena-demo-shell {
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+/* Normalize demo elements */
+#daena-demo-shell > canvas,
+#daena-demo-shell > iframe,
+#daena-demo-shell > video {
+    max-width: 100%;
+    display: block;
+    margin: 12px auto;
+    border-radius: 0.5rem;
+}
+
+#daena-demo-shell > canvas {
+    position: relative !important;
+}
+
+#daena-demo-shell > .stage {
+    position: relative !important;
+}
+
+/* Navbar (matches homepage) */
+.daena-skin .daena-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.daena-skin .daena-navbar > div {
+    pointer-events: auto;
+    max-width: 100%;
+    padding: 1rem;
+}
+
+.daena-skin .daena-navbar .glass-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.daena-skin .daena-navbar a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.daena-skin .daena-navbar a:hover {
+    color: #FFD700;
+}
+
+.daena-skin .daena-navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .daena-container {
+        padding: 16px;
+    }
+    
+    .daena-glass {
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+    
+    .daena-breadcrumb {
+        top: 64px;
+        margin-bottom: 1rem;
+    }
+    
+    .daena-title {
+        font-size: clamp(20px, 5vw, 32px);
+    }
+    
+    .daena-sub {
+        font-size: 1rem;
+    }
+    
+    #daena-demo-shell {
+        min-height: 300px;
+    }
+    
+    #daena-demo-shell > canvas,
+    #daena-demo-shell > iframe,
+    #daena-demo-shell > video {
+        margin: 8px auto;
+    }
+}
+
+/* Ensure no horizontal scroll */
+.daena-skin {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.daena-skin * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Focus states for accessibility */
+.daena-skin a:focus,
+.daena-skin button:focus {
+    outline: 2px solid #FFD700;
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .daena-skin .metatron-pattern-bg {
+        animation: none;
+    }
+    
+    .daena-breadcrumb a {
+        transition: none;
+    }
+}
+

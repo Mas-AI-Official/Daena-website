@@ -36,16 +36,25 @@ class CustomVideoPlayer {
         
         // Big play button
         if (this.controls.bigPlay) {
-            this.controls.bigPlay.addEventListener('click', () => {
-                this.video.play();
+            this.controls.bigPlay.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.video.play().catch(err => {
+                    console.warn('Play failed:', err);
+                });
                 this.hideBigPlayButton();
             });
         }
         
-        // Video click to play/pause
-        this.video.addEventListener('click', () => {
+        // Video click to play/pause (but not when clicking the big play button)
+        this.video.addEventListener('click', (e) => {
+            // Don't trigger if clicking the big play button
+            if (e.target.closest('#big-play-button')) return;
+            
             if (this.video.paused) {
-                this.video.play();
+                this.video.play().catch(err => {
+                    console.warn('Play failed:', err);
+                });
                 this.hideBigPlayButton();
             } else {
                 this.video.pause();
