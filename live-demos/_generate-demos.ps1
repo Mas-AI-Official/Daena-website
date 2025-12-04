@@ -31,7 +31,7 @@ foreach ($demo in $demos) {
   <title>$($demo.title) • Live Demo</title>
   <link rel="stylesheet" href="/assets/css/global.css">
   <link rel="stylesheet" href="/live-demos/_shared.css">
-  <link rel="stylesheet" href="/old demoes/$($demo.name)/live-demo.css">
+  <link rel="stylesheet" href="/live-demos/$($demo.name)/live-demo.css">
 </head>
 <body class="metatron-bg">
   <!-- Metatron Background Layers -->
@@ -61,7 +61,7 @@ foreach ($demo in $demos) {
   </main>
   
   <script src="/js/metatron-hex-network.js"></script>
-  <script src="/old demoes/$($demo.name)/live-demo.js"></script>
+  <script src="/live-demos/$($demo.name)/live-demo.js"></script>
   <script>
     // Smart back navigation
     (function() {
