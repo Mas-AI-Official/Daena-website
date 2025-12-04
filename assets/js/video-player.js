@@ -73,8 +73,10 @@
     video.addEventListener("play", setState);
     video.addEventListener("pause", setState);
     video.addEventListener("ended", () => {
-      hasPlayedOnce = false; // Reset when video ends so overlay shows again
-      video.currentTime = 0; // Reset to beginning
+      // When video ends, reset to beginning and show overlay again
+      hasPlayedOnce = false;
+      video.currentTime = 0;
+      video.pause(); // Ensure video is paused at end
       setState();
     });
     setState();
