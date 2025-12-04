@@ -129,10 +129,23 @@
         const mainContainer = document.createElement('main');
         mainContainer.className = 'daena-container';
         
-        // Create breadcrumb
+        // Create breadcrumb with smart back navigation
         const breadcrumb = document.createElement('nav');
         breadcrumb.className = 'daena-breadcrumb';
-        breadcrumb.innerHTML = '<a href="/#demos" class="pill">← Back to Demos</a>';
+        const backLink = document.createElement('a');
+        backLink.href = '/#demos';
+        backLink.className = 'pill';
+        backLink.textContent = '← Back to Demos';
+        backLink.id = 'demo-back-btn';
+        backLink.addEventListener('click', function(e) {
+            const returnSection = sessionStorage.getItem('returnSection') || 'demos';
+            if (returnSection) {
+                e.preventDefault();
+                window.location.href = `/#${returnSection}`;
+                sessionStorage.removeItem('returnSection');
+            }
+        });
+        breadcrumb.appendChild(backLink);
         mainContainer.appendChild(breadcrumb);
         
         // Create title if missing

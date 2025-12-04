@@ -90,7 +90,7 @@
     
     <!-- Back to Home Button -->
     <div class="fixed top-20 left-4 z-40">
-        <a href="/" class="glass-button text-sm">← Back to Home</a>
+        <a href="/" id="back-to-home-btn" class="glass-button text-sm">← Back to Home</a>
     </div>
     
     <!-- Hero -->
@@ -1192,6 +1192,32 @@
             <a href="mailto:masoud.masoori@mas-ai.co" class="hover:text-yellow-400 transition">Contact</a>
         </div>
     </footer>
+    
+    <!-- Smart Back Navigation -->
+    <script>
+        // Track where user came from for smart back navigation
+        (function() {
+            // Store referrer section when clicking links from homepage
+            if (document.referrer.includes('index.html') || document.referrer.endsWith('/')) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const fromSection = urlParams.get('from') || sessionStorage.getItem('returnSection');
+                if (fromSection) {
+                    sessionStorage.setItem('returnSection', fromSection);
+                }
+            }
+            
+            // Handle back button
+            const backBtn = document.getElementById('back-to-home-btn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const returnSection = sessionStorage.getItem('returnSection') || 'hero';
+                    window.location.href = `/${returnSection === 'hero' ? '' : '#' + returnSection}`;
+                    sessionStorage.removeItem('returnSection');
+                });
+            }
+        })();
+    </script>
     
     <script>
         // Mobile menu toggle

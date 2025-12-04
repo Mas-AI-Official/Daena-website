@@ -327,6 +327,13 @@ nav > div {
     z-index: 10000 !important;
 }
 
+/* Ensure controls are always outside video box in normal mode */
+[data-player-container]:not(.fullscreen-active) .video-controls {
+    position: relative !important;
+    margin-top: 0.75rem !important;
+    bottom: auto !important;
+}
+
 /* Cross-browser fullscreen support */
 :-webkit-full-screen [data-player-container].fullscreen-active {
     width: 100vw !important;

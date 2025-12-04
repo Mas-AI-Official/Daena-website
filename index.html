@@ -92,6 +92,31 @@
             flex-shrink: 0;
         }
         
+        /* Shimmer effect for "Meet Daena" */
+        .shimmer-text {
+            background: linear-gradient(
+                90deg,
+                #FFD700 0%,
+                #FFA500 25%,
+                #FFD700 50%,
+                #FFA500 75%,
+                #FFD700 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+        
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
+        }
+        
         /* Big play button styling - Eye-catching yellow/gold */
         #big-play-button {
             backdrop-filter: blur(10px);
@@ -128,6 +153,25 @@
                 width: 2.25rem;
                 height: 2.25rem;
             }
+        }
+        
+        /* Video controls positioned outside video box */
+        [data-player-container] {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        [data-player-container] > div:first-child {
+            /* Video wrapper - no controls here */
+            position: relative;
+            width: 100%;
+        }
+        
+        [data-player-container] .video-controls {
+            margin-top: 0.75rem !important;
+            position: relative !important;
+            z-index: 10 !important;
         }
         
         /* Video controls - Always visible, positioned below video */
@@ -485,7 +529,9 @@
     <section class="hero-section px-4 py-20 mt-20" id="hero">
         <div class="max-w-4xl mx-auto text-center glass-card p-8 md:p-12">
             <p class="text-yellow-400 text-sm uppercase tracking-wider mb-4">The Auditable AI Vice President</p>
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">Meet Daena</h1>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span class="shimmer-text">Meet Daena</span>
+            </h1>
             <div class="space-y-4 mb-8">
                 <p class="text-xl md:text-2xl text-white font-semibold">
                     Unique AI Decision-Orchestration Platform — your AI VP.
@@ -498,10 +544,10 @@
                 Patent-pending: Sunflower–Honeycomb architecture + NBMF / Enterprise-DNA
             </p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#demos" class="glass-button">Watch Demos</a>
-                <a href="#pitch" class="glass-button">Watch Pitch Deck</a>
-                <a href="/docs.html#live" class="glass-button">Live Demo</a>
-                <a href="/docs.html" class="glass-button">Docs & Benchmarks</a>
+                <a href="#demos" class="glass-button" data-return-section="hero">Watch Demos</a>
+                <a href="#pitch" class="glass-button" data-return-section="hero">Watch Pitch Deck</a>
+                <a href="/docs.html#live" class="glass-button" data-return-section="hero">Live Demo</a>
+                <a href="/docs.html" class="glass-button" data-return-section="hero">Docs & Benchmarks</a>
             </div>
         </div>
     </section>
@@ -520,9 +566,9 @@
                     </div>
                 </div>
                 <div class="video-container order-1 md:order-2 w-full">
-                    <div data-player-container class="w-full relative">
+                    <div data-player-container class="w-full relative flex flex-col">
                         <!-- Video wrapper with big play button overlay -->
-                        <div class="relative w-full" style="aspect-ratio: 16/9; background: #000; border-radius: 1rem; overflow: hidden;">
+                        <div class="relative w-full" style="aspect-ratio: 16/9; background: #000; border-radius: 1rem; overflow: hidden; position: relative;">
                             <video 
                                 data-player
                                 id="why-investors-video"
@@ -558,8 +604,8 @@
                             </div>
                         </div>
                         
-                        <!-- Persistent controls bar (always visible in inline mode) -->
-                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important; margin-top: 0.5rem;">
+                        <!-- Persistent controls bar (OUTSIDE video box, always visible) -->
+                        <div class="video-controls" style="display: flex !important; visibility: visible !important; opacity: 1 !important; margin-top: 0.75rem; position: relative; z-index: 10;">
                             <button data-control="play-pause" aria-label="Play/Pause" aria-pressed="false" type="button" class="play-pause-btn">
                                 <svg class="play-icon" fill="currentColor" viewBox="0 0 20 20" style="display: block;">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
@@ -657,9 +703,9 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Recorded Demos</h2>
                 <p class="text-gray-400 mb-6">Watch pre-recorded demonstrations of Daena's capabilities</p>
-                <a href="/docs.html" class="inline-flex items-center gap-2 px-4 py-2 glass-button text-sm font-semibold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-3 group border border-yellow-400/30 hover:border-yellow-400/60">
+                <a href="/docs.html" class="inline-flex items-center gap-2 px-6 py-3 glass-button text-base font-semibold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-3 group border-2 border-yellow-400/40 hover:border-yellow-400/70 bg-yellow-400/10 hover:bg-yellow-400/20 shadow-lg hover:shadow-yellow-400/30" data-return-section="demos">
                     <span>See all technical details</span>
-                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+                    <span class="group-hover:translate-x-1 transition-transform text-xl">→</span>
                 </a>
             </div>
             <div id="demos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -676,36 +722,36 @@
                 <p class="text-gray-300 text-lg mb-8">Experience Daena's workflows in real-time with step-by-step interactions</p>
             </div>
             <div class="text-center mb-8">
-                <a href="/docs.html#live" class="inline-flex items-center gap-3 px-8 py-4 glass-button text-lg font-bold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-4 group border-2 border-yellow-400/50 hover:border-yellow-400/80 bg-yellow-400/10 hover:bg-yellow-400/20 shadow-lg hover:shadow-yellow-400/30">
+                <a href="/docs.html#live" class="inline-flex items-center gap-3 px-8 py-4 glass-button text-lg font-bold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-4 group border-2 border-yellow-400/50 hover:border-yellow-400/80 bg-yellow-400/10 hover:bg-yellow-400/20 shadow-lg hover:shadow-yellow-400/30" data-return-section="live-demos">
                     <span class="text-2xl">🚀</span>
                     <span>Launch Live Demos</span>
                     <span class="group-hover:translate-x-2 transition-transform text-2xl">→</span>
                 </a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="window.location.href='/docs.html#live'">
+                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="sessionStorage.setItem('returnSection', 'live-demos'); window.location.href='/docs.html#live'">
                     <div class="text-3xl mb-2">🚨</div>
                     <h3 class="text-sm font-semibold text-yellow-400 mb-1">Budget Crisis</h3>
                     <p class="text-xs text-gray-400">Real-time decision</p>
                 </div>
-                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="window.location.href='/docs.html#live'">
+                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="sessionStorage.setItem('returnSection', 'live-demos'); window.location.href='/docs.html#live'">
                     <div class="text-3xl mb-2">🛡️</div>
                     <h3 class="text-sm font-semibold text-yellow-400 mb-1">Security Threat</h3>
                     <p class="text-xs text-gray-400">Incident response</p>
                 </div>
-                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="window.location.href='/docs.html#live'">
+                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="sessionStorage.setItem('returnSection', 'live-demos'); window.location.href='/docs.html#live'">
                     <div class="text-3xl mb-2">👤</div>
                     <h3 class="text-sm font-semibold text-yellow-400 mb-1">Customer Issue</h3>
                     <p class="text-xs text-gray-400">VIP escalation</p>
                 </div>
-                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="window.location.href='/docs.html#live'">
+                <div class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer clickable-link" onclick="sessionStorage.setItem('returnSection', 'live-demos'); window.location.href='/docs.html#live'">
                     <div class="text-3xl mb-2">📊</div>
                     <h3 class="text-sm font-semibold text-yellow-400 mb-1">Campaign</h3>
                     <p class="text-xs text-gray-400">Optimization</p>
                 </div>
             </div>
             <div class="text-center mt-8">
-                <a href="/docs.html#live" class="text-yellow-400 hover:text-yellow-300 font-semibold underline text-lg">View All 8 Live Scenarios →</a>
+                <a href="/docs.html#live" class="text-yellow-400 hover:text-yellow-300 font-semibold underline text-lg" data-return-section="live-demos">View All 8 Live Scenarios →</a>
             </div>
         </div>
     </section>
@@ -876,6 +922,57 @@
                 submitBtn.textContent = 'Send Message';
             }
         });
+    </script>
+    
+    <!-- Smart Back Navigation -->
+    <script>
+        // Track where user came from for smart back navigation
+        (function() {
+            // Store referrer section when clicking links
+            document.querySelectorAll('a[href^="/docs"], a[href^="/"], a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const returnSection = this.getAttribute('data-return-section');
+                    
+                    if (href && (href.startsWith('/docs') || href.startsWith('/') || href.startsWith('#'))) {
+                        // Get current section from data attribute, hash, or active section
+                        let section = returnSection;
+                        if (!section) {
+                            // Find which section is currently in view
+                            const sections = document.querySelectorAll('section[id]');
+                            const scrollPos = window.scrollY + 100;
+                            for (const sec of sections) {
+                                const rect = sec.getBoundingClientRect();
+                                if (rect.top <= scrollPos && rect.bottom >= scrollPos) {
+                                    section = sec.id;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!section) {
+                            section = window.location.hash.replace('#', '') || 'hero';
+                        }
+                        sessionStorage.setItem('returnSection', section);
+                    }
+                });
+            });
+            
+            // Handle return from other pages
+            if (document.referrer && !document.referrer.includes(window.location.hostname)) {
+                // Coming from external or different page
+                const returnSection = sessionStorage.getItem('returnSection');
+                if (returnSection && returnSection !== 'hero') {
+                    window.addEventListener('load', () => {
+                        setTimeout(() => {
+                            const section = document.querySelector('#' + returnSection);
+                            if (section) {
+                                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }, 300);
+                    });
+                }
+            }
+        })();
     </script>
     
     <!-- Load Demos -->
