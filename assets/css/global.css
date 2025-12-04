@@ -121,6 +121,13 @@ body::before {
     pointer-events: none;
 }
 
+/* Hero card styles - prevent top margin */
+.hero-card h1,
+.hero-card h2,
+.hero-card p {
+    margin-top: 0;
+}
+
 /* Mobile-first responsive text */
 h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
