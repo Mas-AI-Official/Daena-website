@@ -327,11 +327,44 @@ nav > div {
     z-index: 10000 !important;
 }
 
+/* Base video controls styling - ALWAYS VISIBLE */
+.video-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 0.5rem !important;
+    margin-top: 0.75rem !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 10 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
 /* Ensure controls are always outside video box in normal mode */
 [data-player-container]:not(.fullscreen-active) .video-controls {
     position: relative !important;
     margin-top: 0.75rem !important;
     bottom: auto !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Cross-browser fullscreen support */
