@@ -1167,12 +1167,15 @@
                 this.agents = {};
                 Object.values(this.departments).forEach(dept => {
                     dept.agents.forEach(agentId => {
-                        this.agents[agentId] = {
-                            name: agentId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-                            status: 'idle',
-                            department: dept.name,
-                            element: document.getElementById(agentId)
-                        };
+                        const element = document.getElementById(agentId);
+                        if (element) {
+                            this.agents[agentId] = {
+                                name: agentId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                                status: 'idle',
+                                department: dept.name,
+                                element: element
+                            };
+                        }
                     });
                 });
 
@@ -1200,6 +1203,13 @@
                     knowledgeTransfers: document.getElementById('knowledge-transfers'),
                     avgConfidence: document.getElementById('avg-confidence')
                 };
+
+                // Verify all critical elements exist
+                if (!this.executeBtn || !this.resetBtn || !this.narrationText || !this.communicationLog || !this.narrationAudio) {
+                    console.error('Critical elements missing, retrying initialization...');
+                    setTimeout(() => this.init(), 300);
+                    return;
+                }
 
                 // Narration scripts
                 this.narrationScripts = [
