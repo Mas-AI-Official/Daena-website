@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena AI - CMP Pipeline Demo</title>
-    <meta name="description" content="Experience Daena's complete CMP orchestration process with intelligent workflow management and live narration">`n    <!-- Daena Skin - Unified styling -->`n    <link rel="stylesheet" href="/assets/skin/daena/skin.css">`n    <script defer src="/assets/skin/daena/skin.js"></script>
-    
+    <meta name="description"
+        content="Experience Daena's complete CMP orchestration process with intelligent workflow management and live narration">
+
+    <!-- Daena Skin - Unified styling -->
+    <link rel="stylesheet" href="/assets/skin/daena/skin.css">
+    <script defer src="/assets/skin/daena/skin.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -42,7 +49,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
+            background:
                 radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
@@ -50,10 +57,23 @@
         }
 
         @keyframes backgroundShift {
-            0%, 100% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(-20px) translateY(-10px); }
-            50% { transform: translateX(20px) translateY(10px); }
-            75% { transform: translateX(-10px) translateY(20px); }
+
+            0%,
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+
+            25% {
+                transform: translateX(-20px) translateY(-10px);
+            }
+
+            50% {
+                transform: translateX(20px) translateY(10px);
+            }
+
+            75% {
+                transform: translateX(-10px) translateY(20px);
+            }
         }
 
         /* Navigation */
@@ -106,7 +126,7 @@
 
         .back-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         /* Main Container */
@@ -173,8 +193,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         /* Demo Controls */
@@ -561,8 +588,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text {
@@ -575,46 +607,58 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Global CSS -->
     <link rel="stylesheet" href="/assets/css/global.css">
-    
+
     <!-- Metatron Background Script -->
     <script src="/js/metatron-hex-network.js"></script>
 
 </head>
+
 <body>
 
     <!-- Standard Navbar -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar"
+        style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="/" class="flex items-center gap-2 group">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
                             <span class="text-black font-bold text-xl">D</span>
                         </div>
-                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                        <span
+                            class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
                     </a>
                 </div>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="/#features" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
-                        <a href="/#technology" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
-                        <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live Demos</a>
-                        <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                        <a href="/#features"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live
+                            Demos</a>
+                        <a href="/docs.html"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
                     </div>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <button type="button" id="mobile-menu-btn"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
@@ -624,10 +668,15 @@
         <!-- Mobile Menu -->
         <div class="hidden md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
-                <a href="/#features" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
-                <a href="/#technology" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
-                <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live Demos</a>
-                <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
+                <a href="/#features"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="/#technology"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
+                <a href="/docs.html#advanced-demos"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live
+                    Demos</a>
+                <a href="/docs.html"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
             </div>
         </div>
     </nav>
@@ -648,10 +697,10 @@
     </div>
 
     <!-- Animated Background -->
-    
+
 
     <!-- Navigation -->
-    
+
 
     <!-- Main Demo Container -->
     <div class="demo-container">
@@ -659,7 +708,7 @@
         <div class="demo-header">
             <h1 class="demo-title">CMP Pipeline Demo</h1>
             <p class="demo-subtitle">
-                Experience Daena's complete CMP (Content Management Pipeline) orchestration process. 
+                Experience Daena's complete CMP (Content Management Pipeline) orchestration process.
                 Watch how intelligent workflow management coordinates multiple agents for seamless content processing.
             </p>
         </div>
@@ -668,7 +717,8 @@
         <div class="narration-panel">
             <div class="narration-text" id="narrationText">
                 <span class="narration-indicator"></span>
-                Welcome to Daena's CMP Pipeline Demo. I'll demonstrate how our intelligent workflow management system orchestrates content processing across multiple agents with seamless coordination.
+                Welcome to Daena's CMP Pipeline Demo. I'll demonstrate how our intelligent workflow management system
+                orchestrates content processing across multiple agents with seamless coordination.
             </div>
         </div>
 
@@ -711,7 +761,8 @@
                     <div class="stage-status status-pending" id="status-1">PENDING</div>
                 </div>
                 <div class="stage-description">
-                    Receiving and validating input content from multiple sources including documents, images, and data streams.
+                    Receiving and validating input content from multiple sources including documents, images, and data
+                    streams.
                 </div>
                 <div class="stage-progress">
                     <div class="stage-progress-fill" id="progress-1"></div>
@@ -769,7 +820,8 @@
                     <div class="stage-status status-pending" id="status-3">PENDING</div>
                 </div>
                 <div class="stage-description">
-                    Coordinating multiple agents to process content according to identified requirements and business rules.
+                    Coordinating multiple agents to process content according to identified requirements and business
+                    rules.
                 </div>
                 <div class="stage-progress">
                     <div class="stage-progress-fill" id="progress-3"></div>
@@ -891,7 +943,7 @@
                 this.currentStage = 0;
                 this.totalStages = 5;
                 this.stageData = {};
-                
+
                 this.init();
             }
 
@@ -945,7 +997,7 @@
                 this.currentStage = 0;
                 this.executeBtn.textContent = '⚙️ EXECUTE CMP PIPELINE';
                 this.executeBtn.classList.remove('executing');
-                
+
                 // Reset all stages
                 for (let i = 1; i <= this.totalStages; i++) {
                     this.resetStage(i);
@@ -968,7 +1020,7 @@
                 const stage = document.getElementById(`stage-${stageNumber}`);
                 const status = document.getElementById(`status-${stageNumber}`);
                 const progress = document.getElementById(`progress-${stageNumber}`);
-                
+
                 stage.classList.remove('active', 'completed');
                 status.textContent = 'PENDING';
                 status.className = 'stage-status status-pending';
@@ -1115,7 +1167,7 @@
 
                 for (let i = 0; i <= steps; i++) {
                     if (!this.isExecuting) break;
-                    
+
                     progress.style.width = `${i}%`;
                     await this.delay(stepDuration);
                 }
@@ -1127,7 +1179,7 @@
 
                 for (let i = 0; i < detailIds.length; i++) {
                     if (!this.isExecuting) break;
-                    
+
                     const element = document.getElementById(detailIds[i]);
                     if (element) {
                         await this.animateValue(element, stageData[i]);
@@ -1155,11 +1207,11 @@
 
                 for (let i = 0; i <= steps; i++) {
                     if (!this.isExecuting) break;
-                    
+
                     const progress = i / steps;
                     const currentValue = this.interpolateValue(startValue, finalValue, progress);
                     element.textContent = currentValue;
-                    
+
                     await this.delay(stepDuration);
                 }
             }
@@ -1248,4 +1300,5 @@
         });
     </script>
 </body>
+
 </html>

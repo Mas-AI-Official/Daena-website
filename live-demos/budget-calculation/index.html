@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena AI - Budget Calculation Demo</title>
-    <meta name="description" content="Watch Daena's Finance Agent calculate comprehensive budgets with real-time data analysis and live narration">`n    <!-- Daena Skin - Unified styling -->`n    <link rel="stylesheet" href="/assets/skin/daena/skin.css">`n    <script defer src="/assets/skin/daena/skin.js"></script>
-    
+    <meta name="description"
+        content="Watch Daena's Finance Agent calculate comprehensive budgets with real-time data analysis and live narration">
+
+    <!-- Daena Skin - Unified styling -->
+    <link rel="stylesheet" href="/assets/skin/daena/skin.css">
+    <script defer src="/assets/skin/daena/skin.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -42,7 +49,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
+            background:
                 radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
@@ -50,10 +57,23 @@
         }
 
         @keyframes backgroundShift {
-            0%, 100% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(-20px) translateY(-10px); }
-            50% { transform: translateX(20px) translateY(10px); }
-            75% { transform: translateX(-10px) translateY(20px); }
+
+            0%,
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+
+            25% {
+                transform: translateX(-20px) translateY(-10px);
+            }
+
+            50% {
+                transform: translateX(20px) translateY(10px);
+            }
+
+            75% {
+                transform: translateX(-10px) translateY(20px);
+            }
         }
 
         /* Navigation */
@@ -106,7 +126,7 @@
 
         .back-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         /* Main Container */
@@ -173,8 +193,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         /* Demo Controls */
@@ -498,7 +525,8 @@
             z-index: 10;
         }
 
-        .narration-controls, .music-controls {
+        .narration-controls,
+        .music-controls {
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -569,45 +597,46 @@
                 padding: 0.5rem 1rem;
                 min-height: 50px;
             }
-            
+
             .logo {
                 font-size: 1.2rem;
             }
-            
+
             .back-button {
                 padding: 8px 16px;
                 font-size: 12px;
             }
-            
+
             .nav-buttons {
                 gap: 0.5rem;
                 flex-wrap: wrap;
             }
-            
+
             .demo-container {
                 padding-top: 60px;
             }
-            
+
             .demo-title {
                 font-size: 1.8rem;
             }
-            
+
             .calculator-container {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-            
-            .input-panel, .results-panel {
+
+            .input-panel,
+            .results-panel {
                 padding: 1rem;
             }
-            
+
             .btn {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.95rem;
                 min-width: 44px;
                 min-height: 44px;
             }
-            
+
             .calculator-container {
                 grid-template-columns: 1fr;
                 padding: 0 1rem;
@@ -628,85 +657,96 @@
                 grid-template-columns: 1fr;
             }
         }
-        
+
         /* Extra small mobile */
         @media (max-width: 480px) {
             .navbar {
                 padding: 0.4rem 0.8rem;
                 min-height: 45px;
             }
-            
+
             .logo {
                 font-size: 1rem;
             }
-            
+
             .back-button {
                 padding: 6px 12px;
                 font-size: 11px;
             }
-            
+
             .demo-title {
                 font-size: 1.5rem;
             }
         }
-        
+
         /* Landscape orientation - Mobile & Tablet */
         @media (max-width: 1024px) and (orientation: landscape) {
             .navbar {
                 padding: 0.3rem 1rem;
                 min-height: 40px;
             }
-            
+
             .logo {
                 font-size: 1.1rem;
             }
-            
+
             .back-button {
                 padding: 6px 12px;
                 font-size: 11px;
             }
-            
+
             .demo-container {
                 padding-top: 50px;
             }
-            
+
             .calculator-container {
                 grid-template-columns: 1fr 1fr;
                 gap: 1rem;
             }
         }
-        
+
         /* Portrait orientation - Mobile & Tablet */
         @media (max-width: 1024px) and (orientation: portrait) {
             .calculator-container {
                 grid-template-columns: 1fr;
             }
         }
-        
+
         /* Tablet specific adjustments */
         @media (min-width: 769px) and (max-width: 1024px) {
             .calculator-container {
                 grid-template-columns: 1fr 1fr;
             }
         }
-        
+
         /* Cross-browser compatibility */
         @supports not (backdrop-filter: blur(20px)) {
-            .navbar, .input-panel, .results-panel {
+
+            .navbar,
+            .input-panel,
+            .results-panel {
                 background: rgba(15, 15, 35, 0.95) !important;
             }
         }
-        
+
         /* iOS Safari specific fixes */
         @supports (-webkit-touch-callout: none) {
-            input, textarea, select, button {
-                font-size: 16px !important; /* Prevents zoom on iOS */
+
+            input,
+            textarea,
+            select,
+            button {
+                font-size: 16px !important;
+                /* Prevents zoom on iOS */
             }
         }
-        
+
         /* Touch-friendly elements */
         @media (hover: none) and (pointer: coarse) {
-            .btn, a, button {
+
+            .btn,
+            a,
+            button {
                 min-height: 44px;
                 min-width: 44px;
                 padding: 12px 24px;
@@ -738,8 +778,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-text {
@@ -752,673 +797,163 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Global CSS -->
     <link rel="stylesheet" href="/assets/css/global.css">
-    
+
     <!-- Metatron Background Script -->
     <script src="/js/metatron-hex-network.js"></script>
 
-</head>
-<body>
-
-    <!-- Standard Navbar -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="/" class="flex items-center gap-2 group">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
-                            <span class="text-black font-bold text-xl">D</span>
-                        </div>
-                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
-                    </a>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="/#features" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
-                        <a href="/#technology" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
-                        <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live Demos</a>
-                        <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
-                    </div>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="hidden md:hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
-                <a href="/#features" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
-                <a href="/#technology" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
-                <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live Demos</a>
-                <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
-            </div>
-        </div>
-    </nav>
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-    </script>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div>
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Loading Budget Calculation Demo...</div>
-                </div>
-            </div>
-
-    <!-- Animated Background -->
-    
-
-    <!-- Navigation -->
-    
-
-    <!-- Main Demo Container -->
-    <div class="demo-container">
-        <!-- Demo Header -->
-        <div class="demo-header">
-            <h1 class="demo-title">Budget Calculation Demo</h1>
-            <p class="demo-subtitle">
-                Watch Daena's Finance Agent calculate comprehensive budgets with real-time data analysis. 
-                See how it processes market data, calculates ROI projections, and provides detailed financial insights.
-            </p>
-                    </div>
-
-        <!-- Narration Panel -->
-        <div class="narration-panel">
-            <div class="narration-text" id="narrationText">
-                <span class="narration-indicator"></span>
-                Welcome to Daena's Budget Calculation Demo. Watch as our Finance Agent processes market data and calculates comprehensive budget projections with real-time analysis and live narration.
-                            </div>
-                            </div>
-
-        <!-- Demo Controls -->
-        <div class="demo-controls">
-            <button class="btn btn-primary" id="executeBtn">💰 EXECUTE BUDGET CALCULATION</button>
-            <button class="btn btn-secondary" id="resetBtn">🔄 Reset Demo</button>
-                            </div>
-
-        <!-- Progress Bar -->
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-                            </div>
-            <div class="progress-text" id="progressText">Ready to calculate budget...</div>
-                            </div>
-
-        <!-- Calculator Interface -->
-        <div class="calculator-container">
-            <!-- Input Panel -->
-            <div class="input-panel">
-                <h3>📊 Budget Parameters</h3>
-                <div class="input-group">
-                    <label for="projectType">Project Type</label>
-                    <select id="projectType">
-                        <option value="product-launch">Product Launch</option>
-                        <option value="marketing-campaign">Marketing Campaign</option>
-                        <option value="r&d-project">R&D Project</option>
-                        <option value="expansion">Business Expansion</option>
-                    </select>
-                        </div>
-                <div class="input-group">
-                    <label for="budgetRange">Budget Range</label>
-                    <select id="budgetRange">
-                        <option value="small">Small ($10K - $100K)</option>
-                        <option value="medium">Medium ($100K - $1M)</option>
-                        <option value="large">Large ($1M - $10M)</option>
-                        <option value="enterprise">Enterprise ($10M+)</option>
-                    </select>
-                    </div>
-                <div class="input-group">
-                    <label for="timeline">Timeline (Months)</label>
-                    <input type="number" id="timeline" value="12" min="1" max="60">
-                </div>
-                <div class="input-group">
-                    <label for="teamSize">Team Size</label>
-                    <input type="number" id="teamSize" value="10" min="1" max="100">
-                    </div>
-                    </div>
-
-            <!-- Results Panel -->
-            <div class="results-panel">
-                <h3>💡 Calculated Results</h3>
-                <div id="budgetResults">
-                    <div class="budget-item">
-                        <span class="budget-label">Market Research</span>
-                        <span class="budget-value" id="marketResearch">$0</span>
-                    </div>
-                    <div class="budget-item">
-                        <span class="budget-label">Development</span>
-                        <span class="budget-value" id="development">$0</span>
-                    </div>
-                    <div class="budget-item">
-                        <span class="budget-label">Marketing</span>
-                        <span class="budget-value" id="marketing">$0</span>
-                </div>
-                    <div class="budget-item">
-                        <span class="budget-label">Operations</span>
-                        <span class="budget-value" id="operations">$0</span>
-                        </div>
-                    <div class="budget-item">
-                        <span class="budget-label">Personnel</span>
-                        <span class="budget-value" id="personnel">$0</span>
-                        </div>
-                    <div class="budget-item">
-                        <span class="budget-label">Infrastructure</span>
-                        <span class="budget-value" id="infrastructure">$0</span>
-                        </div>
-                    <div class="budget-item">
-                        <span class="budget-label">Contingency</span>
-                        <span class="budget-value" id="contingency">$0</span>
-                        </div>
-                    <div class="total-budget">
-                        <div class="label">Total Budget</div>
-                        <div class="value" id="totalBudget">$0</div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
-        <!-- Analysis Panel -->
-        <div class="analysis-panel">
-            <h3>📈 Financial Analysis</h3>
-            <div class="analysis-grid">
-                <div class="analysis-card">
-                    <h4>ROI Projection</h4>
-                    <div class="value" id="roiProjection">0%</div>
-                    <div class="description">Expected return on investment</div>
-                        </div>
-                <div class="analysis-card">
-                    <h4>Payback Period</h4>
-                    <div class="value" id="paybackPeriod">0 months</div>
-                    <div class="description">Time to recover investment</div>
-                    </div>
-                <div class="analysis-card">
-                    <h4>Risk Level</h4>
-                    <div class="value" id="riskLevel">Low</div>
-                    <div class="description">Investment risk assessment</div>
-                        </div>
-                <div class="analysis-card">
-                    <h4>Confidence Score</h4>
-                    <div class="value" id="confidenceScore">0%</div>
-                    <div class="description">Analysis confidence level</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        <!-- Audio Controls -->
-        <div class="audio-controls">
-            <div class="narration-controls">
-                <button id="playNarrationBtn">🎵 Play Narration</button>
-                <button id="rewindBtn" title="Rewind 10s">⏪</button>
-                <button id="speedBtn" title="Speed: 1x">1x</button>
-                <button id="forwardBtn" title="Forward 10s">⏩</button>
-                <div class="progress-container">
-                    <div class="progress-bar" id="narrationProgress">
-                        <div class="progress-fill" id="narrationProgressFill"></div>
-                </div>
-                    <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Audio Elements -->
-    <audio id="narrationAudio" preload="auto"></audio>
-
-    <script>
-        class BudgetCalculationDemo {
-            constructor() {
-                this.isExecuting = false;
-                this.currentStep = 0;
-                this.totalSteps = 8;
-                this.budgetData = {};
-                
-                this.init();
-            }
-
-            init() {
-                this.executeBtn = document.getElementById('executeBtn');
-                this.resetBtn = document.getElementById('resetBtn');
-                this.narrationText = document.getElementById('narrationText');
-                this.progressFill = document.getElementById('progressFill');
-                this.progressText = document.getElementById('progressText');
-                this.narrationAudio = document.getElementById('narrationAudio');
-                this.playNarrationBtn = document.getElementById('playNarrationBtn');
-                
-                // Enhanced audio controls
-                this.rewindBtn = document.getElementById('rewindBtn');
-                this.speedBtn = document.getElementById('speedBtn');
-                this.forwardBtn = document.getElementById('forwardBtn');
-                this.narrationProgress = document.getElementById('narrationProgress');
-                this.narrationProgressFill = document.getElementById('narrationProgressFill');
-                this.timeDisplay = document.getElementById('timeDisplay');
-                
-                this.currentSpeed = 1;
-                this.isNarrationPlaying = false;
-
-                // Narration scripts - Detailed scenarios matching voice-over
-                this.narrationScripts = [
-                    "Welcome to Daena's Budget Calculation Demo. I'm your Finance Agent, and I'll demonstrate how I process your project parameters to calculate a comprehensive budget with real-time market analysis.",
-                    "Step 1: Analyzing your project type - Product Launch. I'm now gathering current market data, competitor pricing, and industry benchmarks to ensure our calculations are accurate and up-to-date.",
-                    "Step 2: Calculating market research costs. Based on your small budget range of $10K to $100K, I'm allocating 15% for comprehensive market analysis, including customer surveys, competitor research, and trend analysis.",
-                    "Step 3: Determining development costs. For a 12-month timeline with a 10-person team, I'm calculating technology costs, development tools, and resource allocation. This represents 35% of your total budget.",
-                    "Step 4: Computing marketing budget. I'm analyzing your target audience and allocating 25% for digital marketing campaigns, content creation, and brand awareness activities.",
-                    "Step 5: Calculating operations costs. I'm factoring in infrastructure, project management tools, and ongoing maintenance costs, which typically represent 10% of the budget.",
-                    "Step 6: Analyzing personnel costs. With your 10-person team over 12 months, I'm calculating salaries, benefits, and training costs, scaled to your budget range.",
-                    "Step 7: Adding contingency buffer. I'm applying a 10% contingency for unexpected costs and risk mitigation, ensuring your project stays within budget even with scope changes.",
-                    "Step 8: Finalizing budget analysis. I've completed the comprehensive budget calculation with detailed ROI projections. Your total budget is calculated, and I'm confident in these projections based on current market data."
-                ];
-
-                this.setupEventListeners();
-                this.resetDemo();
-                this.hideLoading();
-            }
-
-            setupEventListeners() {
-                this.executeBtn.addEventListener('click', () => {
-                    if (!this.isExecuting) {
-                        this.startDemo();
-                    } else {
-                        this.stopDemo();
-                    }
-                });
-
-                this.resetBtn.addEventListener('click', () => this.resetDemo());
-                this.playNarrationBtn.addEventListener('click', () => this.toggleNarration());
-                
-                // Enhanced audio controls
-                this.rewindBtn.addEventListener('click', () => this.rewindNarration());
-                this.speedBtn.addEventListener('click', () => this.toggleSpeed());
-                this.forwardBtn.addEventListener('click', () => this.forwardNarration());
-                this.narrationProgress.addEventListener('click', (e) => this.seekNarration(e));
-                
-                // Audio event listeners
-                this.narrationAudio.addEventListener('timeupdate', () => this.updateProgress());
-                this.narrationAudio.addEventListener('loadedmetadata', () => this.updateTimeDisplay());
-                this.narrationAudio.addEventListener('ended', () => this.onNarrationEnd());
-
-                // Load narration audio
-                this.narrationAudio.src = '../voice-over-demos/Demo 2 Budget Calculation.mp3';
-                this.narrationAudio.volume = 0.8;
-            }
-
-            resetDemo() {
-                this.isExecuting = false;
-                this.currentStep = 0;
-                this.executeBtn.textContent = '💰 EXECUTE BUDGET CALCULATION';
-                this.executeBtn.classList.remove('executing');
-                
-                // Reset progress
-                this.progressFill.style.width = '0%';
-                this.progressText.textContent = 'Ready to calculate budget...';
-                
-                // Reset budget values
-                this.resetBudgetValues();
-                
-                // Reset narration
-                this.updateNarration(this.narrationScripts[0]);
-            }
-
-            resetBudgetValues() {
-                const budgetItems = ['marketResearch', 'development', 'marketing', 'operations', 'personnel', 'infrastructure', 'contingency', 'totalBudget'];
-                budgetItems.forEach(item => {
-                    document.getElementById(item).textContent = '$0';
-                });
-
-                const analysisItems = ['roiProjection', 'paybackPeriod', 'riskLevel', 'confidenceScore'];
-                analysisItems.forEach(item => {
-                    const element = document.getElementById(item);
-                    if (item === 'riskLevel') {
-                        element.textContent = 'Low';
-                    } else {
-                        element.textContent = '0%';
-                    }
-                });
-            }
-
-            async startDemo() {
-                this.isExecuting = true;
-                this.executeBtn.textContent = '⏸ STOP CALCULATION';
-                this.executeBtn.classList.add('executing');
-
-                // Start narration first (the correct voice-over)
-                this.narrationAudio.playbackRate = this.currentSpeed;
-                this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
-                this.playNarrationBtn.textContent = '⏸ Pause Narration';
-                this.isNarrationPlaying = true;
-
-                // Background music disabled by default to avoid interference with narration
-                // this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
-
-                // Get input parameters
-                const projectType = document.getElementById('projectType').value;
-                const budgetRange = document.getElementById('budgetRange').value;
-                const timeline = parseInt(document.getElementById('timeline').value);
-                const teamSize = parseInt(document.getElementById('teamSize').value);
-
-                // Calculate budget based on parameters
-                await this.calculateBudget(projectType, budgetRange, timeline, teamSize);
-
-                // Demo completed - narration continues until finished
-            }
-
-            stopDemo() {
-                this.isExecuting = false;
-                this.executeBtn.textContent = '💰 EXECUTE BUDGET CALCULATION';
-                this.executeBtn.classList.remove('executing');
-
-                // Stop narration only if user manually stops
-                this.narrationAudio.pause();
-                this.playNarrationBtn.textContent = '🎵 Play Narration';
-            }
-
-            async calculateBudget(projectType, budgetRange, timeline, teamSize) {
-                // Define base multipliers based on project type
-                const multipliers = {
-                    'product-launch': { base: 100000, complexity: 1.2 },
-                    'marketing-campaign': { base: 50000, complexity: 0.8 },
-                    'r&d-project': { base: 200000, complexity: 1.5 },
-                    'expansion': { base: 150000, complexity: 1.0 }
-                };
-
-                // Define range multipliers
-                const rangeMultipliers = {
-                    'small': 0.1,
-                    'medium': 1.0,
-                    'large': 5.0,
-                    'enterprise': 20.0
-                };
-
-                const baseMultiplier = multipliers[projectType].base * rangeMultipliers[budgetRange];
-                const complexityMultiplier = multipliers[projectType].complexity;
-
-                // Calculate individual budget components
-                const budgetComponents = {
-                    marketResearch: Math.round(baseMultiplier * 0.15 * complexityMultiplier),
-                    development: Math.round(baseMultiplier * 0.35 * complexityMultiplier),
-                    marketing: Math.round(baseMultiplier * 0.25 * complexityMultiplier),
-                    operations: Math.round(baseMultiplier * 0.10 * complexityMultiplier),
-                    personnel: Math.round(baseMultiplier * 0.10 * complexityMultiplier * (teamSize / 10)),
-                    infrastructure: Math.round(baseMultiplier * 0.05 * complexityMultiplier),
-                    contingency: Math.round(baseMultiplier * 0.10 * complexityMultiplier)
-                };
-
-                // Calculate total budget
-                const totalBudget = Object.values(budgetComponents).reduce((sum, value) => sum + value, 0);
-                budgetComponents.totalBudget = totalBudget;
-
-                // Calculate analysis metrics
-                const analysis = this.calculateAnalysis(budgetComponents, projectType, timeline);
-
-                // Animate the calculation process
-                await this.animateCalculation(budgetComponents, analysis);
-            }
-
-            calculateAnalysis(budget, projectType, timeline) {
-                // Calculate ROI based on project type and budget
-                const roiMultipliers = {
-                    'product-launch': 2.5,
-                    'marketing-campaign': 3.0,
-                    'r&d-project': 1.8,
-                    'expansion': 2.2
-                };
-
-                const expectedROI = Math.round(roiMultipliers[projectType] * 100);
-                const paybackPeriod = Math.round(timeline * 0.6);
-                
-                // Determine risk level
-                let riskLevel = 'Low';
-                if (budget.totalBudget > 1000000) riskLevel = 'Medium';
-                if (budget.totalBudget > 5000000) riskLevel = 'High';
-
-                // Calculate confidence score
-                const confidenceScore = Math.min(95, Math.max(75, 100 - (budget.totalBudget / 100000)));
-
-                return {
-                    roi: expectedROI,
-                    paybackPeriod: paybackPeriod,
-                    riskLevel: riskLevel,
-                    confidence: Math.round(confidenceScore)
-                };
-            }
-
-            async animateCalculation(budgetComponents, analysis) {
-                const steps = [
-                    { component: 'marketResearch', step: 1 },
-                    { component: 'development', step: 2 },
-                    { component: 'marketing', step: 3 },
-                    { component: 'operations', step: 4 },
-                    { component: 'personnel', step: 5 },
-                    { component: 'infrastructure', step: 6 },
-                    { component: 'contingency', step: 7 },
-                    { component: 'totalBudget', step: 8 }
-                ];
-
-                for (let i = 0; i < steps.length; i++) {
-                    if (!this.isExecuting) break;
-
-                    const step = steps[i];
-                    this.currentStep = step.step;
-                    
-                    // Update progress
-                    const progress = (step.step / this.totalSteps) * 100;
-                    this.progressFill.style.width = progress + '%';
-                    this.progressText.textContent = `Calculating ${step.component}...`;
-
-                    // Update narration
-                    this.updateNarration(this.narrationScripts[step.step]);
-
-                    // Animate the value
-                    await this.animateValue(step.component, budgetComponents[step.component]);
-
-                    // Update analysis for final step
-                    if (step.step === 8) {
-                        this.updateAnalysis(analysis);
-                    }
-
-                    await this.delay(1500);
-                }
-
-                // Final narration
-                this.updateNarration("Budget calculation complete! Daena's Finance Agent has processed all parameters and provided comprehensive financial analysis with detailed ROI projections.");
-            }
-
-            async animateValue(componentId, finalValue) {
-                const element = document.getElementById(componentId);
-                const startValue = 0;
-                const duration = 1000;
-                const steps = 50;
-                const stepValue = (finalValue - startValue) / steps;
-                const stepDuration = duration / steps;
-
-                for (let i = 0; i <= steps; i++) {
-                    if (!this.isExecuting) break;
-                    
-                    const currentValue = Math.round(startValue + (stepValue * i));
-                    element.textContent = this.formatCurrency(currentValue);
-                    
-                    await this.delay(stepDuration);
-                }
-            }
-
-            updateAnalysis(analysis) {
-                document.getElementById('roiProjection').textContent = `${analysis.roi}%`;
-                document.getElementById('paybackPeriod').textContent = `${analysis.paybackPeriod} months`;
-                document.getElementById('riskLevel').textContent = analysis.riskLevel;
-                document.getElementById('confidenceScore').textContent = `${analysis.confidence}%`;
-            }
-
-            formatCurrency(amount) {
-                return new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                }).format(amount);
-            }
-
-            updateNarration(text) {
-                this.narrationText.innerHTML = `
-                    <span class="narration-indicator"></span>
-                    ${text}
-                `;
-            }
-
-            toggleNarration() {
-                // Toggle narration audio if available
-                if (this.narrationAudio.paused) {
-                    this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
-                    this.playNarrationBtn.textContent = '⏸ Pause Narration';
-                    this.isNarrationPlaying = true;
-                } else {
-                    this.narrationAudio.pause();
-                    this.playNarrationBtn.textContent = '🎵 Play Narration';
-                    this.isNarrationPlaying = false;
-                }
-            }
-
-            rewindNarration() {
-                this.narrationAudio.currentTime = Math.max(0, this.narrationAudio.currentTime - 10);
-            }
-
-            forwardNarration() {
-                this.narrationAudio.currentTime = Math.min(this.narrationAudio.duration, this.narrationAudio.currentTime + 10);
-            }
-
-            toggleSpeed() {
-                const speeds = [1, 1.25, 1.5, 2];
-                const currentIndex = speeds.indexOf(this.currentSpeed);
-                const nextIndex = (currentIndex + 1) % speeds.length;
-                this.currentSpeed = speeds[nextIndex];
-                
-                this.narrationAudio.playbackRate = this.currentSpeed;
-                this.speedBtn.textContent = `${this.currentSpeed}x`;
-                this.speedBtn.classList.toggle('active', this.currentSpeed !== 1);
-            }
-
-            seekNarration(e) {
-                const rect = this.narrationProgress.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const percentage = clickX / rect.width;
-                this.narrationAudio.currentTime = percentage * this.narrationAudio.duration;
-            }
-
-            updateProgress() {
-                if (this.narrationAudio.duration) {
-                    const percentage = (this.narrationAudio.currentTime / this.narrationAudio.duration) * 100;
-                    this.narrationProgressFill.style.width = `${percentage}%`;
-                    this.updateTimeDisplay();
-                }
-            }
-
-            updateTimeDisplay() {
-                const current = this.formatTime(this.narrationAudio.currentTime);
-                const total = this.formatTime(this.narrationAudio.duration);
-                this.timeDisplay.textContent = `${current} / ${total}`;
-            }
-
-            formatTime(seconds) {
-                if (isNaN(seconds)) return '0:00';
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${mins}:${secs.toString().padStart(2, '0')}`;
-            }
-
-            onNarrationEnd() {
-                this.isNarrationPlaying = false;
-                this.playNarrationBtn.textContent = '🎵 Play Narration';
-                // Auto-stop demo when narration ends
-                if (this.isExecuting) {
-                    this.stopDemo();
-                }
-            }
-
-            toggleBackgroundMusic() {
-                if (this.backgroundMusic.paused) {
-                    this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
-                    this.playMusicBtn.textContent = '⏸ Stop Music';
-                        } else {
-                    this.backgroundMusic.pause();
-                    this.playMusicBtn.textContent = '🎶 Background Music';
-                }
-            }
-
-            setVolume(value) {
-                const volume = value / 100;
-                this.narrationAudio.volume = volume;
-                this.backgroundMusic.volume = volume * 0.3; // Keep background music quieter
-            }
-
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-
-            hideLoading() {
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').style.opacity = '0';
-                    setTimeout(() => {
-                        document.getElementById('loadingOverlay').style.display = 'none';
-                    }, 500);
-                }, 2000);
-            }
+    this.updateAnalysis(analysis);
+    }
+
+    await this.delay(1500);
+    }
+
+    // Final narration
+    this.updateNarration("Budget calculation complete! Daena's Finance Agent has processed all parameters and provided
+    comprehensive financial analysis with detailed ROI projections.");
+    }
+
+    async animateValue(componentId, finalValue) {
+    const element = document.getElementById(componentId);
+    const startValue = 0;
+    const duration = 1000;
+    const steps = 50;
+    const stepValue = (finalValue - startValue) / steps;
+    const stepDuration = duration / steps;
+
+    for (let i = 0; i <= steps; i++) { if (!this.isExecuting) break; const currentValue=Math.round(startValue +
+        (stepValue * i)); element.textContent=this.formatCurrency(currentValue); await this.delay(stepDuration); } }
+        updateAnalysis(analysis) { document.getElementById('roiProjection').textContent=`${analysis.roi}%`;
+        document.getElementById('paybackPeriod').textContent=`${analysis.paybackPeriod} months`;
+        document.getElementById('riskLevel').textContent=analysis.riskLevel;
+        document.getElementById('confidenceScore').textContent=`${analysis.confidence}%`; } formatCurrency(amount) {
+        return new Intl.NumberFormat('en-US', { style: 'currency' , currency: 'USD' , minimumFractionDigits: 0,
+        maximumFractionDigits: 0 }).format(amount); } updateNarration(text) { this.narrationText.innerHTML=` <span
+        class="narration-indicator"></span>
+        ${text}
+        `;
+        }
+
+        toggleNarration() {
+        // Toggle narration audio if available
+        if (this.narrationAudio.paused) {
+        this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
+        this.playNarrationBtn.textContent = '⏸ Pause Narration';
+        this.isNarrationPlaying = true;
+        } else {
+        this.narrationAudio.pause();
+        this.playNarrationBtn.textContent = '🎵 Play Narration';
+        this.isNarrationPlaying = false;
+        }
+        }
+
+        rewindNarration() {
+        this.narrationAudio.currentTime = Math.max(0, this.narrationAudio.currentTime - 10);
+        }
+
+        forwardNarration() {
+        this.narrationAudio.currentTime = Math.min(this.narrationAudio.duration, this.narrationAudio.currentTime + 10);
+        }
+
+        toggleSpeed() {
+        const speeds = [1, 1.25, 1.5, 2];
+        const currentIndex = speeds.indexOf(this.currentSpeed);
+        const nextIndex = (currentIndex + 1) % speeds.length;
+        this.currentSpeed = speeds[nextIndex];
+
+        this.narrationAudio.playbackRate = this.currentSpeed;
+        this.speedBtn.textContent = `${this.currentSpeed}x`;
+        this.speedBtn.classList.toggle('active', this.currentSpeed !== 1);
+        }
+
+        seekNarration(e) {
+        const rect = this.narrationProgress.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        this.narrationAudio.currentTime = percentage * this.narrationAudio.duration;
+        }
+
+        updateProgress() {
+        if (this.narrationAudio.duration) {
+        const percentage = (this.narrationAudio.currentTime / this.narrationAudio.duration) * 100;
+        this.narrationProgressFill.style.width = `${percentage}%`;
+        this.updateTimeDisplay();
+        }
+        }
+
+        updateTimeDisplay() {
+        const current = this.formatTime(this.narrationAudio.currentTime);
+        const total = this.formatTime(this.narrationAudio.duration);
+        this.timeDisplay.textContent = `${current} / ${total}`;
+        }
+
+        formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        onNarrationEnd() {
+        this.isNarrationPlaying = false;
+        this.playNarrationBtn.textContent = '🎵 Play Narration';
+        // Auto-stop demo when narration ends
+        if (this.isExecuting) {
+        this.stopDemo();
+        }
+        }
+
+        toggleBackgroundMusic() {
+        if (this.backgroundMusic.paused) {
+        this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
+        this.playMusicBtn.textContent = '⏸ Stop Music';
+        } else {
+        this.backgroundMusic.pause();
+        this.playMusicBtn.textContent = '🎶 Background Music';
+        }
+        }
+
+        setVolume(value) {
+        const volume = value / 100;
+        this.narrationAudio.volume = volume;
+        this.backgroundMusic.volume = volume * 0.3; // Keep background music quieter
+        }
+
+        delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        hideLoading() {
+        setTimeout(() => {
+        document.getElementById('loadingOverlay').style.opacity = '0';
+        setTimeout(() => {
+        document.getElementById('loadingOverlay').style.display = 'none';
+        }, 500);
+        }, 2000);
+        }
         }
 
         // Initialize demo when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            new BudgetCalculationDemo();
-            
-            // Handle orientation changes
-            function handleOrientationChange() {
-                const calculatorContainer = document.querySelector('.calculator-container');
-                const navbar = document.querySelector('.navbar');
-                
-                setTimeout(() => {
-                    const isLandscape = window.innerWidth > window.innerHeight;
-                    
-                    if (calculatorContainer) {
-                        if (isLandscape && window.innerWidth <= 1024) {
-                            calculatorContainer.style.gridTemplateColumns = '1fr 1fr';
-                        } else if (window.innerWidth <= 768) {
-                            calculatorContainer.style.gridTemplateColumns = '1fr';
-                        }
-                    }
-                    
-                    if (navbar) {
-                        if (isLandscape) {
-                            navbar.style.minHeight = '40px';
-                        } else {
-                            navbar.style.minHeight = '50px';
-                        }
-                    }
-                }, 100);
-            }
-            
-            // Listen for orientation changes
-            window.addEventListener('orientationchange', handleOrientationChange);
-            window.addEventListener('resize', handleOrientationChange);
-            
-            // Initial orientation check
-            handleOrientationChange();
-        });
-    </script>
-</body>
+        new BudgetCalculationDemo();
+
+        // Handle orientation changes
+        function handleOrientationChange() {
+        const calculatorContainer = document.querySelector('.calculator-container');
+        const navbar = document.querySelector('.navbar');
+
+        setTimeout(() => {
+        const isLandscape = window.innerWidth > window.innerHeight;
+
+        if (calculatorContainer) {
+        if (isLandscape && window.innerWidth <= 1024) { calculatorContainer.style.gridTemplateColumns='1fr 1fr' ; } else
+            if (window.innerWidth <=768) { calculatorContainer.style.gridTemplateColumns='1fr' ; } } if (navbar) { if
+            (isLandscape) { navbar.style.minHeight='40px' ; } else { navbar.style.minHeight='50px' ; } } }, 100); } //
+            Listen for orientation changes window.addEventListener('orientationchange', handleOrientationChange);
+            window.addEventListener('resize', handleOrientationChange); // Initial orientation check
+            handleOrientationChange(); }); </script>
+            </body>
+
 </html>

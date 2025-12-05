@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena AI - Sunflower Honeycomb Architecture Demo</title>
-    <meta name="description" content="Experience Daena's revolutionary Sunflower-Honeycomb Architecture with 48 agents across 8 departments">`n    <!-- Daena Skin - Unified styling -->`n    <link rel="stylesheet" href="/assets/skin/daena/skin.css">`n    <script defer src="/assets/skin/daena/skin.js"></script>
-    
+    <meta name="description"
+        content="Experience Daena's revolutionary Sunflower-Honeycomb Architecture with 48 agents across 8 departments">
+
+    <!-- Daena Skin - Unified styling -->
+    <link rel="stylesheet" href="/assets/skin/daena/skin.css">
+    <script defer src="/assets/skin/daena/skin.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -42,7 +49,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
+            background:
                 radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
@@ -429,18 +436,39 @@
 
         /* Animations */
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            }
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         /* Responsive Design */
@@ -448,11 +476,11 @@
             .departments-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .agents-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .control-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -462,46 +490,58 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Global CSS -->
     <link rel="stylesheet" href="/assets/css/global.css">
-    
+
     <!-- Metatron Background Script -->
     <script src="/js/metatron-hex-network.js"></script>
 
 </head>
+
 <body>
 
     <!-- Standard Navbar -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar"
+        style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="/" class="flex items-center gap-2 group">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
                             <span class="text-black font-bold text-xl">D</span>
                         </div>
-                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                        <span
+                            class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
                     </a>
                 </div>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="/#features" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
-                        <a href="/#technology" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
-                        <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live Demos</a>
-                        <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                        <a href="/#features"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live
+                            Demos</a>
+                        <a href="/docs.html"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
                     </div>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <button type="button" id="mobile-menu-btn"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
@@ -511,10 +551,15 @@
         <!-- Mobile Menu -->
         <div class="hidden md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
-                <a href="/#features" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
-                <a href="/#technology" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
-                <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live Demos</a>
-                <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
+                <a href="/#features"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="/#technology"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
+                <a href="/docs.html#advanced-demos"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live
+                    Demos</a>
+                <a href="/docs.html"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
             </div>
         </div>
     </nav>
@@ -526,8 +571,8 @@
         });
     </script>
 
-    
-    
+
+
     <header class="header">
         <div class="logo">Daena AI</div>
         <div class="nav-buttons">
@@ -551,13 +596,14 @@
                 <button id="executeBtn" class="btn btn-primary">🚀 START DEMO</button>
                 <button id="resetBtn" class="btn btn-secondary">🔄 Reset Demo</button>
             </div>
-            <p style="color: var(--text-muted); margin-bottom: 0;">Watch 6 specialized agents collaborate on product launch analysis</p>
+            <p style="color: var(--text-muted); margin-bottom: 0;">Watch 6 specialized agents collaborate on product
+                launch analysis</p>
         </div>
 
         <div class="honeycomb-container">
             <h2 class="honeycomb-title">🤝 Agent Communication Architecture</h2>
             <p class="honeycomb-subtitle">6 Specialized Agents across 8 Departments with Real-time Communication</p>
-            
+
             <!-- Timeline / Progress -->
             <div class="timeline-container">
                 <div class="timeline-header">
@@ -572,7 +618,7 @@
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
             </div>
-            
+
             <div class="departments-grid" id="departmentsGrid">
                 <!-- Departments will be populated by JavaScript -->
             </div>
@@ -600,7 +646,8 @@
         <div class="communication-log">
             <h3 class="log-title">📡 Real-time Communication Log</h3>
             <div id="communicationLog">
-                <p style="color: #999; font-style: italic; text-align: center; padding: 2rem;">Agent communications will appear here when demo executes...</p>
+                <p style="color: #999; font-style: italic; text-align: center; padding: 2rem;">Agent communications will
+                    appear here when demo executes...</p>
             </div>
         </div>
 
@@ -629,7 +676,7 @@
                 this.progressTimer = null;
                 this.stepsTotal = 0;
                 this.stepsDone = 0;
-                
+
                 this.init();
             }
 
@@ -671,7 +718,7 @@
                 // Load narration audio - Using the correct voice-over for Sunflower Honeycomb
                 this.narrationAudio.src = '../voice-over-demos/Demo 1 Agent Communication.mp3';
                 this.narrationAudio.volume = 0.8;
-                
+
                 // Load background music - using a different audio file to avoid pitch deck voice-over
                 this.backgroundMusic.src = '../../audio/slide-2.mp3'; // Using slide-2 instead of slide-1
                 this.backgroundMusic.volume = 0.05; // Lower volume to avoid interference
@@ -698,7 +745,7 @@
                     const departmentCard = document.createElement('div');
                     departmentCard.className = 'department-card';
                     departmentCard.id = `dept-${deptIndex}`;
-                    
+
                     departmentCard.innerHTML = `
                         <div class="department-title">${dept.name}</div>
                         <div class="agents-grid" id="agents-${deptIndex}">
@@ -709,16 +756,16 @@
                             `).join('')}
                         </div>
                     `;
-                    
+
                     departmentsGrid.appendChild(departmentCard);
-                    
+
                     // Store department reference
                     this.departments[deptIndex] = {
                         name: dept.name,
                         element: departmentCard,
                         agents: {}
                     };
-                    
+
                     // Store agent references
                     agentTypes.forEach((type, agentIndex) => {
                         const agentId = `agent-${deptIndex}-${agentIndex}`;
@@ -814,7 +861,7 @@
                         phase: 'border-handshake',
                         description: 'All Border agents establish cross-department channels',
                         narration: "All Border agents are now activating secure channels to share prerequisites across departments.",
-                        departments: [0,1,2,3,4,5,6,7],
+                        departments: [0, 1, 2, 3, 4, 5, 6, 7],
                         actions: [
                             { agent: 'agent-0-4', action: 'Engineering border channel established', confidence: 0.95 },
                             { agent: 'agent-1-4', action: 'Marketing border channel established', confidence: 0.95 },
@@ -959,7 +1006,7 @@
 
                     const phase = scenario[i];
                     this.updateTimelinePhase(phase.phase);
-                    
+
                     // Update narration
                     this.addCommunicationMessage('System', 'All Agents', phase.narration, 'NARRATION', 1.0);
 
@@ -973,10 +1020,10 @@
                         const agentId = action.agent;
                         this.addAgentActivity(agentId, action.action, action.confidence);
                         this.setAgentStatus(agentId, 'active');
-                        
+
                         // Add communication delay
                         await this.delay(800 + Math.random() * 400);
-                        
+
                         this.setAgentStatus(agentId, 'communicating');
                         await this.delay(1200 + Math.random() * 600);
                         this.stepsDone += 1;
@@ -1008,7 +1055,7 @@
 
                 agent.status = status;
                 agent.element.className = `agent-mini ${status}`;
-                
+
                 // Add visual feedback
                 if (status === 'active') {
                     agent.element.style.animation = 'pulse 1s infinite';
@@ -1031,7 +1078,7 @@
 
             addCommunicationMessage(from, to, message, type, confidence) {
                 this.messageCount++;
-                
+
                 // Check if cross-department
                 if (from !== to && from !== 'System') {
                     this.crossDeptCount++;
@@ -1039,7 +1086,7 @@
 
                 const logEntry = document.createElement('div');
                 logEntry.className = 'log-entry';
-                
+
                 const typeColors = {
                     'INITIATION': '#FF6B35',
                     'DATA_SHARE': '#4ECDC4',
@@ -1077,7 +1124,7 @@
                 document.getElementById('activeAgents').textContent = Object.values(this.agents).filter(agent => agent.status === 'active' || agent.status === 'communicating').length;
                 document.getElementById('messagesSent').textContent = this.messageCount;
                 document.getElementById('crossDept').textContent = this.crossDeptCount;
-                
+
                 const avgConfidence = this.confidenceCount > 0 ? Math.round((this.totalConfidence / this.confidenceCount) * 100) : 0;
                 document.getElementById('avgConfidence').textContent = `${avgConfidence}%`;
             }
@@ -1158,5 +1205,5 @@
         });
     </script>
 </body>
-</html>
 
+</html>
