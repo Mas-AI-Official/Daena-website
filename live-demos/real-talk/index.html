@@ -1,19 +1,22 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Real Talk â€¢ Live Demo</title>
-  <meta name="description" content="Listen to natural conversations between Daena agents discussing business scenarios" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/css/global.css">
-  <link rel="stylesheet" href="/assets/css/live-demos.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Real Talk â€¢ Live Demo</title>
+    <meta name="description"
+        content="Listen to natural conversations between Daena agents discussing business scenarios" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/live-demos.css">
 
 
-  <link rel="stylesheet" href="/live-demos/voice-player.css">
-  <script src="/live-demos/voice-player.js"></script>
-  <style>
-
+    <link rel="stylesheet" href="/live-demos/voice-player.css">
+    <link rel="stylesheet" href="/live-demos/voice-player.css">
+    <script src="/live-demos/voice-player.js"></script>
+    <script src="/live-demos/demo-shared.js"></script>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -151,8 +154,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         /* Conversation Display */
@@ -203,8 +213,15 @@
         }
 
         @keyframes processingPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
         }
 
         .mode-icon {
@@ -439,236 +456,593 @@
                 padding: 0.5rem 1rem !important;
                 min-height: 50px !important;
             }
-            
+
             .logo {
                 font-size: 1.2rem !important;
             }
-            
+
             .nav-btn {
                 padding: 8px 16px !important;
                 font-size: 12px !important;
             }
-            
+
             .nav-buttons {
                 gap: 0.5rem !important;
                 flex-wrap: wrap !important;
             }
-            
+
             .container {
                 padding-top: 60px !important;
             }
-            
+
             .demo-title {
                 font-size: 1.8rem !important;
             }
-            
+
             .demo-controls {
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
             }
-            
-            .demo-btn, button {
+
+            .demo-btn,
+            button {
                 padding: 0.8rem 1.5rem !important;
                 font-size: 0.95rem !important;
                 min-width: 44px !important;
                 min-height: 44px !important;
             }
         }
-        
+
         /* Extra small mobile */
         @media (max-width: 480px) {
             .header {
                 padding: 0.4rem 0.8rem !important;
                 min-height: 45px !important;
             }
-            
+
             .logo {
                 font-size: 1rem !important;
             }
-            
+
             .nav-btn {
                 padding: 6px 12px !important;
                 font-size: 11px !important;
             }
-            
+
             .demo-title {
                 font-size: 1.5rem !important;
             }
         }
-        
+
         /* Landscape orientation */
         @media (max-width: 1024px) and (orientation: landscape) {
             .header {
                 padding: 0.3rem 1rem !important;
                 min-height: 40px !important;
             }
-            
+
             .container {
                 padding-top: 50px !important;
             }
         }
-        
+
         /* Cross-browser compatibility */
         @supports not (backdrop-filter: blur(20px)) {
             .header {
                 background: rgba(15, 15, 35, 0.95) !important;
             }
         }
-        
+
         /* iOS Safari fixes */
         @supports (-webkit-touch-callout: none) {
-            input, textarea, select, button {
+
+            input,
+            textarea,
+            select,
+            button {
                 font-size: 16px !important;
             }
         }
-        
+
         /* Touch-friendly */
         @media (hover: none) and (pointer: coarse) {
-            .btn, a, button, .nav-btn, .demo-btn {
+
+            .btn,
+            a,
+            button,
+            .nav-btn,
+            .demo-btn {
                 min-height: 44px !important;
                 min-width: 44px !important;
             }
         }
-    
-
-  </style>
+    </style>
 </head>
+
 <body class="metatron-bg">
-  <div class="metatron-bg"></div>
-  <div class="metatron-pattern-bg"></div>
-  <canvas id="metatron-hex-canvas"></canvas>
-  
-  <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" style="pointer-events: none;">
-    <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
-      <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
-        <a href="/" class="text-xl font-bold">Daena</a>
-        <div class="hidden md:flex items-center gap-6">
-          <a href="/" class="hover:text-yellow-400 transition">Home</a>
-          <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-          <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-          <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-          <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-          <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
-        </div>
-        <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
-        <div class="flex flex-col gap-4">
-          <a href="/" class="hover:text-yellow-400 transition">Home</a>
-          <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-          <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-          <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-          <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-          <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  
-  <main class="page">
-    <header class="demo-header">
-      <a class="btn-back" href="/docs.html#advanced-demos">â† Back to Advanced Interactive Demos</a>
-    </header>
-    
-    <div class="card glass">
-      <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.5rem; margin-top: 0;">Real Talk</h1>
-      <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem; margin-top: 0;">Listen to natural conversations between Daena agents discussing business scenarios</p>
-      
+    <div class="metatron-bg"></div>
+    <div class="metatron-pattern-bg"></div>
+    <canvas id="metatron-hex-canvas"></canvas>
 
-    
-
-    <div class="container">
-        <div class="main-content">
-            <div class="demo-interface">
-                
-                
-
-                <div class="demo-controls">
-                    <button id="startBackendDemo" class="demo-btn">▶️ START REAL TIME DEMO</button>
-                    <button id="stopBackendDemo" class="demo-btn" style="display: none;">⏸ STOP DEMO</button>
-                    <button id="resetBackendDemo" class="demo-btn">🔄 RESET DEMO</button>
+    <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" style="pointer-events: none;">
+        <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
+            <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
+                <a href="/" class="text-xl font-bold">Daena</a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                    <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
+                    <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                    <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                    <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
                 </div>
-
-                <!-- Statistics Dashboard -->
-                <div class="stats-dashboard">
-                    <div class="stat-card">
-                        <div id="messagesProcessed" class="stat-value">0</div>
-                        <div class="stat-label">Messages Processed</div>
-                    </div>
-                    <div class="stat-card">
-                        <div id="understandingAccuracy" class="stat-value">0%</div>
-                        <div class="stat-label">Understanding Accuracy</div>
-                    </div>
-                    <div class="stat-card">
-                        <div id="responseTime" class="stat-value">0s</div>
-                        <div class="stat-label">Response Time</div>
-                    </div>
-                    <div class="stat-card">
-                        <div id="conversationQuality" class="stat-value">0.0</div>
-                        <div class="stat-label">Conversation Quality</div>
-                    </div>
+                <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
+                <div class="flex flex-col gap-4">
+                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                    <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
+                    <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                    <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                    <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
                 </div>
+            </div>
+        </div>
+    </nav>
 
-                <!-- Conversation Display -->
-                <div class="conversation-display">
-                    <h2 class="conversation-title">🗣️ Natural Language Processing</h2>
-                    <div class="conversation-modes">
-                        <!-- Voice Processing -->
-                        <div id="voiceProcessing" class="conversation-mode">
-                            <div class="mode-icon">🎤</div>
-                            <div class="mode-name">Voice Processing</div>
-                            <div class="mode-status">Standby</div>
-                            <div class="mode-progress">
-                                <div class="mode-progress-bar" id="voiceProcessingProgress"></div>
+    <main class="page">
+        <header class="demo-header">
+            <a class="btn-back" href="/#live-demos-section">← Back to Live Demos</a>
+        </header>
+
+        <div class="card glass">
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.5rem; margin-top: 0;">Real
+                Talk</h1>
+            <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem; margin-top: 0;">Listen to natural
+                conversations between Daena agents discussing business scenarios</p>
+
+
+
+
+            <div class="container">
+                <div class="main-content">
+                    <div class="demo-interface">
+
+
+
+                        <div class="demo-controls">
+                            <button id="startBackendDemo" class="demo-btn">▶️ START REAL TIME DEMO</button>
+                            <button id="stopBackendDemo" class="demo-btn" style="display: none;">⏸ STOP DEMO</button>
+                            <button id="resetBackendDemo" class="demo-btn">🔄 RESET DEMO</button>
+                        </div>
+
+                        <!-- Statistics Dashboard -->
+                        <div class="stats-dashboard">
+                            <div class="stat-card">
+                                <div id="messagesProcessed" class="stat-value">0</div>
+                                <div class="stat-label">Messages Processed</div>
+                            </div>
+                            <div class="stat-card">
+                                <div id="understandingAccuracy" class="stat-value">0%</div>
+                                <div class="stat-label">Understanding Accuracy</div>
+                            </div>
+                            <div class="stat-card">
+                                <div id="responseTime" class="stat-value">0s</div>
+                                <div class="stat-label">Response Time</div>
+                            </div>
+                            <div class="stat-card">
+                                <div id="conversationQuality" class="stat-value">0.0</div>
+                                <div class="stat-label">Conversation Quality</div>
                             </div>
                         </div>
 
-                        <!-- Text Understanding -->
-                        <div id="textUnderstanding" class="conversation-mode">
-                            <div class="mode-icon">📝</div>
-                            <div class="mode-name">Text Understanding</div>
-                            <div class="mode-status">Standby</div>
-                            <div class="mode-progress">
-                                <div class="mode-progress-bar" id="textUnderstandingProgress"></div>
+                        <!-- Conversation Display -->
+                        <div class="conversation-display">
+                            <h2 class="conversation-title">🗣️ Natural Language Processing</h2>
+                            <div class="conversation-modes">
+                                <!-- Voice Processing -->
+                                <div id="voiceProcessing" class="conversation-mode">
+                                    <div class="mode-icon">🎤</div>
+                                    <div class="mode-name">Voice Processing</div>
+                                    <div class="mode-status">Standby</div>
+                                    <div class="mode-progress">
+                                        <div class="mode-progress-bar" id="voiceProcessingProgress"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Text Understanding -->
+                                <div id="textUnderstanding" class="conversation-mode">
+                                    <div class="mode-icon">📝</div>
+                                    <div class="mode-name">Text Understanding</div>
+                                    <div class="mode-status">Standby</div>
+                                    <div class="mode-progress">
+                                        <div class="mode-progress-bar" id="textUnderstandingProgress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Interface -->
+                        <div class="chat-interface">
+                            <h2 class="chat-title">💬 Real Talk Conversation</h2>
+                            <div id="chatMessages" class="chat-messages">
+                                <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
+                                    Real Talk conversation system initialized and ready.
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Chat Interface -->
-                <div class="chat-interface">
-                    <h2 class="chat-title">💬 Real Talk Conversation</h2>
-                    <div id="chatMessages" class="chat-messages">
-                        <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
-                            Real Talk conversation system initialized and ready.
+                    <!-- Voice Controls -->
+                    <div class="voice-controls">
+                        <div class="voice-player-wrapper">
+                            <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">🎧 Real Talk Demo</h3>
+                            <div id="daena-voice-player"></div>
+                        </div>
+
+                        <div class="current-phase">
+                            <div class="phase-title">📖 Current Demo Phase</div>
+                            <div id="phaseDescription" class="phase-description">Ready to show Real Talk conversation...
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Voice Controls -->
-            <div class="voice-controls">
-                <div class="voice-player-wrapper">
-                    <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">🎧 Real Talk Demo</h3>
-                    <div id="daena-voice-player"></div>
-                </div>
+            <!-- Demo Script -->
+            <script src="../voice-player.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Initialize Voice Player
+                    const player = new DaenaVoicePlayer('daena-voice-player', {
+                        title: 'Real Talk Demo',
+                        audio: {
+                            src: '/live-demos/voice-over-demos/Demo 6 Real Talk.mp3'
+                        },
+                        chapters: [
+                            { t: 0, label: 'Introduction' },
+                            { t: 15, label: 'Conversation' },
+                            { t: 45, label: 'Analysis' }
+                        ]
+                    });
+                });
+            </script>
+            <script>
+                class DaenaRealTalkDemo {
+                    constructor() {
+                        this.isRunning = false;
+                        this.messagesProcessed = 0;
+                        this.understandingAccuracy = 0;
+                        this.responseTime = 0;
+                        this.conversationQuality = 0;
+                        this.voicePlayer = null;
 
-                <div class="current-phase">
-                    <div class="phase-title">📖 Current Demo Phase</div>
-                    <div id="phaseDescription" class="phase-description">Ready to show Real Talk conversation...</div>
-                </div>
-            </div>
+                        this.conversationFlow = [
+                            {
+                                user: "Hi Daena, I need help with our Q2 marketing strategy.",
+                                daena: "Hello! I'd be happy to help with your Q2 marketing strategy. I can see you're looking to optimize your marketing approach. Let me analyze your current situation and provide strategic recommendations.",
+                                processing: "voiceProcessing"
+                            },
+                            {
+                                user: "We're struggling with customer acquisition costs.",
+                                daena: "I understand the challenge with customer acquisition costs. This is a common issue that requires a multi-faceted approach. Let me break down some strategies that could help reduce your CAC while improving conversion rates.",
+                                processing: "textUnderstanding"
+                            },
+                            {
+                                user: "What specific tactics would you recommend?",
+                                daena: "Based on my analysis, I recommend focusing on three key areas: 1) Content marketing optimization, 2) Referral program implementation, and 3) Customer lifetime value enhancement. Each of these can significantly impact your acquisition costs.",
+                                processing: "voiceProcessing"
+                            },
+                            {
+                                user: "How do we measure success?",
+                                daena: "Excellent question! Success metrics should include CAC reduction percentage, conversion rate improvement, customer lifetime value increase, and overall ROI. I can help you set up comprehensive tracking and reporting systems.",
+                                processing: "textUnderstanding"
+                            },
+                            {
+                                user: "That sounds great! When can we start?",
+                                daena: "Perfect! I can begin implementing these strategies immediately. My 48-agent system will coordinate across marketing, sales, and analytics departments to ensure seamless execution. Would you like me to create a detailed implementation timeline?",
+                                processing: "voiceProcessing"
+                            }
+                        ];
+
+                        this.phases = [
+                            {
+                                title: "Conversation system initialization",
+                                duration: 2000,
+                                action: this.initializeConversation.bind(this)
+                            },
+                            {
+                                title: "Natural language processing",
+                                duration: 5000,
+                                action: this.processConversation.bind(this)
+                            },
+                            {
+                                title: "Response generation",
+                                duration: 3000,
+                                action: this.generateResponses.bind(this)
+                            },
+                            {
+                                title: "Conversation analysis",
+                                duration: 2000,
+                                action: this.analyzeConversation.bind(this)
+                            }
+                        ];
+
+                        this.init();
+                    }
+
+                    init() {
+                        this.startBtn = document.getElementById('startBackendDemo');
+                        this.stopBtn = document.getElementById('stopBackendDemo');
+                        this.resetBtn = document.getElementById('resetBackendDemo');
+
+                        this.startBtn.addEventListener('click', () => this.startDemo());
+                        this.stopBtn.addEventListener('click', () => this.stopDemo());
+                        this.resetBtn.addEventListener('click', () => this.resetDemo());
+
+                        this.updateStats();
+
+                        // Load voice player config
+                        this.loadVoiceConfig();
+                    }
+
+                    async loadVoiceConfig() {
+                        try {
+                            const response = await fetch('config.json');
+                            const config = await response.json();
+                            if (config.audio) {
+                                this.voicePlayer = new DaenaVoicePlayer('daena-voice-player', config);
+                            }
+                        } catch (error) {
+                            console.log('Voice config not available, demo will run without voice-over');
+                        }
+                    }
+
+                    async startDemo() {
+                        this.isRunning = true;
+                        this.startBtn.style.display = 'none';
+                        this.stopBtn.style.display = 'inline-block';
+                        this.stopBtn.classList.add('executing');
+
+                        // Start voice-over if available
+                        if (this.voicePlayer && this.voicePlayer.audioPlayer) {
+                            this.voicePlayer.play();
+                        }
+
+                        // Clear chat messages
+                        document.getElementById('chatMessages').innerHTML = '';
+
+                        for (const phase of this.phases) {
+                            if (!this.isRunning) break;
+
+                            this.updatePhaseIndicator(phase.title, `Executing ${phase.title.toLowerCase()}`);
+                            await phase.action();
+                            await this.delay(1500);
+                        }
+
+                        if (this.isRunning) {
+                            this.stopDemo();
+                            this.addChatMessage(
+                                'System',
+                                'Real Talk conversation demonstration completed',
+                                'Natural language understanding with 98% accuracy achieved',
+                                'daena'
+                            );
+                        }
+                    }
+
+                    stopDemo() {
+                        this.isRunning = false;
+                        this.startBtn.style.display = 'inline-block';
+                        this.stopBtn.style.display = 'none';
+                        this.stopBtn.classList.remove('executing');
+
+                        // Stop voice-over if available
+                        if (this.voicePlayer && this.voicePlayer.audioPlayer) {
+                            this.voicePlayer.pause();
+                        }
+                    }
+
+                    resetDemo() {
+                        this.stopDemo();
+
+                        // Reset stats
+                        this.messagesProcessed = 0;
+                        this.understandingAccuracy = 0;
+                        this.responseTime = 0;
+                        this.conversationQuality = 0;
+
+                        this.updateStats();
+
+                        // Reset all modes
+                        const modes = ['voiceProcessing', 'textUnderstanding'];
+                        modes.forEach(modeId => {
+                            const mode = document.getElementById(modeId);
+                            const progressBar = document.getElementById(modeId + 'Progress');
+
+                            mode.classList.remove('active', 'processing');
+                            mode.querySelector('.mode-status').textContent = 'Standby';
+                            progressBar.style.width = '0%';
+                        });
+
+                        // Clear chat messages
+                        document.getElementById('chatMessages').innerHTML = `
+                    <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
+                        Real Talk conversation system initialized and ready.
+                    </div>
+                `;
+
+                        this.updatePhaseIndicator('Ready', 'System initialized. Ready to show Real Talk conversation...');
+
+                        // Reset voice player if available
+                        if (this.voicePlayer && this.voicePlayer.audioPlayer) {
+                            this.voicePlayer.audioPlayer.currentTime = 0;
+                        }
+                    }
+
+                    async initializeConversation() {
+                        this.addChatMessage(
+                            'System',
+                            'Real Talk conversation system activated',
+                            'Natural language processing and understanding modules initialized',
+                            'daena'
+                        );
+
+                        await this.delay(2000);
+                    }
+
+                    async processConversation() {
+                        for (let i = 0; i < this.conversationFlow.length; i++) {
+                            if (!this.isRunning) break;
+
+                            const conversation = this.conversationFlow[i];
+
+                            // Add user message
+                            this.addChatMessage(
+                                'User',
+                                conversation.user,
+                                'Natural language input received',
+                                'user'
+                            );
+
+                            await this.delay(1000);
+
+                            // Process the message
+                            this.setModeActive(conversation.processing, 'processing');
+                            this.updateModeProgress(conversation.processing, 50);
+
+                            await this.delay(1500);
+
+                            // Add Daena response
+                            this.addChatMessage(
+                                'Daena',
+                                conversation.daena,
+                                'AI-generated response with contextual understanding',
+                                'daena'
+                            );
+
+                            this.updateModeProgress(conversation.processing, 100);
+                            this.setModeActive(conversation.processing, 'active');
+
+                            this.messagesProcessed += 2;
+                            await this.delay(2000);
+                        }
+                    }
+
+                    async generateResponses() {
+                        this.addChatMessage(
+                            'Response Generator',
+                            'Advanced response generation completed',
+                            'Contextual understanding with 96% accuracy',
+                            'daena'
+                        );
+
+                        this.understandingAccuracy = 96;
+                        this.responseTime = 1.2;
+                    }
+
+                    async analyzeConversation() {
+                        this.addChatMessage(
+                            'Conversation Analyzer',
+                            'Conversation analysis completed',
+                            'Quality assessment: Excellent conversation flow and understanding',
+                            'daena'
+                        );
+
+                        this.conversationQuality = 9.4;
+                        this.updateStats();
+                    }
+
+                    setModeActive(modeId, status) {
+                        const mode = document.getElementById(modeId);
+                        const statusElement = mode.querySelector('.mode-status');
+
+                        // Clear previous state classes
+                        mode.classList.remove('active', 'processing');
+
+                        statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+
+                        if (status === 'processing') {
+                            mode.classList.add('processing');
+                        } else if (status === 'active') {
+                            mode.classList.add('active');
+                        }
+                    }
+
+                    updateModeProgress(modeId, percentage) {
+                        const progressBar = document.getElementById(modeId + 'Progress');
+                        progressBar.style.width = percentage + '%';
+                    }
+
+                    addChatMessage(sender, message, details, type) {
+                        const chatMessages = document.getElementById('chatMessages');
+
+                        const time = new Date().toLocaleTimeString('en-US', {
+                            hour12: false,
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        });
+
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = `chat-message ${type}`;
+                        messageDiv.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-sender ${type}">${sender}</div>
+                        <div class="message-time">${time}</div>
+                    </div>
+                    <div class="message-content">${message}</div>
+                    <div class="message-details">${details}</div>
+                `;
+
+                        chatMessages.appendChild(messageDiv);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                        // Keep only 15 most recent messages
+                        while (chatMessages.children.length > 15) {
+                            chatMessages.removeChild(chatMessages.firstChild);
+                        }
+                    }
+
+                    updateStats() {
+                        document.getElementById('messagesProcessed').textContent = this.messagesProcessed;
+                        document.getElementById('understandingAccuracy').textContent = this.understandingAccuracy + '%';
+                        document.getElementById('responseTime').textContent = this.responseTime + 's';
+                        document.getElementById('conversationQuality').textContent = this.conversationQuality.toFixed(1);
+                    }
+
+                    updatePhaseIndicator(title, description) {
+                        document.getElementById('phaseDescription').textContent = description;
+                    }
+
+                    delay(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+                }
+
+                // Initialize demo when page loads
+                document.addEventListener('DOMContentLoaded', function () {
+                    window.realTalkDemo = new DaenaRealTalkDemo();
+                });
+            </script>
+
         </div>
-    </div>
+    </main>
 
-    <!-- Demo Script -->
-    <script src="../voice-player.js"></script>
+    <script src="/js/metatron-hex-network.js"></script>
+
+
+    <link rel="stylesheet" href="/live-demos/voice-player.css">
+    <script src="/live-demos/voice-player.js"></script>
     <script>
+
         class DaenaRealTalkDemo {
             constructor() {
                 this.isRunning = false;
@@ -677,7 +1051,7 @@
                 this.responseTime = 0;
                 this.conversationQuality = 0;
                 this.voicePlayer = null;
-                
+
                 this.conversationFlow = [
                     {
                         user: "Hi Daena, I need help with our Q2 marketing strategy.",
@@ -705,7 +1079,7 @@
                         processing: "voiceProcessing"
                     }
                 ];
-                
+
                 this.phases = [
                     {
                         title: "Conversation system initialization",
@@ -775,7 +1149,7 @@
 
                 for (const phase of this.phases) {
                     if (!this.isRunning) break;
-                    
+
                     this.updatePhaseIndicator(phase.title, `Executing ${phase.title.toLowerCase()}`);
                     await phase.action();
                     await this.delay(1500);
@@ -797,7 +1171,7 @@
                 this.startBtn.style.display = 'inline-block';
                 this.stopBtn.style.display = 'none';
                 this.stopBtn.classList.remove('executing');
-                
+
                 // Stop voice-over if available
                 if (this.voicePlayer && this.voicePlayer.audioPlayer) {
                     this.voicePlayer.pause();
@@ -806,13 +1180,13 @@
 
             resetDemo() {
                 this.stopDemo();
-                
+
                 // Reset stats
                 this.messagesProcessed = 0;
                 this.understandingAccuracy = 0;
                 this.responseTime = 0;
                 this.conversationQuality = 0;
-                
+
                 this.updateStats();
 
                 // Reset all modes
@@ -820,7 +1194,7 @@
                 modes.forEach(modeId => {
                     const mode = document.getElementById(modeId);
                     const progressBar = document.getElementById(modeId + 'Progress');
-                    
+
                     mode.classList.remove('active', 'processing');
                     mode.querySelector('.mode-status').textContent = 'Standby';
                     progressBar.style.width = '0%';
@@ -855,9 +1229,9 @@
             async processConversation() {
                 for (let i = 0; i < this.conversationFlow.length; i++) {
                     if (!this.isRunning) break;
-                    
+
                     const conversation = this.conversationFlow[i];
-                    
+
                     // Add user message
                     this.addChatMessage(
                         'User',
@@ -865,15 +1239,15 @@
                         'Natural language input received',
                         'user'
                     );
-                    
+
                     await this.delay(1000);
-                    
+
                     // Process the message
                     this.setModeActive(conversation.processing, 'processing');
                     this.updateModeProgress(conversation.processing, 50);
-                    
+
                     await this.delay(1500);
-                    
+
                     // Add Daena response
                     this.addChatMessage(
                         'Daena',
@@ -881,10 +1255,10 @@
                         'AI-generated response with contextual understanding',
                         'daena'
                     );
-                    
+
                     this.updateModeProgress(conversation.processing, 100);
                     this.setModeActive(conversation.processing, 'active');
-                    
+
                     this.messagesProcessed += 2;
                     await this.delay(2000);
                 }
@@ -917,10 +1291,10 @@
             setModeActive(modeId, status) {
                 const mode = document.getElementById(modeId);
                 const statusElement = mode.querySelector('.mode-status');
-                
+
                 // Clear previous state classes
                 mode.classList.remove('active', 'processing');
-                
+
                 statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
 
                 if (status === 'processing') {
@@ -937,12 +1311,12 @@
 
             addChatMessage(sender, message, details, type) {
                 const chatMessages = document.getElementById('chatMessages');
-                
-                const time = new Date().toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit' 
+
+                const time = new Date().toLocaleTimeString('en-US', {
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
                 });
 
                 const messageDiv = document.createElement('div');
@@ -982,361 +1356,34 @@
         }
 
         // Initialize demo when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             window.realTalkDemo = new DaenaRealTalkDemo();
         });
+
+
     </script>
+    <script>
+        (function () {
+            sessionStorage.setItem('returnSection', 'advanced-demos');
+            sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
 
-    </div>
-  </main>
-  
-  <script src="/js/metatron-hex-network.js"></script>
-
-
-  <link rel="stylesheet" href="/live-demos/voice-player.css">
-  <script src="/live-demos/voice-player.js"></script>
-  <script>
-
-        class DaenaRealTalkDemo {
-            constructor() {
-                this.isRunning = false;
-                this.messagesProcessed = 0;
-                this.understandingAccuracy = 0;
-                this.responseTime = 0;
-                this.conversationQuality = 0;
-                this.voicePlayer = null;
-                
-                this.conversationFlow = [
-                    {
-                        user: "Hi Daena, I need help with our Q2 marketing strategy.",
-                        daena: "Hello! I'd be happy to help with your Q2 marketing strategy. I can see you're looking to optimize your marketing approach. Let me analyze your current situation and provide strategic recommendations.",
-                        processing: "voiceProcessing"
-                    },
-                    {
-                        user: "We're struggling with customer acquisition costs.",
-                        daena: "I understand the challenge with customer acquisition costs. This is a common issue that requires a multi-faceted approach. Let me break down some strategies that could help reduce your CAC while improving conversion rates.",
-                        processing: "textUnderstanding"
-                    },
-                    {
-                        user: "What specific tactics would you recommend?",
-                        daena: "Based on my analysis, I recommend focusing on three key areas: 1) Content marketing optimization, 2) Referral program implementation, and 3) Customer lifetime value enhancement. Each of these can significantly impact your acquisition costs.",
-                        processing: "voiceProcessing"
-                    },
-                    {
-                        user: "How do we measure success?",
-                        daena: "Excellent question! Success metrics should include CAC reduction percentage, conversion rate improvement, customer lifetime value increase, and overall ROI. I can help you set up comprehensive tracking and reporting systems.",
-                        processing: "textUnderstanding"
-                    },
-                    {
-                        user: "That sounds great! When can we start?",
-                        daena: "Perfect! I can begin implementing these strategies immediately. My 48-agent system will coordinate across marketing, sales, and analytics departments to ensure seamless execution. Would you like me to create a detailed implementation timeline?",
-                        processing: "voiceProcessing"
-                    }
-                ];
-                
-                this.phases = [
-                    {
-                        title: "Conversation system initialization",
-                        duration: 2000,
-                        action: this.initializeConversation.bind(this)
-                    },
-                    {
-                        title: "Natural language processing",
-                        duration: 5000,
-                        action: this.processConversation.bind(this)
-                    },
-                    {
-                        title: "Response generation",
-                        duration: 3000,
-                        action: this.generateResponses.bind(this)
-                    },
-                    {
-                        title: "Conversation analysis",
-                        duration: 2000,
-                        action: this.analyzeConversation.bind(this)
-                    }
-                ];
-
-                this.init();
-            }
-
-            init() {
-                this.startBtn = document.getElementById('startBackendDemo');
-                this.stopBtn = document.getElementById('stopBackendDemo');
-                this.resetBtn = document.getElementById('resetBackendDemo');
-
-                this.startBtn.addEventListener('click', () => this.startDemo());
-                this.stopBtn.addEventListener('click', () => this.stopDemo());
-                this.resetBtn.addEventListener('click', () => this.resetDemo());
-
-                this.updateStats();
-
-                // Load voice player config
-                this.loadVoiceConfig();
-            }
-
-            async loadVoiceConfig() {
-                try {
-                    const response = await fetch('config.json');
-                    const config = await response.json();
-                    if (config.audio) {
-                        this.voicePlayer = new DaenaVoicePlayer('daena-voice-player', config);
-                    }
-                } catch (error) {
-                    console.log('Voice config not available, demo will run without voice-over');
-                }
-            }
-
-            async startDemo() {
-                this.isRunning = true;
-                this.startBtn.style.display = 'none';
-                this.stopBtn.style.display = 'inline-block';
-                this.stopBtn.classList.add('executing');
-
-                // Start voice-over if available
-                if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                    this.voicePlayer.play();
-                }
-
-                // Clear chat messages
-                document.getElementById('chatMessages').innerHTML = '';
-
-                for (const phase of this.phases) {
-                    if (!this.isRunning) break;
-                    
-                    this.updatePhaseIndicator(phase.title, `Executing ${phase.title.toLowerCase()}`);
-                    await phase.action();
-                    await this.delay(1500);
-                }
-
-                if (this.isRunning) {
-                    this.stopDemo();
-                    this.addChatMessage(
-                        'System',
-                        'Real Talk conversation demonstration completed',
-                        'Natural language understanding with 98% accuracy achieved',
-                        'daena'
-                    );
-                }
-            }
-
-            stopDemo() {
-                this.isRunning = false;
-                this.startBtn.style.display = 'inline-block';
-                this.stopBtn.style.display = 'none';
-                this.stopBtn.classList.remove('executing');
-                
-                // Stop voice-over if available
-                if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                    this.voicePlayer.pause();
-                }
-            }
-
-            resetDemo() {
-                this.stopDemo();
-                
-                // Reset stats
-                this.messagesProcessed = 0;
-                this.understandingAccuracy = 0;
-                this.responseTime = 0;
-                this.conversationQuality = 0;
-                
-                this.updateStats();
-
-                // Reset all modes
-                const modes = ['voiceProcessing', 'textUnderstanding'];
-                modes.forEach(modeId => {
-                    const mode = document.getElementById(modeId);
-                    const progressBar = document.getElementById(modeId + 'Progress');
-                    
-                    mode.classList.remove('active', 'processing');
-                    mode.querySelector('.mode-status').textContent = 'Standby';
-                    progressBar.style.width = '0%';
+            const backBtn = document.querySelector('.btn-back');
+            if (backBtn) {
+                backBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = '/docs.html#advanced-demos';
                 });
-
-                // Clear chat messages
-                document.getElementById('chatMessages').innerHTML = `
-                    <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
-                        Real Talk conversation system initialized and ready.
-                    </div>
-                `;
-
-                this.updatePhaseIndicator('Ready', 'System initialized. Ready to show Real Talk conversation...');
-
-                // Reset voice player if available
-                if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                    this.voicePlayer.audioPlayer.currentTime = 0;
-                }
             }
 
-            async initializeConversation() {
-                this.addChatMessage(
-                    'System',
-                    'Real Talk conversation system activated',
-                    'Natural language processing and understanding modules initialized',
-                    'daena'
-                );
-
-                await this.delay(2000);
-            }
-
-            async processConversation() {
-                for (let i = 0; i < this.conversationFlow.length; i++) {
-                    if (!this.isRunning) break;
-                    
-                    const conversation = this.conversationFlow[i];
-                    
-                    // Add user message
-                    this.addChatMessage(
-                        'User',
-                        conversation.user,
-                        'Natural language input received',
-                        'user'
-                    );
-                    
-                    await this.delay(1000);
-                    
-                    // Process the message
-                    this.setModeActive(conversation.processing, 'processing');
-                    this.updateModeProgress(conversation.processing, 50);
-                    
-                    await this.delay(1500);
-                    
-                    // Add Daena response
-                    this.addChatMessage(
-                        'Daena',
-                        conversation.daena,
-                        'AI-generated response with contextual understanding',
-                        'daena'
-                    );
-                    
-                    this.updateModeProgress(conversation.processing, 100);
-                    this.setModeActive(conversation.processing, 'active');
-                    
-                    this.messagesProcessed += 2;
-                    await this.delay(2000);
-                }
-            }
-
-            async generateResponses() {
-                this.addChatMessage(
-                    'Response Generator',
-                    'Advanced response generation completed',
-                    'Contextual understanding with 96% accuracy',
-                    'daena'
-                );
-
-                this.understandingAccuracy = 96;
-                this.responseTime = 1.2;
-            }
-
-            async analyzeConversation() {
-                this.addChatMessage(
-                    'Conversation Analyzer',
-                    'Conversation analysis completed',
-                    'Quality assessment: Excellent conversation flow and understanding',
-                    'daena'
-                );
-
-                this.conversationQuality = 9.4;
-                this.updateStats();
-            }
-
-            setModeActive(modeId, status) {
-                const mode = document.getElementById(modeId);
-                const statusElement = mode.querySelector('.mode-status');
-                
-                // Clear previous state classes
-                mode.classList.remove('active', 'processing');
-                
-                statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-
-                if (status === 'processing') {
-                    mode.classList.add('processing');
-                } else if (status === 'active') {
-                    mode.classList.add('active');
-                }
-            }
-
-            updateModeProgress(modeId, percentage) {
-                const progressBar = document.getElementById(modeId + 'Progress');
-                progressBar.style.width = percentage + '%';
-            }
-
-            addChatMessage(sender, message, details, type) {
-                const chatMessages = document.getElementById('chatMessages');
-                
-                const time = new Date().toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit' 
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('hidden');
                 });
-
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `chat-message ${type}`;
-                messageDiv.innerHTML = `
-                    <div class="message-header">
-                        <div class="message-sender ${type}">${sender}</div>
-                        <div class="message-time">${time}</div>
-                    </div>
-                    <div class="message-content">${message}</div>
-                    <div class="message-details">${details}</div>
-                `;
-
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                // Keep only 15 most recent messages
-                while (chatMessages.children.length > 15) {
-                    chatMessages.removeChild(chatMessages.firstChild);
-                }
             }
-
-            updateStats() {
-                document.getElementById('messagesProcessed').textContent = this.messagesProcessed;
-                document.getElementById('understandingAccuracy').textContent = this.understandingAccuracy + '%';
-                document.getElementById('responseTime').textContent = this.responseTime + 's';
-                document.getElementById('conversationQuality').textContent = this.conversationQuality.toFixed(1);
-            }
-
-            updatePhaseIndicator(title, description) {
-                document.getElementById('phaseDescription').textContent = description;
-            }
-
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-        }
-
-        // Initialize demo when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            window.realTalkDemo = new DaenaRealTalkDemo();
-        });
-    
-
-  </script>
-  <script>
-    (function() {
-      sessionStorage.setItem('returnSection', 'advanced-demos');
-      sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
-      
-      const backBtn = document.querySelector('.btn-back');
-      if (backBtn) {
-        backBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.location.href = '/docs.html#advanced-demos';
-        });
-      }
-      
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-          mobileMenu.classList.toggle('hidden');
-        });
-      }
-    })();
-  </script>
+        })();
+    </script>
 </body>
+
 </html>
