@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 50%, #2a1a4a 100%);
+            background: transparent;
             color: white;
             min-height: 100vh;
             line-height: 1.6;
@@ -222,13 +223,27 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
         }
 
         @keyframes processingPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
         }
 
         .agent-node::before {
@@ -478,7 +493,9 @@
         @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr;
-            '.voice-controls {
+            }
+
+            .voice-controls {
                 position: static;
             }
         }
@@ -503,26 +520,94 @@
             }
         }
     </style>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
 </head>
+
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">{{Daena AI Backend Demo}}</div>
-                <div class="nav-buttons">
-                    <a href="index.html" class="nav-btn">← Demos Gallery</a>
-                    <a href="../index.html" class="nav-btn">🏠 Back to Daena</a>
+    <!-- Standard Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar"
+        style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-2 group">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                            <span class="text-black font-bold text-xl">D</span>
+                        </div>
+                        <span
+                            class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="/#features"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live
+                            Demos</a>
+                        <a href="/docs.html"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
-    </header>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
+                <a href="/#features"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="/#technology"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
+                <a href="/docs.html#advanced-demos"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live
+                    Demos</a>
+                <a href="/docs.html"
+                    class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
     <div class="container">
         <div class="main-content">
             <div class="demo-interface">
                 <!-- Demo Title -->
                 <h1 class="backend-demo-title">🔴 Daena Real Backend Communication Demo</h1>
-                <p class="backend-demo-subtitle">Experience LIVE agent communication through SFHC backend architecture</p>
+                <p class="backend-demo-subtitle">Experience LIVE agent communication through SFHC backend architecture
+                </p>
 
                 <!-- Demo Controls -->
                 <div class="demo-controls">
@@ -535,7 +620,9 @@
                 <div class="demo-scenario">
                     <div class="scenario-title">📋 Current Scenario: Product Launch Analysis</div>
                     <div class="scenario-description">
-                        Daena's SFHC agents will collaborate on a comprehensive product launched analysis. Watch as agents communicate through the Sunflower-Honeycomb architecture, sharing context and distributing tasks across specialized AI components.
+                        Daena's SFHC agents will collaborate on a comprehensive product launched analysis. Watch as
+                        agents communicate through the Sunflower-Honeycomb architecture, sharing context and
+                        distributing tasks across specialized AI components.
                     </div>
                 </div>
 
@@ -727,7 +814,7 @@
                 this.messagesExchanged = 0;
                 this.taskCompletion = 0;
                 this.agentIds = ['researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent', 'executiveAgent'];
-                
+
                 this.phases = [
                     {
                         name: "Backend Connection",
@@ -844,9 +931,9 @@
 
             async connectToBackend() {
                 this.updateStatus('connecting', 'Connecting to SFHC backend...');
-                
+
                 await this.delay(1500);
-                
+
                 this.updateStatus('active', 'Backend connected successfully');
                 this.totalRequests++;
                 this.activeAgents++;
@@ -855,9 +942,9 @@
             async initiateTask() {
                 this.setAgentState('executiveAgent', 'processing');
                 this.addAgentActivity('executiveAgent', 'Establishing secure SFHC connection to backend services', '(Backend API Call)');
-                
+
                 await this.delay(1000);
-                
+
                 this.messagesExchanged++;
                 this.addCommunicationLog(
                     'Executive Agent',
@@ -867,20 +954,20 @@
                 );
 
                 await this.delay(2000);
-                
+
                 this.setAgentState('executiveAgent', 'active');
                 this.updateStats();
             }
 
             async activateResearchAgent() {
                 const agents = ['researchAgent', 'executiveAgent'];
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
-                
+
                 this.addAgentActivity('researchAgent', 'Connecting to market data APIs and research databases', '(Backend Data Fetch)');
-                
+
                 await this.delay(1500);
-                
+
                 this.messagesExchanged += 2;
                 this.addCommunicationLog(
                     'Executive Agent',
@@ -888,7 +975,7 @@
                     'Product market research request dispatched',
                     'SFHC Command'
                 );
-                
+
                 this.addCommunicationLog(
                     'Research Agent',
                     'Market APIs',
@@ -897,25 +984,25 @@
                 );
 
                 await this.delay(2500);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
                 this.addAgentActivity('researchAgent', 'Market analysis complete - data ready for coordination', '(Research Results)');
-                
+
                 await this.delay(1000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'active'));
                 this.updateStats();
             }
 
             async activateMarketingAgent() {
                 const agents = ['marketingAgent', 'researchAgent'];
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
-                
+
                 this.addAgentActivity('marketingAgent', 'Processing market insights and developing campaign strategy', '(Strategy Generation)');
-                
+
                 await this.delay(1500);
-                
+
                 this.messagesExchanged += 2;
                 this.addCommunicationLog(
                     'Research Agent',
@@ -923,7 +1010,7 @@
                     'Market insights transferred: customer segments identified',
                     'Coordined Data'
                 );
-                
+
                 this.addCommunicationLog(
                     'Marketing Agent',
                     'Campaign Engine',
@@ -932,25 +1019,25 @@
                 );
 
                 await this.delay(2000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
                 this.addAgentActivity('marketingAgent', 'Marketing strategy formulated with targeted campaigns', '(Campaign Results)');
-                
+
                 await this.delay(1000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'active'));
                 this.updateStats();
             }
 
             async activateFinanceAgent() {
                 const agents = ['financeAgent', 'researchAgent', 'marketingAgent'];
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
-                
+
                 this.addAgentActivity('financeAgent', 'Calculating budget projections and financial modeling', '(Financial Analysis)');
-                
+
                 await this.delay(1500);
-                
+
                 this.messagesExchanged += 3;
                 this.addCommunicationLog(
                     'Finance Agent',
@@ -958,7 +1045,7 @@
                     'Calculating comprehensive financial projections',
                     'Financial Processing'
                 );
-                
+
                 this.addCommunicationLog(
                     'Marketing Agent',
                     'Finance Agent',
@@ -967,25 +1054,25 @@
                 );
 
                 await this.delay(2500);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
                 this.addAgentActivity('financeAgent', 'Financial analysis complete - ROI projections ready', '(Finance Results)');
-                
+
                 await this.delay(1000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'active'));
                 this.updateStats();
             }
 
             async activateOperationsAgent() {
                 const agents = ['operationsAgent', 'financeAgent'];
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
-                
+
                 this.addAgentActivity('operationsAgent', 'Planning resource allocation and operational timelines', '(Operations Planning)');
-                
+
                 await this.delay(1500);
-                
+
                 this.messagesExchanged += 2;
                 this.addCommunicationLog(
                     'Finance Agent',
@@ -995,25 +1082,25 @@
                 );
 
                 await this.delay(2000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
                 this.addAgentActivity('operationsAgent', 'Operations plan complete - resources allocated', '(Operations Results)');
-                
+
                 await this.delay(1000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'active'));
                 this.updateStats();
             }
 
             async activateSalesAgent() {
                 const agents = ['salesAgent', 'marketingAgent', 'operationsAgent'];
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
-                
+
                 this.addAgentActivity('salesAgent', 'Optimizing customer acquisition strategies', '(Sales Optimization)');
-                
+
                 await this.delay(1500);
-                
+
                 this.messagesExchanged += 3;
                 this.addCommunicationLog(
                     'Sales Agent',
@@ -1023,25 +1110,25 @@
                 );
 
                 await this.delay(2000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
                 this.addAgentActivity('salesAgent', 'Sales strategy optimized - targets aligned', '(Sales Results)');
-                
+
                 await this.delay(1000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'active'));
                 this.updateStats();
             }
 
             async finalizeResults() {
                 const agents = ['executiveAgent', 'researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent'];
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
-                
+
                 this.addAgentActivity('executiveAgent', 'Synthesizing comprehensive analysis from all agents', '(Final Synthesis)');
-                
+
                 await this.delay(2000);
-                
+
                 this.messagesExchanged += 6;
                 this.addCommunicationLog(
                     'Executive Agent',
@@ -1051,19 +1138,19 @@
                 );
 
                 await this.delay(3000);
-                
+
                 agents.forEach(agent => this.setAgentState(agent, 'active'));
                 this.addAgentActivity('executiveAgent', 'COMPLETE: Product launch analysis finalized with strategic recommendations', '(COMPLETE RESULT)');
-                
+
                 await this.delay(1000);
-                
+
                 this.taskCompletion = 100;
                 this.updateStats();
             }
 
             completeDemo() {
                 this.updateStatus('active', 'Demo completed successfully - Check results');
-                
+
                 setTimeout(() => {
                     this.stopDemo();
                     this.addCommunicationLog(
@@ -1077,7 +1164,7 @@
 
             stopDemo() {
                 this.isRunning = false;
-                
+
                 if (this.startBtn) this.startBtn.style.display = 'inline-block';
                 if (this.stopBtn) this.stopBtn.style.display = 'none';
 
@@ -1089,7 +1176,7 @@
 
             resetDemo() {
                 this.stopDemo();
-                
+
                 // Reset statistics
                 this.totalRequests = 0;
                 this.activeAgents = 0;
@@ -1123,7 +1210,7 @@
                 const statusText = agentElement.querySelector('.status-text');
 
                 agentElement.className = `agent-node ${state}`;
-                
+
                 const states = {
                     'standby': { text: 'Standby', color: '#97A1A9' },
                     'processing': { text: 'Processing', color: '#00bcd4' },
@@ -1137,12 +1224,12 @@
 
             addAgentActivity(agentId, activity, type = 'Activity') {
                 const activityContainer = document.getElementById(agentId + 'Activity');
-                
-                const time = new Date().toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit' 
+
+                const time = new Date().toLocaleTimeString('en-US', {
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
                 });
 
                 const activityItem = document.createElement('div');
@@ -1171,11 +1258,11 @@
             }
 
             addCommunicationLog(from, to, message, type) {
-                const time = new Date().toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit' 
+                const time = new Date().toLocaleTimeString('en-US', {
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
                 });
 
                 const logEntry = document.createElement('div');
@@ -1206,7 +1293,7 @@
 
             updateStatus(type, message) {
                 this.statusText.textContent = message;
-                
+
                 const statusTypes = {
                     'ready': { color: '#97A1A9' },
                     'connecting': { color: '#FFD700' },
@@ -1222,7 +1309,7 @@
                 document.querySelector('.scenario-title').textContent = `📋 Current Phase: ${title}`;
                 document.querySelector('.scenario-description').textContent = description;
                 document.getElementById('phaseText').textContent = description;
-                
+
                 // Try to sync with voice player if available
                 if (window.liveVoicePlayer && window.liveVoicePlayer.setPhase) {
                     window.liveVoicePlayer.setPhase(title, description);
@@ -1246,7 +1333,7 @@
             window.backendDemo = new DaenaBackendDemo();
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize backend demo
             initializeBackendDemo();
 
@@ -1267,4 +1354,5 @@
         });
     </script>
 </body>
+
 </html>

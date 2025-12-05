@@ -1,20 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CMP Pipeline â€¢ Live Demo</title>
-  <meta name="description" content="Experience the complete Council-Memory-Process pipeline in action" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/css/global.css">
-  <link rel="stylesheet" href="/assets/css/live-demos.css">
-
-  <link rel="stylesheet" href="/live-demos/cmp-pipeline/live-demo.css">
-
-  <link rel="stylesheet" href="/live-demos/voice-player.css">
-  <script src="/live-demos/voice-player.js"></script>
-  <style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena AI - CMP Pipeline Demo</title>
+    <meta name="description" content="Experience Daena's complete CMP orchestration process with intelligent workflow management and live narration">`n    <!-- Daena Skin - Unified styling -->`n    <link rel="stylesheet" href="/assets/skin/daena/skin.css">`n    <script defer src="/assets/skin/daena/skin.js"></script>
+    
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -39,7 +31,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--gradient-bg);
             color: var(--text-light);
-            overflow-x: hidden; overflow-y: auto; min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Animated Background */
@@ -579,55 +571,73 @@
             font-size: 1.2rem;
             animation: pulse 2s ease-in-out infinite;
         }
-    
+    </style>
 
-  </style>
-</head>
-<body class="metatron-bg">
-  <div class="metatron-bg"></div>
-  <div class="metatron-pattern-bg"></div>
-  <canvas id="metatron-hex-canvas"></canvas>
-  
-  <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" style="pointer-events: none;">
-    <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
-      <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
-        <a href="/" class="text-xl font-bold">Daena</a>
-        <div class="hidden md:flex items-center gap-6">
-          <a href="/" class="hover:text-yellow-400 transition">Home</a>
-          <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-          <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-          <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-          <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-          <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
-        </div>
-        <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
-        <div class="flex flex-col gap-4">
-          <a href="/" class="hover:text-yellow-400 transition">Home</a>
-          <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-          <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-          <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-          <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-          <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  
-  <main class="page">
-    <header class="demo-header">
-      <a class="btn-back" href="/#live-demos-section">← Back to Live Demos</a>
-    </header>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <div class="card glass">
-      <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.5rem; margin-top: 0;">CMP Pipeline</h1>
-      <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem; margin-top: 0;">Experience the complete Council-Memory-Process pipeline in action</p>
-      
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+
+</head>
+<body>
+
+    <!-- Standard Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                            <span class="text-black font-bold text-xl">D</span>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="/#features" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live Demos</a>
+                        <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
+                <a href="/#features" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="/#technology" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
+                <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live Demos</a>
+                <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay">
@@ -638,7 +648,7 @@
     </div>
 
     <!-- Animated Background -->
-    <div class="animated-bg"></div>
+    
 
     <!-- Navigation -->
     
@@ -646,7 +656,13 @@
     <!-- Main Demo Container -->
     <div class="demo-container">
         <!-- Demo Header -->
-        
+        <div class="demo-header">
+            <h1 class="demo-title">CMP Pipeline Demo</h1>
+            <p class="demo-subtitle">
+                Experience Daena's complete CMP (Content Management Pipeline) orchestration process. 
+                Watch how intelligent workflow management coordinates multiple agents for seamless content processing.
+            </p>
+        </div>
 
         <!-- Narration Panel -->
         <div class="narration-panel">
@@ -920,7 +936,7 @@
                 this.volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
 
                 // Load narration audio
-                this.narrationAudio.src = '/live-dem/live-demos/voice-over-demos/Demo 3 CMP Pipeline.mp3';
+                this.narrationAudio.src = '../voice-over-demos/Demo 3 CMP Pipeline.mp3';
                 this.narrationAudio.volume = 0.8;
             }
 
@@ -1231,402 +1247,5 @@
             new CMPPipelineDemo();
         });
     </script>
-
-    </div>
-  </main>
-  
-  <script src="/js/metatron-hex-network.js"></script>
-
-
-  <link rel="stylesheet" href="/live-demos/voice-player.css">
-  <script src="/live-demos/voice-player.js"></script>
-  <script>
-
-        class CMPPipelineDemo {
-            constructor() {
-                this.isExecuting = false;
-                this.currentStage = 0;
-                this.totalStages = 5;
-                this.stageData = {};
-                
-                this.init();
-            }
-
-            init() {
-                this.executeBtn = document.getElementById('executeBtn');
-                this.resetBtn = document.getElementById('resetBtn');
-                this.narrationText = document.getElementById('narrationText');
-                this.narrationAudio = document.getElementById('narrationAudio');
-                this.backgroundMusic = document.getElementById('backgroundMusic');
-                this.volumeSlider = document.getElementById('volumeSlider');
-                this.playNarrationBtn = document.getElementById('playNarrationBtn');
-                this.playMusicBtn = document.getElementById('playMusicBtn');
-
-                // Narration scripts
-                this.narrationScripts = [
-                    "Welcome to Daena's CMP Pipeline Demo. I'll demonstrate how our intelligent workflow management system orchestrates content processing across multiple agents.",
-                    "Stage 1: Input Processing - Receiving and validating content from multiple sources including documents, images, and data streams.",
-                    "Stage 2: Content Analysis - Analyzing content structure and extracting key information to identify processing requirements.",
-                    "Stage 3: Processing Orchestration - Coordinating multiple agents to process content according to business rules and requirements.",
-                    "Stage 4: Quality Assurance - Validating processed content and ensuring quality standards before final output.",
-                    "Stage 5: Output Generation - Generating final output in required formats and delivering to designated destinations.",
-                    "CMP Pipeline execution complete! This demonstrates Daena's ability to orchestrate complex workflows with intelligent agent coordination."
-                ];
-
-                this.setupEventListeners();
-                this.resetDemo();
-                this.hideLoading();
-            }
-
-            setupEventListeners() {
-                this.executeBtn.addEventListener('click', () => {
-                    if (!this.isExecuting) {
-                        this.startDemo();
-                    } else {
-                        this.stopDemo();
-                    }
-                });
-
-                this.resetBtn.addEventListener('click', () => this.resetDemo());
-                this.playNarrationBtn.addEventListener('click', () => this.toggleNarration());
-                this.playMusicBtn.addEventListener('click', () => this.toggleBackgroundMusic());
-                this.volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
-
-                // Load narration audio
-                this.narrationAudio.src = '/live-dem/live-demos/voice-over-demos/Demo 3 CMP Pipeline.mp3';
-                this.narrationAudio.volume = 0.8;
-            }
-
-            resetDemo() {
-                this.isExecuting = false;
-                this.currentStage = 0;
-                this.executeBtn.textContent = '⚙️ EXECUTE CMP PIPELINE';
-                this.executeBtn.classList.remove('executing');
-                
-                // Reset all stages
-                for (let i = 1; i <= this.totalStages; i++) {
-                    this.resetStage(i);
-                }
-
-                // Reset flow nodes
-                for (let i = 1; i <= 5; i++) {
-                    const node = document.getElementById(`flow-${i}`);
-                    node.classList.remove('active', 'completed');
-                }
-
-                // Reset stats
-                this.resetStats();
-
-                // Reset narration
-                this.updateNarration(this.narrationScripts[0]);
-            }
-
-            resetStage(stageNumber) {
-                const stage = document.getElementById(`stage-${stageNumber}`);
-                const status = document.getElementById(`status-${stageNumber}`);
-                const progress = document.getElementById(`progress-${stageNumber}`);
-                
-                stage.classList.remove('active', 'completed');
-                status.textContent = 'PENDING';
-                status.className = 'stage-status status-pending';
-                progress.style.width = '0%';
-
-                // Reset stage details
-                const detailIds = this.getStageDetailIds(stageNumber);
-                detailIds.forEach(id => {
-                    const element = document.getElementById(id);
-                    if (element) {
-                        if (id.includes('time')) {
-                            element.textContent = '0ms';
-                        } else if (id.includes('delivery')) {
-                            element.textContent = 'Pending';
-                        } else {
-                            element.textContent = '0';
-                        }
-                    }
-                });
-            }
-
-            getStageDetailIds(stageNumber) {
-                const detailMappings = {
-                    1: ['files-1', 'time-1', 'success-1'],
-                    2: ['types-2', 'time-2', 'accuracy-2'],
-                    3: ['agents-3', 'time-3', 'efficiency-3'],
-                    4: ['quality-4', 'time-4', 'issues-4'],
-                    5: ['outputs-5', 'time-5', 'delivery-5']
-                };
-                return detailMappings[stageNumber] || [];
-            }
-
-            resetStats() {
-                document.getElementById('total-processed').textContent = '0';
-                document.getElementById('processing-time').textContent = '0s';
-                document.getElementById('success-rate').textContent = '0%';
-                document.getElementById('efficiency').textContent = '0%';
-            }
-
-            async startDemo() {
-                this.isExecuting = true;
-                this.executeBtn.textContent = '⏸ STOP PIPELINE';
-                this.executeBtn.classList.add('executing');
-
-                // Start narration first (the correct voice-over)
-                this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
-                this.playNarrationBtn.textContent = '⏸ Pause Narration';
-
-                // Background music disabled by default to avoid interference with narration
-                // this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
-
-                // Execute pipeline stages
-                await this.executePipeline();
-
-                // Demo completed - narration continues until finished
-            }
-
-            stopDemo() {
-                this.isExecuting = false;
-                this.executeBtn.textContent = '⚙️ EXECUTE CMP PIPELINE';
-                this.executeBtn.classList.remove('executing');
-
-                // Stop background music
-                this.backgroundMusic.pause();
-
-                // Stop narration
-                this.narrationAudio.pause();
-                this.playNarrationBtn.textContent = '🎵 Play Narration';
-            }
-
-            async executePipeline() {
-                const stages = [
-                    { number: 1, name: 'Input Processing', duration: 2000 },
-                    { number: 2, name: 'Content Analysis', duration: 2500 },
-                    { number: 3, name: 'Processing Orchestration', duration: 3000 },
-                    { number: 4, name: 'Quality Assurance', duration: 2000 },
-                    { number: 5, name: 'Output Generation', duration: 1500 }
-                ];
-
-                for (let i = 0; i < stages.length; i++) {
-                    if (!this.isExecuting) break;
-
-                    const stage = stages[i];
-                    this.currentStage = stage.number;
-
-                    // Update narration
-                    this.updateNarration(this.narrationScripts[stage.number]);
-
-                    // Activate stage
-                    await this.activateStage(stage.number);
-
-                    // Wait for stage completion
-                    await this.delay(stage.duration);
-
-                    // Complete stage
-                    await this.completeStage(stage.number);
-                }
-
-                // Final narration
-                this.updateNarration(this.narrationScripts[6]);
-            }
-
-            async activateStage(stageNumber) {
-                const stage = document.getElementById(`stage-${stageNumber}`);
-                const status = document.getElementById(`status-${stageNumber}`);
-                const progress = document.getElementById(`progress-${stageNumber}`);
-                const flowNode = document.getElementById(`flow-${stageNumber}`);
-
-                // Activate stage
-                stage.classList.add('active');
-                status.textContent = 'ACTIVE';
-                status.className = 'stage-status status-active';
-                flowNode.classList.add('active');
-
-                // Animate progress
-                await this.animateProgress(stageNumber);
-
-                // Update stage details
-                await this.updateStageDetails(stageNumber);
-            }
-
-            async completeStage(stageNumber) {
-                const stage = document.getElementById(`stage-${stageNumber}`);
-                const status = document.getElementById(`status-${stageNumber}`);
-                const flowNode = document.getElementById(`flow-${stageNumber}`);
-
-                // Complete stage
-                stage.classList.remove('active');
-                stage.classList.add('completed');
-                status.textContent = 'COMPLETED';
-                status.className = 'stage-status status-completed';
-                flowNode.classList.remove('active');
-                flowNode.classList.add('completed');
-
-                // Update overall stats
-                this.updateOverallStats();
-            }
-
-            async animateProgress(stageNumber) {
-                const progress = document.getElementById(`progress-${stageNumber}`);
-                const duration = 1000;
-                const steps = 50;
-                const stepDuration = duration / steps;
-
-                for (let i = 0; i <= steps; i++) {
-                    if (!this.isExecuting) break;
-                    
-                    progress.style.width = `${i}%`;
-                    await this.delay(stepDuration);
-                }
-            }
-
-            async updateStageDetails(stageNumber) {
-                const detailIds = this.getStageDetailIds(stageNumber);
-                const stageData = this.generateStageData(stageNumber);
-
-                for (let i = 0; i < detailIds.length; i++) {
-                    if (!this.isExecuting) break;
-                    
-                    const element = document.getElementById(detailIds[i]);
-                    if (element) {
-                        await this.animateValue(element, stageData[i]);
-                    }
-                    await this.delay(200);
-                }
-            }
-
-            generateStageData(stageNumber) {
-                const dataMappings = {
-                    1: ['15', '1.2s', '98%'],
-                    2: ['8', '0.8s', '95%'],
-                    3: ['6', '2.1s', '92%'],
-                    4: ['94%', '0.5s', '2'],
-                    5: ['12', '0.3s', 'Delivered']
-                };
-                return dataMappings[stageNumber] || ['0', '0ms', '0%'];
-            }
-
-            async animateValue(element, finalValue) {
-                const startValue = element.textContent;
-                const duration = 500;
-                const steps = 20;
-                const stepDuration = duration / steps;
-
-                for (let i = 0; i <= steps; i++) {
-                    if (!this.isExecuting) break;
-                    
-                    const progress = i / steps;
-                    const currentValue = this.interpolateValue(startValue, finalValue, progress);
-                    element.textContent = currentValue;
-                    
-                    await this.delay(stepDuration);
-                }
-            }
-
-            interpolateValue(start, end, progress) {
-                if (start.includes('%') && end.includes('%')) {
-                    const startNum = parseInt(start);
-                    const endNum = parseInt(end);
-                    return Math.round(startNum + (endNum - startNum) * progress) + '%';
-                } else if (start.includes('s') && end.includes('s')) {
-                    const startNum = parseFloat(start);
-                    const endNum = parseFloat(end);
-                    return (startNum + (endNum - startNum) * progress).toFixed(1) + 's';
-                } else if (!isNaN(parseInt(start)) && !isNaN(parseInt(end))) {
-                    const startNum = parseInt(start);
-                    const endNum = parseInt(end);
-                    return Math.round(startNum + (endNum - startNum) * progress).toString();
-                } else {
-                    return end;
-                }
-            }
-
-            updateOverallStats() {
-                const totalProcessed = this.currentStage * 3;
-                const processingTime = this.currentStage * 0.8;
-                const successRate = Math.min(100, 85 + this.currentStage * 3);
-                const efficiency = Math.min(100, 80 + this.currentStage * 4);
-
-                document.getElementById('total-processed').textContent = totalProcessed;
-                document.getElementById('processing-time').textContent = processingTime.toFixed(1) + 's';
-                document.getElementById('success-rate').textContent = successRate + '%';
-                document.getElementById('efficiency').textContent = efficiency + '%';
-            }
-
-            updateNarration(text) {
-                this.narrationText.innerHTML = `
-                    <span class="narration-indicator"></span>
-                    ${text}
-                `;
-            }
-
-            toggleNarration() {
-                // Toggle narration audio if available
-                if (this.narrationAudio.paused) {
-                    this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
-                    this.playNarrationBtn.textContent = '⏸ Pause Narration';
-                } else {
-                    this.narrationAudio.pause();
-                    this.playNarrationBtn.textContent = '🎵 Play Narration';
-                }
-            }
-
-            toggleBackgroundMusic() {
-                if (this.backgroundMusic.paused) {
-                    this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
-                    this.playMusicBtn.textContent = '⏸ Stop Music';
-                } else {
-                    this.backgroundMusic.pause();
-                    this.playMusicBtn.textContent = '🎶 Background Music';
-                }
-            }
-
-            setVolume(value) {
-                const volume = value / 100;
-                this.narrationAudio.volume = volume;
-                this.backgroundMusic.volume = volume * 0.3; // Keep background music quieter
-            }
-
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-
-            hideLoading() {
-                setTimeout(() => {
-                    document.getElementById('loadingOverlay').style.opacity = '0';
-                    setTimeout(() => {
-                        document.getElementById('loadingOverlay').style.display = 'none';
-                    }, 500);
-                }, 2000);
-            }
-        }
-
-        // Initialize demo when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            new CMPPipelineDemo();
-        });
-    
-
-  </script>
-  <script>
-    (function() {
-      sessionStorage.setItem('returnSection', 'advanced-demos');
-      sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
-      
-      const backBtn = document.querySelector('.btn-back');
-      if (backBtn) {
-        backBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.location.href = '/docs.html#advanced-demos';
-        });
-      }
-      
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-          mobileMenu.classList.toggle('hidden');
-        });
-      }
-    })();
-  </script>
 </body>
 </html>

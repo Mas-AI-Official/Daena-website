@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Daena — The Auditable AI Vice President | MAS-AI</title>
-    <meta name="description" content="Daena: Unique AI Decision-Orchestration Platform — your AI VP. Not just agents. Governed, memory-aligned, self-improving decisions. Patent-pending: Sunflower–Honeycomb architecture + NBMF / Enterprise-DNA.">
-    
+    <meta name="description"
+        content="Daena: Unique AI Decision-Orchestration Platform — your AI VP. Not just agents. Governed, memory-aligned, self-improving decisions. Patent-pending: Sunflower–Honeycomb architecture + NBMF / Enterprise-DNA.">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Daena — The Auditable AI Vice President">
-    <meta property="og:description" content="Unique AI Decision-Orchestration Platform — your AI VP. Governed, memory-aligned, self-improving decisions.">
+    <meta property="og:description"
+        content="Unique AI Decision-Orchestration Platform — your AI VP. Governed, memory-aligned, self-improving decisions.">
     <meta property="og:image" content="https://daena.mas-ai.co/assets/img/og-image.jpg">
     <meta property="og:url" content="https://daena.mas-ai.co/">
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Daena — The Auditable AI Vice President">
     <meta name="twitter:description" content="Unique AI Decision-Orchestration Platform — your AI VP.">
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- HTMX CDN -->
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    
+
     <!-- Global CSS -->
     <link rel="stylesheet" href="/assets/css/global.css">
-    
+
     <!-- Video Player Component CSS -->
     <link rel="stylesheet" href="/assets/css/video-player.css">
-    
+
     <!-- Metatron Background Script -->
     <script src="/js/metatron-hex-network.js"></script>
-    
+
     <!-- Custom Video Player Component -->
     <script src="/assets/js/video-player.js" defer></script>
-    
+
     <style>
         /* Additional inline styles for specific components */
         .hero-section {
@@ -44,7 +47,7 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .video-container {
             position: relative;
             width: 100%;
@@ -54,7 +57,7 @@
             background: #000;
             border-radius: 1rem;
         }
-        
+
         .video-container video {
             width: 100%;
             height: 100%;
@@ -63,7 +66,7 @@
             object-fit: contain;
             background: #000;
         }
-        
+
         /* Ensure video container works on all devices */
         @media (max-width: 768px) {
             .video-container {
@@ -72,14 +75,14 @@
                 margin: 0 auto;
             }
         }
-        
+
         @media (max-width: 480px) {
             .video-container {
                 aspect-ratio: 16 / 9;
                 width: 100%;
             }
         }
-        
+
         /* Video container - ensure controls are below video */
         [data-player-container] {
             display: flex;
@@ -87,24 +90,22 @@
             width: 100%;
             position: relative;
         }
-        
+
         [data-player-container] video {
             width: 100%;
             height: auto;
             display: block;
             flex-shrink: 0;
         }
-        
+
         /* Shimmer effect for "Meet Daena" */
         .shimmer-text {
-            background: linear-gradient(
-                90deg,
-                #FFD700 0%,
-                #FFA500 25%,
-                #FFD700 50%,
-                #FFA500 75%,
-                #FFD700 100%
-            );
+            background: linear-gradient(90deg,
+                    #FFD700 0%,
+                    #FFA500 25%,
+                    #FFD700 50%,
+                    #FFA500 75%,
+                    #FFD700 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -113,13 +114,13 @@
             display: inline-block;
             filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
         }
-        
+
         @keyframes shimmer {
             to {
                 background-position: 200% center;
             }
         }
-        
+
         /* Big play button styling - Eye-catching yellow/gold */
         #big-play-button {
             backdrop-filter: blur(10px);
@@ -127,56 +128,60 @@
             box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 8px 32px rgba(0, 0, 0, 0.4);
             animation: pulse-glow 2s ease-in-out infinite;
         }
-        
+
         @keyframes pulse-glow {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 8px 32px rgba(0, 0, 0, 0.4);
             }
+
             50% {
                 box-shadow: 0 0 60px rgba(255, 215, 0, 0.8), 0 8px 40px rgba(0, 0, 0, 0.5);
             }
         }
-        
+
         #big-play-button:hover {
             transform: scale(1.15);
             box-shadow: 0 0 80px rgba(255, 215, 0, 0.9), 0 12px 48px rgba(0, 0, 0, 0.6);
             animation: none;
         }
-        
+
         #big-play-button:active {
             transform: scale(1.05);
         }
-        
+
         @media (max-width: 768px) {
             #big-play-button {
                 width: 4.5rem;
                 height: 4.5rem;
             }
+
             #big-play-button svg {
                 width: 2.25rem;
                 height: 2.25rem;
             }
         }
-        
+
         /* Video controls positioned outside video box */
         [data-player-container] {
             display: flex;
             flex-direction: column;
             width: 100%;
         }
-        
-        [data-player-container] > div:first-child {
+
+        [data-player-container]>div:first-child {
             /* Video wrapper - no controls here */
             position: relative;
             width: 100%;
         }
-        
+
         [data-player-container] .video-controls {
             margin-top: 0.75rem !important;
             position: relative !important;
             z-index: 10 !important;
         }
-        
+
         /* Video controls - Always visible, positioned below video */
         .video-controls {
             display: flex !important;
@@ -197,7 +202,7 @@
             opacity: 1 !important;
             flex-shrink: 0;
         }
-        
+
         /* Fullscreen mode - controls at bottom of video */
         [data-player-container].fullscreen-active {
             display: flex;
@@ -208,14 +213,15 @@
             height: 100vh;
             background: #000;
         }
-        
+
         [data-player-container].fullscreen-active video {
             width: 100%;
             height: auto;
-            max-height: calc(100vh - 80px); /* Leave space for controls */
+            max-height: calc(100vh - 80px);
+            /* Leave space for controls */
             object-fit: contain;
         }
-        
+
         [data-player-container].fullscreen-active .video-controls {
             position: absolute;
             bottom: 0;
@@ -230,7 +236,7 @@
             background: rgba(0, 0, 0, 0.98) !important;
             padding: 1rem;
         }
-        
+
         /* Ensure navigation stays visible */
         nav {
             position: sticky !important;
@@ -238,11 +244,11 @@
             z-index: 1000 !important;
             pointer-events: none;
         }
-        
-        nav > div {
+
+        nav>div {
             pointer-events: auto;
         }
-        
+
         /* Ensure speed button shows 2x */
         .video-controls [data-control="speed"] {
             min-width: 2.75rem;
@@ -252,7 +258,7 @@
             display: inline-block !important;
             visibility: visible !important;
         }
-        
+
         .video-controls button {
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -270,23 +276,23 @@
             -webkit-tap-highlight-color: transparent;
             flex-shrink: 0;
         }
-        
+
         .video-controls button:active {
             background: rgba(255, 255, 255, 0.25);
             transform: scale(0.95);
         }
-        
+
         .video-controls button:hover {
             background: rgba(255, 255, 255, 0.25);
             border-color: rgba(255, 215, 0, 0.6);
         }
-        
+
         .video-controls button svg {
             width: 1.25rem;
             height: 1.25rem;
             pointer-events: none;
         }
-        
+
         .video-controls input[type="range"] {
             flex: 1 1 auto;
             min-width: 60px;
@@ -299,7 +305,7 @@
             appearance: none;
             touch-action: manipulation;
         }
-        
+
         .video-controls input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -311,7 +317,7 @@
             border: 2px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .video-controls input[type="range"]::-moz-range-thumb {
             width: 18px;
             height: 18px;
@@ -321,7 +327,7 @@
             border: 2px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .video-controls [data-control="time"] {
             color: white;
             font-size: 0.875rem;
@@ -332,27 +338,27 @@
             font-family: 'Courier New', monospace;
             flex-shrink: 0;
         }
-        
+
         .video-controls [data-control="speed"] {
             min-width: 2.75rem;
             font-size: 0.875rem;
             font-weight: 600;
             flex-shrink: 0;
         }
-        
+
         /* Tablet (768px - 1024px) */
         @media (min-width: 768px) and (max-width: 1024px) {
             .video-controls {
                 gap: 0.625rem;
                 padding: 0.875rem;
             }
-            
+
             .video-controls button {
                 min-width: 2.5rem;
                 height: 2.5rem;
             }
         }
-        
+
         /* Mobile (max-width: 768px) */
         @media (max-width: 768px) {
             .video-controls {
@@ -360,44 +366,44 @@
                 padding: 0.75rem;
                 font-size: 0.875rem;
             }
-            
+
             .video-controls button {
                 min-width: 2.5rem;
                 height: 2.5rem;
                 padding: 0.5rem;
             }
-            
+
             .video-controls button svg {
                 width: 1.125rem;
                 height: 1.125rem;
             }
-            
+
             .video-controls [data-control="time"] {
                 font-size: 0.75rem;
                 min-width: 70px;
             }
-            
+
             .video-controls [data-control="speed"] {
                 min-width: 2.5rem;
                 font-size: 0.75rem;
             }
-            
+
             .video-controls input[type="range"] {
                 min-width: 50px;
                 height: 6px;
             }
-            
+
             .video-controls input[type="range"]::-webkit-slider-thumb {
                 width: 16px;
                 height: 16px;
             }
-            
+
             .video-controls input[type="range"]::-moz-range-thumb {
                 width: 16px;
                 height: 16px;
             }
         }
-        
+
         /* Small phones (max-width: 480px) */
         @media (max-width: 480px) {
             .video-controls {
@@ -405,86 +411,87 @@
                 padding: 0.625rem;
                 font-size: 0.75rem;
             }
-            
+
             .video-controls button {
                 min-width: 2.25rem;
                 height: 2.25rem;
                 padding: 0.375rem;
             }
-            
+
             .video-controls button svg {
                 width: 1rem;
                 height: 1rem;
             }
-            
+
             .video-controls [data-control="time"] {
                 font-size: 0.7rem;
                 min-width: 65px;
             }
-            
+
             .video-controls [data-control="speed"] {
                 min-width: 2.25rem;
                 font-size: 0.7rem;
             }
-            
+
             .video-controls input[type="range"] {
                 min-width: 40px;
                 height: 5px;
             }
-            
+
             .video-controls input[type="range"]::-webkit-slider-thumb {
                 width: 14px;
                 height: 14px;
             }
-            
+
             .video-controls input[type="range"]::-moz-range-thumb {
                 width: 14px;
                 height: 14px;
             }
-            
+
             /* Hide PiP on small screens */
             .video-controls [data-control="pip"] {
                 display: none !important;
             }
-            
+
             /* Stack controls vertically if needed */
             .video-controls {
                 flex-direction: row;
                 flex-wrap: wrap;
             }
         }
-        
+
         /* Very small phones (max-width: 360px) */
         @media (max-width: 360px) {
             .video-controls {
                 gap: 0.25rem;
                 padding: 0.5rem;
             }
-            
+
             .video-controls button {
                 min-width: 2rem;
                 height: 2rem;
                 padding: 0.25rem;
             }
-            
+
             .video-controls [data-control="time"] {
                 font-size: 0.65rem;
                 min-width: 60px;
             }
-            
+
             .video-controls [data-control="speed"] {
                 min-width: 2rem;
                 font-size: 0.65rem;
-                display: inline-block !important; /* Keep speed visible, just smaller */
+                display: inline-block !important;
+                /* Keep speed visible, just smaller */
             }
         }
-        
+
         /* Landscape orientation on mobile */
         @media (max-width: 768px) and (orientation: landscape) {
             .video-controls {
                 padding: 0.5rem 0.75rem;
             }
-            
+
             .video-controls button {
                 min-width: 2.25rem;
                 height: 2.25rem;
@@ -492,48 +499,54 @@
         }
     </style>
 </head>
+
 <body class="text-white antialiased">
     <!-- Metatron Background Layers -->
     <div class="metatron-bg"></div>
     <div class="metatron-pattern-bg"></div>
     <canvas id="metatron-hex-canvas"></canvas>
-    
+
     <!-- Navigation - Always visible, never disappears -->
-    <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" aria-label="Main navigation" style="pointer-events: none;">
+    <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" aria-label="Main navigation"
+        style="pointer-events: none;">
         <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
             <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
-            <a href="/" class="text-xl font-bold">Daena</a>
-            <div class="hidden md:flex items-center gap-6">
-                <a href="/" class="hover:text-yellow-400 transition">Home</a>
-                <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-                <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
-                <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-                <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-                <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
+                <a href="/" class="text-xl font-bold">Daena</a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                    <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
+                    <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                    <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                    <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
             </div>
-            <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
-        <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
-            <div class="flex flex-col gap-4">
-                <a href="/" class="hover:text-yellow-400 transition">Home</a>
-                <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-                <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
-                <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-                <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-                <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
+            <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
+                <div class="flex flex-col gap-4">
+                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
+                    <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
+                    <a href="/pitch-deck.html" class="hover:text-yellow-400 transition">Pitch Deck</a>
+                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
+                    <a href="/docs.html" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
+                    <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
+                </div>
             </div>
-        </div>
         </div>
     </nav>
-    
+
     <!-- Hero Section -->
-    <section id="hero" style="min-height: calc(100vh - var(--nav-h, 72px)); display: grid; place-items: center; padding: var(--hero-pad, 24px); position: relative;">
-        <div class="hero-card" style="width: min(1100px, 92vw); margin: 0 auto; border-radius: 20px; background: rgba(12,14,20,0.72); backdrop-filter: blur(12px); box-shadow: 0 12px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.06); padding: clamp(20px, 4vw, 44px); text-align: center;">
-            <p class="text-yellow-400 text-sm uppercase tracking-wider mb-4" style="margin-top: 0;">The Auditable AI Vice President</p>
+    <section id="hero"
+        style="min-height: calc(100vh - var(--nav-h, 72px)); display: grid; place-items: center; padding: var(--hero-pad, 24px); position: relative;">
+        <div class="hero-card"
+            style="width: min(1100px, 92vw); margin: 0 auto; border-radius: 20px; background: rgba(12,14,20,0.72); backdrop-filter: blur(12px); box-shadow: 0 12px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.06); padding: clamp(20px, 4vw, 44px); text-align: center;">
+            <p class="text-yellow-400 text-sm uppercase tracking-wider mb-4" style="margin-top: 0;">The Auditable AI
+                Vice President</p>
             <h1 class="text-4xl md:text-6xl font-bold mb-6" style="margin-top: 0;">
                 <span class="shimmer-text">Meet Daena</span>
             </h1>
@@ -556,7 +569,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Why Investors Choose Daena -->
     <section class="px-4 py-20" id="why-investors">
         <div class="max-w-6xl mx-auto">
@@ -572,7 +585,8 @@
                 </div>
                 <div class="order-1 md:order-2 w-full">
                     <!-- Custom Daena video player -->
-                    <div class="daena-video" data-video="/videos/why-investors.mp4" data-poster="/videos/play.png" aria-label="Why Investors Choose Daena video">
+                    <div class="daena-video" data-video="/videos/why-investors.mp4" data-poster="/videos/play.png"
+                        aria-label="Why Investors Choose Daena video">
                         <div class="video-frame">
                             <video preload="metadata" playsinline></video>
                             <!-- Center play overlay -->
@@ -587,23 +601,38 @@
                         <!-- Always-visible controls under the frame -->
                         <div class="controls" data-controls>
                             <button class="btn" data-action="play" aria-label="Play/Pause">
-                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-                                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>
+                                <svg class="icon-play" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"></path>
+                                </svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24">
+                                    <path d="M6 5h4v14H6zM14 5h4v14h-4z"></path>
+                                </svg>
                             </button>
                             <span class="time" data-time="current">0:00</span>
                             <input class="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
                             <span class="time" data-time="duration">0:00</span>
                             <div class="spacer"></div>
                             <button class="btn" data-action="mute" aria-label="Mute/Unmute">
-                                <svg class="icon-vol" viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6L7 10H3z"></path></svg>
-                                <svg class="icon-vol-mute" viewBox="0 0 24 24"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5L16.5 12z"></path></svg>
+                                <svg class="icon-vol" viewBox="0 0 24 24">
+                                    <path d="M3 10v4h4l5 4V6L7 10H3z"></path>
+                                </svg>
+                                <svg class="icon-vol-mute" viewBox="0 0 24 24">
+                                    <path
+                                        d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5L16.5 12z">
+                                    </path>
+                                </svg>
                             </button>
-                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.8"
+                                aria-label="Volume">
                             <button class="btn" data-action="speed" aria-label="Playback Speed" title="Speed: 1x">
                                 <span class="speed-text">1x</span>
                             </button>
                             <button class="btn" data-action="fs" aria-label="Toggle Fullscreen">
-                                <svg class="icon-fs" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm0-4h3V7h2V2H7v3H5v5h2V6zM17 5h-3V3h5v5h-2V5zm-3 14h3v-3h2v5h-5v-2z"></path></svg>
+                                <svg class="icon-fs" viewBox="0 0 24 24">
+                                    <path
+                                        d="M7 14H5v5h5v-2H7v-3zm0-4h3V7h2V2H7v3H5v5h2V6zM17 5h-3V3h5v5h-2V5zm-3 14h3v-3h2v5h-5v-2z">
+                                    </path>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -611,13 +640,14 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Patent-Pending Technologies Section -->
     <section class="px-4 py-20" id="patents">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-yellow-400">Patent-Pending Technologies</h2>
-                <p class="text-gray-300 text-lg md:text-xl">Revolutionary architectures powering Daena's decision-making</p>
+                <p class="text-gray-300 text-lg md:text-xl">Revolutionary architectures powering Daena's decision-making
+                </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Sunflower-Honeycomb Architecture -->
@@ -625,8 +655,10 @@
                     <div class="flex items-start gap-4 mb-4">
                         <div class="text-4xl">🌻</div>
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-bold mb-3 text-yellow-400">Sunflower–Honeycomb Architecture</h3>
-                            <p class="text-gray-300 mb-4">A mathematical foundation enabling self-organizing agent networks with optimal communication patterns.</p>
+                            <h3 class="text-2xl md:text-3xl font-bold mb-3 text-yellow-400">Sunflower–Honeycomb
+                                Architecture</h3>
+                            <p class="text-gray-300 mb-4">A mathematical foundation enabling self-organizing agent
+                                networks with optimal communication patterns.</p>
                             <ul class="space-y-2 text-gray-400 text-sm">
                                 <li>• Hex-Mesh routing for 48-agent coordination</li>
                                 <li>• Phase-locked parallel processing</li>
@@ -636,14 +668,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- NBMF & Enterprise-DNA -->
                 <div class="glass-card p-8 md:p-12">
                     <div class="flex items-start gap-4 mb-4">
                         <div class="text-4xl">🧬</div>
                         <div>
                             <h3 class="text-2xl md:text-3xl font-bold mb-3 text-yellow-400">NBMF & Enterprise-DNA</h3>
-                            <p class="text-gray-300 mb-4">Neural compression and organizational memory systems with 13.30× compression and 100% accuracy.</p>
+                            <p class="text-gray-300 mb-4">Neural compression and organizational memory systems with
+                                13.30× compression and 100% accuracy.</p>
                             <ul class="space-y-2 text-gray-400 text-sm">
                                 <li>• Lossless neural compression (NBMF)</li>
                                 <li>• Enterprise-DNA: Genome, Epigenome, Lineage, Immune</li>
@@ -655,18 +688,21 @@
                 </div>
             </div>
             <div class="text-center mt-8">
-                <p class="text-gray-400 text-sm">All technologies are patent-pending and proprietary to MAS-AI Technology Inc.</p>
+                <p class="text-gray-400 text-sm">All technologies are patent-pending and proprietary to MAS-AI
+                    Technology Inc.</p>
             </div>
         </div>
     </section>
-    
+
     <!-- Recorded Demos Section -->
     <section class="px-4 py-20" id="demos">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Recorded Demos</h2>
                 <p class="text-gray-400 mb-6">Watch pre-recorded demonstrations of Daena's capabilities</p>
-                <a href="/docs.html" class="inline-flex items-center gap-2 px-6 py-3 glass-button text-base font-semibold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-3 group border-2 border-yellow-400/40 hover:border-yellow-400/70 bg-yellow-400/10 hover:bg-yellow-400/20 shadow-lg hover:shadow-yellow-400/30" data-return-section="demos">
+                <a href="/docs.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 glass-button text-base font-semibold text-yellow-400 hover:text-yellow-300 transition-all hover:gap-3 group border-2 border-yellow-400/40 hover:border-yellow-400/70 bg-yellow-400/10 hover:bg-yellow-400/20 shadow-lg hover:shadow-yellow-400/30"
+                    data-return-section="demos">
                     <span>See all technical details</span>
                     <span class="group-hover:translate-x-1 transition-transform text-xl">→</span>
                 </a>
@@ -676,151 +712,20 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Live Demos Section -->
-    <!-- Live Demos Section -->
-    <section class="px-4 py-20" id="live-demos-section">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-yellow-400">Experience Daena</h2>
-                <p class="text-gray-300 text-lg mb-8">Choose your preferred way to explore Daena's revolutionary AI technology</p>
-                
-                <!-- Demo Access Buttons -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-12">
-                    <button onclick="openDemoTab('live')" class="glass-card p-6 text-center hover:bg-white/5 transition-all group border-2 border-yellow-400/20 hover:border-yellow-400/60 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="text-4xl mb-3">🎮</div>
-                        <h3 class="text-xl font-bold text-white mb-2">Live Interactive</h3>
-                        <p class="text-sm text-gray-400">Real-time experience with step-by-step interactions</p>
-                    </button>
-                    
-                    <button onclick="openDemoTab('recorded')" class="glass-card p-6 text-center hover:bg-white/5 transition-all group border-2 border-transparent hover:border-blue-400/60 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-blue-400/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="text-4xl mb-3">📹</div>
-                        <h3 class="text-xl font-bold text-white mb-2">Recorded Videos</h3>
-                        <p class="text-sm text-gray-400">Watch pre-recorded demonstrations in action</p>
-                    </button>
-                    
-                    <button onclick="openDemoTab('mvp')" class="glass-card p-6 text-center hover:bg-white/5 transition-all group border-2 border-transparent hover:border-green-400/60 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-green-400/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="text-4xl mb-3">🎯</div>
-                        <h3 class="text-xl font-bold text-white mb-2">MVP Validation</h3>
-                        <p class="text-sm text-gray-400">Real talk and complete system validation</p>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Tab Content: Live Demos -->
-            <div id="tab-live" class="demo-tab-content block">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-bold text-yellow-400 mb-2">Live Interactive Demos</h3>
-                    <p class="text-gray-400">Click to launch interactive scenarios with voice-over narration</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                    <!-- Agent Communication -->
-                    <a href="/live-demos/agent-communication/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🕸️</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">Agent Communication</h3>
-                        <p class="text-xs text-gray-400">6-agent collaboration</p>
-                    </a>
-                    
-                    <!-- Budget Calculation -->
-                    <a href="/live-demos/budget-calculation/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">💰</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">Budget Calculation</h3>
-                        <p class="text-xs text-gray-400">Finance agent analysis</p>
-                    </a>
-                    
-                    <!-- CMP Pipeline -->
-                    <a href="/live-demos/cmp-pipeline/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">⚙️</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">CMP Pipeline</h3>
-                        <p class="text-xs text-gray-400">Complete workflow</p>
-                    </a>
-                    
-                    <!-- Patent Technology -->
-                    <a href="/live-demos/patent-technology/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🔬</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">Patent Technology</h3>
-                        <p class="text-xs text-gray-400">NBMF & Enterprise-DNA</p>
-                    </a>
-                    
-                    <!-- Patent Enhanced -->
-                    <a href="/live-demos/patent-enhanced/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🚀</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">Patent Enhanced</h3>
-                        <p class="text-xs text-gray-400">AI-powered insights</p>
-                    </a>
-                    
-                    <!-- Real Talk -->
-                    <a href="/live-demos/real-talk/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">💬</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">Real Talk</h3>
-                        <p class="text-xs text-gray-400">Natural conversation</p>
-                    </a>
-                    
-                    <!-- Real Scenario -->
-                    <a href="/live-demos/real-scenario/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🎯</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">Real Scenario</h3>
-                        <p class="text-xs text-gray-400">Business scenarios</p>
-                    </a>
-                    
-                    <!-- Sunflower-Honeycomb -->
-                    <a href="/live-demos/sunflower-honeycomb/index.html" class="glass-card p-4 text-center hover:scale-105 transition-transform cursor-pointer block group">
-                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🌻</div>
-                        <h3 class="text-sm font-semibold text-yellow-400 mb-1">Sunflower-Honeycomb</h3>
-                        <p class="text-xs text-gray-400">Core architecture</p>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Tab Content: Recorded Videos -->
-            <div id="tab-recorded" class="demo-tab-content hidden">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-bold text-blue-400 mb-2">Recorded Demo Videos</h3>
-                    <p class="text-gray-400">Watch high-quality recordings of Daena in action</p>
-                </div>
-                <div id="demos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Content populated by JS or static -->
-                    <!-- Placeholder for now, can be populated dynamically or statically -->
-                    <div class="glass-card p-4">
-                        <p class="text-center text-gray-400">Loading recorded demos...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab Content: MVP Validation -->
-            <div id="tab-mvp" class="demo-tab-content hidden">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-bold text-green-400 mb-2">MVP Validation & Real Talk</h3>
-                    <p class="text-gray-400">See the complete system validation</p>
-                </div>
-                <div class="max-w-4xl mx-auto glass-card p-8">
-                    <div class="aspect-video bg-black rounded-xl mb-6 flex items-center justify-center">
-                        <p class="text-gray-500">MVP Validation Video Placeholder</p>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-xl font-bold text-white mb-4">Validation Features</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li class="flex items-center gap-2">✅ Complete system demonstration</li>
-                                <li class="flex items-center gap-2">✅ Real conversation with Daena</li>
-                                <li class="flex items-center gap-2">✅ All 48 agents in action</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold text-white mb-4">System Status</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li class="flex items-center gap-2">🚀 Production Ready</li>
-                                <li class="flex items-center gap-2">🛡️ Security Audited</li>
-                                <li class="flex items-center gap-2">⚡ Real-time Performance</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <h4 class="text-xl font-bold text-white mb-4">System Status</h4>
+        <ul class="space-y-2 text-gray-300">
+            <li class="flex items-center gap-2">🚀 Production Ready</li>
+            <li class="flex items-center gap-2">🛡️ Security Audited</li>
+            <li class="flex items-center gap-2">⚡ Real-time Performance</li>
+        </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </section>
 
     <script>
@@ -830,16 +735,16 @@
                 el.classList.add('hidden');
                 el.classList.remove('block');
             });
-            
+
             // Show selected tab
             document.getElementById('tab-' + tabName).classList.remove('hidden');
             document.getElementById('tab-' + tabName).classList.add('block');
-            
+
             // Update button states (optional visual feedback)
             // Could add active class to buttons here
         }
     </script>
-    
+
     <!-- Pitch Deck Section -->
     <section class="px-4 py-20" id="pitch">
         <div class="max-w-4xl mx-auto glass-card p-8 md:p-12">
@@ -858,96 +763,74 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Contact Form Section -->
     <section class="px-4 py-20" id="contact">
         <div class="max-w-4xl mx-auto glass-card p-8 md:p-12">
             <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">Get In Touch</h2>
-            <p class="text-gray-300 text-center mb-8">Have questions? Want to learn more? We'd love to hear from you.</p>
-            
+            <p class="text-gray-300 text-center mb-8">Have questions? Want to learn more? We'd love to hear from you.
+            </p>
+
             <form id="contact-form" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="first-name" class="block text-sm font-semibold mb-2 text-gray-300">First Name *</label>
-                        <input 
-                            type="text" 
-                            id="first-name" 
-                            name="firstName" 
-                            required
+                        <label for="first-name" class="block text-sm font-semibold mb-2 text-gray-300">First Name
+                            *</label>
+                        <input type="text" id="first-name" name="firstName" required
                             class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition"
-                            placeholder="John"
-                        >
+                            placeholder="John">
                     </div>
                     <div>
-                        <label for="last-name" class="block text-sm font-semibold mb-2 text-gray-300">Last Name *</label>
-                        <input 
-                            type="text" 
-                            id="last-name" 
-                            name="lastName" 
-                            required
+                        <label for="last-name" class="block text-sm font-semibold mb-2 text-gray-300">Last Name
+                            *</label>
+                        <input type="text" id="last-name" name="lastName" required
                             class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition"
-                            placeholder="Doe"
-                        >
+                            placeholder="Doe">
                     </div>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="email" class="block text-sm font-semibold mb-2 text-gray-300">Email *</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            required
+                        <input type="email" id="email" name="email" required
                             class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition"
-                            placeholder="john.doe@example.com"
-                        >
+                            placeholder="john.doe@example.com">
                     </div>
                     <div>
                         <label for="phone" class="block text-sm font-semibold mb-2 text-gray-300">Phone Number</label>
-                        <input 
-                            type="tel" 
-                            id="phone" 
-                            name="phone"
+                        <input type="tel" id="phone" name="phone"
                             class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition"
-                            placeholder="+1 (555) 123-4567"
-                        >
+                            placeholder="+1 (555) 123-4567">
                     </div>
                 </div>
-                
+
                 <div>
                     <label for="message" class="block text-sm font-semibold mb-2 text-gray-300">Message *</label>
-                    <textarea 
-                        id="message" 
-                        name="message" 
-                        required
-                        rows="6"
+                    <textarea id="message" name="message" required rows="6"
                         class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition resize-none"
-                        placeholder="Tell us what you'd like to discuss..."
-                    ></textarea>
+                        placeholder="Tell us what you'd like to discuss..."></textarea>
                 </div>
-                
+
                 <div class="text-center">
-                    <button 
-                        type="submit"
-                        class="glass-button px-8 py-3 text-lg font-semibold text-yellow-400 hover:text-yellow-300 transition-all"
-                    >
+                    <button type="submit"
+                        class="glass-button px-8 py-3 text-lg font-semibold text-yellow-400 hover:text-yellow-300 transition-all">
                         Send Message
                     </button>
                 </div>
-                
+
                 <div id="form-message" class="hidden text-center p-4 rounded-lg"></div>
             </form>
-            
+
             <div class="mt-8 pt-8 border-t border-white/10 text-center">
                 <p class="text-gray-400 text-sm mb-2">Or reach us directly:</p>
-                <a href="mailto:masoud.masoori@mas-ai.co" class="text-yellow-400 hover:text-yellow-300 font-semibold text-lg">
+                <a href="mailto:masoud.masoori@mas-ai.co"
+                    class="text-yellow-400 hover:text-yellow-300 font-semibold text-lg">
                     masoud.masoori@mas-ai.co
                 </a>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer class="px-4 py-12 text-center text-sm text-gray-500">
         <p class="mb-4">© MAS-AI Technology Inc. • Patent-pending systems: Sunflower–Honeycomb, NBMF, Enterprise-DNA</p>
@@ -957,22 +840,22 @@
             <a href="mailto:masoud.masoori@mas-ai.co" class="hover:text-yellow-400 transition">Contact</a>
         </div>
     </footer>
-    
+
     <!-- Contact Form Handler -->
     <script>
-        document.getElementById('contact-form')?.addEventListener('submit', async function(e) {
+        document.getElementById('contact-form')?.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             const form = this;
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             const messageDiv = document.getElementById('form-message');
-            
+
             // Disable submit button
             const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
-            
+
             try {
                 // Save to localStorage (for admin page)
                 const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
@@ -982,21 +865,21 @@
                     id: Date.now().toString()
                 });
                 localStorage.setItem('contact_submissions', JSON.stringify(submissions));
-                
+
                 // Also send email (if you have a backend endpoint)
                 // await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) });
-                
+
                 // Show success message
                 messageDiv.className = 'text-center p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400';
                 messageDiv.textContent = 'Thank you! Your message has been sent. We\'ll get back to you soon.';
                 messageDiv.classList.remove('hidden');
-                
+
                 // Reset form
                 form.reset();
-                
+
                 // Scroll to message
                 messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                
+
             } catch (error) {
                 messageDiv.className = 'text-center p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400';
                 messageDiv.textContent = 'Sorry, there was an error. Please try again or email us directly.';
@@ -1007,17 +890,17 @@
             }
         });
     </script>
-    
+
     <!-- Smart Back Navigation -->
     <script>
         // Track where user came from for smart back navigation
-        (function() {
+        (function () {
             // Store referrer section when clicking links
             document.querySelectorAll('a[href^="/docs"], a[href^="/"], a[href^="#"]').forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
                     const returnSection = this.getAttribute('data-return-section');
-                    
+
                     if (href && (href.startsWith('/docs') || href.startsWith('/') || href.startsWith('#'))) {
                         // Get current section from data attribute, hash, or active section
                         let section = returnSection;
@@ -1040,7 +923,7 @@
                     }
                 });
             });
-            
+
             // Handle return from other pages
             if (document.referrer && !document.referrer.includes(window.location.hostname)) {
                 // Coming from external or different page
@@ -1058,7 +941,7 @@
             }
         })();
     </script>
-    
+
     <!-- Load Demos -->
     <script>
         // Mobile menu toggle
@@ -1066,7 +949,7 @@
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
-        
+
         // Load demos from JSON
         fetch('/data/demos.json')
             .then(res => res.json())
@@ -1086,20 +969,20 @@
                 `).join('');
             })
             .catch(err => console.error('Failed to load demos:', err));
-        
+
         // Demo modal with jazz background music
         function openDemoModal(videoSrc, title) {
             const modal = document.createElement('div');
             modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4';
-            
+
             // Create background music (subtle jazz)
             const bgMusic = document.createElement('audio');
             bgMusic.loop = true;
             bgMusic.volume = 0.15; // Subtle background
             // Using a free jazz music URL - you can replace with your own
             bgMusic.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-            bgMusic.play().catch(() => {}); // Auto-play might be blocked, that's okay
-            
+            bgMusic.play().catch(() => { }); // Auto-play might be blocked, that's okay
+
             modal.innerHTML = `
                 <div class="relative max-w-4xl w-full">
                     <button onclick="this.closest('.fixed').remove(); this.querySelector('audio')?.pause();" class="absolute -top-10 right-0 text-white hover:text-yellow-400 text-2xl font-bold z-10" aria-label="Close">×</button>
@@ -1112,29 +995,29 @@
                     <p class="text-gray-400 text-sm mt-2">Background music enabled for better experience</p>
                 </div>
             `;
-            
+
             // Add music to modal
             const musicContainer = document.createElement('div');
             musicContainer.style.display = 'none';
             musicContainer.appendChild(bgMusic);
             modal.querySelector('.relative').appendChild(musicContainer);
-            
+
             document.body.appendChild(modal);
-            
+
             // Stop music when modal closes
             const closeBtn = modal.querySelector('button');
-            closeBtn.onclick = function() {
+            closeBtn.onclick = function () {
                 bgMusic.pause();
                 modal.remove();
             };
-            
+
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     bgMusic.pause();
                     modal.remove();
                 }
             });
-            
+
             // Stop music when video ends
             const video = modal.querySelector('#demo-video');
             if (video) {
@@ -1145,5 +1028,5 @@
         }
     </script>
 </body>
-</html>
 
+</html>

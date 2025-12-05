@@ -1,19 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Patent Enhanced â€¢ Live Demo</title>
-  <meta name="description" content="Explore Daena's enhanced patent analysis with AI-powered insights" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/css/global.css">
-  <link rel="stylesheet" href="/assets/css/live-demos.css">
-
-
-  <link rel="stylesheet" href="/live-demos/voice-player.css">
-  <script src="/live-demos/voice-player.js"></script>
-  <style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena: Enhanced Patent Technology Demo</title>
+    <link rel="stylesheet" href="../voice-player.css">
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -483,63 +475,91 @@
                 align-items: center;
             }
         }
-    
+    </style>
 
-  </style>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+
 </head>
-<body class="metatron-bg">
-  <div class="metatron-bg"></div>
-  <div class="metatron-pattern-bg"></div>
-  <canvas id="metatron-hex-canvas"></canvas>
-  
-  <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" style="pointer-events: none;">
-    <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
-      <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
-        <a href="/" class="text-xl font-bold">Daena</a>
-        <div class="hidden md:flex items-center gap-6">
-          <a href="/" class="hover:text-yellow-400 transition">Home</a>
-          <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-          <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-          <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-          <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-          <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
-        </div>
-        <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
-        <div class="flex flex-col gap-4">
-          <a href="/" class="hover:text-yellow-400 transition">Home</a>
-          <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-          <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-          <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-          <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-          <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  
-  <main class="page">
-    <header class="demo-header">
-      <a class="btn-back" href="/#live-demos-section">← Back to Live Demos</a>
-    </header>
-    
-    <div class="card glass">
-      <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.5rem; margin-top: 0;">Patent Enhanced</h1>
-      <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem; margin-top: 0;">Explore Daena's enhanced patent analysis with AI-powered insights</p>
-      
+<body>
 
-    
+    <!-- Standard Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                            <span class="text-black font-bold text-xl">D</span>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="/#features" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live Demos</a>
+                        <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
+                <a href="/#features" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="/#technology" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
+                <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live Demos</a>
+                <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div class="nav-buttons">
+                    <a href="../../index.html#demos" class="nav-btn">← Demos Gallery</a>
+                    <a href="../../index.html" class="nav-btn">🏠 Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
         <div class="main-content">
             <div class="demo-interface">
-                
-                
+                <h1 class="demo-title">🚀 Enhanced Patent Technology Demo</h1>
+                <p class="demo-subtitle">Advanced AI-powered patent analysis with 96% accuracy and comprehensive insights</p>
 
                 <div class="demo-controls">
                     <button id="startEnhancedDemo" class="demo-btn">▶️ START ENHANCED DEMO</button>
@@ -1045,420 +1065,5 @@
             window.enhancedPatentDemo = new DaenaEnhancedPatentDemo();
         });
     </script>
-
-    </div>
-  </main>
-  
-  <script src="/js/metatron-hex-network.js"></script>
-
-
-  <link rel="stylesheet" href="/live-demos/voice-player.css">
-  <script src="/live-demos/voice-player.js"></script>
-  <script>
-
-        class DaenaEnhancedPatentDemo {
-            constructor() {
-                this.isRunning = false;
-                this.patentsAnalyzed = 0;
-                this.accuracy = 0;
-                this.noveltyIndex = 0;
-                this.processingTime = 0;
-                this.voicePlayer = null;
-                
-                this.phases = [
-                    {
-                        title: "Advanced database integration",
-                        duration: 2000,
-                        action: this.connectToEnhancedDatabase.bind(this)
-                    },
-                    {
-                        title: "AI-powered technology analysis",
-                        duration: 3500,
-                        action: this.analyzeWithAI.bind(this)
-                    },
-                    {
-                        title: "Enhanced prior art search",
-                        duration: 4500,
-                        action: this.enhancedPriorArtSearch.bind(this)
-                    },
-                    {
-                        title: "ML-powered novelty assessment",
-                        duration: 4000,
-                        action: this.mlNoveltyAssessment.bind(this)
-                    },
-                    {
-                        title: "Strategic market analysis",
-                        duration: 3500,
-                        action: this.strategicMarketAnalysis.bind(this)
-                    },
-                    {
-                        title: "Advanced reporting",
-                        duration: 2500,
-                        action: this.generateAdvancedReport.bind(this)
-                    }
-                ];
-
-                this.init();
-            }
-
-            init() {
-                this.startBtn = document.getElementById('startEnhancedDemo');
-                this.stopBtn = document.getElementById('stopEnhancedDemo');
-                this.resetBtn = document.getElementById('resetEnhancedDemo');
-
-                this.startBtn.addEventListener('click', () => this.startDemo());
-                this.stopBtn.addEventListener('click', () => this.stopDemo());
-                this.resetBtn.addEventListener('click', () => this.resetDemo());
-
-                this.updateStats();
-
-                // Load voice player config
-                this.loadVoiceConfig();
-            }
-
-            async loadVoiceConfig() {
-                try {
-                    const response = await fetch('config.json');
-                    const config = await response.json();
-                    if (config.audio) {
-                        this.voicePlayer = new DaenaVoicePlayer('daena-voice-player', config);
-                    }
-                } catch (error) {
-                    console.log('Voice config not available, demo will run without voice-over');
-                }
-            }
-
-            async startDemo() {
-                this.isRunning = true;
-                this.startBtn.style.display = 'none';
-                this.stopBtn.style.display = 'inline-block';
-                this.stopBtn.classList.add('executing');
-
-                // Start voice-over if available
-                if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                    this.voicePlayer.play();
-                }
-
-                // Clear activity log
-                document.getElementById('enhancedLogEntries').innerHTML = '';
-
-                for (const phase of this.phases) {
-                    if (!this.isRunning) break;
-                    
-                    this.updatePhaseIndicator(phase.title, `Executing ${phase.title.toLowerCase()}`);
-                    await phase.action();
-                    await this.delay(1500);
-                }
-
-                if (this.isRunning) {
-                    this.stopDemo();
-                    this.addLogEntry(
-                        'Enhanced Patent Analysis System',
-                        'Enhanced Patent Technology analysis completed',
-                        'Advanced AI-powered analysis with 96% accuracy achieved',
-                        96
-                    );
-                }
-            }
-
-            stopDemo() {
-                this.isRunning = false;
-                this.startBtn.style.display = 'inline-block';
-                this.stopBtn.style.display = 'none';
-                this.stopBtn.classList.remove('executing');
-                
-                // Stop voice-over if available
-                if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                    this.voicePlayer.pause();
-                }
-            }
-
-            resetDemo() {
-                this.stopDemo();
-                
-                // Reset stats
-                this.patentsAnalyzed = 0;
-                this.accuracy = 0;
-                this.noveltyIndex = 0;
-                this.processingTime = 0;
-                
-                this.updateStats();
-
-                // Reset all categories
-                const categories = ['advancedTechnologyAnalysis', 'enhancedPriorArtSearch', 'mlNoveltyAssessment', 'strategicMarketAnalysis'];
-                categories.forEach(categoryId => {
-                    const category = document.getElementById(categoryId);
-                    const progressBar = document.getElementById(categoryId.replace('Analysis', 'Progress').replace('Search', 'Progress').replace('Assessment', 'Progress'));
-                    
-                    category.classList.remove('active', 'processing');
-                    category.querySelector('.category-status').textContent = 'Standby';
-                    progressBar.style.width = '0%';
-                });
-
-                // Reset results
-                document.getElementById('enhancedPatentClassification').textContent = 'Pending Analysis';
-                document.getElementById('enhancedInnovationLevel').textContent = 'Pending Analysis';
-                document.getElementById('enhancedMarketPotential').textContent = 'Pending Analysis';
-                document.getElementById('enhancedCompetitiveAdvantage').textContent = 'Pending Analysis';
-
-                // Clear activity log
-                document.getElementById('enhancedLogEntries').innerHTML = `
-                    <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
-                        Enhanced Patent Technology analysis system initialized and ready.
-                    </div>
-                `;
-
-                this.updatePhaseIndicator('Ready', 'System initialized. Ready to show Enhanced Patent Technology analysis...');
-
-                // Reset voice player if available
-                if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                    this.voicePlayer.audioPlayer.currentTime = 0;
-                }
-            }
-
-            async connectToEnhancedDatabase() {
-                this.addLogEntry(
-                    'Enhanced Patent Database',
-                    'Connecting to advanced patent databases with real-time updates',
-                    'Accessing USPTO, EPO, WIPO, JPO, and academic databases with cross-referencing',
-                    98
-                );
-
-                await this.delay(2000);
-            }
-
-            async analyzeWithAI() {
-                this.setCategoryActive('advancedTechnologyAnalysis', 'processing');
-                
-                const aiAnalysis = [
-                    'AI algorithm analysis with 96% accuracy',
-                    'Neural network architecture evaluation',
-                    'Machine learning model assessment',
-                    'Deep learning framework analysis',
-                    'Natural language processing evaluation',
-                    'Computer vision technology review'
-                ];
-
-                for (let i = 0; i < aiAnalysis.length; i++) {
-                    if (!this.isRunning) break;
-                    
-                    this.addLogEntry(
-                        'AI Technology Agent',
-                        aiAnalysis[i],
-                        `Advanced AI analysis with machine learning models`,
-                        96
-                    );
-                    
-                    this.updateCategoryProgress('advancedTechnologyAnalysis', ((i + 1) / aiAnalysis.length) * 100);
-                    await this.delay(600);
-                }
-
-                this.setCategoryActive('advancedTechnologyAnalysis', 'active');
-                this.patentsAnalyzed += 8;
-                this.accuracy = 96;
-            }
-
-            async enhancedPriorArtSearch() {
-                this.setCategoryActive('enhancedPriorArtSearch', 'processing');
-                
-                const enhancedSearches = [
-                    'Smart search across USPTO database (2.3M patents)',
-                    'AI-powered EPO database analysis (1.8M patents)',
-                    'Intelligent WIPO database review (3.1M patents)',
-                    'Enhanced JPO database examination (1.5M patents)',
-                    'Cross-referencing academic publications',
-                    'Patent family analysis and citation mapping'
-                ];
-
-                for (let i = 0; i < enhancedSearches.length; i++) {
-                    if (!this.isRunning) break;
-                    
-                    this.addLogEntry(
-                        'Enhanced Prior Art Agent',
-                        enhancedSearches[i],
-                        `Intelligent search with AI filtering across ${8.7 + i * 0.5}M documents`,
-                        94
-                    );
-                    
-                    this.updateCategoryProgress('enhancedPriorArtSearch', ((i + 1) / enhancedSearches.length) * 100);
-                    await this.delay(750);
-                }
-
-                this.setCategoryActive('enhancedPriorArtSearch', 'active');
-            }
-
-            async mlNoveltyAssessment() {
-                this.setCategoryActive('mlNoveltyAssessment', 'processing');
-                
-                const mlAssessments = [
-                    'ML-powered novelty scoring algorithm',
-                    'Predictive analytics for innovation level',
-                    'Machine learning model evaluation',
-                    'Advanced technical advancement scoring',
-                    'AI-driven market differentiation analysis',
-                    'Competitive positioning ML assessment'
-                ];
-
-                for (let i = 0; i < mlAssessments.length; i++) {
-                    if (!this.isRunning) break;
-                    
-                    this.addLogEntry(
-                        'ML Novelty Agent',
-                        mlAssessments[i],
-                        `Machine learning-powered assessment with 97% confidence`,
-                        97
-                    );
-                    
-                    this.updateCategoryProgress('mlNoveltyAssessment', ((i + 1) / mlAssessments.length) * 100);
-                    await this.delay(700);
-                }
-
-                this.setCategoryActive('mlNoveltyAssessment', 'active');
-                this.noveltyIndex = 9.2;
-            }
-
-            async strategicMarketAnalysis() {
-                this.setCategoryActive('strategicMarketAnalysis', 'processing');
-                
-                const marketAnalysis = [
-                    'Strategic market intelligence gathering',
-                    'Competitive landscape analysis',
-                    'Market trend forecasting',
-                    'Commercial viability assessment',
-                    'Investment opportunity evaluation',
-                    'Strategic positioning analysis'
-                ];
-
-                for (let i = 0; i < marketAnalysis.length; i++) {
-                    if (!this.isRunning) break;
-                    
-                    this.addLogEntry(
-                        'Strategic Market Agent',
-                        marketAnalysis[i],
-                        `Advanced market intelligence with predictive analytics`,
-                        95
-                    );
-                    
-                    this.updateCategoryProgress('strategicMarketAnalysis', ((i + 1) / marketAnalysis.length) * 100);
-                    await this.delay(600);
-                }
-
-                this.setCategoryActive('strategicMarketAnalysis', 'active');
-            }
-
-            async generateAdvancedReport() {
-                this.addLogEntry(
-                    'Advanced Reporting Engine',
-                    'Generating comprehensive enhanced patent analysis report',
-                    'Creating advanced visualizations and strategic recommendations',
-                    98
-                );
-
-                // Update results
-                document.getElementById('enhancedPatentClassification').textContent = 'AI/ML - Advanced Neural Networks';
-                document.getElementById('enhancedInnovationLevel').textContent = 'Exceptional Innovation';
-                document.getElementById('enhancedMarketPotential').textContent = '$3.2B Market';
-                document.getElementById('enhancedCompetitiveAdvantage').textContent = 'Dominant Edge';
-
-                this.processingTime = 18.5;
-                this.updateStats();
-            }
-
-            setCategoryActive(categoryId, status) {
-                const category = document.getElementById(categoryId);
-                const statusElement = category.querySelector('.category-status');
-                
-                // Clear previous state classes
-                category.classList.remove('active', 'processing');
-                
-                statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-
-                if (status === 'processing') {
-                    category.classList.add('processing');
-                } else if (status === 'active') {
-                    category.classList.add('active');
-                }
-            }
-
-            updateCategoryProgress(categoryId, percentage) {
-                const progressBar = document.getElementById(categoryId.replace('Analysis', 'Progress').replace('Search', 'Progress').replace('Assessment', 'Progress'));
-                progressBar.style.width = percentage + '%';
-            }
-
-            addLogEntry(from, message, details, confidence) {
-                const logEntries = document.getElementById('enhancedLogEntries');
-                
-                const time = new Date().toLocaleTimeString('en-US', { 
-                    hour12: false, 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit' 
-                });
-
-                const logEntry = document.createElement('div');
-                logEntry.className = 'log-entry';
-                logEntry.innerHTML = `
-                    <div class="log-header">
-                        <div style="color: #00bcd4; font-weight: 600;">${time} - ${from}</div>
-                        <div class="log-confidence">${confidence}%</div>
-                    </div>
-                    <div class="log-content">${message}</div>
-                    <div class="log-details">${details}</div>
-                `;
-
-                logEntries.appendChild(logEntry);
-                logEntries.scrollTop = logEntries.scrollHeight;
-
-                // Keep only 10 most recent entries
-                while (logEntries.children.length > 10) {
-                    logEntries.removeChild(logEntries.firstChild);
-                }
-            }
-
-            updateStats() {
-                document.getElementById('enhancedPatentsAnalyzed').textContent = this.patentsAnalyzed;
-                document.getElementById('enhancedAccuracy').textContent = this.accuracy + '%';
-                document.getElementById('enhancedNoveltyIndex').textContent = this.noveltyIndex.toFixed(1);
-                document.getElementById('enhancedProcessingTime').textContent = this.processingTime + 's';
-            }
-
-            updatePhaseIndicator(title, description) {
-                document.getElementById('enhancedPhaseDescription').textContent = description;
-            }
-
-            delay(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-        }
-
-        // Initialize demo when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            window.enhancedPatentDemo = new DaenaEnhancedPatentDemo();
-        });
-    
-
-  </script>
-  <script>
-    (function() {
-      sessionStorage.setItem('returnSection', 'advanced-demos');
-      sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
-      
-      const backBtn = document.querySelector('.btn-back');
-      if (backBtn) {
-        backBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.location.href = '/docs.html#advanced-demos';
-        });
-      }
-      
-      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-          mobileMenu.classList.toggle('hidden');
-        });
-      }
-    })();
-  </script>
 </body>
 </html>

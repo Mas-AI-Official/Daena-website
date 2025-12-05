@@ -1,20 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Real Scenario â€¢ Live Demo</title>
-    <meta name="description" content="Watch Daena handle real-world business scenarios with multi-agent coordination" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assets/css/global.css">
-    <link rel="stylesheet" href="/assets/css/live-demos.css">
-
-
-    <link rel="stylesheet" href="/live-demos/voice-player.css">
-    <link rel="stylesheet" href="/live-demos/voice-player.css">
-    <script src="/live-demos/voice-player.js"></script>
-    <script src="/live-demos/demo-shared.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena: Real World Scenario Demo</title>
+    <link rel="stylesheet" href="../voice-player.css">
     <style>
         * {
             margin: 0;
@@ -153,15 +143,8 @@
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         /* Scenario Display */
@@ -212,15 +195,8 @@
         }
 
         @keyframes processingPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.02);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .step-icon {
@@ -494,29 +470,29 @@
                 padding: 0.5rem 1rem !important;
                 min-height: 50px !important;
             }
-
+            
             .logo {
                 font-size: 1.2rem !important;
             }
-
+            
             .nav-btn {
                 padding: 8px 16px !important;
                 font-size: 12px !important;
             }
-
+            
             .nav-buttons {
                 gap: 0.5rem !important;
                 flex-wrap: wrap !important;
             }
-
+            
             .container {
                 padding-top: 60px !important;
             }
-
+            
             .demo-title {
                 font-size: 1.8rem !important;
             }
-
+            
             .scenario-steps {
                 grid-template-columns: 1fr;
             }
@@ -532,568 +508,205 @@
             }
         }
     </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+
 </head>
+<body>
 
-<body class="metatron-bg">
-    <div class="metatron-bg"></div>
-    <div class="metatron-pattern-bg"></div>
-    <canvas id="metatron-hex-canvas"></canvas>
-
-    <nav class="fixed top-0 left-0 right-0 z-[100]" role="navigation" style="pointer-events: none;">
-        <div class="max-w-7xl mx-auto px-4 pt-4" style="pointer-events: auto;">
-            <div class="glass-card flex items-center justify-between p-4" style="position: relative; z-index: 100;">
-                <a href="/" class="text-xl font-bold">Daena</a>
-                <div class="hidden md:flex items-center gap-6">
-                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
-                    <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-                    <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-                    <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-                    <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
+    <!-- Standard Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                            <span class="text-black font-bold text-xl">D</span>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                    </a>
                 </div>
-                <button class="md:hidden" aria-label="Menu" id="mobile-menu-btn">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="/#features" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live Demos</a>
+                        <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-            <div class="hidden md:hidden p-4 border-t border-white/10" id="mobile-menu">
-                <div class="flex flex-col gap-4">
-                    <a href="/" class="hover:text-yellow-400 transition">Home</a>
-                    <a href="/#demos" class="hover:text-yellow-400 transition">Demos</a>
-                    <a href="/#pitch" class="hover:text-yellow-400 transition">Pitch Deck</a>
-                    <a href="/docs.html#live" class="hover:text-yellow-400 transition">Live Demo</a>
-                    <a href="/docs.html#advanced-demos" class="hover:text-yellow-400 transition">Docs & Benchmarks</a>
-                    <a href="/#contact" class="hover:text-yellow-400 transition">Contact</a>
-                </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
+                <a href="/#features" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="/#technology" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
+                <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live Demos</a>
+                <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
             </div>
         </div>
     </nav>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
-    <main class="page">
-        <header class="demo-header">
-            <a class="btn-back" href="/#live-demos-section">← Back to Live Demos</a>
-        </header>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Daena AI</div>
+                <div class="nav-buttons">
+                    <a href="../../index.html#demos" class="nav-btn">← Demos Gallery</a>
+                    <a href="../../index.html" class="nav-btn">🏠 Back to Daena</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <div class="card glass">
-            <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 0.5rem; margin-top: 0;">Real
-                Scenario</h1>
-            <p style="opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem; margin-top: 0;">Watch Daena handle
-                real-world business scenarios with multi-agent coordination</p>
+    <div class="container">
+        <div class="main-content">
+            <div class="demo-interface">
+                <h1 class="demo-title">🎯 Real World Scenario Demo</h1>
+                <p class="demo-subtitle">48-agent SFHC architecture handling complex business scenarios autonomously</p>
 
+                <div class="demo-controls">
+                    <button id="startBackendDemo" class="demo-btn">▶️ START REAL TIME DEMO</button>
+                    <button id="stopBackendDemo" class="demo-btn" style="display: none;">⏸ STOP DEMO</button>
+                    <button id="resetBackendDemo" class="demo-btn">🔄 RESET DEMO</button>
+                </div>
 
+                <!-- Statistics Dashboard -->
+                <div class="stats-dashboard">
+                    <div class="stat-card">
+                        <div id="scenariosProcessed" class="stat-value">0</div>
+                        <div class="stat-label">Scenarios Processed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="decisionAccuracy" class="stat-value">0%</div>
+                        <div class="stat-label">Decision Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="responseTime" class="stat-value">0s</div>
+                        <div class="stat-label">Response Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="successRate" class="stat-value">0%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
 
-
-            <div class="container">
-                <div class="main-content">
-                    <div class="demo-interface">
-
-
-
-                        <div class="demo-controls">
-                            <button id="startBackendDemo" class="demo-btn">▶️ START REAL TIME DEMO</button>
-                            <button id="stopBackendDemo" class="demo-btn" style="display: none;">⏸ STOP DEMO</button>
-                            <button id="resetBackendDemo" class="demo-btn">🔄 RESET DEMO</button>
-                        </div>
-
-                        <!-- Statistics Dashboard -->
-                        <div class="stats-dashboard">
-                            <div class="stat-card">
-                                <div id="scenariosProcessed" class="stat-value">0</div>
-                                <div class="stat-label">Scenarios Processed</div>
-                            </div>
-                            <div class="stat-card">
-                                <div id="decisionAccuracy" class="stat-value">0%</div>
-                                <div class="stat-label">Decision Accuracy</div>
-                            </div>
-                            <div class="stat-card">
-                                <div id="responseTime" class="stat-value">0s</div>
-                                <div class="stat-label">Response Time</div>
-                            </div>
-                            <div class="stat-card">
-                                <div id="successRate" class="stat-value">0%</div>
-                                <div class="stat-label">Success Rate</div>
-                            </div>
-                        </div>
-
-                        <!-- Scenario Display -->
-                        <div class="scenario-display">
-                            <h2 class="scenario-title">🌍 Real World Scenario Processing</h2>
-                            <div class="scenario-steps">
-                                <!-- Problem Analysis -->
-                                <div id="problemAnalysis" class="scenario-step">
-                                    <div class="step-icon">🔍</div>
-                                    <div class="step-name">Problem Analysis</div>
-                                    <div class="step-status">Standby</div>
-                                    <div class="step-progress">
-                                        <div class="step-progress-bar" id="problemAnalysisProgress"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Solution Design -->
-                                <div id="solutionDesign" class="scenario-step">
-                                    <div class="step-icon">💡</div>
-                                    <div class="step-name">Solution Design</div>
-                                    <div class="step-status">Standby</div>
-                                    <div class="step-progress">
-                                        <div class="step-progress-bar" id="solutionDesignProgress"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Implementation -->
-                                <div id="implementation" class="scenario-step">
-                                    <div class="step-icon">⚡</div>
-                                    <div class="step-name">Implementation</div>
-                                    <div class="step-status">Standby</div>
-                                    <div class="step-progress">
-                                        <div class="step-progress-bar" id="implementationProgress"></div>
-                                    </div>
-                                </div>
+                <!-- Scenario Display -->
+                <div class="scenario-display">
+                    <h2 class="scenario-title">🌍 Real World Scenario Processing</h2>
+                    <div class="scenario-steps">
+                        <!-- Problem Analysis -->
+                        <div id="problemAnalysis" class="scenario-step">
+                            <div class="step-icon">🔍</div>
+                            <div class="step-name">Problem Analysis</div>
+                            <div class="step-status">Standby</div>
+                            <div class="step-progress">
+                                <div class="step-progress-bar" id="problemAnalysisProgress"></div>
                             </div>
                         </div>
 
-                        <!-- Decision Results -->
-                        <div class="decision-results">
-                            <h2 class="results-title">📊 Scenario Decision Results</h2>
-                            <div class="results-grid">
-                                <div class="result-item">
-                                    <div class="result-label">Scenario Type</div>
-                                    <div id="scenarioType" class="result-value">Pending Analysis</div>
-                                </div>
-                                <div class="result-item">
-                                    <div class="result-label">Complexity Level</div>
-                                    <div id="complexityLevel" class="result-value">Pending Analysis</div>
-                                </div>
-                                <div class="result-item">
-                                    <div class="result-label">Recommended Action</div>
-                                    <div id="recommendedAction" class="result-value">Pending Analysis</div>
-                                </div>
-                                <div class="result-item">
-                                    <div class="result-label">Expected Outcome</div>
-                                    <div id="expectedOutcome" class="result-value">Pending Analysis</div>
-                                </div>
+                        <!-- Solution Design -->
+                        <div id="solutionDesign" class="scenario-step">
+                            <div class="step-icon">💡</div>
+                            <div class="step-name">Solution Design</div>
+                            <div class="step-status">Standby</div>
+                            <div class="step-progress">
+                                <div class="step-progress-bar" id="solutionDesignProgress"></div>
                             </div>
                         </div>
 
-                        <!-- Activity Log -->
-                        <div class="activity-log">
-                            <h2 class="log-title">📋 Real Scenario Activity Log</h2>
-                            <div id="logEntries" class="log-entries">
-                                <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
-                                    Real World Scenario processing system initialized and ready.
-                                </div>
+                        <!-- Implementation -->
+                        <div id="implementation" class="scenario-step">
+                            <div class="step-icon">⚡</div>
+                            <div class="step-name">Implementation</div>
+                            <div class="step-status">Standby</div>
+                            <div class="step-progress">
+                                <div class="step-progress-bar" id="implementationProgress"></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Voice Controls -->
-                    <div class="voice-controls">
-                        <div class="voice-player-wrapper">
-                            <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">🎧 Real Scenario Demo
-                            </h3>
-                            <div id="daena-voice-player"></div>
+                <!-- Decision Results -->
+                <div class="decision-results">
+                    <h2 class="results-title">📊 Scenario Decision Results</h2>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label">Scenario Type</div>
+                            <div id="scenarioType" class="result-value">Pending Analysis</div>
                         </div>
+                        <div class="result-item">
+                            <div class="result-label">Complexity Level</div>
+                            <div id="complexityLevel" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Recommended Action</div>
+                            <div id="recommendedAction" class="result-value">Pending Analysis</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Expected Outcome</div>
+                            <div id="expectedOutcome" class="result-value">Pending Analysis</div>
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="current-phase">
-                            <div class="phase-title">📖 Current Demo Phase</div>
-                            <div id="phaseDescription" class="phase-description">Ready to show Real World Scenario
-                                processing...</div>
+                <!-- Activity Log -->
+                <div class="activity-log">
+                    <h2 class="log-title">📋 Real Scenario Activity Log</h2>
+                    <div id="logEntries" class="log-entries">
+                        <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
+                            Real World Scenario processing system initialized and ready.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Demo Script -->
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Initialize Voice Player
-                    const player = new DaenaVoicePlayer('daena-voice-player', {
-                        title: 'Real Scenario Demo',
-                        audio: {
-                            src: '/live-demos/voice-over-demos/Demo 7 Real Scenario.mp3'
-                        },
-                        chapters: [
-                            { t: 0, label: 'Introduction' },
-                            { t: 15, label: 'Scenario Setup' },
-                            { t: 45, label: 'Execution' }
-                        ]
-                    });
-                });
-            </script>
-            <script src="../voice-player.js"></script>
-            <script>
-                class DaenaRealScenarioDemo {
-                    constructor() {
-                        this.isRunning = false;
-                        this.scenariosProcessed = 0;
-                        this.decisionAccuracy = 0;
-                        this.responseTime = 0;
-                        this.successRate = 0;
-                        this.voicePlayer = null;
+            <!-- Voice Controls -->
+            <div class="voice-controls">
+                <div class="voice-player-wrapper">
+                    <h3 style="color: #E6E8EA; font-size: 1.1rem; margin-bottom: 1rem;">🎧 Real Scenario Demo</h3>
+                    <div id="daena-voice-player"></div>
+                </div>
 
-                        this.phases = [
-                            {
-                                title: "Scenario initialization",
-                                duration: 2000,
-                                action: this.initializeScenario.bind(this)
-                            },
-                            {
-                                title: "Problem analysis phase",
-                                duration: 4000,
-                                action: this.analyzeProblem.bind(this)
-                            },
-                            {
-                                title: "Solution design phase",
-                                duration: 3500,
-                                action: this.designSolution.bind(this)
-                            },
-                            {
-                                title: "Implementation phase",
-                                duration: 4000,
-                                action: this.implementSolution.bind(this)
-                            },
-                            {
-                                title: "Results evaluation",
-                                duration: 2500,
-                                action: this.evaluateResults.bind(this)
-                            }
-                        ];
-
-                        this.init();
-                    }
-
-                    init() {
-                        this.startBtn = document.getElementById('startBackendDemo');
-                        this.stopBtn = document.getElementById('stopBackendDemo');
-                        this.resetBtn = document.getElementById('resetBackendDemo');
-
-                        this.startBtn.addEventListener('click', () => this.startDemo());
-                        this.stopBtn.addEventListener('click', () => this.stopDemo());
-                        this.resetBtn.addEventListener('click', () => this.resetDemo());
-
-                        this.updateStats();
-
-                        // Load voice player config
-                        this.loadVoiceConfig();
-                    }
-
-                    async loadVoiceConfig() {
-                        try {
-                            const response = await fetch('config.json');
-                            const config = await response.json();
-                            if (config.audio) {
-                                this.voicePlayer = new DaenaVoicePlayer('daena-voice-player', config);
-                            }
-                        } catch (error) {
-                            console.log('Voice config not available, demo will run without voice-over');
-                        }
-                    }
-
-                    async startDemo() {
-                        this.isRunning = true;
-                        this.startBtn.style.display = 'none';
-                        this.stopBtn.style.display = 'inline-block';
-                        this.stopBtn.classList.add('executing');
-
-                        // Start voice-over if available
-                        if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                            this.voicePlayer.play();
-                        }
-
-                        // Clear activity log
-                        document.getElementById('logEntries').innerHTML = '';
-
-                        for (const phase of this.phases) {
-                            if (!this.isRunning) break;
-
-                            this.updatePhaseIndicator(phase.title, `Executing ${phase.title.toLowerCase()}`);
-                            await phase.action();
-                            await this.delay(1500);
-                        }
-
-                        if (this.isRunning) {
-                            this.stopDemo();
-                            this.addLogEntry(
-                                'Scenario Processor',
-                                'Real World Scenario processing completed',
-                                'Complex business scenario successfully resolved with optimal outcomes',
-                                97
-                            );
-                        }
-                    }
-
-                    stopDemo() {
-                        this.isRunning = false;
-                        this.startBtn.style.display = 'inline-block';
-                        this.stopBtn.style.display = 'none';
-                        this.stopBtn.classList.remove('executing');
-
-                        // Stop voice-over if available
-                        if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                            this.voicePlayer.pause();
-                        }
-                    }
-
-                    resetDemo() {
-                        this.stopDemo();
-
-                        // Reset stats
-                        this.scenariosProcessed = 0;
-                        this.decisionAccuracy = 0;
-                        this.responseTime = 0;
-                        this.successRate = 0;
-
-                        this.updateStats();
-
-                        // Reset all steps
-                        const steps = ['problemAnalysis', 'solutionDesign', 'implementation'];
-                        steps.forEach(stepId => {
-                            const step = document.getElementById(stepId);
-                            const progressBar = document.getElementById(stepId + 'Progress');
-
-                            step.classList.remove('active', 'processing');
-                            step.querySelector('.step-status').textContent = 'Standby';
-                            progressBar.style.width = '0%';
-                        });
-
-                        // Reset results
-                        document.getElementById('scenarioType').textContent = 'Pending Analysis';
-                        document.getElementById('complexityLevel').textContent = 'Pending Analysis';
-                        document.getElementById('recommendedAction').textContent = 'Pending Analysis';
-                        document.getElementById('expectedOutcome').textContent = 'Pending Analysis';
-
-                        // Clear activity log
-                        document.getElementById('logEntries').innerHTML = `
-                    <div style="color: #B8BCC8; text-align: center; padding: 2rem; font-style: italic;">
-                        Real World Scenario processing system initialized and ready.
-                    </div>
-                `;
-
-                        this.updatePhaseIndicator('Ready', 'System initialized. Ready to show Real World Scenario processing...');
-
-                        // Reset voice player if available
-                        if (this.voicePlayer && this.voicePlayer.audioPlayer) {
-                            this.voicePlayer.audioPlayer.currentTime = 0;
-                        }
-                    }
-
-                    async initializeScenario() {
-                        this.addLogEntry(
-                            'Scenario Engine',
-                            'Real World Scenario processing system activated',
-                            'Complex business scenario loaded: Market expansion strategy for Q2',
-                            98
-                        );
-
-                        await this.delay(2000);
-                    }
-
-                    async analyzeProblem() {
-                        this.setStepActive('problemAnalysis', 'processing');
-
-                        const problemAnalysisTasks = [
-                            'Market opportunity assessment',
-                            'Competitive landscape analysis',
-                            'Resource availability evaluation',
-                            'Risk factor identification',
-                            'Stakeholder impact analysis',
-                            'Timeline constraint evaluation'
-                        ];
-
-                        for (let i = 0; i < problemAnalysisTasks.length; i++) {
-                            if (!this.isRunning) break;
-
-                            this.addLogEntry(
-                                'Problem Analysis Agent',
-                                problemAnalysisTasks[i],
-                                `Comprehensive analysis with 94% accuracy`,
-                                94
-                            );
-
-                            this.updateStepProgress('problemAnalysis', ((i + 1) / problemAnalysisTasks.length) * 100);
-                            await this.delay(700);
-                        }
-
-                        this.setStepActive('problemAnalysis', 'active');
-                        this.scenariosProcessed++;
-                    }
-
-                    async designSolution() {
-                        this.setStepActive('solutionDesign', 'processing');
-
-                        const solutionDesignTasks = [
-                            'Multi-strategy approach development',
-                            'Resource allocation optimization',
-                            'Timeline and milestone planning',
-                            'Risk mitigation strategy design',
-                            'Success metrics definition',
-                            'Implementation roadmap creation'
-                        ];
-
-                        for (let i = 0; i < solutionDesignTasks.length; i++) {
-                            if (!this.isRunning) break;
-
-                            this.addLogEntry(
-                                'Solution Design Agent',
-                                solutionDesignTasks[i],
-                                `Strategic solution design with optimal resource utilization`,
-                                92
-                            );
-
-                            this.updateStepProgress('solutionDesign', ((i + 1) / solutionDesignTasks.length) * 100);
-                            await this.delay(600);
-                        }
-
-                        this.setStepActive('solutionDesign', 'active');
-                        this.decisionAccuracy = 94;
-                    }
-
-                    async implementSolution() {
-                        this.setStepActive('implementation', 'processing');
-
-                        const implementationTasks = [
-                            'Cross-department coordination',
-                            'Resource deployment execution',
-                            'Progress monitoring activation',
-                            'Quality assurance protocols',
-                            'Performance tracking implementation',
-                            'Stakeholder communication management'
-                        ];
-
-                        for (let i = 0; i < implementationTasks.length; i++) {
-                            if (!this.isRunning) break;
-
-                            this.addLogEntry(
-                                'Implementation Agent',
-                                implementationTasks[i],
-                                `Real-time implementation with continuous optimization`,
-                                96
-                            );
-
-                            this.updateStepProgress('implementation', ((i + 1) / implementationTasks.length) * 100);
-                            await this.delay(700);
-                        }
-
-                        this.setStepActive('implementation', 'active');
-                        this.responseTime = 12.3;
-                    }
-
-                    async evaluateResults() {
-                        this.addLogEntry(
-                            'Results Evaluator',
-                            'Scenario results evaluation completed',
-                            'Comprehensive analysis shows 97% success probability',
-                            97
-                        );
-
-                        // Update results
-                        document.getElementById('scenarioType').textContent = 'Market Expansion Strategy';
-                        document.getElementById('complexityLevel').textContent = 'High Complexity';
-                        document.getElementById('recommendedAction').textContent = 'Proceed with Phased Rollout';
-                        document.getElementById('expectedOutcome').textContent = '35% Market Share Increase';
-
-                        this.successRate = 97;
-                        this.updateStats();
-                    }
-
-                    setStepActive(stepId, status) {
-                        const step = document.getElementById(stepId);
-                        const statusElement = step.querySelector('.step-status');
-
-                        // Clear previous state classes
-                        step.classList.remove('active', 'processing');
-
-                        statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-
-                        if (status === 'processing') {
-                            step.classList.add('processing');
-                        } else if (status === 'active') {
-                            step.classList.add('active');
-                        }
-                    }
-
-                    updateStepProgress(stepId, percentage) {
-                        const progressBar = document.getElementById(stepId + 'Progress');
-                        progressBar.style.width = percentage + '%';
-                    }
-
-                    addLogEntry(from, message, details, confidence) {
-                        const logEntries = document.getElementById('logEntries');
-
-                        const time = new Date().toLocaleTimeString('en-US', {
-                            hour12: false,
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            second: '2-digit'
-                        });
-
-                        const logEntry = document.createElement('div');
-                        logEntry.className = 'log-entry';
-                        logEntry.innerHTML = `
-                    <div class="log-header">
-                        <div style="color: #00bcd4; font-weight: 600;">${time} - ${from}</div>
-                        <div class="log-confidence">${confidence}%</div>
-                    </div>
-                    <div class="log-content">${message}</div>
-                    <div class="log-details">${details}</div>
-                `;
-
-                        logEntries.appendChild(logEntry);
-                        logEntries.scrollTop = logEntries.scrollHeight;
-
-                        // Keep only 10 most recent entries
-                        while (logEntries.children.length > 10) {
-                            logEntries.removeChild(logEntries.firstChild);
-                        }
-                    }
-
-                    updateStats() {
-                        document.getElementById('scenariosProcessed').textContent = this.scenariosProcessed;
-                        document.getElementById('decisionAccuracy').textContent = this.decisionAccuracy + '%';
-                        document.getElementById('responseTime').textContent = this.responseTime + 's';
-                        document.getElementById('successRate').textContent = this.successRate + '%';
-                    }
-
-                    updatePhaseIndicator(title, description) {
-                        document.getElementById('phaseDescription').textContent = description;
-                    }
-
-                    delay(ms) {
-                        return new Promise(resolve => setTimeout(resolve, ms));
-                    }
-                }
-
-                // Handle orientation changes
-                function handleOrientationChange() {
-                    const header = document.querySelector('.header');
-                    setTimeout(() => {
-                        const isLandscape = window.innerWidth > window.innerHeight;
-                        if (header) {
-                            header.style.minHeight = isLandscape ? '40px' : '50px';
-                        }
-                    }, 100);
-                }
-                window.addEventListener('orientationchange', handleOrientationChange);
-                window.addEventListener('resize', handleOrientationChange);
-                handleOrientationChange();
-
-                // Initialize demo when page loads
-                document.addEventListener('DOMContentLoaded', function () {
-                    window.realScenarioDemo = new DaenaRealScenarioDemo();
-                });
-            </script>
-
+                <div class="current-phase">
+                    <div class="phase-title">📖 Current Demo Phase</div>
+                    <div id="phaseDescription" class="phase-description">Ready to show Real World Scenario processing...</div>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
 
-    <script src="/js/metatron-hex-network.js"></script>
-
-
-    <link rel="stylesheet" href="/live-demos/voice-player.css">
-    <script src="/live-demos/voice-player.js"></script>
+    <!-- Demo Script -->
+    <script src="../voice-player.js"></script>
     <script>
-
         class DaenaRealScenarioDemo {
             constructor() {
                 this.isRunning = false;
@@ -1102,7 +715,7 @@
                 this.responseTime = 0;
                 this.successRate = 0;
                 this.voicePlayer = null;
-
+                
                 this.phases = [
                     {
                         title: "Scenario initialization",
@@ -1177,7 +790,7 @@
 
                 for (const phase of this.phases) {
                     if (!this.isRunning) break;
-
+                    
                     this.updatePhaseIndicator(phase.title, `Executing ${phase.title.toLowerCase()}`);
                     await phase.action();
                     await this.delay(1500);
@@ -1199,7 +812,7 @@
                 this.startBtn.style.display = 'inline-block';
                 this.stopBtn.style.display = 'none';
                 this.stopBtn.classList.remove('executing');
-
+                
                 // Stop voice-over if available
                 if (this.voicePlayer && this.voicePlayer.audioPlayer) {
                     this.voicePlayer.pause();
@@ -1208,13 +821,13 @@
 
             resetDemo() {
                 this.stopDemo();
-
+                
                 // Reset stats
                 this.scenariosProcessed = 0;
                 this.decisionAccuracy = 0;
                 this.responseTime = 0;
                 this.successRate = 0;
-
+                
                 this.updateStats();
 
                 // Reset all steps
@@ -1222,7 +835,7 @@
                 steps.forEach(stepId => {
                     const step = document.getElementById(stepId);
                     const progressBar = document.getElementById(stepId + 'Progress');
-
+                    
                     step.classList.remove('active', 'processing');
                     step.querySelector('.step-status').textContent = 'Standby';
                     progressBar.style.width = '0%';
@@ -1262,7 +875,7 @@
 
             async analyzeProblem() {
                 this.setStepActive('problemAnalysis', 'processing');
-
+                
                 const problemAnalysisTasks = [
                     'Market opportunity assessment',
                     'Competitive landscape analysis',
@@ -1274,14 +887,14 @@
 
                 for (let i = 0; i < problemAnalysisTasks.length; i++) {
                     if (!this.isRunning) break;
-
+                    
                     this.addLogEntry(
                         'Problem Analysis Agent',
                         problemAnalysisTasks[i],
                         `Comprehensive analysis with 94% accuracy`,
                         94
                     );
-
+                    
                     this.updateStepProgress('problemAnalysis', ((i + 1) / problemAnalysisTasks.length) * 100);
                     await this.delay(700);
                 }
@@ -1292,7 +905,7 @@
 
             async designSolution() {
                 this.setStepActive('solutionDesign', 'processing');
-
+                
                 const solutionDesignTasks = [
                     'Multi-strategy approach development',
                     'Resource allocation optimization',
@@ -1304,14 +917,14 @@
 
                 for (let i = 0; i < solutionDesignTasks.length; i++) {
                     if (!this.isRunning) break;
-
+                    
                     this.addLogEntry(
                         'Solution Design Agent',
                         solutionDesignTasks[i],
                         `Strategic solution design with optimal resource utilization`,
                         92
                     );
-
+                    
                     this.updateStepProgress('solutionDesign', ((i + 1) / solutionDesignTasks.length) * 100);
                     await this.delay(600);
                 }
@@ -1322,7 +935,7 @@
 
             async implementSolution() {
                 this.setStepActive('implementation', 'processing');
-
+                
                 const implementationTasks = [
                     'Cross-department coordination',
                     'Resource deployment execution',
@@ -1334,14 +947,14 @@
 
                 for (let i = 0; i < implementationTasks.length; i++) {
                     if (!this.isRunning) break;
-
+                    
                     this.addLogEntry(
                         'Implementation Agent',
                         implementationTasks[i],
                         `Real-time implementation with continuous optimization`,
                         96
                     );
-
+                    
                     this.updateStepProgress('implementation', ((i + 1) / implementationTasks.length) * 100);
                     await this.delay(700);
                 }
@@ -1371,10 +984,10 @@
             setStepActive(stepId, status) {
                 const step = document.getElementById(stepId);
                 const statusElement = step.querySelector('.step-status');
-
+                
                 // Clear previous state classes
                 step.classList.remove('active', 'processing');
-
+                
                 statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
 
                 if (status === 'processing') {
@@ -1391,12 +1004,12 @@
 
             addLogEntry(from, message, details, confidence) {
                 const logEntries = document.getElementById('logEntries');
-
-                const time = new Date().toLocaleTimeString('en-US', {
-                    hour12: false,
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
+                
+                const time = new Date().toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
                 });
 
                 const logEntry = document.createElement('div');
@@ -1448,36 +1061,11 @@
         window.addEventListener('orientationchange', handleOrientationChange);
         window.addEventListener('resize', handleOrientationChange);
         handleOrientationChange();
-
+        
         // Initialize demo when page loads
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             window.realScenarioDemo = new DaenaRealScenarioDemo();
         });
-
-
-    </script>
-    <script>
-        (function () {
-            sessionStorage.setItem('returnSection', 'advanced-demos');
-            sessionStorage.setItem('returnPage', '/docs.html#advanced-demos');
-
-            const backBtn = document.querySelector('.btn-back');
-            if (backBtn) {
-                backBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    window.location.href = '/docs.html#advanced-demos';
-                });
-            }
-
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', function () {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-        })();
     </script>
 </body>
-
 </html>
