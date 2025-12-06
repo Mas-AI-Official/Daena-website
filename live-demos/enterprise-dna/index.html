@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena: Enterprise DNA Demo</title>
+    <link rel="stylesheet" href="../voice-player.css">
+
+    <!-- Daena Skin - Unified styling -->
+    <link rel="stylesheet" href="/assets/skin/daena/skin.css">
+    <script defer src="/assets/skin/daena/skin.js"></script>
+
+    <style>
+        .dna-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+            min-height: 600px;
+        }
+
+        .dna-visualizer {
+            background: rgba(15, 15, 35, 0.6);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dna-helix {
+            width: 100px;
+            height: 400px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 400"><path d="M30,0 Q70,50 30,100 T30,200 T30,300 T30,400" fill="none" stroke="%2300bcd4" stroke-width="4" opacity="0.5"/><path d="M70,0 Q30,50 70,100 T70,200 T70,300 T70,400" fill="none" stroke="%23FFD700" stroke-width="4" opacity="0.5"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: rotateDNA 10s linear infinite;
+        }
+
+        @keyframes rotateDNA {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .shield-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 188, 212, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .shield-overlay.active {
+            opacity: 1;
+            box-shadow: inset 0 0 50px rgba(0, 188, 212, 0.3);
+        }
+
+        .shield-overlay.alert {
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            box-shadow: inset 0 0 50px rgba(255, 0, 0, 0.3);
+        }
+
+        .policy-log {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 100%;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+
+        .log-entry {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0;
+            transform: translateX(20px);
+            animation: slideIn 0.3s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .check-item.pass {
+            border-left: 4px solid #00ff00;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .check-item.fail {
+            border-left: 4px solid #ff0000;
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .check-icon {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .dna-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <style>
+        /* Mobile Landscape Fix */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .dna-container {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1rem;
+                min-height: auto;
+            }
+
+            .dna-visualizer {
+                padding: 1rem;
+                min-height: 250px;
+            }
+
+            .dna-helix {
+                height: 200px;
+                width: 60px;
+            }
+
+            .policy-log {
+                padding: 1rem;
+                height: 250px;
+                /* Limit height */
+            }
+
+            .check-item {
+                padding: 0.5rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .check-icon {
+                font-size: 1rem;
+            }
+
+            #system-status {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Standard Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar"
+        style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-2 group">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                            <span class="text-black font-bold text-xl">D</span>
+                        </div>
+                        <span
+                            class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="javascript:history.back()"
+                            class="back-button flex items-center gap-2 text-gray-300 hover:text-yellow-400 transition-colors">
+                            <span>←</span> Back
+                        </a>
+                        <a href="/#features"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live
+                            Demos</a>
+                        <a href="/docs.html"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 pt-24 pb-12">
+        <div class="max-w-6xl mx-auto">
+            <div class="glass-card p-8 rounded-2xl border border-cyan-400/20">
+                <h1 class="text-3xl md:text-4xl font-bold text-cyan-400 mb-2 text-center">🧬 Enterprise DNA Governance
+                </h1>
+                <p class="text-gray-300 text-center mb-8">Watch the Immune System enforce Genome capabilities and
+                    Epigenome policies in real-time.</p>
+
+                <div class="flex justify-center gap-4 mb-8">
+                    <button id="runCheck"
+                        class="bg-cyan-400 text-black font-bold py-3 px-8 rounded-full hover:bg-cyan-300 transition-all shadow-lg shadow-cyan-400/20">
+                        🛡️ RUN SECURITY AUDIT
+                    </button>
+                    <button id="simulateThreat"
+                        class="bg-red-500 text-white font-bold py-3 px-8 rounded-full hover:bg-red-600 transition-all shadow-lg shadow-red-500/20">
+                        ⚠️ SIMULATE THREAT
+                    </button>
+                </div>
+
+                <div class="dna-container">
+                    <!-- Visualizer -->
+                    <div class="dna-visualizer">
+                        <div class="shield-overlay" id="shield"></div>
+                        <div class="dna-helix"></div>
+                        <div class="absolute bottom-4 text-center w-full">
+                            <div id="system-status" class="text-green-400 font-bold text-xl">SYSTEM SECURE</div>
+                            <div class="text-xs text-gray-400 mt-1">Trust Score: <span id="trust-score">100</span>%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy Log -->
+                    <div class="policy-log" id="policy-log">
+                        <div class="text-gray-500 italic text-center mt-20">Ready to audit agent capabilities...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class EnterpriseDNADemo {
+            constructor() {
+                this.isProcessing = false;
+                this.trustScore = 100;
+                this.init();
+            }
+
+            init() {
+                this.runBtn = document.getElementById('runCheck');
+                this.threatBtn = document.getElementById('simulateThreat');
+                this.logContainer = document.getElementById('policy-log');
+                this.shield = document.getElementById('shield');
+                this.status = document.getElementById('system-status');
+                this.trustDisplay = document.getElementById('trust-score');
+
+                this.runBtn.addEventListener('click', () => this.runAudit());
+                this.threatBtn.addEventListener('click', () => this.simulateThreat());
+            }
+
+            async runAudit() {
+                if (this.isProcessing) return;
+                this.isProcessing = true;
+                this.clearLog();
+                this.setSecureState();
+
+                const checks = [
+                    { type: 'Genome', msg: 'Verifying Agent Capabilities...', detail: 'Agent has READ access to Finance', pass: true },
+                    { type: 'Epigenome', msg: 'Checking Tenant Policies...', detail: 'GDPR Compliance Active', pass: true },
+                    { type: 'Lineage', msg: 'Validating Merkle Proofs...', detail: 'Chain Integrity Verified', pass: true },
+                    { type: 'Immune', msg: 'Scanning for Threats...', detail: 'No Anomalies Detected', pass: true }
+                ];
+
+                for (const check of checks) {
+                    await this.addLogEntry(check);
+                    await this.delay(1000);
+                }
+
+                this.addFinalEntry('Audit Complete: All Systems Nominal', true);
+                this.isProcessing = false;
+            }
+
+            async simulateThreat() {
+                if (this.isProcessing) return;
+                this.isProcessing = true;
+                this.clearLog();
+
+                // Initial checks pass
+                await this.addLogEntry({ type: 'Genome', msg: 'Verifying Agent Capabilities...', detail: 'Agent has WRITE access', pass: true });
+                await this.delay(800);
+
+                // Threat detection
+                this.setAlertState();
+                await this.addLogEntry({ type: 'Immune', msg: '⚠️ THREAT DETECTED', detail: 'Prompt Injection Pattern Identified', pass: false });
+
+                // Response
+                await this.delay(500);
+                this.logContainer.innerHTML += `
+                    <div class="log-entry border-l-4 border-red-500 bg-red-500/10 p-4 rounded">
+                        <div class="text-red-400 font-bold">🛡️ IMMUNE RESPONSE TRIGGERED</div>
+                        <div class="text-sm text-gray-300 mt-1">
+                            1. Quarantine Protocol Activated<br>
+                            2. Trust Score Reduced (-20%)<br>
+                            3. Rollback to Last Known Good State
+                        </div>
+                    </div>
+                `;
+
+                this.trustScore = 80;
+                this.trustDisplay.textContent = this.trustScore;
+                this.trustDisplay.classList.add('text-red-400');
+
+                await this.delay(2000);
+                this.addFinalEntry('Threat Neutralized. System in Restricted Mode.', false);
+                this.isProcessing = false;
+            }
+
+            async addLogEntry(check) {
+                const div = document.createElement('div');
+                div.className = `check-item ${check.pass ? 'pass' : 'fail'}`;
+                div.innerHTML = `
+                    <div class="check-icon">${check.pass ? '✅' : '❌'}</div>
+                    <div>
+                        <div class="font-bold text-sm ${check.pass ? 'text-green-400' : 'text-red-400'}">${check.type}: ${check.msg}</div>
+                        <div class="text-xs text-gray-400">${check.detail}</div>
+                    </div>
+                `;
+                this.logContainer.appendChild(div);
+                this.logContainer.scrollTop = this.logContainer.scrollHeight;
+            }
+
+            addFinalEntry(msg, success) {
+                const div = document.createElement('div');
+                div.className = 'mt-4 text-center font-bold p-2 rounded ' + (success ? 'text-green-400 bg-green-400/10' : 'text-yellow-400 bg-yellow-400/10');
+                div.textContent = msg;
+                this.logContainer.appendChild(div);
+                this.logContainer.scrollTop = this.logContainer.scrollHeight;
+            }
+
+            clearLog() {
+                this.logContainer.innerHTML = '';
+            }
+
+            setSecureState() {
+                this.shield.className = 'shield-overlay active';
+                this.status.textContent = 'SYSTEM SECURE';
+                this.status.className = 'text-green-400 font-bold text-xl';
+                this.trustScore = 100;
+                this.trustDisplay.textContent = '100';
+                this.trustDisplay.classList.remove('text-red-400');
+            }
+
+            setAlertState() {
+                this.shield.className = 'shield-overlay alert active';
+                this.status.textContent = 'THREAT DETECTED';
+                this.status.className = 'text-red-500 font-bold text-xl animate-pulse';
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new EnterpriseDNADemo();
+        });
+    </script>
+</body>
+
+</html>

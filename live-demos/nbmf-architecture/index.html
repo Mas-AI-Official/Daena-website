@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena: NBMF Architecture Demo</title>
+    <link rel="stylesheet" href="../voice-player.css">
+
+    <!-- Daena Skin - Unified styling -->
+    <link rel="stylesheet" href="/assets/skin/daena/skin.css">
+    <script defer src="/assets/skin/daena/skin.js"></script>
+
+    <style>
+        /* Custom styles for NBMF Demo */
+        .memory-layers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .memory-layer {
+            background: rgba(15, 15, 35, 0.6);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            min-height: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .memory-layer.active {
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .layer-title {
+            color: #FFD700;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .data-block {
+            background: linear-gradient(135deg, #00bcd4, #20B2AA);
+            color: #0f0f23;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .data-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .data-block.quarantined {
+            background: linear-gradient(135deg, #ff6b6b, #ee5253);
+        }
+
+        .data-block.promoted {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+
+        .ledger-hash {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.2rem;
+        }
+
+        .ledger-display {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: monospace;
+            color: #00bcd4;
+            margin-top: 1rem;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .arrow-connector {
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            font-size: 2rem;
+            color: rgba(255, 215, 0, 0.5);
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        @media (max-width: 1024px) {
+            .memory-layers {
+                grid-template-columns: 1fr;
+            }
+
+            .arrow-connector {
+                top: auto;
+                bottom: -25px;
+                right: 50%;
+                transform: translateX(50%) rotate(90deg);
+            }
+        }
+
+        /* Mobile Landscape Fix */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .memory-layers {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .memory-layer {
+                min-height: 150px;
+                padding: 0.5rem;
+            }
+
+            .layer-title {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .arrow-connector {
+                right: -15px;
+                bottom: auto;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 1.2rem;
+                display: block !important;
+            }
+
+            .data-block {
+                padding: 0.4rem;
+                font-size: 0.7rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .ledger-display {
+                max-height: 80px;
+                margin-top: 0.5rem;
+                padding: 0.5rem;
+                font-size: 0.7rem;
+            }
+
+            .memory-layer .text-xs {
+                display: none;
+            }
+        }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Standard Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar"
+        style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-2 group">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                            <span class="text-black font-bold text-xl">D</span>
+                        </div>
+                        <span
+                            class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="javascript:history.back()"
+                            class="back-button flex items-center gap-2 text-gray-300 hover:text-yellow-400 transition-colors">
+                            <span>←</span> Back
+                        </a>
+                        <a href="/#features"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live
+                            Demos</a>
+                        <a href="/docs.html"
+                            class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 pt-24 pb-12">
+        <div class="max-w-6xl mx-auto">
+            <div class="glass-card p-8 rounded-2xl border border-yellow-400/20">
+                <h1 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-2 text-center">🧠 NBMF Architecture Demo
+                </h1>
+                <p class="text-gray-300 text-center mb-8">Experience the Neural Business Matrix Field memory lifecycle:
+                    Ingestion, Promotion, and Immutable Storage.</p>
+
+                <div class="flex justify-center gap-4 mb-8">
+                    <button id="startDemo"
+                        class="bg-yellow-400 text-black font-bold py-3 px-8 rounded-full hover:bg-yellow-300 transition-all shadow-lg shadow-yellow-400/20">
+                        ▶️ START MEMORY FLOW
+                    </button>
+                    <button id="resetDemo"
+                        class="bg-gray-700 text-white font-bold py-3 px-8 rounded-full hover:bg-gray-600 transition-all">
+                        🔄 RESET
+                    </button>
+                </div>
+
+                <!-- Memory Layers Visualization -->
+                <div class="memory-layers">
+                    <!-- L1: Short-Term Memory -->
+                    <div id="layer-l1" class="memory-layer">
+                        <h3 class="layer-title">L1: Short-Term Memory</h3>
+                        <div class="text-xs text-gray-400 text-center mb-4">High-velocity ingestion buffer</div>
+                        <div id="l1-container" class="space-y-2"></div>
+                        <div class="arrow-connector hidden lg:block">→</div>
+                    </div>
+
+                    <!-- L2: Mid-Term Memory -->
+                    <div id="layer-l2" class="memory-layer">
+                        <h3 class="layer-title">L2: Mid-Term Memory</h3>
+                        <div class="text-xs text-gray-400 text-center mb-4">Contextual processing & promotion</div>
+                        <div id="l2-container" class="space-y-2"></div>
+                        <div class="arrow-connector hidden lg:block">→</div>
+                    </div>
+
+                    <!-- L3: Long-Term Memory -->
+                    <div id="layer-l3" class="memory-layer">
+                        <h3 class="layer-title">L3: Long-Term Memory</h3>
+                        <div class="text-xs text-gray-400 text-center mb-4">Immutable storage & ledger</div>
+                        <div id="l3-container" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- Ledger Display -->
+                <div class="mt-8">
+                    <h3 class="text-xl font-bold text-yellow-400 mb-2">📜 NBMF Immutable Ledger</h3>
+                    <div id="ledger-display" class="ledger-display">
+                        <div class="text-gray-500 italic">Waiting for memory commitments...</div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+                        <div id="ingested-count" class="text-2xl font-bold text-cyan-400">0</div>
+                        <div class="text-xs text-gray-400">Data Ingested</div>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+                        <div id="promoted-count" class="text-2xl font-bold text-yellow-400">0</div>
+                        <div class="text-xs text-gray-400">Promoted to L2</div>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+                        <div id="committed-count" class="text-2xl font-bold text-green-400">0</div>
+                        <div class="text-xs text-gray-400">Committed to L3</div>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+                        <div id="quarantined-count" class="text-2xl font-bold text-red-400">0</div>
+                        <div class="text-xs text-gray-400">Quarantined</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class NBMFDemo {
+            constructor() {
+                this.isRunning = false;
+                this.stats = {
+                    ingested: 0,
+                    promoted: 0,
+                    committed: 0,
+                    quarantined: 0
+                };
+
+                this.dataStream = [
+                    { id: 'D-101', type: 'User Interaction', content: 'Product Inquiry', valid: true },
+                    { id: 'D-102', type: 'System Log', content: 'API Latency Warning', valid: true },
+                    { id: 'D-103', type: 'External Feed', content: 'Market Data Update', valid: true },
+                    { id: 'D-104', type: 'Security Alert', content: 'Suspicious IP', valid: false }, // Will be quarantined
+                    { id: 'D-105', type: 'User Interaction', content: 'Purchase Order', valid: true },
+                    { id: 'D-106', type: 'System Log', content: 'Backup Complete', valid: true }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.startBtn = document.getElementById('startDemo');
+                this.resetBtn = document.getElementById('resetDemo');
+
+                this.startBtn.addEventListener('click', () => this.start());
+                this.resetBtn.addEventListener('click', () => this.reset());
+            }
+
+            async start() {
+                if (this.isRunning) return;
+                this.isRunning = true;
+                this.startBtn.disabled = true;
+                this.startBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+                // Process data stream
+                for (const data of this.dataStream) {
+                    if (!this.isRunning) break;
+                    await this.processData(data);
+                    await this.delay(1500);
+                }
+
+                this.isRunning = false;
+                this.startBtn.disabled = false;
+                this.startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                this.startBtn.textContent = '▶️ RESTART FLOW';
+            }
+
+            async processData(data) {
+                // Step 1: Ingestion (L1)
+                const l1Block = this.createBlock(data, 'l1-container');
+                this.highlightLayer('layer-l1');
+                this.updateStat('ingested');
+                await this.delay(1000);
+
+                // Step 2: Validation & Promotion (L2)
+                l1Block.remove();
+                const l2Block = this.createBlock(data, 'l2-container');
+                this.highlightLayer('layer-l2');
+
+                if (data.valid) {
+                    l2Block.classList.add('promoted');
+                    this.updateStat('promoted');
+                    await this.delay(1000);
+
+                    // Step 3: Commitment (L3)
+                    l2Block.remove();
+                    const l3Block = this.createBlock(data, 'l3-container');
+                    this.highlightLayer('layer-l3');
+                    l3Block.classList.add('promoted');
+
+                    // Generate Hash
+                    const hash = this.generateHash(data);
+                    l3Block.innerHTML += `<div class="ledger-hash">Hash: ${hash}</div>`;
+                    this.logLedger(data.id, hash);
+                    this.updateStat('committed');
+                } else {
+                    l2Block.classList.add('quarantined');
+                    l2Block.innerHTML += `<div class="text-xs text-white mt-1">⚠️ QUARANTINED</div>`;
+                    this.updateStat('quarantined');
+                    // Stays in L2 (or moves to L2Q conceptually)
+                }
+            }
+
+            createBlock(data, containerId) {
+                const container = document.getElementById(containerId);
+                const div = document.createElement('div');
+                div.className = 'data-block';
+                div.innerHTML = `
+                    <span>${data.id}</span>
+                    <span class="text-xs opacity-80">${data.type}</span>
+                `;
+                container.appendChild(div);
+
+                // Trigger animation
+                setTimeout(() => div.classList.add('visible'), 50);
+                return div;
+            }
+
+            highlightLayer(layerId) {
+                document.querySelectorAll('.memory-layer').forEach(l => l.classList.remove('active'));
+                document.getElementById(layerId).classList.add('active');
+            }
+
+            generateHash(data) {
+                return '0x' + Math.random().toString(16).substr(2, 16).toUpperCase();
+            }
+
+            logLedger(id, hash) {
+                const ledger = document.getElementById('ledger-display');
+                if (ledger.children[0]?.classList.contains('italic')) {
+                    ledger.innerHTML = '';
+                }
+                const entry = document.createElement('div');
+                entry.className = 'mb-1 border-b border-white/10 pb-1';
+                entry.innerHTML = `<span class="text-yellow-400">[COMMIT]</span> ${id} -> <span class="text-green-400">${hash}</span>`;
+                ledger.insertBefore(entry, ledger.firstChild);
+            }
+
+            updateStat(key) {
+                this.stats[key]++;
+                document.getElementById(`${key}-count`).textContent = this.stats[key];
+            }
+
+            reset() {
+                this.isRunning = false;
+                this.stats = { ingested: 0, promoted: 0, committed: 0, quarantined: 0 };
+                ['ingested', 'promoted', 'committed', 'quarantined'].forEach(key => {
+                    document.getElementById(`${key}-count`).textContent = '0';
+                });
+                ['l1-container', 'l2-container', 'l3-container'].forEach(id => {
+                    document.getElementById(id).innerHTML = '';
+                });
+                document.getElementById('ledger-display').innerHTML = '<div class="text-gray-500 italic">Waiting for memory commitments...</div>';
+                document.querySelectorAll('.memory-layer').forEach(l => l.classList.remove('active'));
+                this.startBtn.disabled = false;
+                this.startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                this.startBtn.textContent = '▶️ START MEMORY FLOW';
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new NBMFDemo();
+        });
+    </script>
+</body>
+
+</html>

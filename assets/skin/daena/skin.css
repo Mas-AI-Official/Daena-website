@@ -235,6 +235,43 @@ body.daena-skin {
     #daena-demo-shell > video {
         margin: 8px auto;
     }
+    #daena-demo-shell > canvas,
+    #daena-demo-shell > iframe,
+    #daena-demo-shell > video {
+        margin: 8px auto;
+    }
+}
+
+/* Mobile Landscape Optimization */
+@media (max-height: 500px) and (orientation: landscape) {
+    .daena-container {
+        padding: 10px;
+    }
+
+    .daena-glass {
+        padding: 1rem;
+    }
+
+    .daena-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .daena-sub {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .daena-breadcrumb {
+        top: 0;
+        position: relative;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Ensure navbar doesn't take too much space */
+    .daena-skin .daena-navbar > div {
+        padding: 0.5rem;
+    }
 }
 
 /* Ensure no horizontal scroll */
@@ -265,4 +302,6 @@ body.daena-skin {
         transition: none;
     }
 }
+
+
 
