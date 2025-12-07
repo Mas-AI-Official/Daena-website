@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <title>Daena AI — The Auditable AI VP (Virtual Partner) | MAS-AI</title>
     <meta name="description"
         content="Daena AI: The world's first Auditable AI Vice President (VP). A unique Decision-Orchestration Platform for enterprise. Governed, memory-aligned, self-improving. Powered by Sunflower–Honeycomb & NBMF.">
@@ -269,12 +269,25 @@
         nav {
             position: sticky !important;
             top: 0 !important;
+            top: env(safe-area-inset-top, 0px) !important;
             z-index: 1000 !important;
             pointer-events: none;
+            padding-top: env(safe-area-inset-top, 0px);
         }
 
         nav>div {
             pointer-events: auto;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding-top: max(16px, env(safe-area-inset-top, 0px));
+            }
+            
+            nav .glass-card {
+                margin-left: max(16px, env(safe-area-inset-left, 0px));
+                margin-right: max(16px, env(safe-area-inset-right, 0px));
+            }
         }
 
         /* Ensure speed button shows 2x */
@@ -392,13 +405,19 @@
             .video-controls {
                 gap: 0.5rem;
                 padding: 0.75rem;
+                padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
                 font-size: 0.875rem;
+                margin-bottom: env(safe-area-inset-bottom, 0px);
+                position: relative !important;
+                bottom: auto !important;
             }
 
             .video-controls button {
                 min-width: 2.5rem;
                 height: 2.5rem;
                 padding: 0.5rem;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
             }
 
             .video-controls button svg {
@@ -419,6 +438,7 @@
             .video-controls input[type="range"] {
                 min-width: 50px;
                 height: 6px;
+                touch-action: manipulation;
             }
 
             .video-controls input[type="range"]::-webkit-slider-thumb {
@@ -429,6 +449,17 @@
             .video-controls input[type="range"]::-moz-range-thumb {
                 width: 16px;
                 height: 16px;
+            }
+            
+            /* Ensure video container doesn't overlap with browser UI */
+            [data-player-container] {
+                margin-bottom: env(safe-area-inset-bottom, 0px);
+            }
+            
+            /* Video section spacing */
+            #why-investors {
+                padding-left: max(16px, env(safe-area-inset-left, 0px));
+                padding-right: max(16px, env(safe-area-inset-right, 0px));
             }
         }
 

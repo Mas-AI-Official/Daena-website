@@ -134,6 +134,10 @@ body::before {
     display: grid;
     place-items: center;
     padding: var(--hero-pad);
+    padding-top: calc(var(--hero-pad) + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(var(--hero-pad) + env(safe-area-inset-bottom, 0px));
+    padding-left: calc(var(--hero-pad) + env(safe-area-inset-left, 0px));
+    padding-right: calc(var(--hero-pad) + env(safe-area-inset-right, 0px));
     position: relative;
 }
 
@@ -146,6 +150,23 @@ body::before {
     box-shadow: 0 12px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
     border: 1px solid rgba(255,255,255,.06);
     padding: clamp(20px, 4vw, 44px);
+}
+
+/* Mobile hero centering fix */
+@media (max-width: 768px) {
+    #hero {
+        min-height: calc(100vh - var(--nav-h) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+        padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .hero-card {
+        width: calc(100% - 32px) !important;
+        max-width: calc(100vw - 32px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)) !important;
+        margin: 0 auto !important;
+    }
 }
 
 /* Mobile-specific hero fixes */
@@ -323,16 +344,30 @@ p {
 nav {
     position: sticky !important;
     top: 0 !important;
+    top: env(safe-area-inset-top, 0px) !important;
     z-index: 1000 !important;
     pointer-events: none;
     transition: opacity 0.3s ease;
     opacity: 1 !important;
     visibility: visible !important;
     display: block !important;
+    padding-top: env(safe-area-inset-top, 0px);
 }
 
 nav > div {
     pointer-events: auto;
+}
+
+/* Mobile navbar adjustments */
+@media (max-width: 768px) {
+    nav {
+        padding-top: max(16px, env(safe-area-inset-top, 0px));
+    }
+    
+    nav .glass-card {
+        margin-left: max(16px, env(safe-area-inset-left, 0px));
+        margin-right: max(16px, env(safe-area-inset-right, 0px));
+    }
 }
 
 /* ============================================
@@ -400,11 +435,13 @@ nav > div {
     align-items: center !important;
     gap: 0.5rem !important;
     padding: 0.75rem !important;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px)) !important;
     background: rgba(0, 0, 0, 0.95) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     border-radius: 0.5rem !important;
     margin-top: 0.75rem !important;
+    margin-bottom: env(safe-area-inset-bottom, 0px) !important;
     flex-wrap: wrap !important;
     width: 100% !important;
     box-sizing: border-box !important;

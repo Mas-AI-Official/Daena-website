@@ -186,9 +186,23 @@
   .daena-video .btn {
     width: 32px;
     height: 32px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .daena-video .btn svg {
     width: 16px;
     height: 16px;
+  }
+  
+  /* Ensure controls don't overlap with browser UI */
+  .daena-video .controls {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+    padding-bottom: calc(0.65rem + env(safe-area-inset-bottom, 0px));
+    position: relative !important;
+  }
+  
+  /* Video container spacing */
+  .daena-video {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
