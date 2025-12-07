@@ -437,8 +437,39 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            new NBMFDemo();
+        // Initialize demo when page loads (robust initialization)
+        function initNBMFDemo() {
+            if (!window.nbmfDemoInstance) {
+                try {
+                    window.nbmfDemoInstance = new NBMFDemo();
+                    console.log('NBMF Demo initialized successfully');
+                } catch (e) {
+                    console.error('NBMF Demo initialization error:', e);
+                    // Retry after a short delay
+                    setTimeout(() => {
+                        if (!window.nbmfDemoInstance) {
+                            try {
+                                window.nbmfDemoInstance = new NBMFDemo();
+                            } catch (e2) {
+                                console.error('NBMF Demo retry failed:', e2);
+                            }
+                        }
+                    }, 500);
+                }
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initNBMFDemo);
+        } else {
+            initNBMFDemo();
+        }
+        
+        // Also try on window load as a fallback
+        window.addEventListener('load', () => {
+            if (!window.nbmfDemoInstance) {
+                initNBMFDemo();
+            }
         });
     </script>
 </body>

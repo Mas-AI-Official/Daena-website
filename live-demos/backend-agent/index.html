@@ -605,8 +605,8 @@
         <div class="main-content">
             <div class="demo-interface">
                 <!-- Demo Title -->
-                <h1 class="backend-demo-title">🔴 Daena Real Backend Communication Demo</h1>
-                <p class="backend-demo-subtitle">Experience LIVE agent communication through SFHC backend architecture
+                <h1 class="backend-demo-title">🔴 Daena Backend Architecture Demo</h1>
+                <p class="backend-demo-subtitle">Experience the SFHC backend architecture: API Gateway, Service Mesh, Memory Layers, and Enterprise DNA governance
                 </p>
 
                 <!-- Demo Controls -->
@@ -618,11 +618,11 @@
 
                 <!-- Current Scenario -->
                 <div class="demo-scenario">
-                    <div class="scenario-title">📋 Current Scenario: Product Launch Analysis</div>
+                    <div class="scenario-title">📋 Current Scenario: Backend Architecture Initialization</div>
                     <div class="scenario-description">
-                        Daena's SFHC agents will collaborate on a comprehensive product launched analysis. Watch as
-                        agents communicate through the Sunflower-Honeycomb architecture, sharing context and
-                        distributing tasks across specialized AI components.
+                        Watch as Daena's SFHC backend architecture initializes: API Gateway connections, Service Mesh orchestration, 
+                        NBMF Memory Layer activation, and Enterprise DNA governance validation. This demonstrates the complete 
+                        backend infrastructure powering Daena's AI agents.
                     </div>
                 </div>
 
@@ -831,46 +831,46 @@
                         action: this.initiateTask.bind(this)
                     },
                     {
-                        name: "Research Engagement",
-                        description: "Research Agent connecting to market data APIs...",
+                        name: "Memory Layer Activation",
+                        description: "Activating NBMF memory layers (L1, L2, L3) for backend data processing...",
                         duration: 4000,
                         agents: ['researchAgent', 'executiveAgent'],
-                        action: this.activateResearchAgent.bind(this)
+                        action: this.activateMemoryLayers.bind(this)
                     },
                     {
-                        name: "Marketing Activation",
-                        description: "Marketing Agent developing campaign strategy...",
+                        name: "Enterprise DNA Validation",
+                        description: "Validating agent capabilities through Enterprise DNA governance...",
                         duration: 3500,
                         agents: ['marketingAgent', 'researchAgent'],
-                        action: this.activateMarketingAgent.bind(this)
+                        action: this.validateEnterpriseDNA.bind(this)
                     },
                     {
-                        name: "Financial Processing",
-                        description: "Finance Agent calculating budget and ROI projections...",
+                        name: "Backend Service Orchestration",
+                        description: "Orchestrating backend services through SFHC architecture...",
                         duration: 4000,
                         agents: ['financeAgent', 'researchAgent', 'marketingAgent'],
-                        action: this.activateFinanceAgent.bind(this)
+                        action: this.orchestrateBackendServices.bind(this)
                     },
                     {
-                        name: "Operations Coordination",
-                        description: "Operations Agent planning resource allocation...",
+                        name: "API Endpoint Coordination",
+                        description: "Coordinating API endpoints and service mesh communication...",
                         duration: 3000,
                         agents: ['operationsAgent', 'financeAgent'],
-                        action: this.activateOperationsAgent.bind(this)
+                        action: this.coordinateAPIEndpoints.bind(this)
                     },
                     {
-                        name: "Sales Preparation",
-                        description: "Sales Agent optimizing customer acquisition...",
+                        name: "Backend Data Pipeline",
+                        description: "Processing data through backend pipeline architecture...",
                         duration: 3500,
                         agents: ['salesAgent', 'marketingAgent', 'operationsAgent'],
-                        action: this.activateSalesAgent.bind(this)
+                        action: this.processBackendPipeline.bind(this)
                     },
                     {
-                        name: "Final Synthesis",
-                        description: "Executive Agent synthesizing comprehensive analysis...",
+                        name: "Backend Architecture Synthesis",
+                        description: "Synthesizing backend architecture results and system status...",
                         duration: 4000,
                         agents: ['executiveAgent', 'researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent'],
-                        action: this.finalizeResults.bind(this)
+                        action: this.synthesizeBackendArchitecture.bind(this)
                     }
                 ];
 
@@ -929,28 +929,34 @@
                 this.updateStats();
             }
 
-            async connectToBackend() {
-                this.updateStatus('connecting', 'Connecting to SFHC backend...');
+            async initializeBackendArchitecture() {
+                this.updateStatus('connecting', 'Initializing SFHC backend architecture...');
 
                 await this.delay(1500);
 
-                this.updateStatus('active', 'Backend connected successfully');
+                this.updateStatus('active', 'Backend architecture initialized');
                 this.totalRequests++;
                 this.activeAgents++;
+                this.addCommunicationLog(
+                    'Backend System',
+                    'Architecture Core',
+                    'SFHC backend architecture components initialized: API Gateway, Service Mesh, Memory Layers',
+                    'Architecture Init'
+                );
             }
 
-            async initiateTask() {
+            async connectToAPIGateway() {
                 this.setAgentState('executiveAgent', 'processing');
-                this.addAgentActivity('executiveAgent', 'Establishing secure SFHC connection to backend services', '(Backend API Call)');
+                this.addAgentActivity('executiveAgent', 'Establishing secure connection to backend API gateway', '(API Gateway Connection)');
 
                 await this.delay(1000);
 
                 this.messagesExchanged++;
                 this.addCommunicationLog(
                     'Executive Agent',
-                    'SFHC Backend',
-                    'Initiating product launch analysis request',
-                    'API Command'
+                    'API Gateway',
+                    'Secure connection established to backend API gateway - authentication verified',
+                    'Backend Connection'
                 );
 
                 await this.delay(2000);
@@ -959,34 +965,34 @@
                 this.updateStats();
             }
 
-            async activateResearchAgent() {
+            async activateMemoryLayers() {
                 const agents = ['researchAgent', 'executiveAgent'];
 
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
 
-                this.addAgentActivity('researchAgent', 'Connecting to market data APIs and research databases', '(Backend Data Fetch)');
+                this.addAgentActivity('researchAgent', 'Activating NBMF memory layers: L1 (ingestion), L2 (processing), L3 (storage)', '(Memory Layer Activation)');
 
                 await this.delay(1500);
 
                 this.messagesExchanged += 2;
                 this.addCommunicationLog(
                     'Executive Agent',
-                    'Research Agent',
-                    'Product market research request dispatched',
-                    'SFHC Command'
+                    'NBMF Memory System',
+                    'Memory layer activation request: L1 buffer ready, L2 processing active, L3 ledger initialized',
+                    'Backend Memory'
                 );
 
                 this.addCommunicationLog(
                     'Research Agent',
-                    'Market APIs',
-                    'Fetching competitive landscape data',
-                    'Data Query'
+                    'Memory Layer L1',
+                    'Data ingestion buffer active - receiving backend data streams',
+                    'Backend Data Flow'
                 );
 
                 await this.delay(2500);
 
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
-                this.addAgentActivity('researchAgent', 'Market analysis complete - data ready for coordination', '(Research Results)');
+                this.addAgentActivity('researchAgent', 'Memory layers operational - data flowing through backend architecture', '(Memory System Active)');
 
                 await this.delay(1000);
 
@@ -994,34 +1000,34 @@
                 this.updateStats();
             }
 
-            async activateMarketingAgent() {
+            async validateEnterpriseDNA() {
                 const agents = ['marketingAgent', 'researchAgent'];
 
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
 
-                this.addAgentActivity('marketingAgent', 'Processing market insights and developing campaign strategy', '(Strategy Generation)');
+                this.addAgentActivity('marketingAgent', 'Validating agent capabilities through Enterprise DNA governance system', '(DNA Validation)');
 
                 await this.delay(1500);
 
                 this.messagesExchanged += 2;
                 this.addCommunicationLog(
                     'Research Agent',
-                    'Marketing Agent',
-                    'Market insights transferred: customer segments identified',
-                    'Coordined Data'
+                    'Enterprise DNA System',
+                    'Genome capabilities verified: READ access confirmed, Epigenome policies active',
+                    'Backend Governance'
                 );
 
                 this.addCommunicationLog(
                     'Marketing Agent',
-                    'Campaign Engine',
-                    'Generating targeted marketing campaigns',
-                    'Strategy Synthesis'
+                    'Immune System',
+                    'Security audit passed - agent capabilities validated through backend governance',
+                    'Backend Security'
                 );
 
                 await this.delay(2000);
 
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
-                this.addAgentActivity('marketingAgent', 'Marketing strategy formulated with targeted campaigns', '(Campaign Results)');
+                this.addAgentActivity('marketingAgent', 'Enterprise DNA validation complete - backend governance active', '(Governance Verified)');
 
                 await this.delay(1000);
 
@@ -1029,34 +1035,34 @@
                 this.updateStats();
             }
 
-            async activateFinanceAgent() {
+            async orchestrateBackendServices() {
                 const agents = ['financeAgent', 'researchAgent', 'marketingAgent'];
 
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
 
-                this.addAgentActivity('financeAgent', 'Calculating budget projections and financial modeling', '(Financial Analysis)');
+                this.addAgentActivity('financeAgent', 'Orchestrating backend services through SFHC service mesh', '(Service Orchestration)');
 
                 await this.delay(1500);
 
                 this.messagesExchanged += 3;
                 this.addCommunicationLog(
                     'Finance Agent',
-                    'Budget Engine',
-                    'Calculating comprehensive financial projections',
-                    'Financial Processing'
+                    'Service Mesh',
+                    'Orchestrating backend services: load balancing, service discovery, circuit breakers active',
+                    'Backend Orchestration'
                 );
 
                 this.addCommunicationLog(
                     'Marketing Agent',
                     'Finance Agent',
-                    'Campaign budget requirements shared',
-                    'Cross-Agent Coordination'
+                    'Service coordination request: shared backend resources allocated',
+                    'Backend Coordination'
                 );
 
                 await this.delay(2500);
 
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
-                this.addAgentActivity('financeAgent', 'Financial analysis complete - ROI projections ready', '(Finance Results)');
+                this.addAgentActivity('financeAgent', 'Backend service orchestration complete - all services coordinated', '(Services Orchestrated)');
 
                 await this.delay(1000);
 
@@ -1064,27 +1070,27 @@
                 this.updateStats();
             }
 
-            async activateOperationsAgent() {
+            async coordinateAPIEndpoints() {
                 const agents = ['operationsAgent', 'financeAgent'];
 
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
 
-                this.addAgentActivity('operationsAgent', 'Planning resource allocation and operational timelines', '(Operations Planning)');
+                this.addAgentActivity('operationsAgent', 'Coordinating API endpoints and managing backend service routes', '(API Coordination)');
 
                 await this.delay(1500);
 
                 this.messagesExchanged += 2;
                 this.addCommunicationLog(
                     'Finance Agent',
-                    'Operations Agent',
-                    'Budget allocations and resource requirements',
-                    'Resource Coordination'
+                    'API Gateway',
+                    'API endpoint routing configured: REST endpoints active, GraphQL queries enabled',
+                    'Backend API'
                 );
 
                 await this.delay(2000);
 
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
-                this.addAgentActivity('operationsAgent', 'Operations plan complete - resources allocated', '(Operations Results)');
+                this.addAgentActivity('operationsAgent', 'API endpoints coordinated - backend routes optimized', '(APIs Coordinated)');
 
                 await this.delay(1000);
 
@@ -1092,27 +1098,27 @@
                 this.updateStats();
             }
 
-            async activateSalesAgent() {
+            async processBackendPipeline() {
                 const agents = ['salesAgent', 'marketingAgent', 'operationsAgent'];
 
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
 
-                this.addAgentActivity('salesAgent', 'Optimizing customer acquisition strategies', '(Sales Optimization)');
+                this.addAgentActivity('salesAgent', 'Processing data through backend pipeline: ETL, transformation, storage', '(Pipeline Processing)');
 
                 await this.delay(1500);
 
                 this.messagesExchanged += 3;
                 this.addCommunicationLog(
                     'Sales Agent',
-                    'Customer Database',
-                    'Analyzing customer acquisition channels',
-                    'Data Analysis'
+                    'Backend Pipeline',
+                    'Data pipeline active: extraction from sources, transformation in progress, loading to storage',
+                    'Backend Pipeline'
                 );
 
                 await this.delay(2000);
 
                 agents.forEach(agent => this.setAgentState(agent, 'communicating'));
-                this.addAgentActivity('salesAgent', 'Sales strategy optimized - targets aligned', '(Sales Results)');
+                this.addAgentActivity('salesAgent', 'Backend pipeline processing complete - data transformed and stored', '(Pipeline Complete)');
 
                 await this.delay(1000);
 
@@ -1120,27 +1126,27 @@
                 this.updateStats();
             }
 
-            async finalizeResults() {
+            async synthesizeBackendArchitecture() {
                 const agents = ['executiveAgent', 'researchAgent', 'marketingAgent', 'financeAgent', 'operationsAgent', 'salesAgent'];
 
                 agents.forEach(agent => this.setAgentState(agent, 'processing'));
 
-                this.addAgentActivity('executiveAgent', 'Synthesizing comprehensive analysis from all agents', '(Final Synthesis)');
+                this.addAgentActivity('executiveAgent', 'Synthesizing backend architecture status: all systems operational', '(Architecture Synthesis)');
 
                 await this.delay(2000);
 
                 this.messagesExchanged += 6;
                 this.addCommunicationLog(
                     'Executive Agent',
-                    'All Agents',
-                    'Coordinating final synthesis and report generation',
-                    'Comprehensive Analysis'
+                    'Backend Architecture',
+                    'Backend architecture synthesis complete: API Gateway active, Service Mesh operational, Memory Layers functional, Enterprise DNA validated',
+                    'Backend Status'
                 );
 
                 await this.delay(3000);
 
                 agents.forEach(agent => this.setAgentState(agent, 'active'));
-                this.addAgentActivity('executiveAgent', 'COMPLETE: Product launch analysis finalized with strategic recommendations', '(COMPLETE RESULT)');
+                this.addAgentActivity('executiveAgent', 'COMPLETE: Backend architecture fully operational - all systems verified', '(BACKEND ARCHITECTURE COMPLETE)');
 
                 await this.delay(1000);
 
@@ -1149,15 +1155,15 @@
             }
 
             completeDemo() {
-                this.updateStatus('active', 'Demo completed successfully - Check results');
+                this.updateStatus('active', 'Backend architecture demo completed successfully');
 
                 setTimeout(() => {
                     this.stopDemo();
                     this.addCommunicationLog(
-                        'SFHC Demo System',
+                        'Backend Architecture System',
                         'User',
-                        'Product launch analysis completed. All agents coordinated successfully through SFHC backend.',
-                        'Demo Complete'
+                        'Backend architecture initialization complete. All systems operational: API Gateway, Service Mesh, Memory Layers, and Enterprise DNA governance verified.',
+                        'Backend Demo Complete'
                     );
                 }, 2000);
             }
@@ -1200,7 +1206,7 @@
 
                 // Reset status
                 this.updateStatus('ready', 'Ready to connect');
-                this.updatePhaseIndicator('Ready', 'System ready to execute product launch analysis');
+                this.updatePhaseIndicator('Ready', 'Backend architecture ready for initialization');
                 this.updateStats();
             }
 
@@ -1328,14 +1334,48 @@
             }
         }
 
-        // Initialize demo when page loads
+        // Initialize demo when page loads (robust initialization)
         function initializeBackendDemo() {
-            window.backendDemo = new DaenaBackendDemo();
+            if (!window.backendDemo) {
+                try {
+                    window.backendDemo = new DaenaBackendDemo();
+                    console.log('Backend Demo initialized successfully');
+                } catch (e) {
+                    console.error('Backend Demo initialization error:', e);
+                    // Retry after a short delay
+                    setTimeout(() => {
+                        if (!window.backendDemo) {
+                            try {
+                                window.backendDemo = new DaenaBackendDemo();
+                            } catch (e2) {
+                                console.error('Backend Demo retry failed:', e2);
+                            }
+                        }
+                    }, 500);
+                }
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Initialize backend demo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () {
+                initializeBackendDemo();
+            });
+        } else {
             initializeBackendDemo();
+        }
+        
+        // Also try on window load as a fallback
+        window.addEventListener('load', function () {
+            if (!window.backendDemo) {
+                initializeBackendDemo();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize backend demo (if not already initialized)
+            if (!window.backendDemo) {
+                initializeBackendDemo();
+            }
 
             // Try to load voice player config
             const voicePlayerElement = document.getElementById('daena-voice-player');

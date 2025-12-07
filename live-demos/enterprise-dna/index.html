@@ -272,15 +272,24 @@
             }
 
             init() {
-                this.runBtn = document.getElementById('runCheck');
-                this.threatBtn = document.getElementById('simulateThreat');
-                this.logContainer = document.getElementById('policy-log');
-                this.shield = document.getElementById('shield');
-                this.status = document.getElementById('system-status');
-                this.trustDisplay = document.getElementById('trust-score');
+                // Wait for DOM elements to be ready
+                setTimeout(() => {
+                    this.runBtn = document.getElementById('runCheck');
+                    this.threatBtn = document.getElementById('simulateThreat');
+                    this.logContainer = document.getElementById('policy-log');
+                    this.shield = document.getElementById('shield');
+                    this.status = document.getElementById('system-status');
+                    this.trustDisplay = document.getElementById('trust-score');
 
-                this.runBtn.addEventListener('click', () => this.runAudit());
-                this.threatBtn.addEventListener('click', () => this.simulateThreat());
+                    if (!this.runBtn || !this.threatBtn || !this.logContainer) {
+                        console.error('Required elements not found, retrying...');
+                        setTimeout(() => this.init(), 500);
+                        return;
+                    }
+
+                    this.runBtn.addEventListener('click', () => this.runAudit());
+                    this.threatBtn.addEventListener('click', () => this.simulateThreat());
+                }, 100);
             }
 
             async runAudit() {
@@ -386,8 +395,39 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            new EnterpriseDNADemo();
+        // Initialize demo when page loads (robust initialization)
+        function initEnterpriseDNADemo() {
+            if (!window.enterpriseDNADemoInstance) {
+                try {
+                    window.enterpriseDNADemoInstance = new EnterpriseDNADemo();
+                    console.log('Enterprise DNA Demo initialized successfully');
+                } catch (e) {
+                    console.error('Enterprise DNA Demo initialization error:', e);
+                    // Retry after a short delay
+                    setTimeout(() => {
+                        if (!window.enterpriseDNADemoInstance) {
+                            try {
+                                window.enterpriseDNADemoInstance = new EnterpriseDNADemo();
+                            } catch (e2) {
+                                console.error('Enterprise DNA Demo retry failed:', e2);
+                            }
+                        }
+                    }, 500);
+                }
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initEnterpriseDNADemo);
+        } else {
+            initEnterpriseDNADemo();
+        }
+        
+        // Also try on window load as a fallback
+        window.addEventListener('load', () => {
+            if (!window.enterpriseDNADemoInstance) {
+                initEnterpriseDNADemo();
+            }
         });
     </script>
 </body>

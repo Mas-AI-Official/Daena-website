@@ -1247,9 +1247,39 @@
             }
         }
 
-        // Initialize demo when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            new SunflowerHoneycombDemo();
+        // Initialize demo when page loads (robust initialization)
+        function initSunflowerHoneycombDemo() {
+            if (!window.sunflowerHoneycombDemoInstance) {
+                try {
+                    window.sunflowerHoneycombDemoInstance = new SunflowerHoneycombDemo();
+                    console.log('Sunflower Honeycomb Demo initialized successfully');
+                } catch (e) {
+                    console.error('Sunflower Honeycomb Demo initialization error:', e);
+                    // Retry after a short delay
+                    setTimeout(() => {
+                        if (!window.sunflowerHoneycombDemoInstance) {
+                            try {
+                                window.sunflowerHoneycombDemoInstance = new SunflowerHoneycombDemo();
+                            } catch (e2) {
+                                console.error('Sunflower Honeycomb Demo retry failed:', e2);
+                            }
+                        }
+                    }, 500);
+                }
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSunflowerHoneycombDemo);
+        } else {
+            initSunflowerHoneycombDemo();
+        }
+        
+        // Also try on window load as a fallback
+        window.addEventListener('load', () => {
+            if (!window.sunflowerHoneycombDemoInstance) {
+                initSunflowerHoneycombDemo();
+            }
         });
     </script>
 </body>
