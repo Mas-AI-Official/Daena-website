@@ -817,18 +817,18 @@
 
                 this.phases = [
                     {
-                        name: "Backend Connection",
-                        description: "Establishing connection to SFHC backend systems...",
+                        name: "Backend Architecture Initialization",
+                        description: "Initializing SFHC backend architecture components...",
                         duration: 2000,
                         agents: ['executiveAgent'],
-                        action: this.connectToBackend.bind(this)
+                        action: this.initializeBackendArchitecture.bind(this)
                     },
                     {
-                        name: "Task Initiation",
-                        description: "Executive Agent initiating product launch analysis...",
+                        name: "API Gateway Connection",
+                        description: "Establishing secure connection to backend API gateway...",
                         duration: 3000,
                         agents: ['executiveAgent'],
-                        action: this.initiateTask.bind(this)
+                        action: this.connectToAPIGateway.bind(this)
                     },
                     {
                         name: "Memory Layer Activation",
@@ -878,18 +878,27 @@
             }
 
             init() {
-                this.startBtn = document.getElementById('startBackendDemo');
-                this.stopBtn = document.getElementById('stopBackendDemo');
-                this.resetBtn = document.getElementById('resetBackendDemo');
-                this.statusDot = document.getElementById('statusDot');
-                this.statusText = document.getElementById('statusText');
-                this.communicationEntries = document.getElementById('communicationEntries');
+                // Wait for DOM elements to be ready
+                setTimeout(() => {
+                    this.startBtn = document.getElementById('startBackendDemo');
+                    this.stopBtn = document.getElementById('stopBackendDemo');
+                    this.resetBtn = document.getElementById('resetBackendDemo');
+                    this.statusDot = document.getElementById('statusDot');
+                    this.statusText = document.getElementById('statusText');
+                    this.communicationEntries = document.getElementById('communicationEntries');
 
-                this.startBtn.addEventListener('click', () => this.startDemo());
-                this.stopBtn.addEventListener('click', () => this.stopDemo());
-                this.resetBtn.addEventListener('click', () => this.resetDemo());
+                    if (!this.startBtn || !this.resetBtn || !this.communicationEntries) {
+                        console.error('Required elements not found, retrying...');
+                        setTimeout(() => this.init(), 500);
+                        return;
+                    }
 
-                this.resetDemo();
+                    this.startBtn.addEventListener('click', () => this.startDemo());
+                    this.stopBtn.addEventListener('click', () => this.stopDemo());
+                    this.resetBtn.addEventListener('click', () => this.resetDemo());
+
+                    this.resetDemo();
+                }, 100);
             }
 
             async startDemo() {

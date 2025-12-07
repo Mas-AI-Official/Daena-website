@@ -314,11 +314,20 @@
             }
 
             init() {
-                this.startBtn = document.getElementById('startDemo');
-                this.resetBtn = document.getElementById('resetDemo');
+                // Wait for DOM elements to be ready
+                setTimeout(() => {
+                    this.startBtn = document.getElementById('startDemo');
+                    this.resetBtn = document.getElementById('resetDemo');
 
-                this.startBtn.addEventListener('click', () => this.start());
-                this.resetBtn.addEventListener('click', () => this.reset());
+                    if (!this.startBtn || !this.resetBtn) {
+                        console.error('Required buttons not found, retrying...');
+                        setTimeout(() => this.init(), 500);
+                        return;
+                    }
+
+                    this.startBtn.addEventListener('click', () => this.start());
+                    this.resetBtn.addEventListener('click', () => this.reset());
+                }, 100);
             }
 
             async start() {

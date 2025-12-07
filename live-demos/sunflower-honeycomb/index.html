@@ -729,18 +729,27 @@
             }
 
             init() {
-                this.executeBtn = document.getElementById('executeBtn');
-                this.resetBtn = document.getElementById('resetBtn');
-                this.communicationLog = document.getElementById('communicationLog');
-                this.narrationAudio = document.getElementById('narrationAudio');
-                this.backgroundMusic = document.getElementById('backgroundMusic');
-                this.volumeSlider = document.getElementById('volumeSlider');
-                this.playNarrationBtn = document.getElementById('playNarrationBtn');
-                this.playMusicBtn = document.getElementById('playMusicBtn');
+                // Wait for DOM elements to be ready
+                setTimeout(() => {
+                    this.executeBtn = document.getElementById('executeBtn');
+                    this.resetBtn = document.getElementById('resetBtn');
+                    this.communicationLog = document.getElementById('communicationLog');
+                    this.narrationAudio = document.getElementById('narrationAudio');
+                    this.backgroundMusic = document.getElementById('backgroundMusic');
+                    this.volumeSlider = document.getElementById('volumeSlider');
+                    this.playNarrationBtn = document.getElementById('playNarrationBtn');
+                    this.playMusicBtn = document.getElementById('playMusicBtn');
 
-                this.setupEventListeners();
-                this.initializeDepartments();
-                this.resetDemo();
+                    if (!this.executeBtn || !this.resetBtn || !this.communicationLog) {
+                        console.error('Required elements not found, retrying...');
+                        setTimeout(() => this.init(), 500);
+                        return;
+                    }
+
+                    this.setupEventListeners();
+                    this.initializeDepartments();
+                    this.resetDemo();
+                }, 100);
             }
 
             setupEventListeners() {
