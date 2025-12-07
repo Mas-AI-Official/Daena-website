@@ -131,8 +131,9 @@ body::before {
 /* Hero section - perfect centering on mobile */
 #hero {
     min-height: calc(100vh - var(--nav-h));
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: var(--hero-pad);
     padding-top: calc(var(--hero-pad) + env(safe-area-inset-top, 0px));
     padding-bottom: calc(var(--hero-pad) + env(safe-area-inset-bottom, 0px));
