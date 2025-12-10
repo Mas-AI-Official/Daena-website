@@ -45,6 +45,22 @@
             border: none;
         }
         
+        .pdf-viewer {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .pdf-viewer.active {
+            display: block;
+        }
+        
+        .pdf-viewer iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
         .loading-overlay {
             position: absolute;
             top: 0;
@@ -149,20 +165,32 @@
                 <p>Loading PowerPoint presentation...</p>
             </div>
             <iframe id="pptx-iframe" title="Daena Pitch Deck" allowfullscreen></iframe>
+            <div class="pdf-viewer" id="pdf-viewer">
+                <iframe id="pdf-iframe" src="/assets/pitch/daena_pitch_deck.pdf" title="Daena Pitch Deck PDF" allowfullscreen></iframe>
+            </div>
             <div class="fallback-message" id="fallback-message">
                 <h2>Unable to load presentation</h2>
-                <p>Please download the PPTX or PDF to view the presentation</p>
+                <p>Please download the PPTX or PDF to view the presentation with full animations and voice-over</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
-                    <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn btn-primary">Download PPTX</a>
+                    <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn btn-primary">Download PPTX (Recommended)</a>
                     <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank" class="btn">Open PDF</a>
                 </div>
+                <p style="margin-top: 1rem; font-size: 0.875rem; opacity: 0.7;">
+                    For the best experience with animations and voice-over, download the PPTX file and open it in PowerPoint.
+                </p>
             </div>
         </div>
     </div>
     
     <script>
+        let loadAttempted = false;
+        let loadTimeout = null;
+        
         // Initialize PowerPoint viewer
         function initPowerPointViewer() {
+            if (loadAttempted) return;
+            loadAttempted = true;
+            
             const siteUrl = window.location.origin;
             const pptxPath = '/assets/pitch/daena_pitch_deck.pptx';
             const pptxUrl = encodeURIComponent(siteUrl + pptxPath);
@@ -174,46 +202,62 @@
             
             const iframe = document.getElementById('pptx-iframe');
             const loadingOverlay = document.getElementById('loading-overlay');
+            const pdfViewer = document.getElementById('pdf-viewer');
+            
+            let hasLoaded = false;
             
             // Handle iframe load
             iframe.addEventListener('load', () => {
-                console.log('PowerPoint presentation loaded');
-                // Hide loading overlay after a short delay to ensure content is visible
+                console.log('Iframe load event fired');
+                hasLoaded = true;
+                if (loadTimeout) {
+                    clearTimeout(loadTimeout);
+                }
+                // Hide loading overlay after a short delay
                 setTimeout(() => {
                     if (loadingOverlay) {
                         loadingOverlay.classList.add('hidden');
                     }
-                }, 2000);
+                }, 1500);
             });
             
             // Handle iframe errors
             iframe.addEventListener('error', (e) => {
-                console.error('Failed to load PowerPoint:', e);
-                showFallback();
+                console.error('Iframe error event:', e);
+                if (loadTimeout) {
+                    clearTimeout(loadTimeout);
+                }
+                showPDFFallback();
             });
             
             // Set iframe source
             iframe.src = officeViewerUrl;
             
-            // Fallback check after timeout
-            setTimeout(() => {
-                try {
-                    // Check if iframe loaded (will fail due to CORS, but that's expected)
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                } catch (e) {
-                    // CORS error is expected - iframe should still be visible
-                    console.log('CORS check (expected):', e.message);
-                    // Hide loading overlay anyway
-                    if (loadingOverlay) {
-                        loadingOverlay.classList.add('hidden');
+            // Timeout check - if Office Web Viewer doesn't load, use PDF fallback
+            loadTimeout = setTimeout(() => {
+                if (!hasLoaded) {
+                    console.log('Office Web Viewer timeout - switching to PDF');
+                    showPDFFallback();
+                }
+            }, 8000);
+            
+            // Additional check using postMessage listener
+            window.addEventListener('message', (event) => {
+                if (event.origin === 'https://view.officeapps.live.com') {
+                    console.log('Message from Office Web Viewer:', event.data);
+                    hasLoaded = true;
+                    if (loadTimeout) {
+                        clearTimeout(loadTimeout);
                     }
                 }
-            }, 5000);
+            });
         }
         
-        function showFallback() {
+        function showPDFFallback() {
+            console.log('Showing PDF fallback');
             const iframe = document.getElementById('pptx-iframe');
             const loadingOverlay = document.getElementById('loading-overlay');
+            const pdfViewer = document.getElementById('pdf-viewer');
             const fallbackMessage = document.getElementById('fallback-message');
             
             if (iframe) {
@@ -221,6 +265,51 @@
             }
             if (loadingOverlay) {
                 loadingOverlay.classList.add('hidden');
+            }
+            
+            // Try PDF viewer first
+            if (pdfViewer) {
+                pdfViewer.classList.add('active');
+                console.log('PDF viewer activated');
+                
+                // If PDF also fails, show download message after delay
+                setTimeout(() => {
+                    const pdfIframe = document.getElementById('pdf-iframe');
+                    if (pdfIframe) {
+                        pdfIframe.addEventListener('error', () => {
+                            console.log('PDF viewer failed, showing download message');
+                            if (pdfViewer) {
+                                pdfViewer.classList.remove('active');
+                            }
+                            if (fallbackMessage) {
+                                fallbackMessage.classList.add('active');
+                            }
+                        });
+                    }
+                }, 3000);
+            } else {
+                // If no PDF viewer, show download message directly
+                if (fallbackMessage) {
+                    fallbackMessage.classList.add('active');
+                }
+            }
+        }
+        
+        function showDownloadFallback() {
+            console.log('Showing download fallback');
+            const iframe = document.getElementById('pptx-iframe');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const pdfViewer = document.getElementById('pdf-viewer');
+            const fallbackMessage = document.getElementById('fallback-message');
+            
+            if (iframe) {
+                iframe.style.display = 'none';
+            }
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+            }
+            if (pdfViewer) {
+                pdfViewer.classList.remove('active');
             }
             if (fallbackMessage) {
                 fallbackMessage.classList.add('active');
