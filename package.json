@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Daena website test suite",
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "deck:sync": "powershell -ExecutionPolicy Bypass -File .\\tools\\sync_pitch_assets.ps1",
+    "deck:pdf": "powershell -ExecutionPolicy Bypass -File .\\tools\\export_deck.ps1",
+    "deck:manifest": "node ./scripts/gen-vo-manifest.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

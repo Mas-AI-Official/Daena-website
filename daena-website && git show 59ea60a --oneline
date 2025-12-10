@@ -1,0 +1,30 @@
+[33m9dae9a3[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Restore working pitch-deck version from backup
+[33m05ad011[m Update pitch deck with voice-over integration, modern controls, and animations
+[33m698079c[m fix(pitch-deck): restore original design, update to new voice files, add volume control
+[33m2e98cac[m fix(pitch-deck): add MAS-AI link, keep only Live Demo, add volume control, update voice paths
+[33md76d326[m fix(pitch-deck): add MAS-AI link to navbar, keep only Live Demo link
+[33m09c4547[m fix: update pitch-deck.html to use Office Web Viewer instead of old static version
+[33m0fb3c17[m feat(pitch): embed live PPTX with animations, publish PDF/PPT, add VO panel, add MAS-AI nav link
+[33m32c450b[m Restore global.css with Metatron background, glass-card styles, and layout fixes
+[33m59ea60a[m Remove 3 demo sections from Advanced Interactive Demos: Sunflower-Honeycomb, Backend Architecture, Enterprise DNA and their related pages
+[33mb3aa634[m Fix: Add overflow constraints to video section container
+[33ma0f2df4[m Fix: Video player and controls to fit on screen, stack buttons vertically
+[33m886cdb0[m Fix: Update global.css hero section to use flexbox for consistency
+[33m2fc453c[m Fix: Hero section centering on mobile - use flexbox instead of grid
+[33m0ded350[m Fix: Mobile video player navbar and homepage centering issues
+[33m4e424ba[m Fix: Complete robust initialization for all demos and fix backend-agent phases array
+[33m78dee43[m Fix: Make all 4 live demos functional with robust initialization
+[33m6ddfe88[m Fix: Mobile hero centering, video player display, and update benchmarks
+[33m720c1e0[m Optimize SEO for Daena AI/VP and fix responsive design
+[33m09c0be9[m Refactor live demos: fix artifacts, enhance budget demo, update docs
+[33m986521f[m Remove System Status text and unused script from homepage
+[33mbcdcb8c[m Refactor homepage and live demos: standardize layout, update links, and fix audio
+[33m4501d91[m Fix tsconfig.json: enable allowJs, include JS files, set noEmit
+[33mcf155ef[m Upgrade live demos with 3-tier structure, voice-over integration, and consistent styling
+[33ma3f94ef[m Fix: Remove conflicting live-demo.js scripts and ensure consistent navigation across all live-demos
+[33mdac7a73[m Fix: Improve agent-communication demo initialization with better logging and element verification
+[33mc9d437e[m Fix: Resolve tsconfig.json error and improve agent-communication demo initialization
+[33mf09605d[m Fix: Add critical element verification and null checks to agent-communication demo
+[33m41d90fc[m Fix: Update tsconfig.json, fix agent-communication demo link and initialization
+[33m0f99c4f[m Fix: Improve agent-communication demo initialization robustness
+[33mf179d77[m Fix: Remove stray closing script tag in agent-communication demo
