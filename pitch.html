@@ -500,14 +500,21 @@
         
         // Load voice-over for a specific slide
         function loadAudioForSlide(slideNum, autoPlay = false) {
+            // Make sure we're loading audio for the CORRECT slide
+            console.log('Loading audio for slide', slideNum, 'currentSlide is', currentSlide);
+            
+            // Stop and remove previous audio
             if (audio) {
                 audio.pause();
                 audio.removeEventListener('ended', handleAudioEnded);
                 audio = null;
             }
             
+            // Use the slideNum parameter (not currentSlide) to ensure correct audio
             const slideNumStr = slideNum.toString().padStart(2, '0');
             const audioSrc = `/assets/pitch/voice/slide_${slideNumStr}.mp3`;
+            
+            console.log('Loading audio from:', audioSrc);
             
             audio = new Audio(audioSrc);
             audio.playbackRate = currentSpeed;
@@ -524,14 +531,16 @@
             
             // Handle audio ended - auto-advance to next slide
             const handleAudioEnded = () => {
-                console.log('Audio ended for slide', slideNum);
+                console.log('Audio ended for slide', slideNum, 'currentSlide is', currentSlide);
                 isPlaying = false;
                 updatePlayPauseButton();
-                // Auto-advance to next slide
+                // Auto-advance to next slide - use currentSlide to ensure we advance from current position
                 if (autoAdvance && currentSlide < totalSlides) {
-                    console.log('Auto-advancing to next slide');
+                    console.log('Auto-advancing from slide', currentSlide, 'to', currentSlide + 1);
                     setTimeout(() => {
-                        nextSlide();
+                        // Make sure we advance to the next slide
+                        const nextSlideNum = currentSlide + 1;
+                        goToSlide(nextSlideNum);
                     }, 500);
                 } else {
                     console.log('Not auto-advancing:', { autoAdvance, currentSlide, totalSlides });
@@ -616,40 +625,76 @@
             }
         }
         
+        // Send keyboard event to iframe to control PowerPoint
+        function sendKeyToIframe(key, ctrlKey = false, shiftKey = false) {
+            try {
+                const iframe = slideViewer.contentWindow;
+                if (iframe) {
+                    // Create keyboard events to control PowerPoint
+                    const keyEvent = new KeyboardEvent('keydown', {
+                        key: key,
+                        code: key,
+                        ctrlKey: ctrlKey,
+                        shiftKey: shiftKey,
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    iframe.document.dispatchEvent(keyEvent);
+                }
+            } catch (e) {
+                // Cross-origin restriction - can't directly control
+                console.log('Cannot control iframe directly (cross-origin)');
+            }
+        }
+        
         // Navigate to slide
         function goToSlide(slideNum) {
             if (slideNum < 1 || slideNum > totalSlides) return;
             
             const wasPlaying = isPlaying;
             const oldSlide = currentSlide;
+            
+            // Update current slide FIRST
             currentSlide = slideNum;
             updateSlideCounter();
             
-            // Only reload iframe if slide actually changed
-            // Office Web Viewer doesn't support direct slide navigation, so we keep it loaded
-            // and just track the slide number for audio sync
-            if (oldSlide !== slideNum) {
-                // Reload viewer only on first load or if needed
-                if (!viewerInitialized || slideNum === 1) {
-                    slideViewer.src = getSlideUrl(slideNum);
-                }
+            // Try to control PowerPoint navigation via keyboard
+            if (oldSlide < slideNum) {
+                // Going forward - send Right Arrow or Page Down
+                sendKeyToIframe('ArrowRight');
+                sendKeyToIframe('PageDown');
+            } else if (oldSlide > slideNum) {
+                // Going backward - send Left Arrow or Page Up
+                sendKeyToIframe('ArrowLeft');
+                sendKeyToIframe('PageUp');
             }
             
-            // Load and play audio for this slide (auto-play if it was playing before)
+            // If going to slide 1, reload to start from beginning
+            if (slideNum === 1 && oldSlide !== 1) {
+                slideViewer.src = getSlideUrl(1);
+                viewerInitialized = true;
+            }
+            
+            // Load and play audio for THIS slide (not previous)
+            // Important: Load audio AFTER updating currentSlide
             loadAudioForSlide(slideNum, wasPlaying);
         }
         
         // Previous slide
         function prevSlide() {
             if (currentSlide > 1) {
-                goToSlide(currentSlide - 1);
+                const targetSlide = currentSlide - 1;
+                console.log('Previous: going from slide', currentSlide, 'to', targetSlide);
+                goToSlide(targetSlide);
             }
         }
         
         // Next slide
         function nextSlide() {
             if (currentSlide < totalSlides) {
-                goToSlide(currentSlide + 1);
+                const targetSlide = currentSlide + 1;
+                console.log('Next: going from slide', currentSlide, 'to', targetSlide);
+                goToSlide(targetSlide);
             }
         }
         
@@ -659,15 +704,18 @@
                 // If no audio loaded, start from slide 1
                 if (currentSlide !== 1) {
                     goToSlide(1);
+                } else {
+                    // Already on slide 1, just load and play
+                    loadAudioForSlide(1, true); // true = auto-play when ready
                 }
-                // Load and play first slide audio
-                loadAudioForSlide(1, true); // true = auto-play when ready
                 return;
             }
             
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
+                // Try to pause PowerPoint if possible
+                sendKeyToIframe('Space');
             } else {
                 audio.play().then(() => {
                     isPlaying = true;
@@ -675,6 +723,8 @@
                 }).catch(err => {
                     console.error('Play error:', err);
                 });
+                // Try to play PowerPoint if possible
+                sendKeyToIframe('Space');
             }
             updatePlayPauseButton();
         });
@@ -710,8 +760,19 @@
         });
         
         // Previous/Next buttons
-        document.getElementById('prev-btn').addEventListener('click', prevSlide);
-        document.getElementById('next-btn').addEventListener('click', nextSlide);
+        document.getElementById('prev-btn').addEventListener('click', function() {
+            prevSlide();
+            // Try to control PowerPoint
+            sendKeyToIframe('ArrowLeft');
+            sendKeyToIframe('PageUp');
+        });
+        
+        document.getElementById('next-btn').addEventListener('click', function() {
+            nextSlide();
+            // Try to control PowerPoint
+            sendKeyToIframe('ArrowRight');
+            sendKeyToIframe('PageDown');
+        });
         
         // Download button
         document.getElementById('download-btn').addEventListener('click', function() {
