@@ -73,6 +73,10 @@
             object-fit: contain;
             border-radius: 0.5rem;
             display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         
         .slide-image.active {
@@ -491,6 +495,13 @@
         
         // Show specific slide
         function showSlide(slideNum) {
+            if (slideNum < 1 || slideNum > totalSlides) {
+                console.error('Invalid slide number:', slideNum);
+                return;
+            }
+            
+            console.log('showSlide called with:', slideNum, 'currentSlide is:', currentSlide);
+            
             // Hide all slides
             for (let i = 1; i <= totalSlides; i++) {
                 const slideImg = document.getElementById(`slide-img-${i}`);
@@ -503,6 +514,24 @@
             const currentSlideImg = document.getElementById(`slide-img-${slideNum}`);
             if (currentSlideImg) {
                 currentSlideImg.classList.add('active');
+                console.log('Slide', slideNum, 'is now visible');
+            } else {
+                console.error('Slide image not found for slide:', slideNum);
+                // Try to find it after a short delay (in case images are still loading)
+                setTimeout(() => {
+                    const retryImg = document.getElementById(`slide-img-${slideNum}`);
+                    if (retryImg) {
+                        retryImg.classList.add('active');
+                        console.log('Slide', slideNum, 'found on retry');
+                    }
+                }, 100);
+            }
+            
+            // Ensure currentSlide matches what we're showing
+            if (currentSlide !== slideNum) {
+                console.warn('Sync issue detected: currentSlide is', currentSlide, 'but showing slide', slideNum);
+                currentSlide = slideNum;
+                updateSlideCounter();
             }
         }
         
@@ -638,16 +667,21 @@
         
         // Navigate to slide
         function goToSlide(slideNum, autoPlayAudio = false) {
-            if (slideNum < 1 || slideNum > totalSlides) return;
+            if (slideNum < 1 || slideNum > totalSlides) {
+                console.warn('Invalid slide number:', slideNum);
+                return;
+            }
+            
+            console.log('goToSlide called:', slideNum, 'from currentSlide:', currentSlide);
             
             const wasPlaying = isPlaying;
             
-            // Update current slide FIRST
+            // Show the slide image FIRST (this also updates currentSlide internally)
+            showSlide(slideNum);
+            
+            // Update current slide and counter (redundant but ensures sync)
             currentSlide = slideNum;
             updateSlideCounter();
-            
-            // Show the slide image (we have full control)
-            showSlide(slideNum);
             
             // Load and play audio for THIS slide (not previous)
             // Important: Load audio AFTER updating currentSlide
@@ -826,8 +860,41 @@
         }
         
         // Initialize
+        // Ensure we start on slide 1 and it's visible
+        currentSlide = 1;
+        showSlide(1);
         updateSlideCounter();
         loadVoiceList();
+        
+        // Function to verify and fix sync issues
+        function verifySync() {
+            const activeSlide = document.querySelector('.slide-image.active');
+            if (activeSlide) {
+                const activeId = activeSlide.id;
+                const activeNum = parseInt(activeId.replace('slide-img-', ''));
+                if (activeNum !== currentSlide) {
+                    console.warn('Sync mismatch detected: counter shows', currentSlide, 'but slide', activeNum, 'is visible. Fixing...');
+                    showSlide(currentSlide);
+                }
+            } else {
+                // No active slide found, ensure slide 1 is shown if we're on slide 1
+                if (currentSlide === 1) {
+                    const slide1 = document.getElementById('slide-img-1');
+                    if (slide1) {
+                        slide1.classList.add('active');
+                    }
+                } else {
+                    // Force show the current slide
+                    showSlide(currentSlide);
+                }
+            }
+        }
+        
+        // Verify sync after images load
+        setTimeout(verifySync, 1000);
+        
+        // Periodic sync check (every 2 seconds) to catch any desync issues
+        setInterval(verifySync, 2000);
         
         // Don't load audio until user clicks play - they want to start from beginning
         // Audio will be loaded when play button is clicked
