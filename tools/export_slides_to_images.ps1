@@ -19,7 +19,7 @@ if (-not (Test-Path $imagesDir)) {
 try {
     Write-Host "Exporting slides to images using PowerPoint COM..."
     $pp = New-Object -ComObject PowerPoint.Application
-    $pp.Visible = [Microsoft.Office.Core.MsoTriState]::msoFalse
+    $pp.Visible = [Microsoft.Office.Core.MsoTriState]::msoTrue
     
     $pres = $pp.Presentations.Open($pptx, $true, $true, $false)
     
