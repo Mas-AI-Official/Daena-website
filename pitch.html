@@ -458,11 +458,11 @@
         const origin = window.location.origin;
         const pptUrl = `${origin}/assets/pitch/daena_pitch_deck.pptx`;
         
-        // Use PDF as primary viewer (more reliable than Office Web Viewer)
+        // Office Web Viewer URL (for PowerPoint animations)
         function getSlideUrl(slideNum = 1) {
-            const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
-            // Use PDF with page navigation - more reliable than Office Web Viewer
-            return pdfUrl + '#page=' + slideNum;
+            // Office Web Viewer for PowerPoint animations
+            // Note: Requires HTTPS and publicly accessible file
+            return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
         }
         
         // Show error fallback
@@ -477,30 +477,26 @@
         
         // Initialize slide viewer
         const slideViewer = document.getElementById('slide-viewer');
-        const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
+        let viewerInitialized = false;
         
-        // Use PDF viewer directly (more reliable)
-        slideViewer.src = getSlideUrl(1);
-        
-        // Error handling for iframe
-        slideViewer.addEventListener('error', function() {
-            console.error('Failed to load PDF viewer');
-            showErrorFallback();
-        });
-        
-        // Check if PDF loads successfully after a delay
-        setTimeout(() => {
-            try {
-                // Try to access iframe to see if it loaded
-                if (slideViewer.contentWindow) {
-                    // If we can access it, it likely loaded
-                    console.log('PDF viewer loaded');
-                }
-            } catch (e) {
-                // Cross-origin is expected for PDFs, this is normal
-                console.log('PDF viewer iframe (cross-origin expected)');
+        // Initialize Office Web Viewer
+        function initializeViewer() {
+            if (!viewerInitialized) {
+                slideViewer.src = getSlideUrl(1);
+                viewerInitialized = true;
+                
+                // Error handling
+                slideViewer.addEventListener('error', function() {
+                    console.error('Failed to load Office Web Viewer');
+                    // Fallback to PDF
+                    const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
+                    slideViewer.src = pdfUrl + '#page=1';
+                });
             }
-        }, 2000);
+        }
+        
+        // Initialize on page load
+        initializeViewer();
         
         // Load voice-over for a specific slide
         function loadAudioForSlide(slideNum, autoPlay = false) {
@@ -528,13 +524,17 @@
             
             // Handle audio ended - auto-advance to next slide
             const handleAudioEnded = () => {
+                console.log('Audio ended for slide', slideNum);
                 isPlaying = false;
                 updatePlayPauseButton();
                 // Auto-advance to next slide
                 if (autoAdvance && currentSlide < totalSlides) {
+                    console.log('Auto-advancing to next slide');
                     setTimeout(() => {
                         nextSlide();
                     }, 500);
+                } else {
+                    console.log('Not auto-advancing:', { autoAdvance, currentSlide, totalSlides });
                 }
             };
             
@@ -621,11 +621,19 @@
             if (slideNum < 1 || slideNum > totalSlides) return;
             
             const wasPlaying = isPlaying;
+            const oldSlide = currentSlide;
             currentSlide = slideNum;
             updateSlideCounter();
             
-            // Update PDF viewer to show specific page
-            slideViewer.src = getSlideUrl(slideNum);
+            // Only reload iframe if slide actually changed
+            // Office Web Viewer doesn't support direct slide navigation, so we keep it loaded
+            // and just track the slide number for audio sync
+            if (oldSlide !== slideNum) {
+                // Reload viewer only on first load or if needed
+                if (!viewerInitialized || slideNum === 1) {
+                    slideViewer.src = getSlideUrl(slideNum);
+                }
+            }
             
             // Load and play audio for this slide (auto-play if it was playing before)
             loadAudioForSlide(slideNum, wasPlaying);
@@ -648,8 +656,12 @@
         // Play/Pause button
         document.getElementById('play-pause-btn').addEventListener('click', function() {
             if (!audio) {
+                // If no audio loaded, start from slide 1
+                if (currentSlide !== 1) {
+                    goToSlide(1);
+                }
                 // Load and play first slide audio
-                loadAudioForSlide(currentSlide, true); // true = auto-play when ready
+                loadAudioForSlide(1, true); // true = auto-play when ready
                 return;
             }
             
@@ -723,16 +735,26 @@
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
             // Don't trigger if user is typing in an input
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON') {
                 return;
             }
             
             if (e.key === 'ArrowLeft') {
                 e.preventDefault();
                 prevSlide();
-            } else if (e.key === 'ArrowRight' || (e.key === ' ' && !e.target.tagName === 'BUTTON')) {
+            } else if (e.key === 'ArrowRight') {
                 e.preventDefault();
                 nextSlide();
+            } else if (e.key === ' ' || e.key === 'Spacebar') {
+                e.preventDefault();
+                // Space bar: play/pause if audio exists, otherwise start from beginning
+                if (audio) {
+                    document.getElementById('play-pause-btn').click();
+                } else {
+                    // Start from beginning
+                    goToSlide(1);
+                    loadAudioForSlide(1, true);
+                }
             } else if (e.key === 'p' || e.key === 'P') {
                 e.preventDefault();
                 document.getElementById('play-pause-btn').click();
@@ -792,10 +814,8 @@
         updateSlideCounter();
         loadVoiceList();
         
-        // Load first slide audio but don't auto-play (wait for user to click play)
-        setTimeout(() => {
-            loadAudioForSlide(1, false); // false = don't auto-play
-        }, 500);
+        // Don't load audio until user clicks play - they want to start from beginning
+        // Audio will be loaded when play button is clicked
     </script>
 </body>
 </html>
