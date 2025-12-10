@@ -21,21 +21,11 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Daena AI">
 
-    <!-- Performance: Preconnect to external domains -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    
-    <!-- Performance: Preload critical CSS -->
-    <link rel="preload" href="/assets/css/global.css" as="style">
-    
-    <!-- Global CSS - Critical, load immediately -->
-    <link rel="stylesheet" href="/assets/css/global.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind CSS CDN - Load async to not block render -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    
-    <!-- SEO: Robots meta -->
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
 
     <style>
         .hero-section {
@@ -121,7 +111,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section px-4 py-20" id="hero">
+    <section class="hero-section px-4 py-20" id="hero" style="padding-top: 8rem;">
         <div class="max-w-6xl mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6">
                 <span class="text-yellow-400">For Investors & Partners</span>
@@ -136,7 +126,7 @@
     </section>
 
     <!-- Vision Section -->
-    <section class="px-4 py-20" id="vision">
+    <section class="px-4 py-12" id="vision">
         <div class="max-w-6xl mx-auto">
             <div class="glass-card mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6 text-yellow-400">Vision</h2>
@@ -251,7 +241,7 @@
                     <a href="<INSERT_CALENDLY_LINK>" target="_blank" class="glass-button">
                         Schedule a Demo
                     </a>
-                    <a href="/pitch-deck.html" class="glass-button">
+                    <a href="/pitch.html" class="glass-button">
                         View Pitch Deck
                     </a>
                 </div>
