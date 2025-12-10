@@ -6,6 +6,7 @@
     "test": "playwright test",
     "deck:sync": "powershell -ExecutionPolicy Bypass -File .\\tools\\sync_pitch_assets.ps1",
     "deck:pdf": "powershell -ExecutionPolicy Bypass -File .\\tools\\export_deck.ps1",
+    "deck:images": "powershell -ExecutionPolicy Bypass -File .\\tools\\export_slides_to_images.ps1",
     "deck:manifest": "node ./scripts/gen-vo-manifest.mjs"
   },
   "devDependencies": {

@@ -56,11 +56,26 @@
             overflow: hidden;
         }
         
-        .slide-viewer {
+        .slide-image-viewer {
             width: 100%;
             height: 100%;
-            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slide-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             border-radius: 0.5rem;
+            display: none;
+        }
+        
+        .slide-image.active {
             display: block;
         }
         
@@ -360,15 +375,10 @@
                     <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn btn-secondary">Download PPTX</a>
                 </div>
             </div>
-            <!-- Office Web Viewer (primary viewer with new PPTX) -->
-            <iframe
-                id="slide-viewer"
-                class="slide-viewer"
-                title="Daena Pitch Deck"
-                src=""
-                frameborder="0"
-                allowfullscreen
-            ></iframe>
+            <!-- Slide Image Viewer (for full control and sync) -->
+            <div class="slide-image-viewer" id="slide-image-viewer">
+                <!-- Slides will be dynamically loaded -->
+            </div>
         </div>
         
         <!-- Control Bar -->
@@ -455,35 +465,49 @@
         const speeds = [0.75, 1, 1.25, 1.5, 1.75, 2];
         let autoAdvance = true;
         
-        // Get the current origin
-        const origin = window.location.origin;
-        const pptUrl = `${origin}/assets/pitch/daena_pitch_deck.pptx`;
-        const officeEmbedUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
-        
-        // Initialize Office Web Viewer with new PPTX
-        const slideViewer = document.getElementById('slide-viewer');
-        const errorMessage = document.getElementById('error-message');
-        
-        // Load Office Web Viewer
-        slideViewer.src = officeEmbedUrl;
-        
-        // Handle iframe load errors
-        slideViewer.addEventListener('error', function() {
-            console.error('Failed to load Office Web Viewer');
-            slideViewer.style.display = 'none';
-            errorMessage.style.display = 'flex';
-        });
-        
-        // Check if iframe loaded successfully after a delay
-        setTimeout(function() {
-            try {
-                // Try to access iframe content (will fail due to cross-origin, but that's expected)
-                const iframeDoc = slideViewer.contentDocument || slideViewer.contentWindow.document;
-            } catch (e) {
-                // Cross-origin error is expected, but iframe should still be visible
-                console.log('Office Web Viewer loaded (cross-origin restrictions expected)');
+        // Initialize slide images
+        function initializeSlides() {
+            const container = document.getElementById('slide-image-viewer');
+            
+            for (let i = 1; i <= totalSlides; i++) {
+                const img = document.createElement('img');
+                img.src = `/images/slide-${i}.png`;
+                img.alt = `Slide ${i}`;
+                img.className = `slide-image ${i === 1 ? 'active' : ''}`;
+                img.id = `slide-img-${i}`;
+                img.onerror = function() {
+                    console.error('Failed to load slide image:', this.src);
+                    // Show placeholder
+                    this.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'slide-content';
+                    placeholder.style.cssText = 'text-align: center; color: white; padding: 2rem;';
+                    placeholder.innerHTML = `<h2 style="color: #FFD700;">Slide ${i}</h2><p>Image not available. Please run: npm run deck:images</p>`;
+                    this.parentNode.appendChild(placeholder);
+                };
+                container.appendChild(img);
             }
-        }, 3000);
+        }
+        
+        // Show specific slide
+        function showSlide(slideNum) {
+            // Hide all slides
+            for (let i = 1; i <= totalSlides; i++) {
+                const slideImg = document.getElementById(`slide-img-${i}`);
+                if (slideImg) {
+                    slideImg.classList.remove('active');
+                }
+            }
+            
+            // Show current slide
+            const currentSlideImg = document.getElementById(`slide-img-${slideNum}`);
+            if (currentSlideImg) {
+                currentSlideImg.classList.add('active');
+            }
+        }
+        
+        // Initialize slides on page load
+        initializeSlides();
         
         // Load voice-over for a specific slide
         function loadAudioForSlide(slideNum, autoPlay = false) {
@@ -613,47 +637,21 @@
         }
         
         // Navigate to slide
-        function goToSlide(slideNum) {
+        function goToSlide(slideNum, autoPlayAudio = false) {
             if (slideNum < 1 || slideNum > totalSlides) return;
             
             const wasPlaying = isPlaying;
-            const oldSlide = currentSlide;
             
             // Update current slide FIRST
             currentSlide = slideNum;
             updateSlideCounter();
             
-            // Try to navigate Office Web Viewer iframe (may not work due to cross-origin)
-            try {
-                const iframe = document.getElementById('slide-viewer');
-                if (iframe && iframe.contentWindow) {
-                    // Calculate how many slides to move
-                    const slideDiff = slideNum - oldSlide;
-                    
-                    // Try to send keyboard events to navigate
-                    for (let i = 0; i < Math.abs(slideDiff); i++) {
-                        const key = slideDiff > 0 ? 'ArrowRight' : 'ArrowLeft';
-                        const keyCode = slideDiff > 0 ? 39 : 37;
-                        
-                        // Try postMessage (may not work due to cross-origin)
-                        try {
-                            iframe.contentWindow.postMessage({
-                                type: 'keydown',
-                                key: key,
-                                keyCode: keyCode
-                            }, '*');
-                        } catch (e) {
-                            // Cross-origin restriction - expected
-                        }
-                    }
-                }
-            } catch (e) {
-                console.log('Cannot control Office Web Viewer iframe (cross-origin):', e);
-            }
+            // Show the slide image (we have full control)
+            showSlide(slideNum);
             
             // Load and play audio for THIS slide (not previous)
             // Important: Load audio AFTER updating currentSlide
-            loadAudioForSlide(slideNum, wasPlaying);
+            loadAudioForSlide(slideNum, autoPlayAudio || wasPlaying);
         }
         
         // Previous slide
@@ -677,13 +675,8 @@
         // Play/Pause button
         document.getElementById('play-pause-btn').addEventListener('click', function() {
             if (!audio) {
-                // If no audio loaded, start from slide 1
-                if (currentSlide !== 1) {
-                    goToSlide(1);
-                } else {
-                    // Already on slide 1, just load and play
-                    loadAudioForSlide(1, true); // true = auto-play when ready
-                }
+                // If no audio loaded, start from slide 1 and auto-play
+                goToSlide(1, true); // true = auto-play audio
                 return;
             }
             
