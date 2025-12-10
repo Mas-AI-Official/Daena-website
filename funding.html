@@ -21,11 +21,21 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Daena AI">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Global CSS -->
+    <!-- Performance: Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- Performance: Preload critical CSS -->
+    <link rel="preload" href="/assets/css/global.css" as="style">
+    
+    <!-- Global CSS - Critical, load immediately -->
     <link rel="stylesheet" href="/assets/css/global.css">
+
+    <!-- Tailwind CSS CDN - Load async to not block render -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    
+    <!-- SEO: Robots meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
     <style>
         .hero-section {
