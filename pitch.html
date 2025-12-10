@@ -458,13 +458,11 @@
         const origin = window.location.origin;
         const pptUrl = `${origin}/assets/pitch/daena_pitch_deck.pptx`;
         
-        // Office Web Viewer URL
+        // Use PDF as primary viewer (more reliable than Office Web Viewer)
         function getSlideUrl(slideNum = 1) {
-            // Office Web Viewer doesn't support direct slide navigation, but we'll track it
-            // Use PDF as fallback since Office Web Viewer requires HTTPS and public access
             const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
-            // Try Office Web Viewer first, but have PDF as backup
-            return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
+            // Use PDF with page navigation - more reliable than Office Web Viewer
+            return pdfUrl + '#page=' + slideNum;
         }
         
         // Show error fallback
@@ -477,61 +475,32 @@
             }
         }
         
-        // Initialize slide viewer with error handling
+        // Initialize slide viewer
         const slideViewer = document.getElementById('slide-viewer');
+        const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
         
-        // Try to load Office Web Viewer, but fallback to PDF if it fails
-        slideViewer.addEventListener('error', showErrorFallback);
-        slideViewer.addEventListener('load', function() {
-            // Check if iframe loaded successfully
-            try {
-                // If we can't access iframe content, it might have errored
-                if (this.contentWindow === null) {
-                    showErrorFallback();
-                }
-            } catch (e) {
-                // Cross-origin error is expected, but if we get other errors, show fallback
-                console.log('Iframe loaded (cross-origin check expected)');
-            }
+        // Use PDF viewer directly (more reliable)
+        slideViewer.src = getSlideUrl(1);
+        
+        // Error handling for iframe
+        slideViewer.addEventListener('error', function() {
+            console.error('Failed to load PDF viewer');
+            showErrorFallback();
         });
         
-        // Set timeout to check if iframe loads
+        // Check if PDF loads successfully after a delay
         setTimeout(() => {
             try {
-                // Try to detect if iframe failed to load
-                const iframeDoc = slideViewer.contentDocument || slideViewer.contentWindow?.document;
-                if (!iframeDoc) {
-                    // This is normal for cross-origin, but if we see error message in iframe, handle it
-                    console.log('Iframe loaded (cross-origin)');
+                // Try to access iframe to see if it loaded
+                if (slideViewer.contentWindow) {
+                    // If we can access it, it likely loaded
+                    console.log('PDF viewer loaded');
                 }
             } catch (e) {
-                // Cross-origin is expected
+                // Cross-origin is expected for PDFs, this is normal
+                console.log('PDF viewer iframe (cross-origin expected)');
             }
-        }, 3000);
-        
-        // Try loading with PDF as more reliable fallback
-        const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
-        // Use PDF.js or direct PDF embed as primary method since Office Web Viewer is unreliable
-        slideViewer.src = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
-        
-        // Fallback: If Office Web Viewer fails, use PDF viewer
-        setTimeout(() => {
-            // Check if we should fallback to PDF
-            const checkFallback = () => {
-                try {
-                    // If iframe has error or is blank after 5 seconds, use PDF
-                    if (slideViewer.contentWindow) {
-                        // Try to detect error state
-                        slideViewer.contentWindow.addEventListener('error', () => {
-                            slideViewer.src = pdfUrl + '#page=' + currentSlide;
-                        });
-                    }
-                } catch (e) {
-                    // Cross-origin, can't check - this is normal
-                }
-            };
-            checkFallback();
-        }, 5000);
+        }, 2000);
         
         // Load voice-over for a specific slide
         function loadAudioForSlide(slideNum, autoPlay = false) {
@@ -655,15 +624,8 @@
             currentSlide = slideNum;
             updateSlideCounter();
             
-            // Try to update iframe - if using PDF, navigate to specific page
-            const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
-            try {
-                // Try Office Web Viewer first
-                slideViewer.src = getSlideUrl(slideNum);
-            } catch (e) {
-                // Fallback to PDF with page number
-                slideViewer.src = pdfUrl + '#page=' + slideNum;
-            }
+            // Update PDF viewer to show specific page
+            slideViewer.src = getSlideUrl(slideNum);
             
             // Load and play audio for this slide (auto-play if it was playing before)
             loadAudioForSlide(slideNum, wasPlaying);
