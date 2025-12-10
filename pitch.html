@@ -541,7 +541,7 @@
         // Load voice-over for a specific slide
         function loadAudioForSlide(slideNum, autoPlay = false) {
             // Make sure we're loading audio for the CORRECT slide
-            console.log('Loading audio for slide', slideNum, 'currentSlide is', currentSlide);
+            console.log('Loading audio for slide', slideNum, 'currentSlide is', currentSlide, 'autoPlay:', autoPlay);
             
             // Stop and remove previous audio
             if (audio) {
@@ -554,11 +554,14 @@
             const slideNumStr = slideNum.toString().padStart(2, '0');
             const audioSrc = `/assets/pitch/voice/slide_${slideNumStr}.mp3`;
             
-            console.log('Loading audio from:', audioSrc);
+            console.log('Loading audio from:', audioSrc, 'for slide', slideNum);
             
             audio = new Audio(audioSrc);
+            // Set playback rate and volume immediately
             audio.playbackRate = currentSpeed;
             audio.volume = currentVolume;
+            
+            console.log('Audio configured: speed =', currentSpeed + '×', 'volume =', currentVolume);
             
             // Update progress bar
             audio.addEventListener('loadedmetadata', () => {
@@ -692,8 +695,9 @@
         function prevSlide() {
             if (currentSlide > 1) {
                 const targetSlide = currentSlide - 1;
-                console.log('Previous: going from slide', currentSlide, 'to', targetSlide);
-                goToSlide(targetSlide);
+                const wasPlaying = isPlaying; // Preserve playing state
+                console.log('Previous: going from slide', currentSlide, 'to', targetSlide, 'wasPlaying:', wasPlaying);
+                goToSlide(targetSlide, wasPlaying); // Pass playing state to continue audio
             }
         }
         
@@ -701,8 +705,9 @@
         function nextSlide() {
             if (currentSlide < totalSlides) {
                 const targetSlide = currentSlide + 1;
-                console.log('Next: going from slide', currentSlide, 'to', targetSlide);
-                goToSlide(targetSlide);
+                const wasPlaying = isPlaying; // Preserve playing state
+                console.log('Next: going from slide', currentSlide, 'to', targetSlide, 'wasPlaying:', wasPlaying);
+                goToSlide(targetSlide, wasPlaying); // Pass playing state to continue audio
             }
         }
         
@@ -747,9 +752,14 @@
             currentSpeed = speeds[nextIndex];
             document.getElementById('speed-text').textContent = currentSpeed + '×';
             
+            // Update playback rate for currently playing audio
             if (audio) {
                 audio.playbackRate = currentSpeed;
+                console.log('Speed changed to', currentSpeed + '×', 'for slide', currentSlide);
             }
+            
+            // Also update any future audio that gets loaded
+            // (This is already handled in loadAudioForSlide, but we ensure it here too)
             
             if (currentSpeed !== 1) {
                 this.classList.add('active');
@@ -826,6 +836,7 @@
         // Load voice-over list
         function loadVoiceList() {
             const voiceList = document.getElementById('voice-list');
+            voiceList.innerHTML = ''; // Clear existing items
             
             fetch('/assets/pitch/voice/manifest.json')
                 .then(response => {
@@ -835,15 +846,19 @@
                     throw new Error('Manifest not found');
                 })
                 .then(data => {
-                    data.items.forEach(item => {
+                    // Sort by slide number to ensure correct order
+                    const sortedItems = data.items.sort((a, b) => a.slide - b.slide);
+                    sortedItems.forEach(item => {
+                        const slideNum = item.slide;
+                        const slideNumStr = slideNum.toString().padStart(2, '0');
                         const li = document.createElement('li');
-                        const slideNum = item.slide.toString().padStart(2, '0');
                         li.innerHTML = `
-                            <span>Slide ${slideNum}</span>
-                            <audio controls preload="metadata" src="/assets/pitch/voice/${item.file}"></audio>
+                            <span>Slide ${slideNumStr}</span>
+                            <audio controls preload="metadata" src="/assets/pitch/voice/${item.file}" data-slide="${slideNum}"></audio>
                         `;
                         voiceList.appendChild(li);
                     });
+                    console.log('Voice list loaded:', sortedItems.length, 'items');
                 })
                 .catch(() => {
                     // Fallback: generate list from expected files
@@ -852,10 +867,11 @@
                         const li = document.createElement('li');
                         li.innerHTML = `
                             <span>Slide ${slideNum}</span>
-                            <audio controls preload="metadata" src="/assets/pitch/voice/slide_${slideNum}.mp3"></audio>
+                            <audio controls preload="metadata" src="/assets/pitch/voice/slide_${slideNum}.mp3" data-slide="${i}"></audio>
                         `;
                         voiceList.appendChild(li);
                     }
+                    console.log('Voice list loaded (fallback):', totalSlides, 'items');
                 });
         }
         
