@@ -63,6 +63,29 @@
             border-radius: 0.5rem;
         }
         
+        .slide-image-viewer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slide-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            display: none;
+        }
+        
+        .slide-image.active {
+            display: block;
+        }
+        
         #error-message {
             width: 100%;
             height: 100%;
@@ -458,45 +481,49 @@
         const origin = window.location.origin;
         const pptUrl = `${origin}/assets/pitch/daena_pitch_deck.pptx`;
         
-        // Office Web Viewer URL (for PowerPoint animations)
-        function getSlideUrl(slideNum = 1) {
-            // Office Web Viewer for PowerPoint animations
-            // Note: Requires HTTPS and publicly accessible file
-            return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
-        }
-        
-        // Show error fallback
-        function showErrorFallback() {
-            const iframe = document.getElementById('slide-viewer');
-            const errorMsg = document.getElementById('error-message');
-            if (iframe && errorMsg) {
-                iframe.style.display = 'none';
-                errorMsg.style.display = 'block';
+        // Initialize slide images
+        function initializeSlides() {
+            const container = document.getElementById('slide-image-viewer');
+            
+            for (let i = 1; i <= totalSlides; i++) {
+                const img = document.createElement('img');
+                img.src = `/images/slide-${i}.png`;
+                img.alt = `Slide ${i}`;
+                img.className = `slide-image ${i === 1 ? 'active' : ''}`;
+                img.id = `slide-img-${i}`;
+                img.onerror = function() {
+                    console.error('Failed to load slide image:', this.src);
+                    // Show placeholder
+                    this.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'slide-content';
+                    placeholder.style.cssText = 'text-align: center; color: white; padding: 2rem;';
+                    placeholder.innerHTML = `<h2 style="color: #FFD700;">Slide ${i}</h2><p>Image not available</p>`;
+                    this.parentNode.appendChild(placeholder);
+                };
+                container.appendChild(img);
             }
         }
         
-        // Initialize slide viewer
-        const slideViewer = document.getElementById('slide-viewer');
-        let viewerInitialized = false;
-        
-        // Initialize Office Web Viewer
-        function initializeViewer() {
-            if (!viewerInitialized) {
-                slideViewer.src = getSlideUrl(1);
-                viewerInitialized = true;
-                
-                // Error handling
-                slideViewer.addEventListener('error', function() {
-                    console.error('Failed to load Office Web Viewer');
-                    // Fallback to PDF
-                    const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
-                    slideViewer.src = pdfUrl + '#page=1';
-                });
+        // Show specific slide
+        function showSlide(slideNum) {
+            // Hide all slides
+            for (let i = 1; i <= totalSlides; i++) {
+                const slideImg = document.getElementById(`slide-img-${i}`);
+                if (slideImg) {
+                    slideImg.classList.remove('active');
+                }
+            }
+            
+            // Show current slide
+            const currentSlideImg = document.getElementById(`slide-img-${slideNum}`);
+            if (currentSlideImg) {
+                currentSlideImg.classList.add('active');
             }
         }
         
-        // Initialize on page load
-        initializeViewer();
+        // Initialize slides on page load
+        initializeSlides();
         
         // Load voice-over for a specific slide
         function loadAudioForSlide(slideNum, autoPlay = false) {
@@ -625,28 +652,6 @@
             }
         }
         
-        // Send keyboard event to iframe to control PowerPoint
-        function sendKeyToIframe(key, ctrlKey = false, shiftKey = false) {
-            try {
-                const iframe = slideViewer.contentWindow;
-                if (iframe) {
-                    // Create keyboard events to control PowerPoint
-                    const keyEvent = new KeyboardEvent('keydown', {
-                        key: key,
-                        code: key,
-                        ctrlKey: ctrlKey,
-                        shiftKey: shiftKey,
-                        bubbles: true,
-                        cancelable: true
-                    });
-                    iframe.document.dispatchEvent(keyEvent);
-                }
-            } catch (e) {
-                // Cross-origin restriction - can't directly control
-                console.log('Cannot control iframe directly (cross-origin)');
-            }
-        }
-        
         // Navigate to slide
         function goToSlide(slideNum) {
             if (slideNum < 1 || slideNum > totalSlides) return;
@@ -658,22 +663,8 @@
             currentSlide = slideNum;
             updateSlideCounter();
             
-            // Try to control PowerPoint navigation via keyboard
-            if (oldSlide < slideNum) {
-                // Going forward - send Right Arrow or Page Down
-                sendKeyToIframe('ArrowRight');
-                sendKeyToIframe('PageDown');
-            } else if (oldSlide > slideNum) {
-                // Going backward - send Left Arrow or Page Up
-                sendKeyToIframe('ArrowLeft');
-                sendKeyToIframe('PageUp');
-            }
-            
-            // If going to slide 1, reload to start from beginning
-            if (slideNum === 1 && oldSlide !== 1) {
-                slideViewer.src = getSlideUrl(1);
-                viewerInitialized = true;
-            }
+            // Show the slide image (we have full control)
+            showSlide(slideNum);
             
             // Load and play audio for THIS slide (not previous)
             // Important: Load audio AFTER updating currentSlide
@@ -714,8 +705,6 @@
             if (isPlaying) {
                 audio.pause();
                 isPlaying = false;
-                // Try to pause PowerPoint if possible
-                sendKeyToIframe('Space');
             } else {
                 audio.play().then(() => {
                     isPlaying = true;
@@ -723,8 +712,6 @@
                 }).catch(err => {
                     console.error('Play error:', err);
                 });
-                // Try to play PowerPoint if possible
-                sendKeyToIframe('Space');
             }
             updatePlayPauseButton();
         });
@@ -760,19 +747,8 @@
         });
         
         // Previous/Next buttons
-        document.getElementById('prev-btn').addEventListener('click', function() {
-            prevSlide();
-            // Try to control PowerPoint
-            sendKeyToIframe('ArrowLeft');
-            sendKeyToIframe('PageUp');
-        });
-        
-        document.getElementById('next-btn').addEventListener('click', function() {
-            nextSlide();
-            // Try to control PowerPoint
-            sendKeyToIframe('ArrowRight');
-            sendKeyToIframe('PageDown');
-        });
+        document.getElementById('prev-btn').addEventListener('click', prevSlide);
+        document.getElementById('next-btn').addEventListener('click', nextSlide);
         
         // Download button
         document.getElementById('download-btn').addEventListener('click', function() {
@@ -806,7 +782,7 @@
             } else if (e.key === 'ArrowRight') {
                 e.preventDefault();
                 nextSlide();
-            } else if (e.key === ' ' || e.key === 'Spacebar') {
+            } else if (e.key === ' ') {
                 e.preventDefault();
                 // Space bar: play/pause if audio exists, otherwise start from beginning
                 if (audio) {
