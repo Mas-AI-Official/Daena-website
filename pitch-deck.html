@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Daena Pitch Deck with Narration | MAS-AI</title>
-    <meta name="description" content="13-slide investor presentation with voice-over narration for Daena AI VP.">
+    <meta name="description" content="14-slide investor presentation with voice-over narration for Daena AI VP.">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,54 +22,38 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            margin-top: 80px;
         }
         
-        .slide {
-            max-width: 1200px;
+        .pptx-viewer {
             width: 100%;
-            aspect-ratio: 16 / 9;
+            max-width: 1200px;
+            height: 675px; /* 16:9 aspect ratio */
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            display: none;
-            position: relative;
             overflow: hidden;
+            position: relative;
         }
         
-        .slide.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .pptx-viewer iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .fallback-message {
+            display: none;
+            text-align: center;
+            color: white;
             padding: 3rem;
         }
         
-        .slide img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 0.5rem;
-        }
-        
-        .slide-content {
-            text-align: center;
-            color: white;
-            width: 100%;
-        }
-        
-        .slide-content h2 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-            color: #FFD700;
-        }
-        
-        .slide-content p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            line-height: 1.6;
-            color: #e5e7eb;
+        .fallback-message.active {
+            display: block;
         }
         
         .controls {
@@ -173,8 +157,13 @@
         }
         
         @media (max-width: 768px) {
-            .slide {
+            .slide-container {
                 padding: 1rem;
+                margin-top: 60px;
+            }
+            
+            .pptx-viewer {
+                height: 400px;
             }
             
             .controls {
@@ -216,24 +205,6 @@
                 min-width: 2.5rem;
             }
         }
-        
-        @media (max-width: 480px) {
-            .controls {
-                bottom: 0.5rem;
-                padding: 0.5rem;
-                gap: 0.375rem;
-            }
-            
-            .controls button {
-                padding: 0.375rem 0.5rem;
-                font-size: 0.7rem;
-            }
-            
-            .slide-counter {
-                font-size: 0.7rem;
-                min-width: 45px;
-            }
-        }
     </style>
 </head>
 <body class="text-white antialiased">
@@ -252,10 +223,19 @@
         </div>
     </nav>
     
-    <!-- Slide Container -->
-    <div class="slide-container mt-20">
-        <!-- Slides will be dynamically loaded -->
-        <div id="slides-container"></div>
+    <!-- PPTX Viewer Container -->
+    <div class="slide-container">
+        <div class="pptx-viewer" id="pptx-viewer">
+            <iframe id="pptx-iframe" title="Daena Pitch Deck" allowfullscreen></iframe>
+            <div class="fallback-message" id="fallback-message">
+                <h2>Unable to load presentation</h2>
+                <p>Please download the PDF or PPTX to view the presentation</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+                    <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                    <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn btn-secondary">Download PPTX</a>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Controls -->
@@ -277,143 +257,114 @@
     </div>
     
     <script>
-        // Slide data with images and audio - 14 slides total
+        // Slide data with audio - 14 slides total
         const slides = [
-            { image: '/images/slide-1.png', audio: '/assets/pitch/voice/slide_01.mp3' },
-            { image: '/images/slide-2.png', audio: '/assets/pitch/voice/slide_02.mp3' },
-            { image: '/images/slide-3.png', audio: '/assets/pitch/voice/slide_03.mp3' },
-            { image: '/images/slide-4.png', audio: '/assets/pitch/voice/slide_04.mp3' },
-            { image: '/images/slide-5.png', audio: '/assets/pitch/voice/slide_05.mp3' },
-            { image: '/images/slide-6.png', audio: '/assets/pitch/voice/slide_06.mp3' },
-            { image: '/images/slide-7.png', audio: '/assets/pitch/voice/slide_07.mp3' },
-            { image: '/images/slide-8.png', audio: '/assets/pitch/voice/slide_08.mp3' },
-            { image: '/images/slide-9.png', audio: '/assets/pitch/voice/slide_09.mp3' },
-            { image: '/images/slide-10.png', audio: '/assets/pitch/voice/slide_10.mp3' },
-            { image: '/images/slide-11.png', audio: '/assets/pitch/voice/slide_11.mp3' },
-            { image: '/images/slide-12.png', audio: '/assets/pitch/voice/slide_12.mp3' },
-            { image: '/images/slide-13.png', audio: '/assets/pitch/voice/slide_13.mp3' },
-            { image: '/images/slide-14.png', audio: '/assets/pitch/voice/slide_14.mp3' }
+            { audio: '/assets/pitch/voice/slide_01.mp3' },
+            { audio: '/assets/pitch/voice/slide_02.mp3' },
+            { audio: '/assets/pitch/voice/slide_03.mp3' },
+            { audio: '/assets/pitch/voice/slide_04.mp3' },
+            { audio: '/assets/pitch/voice/slide_05.mp3' },
+            { audio: '/assets/pitch/voice/slide_06.mp3' },
+            { audio: '/assets/pitch/voice/slide_07.mp3' },
+            { audio: '/assets/pitch/voice/slide_08.mp3' },
+            { audio: '/assets/pitch/voice/slide_09.mp3' },
+            { audio: '/assets/pitch/voice/slide_10.mp3' },
+            { audio: '/assets/pitch/voice/slide_11.mp3' },
+            { audio: '/assets/pitch/voice/slide_12.mp3' },
+            { audio: '/assets/pitch/voice/slide_13.mp3' },
+            { audio: '/assets/pitch/voice/slide_14.mp3' }
         ];
         
         let currentSlide = 0;
         let audio = null;
         let isPlaying = false;
-        let wasPlayingBeforeNavigation = false; // Track if audio was playing before navigation
         const speeds = [0.75, 1, 1.25, 1.5, 1.75, 2];
         let currentSpeedIndex = 1;
+        let pptxIframe = null;
         
-        // Initialize slides
-        function initSlides() {
-            const container = document.getElementById('slides-container');
-            slides.forEach((slide, index) => {
-                const slideDiv = document.createElement('div');
-                slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
-                slideDiv.id = `slide-${index}`;
-                
-                const img = document.createElement('img');
-                img.src = slide.image;
-                img.alt = `Slide ${index + 1}`;
-                img.onerror = function() {
-                    this.style.display = 'none';
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'slide-content';
-                    placeholder.innerHTML = `<h2>Slide ${index + 1}</h2><p>Loading...</p>`;
-                    slideDiv.appendChild(placeholder);
-                };
-                
-                slideDiv.appendChild(img);
-                container.appendChild(slideDiv);
+        // Initialize PPTX viewer
+        function initPPTXViewer() {
+            const pptxUrl = encodeURIComponent(window.location.origin + '/assets/pitch/daena_pitch_deck.pptx');
+            const officeViewerUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${pptxUrl}`;
+            
+            pptxIframe = document.getElementById('pptx-iframe');
+            pptxIframe.src = officeViewerUrl;
+            
+            // Handle iframe load errors
+            pptxIframe.addEventListener('error', () => {
+                console.error('Failed to load PPTX viewer');
+                showFallback();
             });
+            
+            // Check if iframe loaded successfully after timeout
+            setTimeout(() => {
+                try {
+                    // Try to access iframe content (will fail due to CORS, but that's expected)
+                    const iframeDoc = pptxIframe.contentDocument || pptxIframe.contentWindow.document;
+                } catch (e) {
+                    // CORS error is expected, but iframe should still be visible
+                    console.log('CORS check (expected):', e.message);
+                }
+            }, 3000);
         }
         
-        // Update slide counter
-        function updateCounter() {
-            document.getElementById('slide-counter').textContent = `${currentSlide + 1} / ${slides.length}`;
+        function showFallback() {
+            document.getElementById('pptx-iframe').style.display = 'none';
+            document.getElementById('fallback-message').classList.add('active');
         }
         
-        // Show slide - with proper audio synchronization
-        function showSlide(index, preservePlayingState = false) {
-            console.log('showSlide called:', index, 'preservePlayingState:', preservePlayingState);
-            
-            // Store current playing state before stopping audio
-            wasPlayingBeforeNavigation = isPlaying && audio && !audio.paused;
-            
-            // Stop and clean up current audio IMMEDIATELY
+        // Stop current audio completely
+        function stopAudio() {
             if (audio) {
                 audio.pause();
                 audio.currentTime = 0;
-                // Remove all event listeners to prevent memory leaks
-                audio.removeEventListener('loadedmetadata', updateAudioProgress);
-                audio.removeEventListener('timeupdate', updateAudioProgress);
-                audio.removeEventListener('ended', handleAudioEnded);
-                audio.removeEventListener('error', handleAudioError);
+                // Remove all event listeners
+                const newAudio = audio.cloneNode(false);
                 audio = null;
-            }
-            
-            isPlaying = false;
-            updateAudioButton();
-            
-            // Hide all slides
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            // Show current slide
-            const slide = document.getElementById(`slide-${index}`);
-            if (slide) {
-                slide.classList.add('active');
-            }
-            
-            // Update currentSlide index
-            currentSlide = index;
-            
-            // Load and play audio for this slide
-            loadAudio(slides[index].audio, preservePlayingState || wasPlayingBeforeNavigation);
-            
-            // Update buttons
-            document.getElementById('prev-btn').disabled = index === 0;
-            document.getElementById('next-btn').disabled = index === slides.length - 1;
-            
-            updateCounter();
-        }
-        
-        // Handle audio ended event
-        function handleAudioEnded() {
-            console.log('Audio ended for slide', currentSlide + 1);
-            isPlaying = false;
-            updateAudioButton();
-            // Auto-advance to next slide if not last
-            if (currentSlide < slides.length - 1) {
-                setTimeout(() => {
-                    nextSlide();
-                }, 500);
+                isPlaying = false;
+                updateAudioButton();
+                updateAudioProgress();
             }
         }
         
-        // Handle audio error
-        function handleAudioError(e) {
-            console.error('Audio error for slide', currentSlide + 1, ':', e);
-            isPlaying = false;
-            updateAudioButton();
-        }
-        
-        // Load audio with proper synchronization
-        function loadAudio(audioSrc, autoPlay = false) {
-            console.log('loadAudio called:', audioSrc, 'autoPlay:', autoPlay);
+        // Load audio for current slide
+        function loadAudioForSlide(slideIndex, autoPlay = false) {
+            console.log('Loading audio for slide', slideIndex + 1, 'autoPlay:', autoPlay);
+            
+            // Stop any existing audio FIRST
+            stopAudio();
             
             // Create new audio instance
+            const audioSrc = slides[slideIndex].audio;
             audio = new Audio(audioSrc);
-            audio.playbackRate = speeds[currentSpeedIndex]; // Set current speed
+            audio.playbackRate = speeds[currentSpeedIndex];
             
             // Add event listeners
             audio.addEventListener('loadedmetadata', () => {
                 updateAudioProgress();
             });
+            
             audio.addEventListener('timeupdate', () => {
                 updateAudioProgress();
             });
-            audio.addEventListener('ended', handleAudioEnded);
-            audio.addEventListener('error', handleAudioError);
+            
+            audio.addEventListener('ended', () => {
+                console.log('Audio ended for slide', slideIndex + 1);
+                isPlaying = false;
+                updateAudioButton();
+                // Auto-advance to next slide
+                if (currentSlide < slides.length - 1) {
+                    setTimeout(() => {
+                        nextSlide();
+                    }, 500);
+                }
+            });
+            
+            audio.addEventListener('error', (e) => {
+                console.error('Audio error for slide', slideIndex + 1, ':', e);
+                isPlaying = false;
+                updateAudioButton();
+            });
             
             // Auto-play if requested
             if (autoPlay) {
@@ -421,12 +372,12 @@
                 if (playPromise !== undefined) {
                     playPromise
                         .then(() => {
-                            console.log('Audio started playing for slide', currentSlide + 1);
+                            console.log('Audio started playing for slide', slideIndex + 1);
                             isPlaying = true;
                             updateAudioButton();
                         })
                         .catch(err => {
-                            console.log('Auto-play prevented for slide', currentSlide + 1, ':', err);
+                            console.log('Auto-play prevented:', err);
                             isPlaying = false;
                             updateAudioButton();
                         });
@@ -434,11 +385,79 @@
             }
         }
         
+        // Send keyboard event to PPTX iframe to control navigation
+        function sendKeyToPPTX(key) {
+            if (!pptxIframe || !pptxIframe.contentWindow) return;
+            
+            try {
+                const iframeWindow = pptxIframe.contentWindow;
+                const event = new KeyboardEvent('keydown', {
+                    key: key,
+                    code: key === 'ArrowRight' ? 'ArrowRight' : key === 'ArrowLeft' ? 'ArrowLeft' : '',
+                    keyCode: key === 'ArrowRight' ? 39 : key === 'ArrowLeft' ? 37 : 0,
+                    which: key === 'ArrowRight' ? 39 : key === 'ArrowLeft' ? 37 : 0,
+                    bubbles: true,
+                    cancelable: true
+                });
+                
+                iframeWindow.dispatchEvent(event);
+                iframeWindow.document.dispatchEvent(event);
+            } catch (e) {
+                // CORS will prevent this, but we try anyway
+                console.log('Cannot send key to iframe (CORS):', e.message);
+            }
+        }
+        
+        // Navigate to next slide
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                const wasPlaying = isPlaying && audio && !audio.paused;
+                currentSlide++;
+                updateSlideCounter();
+                updateButtons();
+                
+                // Try to control PPTX
+                sendKeyToPPTX('ArrowRight');
+                
+                // Load and play audio for new slide
+                loadAudioForSlide(currentSlide, wasPlaying);
+            }
+        }
+        
+        // Navigate to previous slide
+        function prevSlide() {
+            if (currentSlide > 0) {
+                const wasPlaying = isPlaying && audio && !audio.paused;
+                currentSlide--;
+                updateSlideCounter();
+                updateButtons();
+                
+                // Try to control PPTX
+                sendKeyToPPTX('ArrowLeft');
+                
+                // Load and play audio for new slide
+                loadAudioForSlide(currentSlide, wasPlaying);
+            }
+        }
+        
+        // Update slide counter
+        function updateSlideCounter() {
+            document.getElementById('slide-counter').textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+        
+        // Update button states
+        function updateButtons() {
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === slides.length - 1;
+        }
+        
         // Update audio progress
         function updateAudioProgress() {
             if (audio && audio.duration) {
                 const progress = (audio.currentTime / audio.duration) * 100;
                 document.getElementById('audio-progress').style.width = progress + '%';
+            } else {
+                document.getElementById('audio-progress').style.width = '0%';
             }
         }
         
@@ -456,30 +475,27 @@
                     
                     audio.currentTime = Math.max(0, Math.min(newTime, audio.duration));
                     updateAudioProgress();
-                    console.log('Seeked to', newTime.toFixed(2), 'seconds (', (percentage * 100).toFixed(1), '%)');
                 });
             }
         }
         
-        // Toggle audio - ensures audio is loaded for current slide
+        // Toggle audio play/pause
         function toggleAudio() {
-            // If no audio loaded, load it first
             if (!audio) {
-                loadAudio(slides[currentSlide].audio, true);
+                // Load audio for current slide if not loaded
+                loadAudioForSlide(currentSlide, true);
                 return;
             }
             
             if (isPlaying && !audio.paused) {
                 audio.pause();
                 isPlaying = false;
-                console.log('Audio paused');
             } else {
                 const playPromise = audio.play();
                 if (playPromise !== undefined) {
                     playPromise
                         .then(() => {
                             isPlaying = true;
-                            console.log('Audio resumed');
                             updateAudioButton();
                         })
                         .catch(err => {
@@ -492,7 +508,7 @@
             updateAudioButton();
         }
         
-        // Update audio button
+        // Update audio button icon
         function updateAudioButton() {
             const btn = document.getElementById('audio-toggle');
             if (isPlaying) {
@@ -502,19 +518,18 @@
             }
         }
         
-        // Navigation - with proper audio synchronization
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                const wasPlaying = isPlaying && audio && !audio.paused;
-                showSlide(currentSlide + 1, wasPlaying);
+        // Change playback speed
+        function changeSpeed() {
+            currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+            const newSpeed = speeds[currentSpeedIndex];
+            
+            if (audio) {
+                audio.playbackRate = newSpeed;
             }
-        }
-        
-        function prevSlide() {
-            if (currentSlide > 0) {
-                const wasPlaying = isPlaying && audio && !audio.paused;
-                showSlide(currentSlide - 1, wasPlaying);
-            }
+            
+            const speedBtn = document.getElementById('audio-speed');
+            speedBtn.textContent = `${newSpeed}×`;
+            speedBtn.classList.toggle('active', newSpeed > 1);
         }
         
         // Keyboard navigation
@@ -531,21 +546,6 @@
             }
         });
         
-        // Speed control - updates current audio immediately
-        function changeSpeed() {
-            currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
-            const newSpeed = speeds[currentSpeedIndex];
-            if (audio) {
-                audio.playbackRate = newSpeed;
-                console.log('Speed changed to', newSpeed, '×');
-            }
-            const speedBtn = document.getElementById('audio-speed');
-            if (speedBtn) {
-                speedBtn.textContent = `${newSpeed}×`;
-                speedBtn.classList.toggle('active', newSpeed > 1);
-            }
-        }
-        
         // Event listeners
         document.getElementById('next-btn').addEventListener('click', nextSlide);
         document.getElementById('prev-btn').addEventListener('click', prevSlide);
@@ -553,30 +553,15 @@
         document.getElementById('audio-speed').addEventListener('click', changeSpeed);
         
         // Initialize
-        initSlides();
+        initPPTXViewer();
         setupProgressBarSeek();
-        showSlide(0, true); // Start with first slide and auto-play audio
+        updateSlideCounter();
+        updateButtons();
         
-        // Auto-play first slide audio after a short delay (for browser autoplay policies)
+        // Load audio for first slide and auto-play
         setTimeout(() => {
-            if (audio && !isPlaying) {
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            console.log('Auto-play started for first slide');
-                            isPlaying = true;
-                            updateAudioButton();
-                        })
-                        .catch(err => {
-                            console.log('Auto-play prevented by browser:', err);
-                            isPlaying = false;
-                            updateAudioButton();
-                        });
-                }
-            }
-        }, 500);
+            loadAudioForSlide(0, true);
+        }, 1000);
     </script>
 </body>
 </html>
-
