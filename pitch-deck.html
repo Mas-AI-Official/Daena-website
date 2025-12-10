@@ -284,33 +284,67 @@
         
         // Initialize PPTX viewer
         function initPPTXViewer() {
-            const pptxUrl = encodeURIComponent(window.location.origin + '/assets/pitch/daena_pitch_deck.pptx');
+            // Get the full URL for the PPTX file
+            const siteUrl = window.location.origin;
+            const pptxPath = '/assets/pitch/daena_pitch_deck.pptx';
+            const pptxUrl = encodeURIComponent(siteUrl + pptxPath);
             const officeViewerUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${pptxUrl}`;
             
+            console.log('Initializing PPTX viewer with URL:', officeViewerUrl);
+            console.log('PPTX file path:', siteUrl + pptxPath);
+            
             pptxIframe = document.getElementById('pptx-iframe');
-            pptxIframe.src = officeViewerUrl;
+            
+            // Add load event listener
+            pptxIframe.addEventListener('load', () => {
+                console.log('PPTX iframe loaded successfully');
+            });
             
             // Handle iframe load errors
-            pptxIframe.addEventListener('error', () => {
-                console.error('Failed to load PPTX viewer');
+            pptxIframe.addEventListener('error', (e) => {
+                console.error('Failed to load PPTX viewer:', e);
                 showFallback();
             });
             
+            // Set the iframe source
+            pptxIframe.src = officeViewerUrl;
+            
             // Check if iframe loaded successfully after timeout
-            setTimeout(() => {
+            let loadCheckTimeout = setTimeout(() => {
+                // Check if iframe is visible and has content
                 try {
-                    // Try to access iframe content (will fail due to CORS, but that's expected)
-                    const iframeDoc = pptxIframe.contentDocument || pptxIframe.contentWindow.document;
+                    const iframe = document.getElementById('pptx-iframe');
+                    if (iframe && iframe.contentWindow) {
+                        // Iframe exists, check if it's actually displaying content
+                        console.log('PPTX iframe check: iframe exists and has contentWindow');
+                    } else {
+                        console.warn('PPTX iframe may not have loaded properly');
+                    }
                 } catch (e) {
-                    // CORS error is expected, but iframe should still be visible
+                    // CORS error is expected when trying to access iframe content
                     console.log('CORS check (expected):', e.message);
                 }
-            }, 3000);
+            }, 5000);
+            
+            // Also check for Office Web Viewer specific errors
+            window.addEventListener('message', (event) => {
+                // Listen for messages from Office Web Viewer
+                if (event.origin === 'https://view.officeapps.live.com') {
+                    console.log('Message from Office Web Viewer:', event.data);
+                }
+            });
         }
         
         function showFallback() {
-            document.getElementById('pptx-iframe').style.display = 'none';
-            document.getElementById('fallback-message').classList.add('active');
+            console.log('Showing fallback message');
+            const iframe = document.getElementById('pptx-iframe');
+            const fallback = document.getElementById('fallback-message');
+            if (iframe) {
+                iframe.style.display = 'none';
+            }
+            if (fallback) {
+                fallback.classList.add('active');
+            }
         }
         
         // Stop current audio completely
@@ -552,16 +586,25 @@
         document.getElementById('audio-toggle').addEventListener('click', toggleAudio);
         document.getElementById('audio-speed').addEventListener('click', changeSpeed);
         
-        // Initialize
-        initPPTXViewer();
-        setupProgressBarSeek();
-        updateSlideCounter();
-        updateButtons();
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
         
-        // Load audio for first slide and auto-play
-        setTimeout(() => {
-            loadAudioForSlide(0, true);
-        }, 1000);
+        function initialize() {
+            console.log('Initializing pitch deck page...');
+            initPPTXViewer();
+            setupProgressBarSeek();
+            updateSlideCounter();
+            updateButtons();
+            
+            // Load audio for first slide and auto-play
+            setTimeout(() => {
+                loadAudioForSlide(0, true);
+            }, 1000);
+        }
     </script>
 </body>
 </html>
