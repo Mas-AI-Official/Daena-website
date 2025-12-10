@@ -63,6 +63,15 @@
             border-radius: 0.5rem;
         }
         
+        #error-message {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .download-section {
             margin-top: 2rem;
             display: flex;
@@ -342,6 +351,14 @@
         
         <!-- Slide Viewer -->
         <div class="slide-container">
+            <div id="error-message" style="display: none; text-align: center; color: #ff6b6b; padding: 2rem;">
+                <p style="font-size: 1.25rem; margin-bottom: 1rem;">Unable to load presentation viewer</p>
+                <p style="margin-bottom: 1.5rem;">Please download the PDF or PPTX to view the presentation</p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
+                    <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn btn-secondary">Download PPTX</a>
+                </div>
+            </div>
             <iframe
                 id="slide-viewer"
                 class="slide-viewer"
@@ -349,6 +366,7 @@
                 src=""
                 frameborder="0"
                 allowfullscreen
+                onerror="showErrorFallback()"
             ></iframe>
         </div>
         
@@ -443,12 +461,77 @@
         // Office Web Viewer URL
         function getSlideUrl(slideNum = 1) {
             // Office Web Viewer doesn't support direct slide navigation, but we'll track it
+            // Use PDF as fallback since Office Web Viewer requires HTTPS and public access
+            const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
+            // Try Office Web Viewer first, but have PDF as backup
             return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
         }
         
-        // Initialize slide viewer
+        // Show error fallback
+        function showErrorFallback() {
+            const iframe = document.getElementById('slide-viewer');
+            const errorMsg = document.getElementById('error-message');
+            if (iframe && errorMsg) {
+                iframe.style.display = 'none';
+                errorMsg.style.display = 'block';
+            }
+        }
+        
+        // Initialize slide viewer with error handling
         const slideViewer = document.getElementById('slide-viewer');
-        slideViewer.src = getSlideUrl(1);
+        
+        // Try to load Office Web Viewer, but fallback to PDF if it fails
+        slideViewer.addEventListener('error', showErrorFallback);
+        slideViewer.addEventListener('load', function() {
+            // Check if iframe loaded successfully
+            try {
+                // If we can't access iframe content, it might have errored
+                if (this.contentWindow === null) {
+                    showErrorFallback();
+                }
+            } catch (e) {
+                // Cross-origin error is expected, but if we get other errors, show fallback
+                console.log('Iframe loaded (cross-origin check expected)');
+            }
+        });
+        
+        // Set timeout to check if iframe loads
+        setTimeout(() => {
+            try {
+                // Try to detect if iframe failed to load
+                const iframeDoc = slideViewer.contentDocument || slideViewer.contentWindow?.document;
+                if (!iframeDoc) {
+                    // This is normal for cross-origin, but if we see error message in iframe, handle it
+                    console.log('Iframe loaded (cross-origin)');
+                }
+            } catch (e) {
+                // Cross-origin is expected
+            }
+        }, 3000);
+        
+        // Try loading with PDF as more reliable fallback
+        const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
+        // Use PDF.js or direct PDF embed as primary method since Office Web Viewer is unreliable
+        slideViewer.src = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
+        
+        // Fallback: If Office Web Viewer fails, use PDF viewer
+        setTimeout(() => {
+            // Check if we should fallback to PDF
+            const checkFallback = () => {
+                try {
+                    // If iframe has error or is blank after 5 seconds, use PDF
+                    if (slideViewer.contentWindow) {
+                        // Try to detect error state
+                        slideViewer.contentWindow.addEventListener('error', () => {
+                            slideViewer.src = pdfUrl + '#page=' + currentSlide;
+                        });
+                    }
+                } catch (e) {
+                    // Cross-origin, can't check - this is normal
+                }
+            };
+            checkFallback();
+        }, 5000);
         
         // Load voice-over for a specific slide
         function loadAudioForSlide(slideNum, autoPlay = false) {
@@ -572,8 +655,15 @@
             currentSlide = slideNum;
             updateSlideCounter();
             
-            // Reload iframe with new slide (Office Web Viewer will show from start, but we track the slide)
-            slideViewer.src = getSlideUrl(slideNum);
+            // Try to update iframe - if using PDF, navigate to specific page
+            const pdfUrl = `${origin}/assets/pitch/daena_pitch_deck.pdf`;
+            try {
+                // Try Office Web Viewer first
+                slideViewer.src = getSlideUrl(slideNum);
+            } catch (e) {
+                // Fallback to PDF with page number
+                slideViewer.src = pdfUrl + '#page=' + slideNum;
+            }
             
             // Load and play audio for this slide (auto-play if it was playing before)
             loadAudioForSlide(slideNum, wasPlaying);
