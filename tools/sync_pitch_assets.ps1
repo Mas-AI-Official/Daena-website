@@ -1,6 +1,6 @@
 param(
   [string]$RepoRoot = "$PSScriptRoot\..",
-  [string]$SrcPptx = "D:\Ideas\daena-website\pich deck\daena pitch deck new.pptx",
+  [string]$SrcPptx = "D:\Ideas\daena-website\pich deck\daena Pitch Deck .pptx",
   [string]$SrcVo = "D:\Ideas\daena-website\pitch deck voice final - mp3"
 )
 
