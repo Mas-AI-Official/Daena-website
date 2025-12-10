@@ -158,6 +158,7 @@
             border-radius: 2px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .audio-progress-bar {
@@ -165,6 +166,10 @@
             background: #FFD700;
             width: 0%;
             transition: width 0.1s linear;
+        }
+        
+        .audio-progress:hover {
+            height: 6px;
         }
         
         @media (max-width: 768px) {
@@ -267,31 +272,33 @@
             </div>
             <button id="audio-speed" class="audio-speed-btn" aria-label="Playback Speed">1×</button>
         </div>
-        <span class="slide-counter" id="slide-counter">1 / 13</span>
+        <span class="slide-counter" id="slide-counter">1 / 14</span>
         <button id="next-btn" aria-label="Next slide">Next →</button>
     </div>
     
     <script>
-        // Slide data with images and audio
+        // Slide data with images and audio - 14 slides total
         const slides = [
-            { image: '/images/slide-1.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-1.mp3' },
-            { image: '/images/slide-2.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-2.mp3' },
-            { image: '/images/slide-3.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-3.mp3' },
-            { image: '/images/slide-4.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-4.mp3' },
-            { image: '/images/slide-5.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-5.mp3' },
-            { image: '/images/slide-6.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-6.mp3' },
-            { image: '/images/slide-7.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-7.mp3' },
-            { image: '/images/slide-8.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-8.mp3' },
-            { image: '/images/slide-9.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-9.mp3' },
-            { image: '/images/slide-10.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-10.mp3' },
-            { image: '/images/slide-11.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-11.mp3' },
-            { image: '/images/slide-12.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-12.mp3' },
-            { image: '/images/slide-13.png', audio: '/assets/audio/pitch-deck/ElevenLabs_Untitled_Project-13.mp3' }
+            { image: '/images/slide-1.png', audio: '/assets/pitch/voice/slide_01.mp3' },
+            { image: '/images/slide-2.png', audio: '/assets/pitch/voice/slide_02.mp3' },
+            { image: '/images/slide-3.png', audio: '/assets/pitch/voice/slide_03.mp3' },
+            { image: '/images/slide-4.png', audio: '/assets/pitch/voice/slide_04.mp3' },
+            { image: '/images/slide-5.png', audio: '/assets/pitch/voice/slide_05.mp3' },
+            { image: '/images/slide-6.png', audio: '/assets/pitch/voice/slide_06.mp3' },
+            { image: '/images/slide-7.png', audio: '/assets/pitch/voice/slide_07.mp3' },
+            { image: '/images/slide-8.png', audio: '/assets/pitch/voice/slide_08.mp3' },
+            { image: '/images/slide-9.png', audio: '/assets/pitch/voice/slide_09.mp3' },
+            { image: '/images/slide-10.png', audio: '/assets/pitch/voice/slide_10.mp3' },
+            { image: '/images/slide-11.png', audio: '/assets/pitch/voice/slide_11.mp3' },
+            { image: '/images/slide-12.png', audio: '/assets/pitch/voice/slide_12.mp3' },
+            { image: '/images/slide-13.png', audio: '/assets/pitch/voice/slide_13.mp3' },
+            { image: '/images/slide-14.png', audio: '/assets/pitch/voice/slide_14.mp3' }
         ];
         
         let currentSlide = 0;
         let audio = null;
         let isPlaying = false;
+        let wasPlayingBeforeNavigation = false; // Track if audio was playing before navigation
         const speeds = [0.75, 1, 1.25, 1.5, 1.75, 2];
         let currentSpeedIndex = 1;
         
@@ -324,8 +331,28 @@
             document.getElementById('slide-counter').textContent = `${currentSlide + 1} / ${slides.length}`;
         }
         
-        // Show slide
-        function showSlide(index) {
+        // Show slide - with proper audio synchronization
+        function showSlide(index, preservePlayingState = false) {
+            console.log('showSlide called:', index, 'preservePlayingState:', preservePlayingState);
+            
+            // Store current playing state before stopping audio
+            wasPlayingBeforeNavigation = isPlaying && audio && !audio.paused;
+            
+            // Stop and clean up current audio IMMEDIATELY
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+                // Remove all event listeners to prevent memory leaks
+                audio.removeEventListener('loadedmetadata', updateAudioProgress);
+                audio.removeEventListener('timeupdate', updateAudioProgress);
+                audio.removeEventListener('ended', handleAudioEnded);
+                audio.removeEventListener('error', handleAudioError);
+                audio = null;
+            }
+            
+            isPlaying = false;
+            updateAudioButton();
+            
             // Hide all slides
             document.querySelectorAll('.slide').forEach(slide => {
                 slide.classList.remove('active');
@@ -337,16 +364,11 @@
                 slide.classList.add('active');
             }
             
-            // Stop current audio
-            if (audio) {
-                audio.pause();
-                audio.currentTime = 0;
-                isPlaying = false;
-                updateAudioButton();
-            }
+            // Update currentSlide index
+            currentSlide = index;
             
             // Load and play audio for this slide
-            loadAudio(slides[index].audio);
+            loadAudio(slides[index].audio, preservePlayingState || wasPlayingBeforeNavigation);
             
             // Update buttons
             document.getElementById('prev-btn').disabled = index === 0;
@@ -355,34 +377,61 @@
             updateCounter();
         }
         
-        // Load audio
-        function loadAudio(audioSrc) {
-            if (audio) {
-                audio.pause();
-                audio = null;
+        // Handle audio ended event
+        function handleAudioEnded() {
+            console.log('Audio ended for slide', currentSlide + 1);
+            isPlaying = false;
+            updateAudioButton();
+            // Auto-advance to next slide if not last
+            if (currentSlide < slides.length - 1) {
+                setTimeout(() => {
+                    nextSlide();
+                }, 500);
             }
+        }
+        
+        // Handle audio error
+        function handleAudioError(e) {
+            console.error('Audio error for slide', currentSlide + 1, ':', e);
+            isPlaying = false;
+            updateAudioButton();
+        }
+        
+        // Load audio with proper synchronization
+        function loadAudio(audioSrc, autoPlay = false) {
+            console.log('loadAudio called:', audioSrc, 'autoPlay:', autoPlay);
             
+            // Create new audio instance
             audio = new Audio(audioSrc);
-            audio.playbackRate = speeds[currentSpeedIndex]; // Set initial speed
+            audio.playbackRate = speeds[currentSpeedIndex]; // Set current speed
+            
+            // Add event listeners
             audio.addEventListener('loadedmetadata', () => {
                 updateAudioProgress();
             });
             audio.addEventListener('timeupdate', () => {
                 updateAudioProgress();
             });
-            audio.addEventListener('ended', () => {
-                isPlaying = false;
-                updateAudioButton();
-                // Auto-advance to next slide if not last
-                if (currentSlide < slides.length - 1) {
-                    setTimeout(() => {
-                        nextSlide();
-                    }, 500);
+            audio.addEventListener('ended', handleAudioEnded);
+            audio.addEventListener('error', handleAudioError);
+            
+            // Auto-play if requested
+            if (autoPlay) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            console.log('Audio started playing for slide', currentSlide + 1);
+                            isPlaying = true;
+                            updateAudioButton();
+                        })
+                        .catch(err => {
+                            console.log('Auto-play prevented for slide', currentSlide + 1, ':', err);
+                            isPlaying = false;
+                            updateAudioButton();
+                        });
                 }
-            });
-            audio.addEventListener('error', (e) => {
-                console.error('Audio error:', e);
-            });
+            }
         }
         
         // Update audio progress
@@ -393,18 +442,52 @@
             }
         }
         
-        // Toggle audio
+        // Seek audio when clicking on progress bar
+        function setupProgressBarSeek() {
+            const progressBar = document.querySelector('.audio-progress');
+            if (progressBar) {
+                progressBar.addEventListener('click', (e) => {
+                    if (!audio || !audio.duration) return;
+                    
+                    const rect = progressBar.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    const percentage = clickX / rect.width;
+                    const newTime = percentage * audio.duration;
+                    
+                    audio.currentTime = Math.max(0, Math.min(newTime, audio.duration));
+                    updateAudioProgress();
+                    console.log('Seeked to', newTime.toFixed(2), 'seconds (', (percentage * 100).toFixed(1), '%)');
+                });
+            }
+        }
+        
+        // Toggle audio - ensures audio is loaded for current slide
         function toggleAudio() {
-            if (!audio) return;
+            // If no audio loaded, load it first
+            if (!audio) {
+                loadAudio(slides[currentSlide].audio, true);
+                return;
+            }
             
-            if (isPlaying) {
+            if (isPlaying && !audio.paused) {
                 audio.pause();
                 isPlaying = false;
+                console.log('Audio paused');
             } else {
-                audio.play().catch(err => {
-                    console.error('Play error:', err);
-                });
-                isPlaying = true;
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            isPlaying = true;
+                            console.log('Audio resumed');
+                            updateAudioButton();
+                        })
+                        .catch(err => {
+                            console.error('Play error:', err);
+                            isPlaying = false;
+                            updateAudioButton();
+                        });
+                }
             }
             updateAudioButton();
         }
@@ -419,18 +502,18 @@
             }
         }
         
-        // Navigation
+        // Navigation - with proper audio synchronization
         function nextSlide() {
             if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                showSlide(currentSlide);
+                const wasPlaying = isPlaying && audio && !audio.paused;
+                showSlide(currentSlide + 1, wasPlaying);
             }
         }
         
         function prevSlide() {
             if (currentSlide > 0) {
-                currentSlide--;
-                showSlide(currentSlide);
+                const wasPlaying = isPlaying && audio && !audio.paused;
+                showSlide(currentSlide - 1, wasPlaying);
             }
         }
         
@@ -448,16 +531,18 @@
             }
         });
         
-        // Speed control
+        // Speed control - updates current audio immediately
         function changeSpeed() {
             currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+            const newSpeed = speeds[currentSpeedIndex];
             if (audio) {
-                audio.playbackRate = speeds[currentSpeedIndex];
+                audio.playbackRate = newSpeed;
+                console.log('Speed changed to', newSpeed, '×');
             }
             const speedBtn = document.getElementById('audio-speed');
             if (speedBtn) {
-                speedBtn.textContent = `${speeds[currentSpeedIndex]}×`;
-                speedBtn.classList.toggle('active', speeds[currentSpeedIndex] > 1);
+                speedBtn.textContent = `${newSpeed}×`;
+                speedBtn.classList.toggle('active', newSpeed > 1);
             }
         }
         
@@ -469,16 +554,26 @@
         
         // Initialize
         initSlides();
-        showSlide(0);
+        setupProgressBarSeek();
+        showSlide(0, true); // Start with first slide and auto-play audio
         
-        // Auto-play first slide audio
+        // Auto-play first slide audio after a short delay (for browser autoplay policies)
         setTimeout(() => {
-            if (audio) {
-                audio.play().catch(err => {
-                    console.log('Auto-play prevented:', err);
-                });
-                isPlaying = true;
-                updateAudioButton();
+            if (audio && !isPlaying) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            console.log('Auto-play started for first slide');
+                            isPlaying = true;
+                            updateAudioButton();
+                        })
+                        .catch(err => {
+                            console.log('Auto-play prevented by browser:', err);
+                            isPlaying = false;
+                            updateAudioButton();
+                        });
+                }
             }
         }, 500);
     </script>
