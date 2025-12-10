@@ -20,14 +20,27 @@
             min-height: 100vh;
             padding: 2rem;
             padding-top: 6rem;
+            padding-bottom: 10rem;
         }
         
-        .office-viewer {
+        .slide-container {
             width: 100%;
             height: 720px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
             background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        
+        .slide-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0.5rem;
         }
         
         .download-section {
@@ -65,6 +78,81 @@
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Control Bar Styles */
+        .control-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+        
+        .control-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 215, 0, 0.5);
+            color: #FFD700;
+        }
+        
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .control-btn.active {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.6);
+            color: #FFD700;
+        }
+        
+        .slide-counter {
+            color: white;
+            font-size: 0.875rem;
+            min-width: 100px;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        
+        .audio-progress {
+            width: 150px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .audio-progress-bar {
+            height: 100%;
+            background: #FFD700;
+            width: 0%;
+            transition: width 0.1s linear;
         }
         
         .voice-list {
@@ -122,76 +210,15 @@
             max-width: 100%;
         }
         
-        /* Control Bar Styles */
-        .control-bar {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 1rem 2rem;
-            border-radius: 2rem;
-            border: 2px solid rgba(255, 215, 0, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.2);
-        }
-        
-        .control-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.875rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .control-btn:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 215, 0, 0.5);
-            color: #FFD700;
-        }
-        
-        .control-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .control-btn.active {
-            background: rgba(255, 215, 0, 0.2);
-            border-color: rgba(255, 215, 0, 0.6);
-            color: #FFD700;
-        }
-        
-        .slide-counter {
-            color: white;
-            font-size: 0.875rem;
-            min-width: 100px;
-            text-align: center;
-            padding: 0 1rem;
-        }
-        
-        .viewer-wrapper {
-            position: relative;
-        }
-        
-        
         @media (max-width: 768px) {
-            .office-viewer {
+            .slide-container {
                 height: 500px;
             }
             
             .pitch-container {
                 padding: 1rem;
                 padding-top: 5rem;
+                padding-bottom: 8rem;
             }
             
             .voice-list li {
@@ -230,6 +257,10 @@
                 min-width: 60px;
                 padding: 0 0.5rem;
             }
+            
+            .audio-progress {
+                width: 100px;
+            }
         }
     </style>
 </head>
@@ -253,18 +284,17 @@
     <!-- Main Content -->
     <section class="pitch-container container mx-auto">
         <h1 class="text-3xl font-semibold mb-6 text-center">Live Pitch Deck</h1>
-        <p class="text-center text-gray-300 mb-6">View the interactive presentation with original PowerPoint animations</p>
+        <p class="text-center text-gray-300 mb-6">View the interactive presentation with synchronized voice-over narration</p>
         
-        <!-- Office Web Viewer -->
-        <div class="w-full viewer-wrapper">
+        <!-- Slide Viewer -->
+        <div class="slide-container">
             <iframe
-                id="office-viewer"
-                class="office-viewer"
-                title="Daena Pitch Deck (Live with animations)"
+                id="slide-viewer"
+                class="slide-viewer"
+                title="Daena Pitch Deck"
                 src=""
                 frameborder="0"
                 allowfullscreen
-                allow="autoplay; fullscreen"
             ></iframe>
         </div>
         
@@ -276,21 +306,18 @@
                 </svg>
                 Prev
             </button>
-            <button class="control-btn" id="play-pause-btn" aria-label="Play/Pause">
-                <svg class="w-5 h-5" id="play-icon" fill="currentColor" viewBox="0 0 20 20">
+            <button class="control-btn active" id="play-pause-btn" aria-label="Play/Pause">
+                <svg class="w-5 h-5" id="play-icon" fill="currentColor" viewBox="0 0 20 20" style="display: none;">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
                 </svg>
-                <svg class="w-5 h-5" id="pause-icon" fill="currentColor" viewBox="0 0 20 20" style="display: none;">
+                <svg class="w-5 h-5" id="pause-icon" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-                <span id="play-pause-text">Play</span>
+                <span id="play-pause-text">Pause</span>
             </button>
-            <button class="control-btn" id="download-btn" aria-label="Download" title="Download presentation">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                </svg>
-                Download
-            </button>
+            <div class="audio-progress" id="audio-progress">
+                <div class="audio-progress-bar" id="audio-progress-bar"></div>
+            </div>
             <button class="control-btn" id="mute-btn" aria-label="Mute" title="Mute/Unmute">
                 <svg class="w-5 h-5" id="mute-icon" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/>
@@ -307,11 +334,16 @@
                 </svg>
                 <span id="speed-text">1×</span>
             </button>
-            <span class="slide-counter" id="slide-counter">Slide 1</span>
+            <span class="slide-counter" id="slide-counter">Slide 1 / 14</span>
             <button class="control-btn" id="next-btn" aria-label="Next slide">
                 Next
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            <button class="control-btn" id="download-btn" aria-label="Download" title="Download presentation">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
             </button>
             <button class="control-btn" id="fullscreen-btn" aria-label="Fullscreen" title="Fullscreen">
@@ -341,136 +373,178 @@
     </section>
     
     <script>
+        // Presentation state
+        let currentSlide = 1;
+        const totalSlides = 14;
+        let audio = null;
+        let isPlaying = false;
+        let isMuted = false;
+        let currentSpeed = 1;
+        const speeds = [0.75, 1, 1.25, 1.5, 1.75, 2];
+        let autoAdvance = true;
+        
         // Get the current origin
         const origin = window.location.origin;
         const pptUrl = `${origin}/assets/pitch/daena_pitch_deck.pptx`;
         
-        // Office Web Viewer URL with presentation mode parameters
-        // Using 'action=embedview' and trying to start in slideshow mode
-        const officeEmbed = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}&action=embedview&wdStartOn=1`;
-        
-        // Set iframe source immediately to auto-start
-        const iframe = document.getElementById('office-viewer');
-        iframe.src = officeEmbed;
-        
-        // Hide overlay immediately and show control bar
-        const overlay = document.getElementById('auto-start-overlay');
-        if (overlay) {
-            overlay.classList.add('hidden');
+        // Office Web Viewer URL
+        function getSlideUrl(slideNum = 1) {
+            // Office Web Viewer doesn't support direct slide navigation, but we'll track it
+            return `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(pptUrl)}`;
         }
         
-        // Make control bar visible immediately
-        const controlBar = document.getElementById('control-bar');
-        if (controlBar) {
-            controlBar.style.display = 'flex';
-        }
+        // Initialize slide viewer
+        const slideViewer = document.getElementById('slide-viewer');
+        slideViewer.src = getSlideUrl(1);
         
-        // Try to start presentation mode after iframe loads
-        iframe.addEventListener('load', function() {
-            // Wait a bit for Office Web Viewer to initialize
-            setTimeout(() => {
-                try {
-                    // Try to send message to iframe to start slideshow
-                    // Note: Office Web Viewer has limited API, but we can try
-                    iframe.contentWindow.postMessage({
-                        action: 'startSlideshow'
-                    }, '*');
-                } catch (e) {
-                    console.log('Could not communicate with Office Web Viewer:', e);
+        // Load voice-over for a specific slide
+        function loadAudioForSlide(slideNum) {
+            if (audio) {
+                audio.pause();
+                audio = null;
+            }
+            
+            const slideNumStr = slideNum.toString().padStart(2, '0');
+            const audioSrc = `/assets/pitch/voice/slide_${slideNumStr}.mp3`;
+            
+            audio = new Audio(audioSrc);
+            audio.playbackRate = currentSpeed;
+            audio.volume = isMuted ? 0 : 1;
+            
+            // Update progress bar
+            audio.addEventListener('loadedmetadata', () => {
+                updateAudioProgress();
+            });
+            
+            audio.addEventListener('timeupdate', () => {
+                updateAudioProgress();
+            });
+            
+            audio.addEventListener('ended', () => {
+                isPlaying = false;
+                updatePlayPauseButton();
+                // Auto-advance to next slide
+                if (autoAdvance && currentSlide < totalSlides) {
+                    setTimeout(() => {
+                        nextSlide();
+                    }, 500);
                 }
-            }, 2000);
+            });
+            
+            audio.addEventListener('error', (e) => {
+                console.error('Audio error:', e);
+            });
+        }
+        
+        // Update audio progress bar
+        function updateAudioProgress() {
+            if (audio && audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('audio-progress-bar').style.width = progress + '%';
+            }
+        }
+        
+        // Seek audio on progress bar click
+        document.getElementById('audio-progress').addEventListener('click', function(e) {
+            if (audio && audio.duration) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percent = x / rect.width;
+                audio.currentTime = percent * audio.duration;
+            }
         });
         
-        // Load voice-over list
-        function loadVoiceList() {
-            const voiceList = document.getElementById('voice-list');
-            const maxSlides = 20; // Adjust based on your deck size
-            
-            // Try to load manifest first
-            fetch('/assets/pitch/voice/manifest.json')
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Manifest not found');
-                })
-                .then(data => {
-                    // Use manifest data
-                    data.items.forEach(item => {
-                        const li = document.createElement('li');
-                        const slideNum = item.slide.toString().padStart(2, '0');
-                        li.innerHTML = `
-                            <span>Slide ${slideNum}</span>
-                            <audio controls preload="metadata" src="/assets/pitch/voice/${item.file}"></audio>
-                        `;
-                        voiceList.appendChild(li);
-                    });
-                })
-                .catch(() => {
-                    // Fallback: generate list from expected files
-                    for (let i = 1; i <= maxSlides; i++) {
-                        const slideNum = i.toString().padStart(2, '0');
-                        const li = document.createElement('li');
-                        li.innerHTML = `
-                            <span>Slide ${slideNum}</span>
-                            <audio controls preload="metadata" src="/assets/pitch/voice/slide_${slideNum}.mp3"></audio>
-                        `;
-                        voiceList.appendChild(li);
-                    }
-                });
+        // Update slide counter
+        function updateSlideCounter() {
+            document.getElementById('slide-counter').textContent = `Slide ${currentSlide} / ${totalSlides}`;
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
         }
         
-        // Initialize voice list
-        loadVoiceList();
-        
-        // Control bar functionality
-        let isPlaying = false;
-        let currentSpeed = 1;
-        const speeds = [0.75, 1, 1.25, 1.5, 1.75, 2];
-        let isMuted = false;
-        let currentSlide = 1;
-        const totalSlides = 14;
-        
-        // Play/Pause button
-        document.getElementById('play-pause-btn').addEventListener('click', function() {
-            isPlaying = !isPlaying;
+        // Update play/pause button
+        function updatePlayPauseButton() {
             const playIcon = document.getElementById('play-icon');
             const pauseIcon = document.getElementById('pause-icon');
             const playPauseText = document.getElementById('play-pause-text');
+            const btn = document.getElementById('play-pause-btn');
             
             if (isPlaying) {
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
                 playPauseText.textContent = 'Pause';
-                this.classList.add('active');
+                btn.classList.add('active');
             } else {
                 playIcon.style.display = 'block';
                 pauseIcon.style.display = 'none';
                 playPauseText.textContent = 'Play';
-                this.classList.remove('active');
+                btn.classList.remove('active');
+            }
+        }
+        
+        // Navigate to slide
+        function goToSlide(slideNum) {
+            if (slideNum < 1 || slideNum > totalSlides) return;
+            
+            currentSlide = slideNum;
+            updateSlideCounter();
+            
+            // Reload iframe with new slide (Office Web Viewer will show from start, but we track the slide)
+            slideViewer.src = getSlideUrl(slideNum);
+            
+            // Load and play audio for this slide
+            loadAudioForSlide(slideNum);
+            
+            // Auto-play if was playing
+            if (isPlaying) {
+                setTimeout(() => {
+                    if (audio) {
+                        audio.play().catch(err => {
+                            console.error('Play error:', err);
+                        });
+                    }
+                }, 500);
+            }
+        }
+        
+        // Previous slide
+        function prevSlide() {
+            if (currentSlide > 1) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+        
+        // Next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+        
+        // Play/Pause button
+        document.getElementById('play-pause-btn').addEventListener('click', function() {
+            if (!audio) {
+                loadAudioForSlide(currentSlide);
             }
             
-            // Try to control Office Web Viewer (limited API)
-            try {
-                const iframe = document.getElementById('office-viewer');
-                if (iframe && iframe.contentWindow) {
-                    iframe.contentWindow.postMessage({
-                        action: isPlaying ? 'play' : 'pause'
-                    }, '*');
-                }
-            } catch (e) {
-                console.log('Could not control Office Web Viewer:', e);
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play().catch(err => {
+                    console.error('Play error:', err);
+                });
+                isPlaying = true;
             }
-        });
-        
-        // Download button
-        document.getElementById('download-btn').addEventListener('click', function() {
-            window.open('/assets/pitch/daena_pitch_deck.pptx', '_blank');
+            updatePlayPauseButton();
         });
         
         // Mute button
         document.getElementById('mute-btn').addEventListener('click', function() {
             isMuted = !isMuted;
+            if (audio) {
+                audio.volume = isMuted ? 0 : 1;
+            }
+            
             const muteIcon = document.getElementById('mute-icon');
             const unmuteIcon = document.getElementById('unmute-icon');
             const muteText = document.getElementById('mute-text');
@@ -493,6 +567,10 @@
             currentSpeed = speeds[nextIndex];
             document.getElementById('speed-text').textContent = currentSpeed + '×';
             
+            if (audio) {
+                audio.playbackRate = currentSpeed;
+            }
+            
             if (currentSpeed !== 1) {
                 this.classList.add('active');
             } else {
@@ -501,76 +579,104 @@
         });
         
         // Previous/Next buttons
-        document.getElementById('prev-btn').addEventListener('click', function() {
-            if (currentSlide > 1) {
-                currentSlide--;
-                updateSlideCounter();
-                try {
-                    const iframe = document.getElementById('office-viewer');
-                    if (iframe && iframe.contentWindow) {
-                        iframe.contentWindow.postMessage({
-                            action: 'previousSlide'
-                        }, '*');
-                    }
-                } catch (e) {
-                    console.log('Could not navigate slides:', e);
-                }
-            }
-        });
+        document.getElementById('prev-btn').addEventListener('click', prevSlide);
+        document.getElementById('next-btn').addEventListener('click', nextSlide);
         
-        document.getElementById('next-btn').addEventListener('click', function() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                updateSlideCounter();
-                try {
-                    const iframe = document.getElementById('office-viewer');
-                    if (iframe && iframe.contentWindow) {
-                        iframe.contentWindow.postMessage({
-                            action: 'nextSlide'
-                        }, '*');
-                    }
-                } catch (e) {
-                    console.log('Could not navigate slides:', e);
-                }
-            }
+        // Download button
+        document.getElementById('download-btn').addEventListener('click', function() {
+            window.open('/assets/pitch/daena_pitch_deck.pptx', '_blank');
         });
         
         // Fullscreen button
         document.getElementById('fullscreen-btn').addEventListener('click', function() {
-            const iframe = document.getElementById('office-viewer');
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) {
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.mozRequestFullScreen) {
-                iframe.mozRequestFullScreen();
-            } else if (iframe.msRequestFullscreen) {
-                iframe.msRequestFullscreen();
+            const container = document.querySelector('.slide-container');
+            if (container.requestFullscreen) {
+                container.requestFullscreen();
+            } else if (container.webkitRequestFullscreen) {
+                container.webkitRequestFullscreen();
+            } else if (container.mozRequestFullScreen) {
+                container.mozRequestFullScreen();
+            } else if (container.msRequestFullscreen) {
+                container.msRequestFullscreen();
             }
         });
-        
-        // Update slide counter
-        function updateSlideCounter() {
-            document.getElementById('slide-counter').textContent = `Slide ${currentSlide} / ${totalSlides}`;
-        }
-        
-        // Initialize slide counter
-        updateSlideCounter();
         
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+            
             if (e.key === 'ArrowLeft') {
-                document.getElementById('prev-btn').click();
-            } else if (e.key === 'ArrowRight' || e.key === ' ') {
                 e.preventDefault();
-                document.getElementById('next-btn').click();
+                prevSlide();
+            } else if (e.key === 'ArrowRight' || (e.key === ' ' && !e.target.tagName === 'BUTTON')) {
+                e.preventDefault();
+                nextSlide();
             } else if (e.key === 'p' || e.key === 'P') {
+                e.preventDefault();
                 document.getElementById('play-pause-btn').click();
+            } else if (e.key === 'm' || e.key === 'M') {
+                e.preventDefault();
+                document.getElementById('mute-btn').click();
             } else if (e.key === 'f' || e.key === 'F') {
+                e.preventDefault();
                 document.getElementById('fullscreen-btn').click();
             }
         });
+        
+        // Load voice-over list
+        function loadVoiceList() {
+            const voiceList = document.getElementById('voice-list');
+            
+            fetch('/assets/pitch/voice/manifest.json')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Manifest not found');
+                })
+                .then(data => {
+                    data.items.forEach(item => {
+                        const li = document.createElement('li');
+                        const slideNum = item.slide.toString().padStart(2, '0');
+                        li.innerHTML = `
+                            <span>Slide ${slideNum}</span>
+                            <audio controls preload="metadata" src="/assets/pitch/voice/${item.file}"></audio>
+                        `;
+                        voiceList.appendChild(li);
+                    });
+                })
+                .catch(() => {
+                    // Fallback: generate list from expected files
+                    for (let i = 1; i <= totalSlides; i++) {
+                        const slideNum = i.toString().padStart(2, '0');
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <span>Slide ${slideNum}</span>
+                            <audio controls preload="metadata" src="/assets/pitch/voice/slide_${slideNum}.mp3"></audio>
+                        `;
+                        voiceList.appendChild(li);
+                    }
+                });
+        }
+        
+        // Initialize
+        updateSlideCounter();
+        loadVoiceList();
+        
+        // Auto-start: Load first slide audio and start playing
+        setTimeout(() => {
+            loadAudioForSlide(1);
+            isPlaying = true;
+            updatePlayPauseButton();
+            audio.play().catch(err => {
+                console.log('Auto-play prevented:', err);
+                isPlaying = false;
+                updatePlayPauseButton();
+            });
+        }, 1000);
     </script>
 </body>
 </html>
-
