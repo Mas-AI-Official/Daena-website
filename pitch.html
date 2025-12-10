@@ -382,6 +382,11 @@
                     <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn btn-secondary">Download PPTX</a>
                 </div>
             </div>
+            <!-- Slide Image Viewer (for full control and sync) -->
+            <div class="slide-image-viewer" id="slide-image-viewer">
+                <!-- Slides will be dynamically loaded -->
+            </div>
+            <!-- Office Web Viewer (hidden, for reference or can be toggled) -->
             <iframe
                 id="slide-viewer"
                 class="slide-viewer"
@@ -389,7 +394,7 @@
                 src=""
                 frameborder="0"
                 allowfullscreen
-                onerror="showErrorFallback()"
+                style="display: none;"
             ></iframe>
         </div>
         
