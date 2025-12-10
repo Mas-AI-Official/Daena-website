@@ -45,6 +45,22 @@
             border: none;
         }
         
+        .pdf-fallback {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .pdf-fallback.active {
+            display: block;
+        }
+        
+        .pdf-fallback iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
         .fallback-message {
             display: none;
             text-align: center;
@@ -54,6 +70,29 @@
         
         .fallback-message.active {
             display: block;
+        }
+        
+        .fallback-message .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .fallback-message .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+        
+        .fallback-message .btn-primary {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.6);
+            color: #FFD700;
         }
         
         .controls {
@@ -227,12 +266,15 @@
     <div class="slide-container">
         <div class="pptx-viewer" id="pptx-viewer">
             <iframe id="pptx-iframe" title="Daena Pitch Deck" allowfullscreen></iframe>
+            <div class="pdf-fallback" id="pdf-fallback">
+                <iframe id="pdf-iframe" src="/assets/pitch/daena_pitch_deck.pdf" title="Daena Pitch Deck PDF" allowfullscreen></iframe>
+            </div>
             <div class="fallback-message" id="fallback-message">
                 <h2>Unable to load presentation</h2>
                 <p>Please download the PDF or PPTX to view the presentation</p>
-                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
-                    <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank" class="btn btn-primary">Open PDF</a>
-                    <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn btn-secondary">Download PPTX</a>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank" class="btn btn-primary">Open PDF in New Tab</a>
+                    <a href="/assets/pitch/daena_pitch_deck.pptx" download class="btn">Download PPTX</a>
                 </div>
             </div>
         </div>
@@ -336,14 +378,38 @@
         }
         
         function showFallback() {
-            console.log('Showing fallback message');
-            const iframe = document.getElementById('pptx-iframe');
-            const fallback = document.getElementById('fallback-message');
-            if (iframe) {
-                iframe.style.display = 'none';
+            console.log('Showing fallback - trying PDF viewer first');
+            const pptxIframe = document.getElementById('pptx-iframe');
+            const pdfFallback = document.getElementById('pdf-fallback');
+            const fallbackMessage = document.getElementById('fallback-message');
+            
+            // Hide PPTX iframe
+            if (pptxIframe) {
+                pptxIframe.style.display = 'none';
             }
-            if (fallback) {
-                fallback.classList.add('active');
+            
+            // Try to show PDF viewer as fallback
+            if (pdfFallback) {
+                pdfFallback.classList.add('active');
+                console.log('PDF fallback activated');
+                
+                // If PDF also fails, show message after delay
+                setTimeout(() => {
+                    const pdfIframe = document.getElementById('pdf-iframe');
+                    if (pdfIframe) {
+                        pdfIframe.addEventListener('error', () => {
+                            console.log('PDF viewer also failed, showing download message');
+                            if (fallbackMessage) {
+                                fallbackMessage.classList.add('active');
+                            }
+                        });
+                    }
+                }, 2000);
+            } else {
+                // If no PDF fallback, show message immediately
+                if (fallbackMessage) {
+                    fallbackMessage.classList.add('active');
+                }
             }
         }
         
