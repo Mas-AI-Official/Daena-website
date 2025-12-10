@@ -16,17 +16,29 @@
     <meta property="og:description" content="Technical documentation and benchmark results for Daena AI VP.">
     <meta property="og:url" content="https://daena.mas-ai.co/docs.html">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- HTMX CDN -->
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-
-    <!-- Global CSS -->
+    <!-- Performance: Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    
+    <!-- Performance: Preload critical CSS -->
+    <link rel="preload" href="/assets/css/global.css" as="style">
+    
+    <!-- Global CSS - Critical, load immediately -->
     <link rel="stylesheet" href="/assets/css/global.css">
 
-    <!-- Metatron Background Script -->
-    <script src="/js/metatron-hex-network.js"></script>
+    <!-- Tailwind CSS CDN - Load async to not block render -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+
+    <!-- HTMX CDN - Load async -->
+    <script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
+
+    <!-- Metatron Background Script - Defer to not block initial render -->
+    <script src="/js/metatron-hex-network.js" defer></script>
+    
+    <!-- SEO: Robots meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
     <style>
         table {

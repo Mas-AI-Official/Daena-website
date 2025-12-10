@@ -49,23 +49,47 @@
     }
     </script>
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- HTMX CDN -->
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-
-    <!-- Global CSS -->
+    <!-- Performance: Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    
+    <!-- Performance: Preload critical CSS -->
+    <link rel="preload" href="/assets/css/global.css" as="style">
+    <link rel="preload" href="/assets/css/video-player.css" as="style">
+    
+    <!-- Global CSS - Critical, load immediately -->
     <link rel="stylesheet" href="/assets/css/global.css">
-
-    <!-- Video Player Component CSS -->
     <link rel="stylesheet" href="/assets/css/video-player.css">
 
-    <!-- Metatron Background Script -->
-    <script src="/js/metatron-hex-network.js"></script>
+    <!-- Tailwind CSS CDN - Load async to not block render -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
 
-    <!-- Custom Video Player Component -->
+    <!-- HTMX CDN - Load async -->
+    <script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
+
+    <!-- Metatron Background Script - Defer to not block initial render -->
+    <script src="/js/metatron-hex-network.js" defer></script>
+
+    <!-- Custom Video Player Component - Already deferred -->
     <script src="/assets/js/video-player.js" defer></script>
+    
+    <!-- SEO: Robots meta -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <!-- Performance: Reduce motion for users who prefer it -->
+    <style>
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 
     <style>
         /* Additional inline styles for specific components */
@@ -649,7 +673,7 @@
                     <div class="daena-video" data-video="/videos/why-investors.mp4" data-poster="/videos/play.png"
                         aria-label="Why Investors Choose Daena video" style="width: 100%; max-width: 100%; box-sizing: border-box;">
                         <div class="video-frame">
-                            <video preload="metadata" playsinline></video>
+                            <video preload="metadata" playsinline loading="lazy"></video>
                             <!-- Center play overlay -->
                             <button class="overlay-play" aria-label="Play video">
                                 <!-- triangular play icon -->

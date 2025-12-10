@@ -13,15 +13,45 @@ class MetatronHexNetwork {
         this.nodes = [];
         this.connections = [];
         this.animationId = null;
+        this.lastFrameTime = null;
+        this.isVisible = true;
+        
+        // Performance: Use Intersection Observer to pause when not visible
+        if ('IntersectionObserver' in window) {
+            this.observer = new IntersectionObserver((entries) => {
+                this.isVisible = entries[0].isIntersecting;
+                if (this.isVisible && !this.animationId) {
+                    this.animate();
+                }
+            }, { threshold: 0 });
+            this.observer.observe(this.canvas);
+        }
         
         this.setupCanvas();
         this.createHexagonalNetwork();
-        this.animate();
         
-        // Handle window resize
+        // Performance: Delay animation start slightly to prioritize content
+        requestAnimationFrame(() => {
+            if (this.isVisible) {
+                this.animate();
+            }
+        });
+        
+        // Handle window resize with debouncing
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-            this.setupCanvas();
-            this.createHexagonalNetwork();
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                    this.animationId = null;
+                }
+                this.setupCanvas();
+                this.createHexagonalNetwork();
+                if (this.isVisible) {
+                    this.animate();
+                }
+            }, 150);
         });
     }
     
@@ -297,15 +327,36 @@ class MetatronHexNetwork {
     }
     
     animate() {
+        // Performance: Pause animation when not visible
+        if (!this.isVisible) {
+            this.animationId = null;
+            return;
+        }
+        
+        // Performance: Use throttling for slower devices
+        if (this.lastFrameTime) {
+            const delta = performance.now() - this.lastFrameTime;
+            // Skip frame if less than 16ms has passed (target 60fps, but allow some flexibility)
+            if (delta < 14) {
+                this.animationId = requestAnimationFrame(() => this.animate());
+                return;
+            }
+        }
+        this.lastFrameTime = performance.now();
+        
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Draw Metatron background
         this.drawMetatronBackground();
         
+        // Performance: Reduce animation complexity on mobile/low-end devices
+        const isLowEnd = navigator.hardwareConcurrency <= 4 || window.innerWidth < 768;
+        const connectionStep = isLowEnd ? 2 : 1; // Skip some connections on low-end devices
+        
         // Draw connections
-        this.connections.forEach(conn => {
-            this.drawConnection(conn);
-        });
+        for (let i = 0; i < this.connections.length; i += connectionStep) {
+            this.drawConnection(this.connections[i]);
+        }
         
         // Draw nodes
         this.nodes.forEach((node, index) => {
