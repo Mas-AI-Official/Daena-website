@@ -450,6 +450,17 @@
             const slideViewer = document.getElementById('slide-viewer');
             const loadPromises = [];
             
+            // Set timeout for image loading
+            const imageLoadTimeout = setTimeout(() => {
+                console.warn('Image loading timeout - showing what we have');
+                if (slidesLoaded === 0) {
+                    // If no images loaded, try to show first slide anyway
+                    slidesLoaded = slides.length;
+                    showSlide(0);
+                    checkReady();
+                }
+            }, isMobile ? 10000 : 20000); // 10s mobile, 20s desktop
+            
             slides.forEach((slide, index) => {
                 const img = new Image();
                 img.src = slide.image;
@@ -457,13 +468,23 @@
                 img.id = `slide-${index}`;
                 img.alt = `Slide ${index + 1}`;
                 
+                // Add loading attribute for better mobile performance
+                img.loading = index === 0 ? 'eager' : 'lazy';
+                
                 const loadPromise = new Promise((resolve, reject) => {
+                    const imgTimeout = setTimeout(() => {
+                        console.warn(`Slide ${index + 1} load timeout`);
+                        resolve(); // Continue even if timeout
+                    }, isMobile ? 5000 : 10000);
+                    
                     img.onload = () => {
+                        clearTimeout(imgTimeout);
                         slidesLoaded++;
                         console.log(`Slide ${index + 1} loaded (${slidesLoaded}/${slides.length})`);
                         resolve();
                     };
                     img.onerror = () => {
+                        clearTimeout(imgTimeout);
                         console.error(`Failed to load slide ${index + 1}`);
                         resolve(); // Continue even if one fails
                     };
@@ -475,10 +496,37 @@
             
             // Show first slide when all are loaded
             Promise.all(loadPromises).then(() => {
+                clearTimeout(imageLoadTimeout);
                 console.log('All slides loaded!');
                 showSlide(0);
                 checkReady();
+            }).catch(err => {
+                clearTimeout(imageLoadTimeout);
+                console.error('Error loading slides:', err);
+                // Show first slide anyway
+                if (slidesLoaded > 0) {
+                    showSlide(0);
+                    checkReady();
+                }
             });
+            
+            // On mobile, show first slide as soon as it loads (don't wait for all)
+            if (isMobile) {
+                const firstImg = slideViewer.querySelector('#slide-0');
+                if (firstImg) {
+                    firstImg.addEventListener('load', () => {
+                        if (!isInitialized && slidesLoaded >= 1) {
+                            console.log('First slide loaded on mobile - showing immediately');
+                            showSlide(0);
+                            const loadingOverlay = document.getElementById('loading-overlay');
+                            if (loadingOverlay) {
+                                loadingOverlay.classList.add('hidden');
+                            }
+                            isInitialized = true;
+                        }
+                    }, { once: true });
+                }
+            }
         }
         
         // Preload first audio file
@@ -487,14 +535,33 @@
             const firstAudio = new Audio(slides[0].audio);
             firstAudio.preload = 'auto';
             
+            // Set timeout for audio loading (mobile browsers can be slow)
+            const audioTimeout = setTimeout(() => {
+                console.warn('Audio loading timeout - continuing anyway');
+                firstAudioReady = true;
+                checkReady();
+            }, isMobile ? 5000 : 10000); // 5s on mobile, 10s on desktop
+            
             firstAudio.addEventListener('canplaythrough', () => {
                 console.log('First audio ready');
+                clearTimeout(audioTimeout);
                 firstAudioReady = true;
                 checkReady();
             }, { once: true });
             
+            firstAudio.addEventListener('loadeddata', () => {
+                // On mobile, loadeddata is more reliable than canplaythrough
+                if (isMobile) {
+                    console.log('First audio loaded (mobile)');
+                    clearTimeout(audioTimeout);
+                    firstAudioReady = true;
+                    checkReady();
+                }
+            }, { once: true });
+            
             firstAudio.addEventListener('error', (e) => {
                 console.error('First audio failed to load:', e);
+                clearTimeout(audioTimeout);
                 firstAudioReady = true; // Continue anyway
                 checkReady();
             });
@@ -502,6 +569,26 @@
         
         // Check if everything is ready
         function checkReady() {
+            // On mobile, show slides as soon as they're loaded, don't wait for audio
+            if (isMobile && slidesLoaded === slides.length && !isInitialized) {
+                console.log('Slides loaded on mobile - showing presentation');
+                isInitialized = true;
+                
+                // Hide loading overlay
+                const loadingOverlay = document.getElementById('loading-overlay');
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('hidden');
+                }
+                
+                // Show first slide immediately
+                showSlide(0);
+                
+                // Don't show play prompt on mobile - let user use the control bar
+                // Audio will load when user clicks play
+                return;
+            }
+            
+            // Desktop: wait for both slides and audio
             if (slidesLoaded === slides.length && firstAudioReady && !isInitialized) {
                 console.log('Everything loaded, starting presentation...');
                 isInitialized = true;
@@ -513,16 +600,51 @@
                 }
                 
                 // Auto-play first slide audio after a short delay
-                // On mobile, require user interaction first
-                if (isMobile) {
-                    // Show a play button overlay for mobile
-                    showMobilePlayPrompt();
-                } else {
-                    setTimeout(() => {
-                        loadAudioForSlide(0, true);
-                    }, 500);
-                }
+                setTimeout(() => {
+                    loadAudioForSlide(0, true);
+                }, 500);
             }
+        }
+        
+        // Fallback timeout - hide loading overlay after max wait time
+        let loadingTimeout = null;
+        function setupLoadingTimeout() {
+            const maxWaitTime = isMobile ? 5000 : 15000; // 5s mobile (faster), 15s desktop
+            loadingTimeout = setTimeout(() => {
+                console.warn('Loading timeout reached - showing presentation anyway');
+                const loadingOverlay = document.getElementById('loading-overlay');
+                if (loadingOverlay && !isInitialized) {
+                    // Force initialization
+                    isInitialized = true;
+                    firstAudioReady = true;
+                    
+                    // Show first slide if we have at least one loaded
+                    if (slidesLoaded === 0) {
+                        // Try to show first slide even if not fully loaded
+                        const firstSlide = document.getElementById('slide-0');
+                        if (firstSlide) {
+                            showSlide(0);
+                            slidesLoaded = 1; // At least one slide is visible
+                        } else {
+                            // Create placeholder if nothing loaded
+                            slidesLoaded = slides.length;
+                            showSlide(0);
+                        }
+                    } else {
+                        showSlide(0);
+                    }
+                    
+                    loadingOverlay.classList.add('hidden');
+                    
+                    // On mobile, just show the slide - user can click play
+                    // On desktop, try to auto-play
+                    if (!isMobile) {
+                        setTimeout(() => {
+                            loadAudioForSlide(0, true);
+                        }, 500);
+                    }
+                }
+            }, maxWaitTime);
         }
         
         // Show specific slide
@@ -850,32 +972,30 @@
             updateSlideCounter();
             updateButtons();
             
+            // Set up loading timeout fallback
+            setupLoadingTimeout();
+            
             // Preload everything before starting
             preloadSlides();
             preloadFirstAudio();
             
-            // Improve image loading on mobile
+            // On mobile, also try to show first slide immediately if it's cached
             if (isMobile) {
-                // Use intersection observer for lazy loading on mobile
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                                img.removeAttribute('data-src');
-                                observer.unobserve(img);
+                setTimeout(() => {
+                    // Check if first slide is already loaded
+                    const firstSlide = document.getElementById('slide-0');
+                    if (firstSlide && firstSlide.complete && firstSlide.naturalHeight > 0) {
+                        console.log('First slide already available');
+                        if (!isInitialized) {
+                            showSlide(0);
+                            // Don't wait for all slides on mobile - show first one quickly
+                            if (slidesLoaded >= 1) {
+                                firstAudioReady = true;
+                                checkReady();
                             }
                         }
-                    });
-                });
-                
-                // Observe all slide images
-                setTimeout(() => {
-                    document.querySelectorAll('.slide-image').forEach(img => {
-                        observer.observe(img);
-                    });
-                }, 100);
+                    }
+                }, 1000);
             }
         }
     </script>
