@@ -150,6 +150,10 @@ daena-website/
 5. **Error Handling**: Graceful fallbacks if images or audio fail to load
 6. **Keyboard Support**: Full keyboard navigation for accessibility
 
+## Related Repositories
+
+- **[AI-Autonomous Company OS](https://github.com/Mas-AI-Official/AI-Autonomus-company-OS)** - Public architecture documentation for the governance-first orchestration system that powers Daena. Contains schemas, examples, and governance specifications.
+
 ## Support
 
 For technical support or questions about the presentation, contact:
