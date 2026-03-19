@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena AI - Budget Calculation Demo</title>
+    <meta name="description"
+        content="Watch Daena's Finance Agent calculate comprehensive budgets with real-time data analysis and live narration">
+
+    <!-- Daena Skin - Unified styling -->
+    <link rel="stylesheet" href="/assets/skin/daena/skin.css">
+    <script defer src="/assets/skin/daena/skin.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+            --shadow-glow: 0 0 30px rgba(255, 215, 0, 0.3);
+            --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+
+            0%,
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+
+            25% {
+                transform: translateX(-20px) translateY(-10px);
+            }
+
+            50% {
+                transform: translateX(20px) translateY(10px);
+            }
+
+            75% {
+                transform: translateX(-10px) translateY(20px);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .back-button {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Main Container */
+        .demo-container {
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .demo-header {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .demo-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Narration Panel */
+        .narration-panel {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .narration-text {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .narration-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Demo Controls */
+        .demo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-primary.executing {
+            background: var(--secondary-cyan);
+            color: var(--text-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        /* Budget Calculator Interface */
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .input-panel h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .results-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 188, 212, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .results-panel h3 {
+            color: var(--secondary-cyan);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .budget-item:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateX(5px);
+        }
+
+        .budget-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .budget-value {
+            color: var(--primary-gold);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .total-budget {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--primary-gold);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .total-budget .label {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-budget .value {
+            color: var(--primary-gold);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Analysis Panel */
+        .analysis-panel {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 0 2rem 2rem;
+        }
+
+        .analysis-panel h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .analysis-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 188, 212, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .analysis-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .analysis-card h4 {
+            color: var(--secondary-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .analysis-card .value {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .analysis-card .description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 0 2rem 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: var(--text-light);
+            font-weight: bold;
+        }
+
+        /* Audio Controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .audio-controls button {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .audio-controls button:hover {
+            transform: translateY(-2px);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Enhanced Audio Controls */
+        .audio-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .narration-controls,
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            color: var(--text-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .audio-btn:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+        }
+
+        .audio-btn.small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 200px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .time-display {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .volume-slider {
+            width: 100px;
+        }
+
+        .speed-btn.active {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                min-height: 50px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .back-button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .demo-container {
+                padding-top: 60px;
+            }
+
+            .demo-title {
+                font-size: 1.8rem;
+            }
+
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .input-panel,
+            .results-panel {
+                padding: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .calculator-container {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .demo-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .narration-panel,
+            .analysis-panel,
+            .progress-container {
+                margin: 0 1rem 1rem;
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile Landscape Fix */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .calculator-container {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1rem;
+            }
+
+            .input-panel,
+            .results-panel {
+                padding: 0.8rem;
+                max-height: 300px;
+                overflow-y: auto;
+            }
+
+            .demo-title {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .demo-description {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .audio-controls {
+                padding: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .audio-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.4rem 0.8rem;
+                min-height: 45px;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .back-button {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .demo-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Landscape orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .navbar {
+                padding: 0.3rem 1rem;
+                min-height: 40px;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .demo-container {
+                padding-top: 50px;
+            }
+
+            .calculator-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Portrait orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: portrait) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tablet specific adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .calculator-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Cross-browser compatibility */
+        @supports not (backdrop-filter: blur(20px)) {
+
+            .navbar,
+            .input-panel,
+            .results-panel {
+                background: rgba(15, 15, 35, 0.95) !important;
+            }
+        }
+
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+
+            input,
+            textarea,
+            select,
+            button {
+                font-size: 16px !important;
+                /* Prevents zoom on iOS */
+            }
+        }
+
+        /* Touch-friendly elements */
+        @media (hover: none) and (pointer: coarse) {
+
+            .btn,
+            a,
+            button {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 12px 24px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            margin-top: 2rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Global CSS -->
+  <link rel="stylesheet" href="/assets/css/global.css">
+
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+
+    this.updateAnalysis(analysis);
+    }
+
+    await this.delay(1500);
+    }
+
+    // Final narration
+    this.updateNarration("Budget calculation complete! Daena's Finance Agent has processed all parameters and provided
+    comprehensive financial analysis with detailed ROI projections.");
+    }
+
+    async animateValue(componentId, finalValue) {
+    const element = document.getElementById(componentId);
+    const startValue = 0;
+    const duration = 1000;
+    const steps = 50;
+    const stepValue = (finalValue - startValue) / steps;
+    const stepDuration = duration / steps;
+
+    for (let i = 0; i <= steps; i++) { if (!this.isExecuting) break; const currentValue=Math.round(startValue +
+        (stepValue * i)); element.textContent=this.formatCurrency(currentValue); await this.delay(stepDuration); } }
+        updateAnalysis(analysis) { document.getElementById('roiProjection').textContent=`${analysis.roi}%`;
+        document.getElementById('paybackPeriod').textContent=`${analysis.paybackPeriod} months`;
+        document.getElementById('riskLevel').textContent=analysis.riskLevel;
+        document.getElementById('confidenceScore').textContent=`${analysis.confidence}%`; } formatCurrency(amount) {
+        return new Intl.NumberFormat('en-US', { style: 'currency' , currency: 'USD' , minimumFractionDigits: 0,
+        maximumFractionDigits: 0 }).format(amount); } updateNarration(text) { this.narrationText.innerHTML=` <span
+        class="narration-indicator"></span>
+        ${text}
+        `;
+        }
+
+        toggleNarration() {
+        // Toggle narration audio if available
+        if (this.narrationAudio.paused) {
+        this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
+        this.playNarrationBtn.textContent = '⏸ Pause Narration';
+        this.isNarrationPlaying = true;
+        } else {
+        this.narrationAudio.pause();
+        this.playNarrationBtn.textContent = '🎵 Play Narration';
+        this.isNarrationPlaying = false;
+        }
+        }
+
+        rewindNarration() {
+        this.narrationAudio.currentTime = Math.max(0, this.narrationAudio.currentTime - 10);
+        }
+
+        forwardNarration() {
+        this.narrationAudio.currentTime = Math.min(this.narrationAudio.duration, this.narrationAudio.currentTime + 10);
+        }
+
+        toggleSpeed() {
+        const speeds = [1, 1.25, 1.5, 2];
+        const currentIndex = speeds.indexOf(this.currentSpeed);
+        const nextIndex = (currentIndex + 1) % speeds.length;
+        this.currentSpeed = speeds[nextIndex];
+
+        this.narrationAudio.playbackRate = this.currentSpeed;
+        this.speedBtn.textContent = `${this.currentSpeed}x`;
+        this.speedBtn.classList.toggle('active', this.currentSpeed !== 1);
+        }
+
+        seekNarration(e) {
+        const rect = this.narrationProgress.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        this.narrationAudio.currentTime = percentage * this.narrationAudio.duration;
+        }
+
+        updateProgress() {
+        if (this.narrationAudio.duration) {
+        const percentage = (this.narrationAudio.currentTime / this.narrationAudio.duration) * 100;
+        this.narrationProgressFill.style.width = `${percentage}%`;
+        this.updateTimeDisplay();
+        }
+        }
+
+        updateTimeDisplay() {
+        const current = this.formatTime(this.narrationAudio.currentTime);
+        const total = this.formatTime(this.narrationAudio.duration);
+        this.timeDisplay.textContent = `${current} / ${total}`;
+        }
+
+        formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        onNarrationEnd() {
+        this.isNarrationPlaying = false;
+        this.playNarrationBtn.textContent = '🎵 Play Narration';
+        // Auto-stop demo when narration ends
+        if (this.isExecuting) {
+        this.stopDemo();
+        }
+        }
+
+        toggleBackgroundMusic() {
+        if (this.backgroundMusic.paused) {
+        this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
+        this.playMusicBtn.textContent = '⏸ Stop Music';
+        } else {
+        this.backgroundMusic.pause();
+        this.playMusicBtn.textContent = '🎶 Background Music';
+        }
+        }
+
+        setVolume(value) {
+        const volume = value / 100;
+        this.narrationAudio.volume = volume;
+        this.backgroundMusic.volume = volume * 0.3; // Keep background music quieter
+        }
+
+        delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        hideLoading() {
+        setTimeout(() => {
+        document.getElementById('loadingOverlay').style.opacity = '0';
+        setTimeout(() => {
+        document.getElementById('loadingOverlay').style.display = 'none';
+        }, 500);
+        }, 2000);
+        }
+        }
+
+        // Initialize demo when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+        new BudgetCalculationDemo();
+
+        // Handle orientation changes
+        function handleOrientationChange() {
+        const calculatorContainer = document.querySelector('.calculator-container');
+        const navbar = document.querySelector('.navbar');
+
+        setTimeout(() => {
+        const isLandscape = window.innerWidth > window.innerHeight;
+
+        if (calculatorContainer) {
+        if (isLandscape && window.innerWidth <= 1024) { calculatorContainer.style.gridTemplateColumns='1fr 1fr' ; } else
+            if (window.innerWidth <=768) { calculatorContainer.style.gridTemplateColumns='1fr' ; } } if (navbar) { if
+            (isLandscape) { navbar.style.minHeight='40px' ; } else { navbar.style.minHeight='50px' ; } } }, 100); } //
+            Listen for orientation changes window.addEventListener('orientationchange', handleOrientationChange);
+            window.addEventListener('resize', handleOrientationChange); // Initial orientation check
+            handleOrientationChange(); }); </script>
+</body>
+
+</html>

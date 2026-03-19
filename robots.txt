@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://daena.mas-ai.co/sitemap.xml

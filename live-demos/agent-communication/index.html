@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>Daena AI - Agent Communication Demo</title>
+    <meta name="description" content="Watch 6 intelligent AI agents collaborate in real-time on product launch analysis with live narration and jazz background music">
+    
+    <!-- Daena Skin - Unified styling -->
+    <link rel="stylesheet" href="/assets/skin/daena/skin.css">
+    <script defer src="/assets/skin/daena/skin.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --secondary-cyan: #00bcd4;
+            --dark-bg: #0f0f23;
+            --darker-bg: #1a1a3a;
+            --accent-purple: #2a1a4a;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --gradient-primary: linear-gradient(135deg, #FFD700 0%, #00bcd4 100%);
+            --gradient-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #2a1a4a 100%);
+            --shadow-glow: 0 0 30px rgba(255, 215, 0, 0.3);
+            --shadow-strong: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 193, 7, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 193, 7, 0.06) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-20px) translateY(-10px); }
+            50% { transform: translateX(20px) translateY(10px); }
+            75% { transform: translateX(-10px) translateY(20px); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .back-button {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Main Container */
+        .demo-container {
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .demo-header {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .demo-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Narration Panel */
+        .narration-panel {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .narration-text {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .narration-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Demo Controls */
+        .demo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-primary.executing {
+            background: var(--secondary-cyan);
+            color: var(--text-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        /* Agent Grid */
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .agent-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .agent-card.active::before {
+            left: 100%;
+        }
+
+        /* Honeycomb Architecture Styles */
+        .honeycomb-architecture {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .architecture-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .architecture-title h3 {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .architecture-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .department-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 188, 212, 0.1));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            border-color: var(--primary-gold);
+        }
+
+        .dept-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .dept-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .dept-name {
+            color: var(--primary-gold);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .agents-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .agent-mini {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .agent-mini:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--primary-gold);
+        }
+
+        .agent-mini.active {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border-color: var(--primary-gold);
+            animation: pulse 1s infinite;
+        }
+
+        .agent-mini.communicating {
+            background: var(--gradient-secondary);
+            color: var(--text-light);
+            border-color: var(--secondary-cyan);
+            animation: glow 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(0, 188, 212, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(0, 188, 212, 0.8); }
+        }
+
+        .agent-card.active {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--primary-gold);
+        }
+
+        .agent-card.communicating {
+            border-color: var(--secondary-cyan);
+            box-shadow: 0 0 30px rgba(0, 188, 212, 0.3);
+        }
+
+        .agent-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .agent-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .agent-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        .agent-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .status-idle {
+            background: rgba(128, 128, 128, 0.2);
+            color: var(--text-muted);
+        }
+
+        .status-active {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--primary-gold);
+        }
+
+        .status-communicating {
+            background: rgba(0, 188, 212, 0.2);
+            color: var(--secondary-cyan);
+        }
+
+        .agent-activity {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-right: 0.5rem;
+            min-width: 60px;
+        }
+
+        .activity-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .activity-text {
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .confidence-score {
+            font-size: 0.8rem;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        /* Communication Log */
+        .communication-log {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 188, 212, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 0 2rem 2rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-title {
+            font-size: 1.5rem;
+            color: var(--secondary-cyan);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .log-entry {
+            display: grid;
+            grid-template-columns: 80px 1fr 120px;
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-cyan);
+        }
+
+        .log-entry:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .log-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+
+        .log-message {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .log-type {
+            font-size: 0.8rem;
+            color: var(--primary-gold);
+            font-weight: bold;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        /* Stats Dashboard */
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 0 2rem 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Audio Controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .audio-controls button {
+            background: var(--gradient-primary);
+            color: var(--dark-bg);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .audio-controls button:hover {
+            transform: translateY(-2px);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Enhanced Audio Controls */
+        .audio-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .narration-controls, .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            color: var(--text-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .audio-btn:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+        }
+
+        .audio-btn.small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 200px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .time-display {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .volume-slider {
+            width: 100px;
+        }
+
+        .speed-btn.active {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+                min-height: 50px;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .back-button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .nav-buttons {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .demo-container {
+                padding-top: 60px;
+            }
+            
+            .demo-title {
+                font-size: 1.8rem;
+            }
+            
+            .demo-subtitle {
+                font-size: 1rem;
+            }
+            
+            .agent-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+                gap: 1rem;
+            }
+
+            .demo-controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .narration-panel,
+            .communication-log {
+                margin: 0 1rem 1rem;
+                padding: 1rem;
+            }
+            
+            .narration-text {
+                font-size: 1rem;
+                min-height: 60px;
+            }
+
+            .stats-dashboard {
+                padding: 0 1rem 1rem;
+            }
+
+            .log-entry {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .log-time,
+            .log-type {
+                text-align: left;
+            }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.4rem 0.8rem;
+                min-height: 45px;
+            }
+            
+            .logo {
+                font-size: 1rem;
+            }
+            
+            .back-button {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .demo-title {
+                font-size: 1.5rem;
+            }
+            
+            .demo-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .agent-grid {
+                gap: 0.8rem;
+            }
+        }
+        
+        /* Landscape orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .navbar {
+                padding: 0.3rem 1rem;
+                min-height: 40px;
+            }
+            
+            .logo {
+                font-size: 1.1rem;
+            }
+            
+            .back-button {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .demo-container {
+                padding-top: 50px;
+            }
+            
+            .demo-title {
+                font-size: 1.6rem;
+            }
+            
+            .agent-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        /* Portrait orientation - Mobile & Tablet */
+        @media (max-width: 1024px) and (orientation: portrait) {
+            .agent-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Tablet specific adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .agent-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Cross-browser compatibility */
+        @supports not (backdrop-filter: blur(20px)) {
+            .navbar, .agent-card, .narration-panel {
+                background: rgba(15, 15, 35, 0.95) !important;
+            }
+        }
+        
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            input, textarea, select, button {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+        }
+        
+        /* Touch-friendly elements */
+        @media (hover: none) and (pointer: coarse) {
+            .btn, a, button {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 12px 24px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 2rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="/assets/css/global.css">
+    
+    <!-- Metatron Background Script -->
+    <script src="/js/metatron-hex-network.js"></script>
+
+</head>
+<body>
+
+    <!-- Standard Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar" style="background: rgba(15, 15, 35, 0.95); backdrop-filter: blur(20px); border-bottom: 2px solid rgba(255, 215, 0, 0.3);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-400/20 group-hover:shadow-yellow-400/40 transition-all duration-300">
+                            <span class="text-black font-bold text-xl">D</span>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white group-hover:text-yellow-400 transition-colors">DAENA</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="/#features" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="/#technology" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Technology</a>
+                        <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Live Demos</a>
+                        <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Docs</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-md">
+                <a href="/#features" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="/#technology" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Technology</a>
+                <a href="/docs.html#advanced-demos" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Live Demos</a>
+                <a href="/docs.html" class="text-gray-300 hover:text-yellow-400 block px-3 py-2 rounded-md text-base font-medium">Docs</a>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Agent Communication Demo...</div>
+                </div>
+            </div>
+
+    <!-- Animated Background -->
+    
+
+    <!-- Navigation -->
+    
+
+    <!-- Main Demo Container -->
+    <div class="demo-container">
+        <!-- Demo Header -->
+        <div class="demo-header">
+            <h1 class="demo-title">Agent Communication Demo</h1>
+            <p class="demo-subtitle">
+                Watch 6 intelligent AI agents collaborate in real-time on product launch analysis. 
+                Each agent specializes in different business functions and communicates seamlessly 
+                to deliver comprehensive insights with live narration.
+            </p>
+        </div>
+
+        <!-- Narration Panel -->
+        <div class="narration-panel">
+            <div class="narration-text" id="narrationText">
+                <span class="narration-indicator"></span>
+                Welcome to Daena's Agent Communication Demo. Press the execute button to see how our 6 specialized agents work together on a product launch analysis. Each agent will demonstrate their unique capabilities while communicating with others in real-time.
+            </div>
+        </div>
+
+        <!-- Demo Controls -->
+                <div class="demo-controls">
+            <button class="btn btn-primary" id="executeBtn">🚀 EXECUTE LIVE DEMO</button>
+            <button class="btn btn-secondary" id="resetBtn">🔄 Reset Demo</button>
+                </div>
+
+        <!-- Sunflower Honeycomb Architecture -->
+        <div class="honeycomb-architecture">
+            <div class="architecture-title">
+                <h3>🌻 Sunflower Honeycomb Architecture (137.507° Golden Angle)</h3>
+                <p>48 Autonomous Agents across 8 Departments</p>
+            </div>
+            
+            <div class="departments-grid">
+                <!-- Engineering Department -->
+                <div class="department-card" id="engineering-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">⚙️</div>
+                        <div class="dept-name">ENGINEERING</div>
+                    </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="eng-strategic">Strategic</div>
+                        <div class="agent-mini" id="eng-growth">Growth</div>
+                        <div class="agent-mini" id="eng-research">Research</div>
+                        <div class="agent-mini" id="eng-data">Data</div>
+                        <div class="agent-mini" id="eng-border">Border</div>
+                        <div class="agent-mini" id="eng-exec">Exec</div>
+                            </div>
+                        </div>
+
+                <!-- Marketing Department -->
+                <div class="department-card" id="marketing-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">📢</div>
+                        <div class="dept-name">MARKETING</div>
+                    </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="mkt-strategic">Strategic</div>
+                        <div class="agent-mini" id="mkt-growth">Growth</div>
+                        <div class="agent-mini" id="mkt-research">Research</div>
+                        <div class="agent-mini" id="mkt-data">Data</div>
+                        <div class="agent-mini" id="mkt-border">Border</div>
+                        <div class="agent-mini" id="mkt-exec">Exec</div>
+                            </div>
+                        </div>
+
+                <!-- Sales Department -->
+                <div class="department-card" id="sales-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">📈</div>
+                        <div class="dept-name">SALES</div>
+                    </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="sales-strategic">Strategic</div>
+                        <div class="agent-mini" id="sales-growth">Growth</div>
+                        <div class="agent-mini" id="sales-research">Research</div>
+                        <div class="agent-mini" id="sales-data">Data</div>
+                        <div class="agent-mini" id="sales-border">Border</div>
+                        <div class="agent-mini" id="sales-exec">Exec</div>
+                            </div>
+                        </div>
+
+                <!-- Operations Department -->
+                <div class="department-card" id="operations-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">⚙️</div>
+                        <div class="dept-name">OPERATIONS</div>
+                            </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="ops-strategic">Strategic</div>
+                        <div class="agent-mini" id="ops-growth">Growth</div>
+                        <div class="agent-mini" id="ops-research">Research</div>
+                        <div class="agent-mini" id="ops-data">Data</div>
+                        <div class="agent-mini" id="ops-border">Border</div>
+                        <div class="agent-mini" id="ops-exec">Exec</div>
+                    </div>
+                </div>
+
+                <!-- Finance Department -->
+                <div class="department-card" id="finance-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">💰</div>
+                        <div class="dept-name">FINANCE</div>
+                    </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="fin-strategic">Strategic</div>
+                        <div class="agent-mini" id="fin-growth">Growth</div>
+                        <div class="agent-mini" id="fin-research">Research</div>
+                        <div class="agent-mini" id="fin-data">Data</div>
+                        <div class="agent-mini" id="fin-border">Border</div>
+                        <div class="agent-mini" id="fin-exec">Exec</div>
+                    </div>
+                </div>
+
+                <!-- Human Resources Department -->
+                <div class="department-card" id="hr-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">👥</div>
+                        <div class="dept-name">HUMAN RESOURCES</div>
+                    </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="hr-strategic">Strategic</div>
+                        <div class="agent-mini" id="hr-growth">Growth</div>
+                        <div class="agent-mini" id="hr-research">Research</div>
+                        <div class="agent-mini" id="hr-data">Data</div>
+                        <div class="agent-mini" id="hr-border">Border</div>
+                        <div class="agent-mini" id="hr-exec">Exec</div>
+                    </div>
+                </div>
+
+                <!-- Legal Department -->
+                <div class="department-card" id="legal-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">⚖️</div>
+                        <div class="dept-name">LEGAL</div>
+                    </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="legal-strategic">Strategic</div>
+                        <div class="agent-mini" id="legal-growth">Growth</div>
+                        <div class="agent-mini" id="legal-research">Research</div>
+                        <div class="agent-mini" id="legal-data">Data</div>
+                        <div class="agent-mini" id="legal-border">Border</div>
+                        <div class="agent-mini" id="legal-exec">Exec</div>
+                    </div>
+                </div>
+
+                <!-- Product Department -->
+                <div class="department-card" id="product-dept">
+                    <div class="dept-header">
+                        <div class="dept-icon">🚀</div>
+                        <div class="dept-name">PRODUCT</div>
+                    </div>
+                    <div class="agents-container">
+                        <div class="agent-mini" id="prod-strategic">Strategic</div>
+                        <div class="agent-mini" id="prod-growth">Growth</div>
+                        <div class="agent-mini" id="prod-research">Research</div>
+                        <div class="agent-mini" id="prod-data">Data</div>
+                        <div class="agent-mini" id="prod-border">Border</div>
+                        <div class="agent-mini" id="prod-exec">Exec</div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Communication Log -->
+                <div class="communication-log">
+            <h3 class="log-title">🤝 Agent Communication Log</h3>
+            <div id="communication-log">
+                <p style="color: #999; font-style: italic; text-align: center; padding: 2rem;">
+                    Agent communications will appear here when demo executes...
+                </p>
+                        </div>
+                    </div>
+
+        <!-- Stats Dashboard -->
+        <div class="stats-dashboard">
+            <div class="stat-card">
+                <div class="stat-value" id="total-messages">0</div>
+                <div class="stat-label">Total Messages</div>
+                </div>
+            <div class="stat-card">
+                <div class="stat-value" id="cross-dept">0</div>
+                <div class="stat-label">Cross-Department</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="knowledge-transfers">0</div>
+                <div class="stat-label">Knowledge Transfers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avg-confidence">0.00</div>
+                <div class="stat-label">Avg Confidence</div>
+            </div>
+        </div>
+                </div>
+
+        <!-- Audio Controls -->
+        <div class="audio-controls">
+            <div class="narration-controls">
+                <button id="playNarrationBtn">🎵 Play Narration</button>
+                <button id="rewindBtn" title="Rewind 10s">⏪</button>
+                <button id="speedBtn" title="Speed: 1x">1x</button>
+                <button id="forwardBtn" title="Forward 10s">⏩</button>
+                <div class="progress-container">
+                    <div class="progress-bar" id="narrationProgress">
+                        <div class="progress-fill" id="narrationProgressFill"></div>
+                </div>
+                    <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="narrationAudio" preload="auto"></audio>
+
+    <script>
+        class EnhancedAgentDemo {
+            constructor() {
+                this.isExecuting = false;
+                this.messageCount = 0;
+                this.crossDeptCount = 0;
+                this.knowledgeTransfers = 0;
+                this.totalConfidence = 0;
+                this.agentStates = {};
+                this.communicationLog = [];
+                this.narrationIndex = 0;
+                
+                this.init();
+            }
+
+            init() {
+                // Initialize departments and their agents
+                this.departments = {
+                    'engineering': {
+                        name: 'Engineering',
+                        agents: ['eng-strategic', 'eng-growth', 'eng-research', 'eng-data', 'eng-border', 'eng-exec']
+                    },
+                    'marketing': {
+                        name: 'Marketing',
+                        agents: ['mkt-strategic', 'mkt-growth', 'mkt-research', 'mkt-data', 'mkt-border', 'mkt-exec']
+                    },
+                    'sales': {
+                        name: 'Sales',
+                        agents: ['sales-strategic', 'sales-growth', 'sales-research', 'sales-data', 'sales-border', 'sales-exec']
+                    },
+                    'operations': {
+                        name: 'Operations',
+                        agents: ['ops-strategic', 'ops-growth', 'ops-research', 'ops-data', 'ops-border', 'ops-exec']
+                    },
+                    'finance': {
+                        name: 'Finance',
+                        agents: ['fin-strategic', 'fin-growth', 'fin-research', 'fin-data', 'fin-border', 'fin-exec']
+                    },
+                    'hr': {
+                        name: 'Human Resources',
+                        agents: ['hr-strategic', 'hr-growth', 'hr-research', 'hr-data', 'hr-border', 'hr-exec']
+                    },
+                    'legal': {
+                        name: 'Legal',
+                        agents: ['legal-strategic', 'legal-growth', 'legal-research', 'legal-data', 'legal-border', 'legal-exec']
+                    },
+                    'product': {
+                        name: 'Product',
+                        agents: ['prod-strategic', 'prod-growth', 'prod-research', 'prod-data', 'prod-border', 'prod-exec']
+                    }
+                };
+
+                // Initialize all agents
+                this.agents = {};
+                Object.values(this.departments).forEach(dept => {
+                    dept.agents.forEach(agentId => {
+                        this.agents[agentId] = {
+                            name: agentId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                            status: 'idle',
+                            department: dept.name,
+                            element: document.getElementById(agentId)
+                        };
+                    });
+                });
+
+                this.executeBtn = document.getElementById('executeBtn');
+                this.resetBtn = document.getElementById('resetBtn');
+                this.narrationText = document.getElementById('narrationText');
+                this.communicationLog = document.getElementById('communication-log');
+                this.narrationAudio = document.getElementById('narrationAudio');
+                this.playNarrationBtn = document.getElementById('playNarrationBtn');
+                
+                // Enhanced audio controls
+                this.rewindBtn = document.getElementById('rewindBtn');
+                this.speedBtn = document.getElementById('speedBtn');
+                this.forwardBtn = document.getElementById('forwardBtn');
+                this.narrationProgress = document.getElementById('narrationProgress');
+                this.narrationProgressFill = document.getElementById('narrationProgressFill');
+                this.timeDisplay = document.getElementById('timeDisplay');
+                
+                this.currentSpeed = 1;
+                this.isNarrationPlaying = false;
+
+                this.stats = {
+                    totalMessages: document.getElementById('total-messages'),
+                    crossDept: document.getElementById('cross-dept'),
+                    knowledgeTransfers: document.getElementById('knowledge-transfers'),
+                    avgConfidence: document.getElementById('avg-confidence')
+                };
+
+                // Narration scripts
+                this.narrationScripts = [
+                    "Welcome to Daena's Agent Communication Demo. Press the execute button to see how our 6 specialized agents work together on a product launch analysis.",
+                    "Now I'll execute the demo. Watch as the Executive Agent initiates the product launch analysis and coordinates with all other agents.",
+                    "The Research Agent is now gathering market data and competitor analysis. Notice how it communicates findings to other departments.",
+                    "The Marketing Agent is developing the go-to-market strategy based on research insights. See the real-time knowledge transfer happening.",
+                    "The Finance Agent is calculating comprehensive budgets and ROI projections. Watch how it coordinates with other agents for accurate data.",
+                    "The Operations Agent is creating implementation timelines and resource allocation plans. Notice the cross-departmental coordination.",
+                    "The Sales Agent is preparing launch strategies and aligning with marketing campaigns. See the seamless communication flow.",
+                    "Finally, the Executive Agent synthesizes all inputs and makes the final launch recommendation. This demonstrates Daena's autonomous decision-making capabilities.",
+                    "Demo complete! This showcases how Daena's 48 agents work together across 8 departments with perfect coordination and communication."
+                ];
+
+                this.setupEventListeners();
+                this.resetDemo();
+                this.hideLoading();
+            }
+
+            setupEventListeners() {
+                this.executeBtn.addEventListener('click', () => {
+                    if (!this.isExecuting) {
+                        this.startDemo();
+                    } else {
+                        this.stopDemo();
+                    }
+                });
+
+                this.resetBtn.addEventListener('click', () => this.resetDemo());
+                this.playNarrationBtn.addEventListener('click', () => this.toggleNarration());
+                
+                // Enhanced audio controls
+                this.rewindBtn.addEventListener('click', () => this.rewindNarration());
+                this.speedBtn.addEventListener('click', () => this.toggleSpeed());
+                this.forwardBtn.addEventListener('click', () => this.forwardNarration());
+                this.narrationProgress.addEventListener('click', (e) => this.seekNarration(e));
+                
+                // Audio event listeners
+                this.narrationAudio.addEventListener('timeupdate', () => this.updateProgress());
+                this.narrationAudio.addEventListener('loadedmetadata', () => this.updateTimeDisplay());
+                this.narrationAudio.addEventListener('ended', () => this.onNarrationEnd());
+
+                // Load narration audio
+                this.narrationAudio.src = '../voice-over-demos/Demo 1 Agent Communication.mp3';
+                this.narrationAudio.volume = 0.8;
+            }
+
+            resetDemo() {
+                // Reset all agents to idle state
+                Object.keys(this.agents).forEach(agentKey => {
+                    this.setAgentStatus(agentKey, 'idle');
+                });
+
+                // Reset communication log
+                this.communicationLog.innerHTML = '<p style="color: #999; font-style: italic; text-align: center; padding: 2rem;">Agent communications will appear here when demo executes...</p>';
+
+                // Reset stats
+                this.messageCount = 0;
+                this.crossDeptCount = 0;
+                this.knowledgeTransfers = 0;
+                this.totalConfidence = 0;
+                this.updateStats();
+
+                // Reset narration
+                this.narrationIndex = 0;
+                this.updateNarration(this.narrationScripts[0]);
+
+                // Reset buttons
+                this.executeBtn.textContent = '🚀 EXECUTE LIVE DEMO';
+                this.executeBtn.classList.remove('executing');
+                this.isExecuting = false;
+            }
+
+            async startDemo() {
+                this.isExecuting = true;
+                this.executeBtn.textContent = '⏸ STOP DEMO';
+                this.executeBtn.classList.add('executing');
+
+                // Clear previous log
+                this.communicationLog.innerHTML = '';
+
+                // Start narration first (the correct voice-over)
+                this.narrationAudio.playbackRate = this.currentSpeed;
+                this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
+                this.playNarrationBtn.textContent = '⏸ Pause Narration';
+                this.isNarrationPlaying = true;
+
+                // Background music disabled by default to avoid interference with narration
+                // this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
+
+                // Demo scenario: New product launch analysis
+                await this.executeProductLaunchScenario();
+
+                // Demo completed - narration continues until finished
+            }
+
+            stopDemo() {
+                this.isExecuting = false;
+                this.executeBtn.textContent = '🚀 EXECUTE LIVE DEMO';
+                this.executeBtn.classList.remove('executing');
+
+                // Stop narration
+                this.narrationAudio.pause();
+                this.playNarrationBtn.textContent = '🎵 Play Narration';
+
+                // Reset all agents after a delay
+                setTimeout(() => {
+                    Object.keys(this.agents).forEach(agentKey => {
+                        this.setAgentStatus(agentKey, 'idle');
+                    });
+                }, 1000);
+            }
+
+            async executeProductLaunchScenario() {
+                // 0) Border handshake across all departments first
+                this.updateNarration('All Border agents are activating secure channels for cross-department communication.');
+                Object.values(this.departments).forEach(dept => {
+                    const border = dept.agents.find(a => a.endsWith('border'));
+                    if (border) this.setAgentStatus(border, 'communicating');
+                });
+                this.addCommunicationLog('Border Network', 'Handshake established across all departments', 'CROSS_DEPT', 0.95);
+                await this.delay(1200);
+
+                // 1) Iterate departments and align narration
+                const departments = Object.keys(this.departments);
+                for (let i = 0; i < departments.length; i++) {
+                    const deptKey = departments[i];
+                    const dept = this.departments[deptKey];
+                    const deptAgents = dept.agents;
+
+                    this.updateNarration(`${dept.name} is activating agents and sharing data.`);
+                    deptAgents.forEach(agentId => this.setAgentStatus(agentId, 'active'));
+                    this.addCommunicationLog(`${dept.name}`, 'Agents active and coordinating', 'COORDINATION', 0.88);
+                    await this.delay(1000);
+
+                    // Add cross-department messages between departments
+                    if (i > 0) {
+                        const prevDept = this.departments[departments[i - 1]];
+                        this.addCommunicationMessage(
+                            `${prevDept.name}`, 
+                            `${dept.name}`, 
+                            `Sharing data and insights for coordination`, 
+                            'DATA_SHARE', 
+                            0.87
+                        );
+                        await this.delay(500);
+                    }
+
+                    // Communication burst in this department
+                    deptAgents.slice(0, 3).forEach(agentId => this.setAgentStatus(agentId, 'communicating'));
+                    
+                    // Add knowledge transfer messages within department
+                    if (deptAgents.length >= 3) {
+                        this.addCommunicationMessage(
+                            `${dept.name} Strategic`, 
+                            `${dept.name} Exec`, 
+                            `Knowledge transfer: Strategic insights compiled`, 
+                            'KNOWLEDGE_TRANSFER', 
+                            0.89
+                        );
+                        await this.delay(400);
+                    }
+                    
+                    await this.delay(500);
+                }
+
+                // 2) Final coordination phase - all departments working together
+                this.updateNarration('All departments are now coordinating in real-time.');
+                Object.values(this.departments).forEach(dept => {
+                    dept.agents.forEach(agentId => this.setAgentStatus(agentId, 'communicating'));
+                });
+                
+                // Add multiple cross-department coordination messages
+                const deptNames = Object.values(this.departments).map(d => d.name);
+                for (let i = 0; i < Math.min(5, deptNames.length - 1); i++) {
+                    this.addCommunicationMessage(
+                        deptNames[i], 
+                        deptNames[i + 1], 
+                        `Cross-department coordination: Real-time data sync`, 
+                        'CROSS_DEPT', 
+                        0.91
+                    );
+                    await this.delay(300);
+                }
+                
+                // Add knowledge transfers
+                for (let i = 0; i < 3; i++) {
+                    const fromDept = deptNames[Math.floor(Math.random() * deptNames.length)];
+                    const toDept = deptNames[Math.floor(Math.random() * deptNames.length)];
+                    if (fromDept !== toDept) {
+                        this.addCommunicationMessage(
+                            `${fromDept} Research`, 
+                            `${toDept} Strategic`, 
+                            `Knowledge transfer: Research findings and analysis`, 
+                            'KNOWLEDGE_TRANSFER', 
+                            0.88
+                        );
+                        await this.delay(300);
+                    }
+                }
+                
+                this.addCommunicationLog('Daena Core', 'All 48+ agents across 8 departments now coordinating in real-time', 'SYSTEM', 0.94);
+                await this.delay(500);
+
+                // Final narration
+                this.updateNarration("Demo complete! This showcases how Daena's 48+ agents with Consulate experts collaborate across 8 departments under VP Daena.");
+            }
+
+            async executeProductLaunchScenarioOld() {
+                const scenario = [
+                    {
+                        phase: 'task-initiation',
+                        description: 'Executive Agent initiates new product launch analysis',
+                        narration: "The Executive Agent is now initiating a comprehensive product launch analysis. Watch how it coordinates with all other agents.",
+                        actions: [
+                            { agent: 'executive-agent', action: 'Initiating comprehensive product launch analysis', confidence: 0.95 },
+                            { agent: 'executive-agent', action: 'Requesting cross-departmental collaboration', confidence: 0.90 }
+                        ],
+                        messages: [
+                            { from: 'Executive Agent', to: 'All Agents', message: 'New product launch analysis initiated', type: 'TASK_ASSIGNMENT', confidence: 0.95 }
+                        ]
+                    },
+                    {
+                        phase: 'research-engagement',
+                        description: 'Research Agent begins market analysis',
+                        narration: "The Research Agent is now gathering market data and competitor analysis. Notice how it communicates findings to other departments.",
+                        actions: [
+                            { agent: 'research-agent', action: 'Starting market research data collection', confidence: 0.88 },
+                            { agent: 'research-agent', action: 'Analyzing competitor landscape', confidence: 0.92 }
+                        ],
+                        messages: [
+                            { from: 'Research Agent', to: 'Marketing Agent', message: 'Market insights ready for campaign analysis', type: 'DATA_SHARE', confidence: 0.88 },
+                            { from: 'Research Agent', to: 'Finance Agent', message: 'Market sizing data prepared for budget calculations', type: 'CROSS_DEPT', confidence: 0.90 }
+                        ]
+                    },
+                    {
+                        phase: 'marketing-coordination',
+                        description: 'Marketing Agent develops strategy',
+                        narration: "The Marketing Agent is developing the go-to-market strategy based on research insights. See the real-time knowledge transfer happening.",
+                        actions: [
+                            { agent: 'marketing-agent', action: 'Developing go-to-market strategy', confidence: 0.85 },
+                            { agent: 'marketing-agent', action: 'Analyzing customer segments', confidence: 0.87 }
+                        ],
+                        messages: [
+                            { from: 'Marketing Agent', to: 'Sales Agent', message: 'Revised sales targets based on market analysis', type: 'KNOWLEDGE_TRANSFER', confidence: 0.85 },
+                            { from: 'Marketing Agent', to: 'Operations Agent', message: 'Support required for launch logistics', type: 'COORDINATION', confidence: 0.82 }
+                        ]
+                    },
+                    {
+                        phase: 'financial-analysis',
+                        description: 'Finance Agent calculates budgets and ROI',
+                        narration: "The Finance Agent is calculating comprehensive budgets and ROI projections. Watch how it coordinates with other agents for accurate data.",
+                        actions: [
+                            { agent: 'finance-agent', action: 'Calculating comprehensive budget projections', confidence: 0.93 },
+                            { agent: 'finance-agent', action: 'Analyzing ROI scenarios', confidence: 0.89 }
+                        ],
+                        messages: [
+                            { from: 'Finance Agent', to: 'Executive Agent', message: 'Budget analysis complete with risk assessments', type: 'REPORT', confidence: 0.93 },
+                            { from: 'Finance Agent', to: 'Operations Agent', message: 'Resource allocation recommendations', type: 'RECOMMENDATION', confidence: 0.91 }
+                        ]
+                    },
+                    {
+                        phase: 'operations-planning',
+                        description: 'Operations Agent plans implementation',
+                        narration: "The Operations Agent is creating implementation timelines and resource allocation plans. Notice the cross-departmental coordination.",
+                        actions: [
+                            { agent: 'operations-agent', action: 'Developing operational timeline', confidence: 0.86 },
+                            { agent: 'operations-agent', action: 'Coordinating resource allocation', confidence: 0.88 }
+                        ],
+                        messages: [
+                            { from: 'Operations Agent', to: 'All Agents', message: 'Implementation timeline synchronized across departments', type: 'COORDINATION', confidence: 0.86 },
+                            { from: 'Operations Agent', to: 'Sales Agent', message: 'Distribution channel readiness confirmed', type: 'STATUS_UPDATE', confidence: 0.89 }
+                        ]
+                    },
+                    {
+                        phase: 'sales-preparation',
+                        description: 'Sales Agent prepares for launch',
+                        narration: "The Sales Agent is preparing launch strategies and aligning with marketing campaigns. See the seamless communication flow.",
+                        actions: [
+                            { agent: 'sales-agent', action: 'Optimizing sales processes for new product', confidence: 0.87 },
+                            { agent: 'sales-agent', action: 'Aligning with marketing campaigns', confidence: 0.84 }
+                        ],
+                        messages: [
+                            { from: 'Sales Agent', to: 'Executive Agent', message: 'Sales readiness confirmed with final preparation', type: 'STATUS_UPDATE', confidence: 0.87 },
+                            { from: 'Sales Agent', to: 'Marketing Agent', message: 'Campaign alignment verified', type: 'VERIFICATION', confidence: 0.84 }
+                        ]
+                    },
+                    {
+                        phase: 'final-coordination',
+                        description: 'Executive Agent synthesizes all inputs',
+                        narration: "Finally, the Executive Agent synthesizes all inputs and makes the final launch recommendation. This demonstrates Daena's autonomous decision-making capabilities.",
+                        actions: [
+                            { agent: 'executive-agent', action: 'Synthesizing comprehensive analysis', confidence: 0.94 },
+                            { agent: 'executive-agent', action: 'Preparing final launch recommendation', confidence: 0.96 }
+                        ],
+                        messages: [
+                            { from: 'Executive Agent', to: 'All Agents', message: 'Product launch analysis complete - all systems coordinated', type: 'FINAL_SUMMARY', confidence: 0.94 },
+                            { from: 'Executive Agent', to: 'All Agents', message: 'Recommendation: Proceed with launch as planned', type: 'DECISION', confidence: 0.96 }
+                        ]
+                    }
+                ];
+
+                for (let i = 0; i < scenario.length; i++) {
+                    if (!this.isExecuting) break;
+
+                    const phase = scenario[i];
+                    
+                    // Update narration
+                    this.updateNarration(phase.narration);
+
+                    // Update agent activities
+                    for (const action of phase.actions) {
+                        const agentKey = Object.keys(this.agents).find(key => key === action.agent);
+                        if (agentKey) {
+                            this.addAgentActivity(agentKey, action.action, action.confidence);
+                            this.setAgentStatus(agentKey, 'active');
+                            
+                            // Add communication delay
+                            await this.delay(800 + Math.random() * 400);
+                            
+                            this.setAgentStatus(agentKey, 'communicating');
+                            await this.delay(1200 + Math.random() * 600);
+                        }
+                    }
+
+                    // Add communication messages
+                    for (const msg of phase.messages) {
+                        this.addCommunicationMessage(msg.from, msg.to, msg.message, msg.type, msg.confidence);
+                        await this.delay(1000 + Math.random() * 800);
+                    }
+
+                    // Pause between phases
+                    await this.delay(1500);
+                }
+
+                // Final narration
+                this.updateNarration("Demo complete! This showcases how Daena's 48 agents work together across 8 departments with perfect coordination and communication.");
+            }
+
+            setAgentStatus(agentKey, status) {
+                const agent = this.agents[agentKey];
+                if (!agent || !agent.element) return;
+
+                agent.status = status;
+                agent.element.className = `agent-mini ${status}`;
+                
+                // Add visual feedback
+                if (status === 'active') {
+                    agent.element.style.animation = 'pulse 1s infinite';
+                } else if (status === 'communicating') {
+                    agent.element.style.animation = 'glow 0.5s ease-in-out';
+                } else {
+                    agent.element.style.animation = 'none';
+                }
+            }
+
+            addAgentActivity(agentKey, activity, confidence) {
+                const agent = this.agents[agentKey];
+                if (!agent) return;
+
+                const time = new Date().toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
+                });
+
+                const activityItem = document.createElement('div');
+                activityItem.className = 'activity-item';
+                activityItem.innerHTML = `
+                    <div class="activity-time">${time}</div>
+                    <span class="activity-icon">${this.getActivityIcon()}</span>
+                    <div class="activity-text">${activity}</div>
+                    <div class="confidence-score">(${(confidence * 100).toFixed(0)}%)</div>
+                `;
+
+                // Remove placeholder if exists
+                const placeholder = agent.activity.querySelector('p[style*="italic"]');
+                if (placeholder) {
+                    placeholder.remove();
+                }
+
+                agent.activity.appendChild(activityItem);
+                agent.activity.scrollTop = agent.activity.scrollHeight;
+
+                // Update confidence in stats
+                this.totalConfidence += confidence;
+            }
+
+            addCommunicationMessage(from, to, message, type, confidence) {
+                const time = new Date().toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
+                });
+
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.innerHTML = `
+                    <div class="log-time">${time}</div>
+                    <div class="log-message">${from} → ${to}: ${message}</div>
+                    <div class="log-type">${type}</div>
+                `;
+
+                this.communicationLog.appendChild(logEntry);
+                this.communicationLog.scrollTop = this.communicationLog.scrollHeight;
+
+                // Update stats
+                this.messageCount++;
+                if (type === 'CROSS_DEPT' || type === 'DATA_SHARE') this.crossDeptCount++;
+                if (type === 'KNOWLEDGE_TRANSFER') this.knowledgeTransfers++;
+                this.totalConfidence += confidence;
+                this.updateStats();
+            }
+
+            // Simple log appender used by the scenario above
+            addCommunicationLog(source, message, type = 'SYSTEM', confidence = 0.90) {
+                const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.innerHTML = `
+                    <div class="log-time">${time}</div>
+                    <div class="log-message"><strong>${source}</strong>: ${message}</div>
+                    <div class="log-type">${type}</div>
+                `;
+                this.communicationLog.appendChild(logEntry);
+                this.communicationLog.scrollTop = this.communicationLog.scrollHeight;
+                
+                // Update stats based on message type
+                this.messageCount++;
+                if (type === 'CROSS_DEPT' || type === 'DATA_SHARE' || source.includes('Network') || message.includes('coordinating')) {
+                    this.crossDeptCount++;
+                }
+                if (type === 'KNOWLEDGE_TRANSFER' || message.includes('sharing') || message.includes('transfer')) {
+                    this.knowledgeTransfers++;
+                }
+                this.totalConfidence += confidence;
+                this.updateStats();
+            }
+
+            updateNarration(text) {
+                this.narrationText.innerHTML = `
+                    <span class="narration-indicator"></span>
+                    ${text}
+                `;
+            }
+
+            updateStats() {
+                this.stats.totalMessages.textContent = this.messageCount;
+                this.stats.crossDept.textContent = this.crossDeptCount;
+                this.stats.knowledgeTransfers.textContent = this.knowledgeTransfers;
+                
+                const avgConfidence = this.messageCount > 0 ? (this.totalConfidence / this.messageCount) : 0;
+                this.stats.avgConfidence.textContent = avgConfidence.toFixed(2);
+            }
+
+            getActivityIcon() {
+                const icons = ['⚡', '🔄', '📊', '🎯', '💡', '🚀', '⭐', '🔍'];
+                return icons[Math.floor(Math.random() * icons.length)];
+            }
+
+            toggleNarration() {
+                // Toggle narration audio if available
+                if (this.narrationAudio.paused) {
+                    this.narrationAudio.play().catch(e => console.log('Narration failed:', e));
+                    this.playNarrationBtn.textContent = '⏸ Pause Narration';
+                    this.isNarrationPlaying = true;
+                } else {
+                    this.narrationAudio.pause();
+                    this.playNarrationBtn.textContent = '🎵 Play Narration';
+                    this.isNarrationPlaying = false;
+                }
+            }
+
+            rewindNarration() {
+                this.narrationAudio.currentTime = Math.max(0, this.narrationAudio.currentTime - 10);
+            }
+
+            forwardNarration() {
+                this.narrationAudio.currentTime = Math.min(this.narrationAudio.duration, this.narrationAudio.currentTime + 10);
+            }
+
+            toggleSpeed() {
+                const speeds = [1, 1.25, 1.5, 2];
+                const currentIndex = speeds.indexOf(this.currentSpeed);
+                const nextIndex = (currentIndex + 1) % speeds.length;
+                this.currentSpeed = speeds[nextIndex];
+                
+                this.narrationAudio.playbackRate = this.currentSpeed;
+                this.speedBtn.textContent = `${this.currentSpeed}x`;
+                this.speedBtn.classList.toggle('active', this.currentSpeed !== 1);
+            }
+
+            seekNarration(e) {
+                const rect = this.narrationProgress.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const percentage = clickX / rect.width;
+                this.narrationAudio.currentTime = percentage * this.narrationAudio.duration;
+            }
+
+            updateProgress() {
+                if (this.narrationAudio.duration) {
+                    const percentage = (this.narrationAudio.currentTime / this.narrationAudio.duration) * 100;
+                    this.narrationProgressFill.style.width = `${percentage}%`;
+                    this.updateTimeDisplay();
+                }
+            }
+
+            updateTimeDisplay() {
+                const current = this.formatTime(this.narrationAudio.currentTime);
+                const total = this.formatTime(this.narrationAudio.duration);
+                this.timeDisplay.textContent = `${current} / ${total}`;
+            }
+
+            formatTime(seconds) {
+                if (isNaN(seconds)) return '0:00';
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            onNarrationEnd() {
+                this.isNarrationPlaying = false;
+                this.playNarrationBtn.textContent = '🎵 Play Narration';
+                // Auto-stop demo when narration ends
+                if (this.isExecuting) {
+                    this.stopDemo();
+                }
+            }
+
+            toggleBackgroundMusic() {
+                if (this.backgroundMusic.paused) {
+                    this.backgroundMusic.play().catch(e => console.log('Background music failed:', e));
+                    this.playMusicBtn.textContent = '⏸ Stop Music';
+                } else {
+                    this.backgroundMusic.pause();
+                    this.playMusicBtn.textContent = '🎶 Background Music';
+                }
+            }
+
+            setVolume(value) {
+                const volume = value / 100;
+                this.narrationAudio.volume = volume;
+                this.backgroundMusic.volume = volume * 0.3; // Keep background music quieter
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            hideLoading() {
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                    }, 500);
+                }, 2000);
+            }
+        }
+
+        // Initialize demo when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new EnhancedAgentDemo();
+        });
+            // Handle orientation changes
+            function handleOrientationChange() {
+                const agentGrid = document.querySelector('.agent-grid');
+                const navbar = document.querySelector('.navbar');
+                
+                setTimeout(() => {
+                    const isLandscape = window.innerWidth > window.innerHeight;
+                    
+                    if (agentGrid) {
+                        if (isLandscape && window.innerWidth <= 1024) {
+                            agentGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                        } else if (window.innerWidth <= 768) {
+                            agentGrid.style.gridTemplateColumns = '1fr';
+                        }
+                    }
+                    
+                    if (navbar) {
+                        if (isLandscape) {
+                            navbar.style.minHeight = '40px';
+                        } else {
+                            navbar.style.minHeight = '50px';
+                        }
+                    }
+                }, 100);
+            }
+            
+            // Listen for orientation changes
+            window.addEventListener('orientationchange', handleOrientationChange);
+            window.addEventListener('resize', handleOrientationChange);
+            
+            // Initial orientation check
+            handleOrientationChange();
+    </script>
+</body>
+</html>

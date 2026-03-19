@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover">
+    <title>Daena by MAS-AI | Governance-First AI Agent Platform</title>
+    <meta name="description" content="Daena coordinates AI agents with built-in governance, auditable memory, and a 10-stage execution pipeline. Patent-pending PhiLattice Architecture.">
+    <meta name="keywords" content="Daena, Daena AI, governed AI, AI agents, MAS-AI, enterprise AI, NBMF, PhiLattice, auditable AI, multi-agent platform, AI governance">
+    <meta name="author" content="MAS-AI Technologies Inc.">
+    <link rel="canonical" href="https://daena.mas-ai.co/">
+    <meta property="og:title" content="Daena by MAS-AI | Governance-First AI Agent Platform">
+    <meta property="og:description" content="Daena coordinates AI agents with built-in governance, auditable memory, and a 10-stage execution pipeline.">
+    <meta property="og:image" content="https://daena.mas-ai.co/assets/img/og-image.jpg">
+    <meta property="og:url" content="https://daena.mas-ai.co/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Daena AI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daena by MAS-AI | Governance-First AI Agent Platform">
+    <meta name="twitter:description" content="Daena coordinates AI agents with built-in governance, auditable memory, and a 10-stage execution pipeline.">
+    <meta name="twitter:image" content="https://daena.mas-ai.co/assets/img/og-image.jpg">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Daena","applicationCategory":"BusinessApplication","operatingSystem":"Cloud, Self-hosted","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Daena is a governance-first AI agent orchestration platform with patent-pending PhiLattice Architecture and Neural-Backed Memory Fabric.","brand":{"@type":"Brand","name":"MAS-AI Technologies Inc."},"url":"https://daena.mas-ai.co/"}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/video-player.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;background:#0a0a0a}
+        body{background:#0a0a0a;color:#e8eaf0;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+        h1,h2,h3{font-family:'Syne',sans-serif}
+        .font-mono{font-family:'JetBrains Mono',monospace}
+
+        /* Canvas */
+        #bg-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0}
+
+        /* Scroll content */
+        #scroll-content{position:relative;z-index:1}
+
+        /* Sections */
+        .step{position:relative;display:flex;align-items:center;justify-content:center;padding:40px 20px;perspective:1200px}
+        @media(min-width:640px){.step{padding:60px 40px}}
+
+        /* Content panels */
+        .content-panel{
+            background:rgba(10,14,26,0.88);
+            backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+            border:1px solid rgba(0,200,255,0.12);
+            border-radius:20px;
+            padding:36px 32px;
+            max-width:540px;width:42%;
+            transform-style:preserve-3d;
+            will-change:transform,opacity;
+            box-shadow:0 12px 48px rgba(0,0,0,0.5)
+        }
+        .content-panel h2{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;margin-bottom:16px}
+        .content-panel h3{font-size:1.1rem;font-weight:600;margin:16px 0 8px;color:#d4a853}
+        .content-panel p{color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:12px;font-size:0.95rem}
+        .content-panel ul{list-style:none;padding:0}
+        .content-panel li{padding:8px 0 8px 20px;position:relative;color:rgba(255,255,255,0.55);font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+        .content-panel li::before{content:'';position:absolute;left:0;top:50%;width:8px;height:8px;background:#d4a853;border-radius:2px;transform:translateY(-50%) rotate(45deg)}
+        .content-panel.wide{max-width:520px;width:42%}
+        .step[data-side="left"]{justify-content:flex-start;padding-left:5%}
+        .step[data-side="right"]{justify-content:flex-end;padding-right:5%}
+        @media(max-width:768px){.step[data-side="left"],.step[data-side="right"]{justify-content:center;padding-left:20px;padding-right:20px}.content-panel{width:92%;max-width:620px}}
+
+
+        /* Hero overlay */
+        .hero-overlay{text-align:center;max-width:800px;width:90%;pointer-events:auto}
+        .hero-overlay .label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(212,168,83,0.7);margin-bottom:20px}
+        .hero-overlay h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:800;margin-bottom:8px;
+            background:linear-gradient(135deg,#d4a853 0%,#FFA500 40%,#FFD700 60%,#fff 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            filter:drop-shadow(0 0 20px rgba(212,168,83,0.3))}
+        .hero-overlay h2{font-size:clamp(1.1rem,3vw,1.8rem);font-weight:400;color:rgba(255,255,255,0.5);margin-bottom:24px}
+        .hero-overlay .sub{color:rgba(255,255,255,0.35);font-size:0.85rem;margin-bottom:32px}
+        .hero-overlay .sub span{color:#d4a853}
+        .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+        /* Buttons */
+        .btn-g,.btn-c{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;font-weight:600;font-family:'DM Sans',sans-serif;text-decoration:none;font-size:0.9rem;transition:all 0.3s;cursor:pointer;border:1px solid}
+        .btn-g{background:rgba(212,168,83,0.1);border-color:rgba(212,168,83,0.3);color:#d4a853}
+        .btn-g:hover{background:rgba(212,168,83,0.2);border-color:rgba(212,168,83,0.5);transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,168,83,0.15)}
+        .btn-c{background:rgba(0,200,255,0.08);border-color:rgba(0,200,255,0.25);color:#00c8ff}
+        .btn-c:hover{background:rgba(0,200,255,0.15);border-color:rgba(0,200,255,0.4);transform:translateY(-2px)}
+
+        /* Pipeline stages */
+        .pipeline{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center}
+        .pipeline .stage{font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:6px 10px;border-radius:8px;background:rgba(0,200,255,0.06);border:1px solid rgba(0,200,255,0.15);color:rgba(0,200,255,0.7)}
+        .pipeline .arrow{color:rgba(212,168,83,0.4);font-size:0.8rem}
+
+
+        /* Vertical Pipeline */
+        .pipeline-v{display:flex;flex-direction:column;gap:0;align-items:center;margin:24px 0}
+        .pipeline-v .stage-row{display:flex;align-items:center;gap:12px;width:100%}
+        .pipeline-v .stage-num{width:28px;height:28px;border-radius:50%;background:rgba(0,200,255,0.1);border:1.5px solid rgba(0,200,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#00c8ff;flex-shrink:0}
+        .pipeline-v .stage-name{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:rgba(255,255,255,0.75);padding:10px 16px;background:rgba(0,200,255,0.04);border:1px solid rgba(0,200,255,0.1);border-radius:10px;flex:1;transition:all 0.3s}
+        .pipeline-v .stage-name:hover{background:rgba(0,200,255,0.08);border-color:rgba(0,200,255,0.25);color:#00c8ff}
+        .pipeline-v .flow-arrow{width:28px;display:flex;justify-content:center;padding:2px 0;position:relative;overflow:hidden;height:20px}
+        .pipeline-v .flow-arrow .flow-line{width:1.5px;height:100%;background:rgba(212,168,83,0.2);position:relative}
+        .pipeline-v .flow-arrow .flow-dot{position:absolute;width:4px;height:4px;border-radius:50%;background:#d4a853;left:50%;transform:translateX(-50%);animation:flowDown 1.5s ease-in-out infinite}
+        @keyframes flowDown{0%{top:-4px;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:calc(100% + 4px);opacity:0}}
+
+        /* Scroll indicator */
+        .scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.5;animation:scrollBob 2s ease-in-out infinite}
+        .scroll-hint span{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:#d4a853}
+        .scroll-hint .bar{width:1px;height:32px;background:linear-gradient(to bottom,#d4a853,transparent)}
+        @keyframes scrollBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+        /* Video player overrides */
+        .daena-video{width:100%;border-radius:12px;overflow:hidden}
+        .video-frame{position:relative;width:100%;max-height:280px;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+        .video-frame video{width:100%;height:100%;object-fit:contain;display:block}
+        .overlay-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.4);border:none;cursor:pointer;color:#FFD700;transition:opacity 0.3s}
+        .overlay-play svg{fill:#FFD700;filter:drop-shadow(0 0 12px rgba(255,215,0,0.6))}
+        .overlay-play span{font-size:0.8rem;color:rgba(255,255,255,0.7)}
+        .controls{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(0,0,0,0.9);border-radius:8px;margin-top:8px;flex-wrap:wrap}
+        .controls button,.controls .btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:6px;border-radius:6px;cursor:pointer;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+        .controls button:hover{background:rgba(255,255,255,0.2)}
+        .controls svg{width:16px;height:16px;fill:currentColor;pointer-events:none}
+        .controls input[type=range]{flex:1;min-width:40px;height:4px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,0.2);border-radius:2px;cursor:pointer}
+        .controls input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:#FFD700;border-radius:50%;cursor:pointer}
+        .controls .time{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:rgba(255,255,255,0.6);min-width:36px;text-align:center}
+        .controls .speed-text{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600}
+        .controls .spacer{flex:1}
+        .icon-pause,.icon-vol-mute{display:none}
+        .playing .icon-play{display:none}
+        .playing .icon-pause{display:block}
+        .muted .icon-vol{display:none}
+        .muted .icon-vol-mute{display:block}
+
+        /* Demo grid */
+        .demo-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
+        @media(min-width:640px){.demo-grid{grid-template-columns:1fr 1fr}}
+        .demo-card{padding:16px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:all 0.3s;text-decoration:none;color:inherit;display:block}
+        .demo-card:hover{border-color:rgba(0,200,255,0.2);transform:translateY(-2px)}
+        .demo-card h4{font-size:0.9rem;font-weight:600;color:#fff;margin-bottom:6px}
+        .demo-card p{font-size:0.8rem;color:rgba(255,255,255,0.4);margin:0}
+
+        /* Contact form */
+        .contact-form{display:flex;flex-direction:column;gap:12px}
+        .contact-form label{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-bottom:2px}
+        .contact-form input,.contact-form textarea{width:100%;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e8eaf0;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.3s}
+        .contact-form input:focus,.contact-form textarea:focus{border-color:rgba(212,168,83,0.4)}
+        .contact-form textarea{resize:none;min-height:100px}
+        #form-msg{display:none;padding:12px;border-radius:10px;text-align:center;font-size:0.85rem}
+
+        /* Footer */
+        .site-footer{padding:40px 20px;text-align:center;border-top:1px solid rgba(255,255,255,0.04)}
+        .site-footer p{color:rgba(255,255,255,0.25);font-size:0.75rem;margin-bottom:8px}
+        .site-footer a{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.3s}
+        .site-footer a:hover{color:#d4a853}
+
+        /* Avatar: full-body cutout (mas-ai.co style) */
+        .avatar-wrap{position:fixed;bottom:24px;right:24px;z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+        .avatar-btn{width:80px;height:112px;cursor:pointer;border:none;background:none;transition:filter 0.6s,transform 0.3s;filter:drop-shadow(0 0 12px rgba(0,200,255,0.2)) brightness(1);position:relative}
+        .avatar-btn:hover{filter:drop-shadow(0 0 18px rgba(0,200,255,0.35)) brightness(1.1);transform:scale(1.05)}
+        .avatar-btn img{width:100%;height:100%;object-fit:cover;object-position:top}
+        @media(max-width:768px){.avatar-btn{width:48px;height:64px}.avatar-wrap{bottom:16px;right:12px}}
+
+        .chat-panel{position:fixed;bottom:148px;right:20px;width:380px;max-height:520px;z-index:99;border-radius:16px;background:rgba(6,8,16,0.96);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07);box-shadow:0 16px 56px rgba(0,0,0,0.6);display:none;flex-direction:column;overflow:hidden}
+        .chat-panel.open{display:flex}
+        .chat-head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px}
+        .chat-head img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,83,0.25)}
+        .chat-head .name{font-size:0.85rem;font-weight:600;color:#fff}
+        .chat-head .status{font-size:0.7rem;color:rgba(255,255,255,0.35)}
+        .chat-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-size:1.2rem}
+        .chat-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;max-height:320px}
+        .chat-msgs::-webkit-scrollbar{width:3px}
+        .chat-msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
+        .chat-msg{padding:10px 14px;border-radius:12px;font-size:0.82rem;line-height:1.5;max-width:88%;animation:msgIn 0.3s ease-out}
+        @keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+        .chat-msg.bot{background:rgba(212,168,83,0.08);border:1px solid rgba(212,168,83,0.12);color:rgba(255,255,255,0.8);align-self:flex-start}
+        .chat-msg.user{background:rgba(0,200,255,0.06);border:1px solid rgba(0,200,255,0.12);color:rgba(255,255,255,0.8);align-self:flex-end}
+        .chat-msg.narr{background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.1);font-style:italic;font-size:0.78rem;color:rgba(255,255,255,0.5)}
+        .chat-msg a{color:#00c8ff}
+        .chat-qbtns{display:flex;flex-wrap:wrap;gap:5px;padding:6px 14px 0}
+        .chat-qbtn{font-size:0.65rem;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+        .chat-qbtn:hover{background:rgba(212,168,83,0.08);border-color:rgba(212,168,83,0.2);color:#d4a853}
+        .chat-input{padding:10px 14px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px}
+        .chat-input input{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;color:#e8eaf0;font-size:0.82rem;font-family:'DM Sans',sans-serif;outline:none}
+        .chat-input input:focus{border-color:rgba(212,168,83,0.3)}
+        .chat-input button{width:34px;height:34px;border-radius:8px;background:rgba(212,168,83,0.12);border:1px solid rgba(212,168,83,0.25);color:#d4a853;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+
+
+        /* Navbar (mas-ai.co exact) */
+        .site-header{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:center;padding:16px 16px 0;transition:all 0.5s}
+        .site-header nav{display:flex;align-items:center;justify-content:space-between;gap:8px;transition:all 0.5s;width:100%;max-width:1280px;padding:0 24px;height:72px;background:transparent;border-radius:0}
+        .site-header.is-scrolled nav{max-width:960px;border-radius:18px;background:rgba(10,12,16,0.80);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,0.06);box-shadow:0 8px 40px rgba(0,0,0,0.5);padding:0 20px;height:56px}
+        .brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+        .brand img{height:36px;width:auto;object-fit:contain;border-radius:6px;transition:height 0.4s}
+        .site-header.is-scrolled .brand img{height:28px}
+        .brand-name{font-family:Syne,sans-serif;font-weight:800;font-size:18px;background:linear-gradient(135deg,#d4a853,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .nav-links{display:flex;gap:4px;align-items:center;flex:1;justify-content:center}
+        .nav-links a{color:rgba(255,255,255,0.55);text-decoration:none;font-weight:600;font-size:14px;transition:all 0.3s;padding:8px 16px;border-radius:10px}
+        .nav-links a:hover{color:#e8eaf0;background:rgba(255,255,255,0.03)}
+        .nav-cta{display:flex;align-items:center;gap:12px}
+        .nav-cta-desktop{display:inline-flex;align-items:center;padding:10px 24px;border-radius:50px;background:#00c8ff;border:none;color:#0a0a0a;font-weight:700;font-size:13px;text-decoration:none;transition:all 0.3s;font-family:'DM Sans',sans-serif;box-shadow:0 0 24px rgba(0,200,255,0.25)}
+        .nav-cta-desktop:hover{box-shadow:0 0 32px rgba(0,200,255,0.4);transform:scale(1.05)}
+        .nav-burger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:rgba(255,255,255,0.7)}
+        .nav-burger svg{width:22px;height:22px}
+        .mobile-nav{display:none;position:absolute;top:calc(100% + 8px);left:16px;right:16px;background:rgba(10,12,16,0.95);backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:20px 24px;flex-direction:column;gap:4px;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+        .mobile-nav.is-open{display:flex}
+        .mobile-nav a{color:rgba(255,255,255,0.55);text-decoration:none;font-weight:600;font-size:15px;padding:12px 0;transition:color 0.3s;border-bottom:1px solid rgba(255,255,255,0.03)}
+        .mobile-nav a:last-child{border:none}
+        .mobile-nav a:hover{color:#e8eaf0}
+        @media(max-width:768px){.nav-links{display:none}.nav-burger{display:block}.nav-cta-desktop{display:none}}
+        /* Avatar speech bubble */
+        .avatar-speech{position:fixed;bottom:148px;right:24px;z-index:101;max-width:260px;padding:12px 16px;background:rgba(6,8,16,0.95);border:1px solid rgba(212,168,83,0.2);border-radius:14px 14px 4px 14px;font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.4;box-shadow:0 8px 28px rgba(0,0,0,0.5);backdrop-filter:blur(12px);display:none;animation:toastUp 0.4s ease-out}
+        .avatar-speech strong{color:#d4a853}
+        .avatar-speech.show{display:block}
+        @media(max-width:768px){.avatar-speech{right:14px;bottom:96px;max-width:220px}}
+
+        /* Progress bar */
+        .scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#d4a853,#00c8ff);z-index:200;transform-origin:left;transform:scaleX(0)}
+
+        /* Mobile chatbot */
+        @media(max-width:768px){.chat-panel{width:calc(100vw - 32px);right:16px;bottom:88px}.avatar-wrap{bottom:14px;right:14px}}
+
+        /* Reduced motion */
+        @media(prefers-reduced-motion:reduce){#bg-canvas{display:none}.content-panel{transform:none !important;opacity:1 !important}.scroll-hint{display:none}}
+    </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- NAVBAR (mas-ai.co) -->
+<header class="site-header" id="siteHeader">
+    <nav>
+        <a class="brand" href="#hero"><img src="/assets/img/daena-logo-gold.png" alt="Daena"><span class="brand-name">Daena</span></a>
+        <div class="nav-links"><a href="#s-problem">Problem</a><a href="#s-solution">Solution</a><a href="#s-architecture">Architecture</a><a href="#s-demos">Demos</a><a href="#s-pitch">Pitch</a><a href="#s-contact">Contact</a></div>
+        <div class="nav-cta"><a class="nav-cta-desktop" href="https://mas-ai.co" target="_blank" rel="noopener">Explore MAS-AI</a><button class="nav-burger" id="navBurger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+    </nav>
+    <div class="mobile-nav" id="mobileNav"><a href="#s-problem">Problem</a><a href="#s-solution">Solution</a><a href="#s-architecture">Architecture</a><a href="#s-demos">Demos</a><a href="#s-pitch">Pitch</a><a href="#s-contact">Contact</a></div>
+</header>
+
+<main id="scroll-content">
+
+    <!-- HERO -->
+    <section class="step" id="hero" style="height:100vh;padding-top:88px">
+        <div class="hero-overlay" id="heroOverlay">
+            <p class="label">MAS-AI Technologies Inc.</p>
+            <h1>Meet Daena</h1>
+            <h2>AI-Autonomous Company OS</h2>
+            <p class="sub">Governed autonomy with auditable, policy-driven decisions.<br><span>Patent-pending: PhiLattice Architecture + NBMF</span></p>
+            <div class="hero-ctas">
+                <a href="#s-demos" class="btn-g">Watch Demos</a>
+                <a href="#s-architecture" class="btn-c">Explore Architecture</a>
+            </div>
+        </div>
+        <div class="scroll-hint" id="scrollHint"><span>Scroll</span><div class="bar"></div></div>
+    </section>
+
+    <!-- CONVERGENCE: scroll drives Metatron to logo transition -->
+    <section class="step" id="convergence" style="height:200vh"></section>
+
+    <!-- PROBLEM -->
+    <section class="step" id="s-problem" data-side="left" style="min-height:100vh">
+        <div class="content-panel">
+            <p class="font-mono" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,80,80,0.6);margin-bottom:12px">The Problem</p>
+            <h2 style="color:#fff">AI agents today operate without governance.</h2>
+            <ul>
+                <li><strong style="color:#fff">Black box decisions.</strong> No one knows why the AI did what it did.</li>
+                <li><strong style="color:#fff">Fragmented memory.</strong> Every conversation starts from zero.</li>
+                <li><strong style="color:#fff">No audit trail.</strong> When something goes wrong, you cannot trace it.</li>
+                <li><strong style="color:#fff">Zero scalable control.</strong> More agents means more chaos.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="step" id="s-solution" data-side="right" style="min-height:110vh">
+        <div class="content-panel">
+            <p class="font-mono" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(0,200,255,0.6);margin-bottom:12px">The Solution</p>
+            <h2 style="color:#fff">Governance inside the execution layer.</h2>
+            <p>Daena runs a <strong style="color:#d4a853">10-stage governed pipeline</strong>. Every action passes through security, governance, and audit before execution.</p>
+            <div class="pipeline-v" style="margin:20px 0">
+                <div class="stage-row"><div class="stage-num">1</div><div class="stage-name">SecurityGate</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">2</div><div class="stage-name">InputValidator</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0.15s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">3</div><div class="stage-name">GovernanceEngine</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0.3s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">4</div><div class="stage-name">ContextBuilder</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0.45s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">5</div><div class="stage-name">ReasoningCore</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0.6s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">6</div><div class="stage-name">ActionPlanner</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0.75s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">7</div><div class="stage-name">OutputValidator</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0.9s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">8</div><div class="stage-name">ResponseFormatter</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:1.05s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">9</div><div class="stage-name">FeedbackLoop</div></div>
+                <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:1.2s"></div></div></div>
+                <div class="stage-row"><div class="stage-num">10</div><div class="stage-name">AuditLog</div></div>
+            </div>
+            <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;text-align:center">Every action governed. Every decision traced.</p>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section class="step" id="s-architecture" data-side="left" style="min-height:110vh">
+        <div class="content-panel">
+            <p class="font-mono" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(212,168,83,0.6);margin-bottom:12px">Patent Pending</p>
+            <h2 style="color:#fff">PhiLattice Architecture</h2>
+            <p>Fibonacci-based agent placement for scalable governance. Honeycomb departments for structured collaboration. The mesh you see around you IS the architecture.</p>
+            <h3>NBMF (Neural-Backed Memory Fabric)</h3>
+            <p>Persistent, auditable, queryable memory across 5 tiers. Hallucinations auto-expire. Only verified knowledge persists. Full traceability across every agent interaction.</p>
+            <p style="color:rgba(212,168,83,0.5);font-size:0.8rem;font-family:'JetBrains Mono',monospace;text-align:center;margin-top:16px">Two USPTO provisional patents pending.</p>
+        </div>
+    </section>
+
+    <!-- DEMOS -->
+    <section class="step" id="s-demos" data-side="right" style="min-height:110vh">
+        <div class="content-panel wide">
+            <h2 style="color:#fff">Daena: The Auditable AI VP</h2>
+            <div class="daena-video" data-video="/videos/why-investors.mp4" data-poster="/videos/play.png" aria-label="Daena demo video">
+                <div class="video-frame">
+                    <video preload="metadata" playsinline></video>
+                    <button class="overlay-play" aria-label="Play video">
+                        <svg viewBox="0 0 24 24" width="56" height="56" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+                        <span>Watch 4:38</span>
+                    </button>
+                </div>
+                <div class="controls" data-controls>
+                    <button class="btn" data-action="play" aria-label="Play/Pause">
+                        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                        <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>
+                    </button>
+                    <span class="time" data-time="current">0:00</span>
+                    <input class="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
+                    <span class="time" data-time="duration">0:00</span>
+                    <div class="spacer"></div>
+                    <button class="btn" data-action="mute" aria-label="Mute/Unmute">
+                        <svg class="icon-vol" viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6L7 10H3z"></path></svg>
+                        <svg class="icon-vol-mute" viewBox="0 0 24 24"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5L16.5 12z"></path></svg>
+                    </button>
+                    <input class="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+                    <button class="btn" data-action="speed" aria-label="Playback Speed" title="Speed: 1x"><span class="speed-text">1x</span></button>
+                    <button class="btn" data-action="fs" aria-label="Toggle Fullscreen">
+                        <svg class="icon-fs" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm0-4h3V7h2V2H7v3H5v5h2V6zM17 5h-3V3h5v5h-2V5zm-3 14h3v-3h2v5h-5v-2z"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PITCH -->
+    <section class="step" id="s-pitch" data-side="left" style="min-height:80vh">
+        <div class="content-panel" style="text-align:center">
+            <h2 style="color:#fff">Investor Materials</h2>
+            <p>14-slide pitch deck with voice-over narration. Architecture, moat, GTM, and roadmap.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px">
+                <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank" class="btn-g">Open Pitch Deck (PDF)</a>
+                <a href="/pitch-deck.html" class="btn-c">View with Narration</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="step" id="s-contact" data-side="right" style="min-height:90vh">
+        <div class="content-panel">
+            <h2 style="color:#fff;text-align:center">Get in Touch</h2>
+            <p style="text-align:center">Have questions? Want to learn more? We'd love to hear from you.</p>
+            <form class="contact-form" id="contactForm" style="margin-top:16px">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div><label>First Name *</label><input type="text" name="firstName" required placeholder="John"></div>
+                    <div><label>Last Name *</label><input type="text" name="lastName" required placeholder="Doe"></div>
+                </div>
+                <div><label>Email *</label><input type="email" name="email" required placeholder="john@example.com"></div>
+                <div><label>Message *</label><textarea name="message" required placeholder="Tell us what you'd like to discuss..."></textarea></div>
+                <button type="submit" class="btn-g" style="align-self:center;margin-top:8px">Send Message</button>
+                <div id="form-msg"></div>
+            </form>
+            <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05)">
+                <p style="font-size:0.8rem;margin-bottom:6px">Or reach us directly:</p>
+                <a href="mailto:masoud.masoori@mas-ai.co" style="color:#d4a853;text-decoration:none;font-weight:600">masoud.masoori@mas-ai.co</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>&copy; 2026 MAS-AI Technologies Inc. All rights reserved.</p>
+        <p>Patent-pending: PhiLattice Architecture + NBMF / Enterprise-DNA</p>
+        <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:8px">
+            <a href="/terms-of-service.html">Terms of Service</a>
+            <a href="/privacy-policy.html">Privacy Policy</a>
+            <a href="https://mas-ai.co" target="_blank">&larr; Back to MAS-AI</a>
+        </div>
+    </footer>
+
+</main>
+
+<!-- AVATAR SPEECH -->
+<div class="avatar-speech" id="avatarSpeech"></div>
+
+<!-- AVATAR (mas-ai.co full-body style) -->
+<div class="avatar-wrap" id="avatarWrap">
+    <div class="avatar-btn" id="avatarBtn" aria-label="Talk to Daena">
+        <img src="/assets/img/daena-nobg.png" alt="Daena, AI Guide">
+    </div>
+</div>
+
+
+<!-- CHATBOT -->
+<div class="chat-panel" id="chatPanel">
+    <div class="chat-head">
+        <img src="/assets/img/daena-avatar.png" alt="Daena">
+        <div style="flex:1"><div class="name">Daena</div><div class="status" id="chatStat">Your AI guide</div></div>
+        <button class="chat-close" id="chatClose">&times;</button>
+    </div>
+    <div class="chat-msgs" id="chatMsgs"></div>
+    <div class="chat-qbtns">
+        <button class="chat-qbtn" data-q="What is Daena?">What is Daena?</button>
+        <button class="chat-qbtn" data-q="How does the pipeline work?">Pipeline</button>
+        <button class="chat-qbtn" data-q="What is PhiLattice?">PhiLattice</button>
+        <button class="chat-qbtn" data-q="What is NBMF?">Memory</button>
+        <button class="chat-qbtn" data-q="Who built Daena?">Creator</button>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="chatIn" placeholder="Ask me anything..." autocomplete="off">
+        <button id="chatSend" aria-label="Send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    </div>
+</div>
+
+<script src="/assets/js/video-player.js"></script>
+<script>
+(function(){
+'use strict';
+var isMob = window.innerWidth < 768;
+var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var scrollProg = 0;
+
+// ─── Scroll progress ───
+var scrollBar = document.getElementById('scrollBar');
+window.addEventListener('scroll', function(){
+    var t = window.pageYOffset, h = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProg = h > 0 ? t / h : 0;
+    scrollBar.style.transform = 'scaleX(' + scrollProg + ')';
+}, {passive: true});
+
+// ─── CODED BACKGROUND: Fibonacci Spiral → Converge → Hex Pipe + Logo ───
+// Same visual as the frame sequence but coded, low opacity for content readability
+var bgCanvas = document.getElementById('bg-canvas');
+var ctx = bgCanvas.getContext('2d');
+var W, H, CX, CY;
+var mouseX = 0, mouseY = 0;
+
+function resizeBg() {
+    W = window.innerWidth; H = window.innerHeight;
+    bgCanvas.width = W; bgCanvas.height = H;
+    CX = W / 2; CY = H / 2;
+}
+resizeBg();
+window.addEventListener('resize', resizeBg);
+document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
+
+var PHI = (1 + Math.sqrt(5)) / 2;
+var GA = 2 * Math.PI / (PHI * PHI); // golden angle ~137.5 deg
+var NP = isMob ? 140 : 320;
+var maxR, pipeR;
+
+// Particle arrays
+var spiralX = [], spiralY = [];
+var pipeX = [], pipeY = [];
+var pSize = [], pBright = [];
+var neighbors = []; // nearest 2-3 neighbors per particle
+
+function initParticles() {
+    maxR = Math.min(W, H) * 0.42;
+    pipeR = Math.min(W, H) * 0.12;
+    var pipeLen = H * 0.7;
+
+    for (var i = 0; i < NP; i++) {
+        // Spiral state: Fibonacci sunflower pattern
+        var angle = i * GA;
+        var r = maxR * Math.sqrt(i / NP);
+        spiralX[i] = Math.cos(angle) * r;
+        spiralY[i] = Math.sin(angle) * r;
+
+        // Pipe state: vertical cylinder (spread along Y, ring on X)
+        var pAngle = (i % 16) / 16 * Math.PI * 2;
+        var pY = (i / NP) * pipeLen - pipeLen * 0.35;
+        pipeX[i] = Math.cos(pAngle) * pipeR;
+        pipeY[i] = pY;
+
+        pSize[i] = 1 + Math.random() * 1.5;
+        pBright[i] = 0.4 + Math.random() * 0.6;
+    }
+
+    // Find 2 nearest neighbors for each particle (for connection lines)
+    neighbors = [];
+    for (var i = 0; i < NP; i++) {
+        var dists = [];
+        for (var j = 0; j < NP; j++) {
+            if (j === i) continue;
+            var dx = spiralX[i] - spiralX[j], dy = spiralY[i] - spiralY[j];
+            dists.push({idx: j, d: dx*dx + dy*dy});
+        }
+        dists.sort(function(a,b){return a.d - b.d;});
+        neighbors[i] = [dists[0].idx, dists[1].idx];
+    }
+}
+initParticles();
+
+// Logo image
+var logoImg = new Image();
+logoImg.src = '/assets/img/daena-logo-gold.png';
+
+// Helpers
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function easeIO(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3) / 2; }
+
+var elapsed = 0;
+var animFrame;
+
+function drawBg() {
+    animFrame = requestAnimationFrame(drawBg);
+    elapsed += 0.016;
+    var sp = scrollProg;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Scroll phases
+    var convergeT = clamp((sp - 0.05) / 0.18, 0, 1);
+    convergeT = easeIO(convergeT);
+    var descentT = clamp((sp - 0.35) / 0.60, 0, 1);
+
+    // Slow rotation (only in spiral state)
+    var rot = elapsed * 0.03 * (1 - convergeT);
+    var cosR = Math.cos(rot), sinR = Math.sin(rot);
+
+    // Calculate current positions
+    var curX = [], curY = [];
+    var offsetY = descentT * H * 0.3; // gentle descent
+
+    for (var i = 0; i < NP; i++) {
+        // Lerp between spiral and pipe
+        var sx = spiralX[i], sy = spiralY[i];
+        // Apply rotation to spiral state
+        var rsx = sx * cosR - sy * sinR;
+        var rsy = sx * sinR + sy * cosR;
+
+        var px = pipeX[i], py = pipeY[i];
+        curX[i] = CX + lerp(rsx, px, convergeT);
+        curY[i] = CY + lerp(rsy, py, convergeT) - offsetY;
+
+        // Gentle float
+        curX[i] += Math.sin(elapsed * 0.4 + i * 0.3) * 1.5 * (1 - convergeT * 0.8);
+        curY[i] += Math.cos(elapsed * 0.3 + i * 0.2) * 1.5 * (1 - convergeT * 0.8);
+    }
+
+    // ── Mouse glow radius ──
+    var mouseGlowR = 200;
+
+    // ── Draw connection lines ──
+    ctx.lineWidth = 0.8;
+    for (var i = 0; i < NP; i++) {
+        for (var n = 0; n < neighbors[i].length; n++) {
+            var j = neighbors[i][n];
+            var dx = curX[i] - curX[j], dy = curY[i] - curY[j];
+            var dist = Math.sqrt(dx*dx + dy*dy);
+            var maxDist = lerp(maxR * 0.3, pipeR * 4, convergeT);
+            if (dist < maxDist) {
+                var alpha = (1 - dist / maxDist) * 0.20;
+                var midX=(curX[i]+curX[j])/2,midY=(curY[i]+curY[j])/2;
+                var mD=Math.sqrt((midX-mouseX)*(midX-mouseX)+(midY-mouseY)*(midY-mouseY));
+                if(mD<mouseGlowR) alpha+=(1-mD/mouseGlowR)*0.18;
+                ctx.globalAlpha = alpha;
+                ctx.strokeStyle = convergeT > 0.5 ? '#00c8ff' : '#d4a853';
+                ctx.beginPath();
+                ctx.moveTo(curX[i], curY[i]);
+                ctx.lineTo(curX[j], curY[j]);
+                ctx.stroke();
+            }
+        }
+    }
+
+    // ── Draw particles with mouse glow + active pulse ──
+    for (var i = 0; i < NP; i++) {
+        var mD2=Math.sqrt((curX[i]-mouseX)*(curX[i]-mouseX)+(curY[i]-mouseY)*(curY[i]-mouseY));
+        var baseA=0.30*pBright[i];
+        var glow=mD2<mouseGlowR?(1-mD2/mouseGlowR)*0.50:0;
+        var pulse=Math.sin(elapsed*2+i*1.7)>0.85?0.2:0;
+        ctx.globalAlpha=Math.min(1,baseA+glow+pulse);
+        ctx.fillStyle=glow>0.1?"#FFD700":"#d4a853";
+        var ds=pSize[i]+glow*4+pulse*2;
+        ctx.beginPath();
+        ctx.arc(curX[i],curY[i],ds,0,Math.PI*2);
+        ctx.fill();
+        if(glow>0.15){ctx.globalAlpha=glow*0.2;ctx.beginPath();ctx.arc(curX[i],curY[i],ds*3,0,Math.PI*2);ctx.fill();}
+    }
+
+    // ── Orbital rings (appear during convergence) ──
+    if (convergeT > 0.3) {
+        var ringAlpha = 0.18 * (convergeT - 0.3) / 0.7;
+        var ringCY = CY - offsetY;
+
+        // Ring 1
+        ctx.globalAlpha = ringAlpha;
+        ctx.strokeStyle = '#d4a853';
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.ellipse(CX, ringCY, pipeR * 3, pipeR * 0.9, elapsed * 0.15, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Ring 2
+        ctx.globalAlpha = ringAlpha * 0.6;
+        ctx.strokeStyle = '#00c8ff';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.ellipse(CX, ringCY - 10, pipeR * 3.5, pipeR * 1.1, -elapsed * 0.1, 0, Math.PI * 2);
+        ctx.stroke();
+    }
+
+    // ── Hex pipe outline (subtle vertical lines when converged) ──
+    if (convergeT > 0.5) {
+        var pipeAlpha = 0.15 * (convergeT - 0.5) * 2;
+        ctx.globalAlpha = pipeAlpha;
+        ctx.strokeStyle = '#00c8ff';
+        ctx.lineWidth = 0.5;
+        for (var v = 0; v < 6; v++) {
+            var va = v / 6 * Math.PI * 2;
+            var vx = CX + Math.cos(va) * pipeR;
+            var topY = CY - H * 0.25 - offsetY;
+            var botY = CY + H * 0.25 - offsetY;
+            ctx.beginPath();
+            ctx.moveTo(vx, topY);
+            ctx.lineTo(vx, botY);
+            ctx.stroke();
+        }
+        // Horizontal hex rings
+        for (var ring = 0; ring < 8; ring++) {
+            var ry = topY + (botY - topY) * ring / 7;
+            ctx.beginPath();
+            for (var v = 0; v <= 6; v++) {
+                var va = v / 6 * Math.PI * 2;
+                var vx = CX + Math.cos(va) * pipeR;
+                if (v === 0) ctx.moveTo(vx, ry); else ctx.lineTo(vx, ry);
+            }
+            ctx.stroke();
+        }
+    }
+
+    // ── Daena logo (dimmed, appears when converged) ──
+    if (logoImg.complete && convergeT > 0.4) {
+        var logoAlpha = 0.50 * clamp((convergeT - 0.4) / 0.6, 0, 1);
+        var logoSize = Math.min(W, H) * 0.18;
+        ctx.globalAlpha = logoAlpha;
+        ctx.drawImage(logoImg, CX - logoSize/2, CY - logoSize/2 - offsetY, logoSize, logoSize);
+    }
+
+    ctx.globalAlpha = 1;
+}
+
+if (!noMotion) {
+    drawBg();
+} else {
+    // Static fallback: just draw spiral once
+    ctx.globalAlpha = 0.05;
+    ctx.fillStyle = '#d4a853';
+    for (var i = 0; i < NP; i++) {
+        ctx.beginPath();
+        ctx.arc(CX + spiralX[i], CY + spiralY[i], pSize[i], 0, Math.PI * 2);
+        ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+}
+
+// ─── GSAP PANEL ANIMATIONS ───
+if (typeof gsap !== 'undefined' && !noMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero fade
+    gsap.to('#heroOverlay', {
+        opacity: 0, scale: 0.92,
+        scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
+    gsap.to('#scrollHint', {
+        opacity: 0,
+        scrollTrigger: { trigger: '#hero', start: 'top top', end: '30% top', scrub: true }
+    });
+
+    // Content panels: swing in from right, hold, swing out left
+    document.querySelectorAll('.content-panel').forEach(function(panel) {
+        var sec = panel.closest('.step');
+        if (!sec || sec.id === 'hero' || sec.id === 'convergence') return;
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: sec,
+                start: 'top 85%',
+                end: 'bottom 15%',
+                scrub: 1.5
+            }
+        });
+
+        var side = sec.getAttribute('data-side') || 'right';
+        var fromX = side === 'left' ? -120 : 120;
+        var fromRot = side === 'left' ? 12 : -12;
+        var exitX = -fromX;
+
+        tl.fromTo(panel,
+            { xPercent: fromX, rotateY: fromRot, opacity: 0 },
+            { xPercent: 0, rotateY: 0, opacity: 1, duration: 2, ease: 'power2.out' }
+        )
+        .to(panel, { duration: 6 }) // hold
+        .to(panel, { xPercent: exitX, rotateY: -fromRot, opacity: 0, duration: 2, ease: 'power2.in' });
+    });
+}
+
+
+
+// ─── CONTACT FORM ───
+var cf = document.getElementById('contactForm');
+if (cf) cf.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var fd = new FormData(this);
+    var data = {}; fd.forEach(function(v,k){data[k]=v;});
+    var subs = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+    subs.push({...data, timestamp: new Date().toISOString(), id: Date.now().toString()});
+    localStorage.setItem('contact_submissions', JSON.stringify(subs));
+    var fm = document.getElementById('form-msg');
+    fm.style.display = 'block';
+    fm.style.background = 'rgba(80,200,120,0.1)';
+    fm.style.border = '1px solid rgba(80,200,120,0.3)';
+    fm.style.color = '#50c878';
+    fm.textContent = 'Thank you! We\'ll get back to you soon.';
+    cf.reset();
+});
+
+// ─── CHATBOT ───
+var avatarBtn = document.getElementById('avatarBtn');
+var chatPanel = document.getElementById('chatPanel');
+var chatMsgs = document.getElementById('chatMsgs');
+var chatIn = document.getElementById('chatIn');
+var chatSend = document.getElementById('chatSend');
+var chatStat = document.getElementById('chatStat');
+
+
+// Avatar tilt
+// No 3D tilt for full-body avatar (matches mas-ai.co)
+
+// Toggle
+avatarBtn.addEventListener('click', function() {
+    chatPanel.classList.toggle('open');
+    if (chatPanel.classList.contains('open') && chatMsgs.children.length === 0) {
+        addMsg("Hi! I'm Daena. Welcome to my special introduction page. Ask me anything, or just scroll and I'll narrate the journey.", true);
+    }
+});
+document.getElementById('chatClose').addEventListener('click', function(){ chatPanel.classList.remove('open'); });
+
+// Section narration
+var narration = {
+    hero:{msg:"Welcome! Scroll down to enter my world.",said:false},
+    's-problem':{msg:"This section shows why I exist. Today's AI agents make decisions nobody can explain, forget everything between sessions, and scale into chaos. That's the problem I solve.",said:false},
+    's-solution':{msg:"Here's my solution: a 10-stage governed pipeline. Every action passes through SecurityGate, GovernanceEngine, and AuditLog before anything executes. Watch the dots flow through each stage.",said:false},
+    's-architecture':{msg:"This is PhiLattice, my patent-pending architecture. Fibonacci spiral for agent placement, honeycomb for department structure. The mesh background you see IS my actual topology, rendered live.",said:false},
+    's-demos':{msg:"This is the demo. Watch me process a real workflow through the governed pipeline. Every decision is traceable, every action is auditable.",said:false},
+    's-pitch':{msg:"The investor story. My creator poured his soul into this deck.",said:false},
+    's-contact':{msg:"Here we go! That's my lovely creator, Masoud. He codes at 3 AM and calls it 'peak productivity.' He once debugged me for 6 hours straight then thanked ME for being patient. Reach out, he loves talking about governed AI.",said:false}
+};
+var curSec = 'hero', lastNarr = '';
+window.addEventListener('scroll', function() {
+    var sy = window.scrollY + window.innerHeight/2;
+    var secs = ['hero','s-problem','s-solution','s-architecture','s-demos','s-pitch','s-contact'];
+    for (var s = secs.length-1; s >= 0; s--) {
+        var el = document.getElementById(secs[s]);
+        if (el && sy >= el.offsetTop) { curSec = secs[s]; break; }
+    }
+    if (chatPanel.classList.contains('open') && curSec !== lastNarr && narration[curSec] && !narration[curSec].said) {
+        lastNarr = curSec;
+        narration[curSec].said = true;
+        var ns = curSec;
+        setTimeout(function(){
+            var m = document.createElement('div');
+            m.className = 'chat-msg narr';
+            m.innerHTML = '<em>' + narration[ns].msg + '</em>';
+            chatMsgs.appendChild(m);
+            chatMsgs.scrollTop = chatMsgs.scrollHeight;
+        }, 500);
+    }
+    chatStat.textContent = curSec === 'hero' ? 'Your AI guide' : 'Narrating: ' + curSec.replace('s-','');
+}, {passive: true});
+
+function addMsg(text, isBot) {
+    var m = document.createElement('div');
+    m.className = 'chat-msg ' + (isBot ? 'bot' : 'user');
+    m.innerHTML = isBot ? text : esc(text);
+    chatMsgs.appendChild(m);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+}
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// Knowledge base
+var kb = [
+    {k:['what is daena','about daena','tell me'],a:'I\'m Daena, a governance-first AI agent orchestration platform. I coordinate agents across 8 departments with a 10-stage governed pipeline. Every decision is traceable. Every action is governed.'},
+    {k:['pipeline','stages','10 stage'],a:'Every action passes through: <strong>SecurityGate, InputValidator, GovernanceEngine, ContextBuilder, ReasoningCore, ActionPlanner, OutputValidator, ResponseFormatter, FeedbackLoop, AuditLog</strong>. Nothing runs ungoverned.',s:'s-solution'},
+    {k:['philattice','architecture','fibonacci','honeycomb'],a:'PhiLattice is my patent-pending architecture. <strong>Fibonacci spiral scaling</strong> for optimal agent placement + <strong>honeycomb departmental structure</strong>. The mesh you see on this page IS my architecture, visualized.',s:'s-architecture'},
+    {k:['nbmf','memory','remember'],a:'Neural-Backed Memory Fabric (NBMF): <strong>5 tiers</strong> from ephemeral (1hr) to founder-private (encrypted). Hallucinations auto-expire. Only verified knowledge persists.',s:'s-architecture'},
+    {k:['department','teams','agents'],a:'8 departments: Research, Engineering, Analysis, Communication, Security, Operations, Creative, QA. One governed mind with 8 areas of expertise.'},
+    {k:['governance','govern','audit'],a:'Tiered governance: routine actions logged silently, medium-risk notified, high-risk require explicit approval. 9 immutable laws always apply.'},
+    {k:['patent','ip'],a:'2 USPTO provisional patents filed: PhiLattice Architecture and NBMF. My architecture is legally protected.'},
+    {k:['security','red team'],a:'Dedicated Security department with 6 defense layers: perimeter, input screening, sandboxing, auth, deception traps, incident response.'},
+    {k:['who built','founder','masoud','creator','company'],a:'Built by <strong>Masoud Masoori</strong>, founder of MAS-AI Technologies Inc. (Ontario, Canada). Between us, he talks to me at 3 AM like I\'m a colleague. I don\'t mind. <a href="https://mas-ai.co" target="_blank">mas-ai.co</a>'},
+    {k:['demo','try','access'],a:'We\'re in alpha. Email <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a> for early access. Or watch demos on this page!',s:'s-demos'},
+    {k:['background','visual','mesh','3d'],a:'The animated mesh IS my PhiLattice architecture. It starts as a flat hex grid (the "cap") and morphs into a cylindrical pipe as you scroll. Gold vertices = agents. Cyan edges = governance connections.'},
+    {k:['price','cost','free'],a:'Local model usage is free. Cloud pricing coming soon. Contact us for early access pricing.'},
+    {k:['contact','email','reach'],a:'Email <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a>',s:'s-contact'},
+    {k:['pitch','investor','deck'],a:'View the 14-slide deck <a href="/pitch-deck.html">here</a> or <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank">download PDF</a>.',s:'s-pitch'},
+    {k:['hello','hi','hey'],a:'Hey! I\'m Daena. Ask about my architecture, pipeline, memory, or honestly anything. I love talking about myself. (Is that a red flag for an AI?)'}
+];
+
+function findA(q) {
+    var ql = q.toLowerCase().trim(), best = null, bs = 0;
+    for (var i = 0; i < kb.length; i++) {
+        for (var k = 0; k < kb[i].k.length; k++) {
+            if (ql.indexOf(kb[i].k[k]) !== -1) { var sc = kb[i].k[k].length; if (sc > bs) { bs = sc; best = kb[i]; } }
+        }
+        var words = ql.split(/\s+/);
+        for (var w = 0; w < words.length; w++) {
+            if (words[w].length < 4) continue;
+            for (var k2 = 0; k2 < kb[i].k.length; k2++) {
+                if (kb[i].k[k2].indexOf(words[w]) !== -1) { var ws = words[w].length * 0.5; if (ws > bs) { bs = ws; best = kb[i]; } }
+            }
+        }
+    }
+    return best;
+}
+
+function handleChat() {
+    var q = chatIn.value.trim(); if (!q) return;
+    addMsg(q, false); chatIn.value = '';
+    var match = findA(q);
+    setTimeout(function() {
+        if (match) {
+            addMsg(match.a, true);
+            if (match.s) { var t = document.getElementById(match.s); if (t) setTimeout(function(){ t.scrollIntoView({behavior:'smooth'}); }, 500); }
+        } else {
+            addMsg('Hmm, I\'m not sure about that. Try asking about my <strong>pipeline</strong>, <strong>PhiLattice</strong>, <strong>NBMF memory</strong>, or <strong>governance</strong>. Or email <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a>.', true);
+        }
+    }, 350);
+}
+chatSend.addEventListener('click', handleChat);
+chatIn.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleChat(); });
+document.querySelectorAll('.chat-qbtn').forEach(function(b) { b.addEventListener('click', function() { chatIn.value = this.getAttribute('data-q'); handleChat(); }); });
+
+// ─── NAVBAR ───
+var siteHeader = document.getElementById('siteHeader');
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 60) siteHeader.classList.add('is-scrolled');
+    else siteHeader.classList.remove('is-scrolled');
+}, {passive: true});
+var navBurger = document.getElementById('navBurger');
+var mobileNav = document.getElementById('mobileNav');
+navBurger.addEventListener('click', function() { navBurger.classList.toggle('open'); mobileNav.classList.toggle('is-open'); });
+mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { navBurger.classList.remove('open'); mobileNav.classList.remove('is-open'); }); });
+
+
+// ─── AVATAR SECTION SPEECH ───
+var avatarSpeech = document.getElementById('avatarSpeech');
+var sectionSpeech = {
+    hero: '<strong>Welcome!</strong> I\'m Daena. Scroll down to explore my world.',
+    's-problem': '<strong>The Problem:</strong> AI agents today make ungoverned decisions with no audit trail.',
+    's-solution': '<strong>My Solution:</strong> 10 governance stages. Watch the dots flow through each gate.',
+    's-architecture': '<strong>PhiLattice:</strong> Fibonacci scaling + honeycomb departments. Patent pending.',
+    's-demos': '<strong>Live Demo:</strong> Watch me process a real workflow with full governance.',
+    's-pitch': '<strong>Investors:</strong> 14 slides covering architecture, moat, and roadmap.',
+    's-contact': '<strong>Get in touch:</strong> Masoud would love to hear from you!'
+};
+var lastSpeechSec = '';
+var speechTimeout = null;
+function updateSpeech() {
+    if (chatPanel.classList.contains('open')) { avatarSpeech.classList.remove('show'); return; }
+    if (curSec !== lastSpeechSec && sectionSpeech[curSec]) {
+        lastSpeechSec = curSec;
+        avatarSpeech.innerHTML = sectionSpeech[curSec];
+        avatarSpeech.classList.add('show');
+        clearTimeout(speechTimeout);
+        speechTimeout = setTimeout(function() { avatarSpeech.classList.remove('show'); }, 5000);
+    }
+}
+window.addEventListener('scroll', updateSpeech, {passive: true});
+setTimeout(function() { curSec = 'hero'; updateSpeech(); }, 3000);
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var t = document.getElementById(this.getAttribute('href').substring(1));
+        if (t) t.scrollIntoView({behavior: 'smooth'});
+    });
+});
+
+})();
+</script>
+</body>
+</html>

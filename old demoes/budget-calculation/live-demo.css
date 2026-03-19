@@ -1,0 +1,299 @@
+/* Daena Live Budget Calculation Demo Styles */
+
+.budget-demo-container {
+    background: linear-gradient(135deg, rgba(39, 39, 65, 0.95) 0%, rgba(18, 18, 40, 0.98) 100%);
+    border: 1px solid #E6E8EA;
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin: 1rem 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.budget-demo-title {
+    color: #E6E8EA;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.budget-demo-text {
+    color: #97A1A9;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.budget-demo-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.budget-demo-btn {
+    background: linear-gradient(180deg, rgba(203, 213, 225, 0.16) 0%, rgba(203, 213, 225, 0.04) 100%);
+    border: 1px solid rgba(142, 153, 167, 0.6);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #E6E8EA;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.budget-demo-btn:hover {
+    background: linear-gradient(180deg, rgba(255, 215, 0, 0.16) 0%, rgba(255, 215, 0, 0.04) 100%);
+    border-color: rgba(255, 215, 0, 0.6);
+}
+
+.budget-demo-btn.executing {
+    background: linear-gradient(180deg, rgba(220, 38, 127, 0.16) 0%, rgba(220, 38, 127, 0.04) 100%);
+    border-color: rgba(220, 38, 127, 1);
+    color: white;
+}
+
+.budget-input-section {
+    background: rgba(55, 55, 84, 0.6);
+    border: 1px solid rgba(142, 153, 167, 0.3);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.budget-input-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.budget-input-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.budget-input-label {
+    color: #E6E8EA;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.budget-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(142, 153, 167, 0.4);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 0.875rem;
+}
+
+.budget-input:focus {
+    outline: none;
+    border-color: #00bcd4;
+    background: rgba(0, 188, 212, 0.1);
+}
+
+.budget-processing-status {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.budget-status-text {
+    color: #E6E8EA;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.budget-status-details {
+    color: #97A1A9;
+    font-size: 0.75rem;
+}
+
+.budget-analysis-section {
+    background: rgba(55, 55, 84, 0.6);
+    border: 1px solid rgba(142, 153, 167,.3);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.budget-analysis-title {
+    color: #E6E8EA;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.budget-category {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.budget-category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.budget-category-name {
+    color: #FFD700;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.budget-category-amount {
+    color: #E6E8EA;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.budget-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #B8BCC8;
+}
+
+.budget-breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.budget-recommendation-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.budget-recommendation {
+    background: rgba(0, 188, 212, 0.1);
+    border: 1px solid rgba(0, 188, 212, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.budget-recommendation-title {
+    color: #00bcd4;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.budget-recommendation-content {
+    color: #B8BCC8;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.budget-scenarios {
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.budget-scenarios-title {
+    color: #4caf50;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.budget-scenario-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.budget-scenario-name {
+    color: #E6E8EA;
+    font-weight: 500;
+}
+
+.budget-scenario-amount {
+    color: #4caf50;
+    font-weight: 600;
+}
+
+.budget-summary-section {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.budget-summary-title {
+    color: #FFD700;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.budget-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.budget-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.budget-summary-label {
+    color: #97A1A9;
+    font-size: 0.875rem;
+}
+
+.budget-summary-value {
+   	color: #FFD700;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.processing-animation {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .budget-input-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .budget-recommendation-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .budget-summary-grid {
+        grid-template-columns: 1fr;
+    }
+}

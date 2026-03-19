@@ -1,0 +1,54 @@
+{
+  "roi_range": {
+    "value": "2–3×",
+    "label": "ROI Potential (target range)",
+    "description": "Target ROI range based on internal financial modeling",
+    "methodology_link": "/docs/CLAIMS.md",
+    "status": "illustrative"
+  },
+  "cost_savings_range": {
+    "value": "74–94%",
+    "label": "Cost Savings (storage & tokens)",
+    "description": "Storage savings: 94.3% (lossless), 74.4% (semantic). Token reduction: 94.3% (lossless), 74.4% (semantic)",
+    "methodology_link": "/tech/methods-and-reproducibility",
+    "status": "measured"
+  },
+  "accuracy_lossless": {
+    "value": "100%",
+    "label": "Accuracy (lossless)",
+    "description": "100% exact match rate - bit-perfect reconstruction",
+    "methodology_link": "/tech/methods-and-reproducibility",
+    "status": "measured"
+  },
+  "accuracy_semantic": {
+    "value": "95.28%",
+    "label": "Accuracy (semantic)",
+    "description": "95.28% mean similarity - character-level similarity",
+    "methodology_link": "/tech/methods-and-reproducibility",
+    "status": "measured"
+  },
+  "accuracy_range": {
+    "value": "95–100%",
+    "label": "Accuracy (lossless & semantic)",
+    "description": "100% exact match (lossless) or 95.28% similarity (semantic)",
+    "methodology_link": "/tech/methods-and-reproducibility",
+    "status": "measured"
+  },
+  "daily_cost": {
+    "value": "≈$60/day",
+    "label": "Daily Cost vs $2,000+ VP (illustrative)",
+    "description": "Illustrative operational cost comparison",
+    "methodology_link": "/docs/CLAIMS.md",
+    "status": "illustrative"
+  },
+  "benchmarks_section_link": "/#benchmarks",
+  "methods_link": "/tech/methods-and-reproducibility"
+}
+
+
+
+
+
+
+
+
