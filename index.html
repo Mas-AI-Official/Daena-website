@@ -544,7 +544,7 @@ var neighbors = []; // nearest 2-3 neighbors per particle
 function initParticles() {
     maxR = Math.min(W, H) * 0.42;
     pipeR = Math.min(W, H) * 0.12;
-    var pipeLen = H * 0.7;
+    var pipeLen = H * 2.5;
 
     for (var i = 0; i < NP; i++) {
         // Spiral state: Fibonacci sunflower pattern
@@ -701,16 +701,16 @@ function drawBg() {
         for (var v = 0; v < 6; v++) {
             var va = v / 6 * Math.PI * 2;
             var vx = CX + Math.cos(va) * pipeR;
-            var topY = CY - H * 0.25 - offsetY;
-            var botY = CY + H * 0.25 - offsetY;
+            var topY = CY - H * 0.45 - offsetY;
+            var botY = CY + H * 1.5 - offsetY;
             ctx.beginPath();
             ctx.moveTo(vx, topY);
             ctx.lineTo(vx, botY);
             ctx.stroke();
         }
         // Horizontal hex rings
-        for (var ring = 0; ring < 8; ring++) {
-            var ry = topY + (botY - topY) * ring / 7;
+        for (var ring = 0; ring < 20; ring++) {
+            var ry = topY + (botY - topY) * ring / 19;
             ctx.beginPath();
             for (var v = 0; v <= 6; v++) {
                 var va = v / 6 * Math.PI * 2;
@@ -729,22 +729,8 @@ function drawBg() {
         ctx.drawImage(logoImg, CX - logoSize/2, CY - logoSize/2 - offsetY, logoSize, logoSize);
     }
 
-    // Static connections too
-    ctx.globalAlpha = 0.12;
-    ctx.strokeStyle = '#00c8ff';
-    ctx.lineWidth = 0.5;
-    for (var i = 0; i < NP; i++) {
-        for (var n = 0; n < neighbors[i].length; n++) {
-            var j = neighbors[i][n];
-            var x1 = CX + spiralX[i], y1 = CY + spiralY[i];
-            var x2 = CX + spiralX[j], y2 = CY + spiralY[j];
-            var dd = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
-            if (dd < maxR * 0.35) {
-                ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
-            }
-        }
-    }
     ctx.globalAlpha = 1;
+}
 }
 
 // Always run animation (even with reduced motion preference)
