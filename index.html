@@ -171,14 +171,14 @@
         .avatar-btn img{width:100%;height:100%;object-fit:cover;object-position:top}
         @media(max-width:768px){.avatar-btn{width:48px;height:64px}.avatar-wrap{bottom:16px;right:12px}}
 
-        .chat-panel{position:fixed;bottom:100px;right:20px;width:380px;max-height:min(520px,calc(100vh - 120px));z-index:9999;border-radius:16px;background:rgba(6,8,16,0.96);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07);box-shadow:0 16px 56px rgba(0,0,0,0.6);display:none;flex-direction:column;overflow:hidden}
+        .chat-panel{position:fixed;bottom:100px;right:20px;width:380px;max-height:min(560px,calc(100vh - 140px));z-index:9999;border-radius:16px;background:rgba(6,8,16,0.96);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07);box-shadow:0 16px 56px rgba(0,0,0,0.6);display:none;flex-direction:column;overflow:hidden}
         .chat-panel.open{display:flex}
         .chat-head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px}
         .chat-head img{width:28px;height:38px;border-radius:8px;object-fit:cover;object-position:top;border:1px solid rgba(212,168,83,0.25)}
         .chat-head .name{font-size:0.85rem;font-weight:600;color:#fff}
         .chat-head .status{font-size:0.7rem;color:rgba(255,255,255,0.35)}
         .chat-close{margin-left:auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.4rem;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-        .chat-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;max-height:320px}
+        .chat-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;max-height:280px;min-height:0}
         .chat-msgs::-webkit-scrollbar{width:3px}
         .chat-msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
         .chat-msg{padding:10px 14px;border-radius:12px;font-size:0.82rem;line-height:1.5;max-width:88%;animation:msgIn 0.3s ease-out}
