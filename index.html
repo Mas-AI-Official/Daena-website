@@ -21,6 +21,9 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Daena","applicationCategory":"BusinessApplication","operatingSystem":"Cloud, Self-hosted","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Daena is a governance-first AI agent orchestration platform with patent-pending PhiLattice Architecture and Neural-Backed Memory Fabric.","brand":{"@type":"Brand","name":"MAS-AI Technologies Inc."},"url":"https://daena.mas-ai.co/"}
     </script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -550,6 +553,7 @@ var elapsed = 0;
 var animFrame;
 
 function drawBg() {
+    if (elapsed < 0.02) console.log("Daena canvas: animation started, NP=" + NP);
     animFrame = requestAnimationFrame(drawBg);
     elapsed += 0.016;
     var sp = scrollProg;
@@ -685,6 +689,21 @@ function drawBg() {
         ctx.drawImage(logoImg, CX - logoSize/2, CY - logoSize/2 - offsetY, logoSize, logoSize);
     }
 
+    // Static connections too
+    ctx.globalAlpha = 0.12;
+    ctx.strokeStyle = '#00c8ff';
+    ctx.lineWidth = 0.5;
+    for (var i = 0; i < NP; i++) {
+        for (var n = 0; n < neighbors[i].length; n++) {
+            var j = neighbors[i][n];
+            var x1 = CX + spiralX[i], y1 = CY + spiralY[i];
+            var x2 = CX + spiralX[j], y2 = CY + spiralY[j];
+            var dd = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+            if (dd < maxR * 0.35) {
+                ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+            }
+        }
+    }
     ctx.globalAlpha = 1;
 }
 
@@ -692,7 +711,7 @@ if (!noMotion) {
     drawBg();
 } else {
     // Static fallback: just draw spiral once
-    ctx.globalAlpha = 0.05;
+    ctx.globalAlpha = 0.25;
     ctx.fillStyle = '#d4a853';
     for (var i = 0; i < NP; i++) {
         ctx.beginPath();
