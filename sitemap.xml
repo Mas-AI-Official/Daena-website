@@ -2,32 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://daena.mas-ai.co/</loc>
-    <lastmod>2025-12-06</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://daena.mas-ai.co/docs.html</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://daena.mas-ai.co/pitch-deck.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://daena.mas-ai.co/live-demos/budget-calculation/index.html</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://daena.mas-ai.co/terms-of-service.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://daena.mas-ai.co/live-demos/nbmf-architecture/index.html</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://daena.mas-ai.co/live-demos/cmp-pipeline/index.html</loc>
-    <lastmod>2025-12-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://daena.mas-ai.co/privacy-policy.html</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>
