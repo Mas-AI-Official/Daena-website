@@ -174,7 +174,7 @@
         .chat-panel{position:fixed;bottom:100px;right:20px;width:380px;max-height:min(520px,calc(100vh - 120px));z-index:9999;border-radius:16px;background:rgba(6,8,16,0.96);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07);box-shadow:0 16px 56px rgba(0,0,0,0.6);display:none;flex-direction:column;overflow:hidden}
         .chat-panel.open{display:flex}
         .chat-head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px}
-        .chat-head img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,83,0.25)}
+        .chat-head img{width:28px;height:38px;border-radius:8px;object-fit:cover;object-position:top;border:1px solid rgba(212,168,83,0.25)}
         .chat-head .name{font-size:0.85rem;font-weight:600;color:#fff}
         .chat-head .status{font-size:0.7rem;color:rgba(255,255,255,0.35)}
         .chat-close{margin-left:auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.4rem;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -223,7 +223,7 @@
         
         /* Welcome toast */
         .welcome-toast{position:fixed;bottom:92px;right:20px;z-index:98;background:rgba(6,8,16,0.95);border:1px solid rgba(212,168,83,0.15);border-radius:14px;padding:14px 18px;max-width:300px;box-shadow:0 10px 36px rgba(0,0,0,0.5);display:none;align-items:center;gap:12px;animation:toastUp 0.4s ease-out;backdrop-filter:blur(12px)}
-        .welcome-toast img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,83,0.2);flex-shrink:0}
+        .welcome-toast img{width:36px;height:48px;border-radius:8px;object-fit:cover;object-position:top;border:1px solid rgba(212,168,83,0.2);flex-shrink:0}
         .welcome-toast .txt{font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.4}
         .welcome-toast .txt strong{color:#d4a853}
         .welcome-toast .x{background:none;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-size:1rem;padding:2px}
@@ -236,7 +236,7 @@
         .scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#d4a853,#00c8ff);z-index:200;transform-origin:left;transform:scaleX(0)}
 
         /* Mobile chatbot */
-        @media(max-width:768px){.chat-panel{width:calc(100vw - 24px);right:12px;left:12px;bottom:76px;max-height:calc(100vh - 96px);max-height:calc(100dvh - 96px);border-radius:14px;z-index:9999}.avatar-wrap{bottom:10px;right:10px}.avatar-btn{width:54px;height:54px}.chat-close{width:40px;height:40px;font-size:1.5rem}.chat-msgs{max-height:calc(100vh - 320px)}}
+        @media(max-width:768px){.chat-panel{position:fixed;width:calc(100vw - 24px);right:12px;left:12px;bottom:76px;max-height:calc(100dvh - 100px);border-radius:14px;z-index:9999}.avatar-wrap{bottom:10px;right:10px}.avatar-btn{width:54px;height:54px}.chat-close{width:44px;height:44px;font-size:1.6rem;min-width:44px}.chat-msgs{max-height:calc(100dvh - 360px);overflow-y:auto;-webkit-overflow-scrolling:touch}.chat-head img{width:28px;height:28px}.welcome-toast{bottom:76px;right:12px;max-width:calc(100vw - 90px)}}
 
         
         /* ═══ MOBILE RESPONSIVE ═══ */
@@ -463,7 +463,7 @@
 
 <!-- WELCOME TOAST -->
 <div class="welcome-toast" id="wToast" style="display:none">
-    <img src="/assets/img/daena-avatar.png" alt="Daena">
+    <img src="/assets/img/daena-nobg.png" alt="Daena">
     <div class="txt"><strong>Hi! I'm Daena.</strong><br>Welcome to my world. Scroll down to explore my story.</div>
     <button class="x" id="wClose">&times;</button>
 </div>
@@ -480,7 +480,7 @@
 <!-- CHATBOT -->
 <div class="chat-panel" id="chatPanel">
     <div class="chat-head">
-        <img src="/assets/img/daena-avatar.png" alt="Daena">
+        <img src="/assets/img/daena-nobg.png" alt="Daena">
         <div style="flex:1"><div class="name">Daena</div><div class="status" id="chatStat">Your AI guide</div></div>
         <button class="chat-close" id="chatClose">&times;</button>
     </div>
