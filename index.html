@@ -64,9 +64,9 @@
         }
         .content-panel h2{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;margin-bottom:16px}
         .content-panel h3{font-size:1.1rem;font-weight:600;margin:16px 0 8px;color:#d4a853}
-        .content-panel p{color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:12px;font-size:0.95rem}
+        .content-panel p{color:rgba(255,255,255,0.78);line-height:1.6;margin-bottom:12px;font-size:0.95rem}
         .content-panel ul{list-style:none;padding:0}
-        .content-panel li{padding:8px 0 8px 20px;position:relative;color:rgba(255,255,255,0.55);font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+        .content-panel li{padding:8px 0 8px 20px;position:relative;color:rgba(255,255,255,0.72);font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.04)}
         .content-panel li::before{content:'';position:absolute;left:0;top:50%;width:8px;height:8px;background:#d4a853;border-radius:2px;transform:translateY(-50%) rotate(45deg)}
         .content-panel.wide{max-width:520px;width:42%}
         .step[data-side="left"]{justify-content:flex-start;padding-left:5%}
@@ -76,14 +76,14 @@
 
         /* Hero overlay */
         .hero-overlay{text-align:center;max-width:800px;width:90%;pointer-events:auto}
-        .hero-overlay .label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(212,168,83,0.7);margin-bottom:20px}
+        .hero-overlay .label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(212,168,83,0.9);margin-bottom:20px;text-shadow:0 0 10px rgba(212,168,83,0.3)}
         .hero-overlay h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:800;margin-bottom:8px;
             background:linear-gradient(135deg,#d4a853 0%,#FFA500 40%,#FFD700 60%,#fff 100%);
             -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
             filter:drop-shadow(0 0 20px rgba(212,168,83,0.3))}
-        .hero-overlay h2{font-size:clamp(1.1rem,3vw,1.8rem);font-weight:400;color:rgba(255,255,255,0.5);margin-bottom:24px}
-        .hero-overlay .sub{color:rgba(255,255,255,0.35);font-size:0.85rem;margin-bottom:32px}
-        .hero-overlay .sub span{color:#d4a853}
+        .hero-overlay h2{font-size:clamp(1.1rem,3vw,1.8rem);font-weight:400;color:rgba(255,255,255,0.85);margin-bottom:24px;text-shadow:0 0 30px rgba(0,200,255,0.15)}
+        .hero-overlay .sub{color:rgba(255,255,255,0.65);font-size:0.9rem;margin-bottom:32px;text-shadow:0 1px 8px rgba(0,0,0,0.5)}
+        .hero-overlay .sub span{color:#FFD700;text-shadow:0 0 12px rgba(212,168,83,0.3)}
         .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
 
         /* Buttons */
@@ -117,8 +117,13 @@
         @keyframes scrollBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
         /* Shimmer text effect */
         @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-        .shimmer{background:linear-gradient(90deg,#d4a853 0%,#FFD700 25%,#fff 50%,#FFD700 75%,#d4a853 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
-        .shimmer-cyan{background:linear-gradient(90deg,#00c8ff 0%,#00e6ff 25%,#fff 50%,#00e6ff 75%,#00c8ff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
+        .shimmer{background:linear-gradient(90deg,#d4a853 0%,#FFD700 25%,#fff 50%,#FFD700 75%,#d4a853 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;filter:drop-shadow(0 0 8px rgba(212,168,83,0.4))}
+        .shimmer-cyan{background:linear-gradient(90deg,#00c8ff 0%,#00e6ff 25%,#fff 50%,#00e6ff 75%,#00c8ff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;filter:drop-shadow(0 0 8px rgba(0,200,255,0.4))}
+        /* Neon glow effect */
+        .neon-gold{color:#FFD700;text-shadow:0 0 7px rgba(212,168,83,0.5),0 0 20px rgba(212,168,83,0.2)}
+        .neon-cyan{color:#00e6ff;text-shadow:0 0 7px rgba(0,200,255,0.5),0 0 20px rgba(0,200,255,0.2)}
+        @keyframes pulseGlow{0%,100%{text-shadow:0 0 7px rgba(212,168,83,0.5),0 0 20px rgba(212,168,83,0.2)}50%{text-shadow:0 0 14px rgba(212,168,83,0.7),0 0 40px rgba(212,168,83,0.3)}}
+        .neon-pulse{animation:pulseGlow 3s ease-in-out infinite}
 
         /* Video player overrides */
         .daena-video{width:100%;border-radius:12px;overflow:hidden}
@@ -160,8 +165,8 @@
 
         /* Footer */
         .site-footer{padding:40px 20px;text-align:center;border-top:1px solid rgba(255,255,255,0.04)}
-        .site-footer p{color:rgba(255,255,255,0.25);font-size:0.75rem;margin-bottom:8px}
-        .site-footer a{color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.3s}
+        .site-footer p{color:rgba(255,255,255,0.4);font-size:0.75rem;margin-bottom:8px}
+        .site-footer a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.3s}
         .site-footer a:hover{color:#d4a853}
 
         /* Avatar: full-body cutout (mas-ai.co style) */
@@ -306,8 +311,8 @@
         <div class="hero-overlay" id="heroOverlay">
             <p class="label">MAS-AI Technologies Inc.</p>
             <h1 class="shimmer">Meet Daena</h1>
-            <h2>AI-Autonomous Company OS</h2>
-            <p class="sub">Governed autonomy with auditable, policy-driven decisions.<br><span>Patent-pending: PhiLattice Architecture + NBMF</span></p>
+            <h2 class="neon-cyan">AI-Autonomous Company OS</h2>
+            <p class="sub">Governed autonomy with auditable, policy-driven decisions.<br><span class="neon-gold neon-pulse">Patent-pending: PhiLattice Architecture + NBMF</span></p>
             <div class="hero-ctas">
                 <a href="#s-demos" class="btn-g">Watch Demos</a>
                 <a href="#s-architecture" class="btn-c">Explore Architecture</a>
