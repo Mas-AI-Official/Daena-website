@@ -71,7 +71,7 @@
         .content-panel.wide{max-width:520px;width:42%}
         .step[data-side="left"]{justify-content:flex-start;padding-left:5%}
         .step[data-side="right"]{justify-content:flex-end;padding-right:5%}
-        @media(max-width:768px){.step[data-side="left"],.step[data-side="right"]{justify-content:center;padding-left:20px;padding-right:20px}.content-panel{width:92%;max-width:620px}}
+        @media(max-width:768px){.step[data-side="left"],.step[data-side="right"]{justify-content:center;padding-left:12px;padding-right:12px}.content-panel{width:95%;max-width:620px}.content-panel.wide{width:98%;max-width:100%}}
 
 
         /* Hero overlay */
@@ -122,7 +122,7 @@
 
         /* Video player overrides */
         .daena-video{width:100%;border-radius:12px;overflow:hidden}
-        .video-frame{position:relative;width:100%;max-height:280px;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+        .video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
         .video-frame video{width:100%;height:100%;object-fit:contain;display:block}
         .overlay-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.4);border:none;cursor:pointer;color:#FFD700;transition:opacity 0.3s}
         .overlay-play svg{fill:#FFD700;filter:drop-shadow(0 0 12px rgba(255,215,0,0.6))}
@@ -731,7 +731,6 @@ function drawBg() {
 
     ctx.globalAlpha = 1;
 }
-}
 
 // Always run animation (even with reduced motion preference)
 drawBg();
@@ -815,8 +814,9 @@ function toggleDaenaChat(e){if(e){e.preventDefault();e.stopPropagation();}var sp
 avatarBtn.addEventListener('click',toggleDaenaChat);
 avatarBtn.addEventListener('touchend',toggleDaenaChat);
 var chatCloseEl=document.getElementById('chatClose');
-chatCloseEl.addEventListener('click',function(e){e.stopPropagation();chatPanel.classList.remove('open');});
-chatCloseEl.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();chatPanel.classList.remove('open');});
+function closeDaenaChat(e){if(e){e.preventDefault();e.stopPropagation();}chatPanel.classList.remove('open');var sp=document.getElementById('avatarSpeech');if(sp)sp.classList.remove('show');var wt=document.getElementById('wToast');if(wt)wt.style.display='none';lastSpeechSec=curSec;}
+chatCloseEl.addEventListener('click',closeDaenaChat);
+chatCloseEl.addEventListener('touchend',closeDaenaChat);
 
 // Section narration
 var narration = {
@@ -969,6 +969,21 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
         e.preventDefault();
         var t = document.getElementById(this.getAttribute('href').substring(1));
         if (t) t.scrollIntoView({behavior: 'smooth'});
+    });
+});
+
+// ─── FULLSCREEN FIX ───
+document.querySelectorAll('[data-action="fs"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        var vw = this.closest('.daena-video');
+        if (!vw) return;
+        var vf = vw.querySelector('.video-frame');
+        if (!vf) return;
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        } else {
+            (vf.requestFullscreen || vf.webkitRequestFullscreen).call(vf);
+        }
     });
 });
 
