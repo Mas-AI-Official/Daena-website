@@ -171,13 +171,13 @@
         .avatar-btn img{width:100%;height:100%;object-fit:cover;object-position:top}
         @media(max-width:768px){.avatar-btn{width:48px;height:64px}.avatar-wrap{bottom:16px;right:12px}}
 
-        .chat-panel{position:fixed;bottom:148px;right:20px;width:380px;max-height:520px;z-index:99;border-radius:16px;background:rgba(6,8,16,0.96);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07);box-shadow:0 16px 56px rgba(0,0,0,0.6);display:none;flex-direction:column;overflow:hidden}
+        .chat-panel{position:fixed;bottom:100px;right:20px;width:380px;max-height:min(520px,calc(100vh - 120px));z-index:9999;border-radius:16px;background:rgba(6,8,16,0.96);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07);box-shadow:0 16px 56px rgba(0,0,0,0.6);display:none;flex-direction:column;overflow:hidden}
         .chat-panel.open{display:flex}
         .chat-head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px}
         .chat-head img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,83,0.25)}
         .chat-head .name{font-size:0.85rem;font-weight:600;color:#fff}
         .chat-head .status{font-size:0.7rem;color:rgba(255,255,255,0.35)}
-        .chat-close{margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-size:1.2rem}
+        .chat-close{margin-left:auto;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.4rem;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
         .chat-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;max-height:320px}
         .chat-msgs::-webkit-scrollbar{width:3px}
         .chat-msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
@@ -211,11 +211,11 @@
         .nav-cta{display:flex;align-items:center;gap:12px}
         .nav-cta-desktop{display:inline-flex;align-items:center;padding:10px 24px;border-radius:50px;background:#00c8ff;border:none;color:#0a0a0a;font-weight:700;font-size:13px;text-decoration:none;transition:all 0.3s;font-family:'DM Sans',sans-serif;box-shadow:0 0 24px rgba(0,200,255,0.25)}
         .nav-cta-desktop:hover{box-shadow:0 0 32px rgba(0,200,255,0.4);transform:scale(1.05)}
-        .nav-burger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:rgba(255,255,255,0.7)}
+        .nav-burger{display:none;background:none;border:none;cursor:pointer;padding:12px;color:rgba(255,255,255,0.7);-webkit-tap-highlight-color:transparent;touch-action:manipulation;z-index:1001}
         .nav-burger svg{width:22px;height:22px}
-        .mobile-nav{display:none;position:absolute;top:calc(100% + 8px);left:16px;right:16px;background:rgba(10,12,16,0.95);backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:20px 24px;flex-direction:column;gap:4px;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+        .mobile-nav{display:none;position:fixed;top:76px;left:12px;right:12px;background:rgba(10,12,16,0.98);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:20px 24px;flex-direction:column;gap:4px;box-shadow:0 20px 60px rgba(0,0,0,0.8);z-index:999}
         .mobile-nav.is-open{display:flex}
-        .mobile-nav a{color:rgba(255,255,255,0.55);text-decoration:none;font-weight:600;font-size:15px;padding:12px 0;transition:color 0.3s;border-bottom:1px solid rgba(255,255,255,0.03)}
+        .mobile-nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-weight:600;font-size:16px;padding:14px 8px;transition:color 0.3s;border-bottom:1px solid rgba(255,255,255,0.04);-webkit-tap-highlight-color:transparent;display:block}
         .mobile-nav a:last-child{border:none}
         .mobile-nav a:hover{color:#e8eaf0}
         @media(max-width:768px){.nav-links{display:none}.nav-burger{display:block}.nav-cta-desktop{display:none}}
@@ -243,7 +243,7 @@
         .scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#d4a853,#00c8ff);z-index:200;transform-origin:left;transform:scaleX(0)}
 
         /* Mobile chatbot */
-        @media(max-width:768px){.chat-panel{width:calc(100vw - 32px);right:16px;bottom:88px}.avatar-wrap{bottom:14px;right:14px}}
+        @media(max-width:768px){.chat-panel{width:calc(100vw - 24px);right:12px;left:12px;bottom:76px;max-height:calc(100vh - 96px);max-height:calc(100dvh - 96px);border-radius:14px;z-index:9999}.avatar-wrap{bottom:10px;right:10px}.avatar-btn{width:54px;height:54px}.chat-close{width:40px;height:40px;font-size:1.5rem}.chat-msgs{max-height:calc(100vh - 320px)}}
 
         
         /* ═══ MOBILE RESPONSIVE ═══ */
@@ -257,7 +257,7 @@
             .pipeline .arrow{font-size:0.65rem}
             .btn-g,.btn-c{padding:10px 16px;font-size:0.8rem}
             .step{padding:20px 12px}
-            .chat-panel{width:calc(100vw - 24px);right:12px;bottom:84px;max-height:440px}
+            .chat-panel{width:calc(100vw - 16px);right:8px;left:8px;bottom:68px;max-height:calc(100vh - 80px)}
             .avatar-wrap{bottom:12px;right:12px}
             .avatar-btn{width:50px;height:50px}
             .welcome-toast{max-width:260px;right:12px;bottom:74px;padding:10px 14px}
@@ -831,14 +831,13 @@ var chatStat = document.getElementById('chatStat');
 // Avatar tilt
 // No 3D tilt for full-body avatar (matches mas-ai.co)
 
-// Toggle
-avatarBtn.addEventListener('click', function() {
-    chatPanel.classList.toggle('open');
-    if (chatPanel.classList.contains('open') && chatMsgs.children.length === 0) {
-        addMsg("Hi! I'm Daena. Welcome to my special introduction page. Ask me anything, or just scroll and I'll narrate the journey.", true);
-    }
-});
-document.getElementById('chatClose').addEventListener('click', function(){ chatPanel.classList.remove('open'); });
+// Toggle (click + touch for mobile)
+function toggleDaenaChat(e){if(e){e.preventDefault();e.stopPropagation();}var sp=document.getElementById('avatarSpeech');if(sp)sp.classList.remove('show');var wt=document.getElementById('wToast');if(wt)wt.style.display='none';chatPanel.classList.toggle('open');if(chatPanel.classList.contains('open')&&chatMsgs.children.length===0){addMsg("Hi! I'm Daena. Welcome to my special introduction page. Ask me anything, or just scroll and I'll narrate the journey.",true);}}
+avatarBtn.addEventListener('click',toggleDaenaChat);
+avatarBtn.addEventListener('touchend',toggleDaenaChat);
+var chatCloseEl=document.getElementById('chatClose');
+chatCloseEl.addEventListener('click',function(e){e.stopPropagation();chatPanel.classList.remove('open');});
+chatCloseEl.addEventListener('touchend',function(e){e.preventDefault();e.stopPropagation();chatPanel.classList.remove('open');});
 
 // Section narration
 var narration = {
@@ -952,8 +951,11 @@ window.addEventListener('scroll', function() {
 }, {passive: true});
 var navBurger = document.getElementById('navBurger');
 var mobileNav = document.getElementById('mobileNav');
-navBurger.addEventListener('click', function() { navBurger.classList.toggle('open'); mobileNav.classList.toggle('is-open'); });
-mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { navBurger.classList.remove('open'); mobileNav.classList.remove('is-open'); }); });
+function toggleBurger(e){if(e){e.preventDefault();e.stopPropagation();}navBurger.classList.toggle('open');mobileNav.classList.toggle('is-open');}
+navBurger.addEventListener('click',toggleBurger);
+navBurger.addEventListener('touchend',toggleBurger);
+mobileNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navBurger.classList.remove('open');mobileNav.classList.remove('is-open');});a.addEventListener('touchend',function(){navBurger.classList.remove('open');mobileNav.classList.remove('is-open');});});
+document.addEventListener('click',function(e){if(mobileNav&&!mobileNav.contains(e.target)&&!navBurger.contains(e.target)){navBurger.classList.remove('open');mobileNav.classList.remove('is-open');}});
 
 
 // ─── AVATAR SECTION SPEECH ───
