@@ -242,8 +242,8 @@
         /* Mobile chatbot */
         @media(max-width:768px){.chat-panel{width:calc(100vw - 32px);right:16px;bottom:88px}.avatar-wrap{bottom:14px;right:14px}}
 
-        /* Reduced motion */
-        @media(prefers-reduced-motion:reduce){#bg-canvas{display:none}.content-panel{transform:none !important;opacity:1 !important}.scroll-hint{display:none}}
+        /* Reduced motion: keep background visible, just disable animations on panels */
+        @media(prefers-reduced-motion:reduce){.content-panel{transform:none !important;opacity:1 !important}.scroll-hint{display:none}}
     </style>
 </head>
 <body>
@@ -707,19 +707,8 @@ function drawBg() {
     ctx.globalAlpha = 1;
 }
 
-if (!noMotion) {
-    drawBg();
-} else {
-    // Static fallback: just draw spiral once
-    ctx.globalAlpha = 0.25;
-    ctx.fillStyle = '#d4a853';
-    for (var i = 0; i < NP; i++) {
-        ctx.beginPath();
-        ctx.arc(CX + spiralX[i], CY + spiralY[i], pSize[i], 0, Math.PI * 2);
-        ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-}
+// Always run animation (even with reduced motion preference)
+drawBg();
 
 // ─── GSAP PANEL ANIMATIONS ───
 if (typeof gsap !== 'undefined' && !noMotion) {
