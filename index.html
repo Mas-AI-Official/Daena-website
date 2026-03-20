@@ -230,14 +230,7 @@
         .avatar-speech{position:fixed;bottom:148px;right:24px;z-index:101;max-width:260px;padding:12px 16px;background:rgba(6,8,16,0.95);border:1px solid rgba(212,168,83,0.2);border-radius:14px 14px 4px 14px;font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.4;box-shadow:0 8px 28px rgba(0,0,0,0.5);backdrop-filter:blur(12px);display:none;animation:toastUp 0.4s ease-out}
         .avatar-speech strong{color:#d4a853}
         .avatar-speech.show{display:block}
-        @media(max-width:768px){
-        /* Welcome toast */
-        .welcome-toast{position:fixed;bottom:92px;right:20px;z-index:98;background:rgba(6,8,16,0.95);border:1px solid rgba(212,168,83,0.15);border-radius:14px;padding:14px 18px;max-width:300px;box-shadow:0 10px 36px rgba(0,0,0,0.5);display:none;align-items:center;gap:12px;animation:toastUp 0.4s ease-out;backdrop-filter:blur(12px)}
-        .welcome-toast img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,83,0.2);flex-shrink:0}
-        .welcome-toast .txt{font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.4}
-        .welcome-toast .txt strong{color:#d4a853}
-        .welcome-toast .x{background:none;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-size:1rem;padding:2px}
-        .avatar-speech{right:14px;bottom:96px;max-width:220px}}
+        @media(max-width:768px){.avatar-speech{right:14px;bottom:96px;max-width:220px}}
 
         /* Progress bar */
         .scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#d4a853,#00c8ff);z-index:200;transform-origin:left;transform:scaleX(0)}
@@ -939,7 +932,7 @@ document.querySelectorAll('.chat-qbtn').forEach(function(b) { b.addEventListener
 var wToast = document.getElementById('wToast');
 var wClose = document.getElementById('wClose');
 if (wToast) {
-    setTimeout(function(){ wToast.style.display = 'flex'; }, 2500);
+    setTimeout(function(){ if(!avatarSpeech.classList.contains("show")) wToast.style.display = "flex"; }, 2500);
     if (wClose) wClose.addEventListener('click', function(){ wToast.style.display = 'none'; });
 }
 
@@ -976,7 +969,7 @@ function updateSpeech() {
     if (curSec !== lastSpeechSec && sectionSpeech[curSec]) {
         lastSpeechSec = curSec;
         avatarSpeech.innerHTML = sectionSpeech[curSec];
-        avatarSpeech.classList.add('show');
+        wToast.style.display='none';avatarSpeech.classList.add('show');
         clearTimeout(speechTimeout);
         speechTimeout = setTimeout(function() { avatarSpeech.classList.remove('show'); }, 7000);
     }
