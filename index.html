@@ -109,6 +109,10 @@
         .scroll-hint span{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:#d4a853}
         .scroll-hint .bar{width:1px;height:32px;background:linear-gradient(to bottom,#d4a853,transparent)}
         @keyframes scrollBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+        /* Shimmer text effect */
+        @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+        .shimmer{background:linear-gradient(90deg,#d4a853 0%,#FFD700 25%,#fff 50%,#FFD700 75%,#d4a853 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
+        .shimmer-cyan{background:linear-gradient(90deg,#00c8ff 0%,#00e6ff 25%,#fff 50%,#00e6ff 75%,#00c8ff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
 
         /* Video player overrides */
         .daena-video{width:100%;border-radius:12px;overflow:hidden}
@@ -210,10 +214,24 @@
         .mobile-nav a:hover{color:#e8eaf0}
         @media(max-width:768px){.nav-links{display:none}.nav-burger{display:block}.nav-cta-desktop{display:none}}
         /* Avatar speech bubble */
+        
+        /* Welcome toast */
+        .welcome-toast{position:fixed;bottom:92px;right:20px;z-index:98;background:rgba(6,8,16,0.95);border:1px solid rgba(212,168,83,0.15);border-radius:14px;padding:14px 18px;max-width:300px;box-shadow:0 10px 36px rgba(0,0,0,0.5);display:none;align-items:center;gap:12px;animation:toastUp 0.4s ease-out;backdrop-filter:blur(12px)}
+        .welcome-toast img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,83,0.2);flex-shrink:0}
+        .welcome-toast .txt{font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.4}
+        .welcome-toast .txt strong{color:#d4a853}
+        .welcome-toast .x{background:none;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-size:1rem;padding:2px}
         .avatar-speech{position:fixed;bottom:148px;right:24px;z-index:101;max-width:260px;padding:12px 16px;background:rgba(6,8,16,0.95);border:1px solid rgba(212,168,83,0.2);border-radius:14px 14px 4px 14px;font-size:0.78rem;color:rgba(255,255,255,0.75);line-height:1.4;box-shadow:0 8px 28px rgba(0,0,0,0.5);backdrop-filter:blur(12px);display:none;animation:toastUp 0.4s ease-out}
         .avatar-speech strong{color:#d4a853}
         .avatar-speech.show{display:block}
-        @media(max-width:768px){.avatar-speech{right:14px;bottom:96px;max-width:220px}}
+        @media(max-width:768px){
+        /* Welcome toast */
+        .welcome-toast{position:fixed;bottom:92px;right:20px;z-index:98;background:rgba(6,8,16,0.95);border:1px solid rgba(212,168,83,0.15);border-radius:14px;padding:14px 18px;max-width:300px;box-shadow:0 10px 36px rgba(0,0,0,0.5);display:none;align-items:center;gap:12px;animation:toastUp 0.4s ease-out;backdrop-filter:blur(12px)}
+        .welcome-toast img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,83,0.2);flex-shrink:0}
+        .welcome-toast .txt{font-size:0.82rem;color:rgba(255,255,255,0.7);line-height:1.4}
+        .welcome-toast .txt strong{color:#d4a853}
+        .welcome-toast .x{background:none;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-size:1rem;padding:2px}
+        .avatar-speech{right:14px;bottom:96px;max-width:220px}}
 
         /* Progress bar */
         .scroll-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#d4a853,#00c8ff);z-index:200;transform-origin:left;transform:scaleX(0)}
@@ -246,7 +264,7 @@
     <section class="step" id="hero" style="height:100vh;padding-top:88px">
         <div class="hero-overlay" id="heroOverlay">
             <p class="label">MAS-AI Technologies Inc.</p>
-            <h1>Meet Daena</h1>
+            <h1 class="shimmer">Meet Daena</h1>
             <h2>AI-Autonomous Company OS</h2>
             <p class="sub">Governed autonomy with auditable, policy-driven decisions.<br><span>Patent-pending: PhiLattice Architecture + NBMF</span></p>
             <div class="hero-ctas">
@@ -279,7 +297,7 @@
         <div class="content-panel">
             <p class="font-mono" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(0,200,255,0.6);margin-bottom:12px">The Solution</p>
             <h2 style="color:#fff">Governance inside the execution layer.</h2>
-            <p>Daena runs a <strong style="color:#d4a853">10-stage governed pipeline</strong>. Every action passes through security, governance, and audit before execution.</p>
+            <p>Daena runs a <strong class="shimmer" style="display:inline">10-stage governed pipeline</strong>. Every action passes through security, governance, and audit before execution.</p>
             <div class="pipeline-v" style="margin:20px 0">
                 <div class="stage-row"><div class="stage-num">1</div><div class="stage-name">SecurityGate</div></div>
                 <div class="flow-arrow"><div class="flow-line"><div class="flow-dot" style="animation-delay:0s"></div></div></div>
@@ -309,11 +327,11 @@
     <section class="step" id="s-architecture" data-side="left" style="min-height:110vh">
         <div class="content-panel">
             <p class="font-mono" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(212,168,83,0.6);margin-bottom:12px">Patent Pending</p>
-            <h2 style="color:#fff">PhiLattice Architecture</h2>
+            <h2><span class="shimmer">PhiLattice Architecture</span></h2>
             <p>Fibonacci-based agent placement for scalable governance. Honeycomb departments for structured collaboration. The mesh you see around you IS the architecture.</p>
             <h3>NBMF (Neural-Backed Memory Fabric)</h3>
             <p>Persistent, auditable, queryable memory across 5 tiers. Hallucinations auto-expire. Only verified knowledge persists. Full traceability across every agent interaction.</p>
-            <p style="color:rgba(212,168,83,0.5);font-size:0.8rem;font-family:'JetBrains Mono',monospace;text-align:center;margin-top:16px">Two USPTO provisional patents pending.</p>
+            <p style="color:rgba(212,168,83,0.5);font-size:0.8rem;font-family:'JetBrains Mono',monospace;text-align:center;margin-top:16px"><span class="shimmer">Two USPTO provisional patents pending.</span></p>
         </div>
     </section>
 
@@ -401,6 +419,13 @@
 </main>
 
 <!-- AVATAR SPEECH -->
+
+<!-- WELCOME TOAST -->
+<div class="welcome-toast" id="wToast" style="display:none">
+    <img src="/assets/img/daena-avatar.png" alt="Daena">
+    <div class="txt"><strong>Hi! I'm Daena.</strong><br>Welcome to my world. Scroll down to explore my story.</div>
+    <button class="x" id="wClose">&times;</button>
+</div>
 <div class="avatar-speech" id="avatarSpeech"></div>
 
 <!-- AVATAR (mas-ai.co full-body style) -->
@@ -855,6 +880,15 @@ chatSend.addEventListener('click', handleChat);
 chatIn.addEventListener('keydown', function(e) { if (e.key === 'Enter') handleChat(); });
 document.querySelectorAll('.chat-qbtn').forEach(function(b) { b.addEventListener('click', function() { chatIn.value = this.getAttribute('data-q'); handleChat(); }); });
 
+
+// ─── WELCOME TOAST ───
+var wToast = document.getElementById('wToast');
+var wClose = document.getElementById('wClose');
+if (wToast) {
+    setTimeout(function(){ wToast.style.display = 'flex'; }, 2500);
+    if (wClose) wClose.addEventListener('click', function(){ wToast.style.display = 'none'; });
+}
+
 // ─── NAVBAR ───
 var siteHeader = document.getElementById('siteHeader');
 window.addEventListener('scroll', function() {
@@ -887,7 +921,7 @@ function updateSpeech() {
         avatarSpeech.innerHTML = sectionSpeech[curSec];
         avatarSpeech.classList.add('show');
         clearTimeout(speechTimeout);
-        speechTimeout = setTimeout(function() { avatarSpeech.classList.remove('show'); }, 5000);
+        speechTimeout = setTimeout(function() { avatarSpeech.classList.remove('show'); }, 7000);
     }
 }
 window.addEventListener('scroll', updateSpeech, {passive: true});
