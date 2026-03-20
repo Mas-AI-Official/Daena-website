@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Daena by MAS-AI | Governance-First AI Agent Platform</title>
     <meta name="description" content="Daena coordinates AI agents with built-in governance, auditable memory, and a 10-stage execution pipeline. Patent-pending PhiLattice Architecture.">
     <meta name="keywords" content="Daena, Daena AI, governed AI, AI agents, MAS-AI, enterprise AI, NBMF, PhiLattice, auditable AI, multi-agent platform, AI governance">
@@ -38,7 +41,7 @@
         .font-mono{font-family:'JetBrains Mono',monospace}
 
         /* Canvas */
-        #bg-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0}
+        #bg-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;background:#0a0a0a}
 
         /* Scroll content */
         #scroll-content{position:relative;z-index:1}
@@ -241,6 +244,48 @@
 
         /* Mobile chatbot */
         @media(max-width:768px){.chat-panel{width:calc(100vw - 32px);right:16px;bottom:88px}.avatar-wrap{bottom:14px;right:14px}}
+
+        
+        /* ═══ MOBILE RESPONSIVE ═══ */
+        @media(max-width:480px){
+            .hero-overlay h1{font-size:2.2rem}
+            .hero-overlay h2{font-size:1rem}
+            .content-panel{padding:24px 20px;border-radius:14px;max-width:95%}
+            .content-panel h2{font-size:1.25rem}
+            .content-panel p,.content-panel li{font-size:0.82rem}
+            .pipeline .stage{font-size:0.6rem;padding:4px 6px}
+            .pipeline .arrow{font-size:0.65rem}
+            .btn-g,.btn-c{padding:10px 16px;font-size:0.8rem}
+            .step{padding:20px 12px}
+            .chat-panel{width:calc(100vw - 24px);right:12px;bottom:84px;max-height:440px}
+            .avatar-wrap{bottom:12px;right:12px}
+            .avatar-btn{width:50px;height:50px}
+            .welcome-toast{max-width:260px;right:12px;bottom:74px;padding:10px 14px}
+            .welcome-toast img{width:32px;height:32px}
+            .daena-video{border-radius:8px}
+            .video-frame{border-radius:8px}
+            .controls{padding:6px 8px;gap:4px}
+            .controls button,.controls .btn{min-width:28px;height:28px}
+            .demo-grid{grid-template-columns:1fr}
+        }
+        @media(max-width:360px){
+            .hero-overlay h1{font-size:1.8rem}
+            .content-panel{padding:18px 14px;max-width:98%}
+            .pipeline{gap:3px}
+            .pipeline .stage{font-size:0.55rem;padding:3px 5px}
+        }
+        /* Tablet */
+        @media(min-width:481px) and (max-width:1024px){
+            .content-panel{max-width:85%}
+            .content-panel.wide{max-width:90%}
+        }
+        /* iOS safe area */
+        @supports(padding:max(0px)){
+            .site-footer{padding-bottom:max(20px,env(safe-area-inset-bottom))}
+            .avatar-wrap{bottom:max(20px,env(safe-area-inset-bottom))}
+        }
+        /* Ensure canvas always renders */
+        #bg-canvas{image-rendering:auto;-webkit-transform:translateZ(0);transform:translateZ(0)}
 
         /* Reduced motion: keep background visible, just disable animations on panels */
         @media(prefers-reduced-motion:reduce){.content-panel{transform:none !important;opacity:1 !important}.scroll-hint{display:none}}
@@ -559,6 +604,8 @@ function drawBg() {
     var sp = scrollProg;
 
     ctx.clearRect(0, 0, W, H);
+    // Paint dark base on canvas (ensures canvas is always visible)
+    ctx.fillStyle='#0a0a0a';ctx.fillRect(0,0,W,H);
 
     // Scroll phases
     var convergeT = clamp((sp - 0.05) / 0.18, 0, 1);
