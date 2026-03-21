@@ -320,7 +320,61 @@
         #bg-canvas{image-rendering:auto;-webkit-transform:translateZ(0);transform:translateZ(0)}
 
         /* Reduced motion: keep background visible, just disable animations on panels */
-        @media(prefers-reduced-motion:reduce){.content-panel{transform:none !important;opacity:1 !important}.scroll-hint{display:none}}
+        @media(prefers-reduced-motion:reduce){.content-panel{transform:none !important;opacity:1 !important}.scroll-hint{display:none}.content-panel::before,.btn-g::after,.btn-c::after{display:none !important}}
+
+        /* ═══ PREMIUM INTERACTIONS ═══ */
+
+        /* Content panel hover glow */
+        .content-panel{transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),border-color 0.4s,box-shadow 0.4s;position:relative;overflow:hidden}
+        .content-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.3),transparent);opacity:0;transition:opacity 0.4s}
+        .content-panel:hover{border-color:rgba(0,200,255,0.2);box-shadow:0 16px 56px rgba(0,0,0,0.5),0 0 30px rgba(0,200,255,0.04);transform:translateY(-4px) !important}
+        .content-panel:hover::before{opacity:1}
+
+        /* Button ripple effect */
+        .btn-g,.btn-c{position:relative;overflow:hidden;isolation:isolate}
+        .btn-g::after,.btn-c::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--ripple-x,50%) var(--ripple-y,50%),rgba(255,255,255,0.15) 0%,transparent 60%);opacity:0;transition:opacity 0.4s}
+        .btn-g:hover::after,.btn-c:hover::after{opacity:1}
+
+        /* Pipeline stage hover: glow + lift */
+        .pipeline-v .stage-name{transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94)}
+        .pipeline-v .stage-row:hover .stage-name{background:rgba(0,200,255,0.1);border-color:rgba(0,200,255,0.3);color:#00c8ff;transform:translateX(4px);box-shadow:0 0 16px rgba(0,200,255,0.08)}
+        .pipeline-v .stage-row:hover .stage-num{background:rgba(0,200,255,0.2);border-color:rgba(0,200,255,0.5);transform:scale(1.1)}
+        .pipeline-v .stage-num{transition:all 0.3s}
+        .pipeline-v .stage-row{transition:all 0.2s}
+
+        /* Contact form focus glow */
+        .contact-form input:focus,.contact-form textarea:focus{border-color:rgba(212,168,83,0.5);box-shadow:0 0 16px rgba(212,168,83,0.08);background:rgba(255,255,255,0.06)}
+
+        /* Footer upgrade */
+        .site-footer{padding:48px 24px 32px;background:rgba(6,8,16,0.5);backdrop-filter:blur(8px)}
+        .site-footer p{color:rgba(255,255,255,0.45);margin-bottom:10px}
+        .footer-divider{width:60%;max-width:500px;height:1px;margin:0 auto 20px;background:linear-gradient(90deg,transparent,rgba(212,168,83,0.15),transparent)}
+        .site-footer a{position:relative;transition:color 0.3s}
+        .site-footer a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#d4a853;transition:width 0.3s}
+        .site-footer a:hover::after{width:100%}
+
+        /* Demo card hover glow */
+        .demo-card{transition:all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);position:relative;overflow:hidden}
+        .demo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,255,0.25),transparent);opacity:0;transition:opacity 0.3s}
+        .demo-card:hover{border-color:rgba(0,200,255,0.25);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+        .demo-card:hover::before{opacity:1}
+
+        /* Navbar link underline slide */
+        .nav-links a{position:relative}
+        .nav-links a::after{content:'';position:absolute;bottom:4px;left:16px;right:16px;height:1.5px;background:linear-gradient(90deg,#00c8ff,#d4a853);transform:scaleX(0);transform-origin:left;transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94)}
+        .nav-links a:hover::after{transform:scaleX(1)}
+
+        /* CTA button pulse on hero */
+        .hero-ctas .btn-g{animation:ctaPulse 3s ease-in-out 2s infinite}
+        @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,168,83,0.2)}50%{box-shadow:0 0 0 8px rgba(212,168,83,0)}}
+
+        /* Chat quick button hover */
+        .chat-qbtn{transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94)}
+        .chat-qbtn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(212,168,83,0.1)}
+
+        /* Brand logo hover glow */
+        .brand:hover img{filter:drop-shadow(0 0 12px rgba(212,168,83,0.4))}
+        .brand img{transition:filter 0.3s}
     </style>
 </head>
 <body>
@@ -487,12 +541,40 @@
 
     <!-- FOOTER -->
     <footer class="site-footer">
-        <p>&copy; 2026 MAS-AI Technologies Inc. All rights reserved.</p>
-        <p>Patent-pending: PhiLattice Architecture + NBMF / Enterprise-DNA</p>
-        <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:8px">
-            <a href="/terms-of-service.html">Terms of Service</a>
-            <a href="/privacy-policy.html">Privacy Policy</a>
-            <a href="https://mas-ai.co" target="_blank">&larr; Back to MAS-AI</a>
+        <div style="max-width:800px;margin:0 auto">
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-bottom:24px">
+                <div style="text-align:center">
+                    <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(212,168,83,0.6);margin-bottom:8px;font-family:'JetBrains Mono',monospace">Platform</p>
+                    <div style="display:flex;flex-direction:column;gap:6px">
+                        <a href="#s-architecture">Architecture</a>
+                        <a href="#s-demos">Demos</a>
+                        <a href="/docs.html">Documentation</a>
+                    </div>
+                </div>
+                <div style="text-align:center">
+                    <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(212,168,83,0.6);margin-bottom:8px;font-family:'JetBrains Mono',monospace">Company</p>
+                    <div style="display:flex;flex-direction:column;gap:6px">
+                        <a href="https://mas-ai.co" target="_blank">MAS-AI Technologies</a>
+                        <a href="#s-pitch">Investors</a>
+                        <a href="#s-contact">Contact</a>
+                    </div>
+                </div>
+                <div style="text-align:center">
+                    <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(212,168,83,0.6);margin-bottom:8px;font-family:'JetBrains Mono',monospace">Connect</p>
+                    <div style="display:flex;flex-direction:column;gap:6px">
+                        <a href="https://github.com/Mas-AI-Official" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://www.linkedin.com/in/masoud-masoori" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="mailto:masoud.masoori@mas-ai.co">Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <p>&copy; 2026 MAS-AI Technologies Inc. All rights reserved.</p>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;opacity:0.5">Patent-pending: PhiLattice Architecture + NBMF</p>
+            <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:10px">
+                <a href="/terms-of-service.html">Terms of Service</a>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
@@ -544,6 +626,15 @@
 var isMob = window.innerWidth < 768;
 var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var scrollProg = 0;
+
+// ─── Button ripple: track mouse position for radial gradient ───
+document.querySelectorAll('.btn-g,.btn-c').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){
+        var r=btn.getBoundingClientRect();
+        btn.style.setProperty('--ripple-x',((e.clientX-r.left)/r.width*100)+'%');
+        btn.style.setProperty('--ripple-y',((e.clientY-r.top)/r.height*100)+'%');
+    });
+});
 
 // ─── Scroll progress ───
 var scrollBar = document.getElementById('scrollBar');
