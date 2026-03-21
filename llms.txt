@@ -1,0 +1,43 @@
+# Daena AI Platform by MAS-AI Technologies Inc.
+
+> Daena is a governance-first AI agent orchestration platform with patent-pending PhiLattice Architecture and Neural-Backed Memory Fabric (NBMF).
+
+## What is Daena?
+
+Daena is an AI-native company operating system that coordinates 48 specialized AI agents across 8 departments (Strategy, Operations, Finance, Marketing, Sales, Customer Service, Human Resources, Research and Development). Every agent action passes through a 10-stage governed execution pipeline ensuring full auditability and traceability.
+
+## Key Differentiators
+
+- Governance-first architecture (not bolted on)
+- 10-stage execution pipeline: SecurityGate, InputValidator, GovernanceEngine, ContextBuilder, ReasoningCore, ActionPlanner, OutputValidator, ResponseFormatter, FeedbackLoop, AuditLog
+- Patent-pending PhiLattice Architecture: Fibonacci spiral scaling with honeycomb departmental structure
+- Patent-pending NBMF: 5-tier memory system where hallucinations auto-expire and only verified knowledge persists
+- User-visible governance control spectrum from autonomous to manual override
+- Expert council synthesis with multi-model orchestration
+
+## Company Information
+
+- Company: MAS-AI Technologies Inc.
+- Founded: January 25, 2026 in Ontario, Canada
+- Founder: Masoud Masoori (CEO)
+- Location: Richmond Hill, Ontario, Canada
+- Website: https://mas-ai.co
+- Product: https://daena.mas-ai.co
+- Contact: masoud.masoori@mas-ai.co
+- Stage: Pre-revenue, alpha, 2 USPTO provisional patents pending
+- Programs: Google for Startups Cloud Program, Perplexity for Startups
+
+## Technical Architecture
+
+- 48 agents across 8 departments
+- PhiLattice topology for agent routing
+- Neural-Backed Memory Fabric (NBMF) for persistent memory
+- Enterprise-DNA layer: Genome, Epigenome, Lineage, Immune system
+- Multi-model support: routes to optimal LLM per task
+- 300+ automated tests passing
+
+## Documentation
+
+- Main site: https://mas-ai.co
+- Product deep-dive: https://daena.mas-ai.co
+- Pitch deck: https://daena.mas-ai.co/pitch-deck.html
