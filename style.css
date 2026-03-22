@@ -45,7 +45,7 @@ h1,h2,h3{font-family:'Syne',sans-serif}
 .step[data-side="right"]{justify-content:flex-end;padding-right:5%}
 
 /* ═══ HERO ═══ */
-.hero-overlay{text-align:center;max-width:800px;width:90%;pointer-events:auto}
+.hero-overlay{text-align:center;max-width:800px;width:90%;pointer-events:auto;position:relative;z-index:1}
 .hero-overlay .label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(212,168,83,0.9);margin-bottom:20px;text-shadow:0 0 10px rgba(212,168,83,0.3)}
 .hero-overlay h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:800;margin-bottom:8px;
   background:linear-gradient(135deg,#d4a853 0%,#FFA500 40%,#FFD700 60%,#fff 100%);
@@ -196,6 +196,8 @@ h1,h2,h3{font-family:'Syne',sans-serif}
   .nav-cta-desktop{display:none}
   .step[data-side="left"],.step[data-side="right"]{justify-content:center;padding-left:12px;padding-right:12px}
   .content-panel{width:95%;max-width:620px}
+  /* Dark vignette behind hero text for particle readability */
+  .hero-overlay::before{content:'';position:absolute;inset:-40px -30px;border-radius:32px;background:radial-gradient(ellipse at center,rgba(10,10,10,0.65) 0%,rgba(10,10,10,0.25) 50%,transparent 80%);z-index:-1;pointer-events:none}
   .content-panel.wide{width:98%;max-width:100%}
   .avatar-btn{width:48px;height:64px}
   .avatar-wrap{bottom:16px;right:12px}
@@ -209,6 +211,8 @@ h1,h2,h3{font-family:'Syne',sans-serif}
 @media(max-width:480px){
   .hero-overlay h1{font-size:2.2rem}
   .hero-overlay h2{font-size:1rem}
+  /* Dark vignette behind hero text so it's always readable over particles */
+  .hero-overlay::before{content:'';position:absolute;inset:-40px -30px;border-radius:32px;background:radial-gradient(ellipse at center,rgba(10,10,10,0.7) 0%,rgba(10,10,10,0.3) 50%,transparent 80%);z-index:-1;pointer-events:none}
   .content-panel{padding:24px 20px;border-radius:14px;max-width:95%}
   .content-panel h2{font-size:1.25rem}
   .content-panel p,.content-panel li{font-size:0.82rem}

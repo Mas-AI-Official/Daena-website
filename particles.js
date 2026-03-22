@@ -10,8 +10,8 @@
   var noWebGL = false
   var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // Particle count: 10K desktop, 3K mobile
-  var PARTICLE_COUNT = isMob ? 3000 : 10000
+  // Particle count: 10K desktop, 2K mobile (fewer = less visual noise over text)
+  var PARTICLE_COUNT = isMob ? 2000 : 10000
   var GOLDEN_ANGLE = 2.399963229728653 // 2*PI / PHI^2
   var SPIRAL_RADIUS = isMob ? 16 : 38 // Mobile: fit full spiral in narrow portrait viewport
 
@@ -68,10 +68,10 @@
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
   var material = new THREE.PointsMaterial({
-    size: isMob ? 0.2 : 0.15,
+    size: isMob ? 0.18 : 0.15,
     vertexColors: true,
     transparent: true,
-    opacity: 0.85,
+    opacity: isMob ? 0.55 : 0.85, // Mobile: dimmer so gold text stays readable
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true
@@ -137,10 +137,18 @@
         z = Math.sin(angle) * radius
         y = Math.sin(i * 0.008 + time * 0.4) * 0.6
 
-        // Gold/amber range
-        h = 0.1 + Math.sin(i * 0.01) * 0.03
-        s = 0.8
-        l = 0.5 + Math.sin(i * 0.005 + time * 0.3) * 0.08
+        if (isMob) {
+          // Mobile: deep indigo/blue to contrast with gold hero text
+          // h≈0.62-0.68 = indigo/blue range, low lightness = subtle glow
+          h = 0.65 + Math.sin(i * 0.01) * 0.03
+          s = 0.6
+          l = 0.3 + Math.sin(i * 0.005 + time * 0.3) * 0.06
+        } else {
+          // Desktop: gold/amber range (text is far from particles)
+          h = 0.1 + Math.sin(i * 0.01) * 0.03
+          s = 0.8
+          l = 0.5 + Math.sin(i * 0.005 + time * 0.3) * 0.08
+        }
       } else if (sp < 0.45) {
         // STATE 2: Morph spiral to pipe
         var t = (sp - 0.25) / 0.20
@@ -164,10 +172,17 @@
         y = sy + (py - sy) * et
         z = sz + (pz - sz) * et
 
-        // Gold to cyan transition
-        h = 0.1 + t * 0.45
-        s = 0.8
-        l = 0.5 + t * 0.08
+        if (isMob) {
+          // Mobile: deep blue to cyan (stays in cool tones)
+          h = 0.65 - t * 0.1 // indigo → cyan
+          s = 0.6 + t * 0.2
+          l = 0.3 + t * 0.15
+        } else {
+          // Desktop: gold to cyan transition
+          h = 0.1 + t * 0.45
+          s = 0.8
+          l = 0.5 + t * 0.08
+        }
       } else {
         // STATE 3: Full pipe with descent
         var pipeAngle = (i * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
