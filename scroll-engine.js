@@ -39,7 +39,7 @@
       }
     })
 
-    // Camera timeline (faster phases matching v3 particle states)
+    // Camera timeline (aligned with v4 particle morph states)
     var camTL = gsap.timeline({
       scrollTrigger: {
         trigger: '#scroll-content',
@@ -49,17 +49,17 @@
       }
     })
 
-    // Phase 1 (0% to 16%): Above spiral + logo reveal, looking down
-    camTL.to(camera.position, { x: 0, y: 30, z: 10, duration: 16 }, 0)
-    camTL.to(camera.rotation, { x: -1.2, y: 0, z: 0, duration: 16 }, 0)
+    // Phase 1 (0% to 20%): Above spiral + logo formation, looking down
+    camTL.to(camera.position, { x: 0, y: 30, z: 10, duration: 20 }, 0)
+    camTL.to(camera.rotation, { x: -1.2, y: 0, z: 0, duration: 20 }, 0)
 
-    // Phase 2 (16% to 35%): Pull back, see logo + pipe forming
-    camTL.to(camera.position, { x: 16, y: 14, z: 16, duration: 19 }, 16)
-    camTL.to(camera.rotation, { x: -0.4, y: 0.6, z: 0, duration: 19 }, 16)
+    // Phase 2 (20% to 38%): Pull back, see logo shrink + pipe forming
+    camTL.to(camera.position, { x: 16, y: 14, z: 16, duration: 18 }, 20)
+    camTL.to(camera.rotation, { x: -0.4, y: 0.6, z: 0, duration: 18 }, 20)
 
-    // Phase 3 (35% to 85%): Descend alongside pipe, logo in center
-    camTL.to(camera.position, { x: 14, y: -28, z: 14, duration: 50 }, 35)
-    camTL.to(camera.rotation, { x: -0.15, y: 0.7, z: 0, duration: 50 }, 35)
+    // Phase 3 (38% to 85%): Descend alongside pipe, logo in center
+    camTL.to(camera.position, { x: 14, y: -28, z: 14, duration: 47 }, 38)
+    camTL.to(camera.rotation, { x: -0.15, y: 0.7, z: 0, duration: 47 }, 38)
 
     // Phase 4 (85% to 100%): Settle at bottom
     camTL.to(camera.position, { x: 10, y: -35, z: 10, duration: 15 }, 85)

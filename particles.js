@@ -1,8 +1,8 @@
 /**
- * Daena Particle System v3
- * Fibonacci spiral -> Logo reveal (sprite) -> Pipe descent.
- * Logo rendered as THREE.Sprite for crisp image quality.
- * Reduced particle counts for performance.
+ * Daena Particle System v4
+ * Fibonacci spiral → Particles converge to form logo → Pipe descent with logo center.
+ * Logo sampled from image using brightness threshold (handles opaque backgrounds).
+ * Particles physically form the logo shape — no sprite overlay.
  */
 (function () {
   'use strict'
@@ -12,11 +12,16 @@
   var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (noMotion) return
 
-  // Dramatically reduced counts
-  var PARTICLE_COUNT = isMob ? 1200 : 4000
-  var PIPE_COUNT = isMob ? 600 : 2000
+  // More logo particles for crisp formation, fewer pipe for visibility
+  var LOGO_COUNT = isMob ? 1000 : 3500
+  var PIPE_COUNT = isMob ? 500 : 1500
+  var PARTICLE_COUNT = LOGO_COUNT + PIPE_COUNT
   var GOLDEN_ANGLE = 2.399963229728653
-  var PIPE_RADIUS = 7
+
+  // Logo scale: big during formation (camera above), small inside pipe
+  var LOGO_SCALE_BIG = 26
+  var LOGO_SCALE_SMALL = 8
+  var PIPE_RADIUS = 8
 
   window.daenaParticles = {
     scrollProgress: 0,
@@ -68,47 +73,17 @@
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
   var material = new THREE.PointsMaterial({
-    size: isMob ? 0.25 : 0.2,
+    size: isMob ? 0.28 : 0.22,
     vertexColors: true,
     transparent: true,
-    opacity: 0.85,
+    opacity: 0.92,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true
   })
 
   var points = new THREE.Points(geometry, material)
-  points.renderOrder = 0
   scene.add(points)
-
-  // ── Logo Sprite (actual image, not particle-formed) ──
-  var logoSprite = null
-  var logoAR = 1 // aspect ratio
-
-  var textureLoader = new THREE.TextureLoader()
-  textureLoader.load('/assets/img/daena-logo-gold.png', function (tex) {
-    logoAR = tex.image.width / tex.image.height
-
-    var spriteMat = new THREE.SpriteMaterial({
-      map: tex,
-      transparent: true,
-      opacity: 0,
-      depthWrite: false
-    })
-    logoSprite = new THREE.Sprite(spriteMat)
-    logoSprite.renderOrder = 1
-    logoSprite.visible = false
-    scene.add(logoSprite)
-  })
-
-  function setLogoScale(size) {
-    if (!logoSprite) return
-    if (logoAR >= 1) {
-      logoSprite.scale.set(size, size / logoAR, 1)
-    } else {
-      logoSprite.scale.set(size * logoAR, size, 1)
-    }
-  }
 
   // Export references
   window.daenaParticles.scene = scene
@@ -117,7 +92,73 @@
   window.daenaParticles.points = points
   window.daenaParticles.ready = true
 
-  // ── Utilities (zero alloc) ──
+  // ── Logo image sampling (brightness-based) ──
+  // Normalized targets [-0.5, 0.5], scaled at render time
+  var logoNX = new Float32Array(LOGO_COUNT)
+  var logoNZ = new Float32Array(LOGO_COUNT)
+  var logoReady = false
+
+  var logoImg = new Image()
+  logoImg.onload = function () {
+    var sz = isMob ? 120 : 180 // higher resolution = denser sampling
+    var lc = document.createElement('canvas')
+    lc.width = sz; lc.height = sz
+    var ctx = lc.getContext('2d')
+    ctx.drawImage(logoImg, 0, 0, sz, sz)
+    var data = ctx.getImageData(0, 0, sz, sz).data
+
+    // Collect positions where pixel is BRIGHT (not dark background)
+    var cands = []
+    for (var py = 0; py < sz; py++) {
+      for (var px = 0; px < sz; px++) {
+        var idx = (py * sz + px) * 4
+        var r = data[idx], g = data[idx + 1], b = data[idx + 2], a = data[idx + 3]
+        var brightness = (r + g + b) / 3
+
+        // Use brightness threshold: catches gold logo parts, ignores dark bg
+        // Also check alpha for PNGs with proper transparency
+        if ((brightness > 60 && a > 80) || a > 200 && brightness > 30) {
+          cands.push(px / sz - 0.5, -(py / sz - 0.5)) // x, z (flip Y)
+        }
+      }
+    }
+    var numCands = cands.length / 2
+
+    // If too many candidates (opaque bg), raise brightness threshold
+    if (numCands > sz * sz * 0.7) {
+      cands = []
+      for (var py = 0; py < sz; py++) {
+        for (var px = 0; px < sz; px++) {
+          var idx = (py * sz + px) * 4
+          var r = data[idx], g = data[idx + 1], b = data[idx + 2]
+          var brightness = (r + g + b) / 3
+          if (brightness > 100) {
+            cands.push(px / sz - 0.5, -(py / sz - 0.5))
+          }
+        }
+      }
+      numCands = cands.length / 2
+    }
+
+    // Fisher-Yates shuffle pairs
+    for (var i = numCands - 1; i > 0; i--) {
+      var j = (Math.random() * (i + 1)) | 0
+      var t0 = cands[i * 2], t1 = cands[i * 2 + 1]
+      cands[i * 2] = cands[j * 2]; cands[i * 2 + 1] = cands[j * 2 + 1]
+      cands[j * 2] = t0; cands[j * 2 + 1] = t1
+    }
+
+    // Assign to logo particles with tight jitter
+    for (var i = 0; i < LOGO_COUNT; i++) {
+      var ci = (i % numCands) * 2
+      logoNX[i] = cands[ci] + (Math.random() - 0.5) * 0.004
+      logoNZ[i] = cands[ci + 1] + (Math.random() - 0.5) * 0.004
+    }
+    logoReady = true
+  }
+  logoImg.src = '/assets/img/daena-logo-gold.png'
+
+  // ── Utilities (inline, zero alloc) ──
   function hsl2rgb(h, s, l, out, idx) {
     var r, g, b
     if (s === 0) {
@@ -147,46 +188,14 @@
     return t * t * (3 - 2 * t)
   }
 
-  // ── Master update ──
+  // ── Master update: zero allocations ──
   function updateParticles(time) {
     var sp = window.daenaParticles.scrollProgress
     var cam = window.daenaParticles.camera
 
-    // ── Logo sprite state machine ──
-    if (logoSprite) {
-      if (sp < 0.06) {
-        // Hidden during initial spiral
-        logoSprite.visible = false
-        logoSprite.material.opacity = 0
-      } else if (sp < 0.16) {
-        // FAST fade in: particles converge, logo appears
-        logoSprite.visible = true
-        var lt = smoothstep((sp - 0.06) / 0.10)
-        logoSprite.material.opacity = lt * 0.95
-        var scale = 28 - lt * 8 // 28 -> 20
-        setLogoScale(scale)
-        logoSprite.position.set(0, 0, 0)
-      } else if (sp < 0.32) {
-        // Logo shrinks to pipe-interior size
-        logoSprite.visible = true
-        var lt = smoothstep((sp - 0.16) / 0.16)
-        var scale = 20 * (1 - lt) + 10 * lt
-        setLogoScale(scale)
-        logoSprite.material.opacity = 0.9
-        logoSprite.position.set(0, 0, 0)
-      } else {
-        // Logo follows camera during pipe descent
-        logoSprite.visible = true
-        var camY = cam ? cam.position.y - 5 : 0
-        logoSprite.position.set(0, camY, 0)
-        setLogoScale(10)
-        logoSprite.material.opacity = 0.85
-      }
-    }
-
-    // ── Particle updates ──
     for (var i = 0; i < PARTICLE_COUNT; i++) {
       var i3 = i * 3
+      var isLogo = (i < LOGO_COUNT)
       var x, y, z
       var h, s, l
 
@@ -197,8 +206,8 @@
       var sz2 = Math.sin(sAngle) * sRadius
       var sy = Math.sin(i * 0.008 + time * 0.4) * 0.6
 
-      if (sp < 0.06) {
-        // ═══ STATE 1: Fibonacci spiral ═══
+      if (sp < 0.08) {
+        // ═══ STATE 1: Fibonacci spiral (all particles) ═══
         x = sx
         z = sz2
         y = sy
@@ -207,80 +216,113 @@
         s = 0.85
         l = 0.5 + Math.sin(i * 0.005 + time * 0.3) * 0.1
 
-      } else if (sp < 0.16) {
-        // ═══ STATE 2: Converge to center (logo image fades in) ═══
-        var t = (sp - 0.06) / 0.10
+      } else if (sp < 0.20) {
+        // ═══ STATE 2: Logo particles morph to logo shape ═══
+        // Fast transition: 8% to 20% scroll
+        var t = (sp - 0.08) / 0.12
         var et = smoothstep(t)
 
-        // All particles pull inward and dim
-        var pullR = sRadius * (1 - et * 0.85)
-        x = Math.cos(sAngle) * pullR
-        z = Math.sin(sAngle) * pullR
-        y = sy * (1 - et)
+        if (isLogo && logoReady) {
+          // Morph from spiral position to logo position (big scale, XZ plane)
+          var lx = logoNX[i] * LOGO_SCALE_BIG
+          var lz = logoNZ[i] * LOGO_SCALE_BIG
 
-        h = 0.1 + et * 0.02
-        s = 0.8 - et * 0.3
-        l = 0.5 - et * 0.35
+          x = sx + (lx - sx) * et
+          z = sz2 + (lz - sz2) * et
+          y = sy * (1 - et)
 
-      } else if (sp < 0.32) {
-        // ═══ STATE 3: Pipe formation, extra particles fade ═══
-        var t = (sp - 0.16) / 0.16
-        var et = smoothstep(t)
-
-        if (i < PIPE_COUNT) {
-          // Transition from converged center to pipe cylinder
-          var pAngle = (i * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
-          var pRadius = PIPE_RADIUS + Math.sin(i * 0.005 + time * 0.5) * 0.3
-          var px = Math.cos(pAngle) * pRadius
-          var pz = Math.sin(pAngle) * pRadius
-          var py = -((i / PIPE_COUNT) * 55) + 18
-
-          // From converged center
-          var cR = sRadius * 0.15
-          var cx = Math.cos(sAngle) * cR
-          var cz = Math.sin(sAngle) * cR
-
-          x = cx + (px - cx) * et
-          z = cz + (pz - cz) * et
-          y = sy * 0.1 * (1 - et) + py * et
+          // Gold → bright white-gold as they form logo
+          h = 0.1
+          s = 0.9 - et * 0.2
+          l = 0.5 + et * 0.35
+        } else {
+          // Background particles disperse outward and dim
+          var dRadius = sRadius * (1 + et * 2.0)
+          x = Math.cos(sAngle) * dRadius
+          z = Math.sin(sAngle) * dRadius
+          y = sy + et * Math.sin(i * 0.07) * 5
 
           h = 0.1 + et * 0.45
-          s = 0.65
-          l = 0.15 + et * 0.08
-        } else {
-          // Extra particles dissolve
-          var fadeR = sRadius * 0.15 * (1 - et)
-          x = Math.cos(sAngle) * fadeR
-          z = Math.sin(sAngle) * fadeR
-          y = 0
+          s = 0.6
+          l = 0.4 - et * 0.3
+        }
 
+      } else if (sp < 0.35) {
+        // ═══ STATE 3: Logo shrinks, pipe forms ═══
+        var t = (sp - 0.20) / 0.15
+        var et = smoothstep(t)
+
+        if (isLogo && logoReady) {
+          // Logo shrinks from big to small (pipe interior scale)
+          var logoScale = LOGO_SCALE_BIG * (1 - et) + LOGO_SCALE_SMALL * et
+          // Gentle float during shrink
+          var fx = Math.sin(time * 0.3 + i * 0.09) * 0.15 * et
+          var fz = Math.cos(time * 0.25 + i * 0.07) * 0.15 * et
+
+          x = logoNX[i] * logoScale + fx
+          z = logoNZ[i] * logoScale + fz
+          y = Math.sin(time * 0.5 + i * 0.04) * 0.1 * et
+
+          // Bright gold with gentle pulse
           h = 0.1
-          s = 0.5
-          l = 0.15 * (1 - et)
+          s = 0.85
+          l = 0.8 + Math.sin(time * 0.8 + i * 0.02) * 0.05
+        } else {
+          // Background → pipe formation
+          var bgIdx = i - LOGO_COUNT
+          var pAngle = (bgIdx * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
+          var pRadius = PIPE_RADIUS + Math.sin(bgIdx * 0.005 + time * 0.5) * 0.3
+          var px = Math.cos(pAngle) * pRadius
+          var pz = Math.sin(pAngle) * pRadius
+          var py = -((bgIdx / PIPE_COUNT) * 55) + 18
+
+          // Dispersed source position
+          var dAngle = i * GOLDEN_ANGLE
+          var dRadius2 = Math.sqrt(i / PARTICLE_COUNT) * 38 * 2.8
+          var dx = Math.cos(dAngle) * dRadius2
+          var dz = Math.sin(dAngle) * dRadius2
+          var dy = Math.sin(i * 0.07) * 5
+
+          x = dx + (px - dx) * et
+          z = dz + (pz - dz) * et
+          y = dy + (py - dy) * et
+
+          // Dim cyan
+          h = 0.55
+          s = 0.6
+          l = 0.15 + et * 0.08
         }
 
       } else {
-        // ═══ STATE 4: Pipe descent ═══
-        if (i < PIPE_COUNT) {
-          var pAngle = (i * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
-          var pRadius = PIPE_RADIUS + Math.sin(i * 0.005 + time * 0.8) * 0.3
+        // ═══ STATE 4: Pipe descent with logo in center ═══
+        if (isLogo && logoReady) {
+          // Logo stays at camera Y, centered, gentle float
+          var camY = cam ? cam.position.y - 5 : 0
+          var fx = Math.sin(time * 0.2 + i * 0.07) * 0.1
+          var fz = Math.cos(time * 0.15 + i * 0.05) * 0.1
+
+          x = logoNX[i] * LOGO_SCALE_SMALL + fx
+          z = logoNZ[i] * LOGO_SCALE_SMALL + fz
+          y = camY + Math.sin(time * 0.4 + i * 0.02) * 0.08
+
+          // Bright gold pulse
+          h = 0.1
+          s = 0.9
+          l = 0.75 + Math.sin(time * 1.2 + i * 0.01) * 0.07
+        } else {
+          // Pipe descent
+          var bgIdx = i - LOGO_COUNT
+          var pAngle = (bgIdx * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
+          var pRadius = PIPE_RADIUS + Math.sin(bgIdx * 0.005 + time * 0.8) * 0.3
           x = Math.cos(pAngle) * pRadius
           z = Math.sin(pAngle) * pRadius
-          y = -((i / PIPE_COUNT) * 55) + 18
+          y = -((bgIdx / PIPE_COUNT) * 55) + 18
 
-          // Very dim: cyan with sparse gold accents
-          var isGold = (i % 18 === 0)
+          // Very dim cyan with sparse gold accents
+          var isGold = (bgIdx % 20 === 0)
           h = isGold ? 0.1 : 0.55
-          s = 0.65
-          l = isGold ? 0.3 : 0.15
-        } else {
-          // Hidden off-screen
-          x = 0
-          y = -999
-          z = 0
-          h = 0
-          s = 0
-          l = 0
+          s = 0.6
+          l = isGold ? 0.3 : 0.12
         }
       }
 
@@ -310,7 +352,7 @@
   }
   requestAnimationFrame(animate)
 
-  // Resize handler
+  // Resize
   function onResize() {
     var w = window.innerWidth
     var h = window.innerHeight
