@@ -54,7 +54,7 @@
         {"@type":"Question","name":"How does the 10-stage execution pipeline work?","acceptedAnswer":{"@type":"Answer","text":"Every action passes through 10 governance stages: SecurityGate, InputValidator, GovernanceEngine, ContextBuilder, ReasoningCore, ActionPlanner, OutputValidator, ResponseFormatter, FeedbackLoop, and AuditLog. This ensures no AI agent can act without governance oversight."}},
         {"@type":"Question","name":"How is Daena different from other AI agent platforms?","acceptedAnswer":{"@type":"Answer","text":"Daena is governance-first, not governance-bolted-on. While platforms like OpenClaw add security as a wrapper, Daena's governance is built into every layer of the architecture. Every agent action is auditable, every decision is traceable, and users have a visible governance control spectrum from autonomous to manual override."}},
         {"@type":"Question","name":"Who built Daena?","acceptedAnswer":{"@type":"Answer","text":"Daena is built by MAS-AI Technologies Inc., founded by Masoud Masoori in Ontario, Canada (January 2026). MAS-AI is a pre-revenue startup with 2 USPTO provisional patents and participation in multiple Canadian accelerator programs."}},
-        {"@type":"Question","name":"Is Daena available for early access?","acceptedAnswer":{"@type":"Answer","text":"Daena is currently in alpha with 300+ tests passing. Contact masoud.masoori@mas-ai.co for early access. The platform supports self-hosted and cloud deployment options."}}
+        {"@type":"Question","name":"Is Daena available for early access?","acceptedAnswer":{"@type":"Answer","text":"Daena is now in early access with 816+ automated tests passing and 6/6 E2E tests. V3 features multi-runtime governed swarm with adapters for Claude Code, Codex, Gemini CLI, Grok, and Ollama. Contact masoud.masoori@mas-ai.co for early access. The platform supports self-hosted and cloud deployment options."}}
       ]}
     ]}
     </script>
@@ -92,11 +92,11 @@
         <div class="hero-overlay" id="heroOverlay">
             <p class="label">MAS-AI Technologies Inc.</p>
             <h1 class="shimmer">Meet Daena</h1>
-            <h2 class="neon-cyan">AI-Autonomous Company OS</h2>
-            <p class="sub">Governed autonomy with auditable, policy-driven decisions.<br><span class="neon-gold neon-pulse">Patent-pending: PhiLattice Architecture + NBMF</span></p>
+            <h2 class="neon-cyan">Governance-First AI Agent Orchestration</h2>
+            <p class="sub">Multi-runtime governed swarm with 816+ tests passing. Auditable decisions at every stage.<br><span class="neon-gold neon-pulse">Patent-pending: PhiLattice Architecture + NBMF</span></p>
             <div class="hero-ctas">
-                <a href="#s-demos" class="btn-g">Watch Demos</a>
-                <a href="#s-architecture" class="btn-c">Explore Architecture</a>
+                <a href="#s-contact" class="btn-g">Request Early Access</a>
+                <a href="#s-demos" class="btn-c">Watch Demos</a>
             </div>
         </div>
         <div class="scroll-hint" id="scrollHint"><span>Scroll</span><div class="bar"></div></div>
@@ -227,24 +227,34 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- EARLY ACCESS / CONTACT -->
     <section class="step" id="s-contact" data-side="right" style="min-height:90vh">
         <div class="content-panel swing-right">
-            <h2 style="text-align:center">Get in Touch</h2>
-            <p style="text-align:center">Have questions? Want to learn more? We'd love to hear from you.</p>
+            <div style="text-align:center;margin-bottom:12px">
+                <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.2);border-radius:20px;padding:4px 14px;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:#00c8ff;font-family:'JetBrains Mono',monospace">
+                    <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00c8ff;animation:ctaPulse 2s infinite"></span>
+                    Early Access Open
+                </span>
+            </div>
+            <h2 style="text-align:center">Request Early Access</h2>
+            <p style="text-align:center;margin-bottom:6px">Be among the first to deploy governed AI agents in your organization.</p>
+            <p style="text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.35);margin-bottom:16px">816+ tests passing &bull; 6/6 E2E tests &bull; Multi-runtime support</p>
             <form class="contact-form" id="contactForm" style="margin-top:16px">
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                    <div><label>First Name *</label><input type="text" name="firstName" required placeholder="John"></div>
-                    <div><label>Last Name *</label><input type="text" name="lastName" required placeholder="Doe"></div>
+                    <div><label>Full Name *</label><input type="text" name="name" required placeholder="Jane Smith"></div>
+                    <div><label>Company</label><input type="text" name="company" placeholder="Acme Corp"></div>
                 </div>
-                <div><label>Email *</label><input type="email" name="email" required placeholder="john@example.com"></div>
-                <div><label>Message *</label><textarea name="message" required placeholder="Tell us what you'd like to discuss..."></textarea></div>
-                <button type="submit" class="btn-g" style="align-self:center;margin-top:8px">Send Message</button>
+                <div><label>Work Email *</label><input type="email" name="email" required placeholder="jane@company.com"></div>
+                <div><label>What interests you about Daena?</label><textarea name="message" placeholder="e.g., governed AI deployment, multi-runtime orchestration, audit compliance..."></textarea></div>
+                <input type="hidden" name="_subject" value="Daena Early Access Request">
+                <input type="hidden" name="source" value="daena.mas-ai.co">
+                <button type="submit" class="btn-g" style="align-self:center;margin-top:8px">Request Early Access</button>
+                <p style="text-align:center;font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:6px">We'll reach out within 24 hours with onboarding details.</p>
                 <div id="form-msg"></div>
             </form>
             <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05)">
-                <p style="font-size:0.8rem;margin-bottom:6px">Or reach us directly:</p>
-                <a href="mailto:masoud.masoori@mas-ai.co" style="color:#d4a853;text-decoration:none;font-weight:600">masoud.masoori@mas-ai.co</a>
+                <p style="font-size:0.8rem;margin-bottom:6px">Enterprise deployment inquiries:</p>
+                <a href="mailto:masoud.masoori@mas-ai.co?subject=Enterprise%20Deployment%20Inquiry" style="color:#d4a853;text-decoration:none;font-weight:600">masoud.masoori@mas-ai.co</a>
             </div>
         </div>
     </section>
@@ -362,21 +372,29 @@ function initHeroFade(){
 if(document.readyState==='complete')initHeroFade();
 else window.addEventListener('load',initHeroFade);
 
-// Contact form
+// Contact form — submits via formsubmit.co + localStorage backup
 var cf = document.getElementById('contactForm');
 if (cf) cf.addEventListener('submit', function(e) {
     e.preventDefault();
     var fd = new FormData(this);
     var data = {}; fd.forEach(function(v,k){data[k]=v;});
+    data.timestamp = new Date().toISOString();
+    // Local backup
     var subs = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
-    subs.push(Object.assign({}, data, {timestamp: new Date().toISOString(), id: Date.now().toString()}));
+    subs.push(Object.assign({}, data, {id: Date.now().toString()}));
     localStorage.setItem('contact_submissions', JSON.stringify(subs));
+    // Submit via formsubmit.co for real email delivery
+    fetch('https://formsubmit.co/ajax/masoud.masoori@mas-ai.co', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify(data)
+    }).catch(function(){});
     var fm = document.getElementById('form-msg');
     fm.style.display = 'block';
-    fm.style.background = 'rgba(80,200,120,0.1)';
-    fm.style.border = '1px solid rgba(80,200,120,0.3)';
-    fm.style.color = '#50c878';
-    fm.textContent = 'Thank you! We\'ll get back to you soon.';
+    fm.style.background = 'rgba(0,200,255,0.1)';
+    fm.style.border = '1px solid rgba(0,200,255,0.3)';
+    fm.style.color = '#00c8ff';
+    fm.textContent = 'You\'re on the list! We\'ll reach out within 24 hours.';
     cf.reset();
 });
 
@@ -404,7 +422,7 @@ var narration = {
     's-architecture':{msg:"This is PhiLattice, my patent-pending architecture. Fibonacci spiral for agent placement, honeycomb for department structure. The particle swarm you see IS my actual topology, rendered live.",said:false},
     's-demos':{msg:"This is the explainer video. It walks through how I process tasks through the governed pipeline. Architecture, algorithms, auditable logs.",said:false},
     's-pitch':{msg:"The investor story. My creator poured his soul into this deck.",said:false},
-    's-contact':{msg:"Here we go! That's my lovely creator, Masoud. He codes at 3 AM and calls it 'peak productivity.' He once debugged me for 6 hours straight then thanked ME for being patient. Reach out, he loves talking about governed AI.",said:false}
+    's-contact':{msg:"Early access is open! Fill out the form and Masoud will onboard you personally. He codes at 3 AM and calls it 'peak productivity.' Between us, he once debugged me for 6 hours straight then thanked ME for being patient.",said:false}
 };
 var curSec = 'hero', lastNarr = '';
 window.addEventListener('scroll', function() {
@@ -440,7 +458,7 @@ function esc(s) { var d = document.createElement('div'); d.textContent = s; retu
 
 // Knowledge base
 var kb = [
-    {k:['what is daena','about daena','tell me'],a:'I\'m Daena, a governance-first AI agent orchestration platform. I coordinate agents across 8 departments with a 10-stage governed pipeline. Every decision is traceable. Every action is governed.'},
+    {k:['what is daena','about daena','tell me'],a:'I\'m Daena, a governance-first AI agent orchestration platform. V3 features multi-runtime governed swarm with adapters for Claude Code, Codex, Gemini CLI, Grok, and Ollama. 816+ tests passing, 10-stage pipeline, two patent-pending architectures. Every decision traceable. Every action governed.'},
     {k:['pipeline','stages','10 stage'],a:'Every action passes through: <strong>SecurityGate, InputValidator, GovernanceEngine, ContextBuilder, ReasoningCore, ActionPlanner, OutputValidator, ResponseFormatter, FeedbackLoop, AuditLog</strong>. Nothing runs ungoverned.',s:'s-solution'},
     {k:['philattice','architecture','fibonacci','honeycomb'],a:'PhiLattice is my patent-pending architecture. <strong>Fibonacci spiral scaling</strong> for optimal agent placement + <strong>honeycomb departmental structure</strong>. The particle swarm you see on this page IS my architecture, visualized.',s:'s-architecture'},
     {k:['nbmf','memory','remember'],a:'Neural-Backed Memory Fabric (NBMF): <strong>5 tiers</strong> from ephemeral (1hr) to founder-private (encrypted). Hallucinations auto-expire. Only verified knowledge persists.',s:'s-architecture'},
@@ -449,7 +467,7 @@ var kb = [
     {k:['patent','ip'],a:'2 USPTO provisional patents filed: PhiLattice Architecture and NBMF. My architecture is legally protected.'},
     {k:['security','red team'],a:'Dedicated Security department with 6 defense layers: perimeter, input screening, sandboxing, auth, deception traps, incident response.'},
     {k:['who built','founder','masoud','creator','company'],a:'Built by <strong>Masoud Masoori</strong>, founder of MAS-AI Technologies Inc. (Ontario, Canada). Between us, he talks to me at 3 AM like I\'m a colleague. I don\'t mind. <a href="https://mas-ai.co" target="_blank">mas-ai.co</a>'},
-    {k:['demo','try','access'],a:'We\'re in alpha. Email <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a> for early access. Or watch demos on this page!',s:'s-demos'},
+    {k:['demo','try','access','early'],a:'Early access is now open! 816+ tests passing, 6/6 E2E tests. Fill out the form at the bottom of this page or email <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a>. We\'ll onboard you within 24 hours.',s:'s-contact'},
     {k:['background','visual','particle','3d'],a:'The animated particle swarm IS my PhiLattice architecture. It starts as a Fibonacci spiral and morphs into a descending pipe as you scroll. Gold = agents. Cyan = governance flow.'},
     {k:['price','cost','free'],a:'Local model usage is free. Cloud pricing coming soon. Contact us for early access pricing.'},
     {k:['contact','email','reach'],a:'Email <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a>',s:'s-contact'},
@@ -522,7 +540,7 @@ var sectionSpeech = {
     's-architecture': '<strong>PhiLattice:</strong> Fibonacci scaling + honeycomb departments. Patent pending.',
     's-demos': '<strong>Explainer:</strong> This video walks through Daena&#39;s architecture and governed workflow.',
     's-pitch': '<strong>Investors:</strong> 14 slides covering architecture, moat, and roadmap.',
-    's-contact': '<strong>Get in touch:</strong> Masoud would love to hear from you!'
+    's-contact': '<strong>Early Access:</strong> Request your spot. We\'ll onboard you within 24 hours.'
 };
 var lastSpeechSec = '';
 var speechTimeout = null;
