@@ -13,6 +13,7 @@
   // Particle count: 10K desktop, 3K mobile
   var PARTICLE_COUNT = isMob ? 3000 : 10000
   var GOLDEN_ANGLE = 2.399963229728653 // 2*PI / PHI^2
+  var SPIRAL_RADIUS = isMob ? 16 : 38 // Mobile: fit full spiral in narrow portrait viewport
 
   // Exports
   window.daenaParticles = {
@@ -44,7 +45,8 @@
 
   var scene = new THREE.Scene()
   var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200)
-  camera.position.set(0, 35, 5)
+  // Mobile: camera higher up so the full spiral pattern is visible in portrait viewport
+  camera.position.set(0, isMob ? 22 : 35, isMob ? 3 : 5)
   camera.lookAt(0, 0, 0)
 
   var renderer = new THREE.WebGLRenderer({
@@ -130,7 +132,7 @@
       if (sp < 0.25) {
         // STATE 1: Fibonacci spiral (top-down view)
         var angle = i * GOLDEN_ANGLE + time * 0.08
-        var radius = Math.sqrt(i / count) * 38
+        var radius = Math.sqrt(i / count) * SPIRAL_RADIUS
         x = Math.cos(angle) * radius
         z = Math.sin(angle) * radius
         y = Math.sin(i * 0.008 + time * 0.4) * 0.6
@@ -146,14 +148,14 @@
 
         // Spiral position
         var sAngle = i * GOLDEN_ANGLE + time * 0.08
-        var sRadius = Math.sqrt(i / count) * 38
+        var sRadius = Math.sqrt(i / count) * SPIRAL_RADIUS
         var sx = Math.cos(sAngle) * sRadius
         var sz = Math.sin(sAngle) * sRadius
         var sy = Math.sin(i * 0.008 + time * 0.4) * 0.6
 
         // Pipe position
         var pAngle = (i * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.03
-        var pRadius = 5 + Math.sin(i * 0.003 + time * 0.5) * 0.4
+        var pRadius = (isMob ? 3 : 5) + Math.sin(i * 0.003 + time * 0.5) * 0.4
         var px = Math.cos(pAngle) * pRadius
         var pz = Math.sin(pAngle) * pRadius
         var py = -((i / count) * 35)
@@ -169,7 +171,7 @@
       } else {
         // STATE 3: Full pipe with descent
         var pipeAngle = (i * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
-        var pipeRadius = 5 + Math.sin(i * 0.005 + time * 0.8) * 0.35
+        var pipeRadius = (isMob ? 3 : 5) + Math.sin(i * 0.005 + time * 0.8) * 0.35
         x = Math.cos(pipeAngle) * pipeRadius
         z = Math.sin(pipeAngle) * pipeRadius
         // Pipe extends downward, scroll pulls more into view
