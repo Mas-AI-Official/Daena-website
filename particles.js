@@ -137,18 +137,10 @@
         z = Math.sin(angle) * radius
         y = Math.sin(i * 0.008 + time * 0.4) * 0.6
 
-        if (isMob) {
-          // Mobile: deep indigo/blue to contrast with gold hero text
-          // h≈0.62-0.68 = indigo/blue range, low lightness = subtle glow
-          h = 0.65 + Math.sin(i * 0.01) * 0.03
-          s = 0.6
-          l = 0.3 + Math.sin(i * 0.005 + time * 0.3) * 0.06
-        } else {
-          // Desktop: gold/amber range (text is far from particles)
-          h = 0.1 + Math.sin(i * 0.01) * 0.03
-          s = 0.8
-          l = 0.5 + Math.sin(i * 0.005 + time * 0.3) * 0.08
-        }
+        // Deep indigo/blue — luxury-tech contrast with gold text
+        h = 0.65 + Math.sin(i * 0.01) * 0.03
+        s = isMob ? 0.6 : 0.7
+        l = (isMob ? 0.3 : 0.38) + Math.sin(i * 0.005 + time * 0.3) * 0.06
       } else if (sp < 0.45) {
         // STATE 2: Morph spiral to pipe
         var t = (sp - 0.25) / 0.20
@@ -172,17 +164,10 @@
         y = sy + (py - sy) * et
         z = sz + (pz - sz) * et
 
-        if (isMob) {
-          // Mobile: deep blue to cyan (stays in cool tones)
-          h = 0.65 - t * 0.1 // indigo → cyan
-          s = 0.6 + t * 0.2
-          l = 0.3 + t * 0.15
-        } else {
-          // Desktop: gold to cyan transition
-          h = 0.1 + t * 0.45
-          s = 0.8
-          l = 0.5 + t * 0.08
-        }
+        // Indigo → cyan morph (cool-tone journey on both devices)
+        h = 0.65 - t * 0.1
+        s = (isMob ? 0.6 : 0.7) + t * 0.2
+        l = (isMob ? 0.3 : 0.38) + t * 0.12
       } else {
         // STATE 3: Full pipe with descent
         var pipeAngle = (i * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
