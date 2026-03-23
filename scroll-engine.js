@@ -90,32 +90,20 @@
         var section = panel.closest('.step')
         if (!section) return
 
-        // Enter from right
+        // Enter from right, stay visible (no exit animation)
         gsap.fromTo(panel,
           { x: '100%', rotateY: -12, opacity: 0 },
           {
             x: '0%', rotateY: 0, opacity: 1,
-            ease: 'power2.out',
+            ease: 'none',
             scrollTrigger: {
               trigger: section,
-              start: 'top 80%',
-              end: 'top 30%',
-              scrub: 1.5
+              start: 'top 85%',
+              end: 'top 40%',
+              scrub: 0.5
             }
           }
         )
-
-        // Exit to left
-        gsap.to(panel, {
-          x: '-100%', rotateY: 12, opacity: 0,
-          ease: 'power2.in',
-          scrollTrigger: {
-            trigger: section,
-            start: 'bottom 60%',
-            end: 'bottom 10%',
-            scrub: 1.5
-          }
-        })
       })
     } else {
       // Mobile: simple fade-up, no 3D swing
