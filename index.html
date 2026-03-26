@@ -163,35 +163,73 @@
     </section>
 
     <!-- DEMOS -->
-    <section class="step" id="s-demos" data-side="right" style="min-height:110vh">
+    <section class="step" id="s-demos" data-side="right" style="min-height:120vh">
         <div class="content-panel wide swing-right">
-            <h2>How Daena Works</h2>
-            <div class="daena-video" data-video="/videos/why-investors.mp4" data-poster="/videos/play.png" aria-label="Daena demo video">
-                <div class="video-frame">
-                    <video preload="metadata" playsinline></video>
-                    <button class="overlay-play" aria-label="Play video">
-                        <svg viewBox="0 0 24 24" width="56" height="56" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
-                        <span>Watch 4:38</span>
-                    </button>
+            <h2>See Daena In Action</h2>
+            <div class="grid two-col" style="margin-top:16px">
+                <!-- LEFT: Daena in Action -->
+                <div class="glass-card">
+                    <h3 style="margin:0 0 12px;font-size:1rem;color:#00c8ff;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em">Daena in Action</h3>
+                    <div class="daena-video" data-video="/videos/daena-in-action.mp4" data-poster="/videos/play.png" aria-label="Daena in Action demo">
+                        <div class="video-frame">
+                            <video preload="metadata" playsinline></video>
+                            <button class="overlay-play" aria-label="Play video">
+                                <svg viewBox="0 0 24 24" width="56" height="56" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+                                <span>Daena in Action</span>
+                            </button>
+                        </div>
+                        <div class="controls" data-controls>
+                            <button class="btn" data-action="play" aria-label="Play/Pause">
+                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>
+                            </button>
+                            <span class="time" data-time="current">0:00</span>
+                            <input class="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
+                            <span class="time" data-time="duration">0:00</span>
+                            <div class="spacer"></div>
+                            <button class="btn" data-action="mute" aria-label="Mute/Unmute">
+                                <svg class="icon-vol" viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6L7 10H3z"></path></svg>
+                                <svg class="icon-vol-mute" viewBox="0 0 24 24"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5L16.5 12z"></path></svg>
+                            </button>
+                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+                            <button class="btn" data-action="speed" aria-label="Playback Speed" title="Speed: 1x"><span class="speed-text">1x</span></button>
+                            <button class="btn" data-action="fs" aria-label="Toggle Fullscreen">
+                                <svg class="icon-fs" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm0-4h3V7h2V2H7v3H5v5h2V6zM17 5h-3V3h5v5h-2V5zm-3 14h3v-3h2v5h-5v-2z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="controls" data-controls>
-                    <button class="btn" data-action="play" aria-label="Play/Pause">
-                        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-                        <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>
-                    </button>
-                    <span class="time" data-time="current">0:00</span>
-                    <input class="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
-                    <span class="time" data-time="duration">0:00</span>
-                    <div class="spacer"></div>
-                    <button class="btn" data-action="mute" aria-label="Mute/Unmute">
-                        <svg class="icon-vol" viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6L7 10H3z"></path></svg>
-                        <svg class="icon-vol-mute" viewBox="0 0 24 24"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5L16.5 12z"></path></svg>
-                    </button>
-                    <input class="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
-                    <button class="btn" data-action="speed" aria-label="Playback Speed" title="Speed: 1x"><span class="speed-text">1x</span></button>
-                    <button class="btn" data-action="fs" aria-label="Toggle Fullscreen">
-                        <svg class="icon-fs" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm0-4h3V7h2V2H7v3H5v5h2V6zM17 5h-3V3h5v5h-2V5zm-3 14h3v-3h2v5h-5v-2z"></path></svg>
-                    </button>
+                <!-- RIGHT: How Daena Works -->
+                <div class="glass-card">
+                    <h3 style="margin:0 0 12px;font-size:1rem;color:#d4a843;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em">How Daena Works</h3>
+                    <div class="daena-video" data-video="/videos/why-investors.mp4" data-poster="/videos/play.png" aria-label="How Daena Works explainer">
+                        <div class="video-frame">
+                            <video preload="metadata" playsinline></video>
+                            <button class="overlay-play" aria-label="Play video">
+                                <svg viewBox="0 0 24 24" width="56" height="56" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+                                <span>Watch 4:38</span>
+                            </button>
+                        </div>
+                        <div class="controls" data-controls>
+                            <button class="btn" data-action="play" aria-label="Play/Pause">
+                                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                                <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>
+                            </button>
+                            <span class="time" data-time="current">0:00</span>
+                            <input class="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
+                            <span class="time" data-time="duration">0:00</span>
+                            <div class="spacer"></div>
+                            <button class="btn" data-action="mute" aria-label="Mute/Unmute">
+                                <svg class="icon-vol" viewBox="0 0 24 24"><path d="M3 10v4h4l5 4V6L7 10H3z"></path></svg>
+                                <svg class="icon-vol-mute" viewBox="0 0 24 24"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5l-4.5 4.5-1.5-1.5L13.5 12 9 7.5l1.5-1.5L15 10.5l4.5-4.5 1.5 1.5L16.5 12z"></path></svg>
+                            </button>
+                            <input class="volume" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+                            <button class="btn" data-action="speed" aria-label="Playback Speed" title="Speed: 1x"><span class="speed-text">1x</span></button>
+                            <button class="btn" data-action="fs" aria-label="Toggle Fullscreen">
+                                <svg class="icon-fs" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm0-4h3V7h2V2H7v3H5v5h2V6zM17 5h-3V3h5v5h-2V5zm-3 14h3v-3h2v5h-5v-2z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -416,7 +454,7 @@ var narration = {
     's-problem':{msg:"This section shows why I exist. Today's AI agents make decisions nobody can explain, forget everything between sessions, and scale into chaos. That's the problem I solve.",said:false},
     's-solution':{msg:"Here's my solution: a 10-stage governed pipeline. Every action passes through SecurityGate, GovernanceEngine, and AuditLog before anything executes. Watch the dots flow through each stage.",said:false},
     's-architecture':{msg:"This is PhiLattice, my patent-pending architecture. Fibonacci spiral for agent placement, honeycomb for department structure. The particle swarm you see IS my actual topology, rendered live.",said:false},
-    's-demos':{msg:"This is the explainer video. It walks through how I process tasks through the governed pipeline. Architecture, algorithms, auditable logs.",said:false},
+    's-demos':{msg:"Two demos here! 'Daena in Action' shows me working live. 'How Daena Works' walks through the governed pipeline — architecture, algorithms, auditable logs.",said:false},
     's-pitch':{msg:"The investor story. My creator poured his soul into this deck.",said:false},
     's-contact':{msg:"Early access is open! Fill out the form and Masoud will onboard you personally. He codes at 3 AM and calls it 'peak productivity.' Between us, he once debugged me for 6 hours straight then thanked ME for being patient.",said:false}
 };
@@ -534,7 +572,7 @@ var sectionSpeech = {
     's-problem': '<strong>The Problem:</strong> AI agents today make ungoverned decisions with no audit trail.',
     's-solution': '<strong>My Solution:</strong> 10 governance stages. Watch the dots flow through each gate.',
     's-architecture': '<strong>PhiLattice:</strong> Fibonacci scaling + honeycomb departments. Patent pending.',
-    's-demos': '<strong>Explainer:</strong> This video walks through Daena&#39;s architecture and governed workflow.',
+    's-demos': '<strong>Demos:</strong> Watch Daena in action and see how the governed pipeline processes tasks end-to-end.',
     's-pitch': '<strong>Investors:</strong> 14 slides covering architecture, moat, and roadmap.',
     's-contact': '<strong>Early Access:</strong> Request your spot. We\'ll onboard you within 24 hours.'
 };
