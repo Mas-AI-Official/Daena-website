@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <marker id="arrowT" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#3BE5C8"/></marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#84FFA0"/></marker>
+    <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#FF6B6B"/></marker>
+  </defs>
+  <rect width="1200" height="800" fill="#0B1020"/>
+  <text x="600" y="40" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="22" font-weight="bold">FIG. 2 - NBMF Write Path (eDNA-Gated)</text>
+  <!-- Input -->
+  <rect x="500" y="60" width="200" height="45" rx="22" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="88" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="13" font-weight="bold">INPUT ARRIVES</text>
+  <line x1="600" y1="105" x2="600" y2="130" stroke="#3BE5C8" stroke-width="2" marker-end="url(#arrowT)"/>
+  <!-- eDNA Epigenome Policy Check -->
+  <polygon points="600,130 700,170 600,210 500,170" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="167" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="11" font-weight="bold">eDNA Epigenome</text>
+  <text x="600" y="182" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Policy Pass?</text>
+  <!-- Reject path -->
+  <line x1="700" y1="170" x2="820" y2="170" stroke="#FF6B6B" stroke-width="2" marker-end="url(#arrowR)"/>
+  <rect x="820" y="150" width="120" height="40" rx="6" fill="#2a1010" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="880" y="175" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="11" font-weight="bold">REJECTED</text>
+  <text x="750" y="162" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="10">NO</text>
+  <!-- Yes path -->
+  <text x="580" y="225" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">YES</text>
+  <line x1="600" y1="210" x2="600" y2="245" stroke="#3BE5C8" stroke-width="2" marker-end="url(#arrowT)"/>
+  <!-- Content Classification -->
+  <rect x="480" y="245" width="240" height="45" rx="6" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="265" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Content Classification</text>
+  <text x="600" y="280" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">AGENT_DECISION | SKILL_OUTCOME | PATTERN | FAILED</text>
+  <line x1="600" y1="290" x2="600" y2="315" stroke="#3BE5C8" stroke-width="2" marker-end="url(#arrowT)"/>
+  <!-- Encoding Mode Selection -->
+  <rect x="480" y="315" width="240" height="45" rx="6" fill="#1a2a4a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="335" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Encoding Mode Select</text>
+  <text x="600" y="350" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">Lossless (legal/finance) | Semantic (operational)</text>
+  <line x1="600" y1="360" x2="600" y2="390" stroke="#3BE5C8" stroke-width="2" marker-end="url(#arrowT)"/>
+  <!-- CAS Dedup Check -->
+  <polygon points="600,390 700,430 600,470 500,430" fill="#1a2a4a" stroke="#FFD700" stroke-width="2"/>
+  <text x="600" y="427" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="11" font-weight="bold">CAS Dedup</text>
+  <text x="600" y="442" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Duplicate?</text>
+  <!-- Duplicate path -->
+  <line x1="700" y1="430" x2="820" y2="430" stroke="#FFD700" stroke-width="2" marker-end="url(#arrowT)"/>
+  <rect x="820" y="410" width="160" height="40" rx="6" fill="#1a1a30" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="900" y="428" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Bump access_count</text>
+  <text x="900" y="443" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">Return existing entry</text>
+  <text x="750" y="422" fill="#FFD700" font-family="Arial,sans-serif" font-size="10">YES</text>
+  <!-- No duplicate -->
+  <text x="580" y="485" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">NO</text>
+  <line x1="600" y1="470" x2="600" y2="500" stroke="#3BE5C8" stroke-width="2" marker-end="url(#arrowT)"/>
+  <!-- L2Q Quarantine Entry -->
+  <rect x="480" y="500" width="240" height="45" rx="6" fill="#2a2a10" stroke="#FFD700" stroke-width="2"/>
+  <text x="600" y="520" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="12" font-weight="bold">L2Q Quarantine</text>
+  <text x="600" y="535" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="9">trust_score=0.0 | is_quarantined=True</text>
+  <line x1="600" y1="545" x2="600" y2="575" stroke="#3BE5C8" stroke-width="2" marker-end="url(#arrowT)"/>
+  <!-- Trust Pipeline -->
+  <polygon points="600,575 700,615 600,655 500,615" fill="#1a2a4a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="612" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="11" font-weight="bold">Trust Pipeline</text>
+  <text x="600" y="627" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">score &gt;= 0.7?</text>
+  <!-- Stay in L2Q -->
+  <line x1="500" y1="615" x2="320" y2="615" stroke="#FFD700" stroke-width="2" marker-end="url(#arrowT)"/>
+  <rect x="200" y="595" width="120" height="40" rx="6" fill="#1a1a30" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="260" y="620" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Stay in L2Q</text>
+  <text x="420" y="607" fill="#FFD700" font-family="Arial,sans-serif" font-size="10">NO</text>
+  <!-- Promote -->
+  <text x="620" y="670" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">YES</text>
+  <line x1="600" y1="655" x2="600" y2="685" stroke="#84FFA0" stroke-width="2" marker-end="url(#arrowG)"/>
+  <!-- L2 Promotion -->
+  <rect x="480" y="685" width="240" height="40" rx="6" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="705" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Promote to L2 Warm</text>
+  <text x="600" y="718" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="9">is_quarantined=False | trust_score=0.8</text>
+  <!-- Lineage record -->
+  <line x1="720" y1="705" x2="820" y2="705" stroke="#FFD700" stroke-width="2" marker-end="url(#arrowT)"/>
+  <rect x="820" y="685" width="180" height="40" rx="6" fill="#1a1a30" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="910" y="702" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Lineage Records Event</text>
+  <text x="910" y="717" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">Merkle-notarized audit trail</text>
+  <!-- L1 surfacing arrow -->
+  <line x1="600" y1="725" x2="600" y2="755" stroke="#3BE5C8" stroke-width="2" marker-end="url(#arrowT)"/>
+  <rect x="480" y="755" width="240" height="30" rx="6" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="1.5"/>
+  <text x="600" y="775" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="11" font-weight="bold">L1 Surface (if recent + high access)</text>
+  <!-- Patent notice -->
+  <text x="100" y="790" fill="#555555" font-family="Arial,sans-serif" font-size="9">Patent Pending - MAS-AI Technologies Inc.</text>
+</svg>

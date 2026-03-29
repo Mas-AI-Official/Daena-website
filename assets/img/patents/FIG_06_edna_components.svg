@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <rect width="1200" height="800" fill="#0B1020"/>
+  <text x="600" y="40" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="22" font-weight="bold">FIG. 6 - eDNA Governance Components</text>
+  <!-- Center: NBMF -->
+  <rect x="430" y="310" width="340" height="80" rx="12" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="3"/>
+  <text x="600" y="345" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="18" font-weight="bold">NBMF Memory Fabric</text>
+  <text x="600" y="370" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="11">L1 Hot | L2Q Quarantine | L2 Warm | L3 Cold</text>
+  <!-- Top-Left: GENOME -->
+  <rect x="60" y="70" width="450" height="190" rx="10" fill="#1a3a2a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="285" y="100" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="18" font-weight="bold">GENOME</text>
+  <text x="285" y="120" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12">Capability Schema per Agent/Department</text>
+  <line x1="80" y1="130" x2="490" y2="130" stroke="#333" stroke-width="1"/>
+  <text x="90" y="152" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Allowed tools and integrations</text>
+  <text x="90" y="172" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Memory tiers accessible per role</text>
+  <text x="90" y="192" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Action permissions (read/write/promote)</text>
+  <text x="90" y="212" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Versioned behaviors with rollback support</text>
+  <text x="90" y="237" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Enforced at: memory read, skill execution</text>
+  <!-- Arrow from Genome to NBMF -->
+  <line x1="285" y1="260" x2="500" y2="310" stroke="#3BE5C8" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="360" y="288" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="10">Gates READ</text>
+  <!-- Top-Right: EPIGENOME -->
+  <rect x="690" y="70" width="450" height="190" rx="10" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="915" y="100" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="18" font-weight="bold">EPIGENOME</text>
+  <text x="915" y="120" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12">Tenant Policy Overlay on Genome</text>
+  <line x1="710" y1="130" x2="1120" y2="130" stroke="#333" stroke-width="1"/>
+  <text x="720" y="152" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">ABAC rules (attribute-based access)</text>
+  <text x="720" y="172" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Retention policies (auto L3 archival)</text>
+  <text x="720" y="192" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Jurisdiction constraints (data residency)</text>
+  <text x="720" y="212" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">SLO/SLA requirements per tenant</text>
+  <text x="720" y="232" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Feature flags (per-tenant toggles)</text>
+  <text x="720" y="250" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Enforced at: memory write, content storage</text>
+  <!-- Arrow from Epigenome to NBMF -->
+  <line x1="915" y1="260" x2="700" y2="310" stroke="#84FFA0" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="820" y="288" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">Gates WRITE</text>
+  <!-- Bottom-Left: LINEAGE -->
+  <rect x="60" y="440" width="450" height="190" rx="10" fill="#1a2a30" stroke="#FFD700" stroke-width="2"/>
+  <text x="285" y="470" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="18" font-weight="bold">LINEAGE</text>
+  <text x="285" y="490" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12">Merkle-Notarized Audit Chain</text>
+  <line x1="80" y1="500" x2="490" y2="500" stroke="#333" stroke-width="1"/>
+  <text x="90" y="522" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Records every promotion/demotion event</text>
+  <text x="90" y="542" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Fields: object_id, tier_transition, timestamp</text>
+  <text x="90" y="562" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">SHA-256 chain with parent hash reference</text>
+  <text x="90" y="582" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Merkle proofs for audit without full replay</text>
+  <text x="90" y="607" fill="#FFD700" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Records: all tier changes + Immune actions</text>
+  <!-- Arrow from NBMF to Lineage -->
+  <line x1="500" y1="390" x2="285" y2="440" stroke="#FFD700" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="370" y="420" fill="#FFD700" font-family="Arial,sans-serif" font-size="10">Records PROMOTE</text>
+  <!-- Bottom-Right: IMMUNE -->
+  <rect x="690" y="440" width="450" height="190" rx="10" fill="#2a1a1a" stroke="#FF6B6B" stroke-width="2"/>
+  <text x="915" y="470" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="18" font-weight="bold">IMMUNE SYSTEM</text>
+  <text x="915" y="490" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12">Threat Detection + Active Response</text>
+  <line x1="710" y1="500" x2="1120" y2="500" stroke="#333" stroke-width="1"/>
+  <text x="720" y="522" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Anomaly detection in access patterns</text>
+  <text x="720" y="542" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Policy breach identification</text>
+  <text x="720" y="562" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Prompt injection defense</text>
+  <text x="720" y="582" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Actions: quarantine, quorum, tier rollback</text>
+  <text x="720" y="607" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Triggers: quarantine on NBMF, logs to Lineage</text>
+  <!-- Arrow from Immune to NBMF -->
+  <line x1="700" y1="440" x2="700" y2="390" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="740" y="418" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="10">QUARANTINE</text>
+  <!-- Arrow from Immune to Lineage -->
+  <line x1="690" y1="535" x2="510" y2="535" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="600" y="528" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">Immune actions logged</text>
+  <!-- Patent -->
+  <text x="600" y="690" text-anchor="middle" fill="#555555" font-family="Arial,sans-serif" font-size="9">Patent Pending - MAS-AI Technologies Inc.</text>
+</svg>

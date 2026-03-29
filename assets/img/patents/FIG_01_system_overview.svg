@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="tierGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2a4a"/><stop offset="100%" stop-color="#0d1a30"/></linearGradient>
+    <linearGradient id="ednaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a2a"/><stop offset="100%" stop-color="#0d2a1a"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#0B1020"/>
+  <!-- Title -->
+  <text x="600" y="45" text-anchor="middle" fill="#3BE5C8" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="bold">FIG. 1 - NBMF + eDNA System Overview</text>
+  <!-- NBMF Column -->
+  <text x="250" y="85" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="16" font-weight="bold">NBMF Memory Fabric</text>
+  <!-- L1 Hot -->
+  <rect x="80" y="105" width="340" height="80" rx="8" fill="url(#tierGrad)" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="250" y="135" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="14" font-weight="bold">L1 HOT (Vector Cache)</text>
+  <text x="250" y="155" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">&lt;25ms p95 | Active session context</text>
+  <text x="250" y="172" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">TTL: 30 min | Highest access frequency</text>
+  <!-- L2Q Quarantine -->
+  <rect x="80" y="200" width="340" height="80" rx="8" fill="url(#tierGrad)" stroke="#FFD700" stroke-width="2"/>
+  <text x="250" y="230" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="14" font-weight="bold">L2Q QUARANTINE</text>
+  <text x="250" y="250" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">trust_score=0.0 | Excluded from recall</text>
+  <text x="250" y="267" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">New experiences auto-quarantined here</text>
+  <!-- L2 Warm -->
+  <rect x="80" y="295" width="340" height="80" rx="8" fill="url(#tierGrad)" stroke="#84FFA0" stroke-width="2"/>
+  <text x="250" y="325" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">L2 WARM (Validated)</text>
+  <text x="250" y="345" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">trust_score &gt;= 0.7 | Injectable into prompts</text>
+  <text x="250" y="362" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Passed trust validation pipeline</text>
+  <!-- L3 Cold -->
+  <rect x="80" y="390" width="340" height="80" rx="8" fill="url(#tierGrad)" stroke="#6688BB" stroke-width="2"/>
+  <text x="250" y="420" text-anchor="middle" fill="#6688BB" font-family="Arial,sans-serif" font-size="14" font-weight="bold">L3 COLD (Archive)</text>
+  <text x="250" y="440" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Compressed | Long-term storage</text>
+  <text x="250" y="457" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">On-demand decompression | TTL: none</text>
+  <!-- CAS + SimHash box -->
+  <rect x="80" y="490" width="340" height="60" rx="8" fill="#0d1a30" stroke="#3BE5C8" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="250" y="517" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12" font-weight="bold">CAS (SHA-256) + SimHash Dedup</text>
+  <text x="250" y="537" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Zero redundant storage across all agents</text>
+  <!-- Dual Encoding box -->
+  <rect x="80" y="565" width="340" height="60" rx="8" fill="#0d1a30" stroke="#84FFA0" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="250" y="592" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Dual-Mode Neural Encoding</text>
+  <text x="250" y="612" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Lossless (13.30x) | Semantic (2.53x)</text>
+  <!-- eDNA Column -->
+  <text x="900" y="85" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="16" font-weight="bold">eDNA Governance Layer</text>
+  <!-- Genome -->
+  <rect x="730" y="105" width="340" height="80" rx="8" fill="url(#ednaGrad)" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="900" y="135" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="14" font-weight="bold">GENOME</text>
+  <text x="900" y="155" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Capability schemas per agent</text>
+  <text x="900" y="172" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Tools, tiers, permissions, versioned behaviors</text>
+  <!-- Epigenome -->
+  <rect x="730" y="200" width="340" height="80" rx="8" fill="url(#ednaGrad)" stroke="#84FFA0" stroke-width="2"/>
+  <text x="900" y="230" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">EPIGENOME</text>
+  <text x="900" y="250" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Tenant ABAC policy overlay</text>
+  <text x="900" y="267" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Retention | Jurisdiction | SLO/SLA | Feature flags</text>
+  <!-- Lineage -->
+  <rect x="730" y="295" width="340" height="80" rx="8" fill="url(#ednaGrad)" stroke="#FFD700" stroke-width="2"/>
+  <text x="900" y="325" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="14" font-weight="bold">LINEAGE (Merkle-Notarized)</text>
+  <text x="900" y="345" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Every promotion event recorded</text>
+  <text x="900" y="362" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">SHA-256 chain | Cryptographic proof | Audit</text>
+  <!-- Immune -->
+  <rect x="730" y="390" width="340" height="80" rx="8" fill="url(#ednaGrad)" stroke="#FF6B6B" stroke-width="2"/>
+  <text x="900" y="420" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="14" font-weight="bold">IMMUNE SYSTEM</text>
+  <text x="900" y="440" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Threat detection + response</text>
+  <text x="900" y="457" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Quarantine | Quorum | Rollback</text>
+  <!-- Center: Combined System Arrows -->
+  <text x="600" y="510" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="14" font-weight="bold" filter="url(#glow)">GOVERNED MEMORY FABRIC</text>
+  <!-- Connecting arrows NBMF to center -->
+  <line x1="420" y1="145" x2="530" y2="500" stroke="#3BE5C8" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="420" y1="240" x2="540" y2="500" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="420" y1="335" x2="550" y2="500" stroke="#84FFA0" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="420" y1="430" x2="560" y2="500" stroke="#6688BB" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <!-- Connecting arrows eDNA to center -->
+  <line x1="730" y1="145" x2="670" y2="500" stroke="#3BE5C8" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="730" y1="240" x2="660" y2="500" stroke="#84FFA0" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="730" y1="335" x2="650" y2="500" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <line x1="730" y1="430" x2="640" y2="500" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+  <!-- Combined system description -->
+  <rect x="440" y="530" width="320" height="100" rx="8" fill="#0d1a30" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="555" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Combined System (Claim 3)</text>
+  <text x="600" y="575" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">eDNA gates every NBMF operation</text>
+  <text x="600" y="592" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Agent intelligence compounds over time</text>
+  <text x="600" y="609" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Privacy-preserving | Auditable | Governed</text>
+  <!-- Agent Learning Loop indicator -->
+  <rect x="440" y="650" width="320" height="55" rx="8" fill="#1a1a30" stroke="#84FFA0" stroke-width="1.5"/>
+  <text x="600" y="672" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Agent Learning Loop</text>
+  <text x="600" y="692" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Decisions stored, not user content</text>
+  <path d="M 560 630 L 600 650 L 640 630" fill="none" stroke="#84FFA0" stroke-width="1.5"/>
+  <!-- Key -->
+  <rect x="80" y="660" width="320" height="110" rx="6" fill="#0a0e1a" stroke="#333" stroke-width="1"/>
+  <text x="100" y="685" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="11" font-weight="bold">KEY</text>
+  <line x1="100" y1="697" x2="130" y2="697" stroke="#3BE5C8" stroke-width="2"/><text x="140" y="701" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Genome / L1 Hot</text>
+  <line x1="100" y1="715" x2="130" y2="715" stroke="#FFD700" stroke-width="2"/><text x="140" y="719" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Quarantine / Lineage</text>
+  <line x1="100" y1="733" x2="130" y2="733" stroke="#84FFA0" stroke-width="2"/><text x="140" y="737" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Validated / Epigenome</text>
+  <line x1="100" y1="751" x2="130" y2="751" stroke="#FF6B6B" stroke-width="2"/><text x="140" y="755" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Immune System</text>
+  <line x1="260" y1="697" x2="290" y2="697" stroke="#6688BB" stroke-width="2"/><text x="300" y="701" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Cold Archive</text>
+  <!-- Patent notice -->
+  <text x="600" y="785" text-anchor="middle" fill="#555555" font-family="Arial,sans-serif" font-size="9">Patent Pending - MAS-AI Technologies Inc.</text>
+</svg>

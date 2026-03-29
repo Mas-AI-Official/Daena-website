@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <marker id="aT" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#3BE5C8"/></marker>
+    <marker id="aG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#84FFA0"/></marker>
+  </defs>
+  <rect width="1200" height="800" fill="#0B1020"/>
+  <text x="600" y="40" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="22" font-weight="bold">FIG. 4 - Agent Learning Loop (Core System Claim)</text>
+  <!-- Central circular flow -->
+  <!-- Step 1: Agent Responds -->
+  <rect x="480" y="80" width="240" height="55" rx="8" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="103" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="14" font-weight="bold">1. Agent Responds</text>
+  <text x="600" y="122" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">LLM generates response (Stage 8-9)</text>
+  <!-- Arrow down -->
+  <line x1="600" y1="135" x2="600" y2="165" stroke="#3BE5C8" stroke-width="2" marker-end="url(#aT)"/>
+  <!-- Step 2: Extract Decision (Stage 10.5) -->
+  <rect x="480" y="165" width="240" height="55" rx="8" fill="#1a2a4a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="188" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">2. Extract Decision</text>
+  <text x="600" y="207" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Stage 10.5: Intent, model, routing, tier</text>
+  <!-- Arrow down-right -->
+  <line x1="720" y1="192" x2="830" y2="270" stroke="#3BE5C8" stroke-width="2" marker-end="url(#aT)"/>
+  <!-- Step 3: eDNA Approves -->
+  <rect x="780" y="260" width="240" height="55" rx="8" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="900" y="283" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">3. eDNA Approves</text>
+  <text x="900" y="302" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Epigenome policy check on write</text>
+  <!-- Arrow down -->
+  <line x1="900" y1="315" x2="900" y2="355" stroke="#3BE5C8" stroke-width="2" marker-end="url(#aT)"/>
+  <!-- Step 4: L2Q Quarantine -->
+  <rect x="780" y="355" width="240" height="55" rx="8" fill="#2a2a10" stroke="#FFD700" stroke-width="2"/>
+  <text x="900" y="378" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="14" font-weight="bold">4. L2Q Quarantine</text>
+  <text x="900" y="397" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">trust_score=0.0, auto-quarantined</text>
+  <!-- Arrow down -->
+  <line x1="900" y1="410" x2="900" y2="450" stroke="#3BE5C8" stroke-width="2" marker-end="url(#aT)"/>
+  <!-- Step 5: Validate -->
+  <rect x="780" y="450" width="240" height="55" rx="8" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="900" y="473" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="14" font-weight="bold">5. Validate (3x Rule)</text>
+  <text x="900" y="492" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">3+ successes triggers promotion</text>
+  <!-- Arrow down-left -->
+  <line x1="780" y1="477" x2="720" y2="550" stroke="#84FFA0" stroke-width="2" marker-end="url(#aG)"/>
+  <!-- Step 6: Promote to L2 -->
+  <rect x="480" y="540" width="240" height="55" rx="8" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="563" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">6. Promote to L2</text>
+  <text x="600" y="582" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">trust_score=0.8, Lineage records event</text>
+  <!-- Arrow left -->
+  <line x1="480" y1="567" x2="380" y2="477" stroke="#3BE5C8" stroke-width="2" marker-end="url(#aT)"/>
+  <!-- Step 7: Inject (Stage 6.1) -->
+  <rect x="180" y="450" width="240" height="55" rx="8" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="300" y="473" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="14" font-weight="bold">7. Inject (Stage 6.1)</text>
+  <text x="300" y="492" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">"From past experience:" into prompt</text>
+  <!-- Arrow up -->
+  <line x1="300" y1="450" x2="300" y2="355" stroke="#84FFA0" stroke-width="2" marker-end="url(#aG)"/>
+  <!-- Step 8: Agent Smarter -->
+  <rect x="180" y="290" width="240" height="55" rx="8" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="300" y="313" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">8. Agent is Smarter</text>
+  <text x="300" y="332" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Measurably improved via experience</text>
+  <!-- Arrow back to step 1 -->
+  <line x1="380" y1="300" x2="480" y2="192" stroke="#3BE5C8" stroke-width="2" marker-end="url(#aT)"/>
+  <!-- Loop arrow in center -->
+  <text x="600" y="410" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="16" font-weight="bold" opacity="0.3">COMPOUND</text>
+  <text x="600" y="435" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="16" font-weight="bold" opacity="0.3">LEARNING</text>
+  <!-- CRITICAL LABEL -->
+  <rect x="350" y="650" width="500" height="70" rx="8" fill="#2a1010" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="600" y="678" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="18" font-weight="bold">USER CONTENT: NEVER STORED</text>
+  <text x="600" y="702" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="12">Only agent decisions, skill outcomes, patterns, and failed approaches are captured</text>
+  <!-- What IS stored -->
+  <rect x="80" y="130" width="260" height="120" rx="6" fill="#0d1a30" stroke="#3BE5C8" stroke-width="1"/>
+  <text x="210" y="152" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="11" font-weight="bold">WHAT IS CAPTURED:</text>
+  <text x="100" y="170" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Intent, Complexity, Routing mode</text>
+  <text x="100" y="187" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Model selected, Provider used</text>
+  <text x="100" y="204" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Governance tier, Latency</text>
+  <text x="100" y="221" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Skills injected count, Success flag</text>
+  <text x="100" y="238" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Zero user message content</text>
+  <!-- Patent notice -->
+  <text x="600" y="790" text-anchor="middle" fill="#555555" font-family="Arial,sans-serif" font-size="9">Patent Pending - MAS-AI Technologies Inc.</text>
+</svg>

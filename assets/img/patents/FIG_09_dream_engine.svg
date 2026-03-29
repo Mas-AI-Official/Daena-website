@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <marker id="dA" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#3BE5C8"/></marker>
+    <marker id="dG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#84FFA0"/></marker>
+    <marker id="dR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#FF6B6B"/></marker>
+    <marker id="dY" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#FFD700"/></marker>
+  </defs>
+  <rect width="1200" height="800" fill="#0B1020"/>
+  <text x="600" y="40" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="22" font-weight="bold">FIG. 9 - Dream Engine: Autonomous Memory Consolidation</text>
+  <text x="600" y="65" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="12">Background process. Runs when system idle. Never touches user content.</text>
+  <!-- Trigger -->
+  <rect x="440" y="80" width="320" height="40" rx="20" fill="#1a1a30" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="105" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="13" font-weight="bold">System Idle Trigger (every N minutes)</text>
+  <line x1="600" y1="120" x2="600" y2="148" stroke="#3BE5C8" stroke-width="2" marker-end="url(#dA)"/>
+  <!-- Phase 1: Sensitivity -->
+  <rect x="420" y="148" width="360" height="55" rx="8" fill="#2a1a30" stroke="#FF6B6B" stroke-width="2"/>
+  <text x="600" y="172" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Phase 1: Sensitivity Scan</text>
+  <text x="600" y="192" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Detect PII, financial, legal, medical, credentials</text>
+  <!-- Sensitive action -->
+  <line x1="780" y1="175" x2="900" y2="175" stroke="#FF6B6B" stroke-width="1.5" marker-end="url(#dR)"/>
+  <rect x="900" y="155" width="200" height="40" rx="6" fill="#2a1010" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="1000" y="172" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Force LOSSLESS mode</text>
+  <text x="1000" y="187" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">is_sensitive=True, re-encode</text>
+  <line x1="600" y1="203" x2="600" y2="230" stroke="#3BE5C8" stroke-width="2" marker-end="url(#dA)"/>
+  <!-- Phase 2: Cluster & Merge -->
+  <rect x="420" y="230" width="360" height="55" rx="8" fill="#1a2a4a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="254" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Phase 2: Cluster and Merge</text>
+  <text x="600" y="274" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Jaccard similarity >= 0.75 | 3+ similar -> 1 stronger</text>
+  <!-- Merge detail -->
+  <line x1="780" y1="257" x2="900" y2="257" stroke="#84FFA0" stroke-width="1.5" marker-end="url(#dG)"/>
+  <rect x="900" y="237" width="200" height="40" rx="6" fill="#1a3a2a" stroke="#84FFA0" stroke-width="1.5"/>
+  <text x="1000" y="254" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10" font-weight="bold">MERGE action</text>
+  <text x="1000" y="269" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">Archive sources, create combined</text>
+  <line x1="600" y1="285" x2="600" y2="312" stroke="#3BE5C8" stroke-width="2" marker-end="url(#dA)"/>
+  <!-- Phase 3: Trust by Association -->
+  <rect x="420" y="312" width="360" height="55" rx="8" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="336" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Phase 3: Trust by Association</text>
+  <text x="600" y="356" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">L2Q entry aligned with 5+ trusted L2 peers -> promote</text>
+  <line x1="780" y1="339" x2="900" y2="339" stroke="#3BE5C8" stroke-width="1.5" marker-end="url(#dA)"/>
+  <rect x="900" y="319" width="200" height="40" rx="6" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="1.5"/>
+  <text x="1000" y="336" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="10" font-weight="bold">PROMOTE action</text>
+  <text x="1000" y="351" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">trust=0.72, unquarantine</text>
+  <line x1="600" y1="367" x2="600" y2="394" stroke="#3BE5C8" stroke-width="2" marker-end="url(#dA)"/>
+  <!-- Phase 4: Contradiction -->
+  <rect x="420" y="394" width="360" height="55" rx="8" fill="#2a1a10" stroke="#FFD700" stroke-width="2"/>
+  <text x="600" y="418" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Phase 4: Contradiction Detection</text>
+  <text x="600" y="438" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Same intent, opposite success_flag -> flag conflict</text>
+  <line x1="780" y1="421" x2="900" y2="421" stroke="#FFD700" stroke-width="1.5" marker-end="url(#dY)"/>
+  <rect x="900" y="401" width="200" height="40" rx="6" fill="#2a2a10" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="1000" y="418" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="10" font-weight="bold">CONTRADICT action</text>
+  <text x="1000" y="433" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">contradiction=True on both</text>
+  <line x1="600" y1="449" x2="600" y2="476" stroke="#3BE5C8" stroke-width="2" marker-end="url(#dA)"/>
+  <!-- Phase 5: Pattern Synthesis -->
+  <rect x="420" y="476" width="360" height="55" rx="8" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="500" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Phase 5: Pattern Synthesis</text>
+  <text x="600" y="520" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Extract model-intent correlations -> PATTERN_LEARNED</text>
+  <line x1="780" y1="503" x2="900" y2="503" stroke="#84FFA0" stroke-width="1.5" marker-end="url(#dG)"/>
+  <rect x="900" y="483" width="200" height="40" rx="6" fill="#1a3a2a" stroke="#84FFA0" stroke-width="1.5"/>
+  <text x="1000" y="500" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10" font-weight="bold">SYNTHESIZE action</text>
+  <text x="1000" y="515" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">New knowledge from patterns</text>
+  <line x1="600" y1="531" x2="600" y2="558" stroke="#3BE5C8" stroke-width="2" marker-end="url(#dA)"/>
+  <!-- Phase 6: Decay -->
+  <rect x="420" y="558" width="360" height="55" rx="8" fill="#1a1a30" stroke="#6688BB" stroke-width="2"/>
+  <text x="600" y="582" text-anchor="middle" fill="#6688BB" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Phase 6: Decay Management</text>
+  <text x="600" y="602" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">30d: trust-0.05 | 90d: demote tier | 180d: archive</text>
+  <line x1="780" y1="585" x2="900" y2="585" stroke="#6688BB" stroke-width="1.5"/>
+  <rect x="900" y="565" width="200" height="40" rx="6" fill="#0d1a30" stroke="#6688BB" stroke-width="1.5"/>
+  <text x="1000" y="582" text-anchor="middle" fill="#6688BB" font-family="Arial,sans-serif" font-size="10" font-weight="bold">DECAY action</text>
+  <text x="1000" y="597" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">Weaken stale, archive old</text>
+  <line x1="600" y1="613" x2="600" y2="640" stroke="#3BE5C8" stroke-width="2" marker-end="url(#dA)"/>
+  <!-- Lineage -->
+  <rect x="420" y="640" width="360" height="45" rx="8" fill="#1a1a30" stroke="#FFD700" stroke-width="2"/>
+  <text x="600" y="660" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="13" font-weight="bold">All actions -> Lineage (Merkle chain)</text>
+  <text x="600" y="677" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">DreamReport stored as PATTERN_LEARNED, trust=1.0</text>
+  <!-- Result box -->
+  <rect x="300" y="710" width="600" height="50" rx="8" fill="#1a3a2a" stroke="#84FFA0" stroke-width="3"/>
+  <text x="600" y="735" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="16" font-weight="bold">NBMF gets smarter while agents sleep</text>
+  <text x="600" y="753" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Autonomous consolidation without human intervention or user data access</text>
+  <!-- Left sidebar: what Dream operates on -->
+  <rect x="60" y="148" width="300" height="140" rx="6" fill="#0d1a30" stroke="#3BE5C8" stroke-width="1"/>
+  <text x="210" y="172" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12" font-weight="bold">DREAM ENGINE OPERATES ON:</text>
+  <text x="80" y="195" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">AGENT_DECISION entries</text>
+  <text x="80" y="213" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">SKILL_OUTCOME entries</text>
+  <text x="80" y="231" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">PATTERN_LEARNED entries</text>
+  <text x="80" y="249" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">APPROACH_FAILED entries</text>
+  <text x="80" y="273" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="10" font-weight="bold">NEVER: user messages or PII</text>
+  <!-- Patent -->
+  <text x="600" y="790" text-anchor="middle" fill="#555555" font-family="Arial,sans-serif" font-size="9">Patent Pending - Masoud Masoori</text>
+</svg>

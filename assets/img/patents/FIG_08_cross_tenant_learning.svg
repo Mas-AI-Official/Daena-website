@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <marker id="xA" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#3BE5C8"/></marker>
+  </defs>
+  <rect width="1200" height="800" fill="#0B1020"/>
+  <text x="600" y="40" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="22" font-weight="bold">FIG. 8 - Cross-Tenant Learning via Semantic Abstraction</text>
+  <!-- Tenant A -->
+  <rect x="60" y="80" width="400" height="350" rx="12" fill="#0d1a30" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="260" y="110" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="18" font-weight="bold">TENANT A</text>
+  <text x="260" y="130" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="11">Isolated NBMF Instance</text>
+  <!-- Tenant A NBMF tiers -->
+  <rect x="90" y="150" width="340" height="40" rx="4" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="1"/>
+  <text x="260" y="175" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="11">L1 Hot | L2Q | L2 Warm | L3 Cold</text>
+  <!-- Agent experiences -->
+  <rect x="90" y="210" width="340" height="80" rx="6" fill="#1a3a2a" stroke="#84FFA0" stroke-width="1.5"/>
+  <text x="260" y="235" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Agent Experiences</text>
+  <text x="110" y="255" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">AGENT_DECISION: model routing patterns</text>
+  <text x="110" y="273" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">SKILL_OUTCOME: refinement verdicts</text>
+  <!-- Tenant-specific data -->
+  <rect x="90" y="310" width="340" height="60" rx="6" fill="#2a1010" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="260" y="335" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Tenant-Specific Data</text>
+  <text x="110" y="358" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">User content, names, identifiers, PII</text>
+  <text x="260" y="410" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">eDNA Epigenome enforces tenant isolation</text>
+  <!-- Tenant B -->
+  <rect x="740" y="80" width="400" height="350" rx="12" fill="#0d1a30" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="940" y="110" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="18" font-weight="bold">TENANT B</text>
+  <text x="940" y="130" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="11">Isolated NBMF Instance</text>
+  <!-- Tenant B NBMF tiers -->
+  <rect x="770" y="150" width="340" height="40" rx="4" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="1"/>
+  <text x="940" y="175" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="11">L1 Hot | L2Q | L2 Warm | L3 Cold</text>
+  <!-- Agent experiences -->
+  <rect x="770" y="210" width="340" height="80" rx="6" fill="#1a3a2a" stroke="#84FFA0" stroke-width="1.5"/>
+  <text x="940" y="235" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Agent Experiences</text>
+  <text x="790" y="255" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">PATTERN_LEARNED: task decomposition</text>
+  <text x="790" y="273" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">APPROACH_FAILED: error recovery paths</text>
+  <!-- Tenant-specific data -->
+  <rect x="770" y="310" width="340" height="60" rx="6" fill="#2a1010" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="940" y="335" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="12" font-weight="bold">Tenant-Specific Data</text>
+  <text x="790" y="358" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">User content, names, identifiers, PII</text>
+  <text x="940" y="410" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="9">eDNA Epigenome enforces tenant isolation</text>
+  <!-- Arrows down to sanitization -->
+  <line x1="260" y1="430" x2="420" y2="510" stroke="#84FFA0" stroke-width="2" marker-end="url(#xA)"/>
+  <line x1="940" y1="430" x2="780" y2="510" stroke="#84FFA0" stroke-width="2" marker-end="url(#xA)"/>
+  <!-- Sanitization Layer -->
+  <rect x="350" y="500" width="500" height="70" rx="10" fill="#2a1a30" stroke="#FFD700" stroke-width="3"/>
+  <text x="600" y="528" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="16" font-weight="bold">SANITIZATION LAYER</text>
+  <text x="600" y="550" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Remove identifiers | Extract semantic structure | Preserve patterns only</text>
+  <!-- X marks on tenant data -->
+  <text x="260" y="395" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="24" font-weight="bold">X</text>
+  <text x="940" y="395" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="24" font-weight="bold">X</text>
+  <text x="260" y="380" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="9">STRIPPED</text>
+  <text x="940" y="380" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="9">STRIPPED</text>
+  <!-- Arrow down to shared pool -->
+  <line x1="600" y1="570" x2="600" y2="610" stroke="#84FFA0" stroke-width="2" marker-end="url(#xA)"/>
+  <!-- Shared Pattern Pool -->
+  <rect x="300" y="610" width="600" height="80" rx="10" fill="#1a3a2a" stroke="#84FFA0" stroke-width="3"/>
+  <text x="600" y="640" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="16" font-weight="bold">SHARED SEMANTIC PATTERN POOL</text>
+  <text x="600" y="660" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Abstracted artifacts: routing patterns, skill effectiveness, model performance</text>
+  <text x="600" y="678" text-anchor="middle" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Cryptographically verified sanitization | No raw data crosses tenant boundary</text>
+  <!-- Critical label -->
+  <rect x="250" y="720" width="700" height="40" rx="8" fill="#2a1010" stroke="#FF6B6B" stroke-width="2"/>
+  <text x="600" y="746" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="15" font-weight="bold">ZERO RAW DATA CROSSES TENANT BOUNDARY</text>
+  <!-- Patent -->
+  <text x="600" y="790" text-anchor="middle" fill="#555555" font-family="Arial,sans-serif" font-size="9">Patent Pending - MAS-AI Technologies Inc.</text>
+</svg>

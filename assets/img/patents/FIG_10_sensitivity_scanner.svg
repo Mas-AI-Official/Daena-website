@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <marker id="sA" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#3BE5C8"/></marker>
+    <marker id="sR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#FF6B6B"/></marker>
+    <marker id="sG" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#84FFA0"/></marker>
+  </defs>
+  <rect width="1200" height="800" fill="#0B1020"/>
+  <text x="600" y="40" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="22" font-weight="bold">FIG. 10 - Updated Write Path with Sensitivity Scanner</text>
+  <!-- Input -->
+  <rect x="460" y="65" width="280" height="45" rx="22" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="93" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="14" font-weight="bold">CONTENT ARRIVES</text>
+  <line x1="600" y1="110" x2="600" y2="140" stroke="#3BE5C8" stroke-width="2" marker-end="url(#sA)"/>
+  <!-- SENSITIVITY SCANNER (runs FIRST) -->
+  <rect x="380" y="140" width="440" height="100" rx="10" fill="#2a1a30" stroke="#FF6B6B" stroke-width="3"/>
+  <text x="600" y="168" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="16" font-weight="bold">SENSITIVITY SCANNER (FIRST)</text>
+  <text x="600" y="190" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="11">Regex detection across content + metadata</text>
+  <!-- Detection categories -->
+  <text x="405" y="215" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">PII</text>
+  <text x="455" y="215" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Financial</text>
+  <text x="535" y="215" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Legal</text>
+  <text x="595" y="215" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Medical</text>
+  <text x="665" y="215" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Credentials</text>
+  <text x="760" y="215" fill="#aaaaaa" font-family="Arial,sans-serif" font-size="10">Contracts</text>
+  <!-- Two paths from scanner -->
+  <!-- SENSITIVE path (left) -->
+  <line x1="470" y1="240" x2="250" y2="290" stroke="#FF6B6B" stroke-width="2" marker-end="url(#sR)"/>
+  <text x="340" y="260" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="11" font-weight="bold">SENSITIVE</text>
+  <rect x="100" y="290" width="300" height="75" rx="8" fill="#2a1010" stroke="#FF6B6B" stroke-width="2"/>
+  <text x="250" y="315" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Force LOSSLESS Mode</text>
+  <text x="250" y="335" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">is_sensitive = True</text>
+  <text x="250" y="352" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">encoding_mode = "lossless"</text>
+  <!-- NOT SENSITIVE path (right) -->
+  <line x1="730" y1="240" x2="950" y2="290" stroke="#84FFA0" stroke-width="2" marker-end="url(#sG)"/>
+  <text x="850" y="260" fill="#84FFA0" font-family="Arial,sans-serif" font-size="11" font-weight="bold">NOT SENSITIVE</text>
+  <rect x="800" y="290" width="300" height="75" rx="8" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="950" y="315" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Standard SEMANTIC Mode</text>
+  <text x="950" y="335" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">is_sensitive = False</text>
+  <text x="950" y="352" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">encoding_mode = "semantic"</text>
+  <!-- Both paths converge -->
+  <line x1="250" y1="365" x2="500" y2="415" stroke="#3BE5C8" stroke-width="2" marker-end="url(#sA)"/>
+  <line x1="950" y1="365" x2="700" y2="415" stroke="#3BE5C8" stroke-width="2" marker-end="url(#sA)"/>
+  <!-- eDNA Epigenome -->
+  <polygon points="600,415 720,460 600,505 480,460" fill="#1a3a2a" stroke="#84FFA0" stroke-width="2"/>
+  <text x="600" y="455" text-anchor="middle" fill="#84FFA0" font-family="Arial,sans-serif" font-size="12" font-weight="bold">eDNA Epigenome</text>
+  <text x="600" y="472" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Policy Pass?</text>
+  <!-- Reject -->
+  <line x1="720" y1="460" x2="850" y2="460" stroke="#FF6B6B" stroke-width="2"/>
+  <rect x="850" y="440" width="100" height="40" rx="6" fill="#2a1010" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="900" y="465" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="11" font-weight="bold">REJECT</text>
+  <text x="780" y="452" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="10">NO</text>
+  <!-- Yes -->
+  <text x="575" y="520" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">YES</text>
+  <line x1="600" y1="505" x2="600" y2="535" stroke="#3BE5C8" stroke-width="2" marker-end="url(#sA)"/>
+  <!-- Encoding (mode already decided) -->
+  <rect x="450" y="535" width="300" height="40" rx="6" fill="#1a2a4a" stroke="#3BE5C8" stroke-width="2"/>
+  <text x="600" y="560" text-anchor="middle" fill="#3BE5C8" font-family="Arial,sans-serif" font-size="12" font-weight="bold">NBMF Encode (mode pre-selected)</text>
+  <line x1="600" y1="575" x2="600" y2="600" stroke="#3BE5C8" stroke-width="2" marker-end="url(#sA)"/>
+  <!-- CAS Dedup -->
+  <polygon points="600,600 690,630 600,660 510,630" fill="#1a2a4a" stroke="#FFD700" stroke-width="2"/>
+  <text x="600" y="633" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="11" font-weight="bold">CAS Dedup?</text>
+  <line x1="690" y1="630" x2="780" y2="630" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="730" y="622" fill="#FFD700" font-family="Arial,sans-serif" font-size="10">DUP</text>
+  <rect x="780" y="613" width="130" height="35" rx="6" fill="#1a1a30" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="845" y="635" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="10">Bump count</text>
+  <text x="575" y="675" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10">NEW</text>
+  <line x1="600" y1="660" x2="600" y2="690" stroke="#3BE5C8" stroke-width="2" marker-end="url(#sA)"/>
+  <!-- L2Q -->
+  <rect x="450" y="690" width="300" height="40" rx="6" fill="#2a2a10" stroke="#FFD700" stroke-width="2"/>
+  <text x="600" y="715" text-anchor="middle" fill="#FFD700" font-family="Arial,sans-serif" font-size="13" font-weight="bold">L2Q Quarantine (trust=0.0)</text>
+  <!-- Key change callout -->
+  <rect x="60" y="430" width="340" height="90" rx="8" fill="#0d1a30" stroke="#FF6B6B" stroke-width="2"/>
+  <text x="230" y="455" text-anchor="middle" fill="#FF6B6B" font-family="Arial,sans-serif" font-size="13" font-weight="bold">KEY CHANGE vs. Original Patent</text>
+  <text x="80" y="478" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Sensitivity Scanner runs BEFORE eDNA</text>
+  <text x="80" y="496" fill="#ffffff" font-family="Arial,sans-serif" font-size="10">Encoding mode decided by scanner, not later</text>
+  <text x="80" y="514" fill="#84FFA0" font-family="Arial,sans-serif" font-size="10" font-weight="bold">Safety-first: detect sensitive before encode</text>
+  <!-- Patent -->
+  <text x="600" y="785" text-anchor="middle" fill="#555555" font-family="Arial,sans-serif" font-size="9">Patent Pending - Masoud Masoori</text>
+</svg>
