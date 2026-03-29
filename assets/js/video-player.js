@@ -20,9 +20,9 @@
 
     if (!video || !overlayPlay || !btnPlay) return; // Safety check
 
-    // Attach source & poster
-    video.src = el.dataset.video;
+    // Attach poster first, defer video source until play
     video.setAttribute("poster", el.dataset.poster);
+    video.preload = "none";
 
     // Restore volume and speed
     const savedVol = +localStorage.getItem("daena:vid:vol");
@@ -61,8 +61,11 @@
 
     function togglePlay() {
       if (video.paused) {
+        if (!video.src || video.src === window.location.href) {
+          video.src = el.dataset.video;
+        }
         video.play();
-        hasPlayedOnce = true; // Mark as played once user starts playback
+        hasPlayedOnce = true;
       } else {
         video.pause();
       }
