@@ -516,14 +516,18 @@ document.querySelectorAll('.btn-g,.btn-c').forEach(function(btn){
 function initHeroFade(){
     if(typeof gsap==='undefined'||noMotion)return;
     gsap.registerPlugin(ScrollTrigger);
-    gsap.to('#heroOverlay',{
-        opacity:0,scale:0.92,
-        scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}
-    });
-    gsap.to('#scrollHint',{
-        opacity:0,
-        scrollTrigger:{trigger:'#hero',start:'top top',end:'30% top',scrub:true}
-    });
+    // Set explicit starting state so GSAP always knows where to return
+    gsap.set('#heroOverlay',{opacity:1,scale:1});
+    gsap.fromTo('#heroOverlay',
+        {opacity:1,scale:1},
+        {opacity:0,scale:0.92,immediateRender:false,
+         scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}
+        });
+    gsap.fromTo('#scrollHint',
+        {opacity:1},
+        {opacity:0,immediateRender:false,
+         scrollTrigger:{trigger:'#hero',start:'top top',end:'30% top',scrub:true}
+        });
 }
 if(document.readyState==='complete')initHeroFade();
 else window.addEventListener('load',initHeroFade);
