@@ -100,9 +100,12 @@
             <h2 class="neon-cyan">Governance-First AI Agent Orchestration</h2>
             <p class="sub">1,424 tests passing. 10 departments. 60 agents. Free to run locally with Ollama.<br><span class="neon-gold neon-pulse">Patent-pending: PhiLattice Architecture + NBMF</span></p>
             <div class="hero-ctas">
+                <a href="https://daena-596551989073.us-central1.run.app" target="_blank" rel="noopener" class="btn-g" style="background:rgba(212,168,83,0.2);border-color:rgba(212,168,83,0.5)">
+                    <svg style="display:inline;width:16px;height:16px;vertical-align:-2px;margin-right:4px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Try Online</a>
                 <a href="#s-get-started" class="btn-g">Get Started Free</a>
                 <a href="#s-demos" class="btn-c">Watch Demos</a>
             </div>
+            <p style="margin-top:14px;font-size:0.8rem;color:rgba(255,255,255,0.5)"><span id="communityCount" style="font-weight:600;color:#d4a853">150+</span> in our early community</p>
         </div>
         <div class="scroll-hint" id="scrollHint"><span>Scroll</span><div class="bar"></div></div>
     </section>
@@ -384,8 +387,8 @@
     <!-- CONTACT -->
     <section class="step" id="s-contact" data-side="left" style="min-height:70vh">
         <div class="content-panel swing-right">
-            <h2 style="text-align:center">Talk to Us</h2>
-            <p style="text-align:center;margin-bottom:16px;max-width:480px;margin-left:auto;margin-right:auto">Questions about Pro, Enterprise, or custom deployments? We respond within 24 hours.</p>
+            <h2 style="text-align:center">Get Early Access</h2>
+            <p style="text-align:center;margin-bottom:16px;max-width:480px;margin-left:auto;margin-right:auto">Join our growing community. First 100 Pro subscribers receive founding member benefits. We respond within 24 hours.</p>
             <form class="contact-form" id="contactForm" style="margin-top:16px">
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
                     <div><label>Full Name *</label><input type="text" name="name" required placeholder="Jane Smith"></div>
@@ -537,6 +540,18 @@ function initHeroFade(){
 if(document.readyState==='complete')initHeroFade();
 else window.addEventListener('load',initHeroFade);
 
+// Community counter — fetch from live API, fallback to local base
+(function() {
+    var FALLBACK_COUNT = 150;
+    var el = document.getElementById('communityCount');
+    if (!el) return;
+    el.textContent = FALLBACK_COUNT + '+';
+    fetch('https://daena-596551989073.us-central1.run.app/api/v1/waitlist/count')
+        .then(function(r) { return r.json(); })
+        .then(function(d) { if (d.count) el.textContent = d.count + '+'; })
+        .catch(function() {});
+})();
+
 // Contact form — submits via formsubmit.co + localStorage backup
 var cf = document.getElementById('contactForm');
 if (cf) cf.addEventListener('submit', function(e) {
@@ -559,7 +574,7 @@ if (cf) cf.addEventListener('submit', function(e) {
     fm.style.background = 'rgba(0,200,255,0.1)';
     fm.style.border = '1px solid rgba(0,200,255,0.3)';
     fm.style.color = '#00c8ff';
-    fm.textContent = 'You\'re on the list! We\'ll reach out within 24 hours.';
+    fm.textContent = 'Welcome to the Daena community! We\'ll reach out within 24 hours.';
     cf.reset();
 });
 
