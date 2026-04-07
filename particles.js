@@ -71,7 +71,7 @@
     size: isMob ? 0.22 : 0.2,
     vertexColors: true,
     transparent: true,
-    opacity: isMob ? 0.65 : 0.95, // Brighter particles, more visible spiral
+    opacity: isMob ? 0.6 : 0.85, // Visible but not overpowering behind content
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true
