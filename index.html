@@ -742,42 +742,41 @@ function initHeroFade(){
          scrollTrigger:{trigger:'#hero',start:'top top',end:'30% top',scrub:true}
         });
 
-    // Animate sections from alternating sides (reverse on scroll-up)
+    // Animate sections — slide from sides on desktop, fade up on mobile — stay visible
     var sectionEls = document.querySelectorAll('.section-inner, .contact-card, .manifesto-quote');
     sectionEls.forEach(function(el, i) {
         var fromLeft = i % 2 === 0;
-        gsap.fromTo(el,
-            {opacity:0, x: fromLeft ? -60 : 60},
-            {opacity:1, x:0, duration:0.8, ease:'power2.out',
-             scrollTrigger:{trigger:el, start:'top 85%', end:'top 40%',
-                toggleActions:'play reverse play reverse'}
-            }
-        );
+        var fromProps = isMob ? {opacity:0, y:30} : {opacity:0, x: fromLeft ? -40 : 40};
+        var toProps = isMob ? {opacity:1, y:0} : {opacity:1, x:0};
+        toProps.duration = 0.9;
+        toProps.ease = 'power2.out';
+        toProps.scrollTrigger = {trigger:el, start:'top 88%', toggleActions:'play none none none'};
+        gsap.fromTo(el, fromProps, toProps);
     });
 
-    // Animate stats on scroll
+    // Animate stats on scroll — stay visible
     document.querySelectorAll('.stat-number,.arch-stat-num').forEach(function(el){
         gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,
-            scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play reverse play reverse'}
+            scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}
         });
     });
 
-    // Animate cards stagger within each grid
+    // Animate cards stagger within each grid — stay visible
     var grids = document.querySelectorAll('.problem-grid,.features-grid,.arch-grid,.solution-grid,.pricing-4col,.demos-grid,.compare-grid');
     grids.forEach(function(grid){
         var cards = grid.children;
         for(var c=0;c<cards.length;c++){
             (function(card,idx){
-                gsap.fromTo(card,{opacity:0,y:30,scale:0.97},{opacity:1,y:0,scale:1,duration:0.5,delay:idx*0.08,
-                    scrollTrigger:{trigger:grid,start:'top 85%',toggleActions:'play reverse play reverse'}
+                gsap.fromTo(card,{opacity:0,y:24,scale:0.98},{opacity:1,y:0,scale:1,duration:0.5,delay:idx*0.06,
+                    scrollTrigger:{trigger:grid,start:'top 88%',toggleActions:'play none none none'}
                 });
             })(cards[c],c);
         }
     });
 
-    // Animate stats bar
+    // Animate stats bar — stay visible
     gsap.fromTo('.stats-grid',{opacity:0,y:20},{opacity:1,y:0,duration:0.6,
-        scrollTrigger:{trigger:'.stats-bar',start:'top 85%',toggleActions:'play reverse play reverse'}
+        scrollTrigger:{trigger:'.stats-bar',start:'top 88%',toggleActions:'play none none none'}
     });
 }
 if(document.readyState==='complete')initHeroFade();
