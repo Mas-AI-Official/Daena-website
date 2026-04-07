@@ -845,14 +845,14 @@ function initHeroFade(){
         var toProps = isMob ? {opacity:1, y:0} : {opacity:1, x:0};
         toProps.duration = 0.9;
         toProps.ease = 'power2.out';
-        toProps.scrollTrigger = {trigger:el, start:'top 88%', toggleActions:'play none none reset'};
+        toProps.scrollTrigger = {trigger:el, start:'top 88%', toggleActions:'play none play reset'};
         gsap.fromTo(el, fromProps, toProps);
     });
 
     // Animate stats
     document.querySelectorAll('.stat-number,.arch-stat-num').forEach(function(el){
         gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,
-            scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none reset'}
+            scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none play reset'}
         });
     });
 
@@ -863,7 +863,7 @@ function initHeroFade(){
         for(var c=0;c<cards.length;c++){
             (function(card,idx){
                 gsap.fromTo(card,{opacity:0,y:24,scale:0.98},{opacity:1,y:0,scale:1,duration:0.5,delay:idx*0.06,
-                    scrollTrigger:{trigger:grid,start:'top 88%',toggleActions:'play none none reset'}
+                    scrollTrigger:{trigger:grid,start:'top 88%',toggleActions:'play none play reset'}
                 });
             })(cards[c],c);
         }
@@ -871,7 +871,7 @@ function initHeroFade(){
 
     // Animate stats bar
     gsap.fromTo('.stats-grid',{opacity:0,y:20},{opacity:1,y:0,duration:0.6,
-        scrollTrigger:{trigger:'.stats-bar',start:'top 88%',toggleActions:'play none none reset'}
+        scrollTrigger:{trigger:'.stats-bar',start:'top 88%',toggleActions:'play none play reset'}
     });
 }
 if(document.readyState==='complete')initHeroFade();
