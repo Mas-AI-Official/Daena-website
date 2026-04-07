@@ -175,8 +175,8 @@
             <h2 class="section-title">Governance inside the execution layer.</h2>
             <p class="section-subtitle">Every action passes through a 10-stage governed pipeline. Security, governance, and audit happen before anything executes, not after.</p>
 
-            <!-- Compact horizontal pipeline -->
-            <div class="pipeline-strip">
+            <!-- Pipeline: single row on desktop, snake/zigzag on mobile -->
+            <div class="pipeline-strip pipeline-desktop">
                 <div class="pipeline-stage"><span class="ps-num">1</span><span class="ps-name">Security<br>Gate</span></div>
                 <div class="pipeline-arrow"></div>
                 <div class="pipeline-stage"><span class="ps-num">2</span><span class="ps-name">Input<br>Validator</span></div>
@@ -196,6 +196,32 @@
                 <div class="pipeline-stage"><span class="ps-num">9</span><span class="ps-name">Feedback<br>Loop</span></div>
                 <div class="pipeline-arrow"></div>
                 <div class="pipeline-stage"><span class="ps-num">10</span><span class="ps-name">Audit<br>Log</span></div>
+            </div>
+            <!-- Mobile snake layout: Row 1 (1-5) → down → Row 2 (6-10 reversed visually) -->
+            <div class="pipeline-snake">
+                <div class="snake-row">
+                    <div class="pipeline-stage"><span class="ps-num">1</span><span class="ps-name">Security Gate</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">2</span><span class="ps-name">Input Validator</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">3</span><span class="ps-name">Governance Engine</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">4</span><span class="ps-name">Context Builder</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">5</span><span class="ps-name">Reasoning Core</span></div>
+                </div>
+                <div class="snake-down"><div class="snake-down-line"></div></div>
+                <div class="snake-row snake-row-reverse">
+                    <div class="pipeline-stage"><span class="ps-num">10</span><span class="ps-name">Audit Log</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">9</span><span class="ps-name">Feedback Loop</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">8</span><span class="ps-name">Response Formatter</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">7</span><span class="ps-name">Output Validator</span></div>
+                    <div class="pipeline-arrow"></div>
+                    <div class="pipeline-stage"><span class="ps-num">6</span><span class="ps-name">Action Planner</span></div>
+                </div>
             </div>
             <p class="pipeline-caption">Every action governed. Every decision traced. Nothing runs ungoverned.</p>
 
