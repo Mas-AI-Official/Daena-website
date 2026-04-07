@@ -68,10 +68,10 @@
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
   var material = new THREE.PointsMaterial({
-    size: isMob ? 0.18 : 0.15,
+    size: isMob ? 0.22 : 0.2,
     vertexColors: true,
     transparent: true,
-    opacity: isMob ? 0.55 : 0.85, // Mobile: dimmer so gold text stays readable
+    opacity: isMob ? 0.65 : 0.95, // Brighter particles, more visible spiral
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true

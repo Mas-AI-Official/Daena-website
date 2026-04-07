@@ -173,7 +173,7 @@
         <div class="section-inner">
             <p class="section-label" style="color:rgba(0,200,255,0.7)">The Solution</p>
             <h2 class="section-title">Governance inside the execution layer.</h2>
-            <p class="section-subtitle">Every action passes through a 10-stage governed pipeline. Security, governance, and audit happen before anything executes — not after.</p>
+            <p class="section-subtitle">Every action passes through a 10-stage governed pipeline. Security, governance, and audit happen before anything executes, not after.</p>
 
             <!-- Compact horizontal pipeline -->
             <div class="pipeline-strip">
@@ -203,7 +203,7 @@
             <div class="solution-grid">
                 <div class="solution-card">
                     <h3 style="color:#00c8ff">Invisible Governance</h3>
-                    <p>4-tier system: routine actions logged silently, medium-risk notified, high-risk requires approval. Governance never blocks — it guides.</p>
+                    <p>4-tier system: routine actions logged silently, medium-risk notified, high-risk requires approval. Governance never blocks. It guides.</p>
                 </div>
                 <div class="solution-card">
                     <h3 style="color:#d4a853">Multi-Model Council</h3>
@@ -257,7 +257,7 @@
         <div class="section-inner">
             <p class="section-label" style="color:rgba(212,168,83,0.7)">What's Built</p>
             <h2 class="section-title">Production-Ready. Not a Demo.</h2>
-            <p class="section-subtitle">v3.6 — deployed on GCP Cloud Run, 1,764 tests passing, 6 E2E tests verified.</p>
+            <p class="section-subtitle">v3.6 production. Deployed on GCP Cloud Run. 1,764 tests passing. 6 E2E tests verified.</p>
 
             <div class="features-grid">
                 <div class="feature-card">
@@ -826,7 +826,7 @@ var chatIn = document.getElementById('chatIn');
 var chatSend = document.getElementById('chatSend');
 var chatStat = document.getElementById('chatStat');
 
-function toggleDaenaChat(e){if(e){e.preventDefault();e.stopPropagation();}var sp=document.getElementById('avatarSpeech');if(sp)sp.classList.remove('show');var wt=document.getElementById('wToast');if(wt)wt.style.display='none';chatPanel.classList.toggle('open');if(chatPanel.classList.contains('open')&&chatMsgs.children.length===0){addMsg("Hi! I'm Daena, your AI guide. Ask me anything about governance, architecture, or features — or just scroll and I'll narrate the journey.",true);}}
+function toggleDaenaChat(e){if(e){e.preventDefault();e.stopPropagation();}var sp=document.getElementById('avatarSpeech');if(sp)sp.classList.remove('show');var wt=document.getElementById('wToast');if(wt)wt.style.display='none';chatPanel.classList.toggle('open');if(chatPanel.classList.contains('open')&&chatMsgs.children.length===0){addMsg("Hi! I'm Daena, your AI guide. Ask me anything about governance, architecture, or features. Or just scroll and I'll narrate the journey.",true);}}
 avatarBtn.addEventListener('click',toggleDaenaChat);
 avatarBtn.addEventListener('touchend',toggleDaenaChat);
 var chatCloseEl=document.getElementById('chatClose');
@@ -885,7 +885,7 @@ var kb = [
     {k:['nbmf','memory','remember'],a:'Neural-Backed Memory Fabric (NBMF): <strong>5 tiers</strong> from ephemeral (1hr) to founder-private (encrypted). Hallucinations auto-expire. Only verified knowledge persists.',s:'s-architecture'},
     {k:['department','teams','agents'],a:'10 departments: Engineering, Product, Marketing, Sales, Finance, Operations, Research, Legal & Compliance, Skill Governance, Security Ops. Each has 6 sub-capabilities: MIND, EYES, HANDS, VOICE, SHIELD, MEMORY.'},
     {k:['feature','live','what can','built'],a:'v3.6 production features: 10-stage pipeline, DaenaBot (file/terminal/browser agents), Autopilot mode, Voice I/O, SSE streaming, 26 frontend pages, skill refinery, cost tracking, 14 OAuth connectors, and 200+ API endpoints. All live, all tested.',s:'s-features'},
-    {k:['governance','govern','audit'],a:'4-tier governance: routine actions logged silently, medium-risk notified, high-risk require explicit approval. 9 immutable laws always apply. Governance never blocks — it guides.'},
+    {k:['governance','govern','audit'],a:'4-tier governance: routine actions logged silently, medium-risk notified, high-risk require explicit approval. 9 immutable laws always apply. Governance never blocks. It guides.'},
     {k:['patent','ip'],a:'2 USPTO provisional patents filed: PhiLattice Architecture and NBMF. Plus TLM and eDNA systems under patent protection.'},
     {k:['security','red team'],a:'Dedicated Security department with 6 defense layers: perimeter, input screening, sandboxing, auth, deception traps, incident response.'},
     {k:['who built','founder','masoud','creator','company'],a:'Built by <strong>Masoud Masoori</strong>, founder of MAS-AI Technologies Inc. (Ontario, Canada, Jan 2026). 2 USPTO provisionals filed, GCP deployed, v3.6 production. <a href="https://mas-ai.co" target="_blank">mas-ai.co</a>'},
@@ -961,7 +961,7 @@ var sectionSpeech = {
     's-solution': '<strong>My Solution:</strong> 10 governance stages. Every action governed.',
     's-features': '<strong>Production-Ready:</strong> 1,764 tests, 200+ endpoints, 26 pages. All live.',
     's-architecture': '<strong>PhiLattice:</strong> Fibonacci scaling + honeycomb departments. Patent pending.',
-    's-demos': '<strong>Demos:</strong> Watch Daena in action — governed pipeline end-to-end.',
+    's-demos': '<strong>Demos:</strong> Watch Daena in action. Governed pipeline end-to-end.',
     's-pitch': '<strong>Investors:</strong> 14 slides covering architecture, moat, and roadmap.',
     's-contact': '<strong>Early Access:</strong> Request your spot. We\'ll onboard you within 24 hours.'
 };
