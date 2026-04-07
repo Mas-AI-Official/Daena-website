@@ -175,33 +175,14 @@
             <h2 class="section-title">Governance inside the execution layer.</h2>
             <p class="section-subtitle">Every action passes through a 10-stage governed pipeline. Security, governance, and audit happen before anything executes, not after.</p>
 
-            <!-- Horseshoe Pipeline: U-shape flowing 1→5 down left, curve, 6→10 up right -->
+            <!-- Horseshoe Pipeline: visible golden curve with numbered dots -->
             <div class="horseshoe">
-                <div class="hs-left">
-                    <div class="hs-stage"><span class="hs-num">1</span><span class="hs-name">SecurityGate</span></div>
-                    <div class="hs-arrow-down"></div>
-                    <div class="hs-stage"><span class="hs-num">2</span><span class="hs-name">InputValidator</span></div>
-                    <div class="hs-arrow-down"></div>
-                    <div class="hs-stage"><span class="hs-num">3</span><span class="hs-name">GovernanceEngine</span></div>
-                    <div class="hs-arrow-down"></div>
-                    <div class="hs-stage"><span class="hs-num">4</span><span class="hs-name">ContextBuilder</span></div>
-                    <div class="hs-arrow-down"></div>
-                    <div class="hs-stage"><span class="hs-num">5</span><span class="hs-name">ReasoningCore</span></div>
-                </div>
-                <div class="hs-curve">
-                    <div class="hs-curve-line"></div>
-                </div>
-                <div class="hs-right">
-                    <div class="hs-stage"><span class="hs-name">AuditLog</span><span class="hs-num">10</span></div>
-                    <div class="hs-arrow-up"></div>
-                    <div class="hs-stage"><span class="hs-name">FeedbackLoop</span><span class="hs-num">9</span></div>
-                    <div class="hs-arrow-up"></div>
-                    <div class="hs-stage"><span class="hs-name">ResponseFormatter</span><span class="hs-num">8</span></div>
-                    <div class="hs-arrow-up"></div>
-                    <div class="hs-stage"><span class="hs-name">OutputValidator</span><span class="hs-num">7</span></div>
-                    <div class="hs-arrow-up"></div>
-                    <div class="hs-stage"><span class="hs-name">ActionPlanner</span><span class="hs-num">6</span></div>
-                </div>
+                <div class="hs-line"></div>
+                <div class="hs-row"><span class="hs-text hs-text-r">SecurityGate</span><span class="hs-dot">1</span><span class="hs-space"></span><span class="hs-dot">10</span><span class="hs-text hs-text-l">AuditLog</span></div>
+                <div class="hs-row"><span class="hs-text hs-text-r">InputValidator</span><span class="hs-dot">2</span><span class="hs-space"></span><span class="hs-dot">9</span><span class="hs-text hs-text-l">FeedbackLoop</span></div>
+                <div class="hs-row"><span class="hs-text hs-text-r">GovernanceEngine</span><span class="hs-dot">3</span><span class="hs-space"></span><span class="hs-dot">8</span><span class="hs-text hs-text-l">ResponseFormatter</span></div>
+                <div class="hs-row"><span class="hs-text hs-text-r">ContextBuilder</span><span class="hs-dot">4</span><span class="hs-space"></span><span class="hs-dot">7</span><span class="hs-text hs-text-l">OutputValidator</span></div>
+                <div class="hs-row hs-row-bottom"><span class="hs-text hs-text-r">ReasoningCore</span><span class="hs-dot">5</span><span class="hs-space"></span><span class="hs-dot">6</span><span class="hs-text hs-text-l">ActionPlanner</span></div>
             </div>
             <p class="pipeline-caption">Every action governed. Every decision traced. Nothing runs ungoverned.</p>
 

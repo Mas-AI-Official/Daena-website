@@ -95,35 +95,45 @@ h1,h2,h3{font-family:'Syne',sans-serif}
 .problem-card p{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.6}
 
 /* ═══ HORSESHOE PIPELINE ═══ */
-.horseshoe{display:flex;justify-content:center;gap:0;margin:32px auto;max-width:560px;position:relative}
-.hs-left,.hs-right{display:flex;flex-direction:column;gap:0;flex:1;max-width:200px}
-.hs-right{align-items:flex-end}
-.hs-left{align-items:flex-start}
+.horseshoe{position:relative;max-width:520px;margin:32px auto;display:flex;flex-direction:column;gap:8px}
 
-/* Stages */
-.hs-stage{display:flex;align-items:center;gap:10px;padding:6px 14px;border-radius:10px;background:rgba(212,168,83,0.04);border:1px solid rgba(212,168,83,0.1);transition:all 0.3s;width:100%}
-.hs-stage:hover{background:rgba(212,168,83,0.08);border-color:rgba(212,168,83,0.25);box-shadow:0 0 16px rgba(212,168,83,0.1)}
-.hs-num{width:26px;height:26px;border-radius:50%;background:rgba(212,168,83,0.1);border:1.5px solid rgba(212,168,83,0.3);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#d4a853;flex-shrink:0;transition:all 0.3s}
-.hs-stage:hover .hs-num{background:rgba(212,168,83,0.2);border-color:rgba(212,168,83,0.5);box-shadow:0 0 12px rgba(212,168,83,0.2)}
-.hs-name{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(255,255,255,0.55);transition:color 0.3s}
-.hs-stage:hover .hs-name{color:rgba(212,168,83,0.9)}
+/* The visible golden U-shaped line behind the dots */
+.hs-line{position:absolute;top:16px;bottom:16px;left:50%;transform:translateX(-50%);width:120px;border:2.5px solid rgba(212,168,83,0.25);border-top:none;border-radius:0 0 60px 60px;pointer-events:none;z-index:0;box-shadow:0 0 20px rgba(212,168,83,0.06),inset 0 0 20px rgba(212,168,83,0.03)}
 
-/* Vertical arrows */
-.hs-arrow-down,.hs-arrow-up{width:26px;height:16px;display:flex;justify-content:center;position:relative;margin-left:14px}
-.hs-right .hs-arrow-up{margin-left:auto;margin-right:14px}
-.hs-arrow-down::before,.hs-arrow-up::before{content:'';width:1.5px;height:100%;background:linear-gradient(180deg,rgba(212,168,83,0.2),rgba(212,168,83,0.1))}
-.hs-arrow-down::after{content:'';position:absolute;width:4px;height:4px;border-radius:50%;background:#d4a853;left:50%;transform:translateX(-50%);animation:flowDown 1.5s ease-in-out infinite;opacity:0.5}
-.hs-arrow-up::after{content:'';position:absolute;width:4px;height:4px;border-radius:50%;background:#d4a853;left:50%;transform:translateX(-50%);animation:flowUp 1.5s ease-in-out infinite;opacity:0.5}
-@keyframes flowDown{0%{top:-4px;opacity:0}20%{opacity:0.7}80%{opacity:0.7}100%{top:calc(100% + 4px);opacity:0}}
-@keyframes flowUp{0%{bottom:-4px;opacity:0;top:auto}20%{opacity:0.7}80%{opacity:0.7}100%{bottom:calc(100% + 4px);opacity:0;top:auto}}
+/* Each row: text-left | dot-left | space | dot-right | text-right */
+.hs-row{display:flex;align-items:center;justify-content:center;gap:0;position:relative;z-index:1}
 
-/* U-curve at bottom */
-.hs-curve{display:flex;align-items:flex-end;width:80px;position:relative;margin:0 -6px}
-.hs-curve-line{width:100%;height:60px;border:1.5px solid rgba(212,168,83,0.15);border-top:none;border-radius:0 0 40px 40px;position:relative}
-.hs-curve-line::after{content:'';position:absolute;width:4px;height:4px;border-radius:50%;background:#d4a853;opacity:0.5;bottom:0;animation:flowCurve 2s ease-in-out infinite}
-@keyframes flowCurve{0%{left:0;bottom:100%;opacity:0}15%{opacity:0.7}50%{left:calc(50% - 2px);bottom:0}85%{opacity:0.7}100%{left:calc(100% - 4px);bottom:100%;opacity:0}}
+/* Number circles */
+.hs-dot{width:30px;height:30px;border-radius:50%;background:rgba(212,168,83,0.12);border:2px solid rgba(212,168,83,0.35);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:600;color:#d4a853;flex-shrink:0;transition:all 0.3s;position:relative;z-index:2;box-shadow:0 0 8px rgba(212,168,83,0.1)}
+.hs-dot:hover{background:rgba(212,168,83,0.2);border-color:rgba(212,168,83,0.6);box-shadow:0 0 20px rgba(212,168,83,0.25);transform:scale(1.15)}
 
-.pipeline-caption{font-size:0.75rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;font-family:'JetBrains Mono',monospace}
+/* Space between left and right dots */
+.hs-space{width:68px;flex-shrink:0}
+
+/* Text labels */
+.hs-text{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.5);width:130px;flex-shrink:0;transition:color 0.3s}
+.hs-text-r{text-align:right;padding-right:12px}
+.hs-text-l{text-align:left;padding-left:12px}
+.hs-row:hover .hs-text{color:rgba(212,168,83,0.8)}
+
+/* Bottom row curve emphasis */
+.hs-row-bottom{margin-top:4px}
+.hs-row-bottom .hs-space{width:68px;position:relative}
+.hs-row-bottom .hs-space::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:rgba(212,168,83,0.3);box-shadow:0 0 12px rgba(212,168,83,0.2)}
+
+/* Animated flow dot traveling the horseshoe */
+.hs-line::after{content:'';position:absolute;width:5px;height:5px;border-radius:50%;background:#d4a853;box-shadow:0 0 8px rgba(212,168,83,0.5);animation:horseshoeFlow 4s ease-in-out infinite;z-index:3}
+@keyframes horseshoeFlow{
+  0%{top:0;left:-2.5px;opacity:0}
+  5%{opacity:0.8}
+  45%{top:calc(100% - 5px);left:-2.5px}
+  50%{top:100%;left:calc(50% - 2.5px);opacity:0.9}
+  55%{top:calc(100% - 5px);left:calc(100% - 2.5px)}
+  95%{top:0;left:calc(100% - 2.5px);opacity:0.8}
+  100%{top:0;left:calc(100% - 2.5px);opacity:0}
+}
+
+.pipeline-caption{font-size:0.75rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:16px;font-family:'JetBrains Mono',monospace}
 
 /* ═══ SOLUTION GRID ═══ */
 .solution-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:32px}
@@ -362,15 +372,14 @@ h1,h2,h3{font-family:'Syne',sans-serif}
   .hero-ctas{gap:8px}
   .hero-ctas .btn-primary,.hero-ctas .btn-secondary,.hero-ctas .btn-outline{width:100%;justify-content:center}
   .manifesto-quote{font-size:1rem;padding:0 16px}
-  .horseshoe{max-width:100%;gap:0}
-  .hs-left,.hs-right{max-width:42%}
-  .hs-stage{padding:5px 8px;border-radius:8px}
-  .hs-name{font-size:0.55rem}
-  .hs-num{width:22px;height:22px;font-size:0.5rem}
-  .hs-arrow-down,.hs-arrow-up{height:10px;width:22px;margin-left:8px}
-  .hs-right .hs-arrow-up{margin-right:8px}
-  .hs-curve{width:50px;margin:0 -4px}
-  .hs-curve-line{height:40px}
+  .horseshoe{max-width:100%;gap:5px}
+  .hs-text{font-size:0.52rem;width:90px}
+  .hs-text-r{padding-right:6px}
+  .hs-text-l{padding-left:6px}
+  .hs-dot{width:24px;height:24px;font-size:0.55rem}
+  .hs-space{width:44px}
+  .hs-line{width:76px;border-width:2px;border-radius:0 0 38px 38px}
+  .hs-row-bottom .hs-space{width:44px}
   .hero-overlay::before{content:'';position:absolute;inset:-40px -30px;border-radius:32px;background:radial-gradient(ellipse at center,rgba(10,10,10,0.65) 0%,rgba(10,10,10,0.25) 50%,transparent 80%);z-index:-1;pointer-events:none}
   .avatar-btn{width:48px;height:64px}
   .avatar-wrap{bottom:16px;right:12px}
