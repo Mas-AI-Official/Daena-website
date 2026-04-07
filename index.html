@@ -588,24 +588,27 @@
 
     <!-- ═══════════════ CONTACT ═══════════════ -->
     <section class="section" id="s-contact" style="min-height:60vh">
-        <div class="section-inner" style="max-width:600px">
-            <h2 class="section-title" style="text-align:center">Get Early Access</h2>
-            <p class="section-subtitle" style="text-align:center">Join our growing community. First 100 Pro subscribers receive founding member benefits. We respond within 24 hours.</p>
-            <form class="contact-form" id="contactForm" style="margin-top:24px">
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                    <div><label>Full Name *</label><input type="text" name="name" required placeholder="Jane Smith"></div>
-                    <div><label>Company</label><input type="text" name="company" placeholder="Acme Corp"></div>
+        <div class="section-inner" style="max-width:620px">
+            <div class="contact-card">
+                <p class="section-label" style="color:rgba(212,168,83,0.7);margin-bottom:8px">Join the Community</p>
+                <h2 class="section-title" style="text-align:center;margin-bottom:8px">Get Early Access</h2>
+                <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:28px">First 100 Pro subscribers receive founding member benefits. We respond within 24 hours.</p>
+                <form class="contact-form" id="contactForm">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                        <div><label>Full Name *</label><input type="text" name="name" required placeholder="Jane Smith"></div>
+                        <div><label>Company</label><input type="text" name="company" placeholder="Acme Corp"></div>
+                    </div>
+                    <div><label>Work Email *</label><input type="email" name="email" required placeholder="jane@company.com"></div>
+                    <div><label>How can we help?</label><textarea name="message" placeholder="e.g., enterprise deployment, custom departments, SSO integration, volume pricing..."></textarea></div>
+                    <input type="hidden" name="_subject" value="Daena Inquiry">
+                    <input type="hidden" name="source" value="daena.mas-ai.co">
+                    <button type="submit" class="btn-primary" style="align-self:center;margin-top:8px;width:100%">Send Message</button>
+                    <div id="form-msg"></div>
+                </form>
+                <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05)">
+                    <p style="font-size:0.8rem;margin-bottom:6px;color:rgba(255,255,255,0.5)">Enterprise deployment inquiries:</p>
+                    <a href="mailto:masoud.masoori@mas-ai.co?subject=Enterprise%20Deployment%20Inquiry" style="color:#d4a853;text-decoration:none;font-weight:600">masoud.masoori@mas-ai.co</a>
                 </div>
-                <div><label>Work Email *</label><input type="email" name="email" required placeholder="jane@company.com"></div>
-                <div><label>How can we help?</label><textarea name="message" placeholder="e.g., enterprise deployment, custom departments, SSO integration, volume pricing..."></textarea></div>
-                <input type="hidden" name="_subject" value="Daena Inquiry">
-                <input type="hidden" name="source" value="daena.mas-ai.co">
-                <button type="submit" class="btn-primary" style="align-self:center;margin-top:8px">Send Message</button>
-                <div id="form-msg"></div>
-            </form>
-            <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.05)">
-                <p style="font-size:0.8rem;margin-bottom:6px;color:rgba(255,255,255,0.5)">Enterprise deployment inquiries:</p>
-                <a href="mailto:masoud.masoori@mas-ai.co?subject=Enterprise%20Deployment%20Inquiry" style="color:#d4a853;text-decoration:none;font-weight:600">masoud.masoori@mas-ai.co</a>
             </div>
         </div>
     </section>
