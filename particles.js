@@ -13,7 +13,7 @@
   // Particle count: 10K desktop, 2K mobile (fewer = less visual noise over text)
   var PARTICLE_COUNT = isMob ? 4000 : 10000
   var GOLDEN_ANGLE = 2.399963229728653 // 2*PI / PHI^2
-  var SPIRAL_RADIUS = isMob ? 16 : 38 // Mobile: fit full spiral in narrow portrait viewport
+  var SPIRAL_RADIUS = isMob ? 14 : 38 // Mobile: tighter spiral so it fills portrait viewport with closer camera
 
   // Exports
   window.daenaParticles = {
@@ -44,9 +44,9 @@
   if (!canvas) return
 
   var scene = new THREE.Scene()
-  var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200)
-  // Mobile: camera higher up so the full spiral pattern is visible in portrait viewport
-  camera.position.set(0, isMob ? 22 : 35, isMob ? 3 : 5)
+  var camera = new THREE.PerspectiveCamera(isMob ? 75 : 60, window.innerWidth / window.innerHeight, 0.1, 200)
+  // Mobile: wider FOV + closer camera so fibonacci fills the portrait screen
+  camera.position.set(0, isMob ? 18 : 35, isMob ? 8 : 5)
   camera.lookAt(0, 0, 0)
 
   var renderer = new THREE.WebGLRenderer({
@@ -137,10 +137,10 @@
         z = Math.sin(angle) * radius
         y = Math.sin(i * 0.008 + time * 0.4) * 0.6
 
-        // Deep indigo/blue — luxury-tech contrast with gold text
-        h = 0.65 + Math.sin(i * 0.01) * 0.03
-        s = isMob ? 0.6 : 0.7
-        l = (isMob ? 0.3 : 0.38) + Math.sin(i * 0.005 + time * 0.3) * 0.06
+        // Cyan-gold particles — bright on both desktop and mobile
+        h = 0.55 + Math.sin(i * 0.01) * 0.05
+        s = isMob ? 0.85 : 0.7
+        l = (isMob ? 0.5 : 0.38) + Math.sin(i * 0.005 + time * 0.3) * 0.08
       } else if (sp < 0.45) {
         // STATE 2: Morph spiral to pipe
         var t = (sp - 0.25) / 0.20
@@ -164,10 +164,10 @@
         y = sy + (py - sy) * et
         z = sz + (pz - sz) * et
 
-        // Indigo → cyan morph (cool-tone journey on both devices)
-        h = 0.65 - t * 0.1
-        s = (isMob ? 0.6 : 0.7) + t * 0.2
-        l = (isMob ? 0.3 : 0.38) + t * 0.12
+        // Cyan morph — stays bright on mobile
+        h = 0.55 - t * 0.05
+        s = (isMob ? 0.85 : 0.7) + t * 0.1
+        l = (isMob ? 0.5 : 0.38) + t * 0.12
       } else {
         // STATE 3: Full pipe with descent
         var pipeAngle = (i * GOLDEN_ANGLE) % (Math.PI * 2) + time * 0.02
@@ -204,7 +204,7 @@
 
   // Animation loop
   var lastFrame = 0
-  var frameInterval = isMob ? 33.33 : 16.67 // 30fps mobile, 60fps desktop
+  var frameInterval = isMob ? 20 : 16.67 // 50fps mobile (smooth), 60fps desktop
 
   function animate(now) {
     requestAnimationFrame(animate)

@@ -49,22 +49,22 @@
     })
 
     if (isMob) {
-      // Mobile: tighter camera positions matching smaller spiral/pipe radii
-      // Phase 1 (0% to 20%): Above spiral looking down
-      camTL.to(camera.position, { x: 0, y: 20, z: 5, duration: 15 }, 0)
-      camTL.to(camera.rotation, { x: -1.3, y: 0, z: 0, duration: 15 }, 0)
+      // Mobile: close-up on spiral, then dramatic pull-back and descent
+      // Phase 1 (0% to 20%): Angled view of spiral (shows the fibonacci shape clearly)
+      camTL.to(camera.position, { x: 3, y: 16, z: 10, duration: 15 }, 0)
+      camTL.to(camera.rotation, { x: -1.0, y: 0.15, z: 0, duration: 15 }, 0)
 
-      // Phase 2 (20% to 40%): Pull back, see convergence
-      camTL.to(camera.position, { x: 10, y: 8, z: 10, duration: 20 }, 15)
-      camTL.to(camera.rotation, { x: -0.35, y: 0.7, z: 0, duration: 20 }, 15)
+      // Phase 2 (20% to 40%): Pull back and rotate to see convergence
+      camTL.to(camera.position, { x: 8, y: 8, z: 10, duration: 20 }, 15)
+      camTL.to(camera.rotation, { x: -0.35, y: 0.6, z: 0, duration: 20 }, 15)
 
       // Phase 3 (40% to 85%): Descend alongside pipe
-      camTL.to(camera.position, { x: 8, y: -20, z: 8, duration: 45 }, 35)
-      camTL.to(camera.rotation, { x: -0.15, y: 0.7, z: 0, duration: 45 }, 35)
+      camTL.to(camera.position, { x: 6, y: -18, z: 8, duration: 45 }, 35)
+      camTL.to(camera.rotation, { x: -0.15, y: 0.5, z: 0, duration: 45 }, 35)
 
       // Phase 4 (85% to 100%): Settle at bottom
-      camTL.to(camera.position, { x: 6, y: -25, z: 6, duration: 20 }, 80)
-      camTL.to(camera.rotation, { x: -0.1, y: 0.6, z: 0, duration: 20 }, 80)
+      camTL.to(camera.position, { x: 5, y: -22, z: 6, duration: 20 }, 80)
+      camTL.to(camera.rotation, { x: -0.1, y: 0.4, z: 0, duration: 20 }, 80)
     } else {
       // Desktop: original camera positions
       // Phase 1 (0% to 20%): Above spiral looking down
