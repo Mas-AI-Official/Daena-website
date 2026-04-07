@@ -125,6 +125,11 @@
     <!-- Particle morph spacer -->
     <section class="section" id="convergence" style="height:200vh"></section>
 
+    <!-- ═══════════════ MANIFESTO ═══════════════ -->
+    <section class="section" id="s-manifesto" style="min-height:30vh;display:flex;align-items:center;justify-content:center">
+        <p class="manifesto-quote shimmer">"Intelligence without governance is just a faster way to make mistakes."</p>
+    </section>
+
     <!-- ═══════════════ STATS BAR ═══════════════ -->
     <section class="section stats-bar" id="s-stats">
         <div class="stats-grid">
@@ -196,11 +201,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- ═══════════════ MANIFESTO ═══════════════ -->
-    <section class="section" style="min-height:20vh;display:flex;align-items:center;justify-content:center">
-        <p class="manifesto-quote shimmer">"Intelligence without governance is just a faster way to make mistakes."</p>
     </section>
 
     <!-- ═══════════════ SOLUTION ═══════════════ -->
@@ -742,18 +742,42 @@ function initHeroFade(){
          scrollTrigger:{trigger:'#hero',start:'top top',end:'30% top',scrub:true}
         });
 
+    // Animate sections from alternating sides (reverse on scroll-up)
+    var sectionEls = document.querySelectorAll('.section-inner, .contact-card, .manifesto-quote');
+    sectionEls.forEach(function(el, i) {
+        var fromLeft = i % 2 === 0;
+        gsap.fromTo(el,
+            {opacity:0, x: fromLeft ? -60 : 60},
+            {opacity:1, x:0, duration:0.8, ease:'power2.out',
+             scrollTrigger:{trigger:el, start:'top 85%', end:'top 40%',
+                toggleActions:'play reverse play reverse'}
+            }
+        );
+    });
+
     // Animate stats on scroll
     document.querySelectorAll('.stat-number,.arch-stat-num').forEach(function(el){
         gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,
-            scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}
+            scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play reverse play reverse'}
         });
     });
 
-    // Animate feature cards stagger
-    gsap.utils.toArray('.feature-card,.problem-card,.arch-card').forEach(function(card,i){
-        gsap.fromTo(card,{opacity:0,y:30},{opacity:1,y:0,duration:0.5,delay:i*0.05,
-            scrollTrigger:{trigger:card,start:'top 90%',toggleActions:'play none none none'}
-        });
+    // Animate cards stagger within each grid
+    var grids = document.querySelectorAll('.problem-grid,.features-grid,.arch-grid,.solution-grid,.pricing-4col,.demos-grid,.compare-grid');
+    grids.forEach(function(grid){
+        var cards = grid.children;
+        for(var c=0;c<cards.length;c++){
+            (function(card,idx){
+                gsap.fromTo(card,{opacity:0,y:30,scale:0.97},{opacity:1,y:0,scale:1,duration:0.5,delay:idx*0.08,
+                    scrollTrigger:{trigger:grid,start:'top 85%',toggleActions:'play reverse play reverse'}
+                });
+            })(cards[c],c);
+        }
+    });
+
+    // Animate stats bar
+    gsap.fromTo('.stats-grid',{opacity:0,y:20},{opacity:1,y:0,duration:0.6,
+        scrollTrigger:{trigger:'.stats-bar',start:'top 85%',toggleActions:'play reverse play reverse'}
     });
 }
 if(document.readyState==='complete')initHeroFade();
@@ -825,7 +849,7 @@ var narration = {
 var curSec = 'hero', lastNarr = '';
 window.addEventListener('scroll', function() {
     var sy = window.scrollY + window.innerHeight/2;
-    var secs = ['hero','s-problem','s-solution','s-features','s-architecture','s-demos','s-pitch','s-contact'];
+    var secs = ['hero','s-manifesto','s-problem','s-solution','s-features','s-architecture','s-demos','s-pitch','s-contact'];
     for (var s = secs.length-1; s >= 0; s--) {
         var el = document.getElementById(secs[s]);
         if (el && sy >= el.offsetTop) { curSec = secs[s]; break; }
