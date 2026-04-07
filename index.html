@@ -175,52 +175,32 @@
             <h2 class="section-title">Governance inside the execution layer.</h2>
             <p class="section-subtitle">Every action passes through a 10-stage governed pipeline. Security, governance, and audit happen before anything executes, not after.</p>
 
-            <!-- Pipeline: single row on desktop, snake/zigzag on mobile -->
-            <div class="pipeline-strip pipeline-desktop">
-                <div class="pipeline-stage"><span class="ps-num">1</span><span class="ps-name">Security<br>Gate</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">2</span><span class="ps-name">Input<br>Validator</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">3</span><span class="ps-name">Governance<br>Engine</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">4</span><span class="ps-name">Context<br>Builder</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">5</span><span class="ps-name">Reasoning<br>Core</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">6</span><span class="ps-name">Action<br>Planner</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">7</span><span class="ps-name">Output<br>Validator</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">8</span><span class="ps-name">Response<br>Formatter</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">9</span><span class="ps-name">Feedback<br>Loop</span></div>
-                <div class="pipeline-arrow"></div>
-                <div class="pipeline-stage"><span class="ps-num">10</span><span class="ps-name">Audit<br>Log</span></div>
-            </div>
-            <!-- Mobile snake layout: Row 1 (1-5) → down → Row 2 (6-10 reversed visually) -->
-            <div class="pipeline-snake">
-                <div class="snake-row">
-                    <div class="pipeline-stage"><span class="ps-num">1</span><span class="ps-name">Security Gate</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">2</span><span class="ps-name">Input Validator</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">3</span><span class="ps-name">Governance Engine</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">4</span><span class="ps-name">Context Builder</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">5</span><span class="ps-name">Reasoning Core</span></div>
+            <!-- Horseshoe Pipeline: U-shape flowing 1→5 down left, curve, 6→10 up right -->
+            <div class="horseshoe">
+                <div class="hs-left">
+                    <div class="hs-stage"><span class="hs-num">1</span><span class="hs-name">SecurityGate</span></div>
+                    <div class="hs-arrow-down"></div>
+                    <div class="hs-stage"><span class="hs-num">2</span><span class="hs-name">InputValidator</span></div>
+                    <div class="hs-arrow-down"></div>
+                    <div class="hs-stage"><span class="hs-num">3</span><span class="hs-name">GovernanceEngine</span></div>
+                    <div class="hs-arrow-down"></div>
+                    <div class="hs-stage"><span class="hs-num">4</span><span class="hs-name">ContextBuilder</span></div>
+                    <div class="hs-arrow-down"></div>
+                    <div class="hs-stage"><span class="hs-num">5</span><span class="hs-name">ReasoningCore</span></div>
                 </div>
-                <div class="snake-down"><div class="snake-down-line"></div></div>
-                <div class="snake-row snake-row-reverse">
-                    <div class="pipeline-stage"><span class="ps-num">10</span><span class="ps-name">Audit Log</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">9</span><span class="ps-name">Feedback Loop</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">8</span><span class="ps-name">Response Formatter</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">7</span><span class="ps-name">Output Validator</span></div>
-                    <div class="pipeline-arrow"></div>
-                    <div class="pipeline-stage"><span class="ps-num">6</span><span class="ps-name">Action Planner</span></div>
+                <div class="hs-curve">
+                    <div class="hs-curve-line"></div>
+                </div>
+                <div class="hs-right">
+                    <div class="hs-stage"><span class="hs-name">AuditLog</span><span class="hs-num">10</span></div>
+                    <div class="hs-arrow-up"></div>
+                    <div class="hs-stage"><span class="hs-name">FeedbackLoop</span><span class="hs-num">9</span></div>
+                    <div class="hs-arrow-up"></div>
+                    <div class="hs-stage"><span class="hs-name">ResponseFormatter</span><span class="hs-num">8</span></div>
+                    <div class="hs-arrow-up"></div>
+                    <div class="hs-stage"><span class="hs-name">OutputValidator</span><span class="hs-num">7</span></div>
+                    <div class="hs-arrow-up"></div>
+                    <div class="hs-stage"><span class="hs-name">ActionPlanner</span><span class="hs-num">6</span></div>
                 </div>
             </div>
             <p class="pipeline-caption">Every action governed. Every decision traced. Nothing runs ungoverned.</p>
@@ -424,7 +404,7 @@
             <h2 class="section-title">What Others Bolt On, We Built In.</h2>
             <div class="compare-grid">
                 <div class="compare-card">
-                    <h3 style="color:rgba(255,255,255,0.4)">Other Platforms</h3>
+                    <h3 style="color:rgba(239,68,68,0.6)">Other Platforms</h3>
                     <ul class="compare-list compare-bad">
                         <li>Governance added as a wrapper</li>
                         <li>Single model, single provider</li>
@@ -435,7 +415,7 @@
                     </ul>
                 </div>
                 <div class="compare-card compare-highlight">
-                    <h3 class="shimmer">Daena</h3>
+                    <h3 style="color:#22c55e;text-shadow:0 0 12px rgba(34,197,94,0.3)">Daena</h3>
                     <ul class="compare-list compare-good">
                         <li>Governance is the execution layer</li>
                         <li>9 providers, hot-swappable</li>
