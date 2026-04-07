@@ -68,10 +68,10 @@
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
   var material = new THREE.PointsMaterial({
-    size: isMob ? 0.35 : 0.25,
+    size: isMob ? 0.12 : 0.25,
     vertexColors: true,
     transparent: true,
-    opacity: isMob ? 0.9 : 1.0, // Full brightness, glass panels handle readability
+    opacity: isMob ? 0.45 : 1.0, // Mobile: subtle dots, desktop: full brightness
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true
