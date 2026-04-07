@@ -827,13 +827,20 @@ function initHeroFade(){
     gsap.fromTo('#heroOverlay',
         {opacity:1,scale:1},
         {opacity:0,scale:0.92,immediateRender:false,
-         scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}
+         scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true,
+           onLeaveBack: function(){ gsap.set('#heroOverlay',{opacity:1,scale:1}); }
+         }
         });
     gsap.fromTo('#scrollHint',
         {opacity:1},
         {opacity:0,immediateRender:false,
          scrollTrigger:{trigger:'#hero',start:'top top',end:'30% top',scrub:true}
         });
+
+    // Force hero visible when scroll is at top (handles navbar click back to top)
+    ScrollTrigger.addEventListener('refresh', function(){
+        if(window.scrollY < 10){ gsap.set('#heroOverlay',{opacity:1,scale:1}); }
+    });
 
     // Animate sections — slide in from sides, reset on scroll-up so they replay
     // toggleActions: onEnter onLeave onEnterBack onLeaveBack
