@@ -11,7 +11,7 @@
   var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   // Particle count: 10K desktop, 2K mobile (fewer = less visual noise over text)
-  var PARTICLE_COUNT = isMob ? 4000 : 10000
+  var PARTICLE_COUNT = isMob ? 1500 : 10000
   var GOLDEN_ANGLE = 2.399963229728653 // 2*PI / PHI^2
   var SPIRAL_RADIUS = isMob ? 14 : 38 // Mobile: tighter spiral so it fills portrait viewport with closer camera
 
