@@ -193,7 +193,8 @@ h1,h2,h3{font-family:'Syne',sans-serif}
 @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(45,212,191,0.3)}50%{box-shadow:0 0 0 6px rgba(45,212,191,0)}}
 
 /* ═══ PRICING ═══ */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:28px;max-width:800px;margin-left:auto;margin-right:auto}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:28px;max-width:960px;margin-left:auto;margin-right:auto}
+.pricing-4col{max-width:1000px}
 .pricing-card{padding:28px 24px;border-radius:16px;background:rgba(6,8,16,0.88);border:1px solid rgba(255,255,255,0.06);position:relative;transition:all 0.3s}
 .pricing-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.3)}
 .pricing-highlight{border-color:rgba(45,212,191,0.2)}
