@@ -11,7 +11,7 @@
   var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   // Particle count: 10K desktop, 2K mobile (fewer = less visual noise over text)
-  var PARTICLE_COUNT = isMob ? 2000 : 10000
+  var PARTICLE_COUNT = isMob ? 4000 : 10000
   var GOLDEN_ANGLE = 2.399963229728653 // 2*PI / PHI^2
   var SPIRAL_RADIUS = isMob ? 16 : 38 // Mobile: fit full spiral in narrow portrait viewport
 
@@ -68,10 +68,10 @@
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
   var material = new THREE.PointsMaterial({
-    size: isMob ? 0.22 : 0.2,
+    size: isMob ? 0.35 : 0.25,
     vertexColors: true,
     transparent: true,
-    opacity: isMob ? 0.6 : 0.85, // Visible but not overpowering behind content
+    opacity: isMob ? 0.9 : 1.0, // Full brightness, glass panels handle readability
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     sizeAttenuation: true
