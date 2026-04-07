@@ -175,51 +175,73 @@
             <h2 class="section-title">Governance inside the execution layer.</h2>
             <p class="section-subtitle">Every action passes through a 10-stage governed pipeline. Security, governance, and audit happen before anything executes, not after.</p>
 
-            <!-- Horseshoe Pipeline: SVG arch with numbered dots along the curve -->
+            <!-- Horseshoe Pipeline: true horseshoe shape with numbered dots along the curve -->
             <div class="horseshoe-wrap">
-            <svg class="horseshoe-svg" viewBox="0 0 700 440" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Horseshoe thick curve (the metal) -->
-                <path class="hs-metal" d="M 180 410 A 170 170 0 0 1 520 410" stroke="url(#hsGrad)" stroke-width="22" stroke-linecap="round" fill="none"/>
-                <!-- Inner glow line -->
-                <path d="M 180 410 A 170 170 0 0 1 520 410" stroke="rgba(212,168,83,0.08)" stroke-width="40" stroke-linecap="round" fill="none"/>
-                <!-- Gradient -->
+            <svg class="horseshoe-svg" viewBox="0 0 700 420" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="hsGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="rgba(212,168,83,0.3)"/>
+                    <linearGradient id="hsGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="rgba(212,168,83,0.25)"/>
                         <stop offset="50%" stop-color="rgba(212,168,83,0.5)"/>
-                        <stop offset="100%" stop-color="rgba(212,168,83,0.3)"/>
+                        <stop offset="100%" stop-color="rgba(212,168,83,0.25)"/>
                     </linearGradient>
                 </defs>
+                <!-- Outer glow -->
+                <path d="M 220 80 C 220 450, 480 450, 480 80" stroke="rgba(212,168,83,0.06)" stroke-width="44" stroke-linecap="round" fill="none"/>
+                <!-- Horseshoe metal (the thick golden curve) -->
+                <path class="hs-metal" d="M 220 80 C 220 450, 480 450, 480 80" stroke="url(#hsGrad)" stroke-width="22" stroke-linecap="round" fill="none"/>
+                <!-- Inner highlight -->
+                <path d="M 220 80 C 220 450, 480 450, 480 80" stroke="rgba(255,255,255,0.03)" stroke-width="8" stroke-linecap="round" fill="none"/>
+
                 <!-- Animated dot traveling the horseshoe -->
                 <circle class="hs-traveler" r="4" fill="#d4a853">
-                    <animateMotion dur="4s" repeatCount="indefinite" path="M 180 410 A 170 170 0 0 1 520 410"/>
+                    <animateMotion dur="4s" repeatCount="indefinite" path="M 220 80 C 220 450, 480 450, 480 80"/>
                 </circle>
 
-                <!-- Number circles on the curve (10 positions along the arch) -->
-                <!-- 1: bottom-left --> <circle cx="180" cy="410" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="180" y="415" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">1</text>
-                <!-- 2 --> <circle cx="192" cy="348" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="192" y="353" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">2</text>
-                <!-- 3 --> <circle cx="222" cy="293" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="222" y="298" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">3</text>
-                <!-- 4 --> <circle cx="268" cy="254" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="268" y="259" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">4</text>
-                <!-- 5 --> <circle cx="325" cy="240" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="325" y="245" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">5</text>
-                <!-- 6 --> <circle cx="375" cy="240" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="375" y="245" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">6</text>
-                <!-- 7 --> <circle cx="432" cy="254" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="432" y="259" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">7</text>
-                <!-- 8 --> <circle cx="478" cy="293" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="478" y="298" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">8</text>
-                <!-- 9 --> <circle cx="508" cy="348" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="508" y="353" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">9</text>
-                <!-- 10: bottom-right --> <circle cx="520" cy="410" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/><text x="520" y="415" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="10" font-weight="600">10</text>
+                <!-- Numbered dots positioned along the cubic bezier curve -->
+                <!-- 1: top-left -->
+                <circle cx="220" cy="80" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="220" y="85" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">1</text>
+                <!-- 2 -->
+                <circle cx="229" cy="190" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="229" y="195" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">2</text>
+                <!-- 3 -->
+                <circle cx="253" cy="272" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="253" y="277" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">3</text>
+                <!-- 4 -->
+                <circle cx="287" cy="326" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="287" y="331" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">4</text>
+                <!-- 5 -->
+                <circle cx="328" cy="354" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="328" y="359" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">5</text>
+                <!-- 6 -->
+                <circle cx="372" cy="354" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="372" y="359" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">6</text>
+                <!-- 7 -->
+                <circle cx="413" cy="326" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="413" y="331" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">7</text>
+                <!-- 8 -->
+                <circle cx="447" cy="272" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="447" y="277" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">8</text>
+                <!-- 9 -->
+                <circle cx="471" cy="190" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="471" y="195" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="11" font-weight="600">9</text>
+                <!-- 10: top-right -->
+                <circle cx="480" cy="80" r="16" fill="rgba(6,8,16,0.95)" stroke="rgba(212,168,83,0.5)" stroke-width="2"/>
+                <text x="480" y="85" text-anchor="middle" fill="#d4a853" font-family="JetBrains Mono" font-size="10" font-weight="600">10</text>
 
-                <!-- Text labels (outside the curve) -->
-                <!-- Left side: text-anchor=end (right-aligned, pointing left) -->
-                <text x="155" y="415" text-anchor="end" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">SecurityGate</text>
-                <text x="162" y="353" text-anchor="end" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">InputValidator</text>
-                <text x="190" y="298" text-anchor="end" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">GovernanceEngine</text>
-                <text x="236" y="259" text-anchor="end" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">ContextBuilder</text>
-                <text x="300" y="230" text-anchor="end" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">ReasoningCore</text>
-                <!-- Right side: text-anchor=start (left-aligned, pointing right) -->
-                <text x="400" y="230" text-anchor="start" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">ActionPlanner</text>
-                <text x="464" y="259" text-anchor="start" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">OutputValidator</text>
-                <text x="510" y="298" text-anchor="start" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">ResponseFormatter</text>
-                <text x="538" y="353" text-anchor="start" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">FeedbackLoop</text>
-                <text x="545" y="415" text-anchor="start" fill="rgba(255,255,255,0.55)" font-family="JetBrains Mono" font-size="10">AuditLog</text>
+                <!-- Text labels outside the curve -->
+                <!-- Left side -->
+                <text x="195" y="85" text-anchor="end" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">SecurityGate</text>
+                <text x="200" y="195" text-anchor="end" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">InputValidator</text>
+                <text x="222" y="277" text-anchor="end" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">GovernanceEngine</text>
+                <text x="258" y="331" text-anchor="end" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">ContextBuilder</text>
+                <text x="300" y="359" text-anchor="end" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">ReasoningCore</text>
+                <!-- Right side -->
+                <text x="400" y="359" text-anchor="start" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">ActionPlanner</text>
+                <text x="442" y="331" text-anchor="start" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">OutputValidator</text>
+                <text x="478" y="277" text-anchor="start" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">ResponseFormatter</text>
+                <text x="500" y="195" text-anchor="start" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">FeedbackLoop</text>
+                <text x="505" y="85" text-anchor="start" fill="rgba(255,255,255,0.6)" font-family="JetBrains Mono" font-size="10">AuditLog</text>
             </svg>
             </div>
             <p class="pipeline-caption">Every action governed. Every decision traced. Nothing runs ungoverned.</p>
