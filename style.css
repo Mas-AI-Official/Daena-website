@@ -95,45 +95,13 @@ h1,h2,h3{font-family:'Syne',sans-serif}
 .problem-card p{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.6}
 
 /* ═══ HORSESHOE PIPELINE ═══ */
-.horseshoe{position:relative;max-width:520px;margin:32px auto;display:flex;flex-direction:column;gap:8px}
+.horseshoe-wrap{max-width:580px;margin:28px auto 0;position:relative}
+.horseshoe-svg{width:100%;height:auto;display:block}
+.horseshoe-svg text{pointer-events:none}
+.hs-metal{filter:drop-shadow(0 0 12px rgba(212,168,83,0.15))}
+.hs-traveler{filter:drop-shadow(0 0 6px rgba(212,168,83,0.6))}
 
-/* The visible golden U-shaped line behind the dots */
-.hs-line{position:absolute;top:16px;bottom:16px;left:50%;transform:translateX(-50%);width:120px;border:2.5px solid rgba(212,168,83,0.25);border-top:none;border-radius:0 0 60px 60px;pointer-events:none;z-index:0;box-shadow:0 0 20px rgba(212,168,83,0.06),inset 0 0 20px rgba(212,168,83,0.03)}
-
-/* Each row: text-left | dot-left | space | dot-right | text-right */
-.hs-row{display:flex;align-items:center;justify-content:center;gap:0;position:relative;z-index:1}
-
-/* Number circles */
-.hs-dot{width:30px;height:30px;border-radius:50%;background:rgba(212,168,83,0.12);border:2px solid rgba(212,168,83,0.35);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:600;color:#d4a853;flex-shrink:0;transition:all 0.3s;position:relative;z-index:2;box-shadow:0 0 8px rgba(212,168,83,0.1)}
-.hs-dot:hover{background:rgba(212,168,83,0.2);border-color:rgba(212,168,83,0.6);box-shadow:0 0 20px rgba(212,168,83,0.25);transform:scale(1.15)}
-
-/* Space between left and right dots */
-.hs-space{width:68px;flex-shrink:0}
-
-/* Text labels */
-.hs-text{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:rgba(255,255,255,0.5);width:130px;flex-shrink:0;transition:color 0.3s}
-.hs-text-r{text-align:right;padding-right:12px}
-.hs-text-l{text-align:left;padding-left:12px}
-.hs-row:hover .hs-text{color:rgba(212,168,83,0.8)}
-
-/* Bottom row curve emphasis */
-.hs-row-bottom{margin-top:4px}
-.hs-row-bottom .hs-space{width:68px;position:relative}
-.hs-row-bottom .hs-space::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:rgba(212,168,83,0.3);box-shadow:0 0 12px rgba(212,168,83,0.2)}
-
-/* Animated flow dot traveling the horseshoe */
-.hs-line::after{content:'';position:absolute;width:5px;height:5px;border-radius:50%;background:#d4a853;box-shadow:0 0 8px rgba(212,168,83,0.5);animation:horseshoeFlow 4s ease-in-out infinite;z-index:3}
-@keyframes horseshoeFlow{
-  0%{top:0;left:-2.5px;opacity:0}
-  5%{opacity:0.8}
-  45%{top:calc(100% - 5px);left:-2.5px}
-  50%{top:100%;left:calc(50% - 2.5px);opacity:0.9}
-  55%{top:calc(100% - 5px);left:calc(100% - 2.5px)}
-  95%{top:0;left:calc(100% - 2.5px);opacity:0.8}
-  100%{top:0;left:calc(100% - 2.5px);opacity:0}
-}
-
-.pipeline-caption{font-size:0.75rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:16px;font-family:'JetBrains Mono',monospace}
+.pipeline-caption{font-size:0.75rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;font-family:'JetBrains Mono',monospace}
 
 /* ═══ SOLUTION GRID ═══ */
 .solution-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:32px}
@@ -372,14 +340,7 @@ h1,h2,h3{font-family:'Syne',sans-serif}
   .hero-ctas{gap:8px}
   .hero-ctas .btn-primary,.hero-ctas .btn-secondary,.hero-ctas .btn-outline{width:100%;justify-content:center}
   .manifesto-quote{font-size:1rem;padding:0 16px}
-  .horseshoe{max-width:100%;gap:5px}
-  .hs-text{font-size:0.52rem;width:90px}
-  .hs-text-r{padding-right:6px}
-  .hs-text-l{padding-left:6px}
-  .hs-dot{width:24px;height:24px;font-size:0.55rem}
-  .hs-space{width:44px}
-  .hs-line{width:76px;border-width:2px;border-radius:0 0 38px 38px}
-  .hs-row-bottom .hs-space{width:44px}
+  .horseshoe-wrap{max-width:100%;margin:16px auto 0}
   .hero-overlay::before{content:'';position:absolute;inset:-40px -30px;border-radius:32px;background:radial-gradient(ellipse at center,rgba(10,10,10,0.65) 0%,rgba(10,10,10,0.25) 50%,transparent 80%);z-index:-1;pointer-events:none}
   .avatar-btn{width:48px;height:64px}
   .avatar-wrap{bottom:16px;right:12px}
