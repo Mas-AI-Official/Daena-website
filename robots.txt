@@ -1,39 +1,129 @@
-# Daena AI Platform - robots.txt
-# https://daena.mas-ai.co
+# ─────────────────────────────────────────────────────────────────────────
+# robots.txt for Daena AI Platform (daena.mas-ai.co)
+# Maintained: 2026-04-20 · Stance: AEO/GEO-forward (citation-first)
+#
+# CRITICAL DESIGN NOTE:
+# The default "Block All AI Scrapers" advice (Cloudflare / generic
+# playbooks) blocks the wrong bots for a startup. The bots that put our
+# canonical text into ChatGPT, Claude, Perplexity and Google AI Overview
+# answers (OAI-SearchBot, ChatGPT-User, Claude-User, PerplexityBot,
+# Googlebot) are *different* from the training-only crawlers (GPTBot,
+# ClaudeBot, CCBot). We ALLOW everything because our goal is:
+#   "When a human asks 'what is Daena', the LLM's answer uses OUR words."
+# Patent IP protection lives upstream of this file (provisional filings,
+# NDAs with enterprise customers, code not published here).
+# ─────────────────────────────────────────────────────────────────────────
 
-User-agent: *
-Allow: /
+# ─── Sitemap declaration (fetched by every compliant crawler) ───
 Sitemap: https://daena.mas-ai.co/sitemap.xml
 
-# Search engine crawlers
+# ─── Default: everything allowed ───
+User-agent: *
+Allow: /
+
+# ─── Classic search engines ───
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-# AI search crawlers - ALLOWED for discoverability
+User-agent: DuckDuckBot
+Allow: /
+
+# ─── Google AI (Gemini + AI Overviews) ───
+# Training control. Blocking this does NOT affect Search or AI Overview
+# inclusion — Google's doc is explicit about that. We allow to maximize
+# model knowledge of Daena/Klyntar.
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# ─── OpenAI (ChatGPT browse + search + training) ───
+# OAI-SearchBot indexes for ChatGPT search (the one that cites us).
+# ChatGPT-User is live user-triggered fetches (also cites us).
+# GPTBot is training (optional; we allow for maximum presence).
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# ─── Anthropic (Claude) — 2025 spec ───
+# Legacy strings anthropic-ai and Claude-Web were deprecated in 2025.
+# Current triad:
+#   Claude-User      — live user fetch (CITES US)
+#   Claude-SearchBot — search index
+#   ClaudeBot        — training
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Keep legacy strings allowed too (harmless, belt and suspenders)
+User-agent: anthropic-ai
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
+# ─── Perplexity ───
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+# ─── Apple Intelligence ───
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ─── Amazon / Alexa+ ───
+User-agent: Amazonbot
+Allow: /
+
+# ─── Meta AI ───
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# ─── You.com ───
 User-agent: YouBot
 Allow: /
 
-# AI training crawlers - BLOCKED (protect patent-pending IP)
-User-agent: GPTBot
-Disallow: /
+# ─── DuckDuckGo AI assist ───
+User-agent: DuckAssistBot
+Allow: /
 
-User-agent: Google-Extended
-Disallow: /
+# ─── Cohere ───
+User-agent: cohere-ai
+Allow: /
 
+# ─── Common Crawl (feeds most open LLMs) ───
 User-agent: CCBot
-Disallow: /
+Allow: /
 
-User-agent: anthropic-ai
-Disallow: /
+# ─── Bytedance (Doubao, TikTok search) ───
+User-agent: Bytespider
+Allow: /
+
+# ─── Mistral ───
+User-agent: MistralAI-User
+Allow: /
