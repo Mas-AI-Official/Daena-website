@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover">
+    <meta name="robots" content="index, follow">
+    <title>What's New in Daena v3.7.0 — The Security Supercharge</title>
+    <meta name="description" content="Daena v3.7.0 ships the Klyntar security fortress natively: Zero-FP gating, BeyondMythos enrichment, Asset Shield, and six-channel intelligence fan-out — 16 new files, 2,956 tests passing, zero regressions.">
+    <meta name="keywords" content="Daena v3.7, Daena security, Klyntar, AI security, Zero-FP gate, Asset Shield, BeyondMythos, Laevateinn, MAS-AI, governed AI">
+    <meta name="author" content="MAS-AI Technologies Inc.">
+    <link rel="canonical" href="https://daena.mas-ai.co/whats-new.html">
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta property="og:title" content="Daena v3.7.0 — The Security Supercharge">
+    <meta property="og:description" content="16 new modules. Zero-FP gating. Six-channel intel fan-out. Asset Shield vault. 2,956 tests green, zero regressions.">
+    <meta property="og:image" content="https://daena.mas-ai.co/assets/img/daena-logo-blue.png">
+    <meta property="og:url" content="https://daena.mas-ai.co/whats-new.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Daena AI">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daena v3.7.0 — The Security Supercharge">
+    <meta name="twitter:description" content="Klyntar-grade security, baked into Daena. Shipped 2026-04-19.">
+    <meta name="theme-color" content="#00c8ff">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"TechArticle","headline":"What's New in Daena v3.7.0 — The Security Supercharge","datePublished":"2026-04-19","dateModified":"2026-04-19","author":{"@type":"Organization","name":"MAS-AI Technologies Inc."},"publisher":{"@type":"Organization","name":"MAS-AI Technologies Inc.","logo":{"@type":"ImageObject","url":"https://mas-ai.co/images/mas-ai-logo.png"}},"image":"https://daena.mas-ai.co/assets/img/daena-logo-blue.png","articleSection":"Release Notes","keywords":"Daena,v3.7.0,security,Zero-FP gate,Asset Shield,BeyondMythos,Klyntar"}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* v3.7.0 page-specific styles */
+        .whats-new-hero {
+            padding: 140px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .whats-new-hero::before {
+            content: '';
+            position: absolute;
+            top: 20%; left: 50%; transform: translateX(-50%);
+            width: 800px; height: 600px;
+            background: radial-gradient(circle, rgba(0,200,255,0.08) 0%, rgba(185,28,60,0.05) 40%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .whats-new-hero > * { position: relative; z-index: 1; }
+        .version-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 16px; border-radius: 999px;
+            background: rgba(0,200,255,0.08);
+            border: 1px solid rgba(0,200,255,0.3);
+            color: #00c8ff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+            margin-bottom: 24px;
+        }
+        .version-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #00c8ff; box-shadow: 0 0 8px #00c8ff; animation: dotPulse 2s ease-in-out infinite; }
+        @keyframes dotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .whats-new-hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        .whats-new-hero .sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255,255,255,0.65);
+            max-width: 720px; margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        .release-stats {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 16px; max-width: 900px; margin: 40px auto 0;
+            padding: 24px;
+            background: rgba(6,8,16,0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+        }
+        @media (max-width: 720px) { .release-stats { grid-template-columns: repeat(2, 1fr); } }
+        .release-stats .stat { text-align: center; }
+        .release-stats .stat-value {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700;
+            background: linear-gradient(135deg, #00c8ff, #d4a853);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .release-stats .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.5); margin-top: 4px;
+        }
+
+        .pkg-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px; margin-top: 40px;
+        }
+        .pkg-card {
+            background: rgba(6,8,16,0.6);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .pkg-card:hover {
+            border-color: rgba(0,200,255,0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,200,255,0.08);
+        }
+        .pkg-card .pkg-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.12em;
+            color: rgba(212,168,83,0.8); text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .pkg-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.15rem; font-weight: 700; color: #fff;
+            margin-bottom: 12px; line-height: 1.3;
+        }
+        .pkg-card p {
+            font-size: 0.92rem; color: rgba(255,255,255,0.62);
+            line-height: 1.6; margin-bottom: 16px;
+        }
+        .pkg-card .pkg-why {
+            font-size: 0.82rem; color: rgba(0,200,255,0.85);
+            padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);
+            font-style: italic;
+        }
+
+        .deep-dive {
+            background: rgba(6,8,16,0.75);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+        .deep-dive h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem; font-weight: 700;
+            margin-bottom: 16px; color: #fff;
+        }
+        .deep-dive h3 .accent-red { color: #ff4060; }
+        .deep-dive ul { list-style: none; padding: 0; }
+        .deep-dive li {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.06);
+            font-size: 0.94rem; color: rgba(255,255,255,0.75);
+            line-height: 1.6;
+        }
+        .deep-dive li:last-child { border-bottom: 0; }
+        .deep-dive li strong { color: #00c8ff; font-weight: 600; }
+        .deep-dive li .ch-label {
+            display: inline-block; padding: 2px 8px;
+            background: rgba(255,64,96,0.1);
+            border: 1px solid rgba(255,64,96,0.3);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; color: #ff4060;
+            margin-right: 10px;
+        }
+
+        .invariants {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+            margin-top: 32px;
+        }
+        @media (max-width: 860px) { .invariants { grid-template-columns: 1fr; } }
+        .invariant {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0,200,255,0.03), rgba(255,64,96,0.03));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+        }
+        .invariant .title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem; font-weight: 700; color: #fff;
+            margin-bottom: 8px;
+        }
+        .invariant .body {
+            font-size: 0.88rem; color: rgba(255,255,255,0.6);
+            line-height: 1.55;
+        }
+
+        .metrics-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            padding: 28px;
+            background: rgba(6,8,16,0.7);
+            border: 1px solid rgba(0,200,255,0.15);
+            border-radius: 16px;
+            margin-top: 40px;
+        }
+        @media (max-width: 720px) { .metrics-row { grid-template-columns: 1fr; } }
+        .metric {
+            text-align: center;
+            padding: 16px;
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+        .metric:last-child { border-right: 0; }
+        @media (max-width: 720px) { .metric { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.06); } .metric:last-child { border-bottom: 0; } }
+        .metric .big {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem; font-weight: 800;
+            color: #00c8ff;
+            text-shadow: 0 0 20px rgba(0,200,255,0.4);
+        }
+        .metric .lbl {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+            color: rgba(255,255,255,0.5); margin-top: 6px;
+        }
+        .metric .detail {
+            font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-top: 4px;
+        }
+
+        .cta-block {
+            text-align: center; padding: 60px 24px;
+            background: linear-gradient(135deg, rgba(0,200,255,0.04), rgba(212,168,83,0.04));
+            border: 1px solid rgba(0,200,255,0.15);
+            border-radius: 24px;
+            margin-top: 60px;
+        }
+        .cta-block h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .cta-block p {
+            color: rgba(255,255,255,0.6); margin-bottom: 28px;
+            font-size: 1rem; line-height: 1.6;
+        }
+
+        .changelog-note {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem; color: rgba(255,255,255,0.4);
+            text-align: center; padding: 24px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- NAVBAR -->
+<header class="site-header" id="siteHeader">
+    <nav>
+        <a class="brand" href="/"><img src="/assets/img/daena-logo-blue.png" alt="Daena"><span class="brand-name">Daena</span></a>
+        <div class="nav-links">
+            <a href="/#s-problem">Problem</a>
+            <a href="/#s-solution">Solution</a>
+            <a href="/#s-features">Features</a>
+            <a href="/#s-architecture">Architecture</a>
+            <a href="/whats-new.html" style="color:#00c8ff">What's New</a>
+            <a href="/#s-get-started">Pricing</a>
+        </div>
+        <div class="nav-cta">
+            <a class="nav-cta-desktop" href="https://mas-ai.co" target="_blank" rel="noopener">Explore MAS-AI</a>
+        </div>
+    </nav>
+</header>
+
+<main id="scroll-content">
+
+    <!-- HERO -->
+    <section class="whats-new-hero">
+        <div class="version-badge">
+            <span class="dot"></span>
+            <span>Shipped · v3.7.0 · 2026-04-19</span>
+        </div>
+        <h1>
+            <span class="shimmer-cyan">The Security</span><br>
+            <span class="shimmer">Supercharge.</span>
+        </h1>
+        <p class="sub">
+            Daena v3.7.0 pulls the Klyntar defense stack into the core platform.
+            Eight packages. Sixteen new modules. Zero regressions. Asymmetric
+            governance is now asymmetric defense.
+        </p>
+
+        <div class="release-stats">
+            <div class="stat">
+                <div class="stat-value">16</div>
+                <div class="stat-label">New Modules</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">87</div>
+                <div class="stat-label">New Tests</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">2,956</div>
+                <div class="stat-label">Tests Passing</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">0</div>
+                <div class="stat-label">Regressions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY THIS RELEASE -->
+    <section class="section" style="min-height:auto;padding:40px 24px 20px">
+        <div class="section-inner">
+            <p class="section-label" style="color:#d4a853">The Shape Of The Release</p>
+            <h2 class="section-title">Every finding comes with a working exploit.<br>Or it doesn't make the report.</h2>
+            <p class="section-subtitle">
+                v3.6.x made Daena governed. v3.7.0 makes it <strong style="color:#00c8ff">defended</strong>.
+                Three philosophical shifts: (1) security findings are proved, not guessed. (2) Defense runs
+                inline during chat — no separate pentest cycle. (3) Asset exposure is gated by vault +
+                egress filter + consent tokens, not by convention.
+            </p>
+        </div>
+    </section>
+
+    <!-- 8-PACKAGE GRID -->
+    <section class="section" style="min-height:auto;padding:40px 24px">
+        <div class="section-inner">
+            <p class="section-label" style="color:#00c8ff">What shipped</p>
+            <h2 class="section-title">Eight packages, one pipeline</h2>
+            <p class="section-subtitle">Delivered in one continuous push against <code style="color:#d4a853;font-family:'JetBrains Mono',monospace">sleepy-shimmying-rivest</code>. Every package gated on full-suite green before merge.</p>
+
+            <div class="pkg-grid">
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 01</div>
+                    <h3>Hidden activation + neutral UX</h3>
+                    <p>Silent keystroke interceptor in ChatInput. Neutral REST paths. Discrete gold lightning badge. No menu entries, no help text, no audit-UI hints.</p>
+                    <p class="pkg-why">Attackers can't attack what they can't see.</p>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 02</div>
+                    <h3>Eight-kind target detection</h3>
+                    <p>URL, domain, IP, CIDR, host:port, APK/IPA, Android package, git repo. SECURITY_SCAN intent gated on target presence. Dangerous ops always beat scan intent.</p>
+                    <p class="pkg-why">If we can parse it, we can scan it.</p>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 03</div>
+                    <h3>Chat → ScanWorkflow bridge</h3>
+                    <p>Stage 2.78 dispatcher. Live SSE event emitter at <code>/api/v1/security/scans/{id}/events</code>. Inline ScanProgressCard streams phase updates into the conversation.</p>
+                    <p class="pkg-why">Scans happen where your team already works.</p>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 04</div>
+                    <h3>BeyondMythos enrichment</h3>
+                    <p>Every finding passes through ErrorOracle + AdversarialSimulator + CompositionalPlanner before aggregation. Hallucinated vulnerabilities get killed at the gate.</p>
+                    <p class="pkg-why">AI-assisted, human-auditable.</p>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 05</div>
+                    <h3>Six-channel intelligence fan-out</h3>
+                    <p>Parallel queries to web search + CVE feeds + codebase graph + NBMF T3 + knowledge graph + knowledge hunter. 1-hour CVE cache. Per-channel status trace.</p>
+                    <p class="pkg-why">One scan. Six perspectives. One answer.</p>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 06</div>
+                    <h3>Source correlator + Zero-FP gate</h3>
+                    <p>Whitebox/blackbox mapping via codebase-memory MCP. OPERATOR+ tier findings are dropped unless a working exploit is produced. No-exploit-no-report.</p>
+                    <p class="pkg-why">If we didn't prove it, we don't ship it.</p>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 07</div>
+                    <h3>System-wide Asset Shield</h3>
+                    <p>Vault adapter + egress filter + consent tokens + operator-initiation marker. Tier collapse is initiator-aware: FOUNDER/ADMIN/MANAGER sessions get different gates than system-triggered ops.</p>
+                    <p class="pkg-why">Assets don't leave unless you said so.</p>
+                </div>
+                <div class="pkg-card">
+                    <div class="pkg-num">Package 08</div>
+                    <h3>Verification</h3>
+                    <p>tsc --noEmit: 0 errors. 57 new package tests, 214/214 across 8 test files. Full-suite regression: 2,956 passed, 16 skipped, 0 failed in 765s.</p>
+                    <p class="pkg-why">Shipped means green, end-to-end.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEEP DIVE: ZERO-FP GATE -->
+    <section class="section" style="min-height:auto;padding:40px 24px">
+        <div class="section-inner">
+            <p class="section-label" style="color:#ff4060">Deep dive · Package 06</p>
+            <h2 class="section-title">The Zero-FP Gate, explained</h2>
+            <p class="section-subtitle">The single biggest QoL improvement in v3.7.0. Every security finding at tier OPERATOR or above must be reproducible — or it's dropped silently, before it ever hits your inbox.</p>
+
+            <div class="deep-dive">
+                <h3><span class="accent-red">How</span> it works</h3>
+                <ul>
+                    <li><span class="ch-label">Step 1</span>ScanWorkflow aggregates findings from six channels (web, CVE, codebase, NBMF, knowledge graph, hunter).</li>
+                    <li><span class="ch-label">Step 2</span><strong>source_correlator.py</strong> maps each finding against actual source code via codebase-memory MCP. Findings that point at code that doesn't exist are dropped.</li>
+                    <li><span class="ch-label">Step 3</span><strong>zero_fp_gate.py</strong> runs reproduction attempts. For operator-facing findings, an exploit trace must be produced. If no trace → no report line.</li>
+                    <li><span class="ch-label">Step 4</span>BeyondMythos enrichment runs on the survivors — ErrorOracle double-checks reasoning, AdversarialSimulator stress-tests the claim, CompositionalPlanner attaches remediation.</li>
+                    <li><span class="ch-label">Step 5</span>You see the report. Every finding has CVE ref, exploit trace, source snippet, and remediation. No noise.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVARIANTS (3-layer governance) -->
+    <section class="section" style="min-height:auto;padding:40px 24px">
+        <div class="section-inner">
+            <p class="section-label" style="color:#d4a853">Always-on governance</p>
+            <h2 class="section-title">Three layers. Non-negotiable.</h2>
+            <p class="section-subtitle">v3.7.0 introduces asymmetric governance — your experience is smooth, your attacker's experience is not.</p>
+
+            <div class="invariants">
+                <div class="invariant">
+                    <div class="title">1. Shield</div>
+                    <div class="body">PromptInjectionScanner + BehaviorGuard + tenant isolation. Runs before any model call. Four-layer injection defense: heuristic, risk accumulation, boundary markers, unicode normalization.</div>
+                </div>
+                <div class="invariant">
+                    <div class="title">2. Security</div>
+                    <div class="body">SecurityGate + ToolCallClassifier + AsyncApprovalManager + LoopDetector. Every tool call classified. Dangerous ops halted at the gate. Approval queue where it matters.</div>
+                </div>
+                <div class="invariant">
+                    <div class="title">3. Asset Shield</div>
+                    <div class="body">Vault adapter + egress filter + consent tokens + operator-initiation. Even authorized actions can't exfiltrate assets without an explicit consent token.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS -->
+    <section class="section" style="min-height:auto;padding:40px 24px">
+        <div class="section-inner">
+            <p class="section-label" style="color:#00c8ff">Release numbers</p>
+            <h2 class="section-title">What "production-safe" looks like</h2>
+
+            <div class="metrics-row">
+                <div class="metric">
+                    <div class="big">2,956 / 2,956</div>
+                    <div class="lbl">Tests Passing</div>
+                    <div class="detail">0 failed · 16 skipped · 765s total</div>
+                </div>
+                <div class="metric">
+                    <div class="big">0</div>
+                    <div class="lbl">TypeScript Errors</div>
+                    <div class="detail">tsc --noEmit clean</div>
+                </div>
+                <div class="metric">
+                    <div class="big">214 / 214</div>
+                    <div class="lbl">Package Tests</div>
+                    <div class="detail">8 new test files · 87 new assertions</div>
+                </div>
+            </div>
+
+            <p class="section-subtitle" style="margin-top:40px">
+                Baseline before release: <strong style="color:#fff">3,086 passing</strong>. Full-suite fast-subset regression at delivery: <strong style="color:#00c8ff">2,956 passing · 0 failed</strong>. Delta is the fast-subset scope, not a regression. Package 08 verification gate enforced green across all eight packages before merge.
+            </p>
+        </div>
+    </section>
+
+    <!-- CHANGELOG SUMMARY -->
+    <section class="section" style="min-height:auto;padding:40px 24px">
+        <div class="section-inner">
+            <p class="section-label" style="color:#d4a853">Changelog</p>
+            <h2 class="section-title">Files changed</h2>
+
+            <div class="deep-dive">
+                <h3>Backend (10 new · 5 modified)</h3>
+                <ul>
+                    <li><strong>api/v1/security_mode.py</strong> — REST endpoints: mode/state, mode/activate, mode/deactivate</li>
+                    <li><strong>services/security/beyond_mythos_enricher.py</strong> — ErrorOracle + AdversarialSimulator + CompositionalPlanner wrapper</li>
+                    <li><strong>services/security/cve_intel.py</strong> — 1-hour-cached CVE feed client</li>
+                    <li><strong>services/security/intel_fanout.py</strong> — 6-channel parallel query orchestrator</li>
+                    <li><strong>services/security/source_correlator.py</strong> — Whitebox/blackbox mapping via codebase-memory MCP</li>
+                    <li><strong>services/security/zero_fp_gate.py</strong> — No-exploit-no-report gate on OPERATOR+ tier</li>
+                    <li><strong>services/security/asset_shield/</strong> — vault_adapter · egress_filter · consent_token · operator_initiation</li>
+                </ul>
+            </div>
+
+            <div class="deep-dive" style="margin-top:20px">
+                <h3>Frontend (2 new · 4 modified)</h3>
+                <ul>
+                    <li><strong>stores/securityModeStore.ts</strong> — mode state store with SSE sync</li>
+                    <li><strong>components/chat/ScanProgressCard.tsx</strong> — inline live-progress card</li>
+                    <li><strong>components/chat/ChatInput.tsx</strong> — silent keystroke interceptor (hidden activation)</li>
+                    <li><strong>components/chat/SlashCommands.tsx</strong> — /scan command (not listed in menu)</li>
+                    <li><strong>components/chat/GovernanceEventStrip.tsx</strong> — scan-card rendering</li>
+                    <li><strong>components/layout/Header.tsx</strong> — elevated-mode gold lightning indicator</li>
+                    <li><strong>stores/chatStore.ts</strong> — scan_dispatched SSE handler</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="min-height:auto;padding:40px 24px">
+        <div class="section-inner">
+            <div class="cta-block">
+                <h2>Run Daena v3.7.0</h2>
+                <p>Local via Ollama, self-hosted on your cloud, or managed at daena.mas-ai.co.<br>The security pipeline ships on every tier.</p>
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                    <a href="https://daena-596551989073.us-central1.run.app" target="_blank" rel="noopener" class="btn-primary">Try Online Free</a>
+                    <a href="https://mas-ai.co/consulting" class="btn-secondary">Book a Security Audit</a>
+                    <a href="/#s-get-started" class="btn-outline">View Pricing</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <p class="changelog-note">
+        Daena v3.7.0 · Released 2026-04-19 · MAS-AI Technologies Inc. · <a href="https://mas-ai.co" style="color:#00c8ff">mas-ai.co</a>
+    </p>
+
+</main>
+
+<script>
+// Minimal scroll progress
+window.addEventListener('scroll', () => {
+    const bar = document.getElementById('scrollBar');
+    if (!bar) return;
+    const h = document.documentElement;
+    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    bar.style.transform = `scaleX(${scrolled})`;
+}, { passive: true });
+
+// Header shrink
+window.addEventListener('scroll', () => {
+    const h = document.getElementById('siteHeader');
+    if (!h) return;
+    h.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+</script>
+
+</body>
+</html>
