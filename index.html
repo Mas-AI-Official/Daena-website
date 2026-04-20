@@ -65,7 +65,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="/assets/css/video-player.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <!-- GSAP still used for scroll-triggered section reveals. Three.js dropped with the old hex particles. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
@@ -753,9 +753,25 @@
                         <p class="twin-line">Governed. Calm. Auditable.</p>
                     </div>
                 </div>
-                <div class="twin-separator">
-                    <div class="twin-sep-line"></div>
-                    <div class="twin-sep-glyph">/</div>
+                <!-- MODE TOGGLE: cyan→red transformation indicator -->
+                <div class="twin-separator" aria-hidden="true">
+                    <svg class="twin-sep-svg" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="twinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#00c8ff" stop-opacity="0.8"/>
+                                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#ff4060" stop-opacity="0.8"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Upper arrow (cyan → red) -->
+                        <path d="M30 10 L30 50 M22 42 L30 50 L38 42" stroke="url(#twinGrad)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Center hex node (the shared 'mind') -->
+                        <polygon points="30,56 38,61 38,71 30,76 22,71 22,61" fill="none" stroke="url(#twinGrad)" stroke-width="1.2"/>
+                        <circle cx="30" cy="66" r="2" fill="#fff" opacity="0.6"/>
+                        <!-- Lower arrow (red → cyan, reverse direction) -->
+                        <path d="M30 110 L30 82 M22 90 L30 82 L38 90" stroke="url(#twinGrad)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="twin-sep-label">Same mind.<br>Two modes.</p>
                 </div>
                 <div class="twin-tile twin-klyntar">
                     <div class="twin-glow"></div>
@@ -789,31 +805,12 @@
                 </div>
             </div>
 
-            <!-- INTERACTIVE KLYNTAR SCAN DEMO -->
-            <div class="scan-demo" id="scanDemo">
-                <div class="scan-head">
-                    <p class="scan-eyebrow">Try it · 30 seconds</p>
-                    <h3 class="scan-title">Run a <span style="color:#ff4060">Klyntar scan</span> on anything</h3>
-                    <p class="scan-sub">Paste a URL. Watch a real scan pattern run. This is the simulation you see live during an engagement.</p>
-                </div>
-                <div class="scan-form">
-                    <input type="text" id="scanUrl" placeholder="https://your-site.com" autocomplete="off" spellcheck="false">
-                    <button id="scanBtn" type="button">Run Klyntar Scan</button>
-                </div>
-                <div class="scan-stage" id="scanStage" aria-live="polite"></div>
-                <div class="scan-findings" id="scanFindings"></div>
-                <div class="scan-footer" id="scanFooter" hidden>
-                    <p class="scan-footer-title">Want a real scan on <span id="scanFooterTarget">your stack</span>?</p>
-                    <a href="https://mas-ai.co/security#contact-consulting" class="btn-primary" style="background:linear-gradient(135deg,#ff4060,#b91c3c);border-color:rgba(255,64,96,0.6);color:#fff;box-shadow:0 0 32px rgba(255,64,96,0.25)">
-                        Book Free Recon at mas-ai.co/security &rarr;
-                    </a>
-                </div>
-            </div>
-
-            <div style="display:flex;justify-content:center;margin-top:36px">
-                <a href="https://mas-ai.co/security" class="btn-primary" style="background:linear-gradient(135deg,#ff4060,#b91c3c);border-color:rgba(255,64,96,0.6);color:#fff;box-shadow:0 0 32px rgba(255,64,96,0.25)">
-                    Request Free Klyntar Recon &rarr;
+            <!-- Single CTA — no self-serve scan. We run it for them. -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:40px">
+                <a href="#s-request" class="btn-primary" style="background:linear-gradient(135deg,#ff4060,#b91c3c);border-color:rgba(255,64,96,0.6);color:#fff;box-shadow:0 0 32px rgba(255,64,96,0.25)">
+                    Request a Free Klyntar Recon &rarr;
                 </a>
+                <p style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;margin:6px 0 0">Ownership attestation required &middot; 48h response</p>
             </div>
         </div>
     </section>
@@ -877,192 +874,28 @@
     .twin-line { font-size: 0.88rem; color: rgba(255,255,255,0.65); margin: 0; }
 
     .twin-separator {
-        display: flex; flex-direction: column; align-items: center; gap: 6px;
+        display: flex; flex-direction: column; align-items: center; gap: 10px;
+        padding: 8px 4px;
     }
-    .twin-sep-line {
-        width: 1px; height: 48px;
-        background: linear-gradient(180deg, rgba(0,200,255,0.6), rgba(255,64,96,0.6));
+    .twin-sep-svg {
+        width: 44px; height: 88px;
+        filter: drop-shadow(0 0 8px rgba(255,255,255,0.1));
+        animation: twinSepPulse 3.6s ease-in-out infinite;
     }
-    .twin-sep-glyph {
-        font-family: 'JetBrains Mono', monospace; font-weight: 700;
-        color: rgba(255,255,255,0.4); font-size: 1.2rem;
+    @keyframes twinSepPulse {
+        0%, 100% { opacity: 0.7; }
+        50%      { opacity: 1;   filter: drop-shadow(0 0 12px rgba(212,168,83,0.25)); }
     }
-
-    /* ═══ Interactive Scan Demo ═══ */
-    .scan-demo {
-        margin-top: 56px; padding: 28px 24px;
-        background: rgba(6,10,20,0.7);
-        border: 1px solid rgba(255,64,96,0.3);
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(255,64,96,0.06);
-    }
-    .scan-head { text-align: center; margin-bottom: 20px; }
-    .scan-eyebrow {
+    .twin-sep-label {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-        color: #ff4060; margin: 0 0 6px;
+        font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+        color: rgba(255,255,255,0.35); text-align: center; line-height: 1.5;
+        margin: 0;
     }
-    .scan-title {
-        font-family: 'Syne', sans-serif;
-        font-size: clamp(1.2rem, 3vw, 1.6rem); color: #fff; margin: 0 0 6px;
-    }
-    .scan-sub { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin: 0; }
-    .scan-form {
-        display: flex; gap: 10px; max-width: 640px; margin: 16px auto 0;
-        flex-wrap: wrap;
-    }
-    .scan-form input {
-        flex: 1 1 240px; min-width: 200px;
-        padding: 12px 14px; border-radius: 10px;
-        background: rgba(10,14,26,0.8);
-        border: 1px solid rgba(255,255,255,0.1);
-        color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
-        outline: none;
-    }
-    .scan-form input:focus { border-color: rgba(255,64,96,0.5); box-shadow: 0 0 0 3px rgba(255,64,96,0.08); }
-    .scan-form button {
-        padding: 12px 22px; border-radius: 10px;
-        background: linear-gradient(135deg,#ff4060,#b91c3c);
-        color: #fff; font-weight: 700; border: none; cursor: pointer;
-        font-size: 0.9rem; font-family: inherit;
-        transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .scan-form button:hover { transform: scale(1.03); box-shadow: 0 0 24px rgba(255,64,96,0.4); }
-    .scan-form button:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
-    .scan-stage {
-        margin-top: 16px; min-height: 0; padding: 0;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.78rem; color: rgba(255,255,255,0.7);
-    }
-    .scan-stage.active { padding: 14px 16px; background: rgba(10,14,26,0.8); border-left: 2px solid #ff4060; border-radius: 8px; margin-top: 14px; }
-    .scan-stage .stage-line { display: flex; gap: 10px; margin: 4px 0; opacity: 0; animation: scanFadeIn .4s forwards; }
-    @keyframes scanFadeIn { to { opacity: 1; } }
-    .scan-stage .stage-line .dot { color: #d4a853; }
-    .scan-stage .stage-line .ok { color: #22c55e; }
-    .scan-stage .stage-line .fail { color: #ff4060; }
-
-    .scan-findings { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
-    .scan-finding {
-        padding: 14px 16px; border-radius: 10px;
-        background: rgba(10,14,26,0.75);
-        border-left: 3px solid var(--sev-color, #f59e0b);
-        animation: scanFadeIn .5s forwards;
-        opacity: 0;
-    }
-    .scan-finding .sev {
-        display: inline-block; padding: 2px 8px; border-radius: 4px;
-        font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
-        background: var(--sev-color, #f59e0b); color: #0a0a0a;
-        font-weight: 700; letter-spacing: 0.05em;
-    }
-    .scan-finding .f-title { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; margin: 6px 0 4px; }
-    .scan-finding .f-detail { color: rgba(255,255,255,0.65); font-size: 0.85rem; margin: 0; }
-
-    .scan-footer {
-        margin-top: 20px; text-align: center; padding-top: 16px;
-        border-top: 1px dashed rgba(255,64,96,0.3);
-        animation: scanFadeIn .6s forwards;
-    }
-    .scan-footer-title {
-        color: rgba(255,255,255,0.75); font-size: 0.95rem;
-        margin: 0 0 12px;
-    }
     </style>
 
     <script>
-    // ─── Scan Demo ──────────────────────────────────────────────────────────
-    (function () {
-        var btn = document.getElementById('scanBtn');
-        var input = document.getElementById('scanUrl');
-        var stage = document.getElementById('scanStage');
-        var findings = document.getElementById('scanFindings');
-        var footer = document.getElementById('scanFooter');
-        var footerTarget = document.getElementById('scanFooterTarget');
-        if (!btn || !input) return;
-
-        function sanitizeTarget(raw) {
-            if (!raw) return null;
-            var s = raw.trim();
-            if (!s) return null;
-            if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
-            try {
-                var u = new URL(s);
-                return u.host;
-            } catch (e) { return null; }
-        }
-
-        // Pre-built stage sequence and findings. These are PATTERNS the real
-        // Klyntar scan runs — the text is factual about what the system does.
-        var stages = [
-            { t: 600,  text: 'Fetching target → reachable', cls: 'ok', dot: '→' },
-            { t: 1100, text: 'Loading 25+ Klyntar exploit signatures', cls: 'dot', dot: '·' },
-            { t: 1700, text: 'Running OWASP Top 10 passes', cls: 'dot', dot: '·' },
-            { t: 2400, text: 'External attack-surface map + DNS hygiene', cls: 'dot', dot: '·' },
-            { t: 3100, text: 'Credential-leak hunt (GitHub / pastebin)', cls: 'dot', dot: '·' },
-            { t: 3700, text: 'BeyondMythos enrichment on findings', cls: 'dot', dot: '·' },
-            { t: 4300, text: 'Zero-FP gate → dropping 12 false positives', cls: 'ok', dot: '✓' },
-            { t: 5000, text: 'Finalizing redacted report', cls: 'ok', dot: '✓' },
-        ];
-
-        // Fake but plausible finding templates — same categories real scans catch.
-        var findingTemplates = [
-            { sev: 'MEDIUM', color: '#f59e0b', title: 'Source maps exposed in production', detail: 'Build-time JS source maps reachable at {host}/static/*.js.map. Reveals module structure and variable names. Easy fix: strip source maps from production bundle.' },
-            { sev: 'LOW', color: '#00c8ff', title: 'Missing HSTS preload', detail: '{host} sends Strict-Transport-Security but not with preload directive. Recommend adding preload + submitting to hstspreload.org.' },
-            { sev: 'HIGH', color: '#ff4060', title: 'CORS wildcard on authenticated endpoint', detail: 'Access-Control-Allow-Origin: * on a route that accepts credentials. Any origin can read session-authenticated responses. Fix: echo a whitelisted origin.' },
-            { sev: 'INFO', color: '#22c55e', title: 'No public secrets found in scanned assets', detail: 'GitHub-leak pattern check clean for {host} domain. No API keys detected in the first 50 indexed source files.' },
-        ];
-
-        function renderStageLine(line) {
-            var row = document.createElement('div');
-            row.className = 'stage-line';
-            row.innerHTML = '<span class="' + line.cls + '">' + line.dot + '</span> <span>' + line.text + '</span>';
-            stage.appendChild(row);
-        }
-        function renderFinding(f, host) {
-            var div = document.createElement('div');
-            div.className = 'scan-finding';
-            div.style.setProperty('--sev-color', f.color);
-            div.innerHTML =
-                '<span class="sev">' + f.sev + '</span>' +
-                '<h4 class="f-title">' + f.title + '</h4>' +
-                '<p class="f-detail">' + f.detail.replace(/\{host\}/g, host) + '</p>';
-            findings.appendChild(div);
-        }
-
-        function runScan() {
-            var host = sanitizeTarget(input.value) || 'example.com';
-            btn.disabled = true;
-            btn.textContent = 'Scanning ' + host + '…';
-            stage.innerHTML = '';
-            findings.innerHTML = '';
-            footer.hidden = true;
-            stage.classList.add('active');
-
-            stages.forEach(function (s) {
-                setTimeout(function () { renderStageLine(s); }, s.t);
-            });
-
-            // After stages complete, show 3 findings (2 real-looking + 1 positive)
-            setTimeout(function () {
-                renderFinding(findingTemplates[0], host);  // MEDIUM
-                setTimeout(function () { renderFinding(findingTemplates[2], host); }, 400);  // HIGH
-                setTimeout(function () { renderFinding(findingTemplates[3], host); }, 800);  // INFO (positive)
-                setTimeout(function () {
-                    footer.hidden = false;
-                    footerTarget.textContent = host;
-                    btn.disabled = false;
-                    btn.textContent = 'Run Klyntar Scan';
-                }, 1200);
-            }, 5400);
-        }
-
-        btn.addEventListener('click', runScan);
-        input.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') { e.preventDefault(); runScan(); }
-        });
-    })();
-
     // ─── Scroll-tied Page Mood ──────────────────────────────────────────────
     // Body background subtly tints based on scroll progress, matching the
     // particle acts: cyan (0-50%) → neutral (50-60%) → red (60-100%).
@@ -1589,9 +1422,8 @@
     </div>
 </div>
 
-<!-- THREE.JS + PARTICLE SYSTEM -->
+<!-- Canvas 2D living-aurora mesh (replaces Three.js hex particles + the scroll-engine camera rig). -->
 <script src="particles.js" defer></script>
-<script src="scroll-engine.js" defer></script>
 <script src="/assets/js/video-player.js?v=2" defer></script>
 
 <script>
