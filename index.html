@@ -84,7 +84,7 @@
             <a href="#s-features">Features</a>
             <a href="#s-architecture">Architecture</a>
             <a href="#s-demos">Demos</a>
-            <a href="#s-get-started">Pricing</a>
+            <a href="#s-request">Request</a>
         </div>
         <div class="nav-cta">
             <a class="nav-cta-desktop" href="https://mas-ai.co" target="_blank" rel="noopener">Explore MAS-AI</a>
@@ -97,7 +97,7 @@
         <a href="#s-features">Features</a>
         <a href="#s-architecture">Architecture</a>
         <a href="#s-demos">Demos</a>
-        <a href="#s-get-started">Pricing</a>
+        <a href="#s-request">Request</a>
         <a href="#s-contact">Contact</a>
     </div>
 </header>
@@ -112,12 +112,12 @@
             <h2 class="neon-cyan">Governed by design. Defended by <span style="color:#ff4060">Klyntar</span>.</h2>
             <p class="sub">One platform. Two modes. Daena governs every AI action. Klyntar is the security layer that activates when something tries to break in.<br>Watch what happens as you scroll.</p>
             <div class="hero-ctas">
-                <a href="https://daena-596551989073.us-central1.run.app" target="_blank" rel="noopener" class="btn-primary">
-                    <svg style="display:inline;width:16px;height:16px;vertical-align:-2px;margin-right:4px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Try Online Free</a>
-                <a href="https://mas-ai.co/security" class="btn-secondary" style="border-color:rgba(255,64,96,0.35);color:#ff4060">See Klyntar Services</a>
-                <a href="#s-get-started" class="btn-outline">View Pricing</a>
+                <a href="#s-request" class="btn-primary">
+                    <svg style="display:inline;width:16px;height:16px;vertical-align:-2px;margin-right:4px" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Request Daena Demo</a>
+                <a href="#s-request" class="btn-secondary" style="border-color:rgba(255,64,96,0.35);color:#ff4060">Request Klyntar Scan</a>
+                <a href="https://mas-ai.co/book" target="_blank" rel="noopener" class="btn-outline">Book Free Call</a>
             </div>
-            <p class="hero-social-proof"><span class="neon-gold">2 USPTO patents filed</span> &bull; <span class="neon-gold">2,956 tests passing</span> &bull; <span class="neon-gold">25+ exploit signatures</span></p>
+            <p class="hero-social-proof"><span class="neon-gold">2 USPTO patents filed</span> &bull; <span class="neon-gold">2,956 tests passing</span> &bull; <span class="neon-gold">25+ Klyntar exploit signatures</span> &bull; <span class="neon-gold">Registered Bugcrowd researcher</span></p>
         </div>
         <div class="scroll-hint" id="scrollHint"><span>Scroll</span><div class="bar"></div></div>
     </section>
@@ -951,61 +951,155 @@
     </section>
 
     <!-- ═══════════════ PITCH ═══════════════ -->
-    <section class="section" id="s-pitch" style="min-height:40vh">
-        <div class="section-inner" style="text-align:center">
-            <p class="section-label" style="color:rgba(212,168,83,0.8)">For Investors</p>
-            <h2 class="section-title" style="color:rgba(255,255,255,0.95)">The Full Story. 14 Slides.</h2>
-            <p class="section-subtitle">Architecture, competitive moat, go-to-market strategy, and roadmap. With voice-over narration.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px">
-                <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank" class="btn-primary">Open Pitch Deck (PDF)</a>
-                <a href="/pitch-deck.html" class="btn-secondary">View with Narration</a>
-            </div>
-        </div>
-    </section>
+<!-- (Investor pitch deck section removed from product page; moved to /funding.html for investor-only audience) -->
 
-    <!-- ═══════════════ GET STARTED / PRICING ═══════════════ -->
-    <section class="section" id="s-get-started" style="min-height:90vh">
+    <!-- ═══════════════ REQUEST ACCESS ═══════════════ -->
+    <section class="section" id="s-request" style="min-height:80vh">
         <div class="section-inner">
-            <div style="text-align:center;margin-bottom:12px">
-                <span class="live-badge">
-                    <span class="live-dot"></span>
-                    Now Available
-                </span>
+            <p class="section-label" style="color:#d4a853;text-align:center">Request Access</p>
+            <h2 class="section-title" style="text-align:center">No self-serve.<br>Every engagement starts with <span style="color:#d4a853">a conversation</span>.</h2>
+            <p class="section-subtitle" style="text-align:center">We do not offer instant-try accounts. Why? Because Daena is governed by design, and good governance means <strong style="color:#fff">we know who is running what</strong>. Pick the path below. We respond in 48 hours.</p>
+
+            <div class="request-grid">
+                <!-- REQUEST DAENA DEMO -->
+                <form class="request-form request-daena" id="formDaena" novalidate>
+                    <p class="rf-eyebrow" style="color:#00c8ff">Path 01 · Daena Demo</p>
+                    <h3 class="rf-title">Request a guided Daena demo</h3>
+                    <p class="rf-sub">30-minute walkthrough of the 10-stage pipeline on your use case. No deck, just the product.</p>
+                    <label>Your name <input type="text" name="name" required autocomplete="name"></label>
+                    <label>Work email <input type="email" name="email" required autocomplete="email"></label>
+                    <label>Company <input type="text" name="company" required autocomplete="organization"></label>
+                    <label>What are you trying to ship? <textarea name="useCase" rows="3" placeholder="e.g. governed AI support agent on our helpdesk" required></textarea></label>
+                    <button type="submit" class="btn-primary" style="width:100%">Request Daena Demo &rarr;</button>
+                    <p class="rf-foot">We respond in 48 hours. No marketing automation, no nurture sequence.</p>
+                </form>
+
+                <!-- REQUEST KLYNTAR SCAN (with ownership attestation) -->
+                <form class="request-form request-klyntar" id="formKlyntar" novalidate>
+                    <p class="rf-eyebrow" style="color:#ff4060">Path 02 · Klyntar Scan</p>
+                    <h3 class="rf-title">Request a free Klyntar recon</h3>
+                    <p class="rf-sub">2 hours of our time against your target. Top 3 findings delivered in 48 hours. Ownership verification required before we start.</p>
+                    <label>Your name <input type="text" name="name" required autocomplete="name"></label>
+                    <label>Work email <input type="email" name="email" required autocomplete="email"></label>
+                    <label>Company <input type="text" name="company" required autocomplete="organization"></label>
+                    <label>Target URL, repo, or app <input type="text" name="target" placeholder="https://yourdomain.com" required></label>
+                    <label>Your role at the target company <input type="text" name="role" placeholder="CTO, DevOps lead, etc." required></label>
+                    <div class="rf-attest">
+                        <label class="rf-checkbox">
+                            <input type="checkbox" name="attest1" required>
+                            <span>I am the owner of, or am authorized to approve security testing against, the target above.</span>
+                        </label>
+                        <label class="rf-checkbox">
+                            <input type="checkbox" name="attest2" required>
+                            <span>I understand MAS-AI may contact me with a DNS TXT or <code>.well-known</code> file-based verification challenge before any scanning begins. We will not start until verification is confirmed.</span>
+                        </label>
+                        <label class="rf-checkbox">
+                            <input type="checkbox" name="attest3" required>
+                            <span>I have read and agree that no scanning starts without signed written authorization. Submitting this form is a request, not a scan order.</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%;background:linear-gradient(135deg,#ff4060,#b91c3c)">Request Klyntar Recon &rarr;</button>
+                    <p class="rf-foot">Unauthorized scan requests will be rejected. Request IP + timestamp are logged for legal record.</p>
+                </form>
             </div>
-            <h2 class="section-title" style="text-align:center">Get Started with Daena</h2>
-            <p class="section-subtitle" style="text-align:center">Two ways in. <strong style="color:#fff">Run Daena yourself</strong> on the plans below, or <strong style="color:#ff4060">hire us to install and secure it for you</strong> at <a href="https://mas-ai.co/book" style="color:#d4a853;text-decoration:underline">mas-ai.co</a>.</p>
 
-            <!-- Services cross-sell: the done-for-you path -->
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:1080px;margin:0 auto 40px;padding:20px;background:rgba(6,8,16,0.6);border:1px dashed rgba(212,168,83,0.3);border-radius:14px">
-                <div style="text-align:left">
-                    <p style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#d4a853;margin:0 0 6px">Need it installed</p>
-                    <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin:0 0 10px;line-height:1.5">Custom agents + Daena governance wrapped around your stack. 21-day fixed-scope build.</p>
-                    <a href="https://mas-ai.co/automation" target="_blank" rel="noopener" style="font-size:0.8rem;color:#00c8ff;text-decoration:none;font-family:'JetBrains Mono',monospace">See Automation &rarr;</a>
-                </div>
-                <div style="text-align:left">
-                    <p style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#ff4060;margin:0 0 6px">Need a scan</p>
-                    <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin:0 0 10px;line-height:1.5">Klyntar audit with Zero-FP gate + proof-of-exploit on every finding. 5-day turnaround.</p>
-                    <a href="https://mas-ai.co/security" target="_blank" rel="noopener" style="font-size:0.8rem;color:#ff4060;text-decoration:none;font-family:'JetBrains Mono',monospace">See Security &rarr;</a>
-                </div>
-                <div style="text-align:left">
-                    <p style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#d4a853;margin:0 0 6px">Not sure yet</p>
-                    <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin:0 0 10px;line-height:1.5">30-minute free consultation. We map your stack, your gaps, and the fastest path to a result.</p>
-                    <a href="https://mas-ai.co/book" target="_blank" rel="noopener" style="font-size:0.8rem;color:#d4a853;text-decoration:none;font-family:'JetBrains Mono',monospace">Book Free Call &rarr;</a>
-                </div>
+            <div class="request-bridge">
+                <p>Not sure which path? Prefer a call first?</p>
+                <a href="https://mas-ai.co/book" target="_blank" rel="noopener" class="btn-outline">Book a free 30-min call at mas-ai.co &rarr;</a>
             </div>
-
-            <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin:24px 0 20px">Or try Daena yourself</p>
-
-            <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px">
-                <a href="https://daena-596551989073.us-central1.run.app" target="_blank" rel="noopener" class="btn-primary">Try Daena Free Online &rarr;</a>
-                <a href="https://github.com/Mas-AI-Official" target="_blank" rel="noopener" class="btn-outline">See Source on GitHub</a>
-                <a href="https://mas-ai.co/book" target="_blank" rel="noopener" class="btn-secondary">Book Free Call at mas-ai.co</a>
-            </div>
-
-            <p style="text-align:center;margin-top:20px;font-size:0.82rem;color:rgba(255,255,255,0.45)">Pricing lives at <a href="https://mas-ai.co/book" target="_blank" rel="noopener" style="color:#d4a853;text-decoration:underline">mas-ai.co/book</a>. Every engagement is scoped to your business on the free consultation call.</p>
-
         </div>
     </section>
+
+    <style>
+    .request-grid {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+        max-width: 1080px; margin: 40px auto 0;
+    }
+    @media (max-width: 820px) { .request-grid { grid-template-columns: 1fr; } }
+    .request-form {
+        padding: 28px 24px; border-radius: 18px;
+        background: rgba(6,10,20,0.7); backdrop-filter: blur(12px);
+        display: flex; flex-direction: column; gap: 12px;
+    }
+    .request-daena { border: 1px solid rgba(0,200,255,0.3); box-shadow: 0 12px 40px rgba(0,200,255,0.08); }
+    .request-klyntar { border: 1px solid rgba(255,64,96,0.3); box-shadow: 0 12px 40px rgba(255,64,96,0.08); }
+    .rf-eyebrow {
+        font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+        letter-spacing: 0.18em; text-transform: uppercase; margin: 0 0 6px;
+    }
+    .rf-title {
+        font-family: 'Syne', sans-serif; font-size: 1.2rem; color: #fff;
+        margin: 0 0 8px;
+    }
+    .rf-sub { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin: 0 0 12px; line-height: 1.5; }
+    .request-form label {
+        display: flex; flex-direction: column; gap: 5px;
+        font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+        color: rgba(255,255,255,0.55); letter-spacing: 0.05em;
+    }
+    .request-form input, .request-form textarea {
+        padding: 10px 12px; border-radius: 8px;
+        background: rgba(10,14,26,0.8); border: 1px solid rgba(255,255,255,0.1);
+        color: #fff; font-family: inherit; font-size: 0.9rem; outline: none;
+    }
+    .request-form textarea { resize: vertical; min-height: 64px; }
+    .request-daena input:focus, .request-daena textarea:focus { border-color: rgba(0,200,255,0.5); box-shadow: 0 0 0 3px rgba(0,200,255,0.08); }
+    .request-klyntar input:focus, .request-klyntar textarea:focus { border-color: rgba(255,64,96,0.5); box-shadow: 0 0 0 3px rgba(255,64,96,0.08); }
+    .rf-attest {
+        margin-top: 4px; padding: 12px;
+        border: 1px dashed rgba(255,64,96,0.3); border-radius: 10px;
+        background: rgba(6,10,20,0.4);
+        display: flex; flex-direction: column; gap: 10px;
+    }
+    .rf-checkbox {
+        display: flex; flex-direction: row !important; gap: 10px; align-items: flex-start;
+        font-family: inherit; font-size: 0.8rem; color: rgba(255,255,255,0.75);
+        letter-spacing: 0; text-transform: none;
+        cursor: pointer; line-height: 1.45;
+    }
+    .rf-checkbox input { margin-top: 2px; flex-shrink: 0; accent-color: #ff4060; }
+    .rf-checkbox code { background: rgba(255,64,96,0.15); padding: 1px 5px; border-radius: 3px; color: #ff4060; font-size: 0.78rem; }
+    .rf-foot { margin: 6px 0 0; font-size: 0.72rem; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; }
+    .request-bridge {
+        text-align: center; margin: 40px auto 0; max-width: 560px;
+        padding: 24px; border: 1px dashed rgba(212,168,83,0.3); border-radius: 14px;
+        background: rgba(212,168,83,0.04);
+    }
+    .request-bridge p { color: rgba(255,255,255,0.7); margin: 0 0 12px; font-size: 0.95rem; }
+    </style>
+
+    <script>
+    (function () {
+        function handle(form, kind) {
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (!form.reportValidity()) return;
+                var data = {};
+                Array.prototype.forEach.call(form.elements, function (el) {
+                    if (!el.name) return;
+                    if (el.type === 'checkbox') data[el.name] = el.checked ? 'yes' : 'no';
+                    else data[el.name] = (el.value || '').trim();
+                });
+                var subject = '[' + kind + ' Request] ' + (data.company || data.name);
+                var lines = ['Request Type: ' + kind, '', 'Name: ' + data.name, 'Email: ' + data.email, 'Company: ' + data.company];
+                if (data.useCase) lines.push('Use Case: ' + data.useCase);
+                if (data.target) {
+                    lines.push('Target: ' + data.target);
+                    lines.push('Requester Role: ' + data.role);
+                    lines.push('Ownership Attestation: ' + data.attest1);
+                    lines.push('Verification-Challenge Consent: ' + data.attest2);
+                    lines.push('Written-Auth Required Ack: ' + data.attest3);
+                }
+                lines.push('', '-- Sent from daena.mas-ai.co/#s-request at ' + new Date().toISOString());
+                var body = encodeURIComponent(lines.join('\n'));
+                window.location.href = 'mailto:masoud.masoori@mas-ai.co?subject=' + encodeURIComponent(subject) + '&body=' + body;
+            });
+        }
+        handle(document.getElementById('formDaena'), 'Daena Demo');
+        handle(document.getElementById('formKlyntar'), 'Klyntar Recon');
+    })();
+    </script>
 
     <!-- ═══════════════ CONTACT ═══════════════ -->
     <section class="section" id="s-contact" style="min-height:60vh">
@@ -1065,7 +1159,7 @@
                     <p class="footer-col-title">Company</p>
                     <div style="display:flex;flex-direction:column;gap:6px">
                         <a href="https://mas-ai.co" target="_blank">MAS-AI Technologies</a>
-                        <a href="#s-pitch">Investors</a>
+                        <a href="/funding.html">Investors</a>
                         <a href="#s-contact">Contact</a>
                     </div>
                 </div>
@@ -1412,7 +1506,7 @@ chatCloseEl.addEventListener('click',closeDaenaChat);
 chatCloseEl.addEventListener('touchend',closeDaenaChat);
 
 // Section narration (chatbot) + detection
-var allSecs = ['hero','s-manifesto','s-problem','s-solution','s-stats','s-features','s-architecture','s-why','s-demos','s-pitch','s-get-started','s-contact','s-creator'];
+var allSecs = ['hero','s-manifesto','s-problem','s-solution','s-stats','s-features','s-architecture','s-why','s-demos','s-request','s-contact','s-creator'];
 var narration = {
     hero:{msg:"Welcome! Scroll down to enter my world."},
     's-manifesto':{msg:"This is the principle behind everything I do. Intelligence without governance is just a faster way to make mistakes."},
@@ -1423,8 +1517,7 @@ var narration = {
     's-architecture':{msg:"PhiLattice is my patent-pending architecture. Fibonacci spiral for agent placement, honeycomb for department structure. The particle swarm you see IS my topology."},
     's-why':{msg:"This is what sets me apart. Other platforms bolt governance on as a wrapper. Mine is built into every layer of execution."},
     's-demos':{msg:"Two demos here! 'Daena in Action' shows me working live. 'How Daena Works' walks through the governed pipeline."},
-    's-pitch':{msg:"The investor story. 14 slides covering architecture, competitive moat, go-to-market, and roadmap."},
-    's-get-started':{msg:"Four pricing tiers. Free runs entirely on your machine with Ollama. Pro, Max, and Enterprise are coming soon with cloud runtimes and more tokens."},
+    's-request':{msg:"Four pricing tiers. Free runs entirely on your machine with Ollama. Pro, Max, and Enterprise are coming soon with cloud runtimes and more tokens."},
     's-contact':{msg:"Early access is open! Fill out the form and Masoud will onboard you personally. He responds within 24 hours."},
     's-creator':{msg:"Built by Masoud Masoori, founder of MAS-AI Technologies. Based in Ontario, Canada. He codes at 3 AM and calls it peak productivity."}
 };
@@ -1472,11 +1565,11 @@ var kb = [
     {k:['patent','ip'],a:'2 USPTO provisional patents filed: PhiLattice Architecture and NBMF. Plus TLM and eDNA systems under patent protection.'},
     {k:['security','red team'],a:'Dedicated Security department with 6 defense layers: perimeter, input screening, sandboxing, auth, deception traps, incident response.'},
     {k:['who built','founder','masoud','creator','company'],a:'Built by <strong>Masoud Masoori</strong>, founder of MAS-AI Technologies Inc. (Ontario, Canada, Jan 2026). 2 USPTO provisionals filed, GCP deployed, v3.7 production. <a href="https://mas-ai.co" target="_blank">mas-ai.co</a>'},
-    {k:['demo','try','access','early'],a:'Try Daena online right now at our GCP deployment, or download from GitHub for free local use. Fill out the contact form for Pro/Enterprise access. <a href="https://daena-596551989073.us-central1.run.app" target="_blank">Try Online</a>',s:'s-contact'},
+    {k:['demo','try','access','early'],a:'No self-serve accounts. Every engagement starts with a 30-min guided demo or a free Klyntar recon request. Request one here: <a href="#s-request">Request Access form</a>, or book a call at <a href="https://mas-ai.co/book" target="_blank">mas-ai.co/book</a>.',s:'s-request'},
     {k:['background','visual','particle','3d'],a:'The particle swarm tells the story in 4 acts as you scroll. Act 1: Fibonacci spiral = my PhiLattice governance. Act 2: Pipeline descent = 10-stage governed flow. Act 3: Red threat wave = something tries to break in. Act 4: <strong style="color:#ff4060">Hexagonal fortress</strong> = Klyntar security mode activates. Move your cursor during acts 3 and 4 and watch the defense react.'},
-    {k:['price','cost','free'],a:'4 tiers: FREE (Ollama local, $0 forever), PRO ($29/mo, Claude+GPT, 50K tokens), MAX ($99/mo, all 9 providers, 500K tokens), ENTERPRISE (custom, unlimited). Pro/Max/Enterprise coming soon. <a href="#s-get-started">View pricing</a>',s:'s-get-started'},
+    {k:['price','cost','free'],a:'No self-serve pricing on this page. Every Daena engagement is scoped to the business on a free consultation. Ranges run $3,000 to $45,000 depending on scope. <a href="https://mas-ai.co/book" target="_blank">Book free call at mas-ai.co/book</a>.',s:'s-request'},
     {k:['contact','email','reach'],a:'Email <a href="mailto:masoud.masoori@mas-ai.co">masoud.masoori@mas-ai.co</a> or fill out the form below.',s:'s-contact'},
-    {k:['pitch','investor','deck'],a:'View the 14-slide deck <a href="/pitch-deck.html">here</a> or <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank">download PDF</a>.',s:'s-pitch'},
+    {k:['pitch','investor','deck'],a:'View the 14-slide deck <a href="/pitch-deck.html">here</a> or <a href="/assets/pitch/daena_pitch_deck.pdf" target="_blank">download PDF</a>.',s:null},
     {k:['hello','hi','hey'],a:'Hey! I\'m Daena. Ask about my architecture, pipeline, features, or anything. I love talking about myself. (Is that a red flag for an AI?)'}
 ];
 
@@ -1548,8 +1641,7 @@ var sectionSpeech = {
     's-architecture': '<strong>PhiLattice:</strong> Fibonacci scaling + honeycomb departments. Patent pending.',
     's-why': '<strong>The Difference:</strong> We built governance in. Others bolt it on.',
     's-demos': '<strong>Demos:</strong> Watch Daena in action. Governed pipeline end-to-end.',
-    's-pitch': '<strong>Investors:</strong> 14 slides. Architecture, moat, and roadmap.',
-    's-get-started': '<strong>Pricing:</strong> Free forever with Ollama. Pro, Max, Enterprise coming soon.',
+    's-request': '<strong>Pricing:</strong> Free forever with Ollama. Pro, Max, Enterprise coming soon.',
     's-contact': '<strong>Early Access:</strong> Request your spot. We respond within 24 hours.',
     's-creator': '<strong>Creator:</strong> Built by Masoud Masoori. MAS-AI Technologies, Ontario, Canada.'
 };
