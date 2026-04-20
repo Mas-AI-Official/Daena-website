@@ -74,33 +74,163 @@
 <canvas id="bg-canvas"></canvas>
 <div class="scroll-bar" id="scrollBar"></div>
 
-<!-- NAVBAR -->
+<!-- NAVBAR: mas-ai.co-style shrinking glass header with magnetic links -->
 <header class="site-header" id="siteHeader">
-    <nav>
-        <a class="brand" href="#hero"><img src="/assets/img/daena-logo-blue.png" alt="Daena"><span class="brand-name">Daena</span></a>
+    <nav class="nav-inner">
+        <a class="brand" href="/">
+            <img src="/assets/img/daena-logo-blue.png" alt="Daena">
+            <span class="brand-name">Daena</span>
+        </a>
         <div class="nav-links">
-            <a href="#s-problem">Problem</a>
-            <a href="#s-solution">Solution</a>
-            <a href="#s-features">Features</a>
-            <a href="#s-architecture">Architecture</a>
-            <a href="#s-demos">Demos</a>
-            <a href="#s-request">Request</a>
+            <a href="#s-problem" class="nav-link">Risk</a>
+            <a href="#s-solution" class="nav-link">Governance</a>
+            <a href="#s-klyntar" class="nav-link">Klyntar</a>
+            <a href="#s-demos" class="nav-link">Demos</a>
+            <a href="#s-request" class="nav-link">Request</a>
         </div>
         <div class="nav-cta">
-            <a class="nav-cta-desktop" href="https://mas-ai.co" target="_blank" rel="noopener">Explore MAS-AI</a>
-            <button class="nav-burger" id="navBurger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            <a class="nav-cta-secondary" href="https://mas-ai.co/book" target="_blank" rel="noopener">mas-ai.co</a>
+            <a class="nav-cta-primary" href="#s-request">Request Demo</a>
+            <button class="nav-burger" id="navBurger" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
         </div>
     </nav>
     <div class="mobile-nav" id="mobileNav">
-        <a href="#s-problem">Problem</a>
-        <a href="#s-solution">Solution</a>
-        <a href="#s-features">Features</a>
-        <a href="#s-architecture">Architecture</a>
+        <a href="#s-problem">Risk</a>
+        <a href="#s-solution">Governance</a>
+        <a href="#s-klyntar">Klyntar</a>
         <a href="#s-demos">Demos</a>
-        <a href="#s-request">Request</a>
-        <a href="#s-contact">Contact</a>
+        <a href="#s-request" class="mobile-cta-primary">Request Demo</a>
+        <a href="https://mas-ai.co/book" target="_blank" rel="noopener" class="mobile-cta-secondary">mas-ai.co</a>
     </div>
 </header>
+
+<style>
+/* Navbar match to mas-ai.co: shrinking glass, magnetic links, red CTA */
+.site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: center; padding: 16px;
+    transition: padding 0.4s ease;
+}
+.site-header.scrolled { padding: 8px 16px; }
+.nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; width: 100%; max-width: 1280px; padding: 14px 24px;
+    background: transparent; border: 1px solid transparent; border-radius: 0;
+    transition: all 0.5s ease;
+}
+.site-header.scrolled .nav-inner {
+    max-width: 1080px; padding: 10px 20px;
+    background: rgba(8,11,20,0.82);
+    backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(30,41,59,0.6); border-radius: 18px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-inner .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; text-decoration: none; color: #fff; }
+.nav-inner .brand img { height: 34px; width: auto; transition: height 0.3s ease; }
+.site-header.scrolled .brand img { height: 26px; }
+.nav-inner .brand-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: #fff; }
+.nav-inner .nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-inner .nav-link {
+    position: relative; padding: 8px 14px;
+    font-size: 0.88rem; font-weight: 500;
+    color: rgba(232,234,240,0.72); text-decoration: none;
+    border-radius: 8px;
+    transition: color 0.25s ease, background 0.25s ease;
+    will-change: transform;
+}
+.nav-inner .nav-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
+.nav-inner .nav-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-cta-primary {
+    display: inline-flex; align-items: center;
+    padding: 10px 20px; font-size: 0.88rem; font-weight: 700;
+    color: #fff; background: linear-gradient(135deg, #ff4060, #b91c3c);
+    border-radius: 999px; text-decoration: none;
+    box-shadow: 0 0 20px rgba(255,64,96,0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.nav-cta-primary:hover { transform: scale(1.04); box-shadow: 0 0 32px rgba(255,64,96,0.45); }
+.nav-cta-secondary {
+    padding: 8px 16px; font-size: 0.8rem; font-weight: 600;
+    color: rgba(212,168,83,0.9);
+    border: 1px solid rgba(212,168,83,0.3); border-radius: 999px;
+    text-decoration: none; transition: all 0.25s ease;
+    font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;
+}
+.nav-cta-secondary:hover { color: #d4a853; border-color: #d4a853; background: rgba(212,168,83,0.06); }
+@media (max-width: 960px) {
+    .nav-inner .nav-links { display: none; }
+    .nav-cta-secondary { display: none; }
+}
+@media (min-width: 961px) {
+    .nav-burger { display: none; }
+}
+.nav-burger { background: transparent; border: none; color: #fff; padding: 6px; cursor: pointer; }
+.nav-burger svg { width: 22px; height: 22px; }
+.mobile-nav {
+    display: none; position: absolute; top: 100%; left: 16px; right: 16px;
+    margin-top: 8px; background: rgba(8,11,20,0.95);
+    backdrop-filter: blur(40px); border: 1px solid rgba(30,41,59,0.6);
+    border-radius: 18px; padding: 20px 24px;
+    flex-direction: column; gap: 4px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+    color: rgba(232,234,240,0.78); padding: 12px 4px;
+    font-size: 1rem; text-decoration: none;
+    border-bottom: 1px solid rgba(30,41,59,0.3);
+}
+.mobile-nav a:last-child { border-bottom: 0; }
+.mobile-cta-primary {
+    margin-top: 8px; text-align: center; font-weight: 700;
+    background: linear-gradient(135deg, #ff4060, #b91c3c) !important;
+    color: #fff !important; border-radius: 10px !important; border: 0 !important;
+}
+.mobile-cta-secondary {
+    text-align: center; color: #d4a853 !important;
+    border: 1px solid rgba(212,168,83,0.3) !important; border-radius: 10px !important;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem !important;
+}
+</style>
+
+<script>
+(function () {
+    'use strict';
+    var header = document.getElementById('siteHeader');
+    if (header) {
+        var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 60); };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var isTouch = 'ontouchstart' in window;
+    if (!reduced && !isTouch) {
+        document.querySelectorAll('.nav-link').forEach(function (el) {
+            el.addEventListener('mousemove', function (e) {
+                var r = el.getBoundingClientRect();
+                var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+                var dx = Math.max(-5, Math.min(5, (e.clientX - cx) * 0.14));
+                var dy = Math.max(-3, Math.min(3, (e.clientY - cy) * 0.14));
+                el.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+                el.style.transition = 'transform 0.08s ease';
+            });
+            el.addEventListener('mouseleave', function () {
+                el.style.transform = 'translate(0,0)';
+                el.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+        });
+    }
+    var burger = document.getElementById('navBurger');
+    var mobileNav = document.getElementById('mobileNav');
+    if (burger && mobileNav) {
+        burger.addEventListener('click', function () { mobileNav.classList.toggle('open'); });
+        mobileNav.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () { mobileNav.classList.remove('open'); });
+        });
+    }
+})();
+</script>
 
 <main id="scroll-content">
 
