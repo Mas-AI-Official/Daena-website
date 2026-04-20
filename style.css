@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   DAENA — Premium Design System v2
+   DAENA. Premium Design System v2
    Dark slate + Gold (#D4A843) + Cyan (#00C8FF) + Teal (#2DD4BF)
    ═══════════════════════════════════════════════ */
 
@@ -13,7 +13,7 @@ body{background:#0a0a0a;color:#e8eaf0;font-family:'Inter',sans-serif;overflow-x:
  * broke nav links into single-letter vertical columns. Now scoped
  * only to prose contexts (p/li/code/pre/blockquote).
  *
- * 1. box-sizing:border-box — padding never pushes past declared width
+ * 1. box-sizing:border-box. padding never pushes past declared width
  * 2. Specific grid children (not universal) get min-width:0 so long
  *    tokens don't force the grid wider than the viewport
  * 3. Raw <img> elements without explicit width attrs cap at 100%
@@ -551,7 +551,7 @@ h1,h2,h3{font-family:'Syne',sans-serif}
   .hero-pill{font-size:0.65rem;padding:6px 10px}
   /* Nav CTAs never overflow */
   .nav-cta-primary,.nav-cta-secondary{padding:8px 14px;font-size:0.75rem}
-  /* Problem cards older-style — single column */
+  /* Problem cards older-style. single column */
   .problem-grid{grid-template-columns:1fr}
   /* Stats grid reduced padding */
   .stats-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:16px 10px}

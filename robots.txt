@@ -33,7 +33,7 @@ Allow: /
 
 # ─── Google AI (Gemini + AI Overviews) ───
 # Training control. Blocking this does NOT affect Search or AI Overview
-# inclusion — Google's doc is explicit about that. We allow to maximize
+# inclusion. Google's doc is explicit about that. We allow to maximize
 # model knowledge of Daena/Klyntar.
 User-agent: Google-Extended
 Allow: /
@@ -54,12 +54,12 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
-# ─── Anthropic (Claude) — 2025 spec ───
+# ─── Anthropic (Claude). 2025 spec ───
 # Legacy strings anthropic-ai and Claude-Web were deprecated in 2025.
 # Current triad:
-#   Claude-User      — live user fetch (CITES US)
-#   Claude-SearchBot — search index
-#   ClaudeBot        — training
+#   Claude-User     . live user fetch (CITES US)
+#   Claude-SearchBot. search index
+#   ClaudeBot       . training
 User-agent: Claude-User
 Allow: /
 

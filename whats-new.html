@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover">
     <meta name="robots" content="index, follow">
-    <title>What's New in Daena v3.7.0 — The Security Supercharge</title>
-    <meta name="description" content="Daena v3.7.0 ships the Klyntar security fortress natively: Zero-FP gating, BeyondMythos enrichment, Asset Shield, and six-channel intelligence fan-out — 16 new files, 2,956 tests passing, zero regressions.">
+    <title>What's New in Daena v3.7.0. The Security Supercharge</title>
+    <meta name="description" content="Daena v3.7.0 ships the Klyntar security fortress natively: Zero-FP gating, BeyondMythos enrichment, Asset Shield, and six-channel intelligence fan-out. 16 new files, 2,956 tests passing, zero regressions.">
     <meta name="keywords" content="Daena v3.7, Daena security, Klyntar, AI security, Zero-FP gate, Asset Shield, BeyondMythos, Laevateinn, MAS-AI, governed AI">
     <meta name="author" content="MAS-AI Technologies Inc.">
     <link rel="canonical" href="https://daena.mas-ai.co/whats-new.html">
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <meta property="og:title" content="Daena v3.7.0 — The Security Supercharge">
+    <meta property="og:title" content="Daena v3.7.0. The Security Supercharge">
     <meta property="og:description" content="16 new modules. Zero-FP gating. Six-channel intel fan-out. Asset Shield vault. 2,956 tests green, zero regressions.">
     <meta property="og:image" content="https://daena.mas-ai.co/assets/img/daena-logo-blue.png">
     <meta property="og:url" content="https://daena.mas-ai.co/whats-new.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Daena AI">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Daena v3.7.0 — The Security Supercharge">
+    <meta name="twitter:title" content="Daena v3.7.0. The Security Supercharge">
     <meta name="twitter:description" content="Klyntar-grade security, baked into Daena. Shipped 2026-04-19.">
     <meta name="theme-color" content="#00c8ff">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"TechArticle","headline":"What's New in Daena v3.7.0 — The Security Supercharge","datePublished":"2026-04-19","dateModified":"2026-04-19","author":{"@type":"Organization","name":"MAS-AI Technologies Inc."},"publisher":{"@type":"Organization","name":"MAS-AI Technologies Inc.","logo":{"@type":"ImageObject","url":"https://mas-ai.co/images/mas-ai-logo.png"}},"image":"https://daena.mas-ai.co/assets/img/daena-logo-blue.png","articleSection":"Release Notes","keywords":"Daena,v3.7.0,security,Zero-FP gate,Asset Shield,BeyondMythos,Klyntar"}
+    {"@context":"https://schema.org","@type":"TechArticle","headline":"What's New in Daena v3.7.0. The Security Supercharge","datePublished":"2026-04-19","dateModified":"2026-04-19","author":{"@type":"Organization","name":"MAS-AI Technologies Inc."},"publisher":{"@type":"Organization","name":"MAS-AI Technologies Inc.","logo":{"@type":"ImageObject","url":"https://mas-ai.co/images/mas-ai-logo.png"}},"image":"https://daena.mas-ai.co/assets/img/daena-logo-blue.png","articleSection":"Release Notes","keywords":"Daena,v3.7.0,security,Zero-FP gate,Asset Shield,BeyondMythos,Klyntar"}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -313,7 +313,7 @@
             <p class="section-subtitle">
                 v3.6.x made Daena governed. v3.7.0 makes it <strong style="color:#00c8ff">defended</strong>.
                 Three philosophical shifts: (1) security findings are proved, not guessed. (2) Defense runs
-                inline during chat — no separate pentest cycle. (3) Asset exposure is gated by vault +
+                inline during chat. No separate pentest cycle. (3) Asset exposure is gated by vault +
                 egress filter + consent tokens, not by convention.
             </p>
         </div>
@@ -384,7 +384,7 @@
         <div class="section-inner">
             <p class="section-label" style="color:#ff4060">Deep dive · Package 06</p>
             <h2 class="section-title">The Zero-FP Gate, explained</h2>
-            <p class="section-subtitle">The single biggest QoL improvement in v3.7.0. Every security finding at tier OPERATOR or above must be reproducible — or it's dropped silently, before it ever hits your inbox.</p>
+            <p class="section-subtitle">The single biggest QoL improvement in v3.7.0. Every security finding at tier OPERATOR or above must be reproducible. or it's dropped silently, before it ever hits your inbox.</p>
 
             <div class="deep-dive">
                 <h3><span class="accent-red">How</span> it works</h3>
@@ -392,7 +392,7 @@
                     <li><span class="ch-label">Step 1</span>ScanWorkflow aggregates findings from six channels (web, CVE, codebase, NBMF, knowledge graph, hunter).</li>
                     <li><span class="ch-label">Step 2</span><strong>source_correlator.py</strong> maps each finding against actual source code via codebase-memory MCP. Findings that point at code that doesn't exist are dropped.</li>
                     <li><span class="ch-label">Step 3</span><strong>zero_fp_gate.py</strong> runs reproduction attempts. For operator-facing findings, an exploit trace must be produced. If no trace → no report line.</li>
-                    <li><span class="ch-label">Step 4</span>BeyondMythos enrichment runs on the survivors — ErrorOracle double-checks reasoning, AdversarialSimulator stress-tests the claim, CompositionalPlanner attaches remediation.</li>
+                    <li><span class="ch-label">Step 4</span>BeyondMythos enrichment runs on the survivors. ErrorOracle double-checks reasoning, AdversarialSimulator stress-tests the claim, CompositionalPlanner attaches remediation.</li>
                     <li><span class="ch-label">Step 5</span>You see the report. Every finding has CVE ref, exploit trace, source snippet, and remediation. No noise.</li>
                 </ul>
             </div>
@@ -404,7 +404,7 @@
         <div class="section-inner">
             <p class="section-label" style="color:#d4a853">Always-on governance</p>
             <h2 class="section-title">Three layers. Non-negotiable.</h2>
-            <p class="section-subtitle">v3.7.0 introduces asymmetric governance — your experience is smooth, your attacker's experience is not.</p>
+            <p class="section-subtitle">v3.7.0 introduces asymmetric governance. Your experience is smooth, your attacker's experience is not.</p>
 
             <div class="invariants">
                 <div class="invariant">
@@ -462,26 +462,26 @@
             <div class="deep-dive">
                 <h3>Backend (10 new · 5 modified)</h3>
                 <ul>
-                    <li><strong>api/v1/security_mode.py</strong> — REST endpoints: mode/state, mode/activate, mode/deactivate</li>
-                    <li><strong>services/security/beyond_mythos_enricher.py</strong> — ErrorOracle + AdversarialSimulator + CompositionalPlanner wrapper</li>
-                    <li><strong>services/security/cve_intel.py</strong> — 1-hour-cached CVE feed client</li>
-                    <li><strong>services/security/intel_fanout.py</strong> — 6-channel parallel query orchestrator</li>
-                    <li><strong>services/security/source_correlator.py</strong> — Whitebox/blackbox mapping via codebase-memory MCP</li>
-                    <li><strong>services/security/zero_fp_gate.py</strong> — No-exploit-no-report gate on OPERATOR+ tier</li>
-                    <li><strong>services/security/asset_shield/</strong> — vault_adapter · egress_filter · consent_token · operator_initiation</li>
+                    <li><strong>api/v1/security_mode.py</strong>. REST endpoints: mode/state, mode/activate, mode/deactivate</li>
+                    <li><strong>services/security/beyond_mythos_enricher.py</strong>. ErrorOracle + AdversarialSimulator + CompositionalPlanner wrapper</li>
+                    <li><strong>services/security/cve_intel.py</strong>. 1-hour-cached CVE feed client</li>
+                    <li><strong>services/security/intel_fanout.py</strong>. 6-channel parallel query orchestrator</li>
+                    <li><strong>services/security/source_correlator.py</strong>. Whitebox/blackbox mapping via codebase-memory MCP</li>
+                    <li><strong>services/security/zero_fp_gate.py</strong>. No-exploit-no-report gate on OPERATOR+ tier</li>
+                    <li><strong>services/security/asset_shield/</strong>. vault_adapter · egress_filter · consent_token · operator_initiation</li>
                 </ul>
             </div>
 
             <div class="deep-dive" style="margin-top:20px">
                 <h3>Frontend (2 new · 4 modified)</h3>
                 <ul>
-                    <li><strong>stores/securityModeStore.ts</strong> — mode state store with SSE sync</li>
-                    <li><strong>components/chat/ScanProgressCard.tsx</strong> — inline live-progress card</li>
-                    <li><strong>components/chat/ChatInput.tsx</strong> — silent keystroke interceptor (hidden activation)</li>
-                    <li><strong>components/chat/SlashCommands.tsx</strong> — /scan command (not listed in menu)</li>
-                    <li><strong>components/chat/GovernanceEventStrip.tsx</strong> — scan-card rendering</li>
-                    <li><strong>components/layout/Header.tsx</strong> — elevated-mode gold lightning indicator</li>
-                    <li><strong>stores/chatStore.ts</strong> — scan_dispatched SSE handler</li>
+                    <li><strong>stores/securityModeStore.ts</strong>. mode state store with SSE sync</li>
+                    <li><strong>components/chat/ScanProgressCard.tsx</strong>. inline live-progress card</li>
+                    <li><strong>components/chat/ChatInput.tsx</strong>. silent keystroke interceptor (hidden activation)</li>
+                    <li><strong>components/chat/SlashCommands.tsx</strong>. /scan command (not listed in menu)</li>
+                    <li><strong>components/chat/GovernanceEventStrip.tsx</strong>. scan-card rendering</li>
+                    <li><strong>components/layout/Header.tsx</strong>. elevated-mode gold lightning indicator</li>
+                    <li><strong>stores/chatStore.ts</strong>. scan_dispatched SSE handler</li>
                 </ul>
             </div>
         </div>

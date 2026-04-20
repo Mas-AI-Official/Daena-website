@@ -6,12 +6,12 @@
  * Linear, Vercel, Framer, Stripe and Claude.com in 2025-2026.
  *
  * Design methods applied (the three that survived my top-5 shortlist):
- *   1. Gradient Mesh  — Linear / Vercel / Framer. A handful of large soft
+ *   1. Gradient Mesh . Linear / Vercel / Framer. A handful of large soft
  *      orbs with 'lighter' compositing. No story to decode; just mood.
- *   2. Peak-end Crescendo — Stripe / Apple. Cyan governance palette up top
+ *   2. Peak-end Crescendo. Stripe / Apple. Cyan governance palette up top
  *      (calm, competent), gold proof/trust in the middle, red Klyntar peak
  *      during the security section, cyan+gold resolution at the bottom.
- *   3. Cursor Soft Spotlight — Claude.com / Arc. Low-opacity white halo
+ *   3. Cursor Soft Spotlight. Claude.com / Arc. Low-opacity white halo
  *      that follows the cursor; peripheral awareness, not a reaction game.
  *
  * Psychology this is tuned for:
@@ -67,7 +67,7 @@
         return              [255, 64,  96];      // red    - Klyntar security
     }
 
-    // Weight of each role at a given scroll fraction (0..1).
+    // Weight of each role at a given scroll fraction (0.1).
     // Curves are tuned so that:
     //   - cyan (governance) is present everywhere but recedes past the middle
     //   - gold (trust) peaks at the Proof Wall (~40-50%)
@@ -172,7 +172,7 @@
             ctx.fill();
         }
 
-        // 3.5. Light streaks — slow-moving horizontal trails for kinetic depth
+        // 3.5. Light streaks. slow-moving horizontal trails for kinetic depth
         for (var sj = 0; sj < STREAKS; sj++) {
             var sk = streaks[sj];
             var px = ((ts * sk.speed) + sk.phase) % 1;
