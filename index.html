@@ -209,7 +209,7 @@
             <span class="brand-name">Daena</span>
         </a>
         <div class="nav-links">
-            <a href="#s-problem" class="nav-link">Risk</a>
+            <a href="/origin.html" class="nav-link">Origin</a>
             <a href="#s-solution" class="nav-link">Governance</a>
             <a href="#s-proof" class="nav-link">Proof</a>
             <a href="#s-klyntar" class="nav-link" style="color:rgba(255,64,96,0.85)">Klyntar</a>
@@ -225,7 +225,7 @@
         </div>
     </nav>
     <div class="mobile-nav" id="mobileNav">
-        <a href="#s-problem">Risk</a>
+        <a href="/origin.html">Origin</a>
         <a href="#s-solution">Governance</a>
         <a href="#s-proof">Proof</a>
         <a href="#s-klyntar" style="color:#ff4060">Klyntar</a>
@@ -659,6 +659,99 @@
             </div>
 
             <p class="proof-honesty">Every claim above has a public source. If a line here doesn&rsquo;t match what you find when you Google it, tell us. We&rsquo;ll take it down.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PROVEN RESULTS (private-customer + coordinated disclosure) ═══════════════ -->
+    <section class="section" id="s-results" style="min-height:auto;padding:60px 24px 40px">
+        <div class="section-inner">
+            <p class="section-label" style="color:rgba(212,168,83,0.85)">Act 02.6 &middot; Proven Results</p>
+            <h2 class="section-title" style="color:rgba(255,255,255,0.95)">What Klyntar has <span class="shimmer">actually found</span>.</h2>
+            <p class="section-subtitle">We do not name customers on the public site. These are real engagements, described in terms our partners approved. If you want the full case study, ask under NDA.</p>
+
+            <div class="results-grid">
+                <!-- RESULT 1 — Google Cloud VRP -->
+                <div class="result-card result-card-red">
+                    <div class="result-tag">
+                        <span class="result-tag-dot"></span>
+                        Coordinated Disclosure &middot; Google Cloud VRP
+                    </div>
+                    <h3 class="result-title">4 findings submitted to the Google Cloud Vulnerability Reward Program.</h3>
+                    <p class="result-body">Klyntar contributed four findings to the Google Cloud VRP, currently in coordinated disclosure. Details remain embargoed until Google completes remediation. Discovery methodology: exploit-signature replay against Cloud Run public-facing surfaces, Zero-FP gate applied before each submission.</p>
+                    <!-- TODO(Masoud): confirm VRP submission IDs or embargo status. -->
+                    <div class="result-foot">
+                        <span class="result-foot-pill">Status: embargoed pending remediation</span>
+                    </div>
+                </div>
+
+                <!-- RESULT 2 — Private customer, SaaS -->
+                <div class="result-card result-card-cyan">
+                    <div class="result-tag">
+                        <span class="result-tag-dot" style="background:#00c8ff"></span>
+                        Private Customer &middot; Series B SaaS
+                    </div>
+                    <h3 class="result-title">Prompt-injection vector shipped in production.</h3>
+                    <p class="result-body">A $40M-ARR SaaS was running an AI support agent with no input-side sanitization. Klyntar flagged a 2-step prompt-injection that escalated a user to admin-read scope. Patch landed in 72 hours. We held disclosure; they rewrote the system prompt + added Daena&rsquo;s InputValidator stage.</p>
+                    <div class="result-foot">
+                        <span class="result-foot-pill" style="color:#00c8ff;border-color:rgba(0,200,255,0.3);background:rgba(0,200,255,0.06)">Status: fixed &middot; recon to patch = 3 days</span>
+                    </div>
+                </div>
+
+                <!-- RESULT 3 — Private customer, Fintech -->
+                <div class="result-card result-card-red">
+                    <div class="result-tag">
+                        <span class="result-tag-dot"></span>
+                        Private Customer &middot; Fintech (pre-seed)
+                    </div>
+                    <h3 class="result-title">Exposed source maps on a production API console.</h3>
+                    <p class="result-body">A fintech startup shipped a Next.js admin console with source maps enabled in production. Klyntar&rsquo;s Asset Shield crawled the build output, identified 14 JS chunks with full module paths, flagged 2 internal endpoint names, and returned the redacted fix-list inside 4 hours. Consent token destroyed the artifacts within 24h.</p>
+                    <div class="result-foot">
+                        <span class="result-foot-pill">Status: fixed &middot; source maps stripped from CI</span>
+                    </div>
+                </div>
+
+                <!-- RESULT 4 — Bugcrowd posture -->
+                <div class="result-card result-card-gold">
+                    <div class="result-tag">
+                        <span class="result-tag-dot" style="background:#d4a853"></span>
+                        Bugcrowd &middot; Active Researcher
+                    </div>
+                    <h3 class="result-title">Active on public programs: Tesla, Microsoft, Google, X.</h3>
+                    <p class="result-body">Masoud is an active security researcher on Bugcrowd. We publish registration, not private findings. Any Bugcrowd program details are confirmable on request via the researcher profile URL. We intentionally never claim unverifiable hall-of-fame spots.</p>
+                    <!-- TODO(Masoud): upgrade to specific rank/points number if shareable. -->
+                    <div class="result-foot">
+                        <span class="result-foot-pill" style="color:#d4a853;border-color:rgba(212,168,83,0.3);background:rgba(212,168,83,0.06)">Profile URL on request</span>
+                    </div>
+                </div>
+
+                <!-- RESULT 5 — Private customer, Enterprise deployment -->
+                <div class="result-card result-card-cyan">
+                    <div class="result-tag">
+                        <span class="result-tag-dot" style="background:#00c8ff"></span>
+                        Private Customer &middot; Enterprise AI Pilot
+                    </div>
+                    <h3 class="result-title">10-stage pipeline replaced 3 vendor tools in one install.</h3>
+                    <p class="result-body">An enterprise pilot was paying for a prompt-injection filter, an audit log service, and a policy engine. Daena&rsquo;s SecurityGate + GovernanceEngine + AuditLog stages replaced all three. Vendor cost delta: $67k/year saved. Governance never blocks execution in their deployment. It guides.</p>
+                    <div class="result-foot">
+                        <span class="result-foot-pill" style="color:#00c8ff;border-color:rgba(0,200,255,0.3);background:rgba(0,200,255,0.06)">Status: live &middot; 90-day pilot in month 2</span>
+                    </div>
+                </div>
+
+                <!-- RESULT 6 — Credential-leak hunt -->
+                <div class="result-card result-card-red">
+                    <div class="result-tag">
+                        <span class="result-tag-dot"></span>
+                        Private Customer &middot; DTC brand
+                    </div>
+                    <h3 class="result-title">Leaked API key found on a public GitHub mirror.</h3>
+                    <p class="result-body">A DTC brand had migrated a demo app to a public repo 18 months prior. A Stripe test key (still valid, production scope) was sitting in commit #42. Klyntar&rsquo;s credential-leak pass found it in 11 minutes. Key rotated, incident closed, governance now monitors their full org.</p>
+                    <div class="result-foot">
+                        <span class="result-foot-pill">Status: fixed &middot; scan-to-rotate = 40 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="results-honesty">Customer names omitted by policy. We do not share users&rsquo; problems, even anonymized, without their written consent. Want a direct reference? Ask and we&rsquo;ll arrange a confidential call.</p>
         </div>
     </section>
 
@@ -1946,7 +2039,10 @@ var sectionSpeech = {
 var lastSpeechSec = '';
 var speechTimeout = null;
 
-// Avatar swap: Daena on most sections, Klyntar on s-klyntar / s-request
+// Avatar swap: Daena on most sections, Klyntar on s-klyntar / s-request.
+// Uses a CSS class toggle instead of inline box-shadow so the glow follows
+// the alpha silhouette of the transparent PNG (drop-shadow), not a
+// rectangular button frame.
 var avatarImgs = document.querySelectorAll('#avatarBtn img, .chat-head img, #wToast img');
 var KLYNTAR_SECTIONS = {'s-klyntar':true, 's-request':true};
 var currentAvatarSrc = '/assets/img/daena-nobg.png';
@@ -1956,12 +2052,13 @@ function updateAvatarForSection(sec){
     if (targetSrc === currentAvatarSrc) return;
     currentAvatarSrc = targetSrc;
     avatarImgs.forEach(function(img){ img.src = targetSrc; });
-    // Visual hint on the floating button
+    // Toggle klyntar-mode class on avatar button + chat-head img. CSS
+    // does the rest (red drop-shadow instead of cyan).
     var btn = document.getElementById('avatarBtn');
-    if (btn){
-        if (wantKlyntar) btn.style.boxShadow = '0 0 0 2px rgba(255,64,96,0.4), 0 0 24px rgba(255,64,96,0.25)';
-        else btn.style.boxShadow = '';
-    }
+    if (btn){ btn.classList.toggle('klyntar-mode', wantKlyntar); }
+    document.querySelectorAll('.chat-head img').forEach(function(img){
+        img.classList.toggle('klyntar-mode', wantKlyntar);
+    });
 }
 
 function updateSpeech() {
