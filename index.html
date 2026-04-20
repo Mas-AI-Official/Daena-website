@@ -364,7 +364,7 @@
 <main id="scroll-content">
 
     <!-- ═══════════════ HERO ═══════════════ -->
-    <section class="section" id="hero" style="height:100vh;padding-top:88px;display:flex;align-items:center;justify-content:center">
+    <section class="section" id="hero" data-scene="awakening" style="height:100vh;padding-top:88px;display:flex;align-items:center;justify-content:center">
         <div class="hero-overlay" id="heroOverlay">
             <p class="label">MAS-AI Technologies Inc. &middot; v3.7 Production</p>
             <h1 class="shimmer">Meet Daena.</h1>
@@ -383,16 +383,39 @@
         <div class="scroll-hint" id="scrollHint"><span>Scroll</span><div class="bar"></div></div>
     </section>
 
-    <!-- Particle morph spacer -->
-    <section class="section" id="convergence" style="height:200vh"></section>
+    <!-- ═══════════════ PROLOGUE (3-beat scroll-coupled intro) ═══════════════ -->
+    <!-- Replaces the old 200vh particle-morph dead zone with a proper
+         narrative. The canvas in the background reacts to each beat
+         via data-scene attributes read by particles.js. -->
+    <section class="section prologue-section" id="s-prologue" data-scene="origin">
+        <div class="prologue-stage">
+            <!-- Fixed-position beats that pin and fade as user scrolls. -->
+            <div class="prologue-beat" data-beat="origin">
+                <p class="prologue-eyebrow">Prologue &middot; 2026</p>
+                <h2 class="prologue-title">Before AI had <em>a conscience</em>,<br>it had only a voice.</h2>
+                <p class="prologue-body">Agents drifted without memory. Decisions left no trace. Nobody could replay them. Nobody could audit them. That was the silent liability waiting for every founder who said yes to AI.</p>
+            </div>
+            <div class="prologue-beat" data-beat="question">
+                <p class="prologue-eyebrow">Then, a question.</p>
+                <h2 class="prologue-title">What if every AI action<br>left a <em>signature</em>?</h2>
+                <p class="prologue-body">Not a log line. A proof. Merkle-notarized. Append-only. Replayable six months later. Governance as an execution layer, not a wrapper.</p>
+            </div>
+            <div class="prologue-beat" data-beat="answer">
+                <p class="prologue-eyebrow">The answer emerges.</p>
+                <h2 class="prologue-title">A governed mind.<br>And <em style="color:#ff4060">a defender</em> when threat enters.</h2>
+                <p class="prologue-body">One platform. Two modes. Daena governs. <strong style="color:#ff4060">Klyntar</strong> guards. Scroll through the architecture. You'll meet both.</p>
+            </div>
+            <p class="prologue-scroll-hint">&darr; Scroll &darr;</p>
+        </div>
+    </section>
 
     <!-- ═══════════════ MANIFESTO ═══════════════ -->
-    <section class="section" id="s-manifesto" style="min-height:30vh;display:flex;align-items:center;justify-content:center">
+    <section class="section" id="s-manifesto" data-scene="zen" style="min-height:30vh;display:flex;align-items:center;justify-content:center">
         <p class="manifesto-quote shimmer">"Intelligence without governance is just a faster way to make mistakes. Governance without defense is a softer target."</p>
     </section>
 
     <!-- ═══════════════ PROBLEM ═══════════════ -->
-    <section class="section" id="s-problem" style="min-height:80vh">
+    <section class="section" id="s-problem" data-scene="chaos" style="min-height:80vh">
         <div class="section-inner section-problem">
             <p class="section-label" style="color:rgba(239,68,68,0.7)">Act 01 &middot; The Risk</p>
             <h2 class="section-title" style="color:rgba(255,255,255,0.95)">Your AI is making decisions<br>you <span style="color:#ff4060">can&rsquo;t explain</span>.</h2>
@@ -437,7 +460,7 @@
     </section>
 
     <!-- ═══════════════ SOLUTION ═══════════════ -->
-    <section class="section" id="s-solution" style="min-height:90vh">
+    <section class="section" id="s-solution" data-scene="pipeline" style="min-height:90vh">
         <div class="section-inner">
             <p class="section-label" style="color:rgba(34,197,94,0.8)">Act 02 · The Governance</p>
             <h2 class="section-title" style="color:rgba(255,255,255,0.95)">Every Decision Governed.<br>Every Action Traceable.</h2>
@@ -578,7 +601,7 @@
     </section>
 
     <!-- ═══════════════ PROOF WALL ═══════════════ -->
-    <section class="section" id="s-proof" style="min-height:auto;padding:80px 24px 60px">
+    <section class="section" id="s-proof" data-scene="trust" style="min-height:auto;padding:80px 24px 60px">
         <div class="section-inner">
             <p class="section-label" style="color:rgba(212,168,83,0.8)">Act 02.5 &middot; The Proof Wall</p>
             <h2 class="section-title" style="color:rgba(255,255,255,0.95)">Every claim here is <span class="shimmer">verifiable</span>.</h2>
@@ -663,7 +686,7 @@
     </section>
 
     <!-- ═══════════════ PROVEN RESULTS (private-customer + coordinated disclosure) ═══════════════ -->
-    <section class="section" id="s-results" style="min-height:auto;padding:60px 24px 40px">
+    <section class="section" id="s-results" data-scene="trust" style="min-height:auto;padding:60px 24px 40px">
         <div class="section-inner">
             <p class="section-label" style="color:rgba(212,168,83,0.85)">Act 02.6 &middot; Proven Results</p>
             <h2 class="section-title" style="color:rgba(255,255,255,0.95)">What Klyntar has <span class="shimmer">actually found</span>.</h2>
@@ -756,7 +779,7 @@
     </section>
 
     <!-- ═══════════════ STATS BAR ═══════════════ -->
-    <section class="section stats-bar" id="s-stats">
+    <section class="section stats-bar" id="s-stats" data-scene="proof">
         <div class="stats-grid">
             <div class="stat-item">
                 <span class="stat-number shimmer-cyan">2,956</span>
@@ -791,7 +814,7 @@
     </section>
 
     <!-- ═══════════════ FEATURES (bento) ═══════════════ -->
-    <section class="section" id="s-features" style="min-height:100vh">
+    <section class="section" id="s-features" data-scene="lattice" style="min-height:100vh">
         <div class="section-inner">
             <p class="section-label" style="color:rgba(212,168,83,0.8)">Proof, not promises</p>
             <h2 class="section-title" style="color:rgba(255,255,255,0.95)"><span class="shimmer">2,956 tests.</span> v3.7 in production.</h2>
@@ -838,7 +861,7 @@
     </section>
 
     <!-- ═══════════════ ARCHITECTURE ═══════════════ -->
-    <section class="section" id="s-architecture" style="min-height:100vh">
+    <section class="section" id="s-architecture" data-scene="spiral" style="min-height:100vh">
         <div class="section-inner">
             <p class="section-label" style="color:rgba(212,168,83,0.8)">Protected Innovation</p>
             <h2 class="section-title"><span class="shimmer">2 Patents Filed. 6 Systems. Zero Copies.</span></h2>
@@ -902,7 +925,7 @@
     </section>
 
     <!-- ═══════════════ WHY DAENA ═══════════════ -->
-    <section class="section" id="s-why" style="min-height:60vh">
+    <section class="section" id="s-why" data-scene="split" style="min-height:60vh">
         <div class="section-inner">
             <p class="section-label" style="color:rgba(0,200,255,0.8)">Act 03 &middot; The Difference</p>
             <h2 class="section-title" style="color:rgba(255,255,255,0.95)">They bolt governance on.<br>We <span class="shimmer-cyan">built it in</span>.</h2>
@@ -935,7 +958,7 @@
     </section>
 
     <!-- ═══════════════ KLYNTAR ACTIVATES (synced with Act 4 red peak in aurora) ═══════════════ -->
-    <section class="section" id="s-klyntar" style="min-height:auto;padding:80px 24px">
+    <section class="section" id="s-klyntar" data-scene="fortress" style="min-height:auto;padding:80px 24px">
         <div class="klyntar-shell">
             <div class="klyntar-corona"></div>
             <p class="section-label" style="color:rgba(255,64,96,0.85);text-align:center">Act 04 &middot; When Threat Enters</p>
@@ -1252,7 +1275,7 @@
     </script>
 
     <!-- ═══════════════ DEMOS ═══════════════ -->
-    <section class="section" id="s-demos" style="min-height:80vh">
+    <section class="section" id="s-demos" data-scene="calm" style="min-height:80vh">
         <div class="section-inner">
             <p class="section-label" style="color:rgba(0,200,255,0.8)">Act 05 &middot; See It Work</p>
             <h2 class="section-title" style="color:rgba(255,255,255,0.95)">Watch it work. <span class="shimmer-cyan">Live. Governed. Audited.</span></h2>
@@ -1328,7 +1351,7 @@
 <!-- (Investor pitch deck section removed from product page; moved to /funding.html for investor-only audience) -->
 
     <!-- ═══════════════ REQUEST ACCESS ═══════════════ -->
-    <section class="section" id="s-request" style="min-height:80vh">
+    <section class="section" id="s-request" data-scene="focus" style="min-height:80vh">
         <div class="section-inner">
             <p class="section-label" style="color:#d4a853;text-align:center">Request Access</p>
             <h2 class="section-title" style="text-align:center">No self-serve.<br>Every engagement starts with <span style="color:#d4a853">a conversation</span>.</h2>
@@ -1476,7 +1499,7 @@
     </script>
 
     <!-- ═══════════════ CONTACT ═══════════════ -->
-    <section class="section" id="s-contact" style="min-height:60vh">
+    <section class="section" id="s-contact" data-scene="calm" style="min-height:60vh">
         <div class="section-inner" style="max-width:620px">
             <div class="contact-card">
                 <p class="section-label" style="color:rgba(212,168,83,0.7);margin-bottom:8px">Let&rsquo;s Talk</p>
@@ -1503,7 +1526,7 @@
     </section>
 
     <!-- ═══════════════ CREATOR ═══════════════ -->
-    <section class="section" id="s-creator" style="min-height:auto;padding:60px 20px">
+    <section class="section" id="s-creator" data-scene="warm" style="min-height:auto;padding:60px 20px">
         <div style="max-width:360px;margin:0 auto;text-align:center">
             <p class="section-label" style="margin-bottom:20px">The Human Behind MAS-AI</p>
             <img src="/assets/img/masoud-founder.jpg" alt="Masoud Masoori" style="width:88px;height:88px;border-radius:50%;object-fit:cover;border:2px solid rgba(212,168,83,0.3);margin-bottom:14px">
