@@ -68,11 +68,18 @@
     }
 
     // Weight of each role at a given scroll fraction (0..1).
-    // These curves define the peak-end crescendo.
+    // Curves are tuned so that:
+    //   - cyan (governance) is present everywhere but recedes past the middle
+    //   - gold (trust) peaks at the Proof Wall (~40-50%)
+    //   - red (Klyntar) surges hard in the 55-80% band, then tapers for the
+    //     closing CTA (peak-end rule)
     function weightAt(role, s) {
-        if (role === 0) return Math.max(0.28, 1 - s * 0.45);                     // cyan:  never fully leaves
-        if (role === 1) return Math.max(0.22, 1 - Math.abs(s - 0.45) * 1.5);     // gold:  peaks mid (proof)
-        return              Math.max(0.08, s < 0.55 ? s * 0.35 : (s - 0.40) * 1.6); // red:  surges 55-80%
+        if (role === 0) return Math.max(0.30, 1 - s * 0.42);
+        if (role === 1) return Math.max(0.22, 1 - Math.abs(s - 0.45) * 1.4);
+        // Red: smooth gaussian-ish peak centered around 0.65 scroll
+        var redCenter = 0.65, redSpread = 0.22;
+        var redBell = Math.exp(-Math.pow((s - redCenter) / redSpread, 2));
+        return Math.max(0.10, redBell * 1.25);
     }
 
     // --- Dot field (depth) ----------------------------------------------
@@ -84,6 +91,19 @@
             y: Math.random(),
             r: 0.6 + Math.random() * 1.2,
             phase: Math.random() * 6.28
+        });
+    }
+
+    // --- Light streaks (subtle motion trails, adds kinetic depth) --------
+    var STREAKS = 4;
+    var streaks = [];
+    for (var si = 0; si < STREAKS; si++) {
+        streaks.push({
+            y: Math.random(),
+            speed: 0.00002 + Math.random() * 0.00005, // pixels-per-ms per viewport width
+            phase: Math.random() * 1000,
+            len: 0.18 + Math.random() * 0.18,  // length as fraction of W
+            hue: si % 2                          // 0 = cyan-ish, 1 = gold-ish
         });
     }
 
@@ -150,6 +170,23 @@
             ctx.beginPath();
             ctx.arc(x, y, r, 0, Math.PI * 2);
             ctx.fill();
+        }
+
+        // 3.5. Light streaks — slow-moving horizontal trails for kinetic depth
+        for (var sj = 0; sj < STREAKS; sj++) {
+            var sk = streaks[sj];
+            var px = ((ts * sk.speed) + sk.phase) % 1;
+            var cx = px * W;
+            var cy = sk.y * H + Math.sin(ts * 0.0003 + sj) * 12;
+            var sLen = sk.len * W;
+            var sCol = sk.hue === 0 ? '0,200,255' : '212,168,83';
+            var sAlpha = 0.07;
+            var lg = ctx.createLinearGradient(cx - sLen, cy, cx, cy);
+            lg.addColorStop(0,   'rgba(' + sCol + ',0)');
+            lg.addColorStop(0.8, 'rgba(' + sCol + ',' + sAlpha + ')');
+            lg.addColorStop(1,   'rgba(' + sCol + ',0)');
+            ctx.fillStyle = lg;
+            ctx.fillRect(cx - sLen, cy - 1, sLen, 2);
         }
 
         // 4. Cursor spotlight (peripheral awareness, not a reaction game)
