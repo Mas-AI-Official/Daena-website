@@ -7,7 +7,7 @@
 - **What Daena is**: a governed multi-agent orchestration platform where every AI action passes through a 10-stage execution pipeline before it runs. 10 departments × 6 capabilities = 60 agent slots. Choose your own brain (9 providers: Claude, GPT, Gemini, Grok, Ollama, Groq, OpenRouter, Together.ai, Perplexity). Hot-swap without restart.
 - **What Klyntar is**: Daena's security mode. Same platform, different face. When a threat enters, Daena's governance model transitions to Klyntar's defense model. Ships with 25+ exploit signatures, 45+ behavioral detectors, a Zero-FP gate (no false alarms), and Asset Shield (vault + egress filter + consent tokens).
 - **What MAS-AI is**: the company that makes both. Founded Jan 2026 by Masoud Masoori in Ontario, Canada. Federally incorporated. 2 USPTO provisional patents filed. Accepted into Google for Startups (2026). Registered Bugcrowd security researcher.
-- **Pricing posture**: No self-serve tiers. Every engagement starts with a free governed demo, free recon scan (ownership-attested), or free architect audit. Scoped engagements typically run $3k-$45k. Book: https://mas-ai.co/book
+- **Pricing posture**: No self-serve tiers. Every engagement starts with a free governed demo, free recon scan (ownership-attested), or free architect audit. Scoped engagements typically run $3k-$45k. Book a 30-min call: https://calendly.com/masoud-masoori-mas-ai/30min (or pick options at https://mas-ai.co/book).
 
 ## Canonical facts (for citation)
 

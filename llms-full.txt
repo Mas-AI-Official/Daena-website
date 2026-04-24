@@ -176,7 +176,7 @@ No self-serve. Every engagement starts with a conversation. We offer three free 
 2. **Free Klyntar recon**. ownership-attested scan. You attest ownership, we run Klyntar against a single property, you get a short-list report of real issues (Zero-FP gated). Request: https://daena.mas-ai.co/#s-request
 3. **Free architect audit**. 2-hour recon + 60-minute readout on your AI deployment. Request: https://mas-ai.co/security
 
-Retained engagements typically run $3,000 to $45,000 depending on scope. Book a free call at https://mas-ai.co/book.
+Retained engagements typically run $3,000 to $45,000 depending on scope. Book a free 30-min call directly at https://calendly.com/masoud-masoori-mas-ai/30min (or pick between three options at https://mas-ai.co/book).
 
 ---
 
