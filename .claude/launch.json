@@ -4,8 +4,8 @@
     {
       "name": "daena-site",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "3333", "--directory", "D:/Ideas/daena-website"],
-      "port": 3333
+      "runtimeArgs": ["-m", "http.server", "--directory", "D:/Ideas/daena-website", "3334"],
+      "port": 3334
     }
   ]
 }

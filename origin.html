@@ -8,17 +8,23 @@
 <meta name="description" content="How governance and defense became one platform. The origin story of Daena and Klyntar, told in seven acts.">
 <link rel="canonical" href="https://daena.mas-ai.co/origin.html">
 <link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta property="og:title" content="Origin. The Daena + Klyntar Story">
 <meta property="og:description" content="Seven acts. One platform. Two modes. One mind.">
 <meta property="og:image" content="https://daena.mas-ai.co/assets/img/daena-klyntar-1.png">
 <meta property="og:url" content="https://daena.mas-ai.co/origin.html">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#00c8ff">
 
-<!-- Fonts + GSAP from CDN -->
+<!-- Fonts + GSAP -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Inherit the full Daena design system -->
+<link rel="stylesheet" href="/style.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
@@ -28,7 +34,7 @@
   "@type": "Article",
   "headline": "Origin. The Daena + Klyntar Story",
   "datePublished": "2026-04-20",
-  "dateModified": "2026-04-20",
+  "dateModified": "2026-04-26",
   "author": {"@type": "Person", "name": "Masoud Masoori", "@id": "https://mas-ai.co/#founder"},
   "publisher": {"@type": "Organization", "name": "MAS-AI Technologies Inc.", "@id": "https://mas-ai.co/#organization"},
   "description": "The seven-act origin story of Daena (governance) and Klyntar (security), told through scroll-coupled narrative.",
@@ -39,290 +45,384 @@
 
 <style>
 /* ═════════════════════════════════════════════════════════════════════════
- * ORIGIN. Seven-act scroll-coupled narrative.
- *
- * Design principles from 2026 scroll-storytelling research:
- *   1. Couple to scroll, never fight it. No scroll-jacking.
- *   2. Beat-driven visual rhetoric. Each act changes palette + density.
- *   3. Sticky-graphic stepper where the visual deserves screen real estate.
- *   4. SVG line draws for the cheap-and-distinctive moments.
- *   5. matchMedia gates every motion-heavy setup behind reduced-motion.
- *   6. Semantic HTML first. The page is a readable article without JS.
+ * ORIGIN.HTML — page-specific styles only
+ * Inherits site-wide design system from /style.css.
+ * Adds the seven-act scroll narrative, palette-shift mechanics, and
+ * climax-scene canvas. Everything else (navbar, buttons, sections, hero)
+ * is shared with index.html.
  * ═════════════════════════════════════════════════════════════════════════ */
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  /* These three custom properties drive the whole visual theme.
-     One tween per chapter updates all three. Everything else reads them. */
-  --hue-primary: 200;     /* 200 = cyan / Daena. 0 = red / Klyntar. 45 = gold / trust */
-  --density: 0.2;         /* 0.0 (sparse) to 1.0 (dense). Drives opacity + stroke weight. */
-  --type-scale: 1.0;      /* Headline size multiplier. Climax beats get >1.3 */
-  --ink: #e8eaf0;
-  --ink-dim: rgba(232,234,240,0.55);
-  --ink-muted: rgba(232,234,240,0.35);
-  --bg: #05070e;
-  --cyan: #00c8ff;
-  --gold: #d4a853;
-  --red: #ff4060;
-  --teal: #2dd4bf;
+  --hue-primary: 200;
+  --density: 0.2;
+  --type-scale: 1.0;
 }
 
-html {
-  background: var(--bg);
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-  max-width: 100vw;
-  position: relative;
-  /* Global tint shifts with --hue-primary so every section inherits the
-     current chapter's palette. Extremely cheap since it's just a
-     background-image on body. */
+/* Page background — dark with palette-shifting radial tints driven by scroll */
+body.origin-body {
   background:
-    radial-gradient(ellipse at 20% 20%, hsla(var(--hue-primary),70%,50%,calc(var(--density) * 0.12)), transparent 55%),
-    radial-gradient(ellipse at 80% 70%, hsla(calc(var(--hue-primary) + 30),60%,55%,calc(var(--density) * 0.08)), transparent 55%),
-    var(--bg);
+    radial-gradient(ellipse at 18% 22%, hsla(var(--hue-primary),70%,55%,calc(var(--density) * 0.14)), transparent 55%),
+    radial-gradient(ellipse at 82% 72%, hsla(calc(var(--hue-primary) + 30),60%,55%,calc(var(--density) * 0.10)), transparent 60%),
+    #0a0a0a;
   background-attachment: fixed;
 }
 
-img, video, svg { max-width: 100%; height: auto; }
-a { color: inherit; text-decoration: none; }
+/* ─── Page-level chrome ──────────────────────────────────────────────── */
 
-/* ─── Progress bar + chapter nav ─────────────────────────────────────── */
-.progress-bar {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: 2px; z-index: 100;
-  background: linear-gradient(90deg, var(--cyan), var(--gold), var(--red));
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform 0.1s linear;
+/* Navbar — copied from index.html inline styles (nav CSS is not in style.css) */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: center; padding: 16px;
+  transition: padding 0.4s ease;
+}
+.site-header.scrolled { padding: 8px 16px; }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; width: 100%; max-width: 1280px; padding: 14px 24px;
+  background: transparent; border: 1px solid transparent; border-radius: 0;
+  transition: all 0.5s ease;
+}
+.site-header.scrolled .nav-inner {
+  max-width: 1080px; padding: 10px 20px;
+  background: rgba(8,11,20,0.82);
+  backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(30,41,59,0.6); border-radius: 18px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-inner .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; text-decoration: none; color: #fff; }
+.nav-inner .brand img { height: 34px; width: auto; transition: height 0.3s ease; }
+.site-header.scrolled .brand img { height: 26px; }
+.nav-inner .brand-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: #fff; }
+.nav-inner .nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-inner .nav-link {
+  position: relative; padding: 8px 14px;
+  font-size: 0.88rem; font-weight: 500;
+  color: rgba(232,234,240,0.72); text-decoration: none;
+  border-radius: 8px;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+.nav-inner .nav-link:hover { color: #fff; background: rgba(255,255,255,0.04); }
+.nav-inner .nav-cta { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-cta-primary {
+  display: inline-flex; align-items: center;
+  padding: 10px 20px; font-size: 0.88rem; font-weight: 700;
+  color: #fff; background: linear-gradient(135deg, #ff4060, #b91c3c);
+  border-radius: 999px; text-decoration: none;
+  box-shadow: 0 0 20px rgba(255,64,96,0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.nav-cta-primary:hover { transform: scale(1.04); box-shadow: 0 0 32px rgba(255,64,96,0.45); }
+.nav-cta-secondary {
+  padding: 8px 16px; font-size: 0.8rem; font-weight: 600;
+  color: rgba(212,168,83,0.9);
+  border: 1px solid rgba(212,168,83,0.3); border-radius: 999px;
+  text-decoration: none; transition: all 0.25s ease;
+  font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em;
+}
+.nav-cta-secondary:hover { color: #d4a853; border-color: #d4a853; background: rgba(212,168,83,0.06); }
+@media (max-width: 960px) {
+  .nav-inner .nav-links { display: none; }
+  .nav-cta-secondary { display: none; }
+}
+@media (min-width: 961px) { .nav-burger { display: none; } }
+.nav-burger { background: transparent; border: none; color: #fff; padding: 6px; cursor: pointer; }
+.nav-burger svg { width: 22px; height: 22px; }
+.mobile-nav {
+  display: none; position: absolute; top: 100%; left: 16px; right: 16px;
+  margin-top: 8px; background: rgba(8,11,20,0.95);
+  backdrop-filter: blur(40px); border: 1px solid rgba(30,41,59,0.6);
+  border-radius: 18px; padding: 20px 24px;
+  flex-direction: column; gap: 4px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  color: rgba(232,234,240,0.78); padding: 12px 4px;
+  font-size: 1rem; text-decoration: none;
+  border-bottom: 1px solid rgba(30,41,59,0.3);
+}
+.mobile-nav a:last-child { border-bottom: 0; }
+.mobile-cta-primary {
+  margin-top: 8px; text-align: center; font-weight: 700;
+  background: linear-gradient(135deg, #ff4060, #b91c3c) !important;
+  color: #fff !important; border-radius: 10px !important; border: 0 !important;
+}
+.mobile-cta-secondary {
+  text-align: center; color: #d4a853 !important;
+  border: 1px solid rgba(212,168,83,0.3) !important; border-radius: 10px !important;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem !important;
 }
 
-.chapter-nav {
-  position: fixed; right: 28px; top: 50%; transform: translateY(-50%);
-  z-index: 50;
-  display: flex; flex-direction: column; gap: 14px;
-  padding: 12px 8px; border-radius: 999px;
-  background: rgba(6,10,20,0.55);
-  backdrop-filter: blur(12px);
+/* Chapter dot rail — right edge */
+.chapter-rail {
+  position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
+  z-index: 60;
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 12px 7px; border-radius: 999px;
+  background: rgba(8,11,20,0.62);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255,255,255,0.06);
 }
-.chapter-nav a {
+.chapter-rail a {
   width: 8px; height: 8px; border-radius: 50%;
   background: rgba(255,255,255,0.18);
-  transition: background 0.3s, transform 0.3s;
-  cursor: pointer;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: pointer; display: block;
 }
-.chapter-nav a:hover { background: rgba(255,255,255,0.4); transform: scale(1.3); }
-.chapter-nav a.active {
+.chapter-rail a:hover { background: rgba(255,255,255,0.4); transform: scale(1.25); }
+.chapter-rail a.active {
   background: hsl(var(--hue-primary), 80%, 60%);
-  box-shadow: 0 0 12px hsla(var(--hue-primary), 80%, 60%, 0.6);
+  box-shadow: 0 0 14px hsla(var(--hue-primary), 80%, 60%, 0.6);
   transform: scale(1.4);
 }
-@media (max-width: 720px) { .chapter-nav { display: none; } }
+@media (max-width: 900px) { .chapter-rail { display: none; } }
 
-/* ─── Page-level chrome ──────────────────────────────────────────────── */
-.origin-nav {
-  position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
-  z-index: 80;
-  display: flex; align-items: center; gap: 16px;
-  padding: 10px 18px; border-radius: 999px;
-  background: rgba(6,10,20,0.75);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.74rem;
-  letter-spacing: 0.06em;
-}
-.origin-nav a {
-  color: var(--ink-dim);
-  transition: color 0.3s;
-}
-.origin-nav a:hover { color: var(--ink); }
-.origin-nav .dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: hsl(var(--hue-primary), 80%, 60%);
-  box-shadow: 0 0 8px hsla(var(--hue-primary), 80%, 60%, 0.6);
-}
+/* ─── Reveal-on-scroll utility ───────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-/* ─── Section base ────────────────────────────────────────────────────── */
-section.act {
+/* ─── Act / chapter base. We override the shared .section min-height
+       so each act feels like its own beat. ───────────────────────────── */
+.act-section {
   position: relative;
-  min-height: 100vh;
-  padding: 120px 40px 80px;
+  padding: 96px 24px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  isolation: isolate;
+  justify-content: center;
 }
-@media (max-width: 720px) {
-  section.act { padding: 100px 20px 60px; min-height: 90vh; }
-}
-
-.act-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: hsla(var(--hue-primary), 80%, 60%, 0.85);
-  margin-bottom: 20px;
-  text-shadow: 0 0 12px hsla(var(--hue-primary), 80%, 60%, 0.4);
-}
-
-h2.act-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: calc(clamp(2.2rem, 5.5vw, 4.5rem) * var(--type-scale));
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  max-width: 1100px;
-  margin-bottom: 28px;
-  color: #fff;
-}
-h2.act-title em { font-style: normal; color: hsl(var(--hue-primary), 85%, 65%); }
-h2.act-title strong { font-weight: 800; color: #fff; }
-
-p.act-body {
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-  line-height: 1.7;
-  color: var(--ink-dim);
-  max-width: 640px;
-  margin-bottom: 18px;
-}
-p.act-body strong { color: #fff; font-weight: 600; }
-
-.act-inner {
-  max-width: 1100px;
-  width: 100%;
+.act-section .section-inner {
+  position: relative;
   text-align: center;
 }
+.act-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: hsla(var(--hue-primary), 80%, 65%, 0.95);
+  margin-bottom: 14px;
+  text-shadow: 0 0 14px hsla(var(--hue-primary), 80%, 60%, 0.4);
+  display: inline-block;
+}
+.act-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: calc(clamp(1.7rem, 4vw, 3rem) * min(var(--type-scale), 1.15));
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: #fff;
+  max-width: 24ch;
+  margin: 0 auto 18px;
+  text-wrap: balance;
+}
+.act-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, hsl(var(--hue-primary), 80%, 60%), hsl(calc(var(--hue-primary) + 30), 80%, 70%));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.act-body {
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.66);
+  max-width: 620px;
+  margin: 0 auto 14px;
+}
+.act-body strong { color: #fff; font-weight: 600; }
 
-/* ─── Reveal on scroll (progressive enhancement, not scrub-jacking) ──── */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.in { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
-
-/* ═══ Chapter 1 — Setup ══════════════════════════════════════════════ */
-#setup { text-align: center; }
-#setup .big-word {
+/* ═══ ACT 1 — SETUP (Hero) ═════════════════════════════════════════════ */
+#setup {
+  padding-top: 140px;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+}
+#setup .hero-overlay { max-width: 880px; }
+#setup .hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(212,168,83,0.95);
+  margin-bottom: 22px;
+  text-shadow: 0 0 14px rgba(212,168,83,0.5);
+}
+/* Override .hero-overlay h1 from style.css with higher specificity */
+#setup .hero-overlay h1.hero-bigword,
+.hero-overlay .hero-bigword {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: clamp(4rem, 15vw, 12rem);
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  color: #fff;
-  opacity: 0.95;
+  font-size: clamp(1.65rem, 3.2vw, 2.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin: 0 auto 22px;
+  max-width: 720px;
+  text-wrap: balance;
+  background: linear-gradient(135deg, #d4a853 0%, #FFA500 25%, #FFD700 50%, #fff 70%, #FFD700 85%, #d4a853 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: heroShine 5s linear infinite;
+  filter: drop-shadow(0 0 24px rgba(212,168,83,0.4)) drop-shadow(0 0 48px rgba(212,168,83,0.15));
+  /* Reset style.css h1 mb */
+  margin-bottom: 22px;
 }
-#setup .big-word span { display: inline-block; }
-#setup .big-word .pulse { color: var(--red); text-shadow: 0 0 40px rgba(255,64,96,0.4); }
-#setup .sub-hint {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  margin-top: 32px;
+.hero-bigword .line-break-mobile { display: inline; }
+@media (max-width: 720px) {
+  .hero-bigword .line-break-mobile { display: block; }
+}
+.hero-bigword .pulse {
+  -webkit-text-fill-color: #ff4060;
+  filter: drop-shadow(0 0 18px rgba(255,64,96,0.55));
+  animation: pulseRed 2.4s ease-in-out infinite;
+}
+@keyframes pulseRed {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(255,64,96,0.55)); }
+  50% { filter: drop-shadow(0 0 36px rgba(255,64,96,0.85)); }
+}
+.hero-subhead {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  max-width: 640px;
+  margin: 0 auto 34px;
+  text-shadow: 0 0 40px rgba(0,200,255,0.18);
+}
+.hero-subhead strong { color: #fff; font-weight: 600; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-bigword { animation: none; }
+  .hero-bigword .pulse { animation: none; }
 }
 
-/* ═══ Chapter 2 — Catalyst ══════════════════════════════════════════════ */
+/* ═══ ACT 2 — CATALYST ═════════════════════════════════════════════════ */
 #catalyst .catalyst-line {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-  margin: 40px 0;
-  transform: scaleX(0);
-  transform-origin: left;
+  width: 100%; max-width: 760px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ink, #00c8ff) 30%, var(--ink, #00c8ff) 70%, transparent);
+  margin: 28px auto;
+  transform: scaleX(0); transform-origin: center;
 }
 #catalyst .catalyst-q {
   font-family: 'Syne', sans-serif;
   font-weight: 400;
-  font-size: clamp(1.6rem, 4vw, 2.8rem);
-  line-height: 1.25;
-  max-width: 900px;
-  color: rgba(255,255,255,0.85);
+  font-size: clamp(1.3rem, 2.6vw, 1.95rem);
+  line-height: 1.4;
+  max-width: 760px;
+  margin: 0 auto 22px;
+  color: rgba(255,255,255,0.86);
 }
-#catalyst .catalyst-q span { color: var(--cyan); font-weight: 700; }
-
-/* ═══ Chapter 3 — Rising (sticky-graphic stepper: the pipeline) ════════ */
-#rising {
-  min-height: 320vh;
-  padding: 0;
-  align-items: stretch;
-  justify-content: flex-start;
-}
-.rising-shell { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
-@media (max-width: 900px) { .rising-shell { grid-template-columns: 1fr; } }
-.rising-sticky {
-  position: sticky; top: 0;
-  height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 40px;
-}
-.pipeline-svg {
-  width: 100%; max-width: 420px; aspect-ratio: 1 / 1;
-}
-.rising-steps { padding: 140px 40px; display: flex; flex-direction: column; gap: 60vh; }
-@media (max-width: 900px) {
-  .rising-sticky { height: 50vh; }
-  .rising-steps { padding: 40px 20px; gap: 40vh; }
-}
-.step {
-  max-width: 520px;
-  padding: 28px 24px;
-  border-left: 2px solid rgba(255,255,255,0.08);
-  opacity: 0.35;
-  transition: opacity 0.5s ease, border-color 0.5s ease, transform 0.5s ease;
-}
-.step.active {
-  opacity: 1;
-  border-left-color: hsl(var(--hue-primary), 80%, 60%);
-  transform: translateX(6px);
-}
-.step-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: hsla(var(--hue-primary), 80%, 60%, 0.8);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-}
-.step-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+#catalyst .catalyst-q .accent {
+  color: #00c8ff;
   font-weight: 700;
-  color: #fff;
-  margin-bottom: 10px;
-  letter-spacing: -0.01em;
+  text-shadow: 0 0 20px rgba(0,200,255,0.4);
 }
-.step-body { font-size: 0.95rem; color: var(--ink-dim); line-height: 1.6; }
 
-/* ═══ Chapter 4 — Turn (palette flip, Klyntar awakens) ═════════════════ */
-#turn {
-  background: linear-gradient(180deg, transparent 0%, rgba(40,0,10,0.4) 50%, transparent 100%);
+/* ═══ ACT 3 — RISING (Pipeline) ════════════════════════════════════════ */
+#rising { padding: 96px 24px; }
+#rising .section-inner { text-align: center; }
+.pipeline-wrap {
+  position: relative;
+  max-width: 720px;
+  margin: 32px auto 28px;
 }
-#turn .turn-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  width: 100%; max-width: 960px; margin-top: 40px;
-}
-@media (max-width: 720px) { #turn .turn-grid { grid-template-columns: 1fr; } }
-.threat-card {
-  padding: 22px 20px; border-radius: 14px;
-  background: rgba(20,6,10,0.55);
-  border: 1px solid rgba(255,64,96,0.25);
+.pipeline-svg { width: 100%; height: auto; display: block; }
+.pipeline-svg text { pointer-events: none; }
+.pipeline-stage-circle { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), stroke 0.35s ease, fill 0.35s ease; }
+.pipeline-stage-circle.active { transform: scale(1.18); }
+.pipeline-stage-num.active { fill: #FFD700; }
+.pipeline-stage-label { transition: fill 0.35s ease, font-size 0.35s ease; }
+.pipeline-stage-label.active { fill: #fff; }
+
+.pipeline-detail {
+  margin: 28px auto 0; max-width: 580px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: rgba(6,8,16,0.78);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212,168,83,0.18);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
   text-align: left;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  min-height: 116px;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.pipeline-detail-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #d4a853;
+  margin-bottom: 8px;
+}
+.pipeline-detail-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15rem; font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+}
+.pipeline-detail-body {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+}
+.pipeline-detail-body strong { color: #fff; font-weight: 600; }
+.pipeline-caption {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.4);
+  margin-top: 14px;
+}
+
+/* Vertical step list (mobile + larger screens — appears below the SVG) */
+.pipeline-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  max-width: 1080px;
+  margin: 36px auto 0;
+}
+.pipeline-list-item {
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: rgba(6,8,16,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+  text-align: left;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pipeline-list-item:hover {
+  border-color: rgba(212,168,83,0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(212,168,83,0.06);
+}
+.pipeline-list-item .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.18em;
+  color: #d4a853;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+.pipeline-list-item .name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.96rem;
+  color: #fff;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+.pipeline-list-item .blurb {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+/* ═══ ACT 4 — TURN (Threats arrive) ════════════════════════════════════ */
+#turn .section-inner { background: rgba(20,6,10,0.55); border-color: rgba(255,64,96,0.15); }
+.threats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  width: 100%; max-width: 980px; margin: 36px auto 0;
+}
+@media (max-width: 760px) { .threats-grid { grid-template-columns: 1fr; } }
+.threat-card {
+  padding: 22px 22px;
+  border-radius: 16px;
+  background: rgba(20,6,10,0.6);
+  border: 1px solid rgba(255,64,96,0.22);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .threat-card:hover {
   transform: translateY(-3px);
@@ -330,21 +430,33 @@ p.act-body strong { color: #fff; font-weight: 600; }
   box-shadow: 0 14px 40px rgba(255,64,96,0.12);
 }
 .threat-card .tag {
+  display: inline-flex; align-items: center; gap: 8px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  color: var(--red);
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #ff4060;
+  margin-bottom: 10px;
 }
-.threat-card h4 { font-family: 'Syne', sans-serif; font-size: 1.05rem; color: #fff; margin-bottom: 8px; }
-.threat-card p { font-size: 0.85rem; color: var(--ink-dim); line-height: 1.55; }
+.threat-card .tag::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #ff4060; box-shadow: 0 0 8px currentColor;
+}
+.threat-card h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.08rem; color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.threat-card p {
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.6;
+}
 
-/* ═══ Chapter 5 — Climax (pinned canvas, Klyntar fortress) ═════════════ */
+/* ═══ ACT 5 — CLIMAX (Pinned Klyntar canvas) ═══════════════════════════ */
 #climax {
   min-height: 220vh;
   padding: 0;
-  justify-content: flex-start;
+  position: relative;
 }
 .climax-pin {
   position: sticky; top: 0;
@@ -357,617 +469,841 @@ p.act-body strong { color: #fff; font-weight: 600; }
   width: 100%; height: 100%;
 }
 .climax-content {
-  position: relative;
+  position: relative; z-index: 2;
+  padding: 32px 28px;
+  max-width: 720px; margin: 0 auto;
   text-align: center;
-  padding: 40px;
-  z-index: 2;
-  max-width: 900px;
+}
+.climax-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,64,96,0.9);
+  text-shadow: 0 0 16px rgba(255,64,96,0.5);
+  margin-bottom: 18px;
+  display: inline-block;
 }
 .climax-title {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-size: clamp(2.1rem, 5.5vw, 4rem);
   color: #fff;
-  line-height: 1;
-  margin-bottom: 20px;
-  text-shadow: 0 0 40px rgba(255,64,96,0.4);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+  text-shadow: 0 0 40px rgba(255,64,96,0.35);
 }
-.climax-title .red { color: var(--red); }
-.climax-line {
+.climax-title .red {
+  color: #ff4060;
+  text-shadow: 0 0 28px rgba(255,64,96,0.55), 0 0 60px rgba(255,64,96,0.25);
+}
+.climax-body {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  color: rgba(255,255,255,0.78);
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 0 auto 18px;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+}
+.climax-stats {
+  display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+  margin: 24px 0 18px;
+}
+.climax-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: #ff4060;
+  display: block;
+  text-shadow: 0 0 20px rgba(255,64,96,0.4);
+}
+.climax-stat-lbl {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.7);
-  text-transform: uppercase;
+  font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+  display: block;
+}
+.climax-foot {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 16px;
+}
+
+/* ═══ ACT 6 — RESOLUTION (Two modes, one mind) ═════════════════════════ */
+#resolution .section-inner {
+  background: linear-gradient(180deg, rgba(0,200,255,0.04), rgba(255,64,96,0.04));
+}
+.twins-grid {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 22px; width: 100%; max-width: 920px;
+  margin: 36px auto 0; align-items: stretch;
+}
+@media (max-width: 820px) {
+  .twins-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+.twin {
+  padding: 28px 26px;
+  border-radius: 20px;
+  background: rgba(6,8,16,0.7);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.twin:hover { transform: translateY(-4px); }
+.twin.cyan { border-color: rgba(0,200,255,0.28); box-shadow: 0 12px 36px rgba(0,200,255,0.08); }
+.twin.cyan:hover { border-color: rgba(0,200,255,0.55); box-shadow: 0 18px 50px rgba(0,200,255,0.16); }
+.twin.red { border-color: rgba(255,64,96,0.32); box-shadow: 0 12px 36px rgba(255,64,96,0.10); }
+.twin.red:hover { border-color: rgba(255,64,96,0.6); box-shadow: 0 18px 50px rgba(255,64,96,0.20); }
+.twin-portrait {
+  width: 124px; height: 124px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  object-fit: cover; object-position: top;
+  display: block;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+.twin.cyan .twin-portrait {
+  border-color: #00c8ff;
+  box-shadow: 0 0 0 4px rgba(0,200,255,0.15), 0 0 32px rgba(0,200,255,0.32);
+}
+.twin.red .twin-portrait {
+  border-color: #ff4060;
+  box-shadow: 0 0 0 4px rgba(255,64,96,0.18), 0 0 32px rgba(255,64,96,0.4);
+}
+.twin-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.twin.cyan .twin-eyebrow { color: #00c8ff; }
+.twin.red .twin-eyebrow { color: #ff4060; }
+.twin h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.twin.red h3 { color: #ff4060; }
+.twin p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.55;
+}
+.twin-bridge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  text-align: center; line-height: 1.6;
+  align-self: center;
+  white-space: nowrap;
+}
+@media (max-width: 820px) { .twin-bridge { white-space: normal; padding: 10px 0; } }
+
+/* ═══ ACT 7 — CODA (Final CTA) ═════════════════════════════════════════ */
+#coda { padding-bottom: 140px; }
+#coda .section-inner { text-align: center; }
+.coda-headline {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  color: #fff;
+  max-width: 22ch;
+  margin: 0 auto 32px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.coda-cta-row {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  margin-bottom: 30px;
+}
+.coda-fineprint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.35);
   margin-top: 24px;
 }
 
-/* ═══ Chapter 6 — Resolution (two modes, one mind) ═════════════════════ */
-#resolution { background: linear-gradient(180deg, transparent, rgba(10,20,30,0.4), transparent); }
-.twins {
-  display: grid; grid-template-columns: 1fr auto 1fr;
-  gap: 28px; width: 100%; max-width: 900px;
-  margin-top: 40px; align-items: center;
-}
-@media (max-width: 720px) { .twins { grid-template-columns: 1fr; } }
-.twin {
-  padding: 28px 24px; border-radius: 20px;
-  background: rgba(6,10,20,0.55);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.06);
-  text-align: center;
-}
-.twin.cyan { border-color: rgba(0,200,255,0.25); box-shadow: 0 12px 40px rgba(0,200,255,0.08); }
-.twin.red { border-color: rgba(255,64,96,0.3); box-shadow: 0 12px 40px rgba(255,64,96,0.12); }
-.twin img {
-  width: 130px; height: 130px; border-radius: 50%;
-  object-fit: cover; object-position: top;
-  margin: 0 auto 16px;
-  display: block;
-  border: 2px solid rgba(255,255,255,0.1);
-  box-shadow: inset 0 0 24px 4px rgba(6,10,20,0.55);
-}
-.twin.cyan img { border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(0,200,255,0.15), 0 0 28px rgba(0,200,255,0.3), inset 0 0 20px 4px rgba(6,10,20,0.5); }
-.twin.red img { border-color: var(--red); box-shadow: 0 0 0 4px rgba(255,64,96,0.15), 0 0 28px rgba(255,64,96,0.35), inset 0 0 20px 4px rgba(6,10,20,0.5); }
-.twin .twin-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.2em;
-  text-transform: uppercase; margin-bottom: 4px;
-}
-.twin.cyan .twin-eyebrow { color: var(--cyan); }
-.twin.red .twin-eyebrow { color: var(--red); }
-.twin h3 {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.6rem; font-weight: 700; color: #fff;
-  margin-bottom: 6px; letter-spacing: -0.02em;
-}
-.twin.red h3 { color: var(--red); }
-.twin p { font-size: 0.9rem; color: var(--ink-dim); }
-.twin-bridge {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.18em;
-  color: var(--ink-muted); text-transform: uppercase;
-  text-align: center; line-height: 1.5;
-}
+/* ─── Hero CTA pulse from style.css already runs on .btn-primary ─── */
 
-/* ═══ Chapter 7 — Coda (single CTA) ════════════════════════════════════ */
-#coda { text-align: center; padding-bottom: 160px; }
-.coda-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  color: #fff;
-  max-width: 820px;
-  margin: 0 auto 32px;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
-}
-.coda-ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
-.coda-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 14px 28px; border-radius: 999px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-}
-.coda-btn:hover { transform: translateY(-2px); }
-.coda-btn.primary {
-  background: linear-gradient(135deg, var(--gold), #f59e0b);
-  color: #0a0a0a;
-  box-shadow: 0 0 24px rgba(212,168,83,0.3);
-}
-.coda-btn.primary:hover { box-shadow: 0 10px 40px rgba(212,168,83,0.4); }
-.coda-btn.secondary {
-  background: linear-gradient(135deg, var(--red), #b91c3c);
-  color: #fff;
-  box-shadow: 0 0 24px rgba(255,64,96,0.3);
-}
-.coda-btn.secondary:hover { box-shadow: 0 10px 40px rgba(255,64,96,0.4); }
-.coda-btn.outline {
-  background: transparent;
-  color: rgba(255,255,255,0.8);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-.coda-btn.outline:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
-
-/* Hide scroll-driven UI during reduced motion */
+/* ─── Reduced-motion safety ──────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .progress-bar { display: none; }
-  #setup .big-word .pulse { text-shadow: none; }
+  .pipeline-stage-circle.active { transform: none; }
+  .climax-title .red { animation: none; }
+}
+
+/* ─── Responsive tuning ──────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  .act-section { padding: 72px 16px; }
+  #setup { padding-top: 110px; }
+  .climax-content { padding: 24px 18px; }
+  .pipeline-detail { padding: 18px 18px; }
+}
+@media (min-width: 1280px) {
+  .act-section { padding: 120px 32px; }
+  .pipeline-wrap { max-width: 760px; }
 }
 </style>
 </head>
-<body>
+<body class="origin-body">
 
-<!-- Fixed chrome -->
-<div class="progress-bar" id="progress"></div>
-<nav class="origin-nav" aria-label="Back to Daena">
-  <span class="dot" aria-hidden="true"></span>
-  <a href="/">Daena</a>
-  <span style="opacity:0.3">·</span>
-  <a href="https://mas-ai.co" target="_blank" rel="noopener">mas-ai.co</a>
-</nav>
-<aside class="chapter-nav" aria-label="Chapter navigation">
-  <a href="#setup" data-chap="setup" aria-label="Chapter 1"></a>
-  <a href="#catalyst" data-chap="catalyst" aria-label="Chapter 2"></a>
-  <a href="#rising" data-chap="rising" aria-label="Chapter 3"></a>
-  <a href="#turn" data-chap="turn" aria-label="Chapter 4"></a>
-  <a href="#climax" data-chap="climax" aria-label="Chapter 5"></a>
-  <a href="#resolution" data-chap="resolution" aria-label="Chapter 6"></a>
-  <a href="#coda" data-chap="coda" aria-label="Chapter 7"></a>
+<!-- Scroll progress bar (defined in style.css as .scroll-bar) -->
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- ═══════════════ NAVBAR (matches index.html) ═══════════════ -->
+<header class="site-header" id="siteHeader">
+  <nav class="nav-inner">
+    <a class="brand" href="/">
+      <img src="/assets/img/daena-logo-blue.png" alt="Daena">
+      <span class="brand-name">Daena</span>
+    </a>
+    <div class="nav-links">
+      <a href="/origin.html" class="nav-link" aria-current="page" style="color:#fff">Origin</a>
+      <a href="/#s-solution" class="nav-link">Governance</a>
+      <a href="/#s-proof" class="nav-link">Proof</a>
+      <a href="/#s-klyntar" class="nav-link" style="color:rgba(255,64,96,0.85)">Klyntar</a>
+      <a href="/#s-demos" class="nav-link">Demos</a>
+      <a href="/#s-request" class="nav-link">Request</a>
+    </div>
+    <div class="nav-cta">
+      <a class="nav-cta-secondary" href="https://mas-ai.co" target="_blank" rel="noopener">mas-ai.co</a>
+      <a class="nav-cta-primary" href="/#s-request">Request Demo</a>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="/origin.html">Origin</a>
+    <a href="/#s-solution">Governance</a>
+    <a href="/#s-proof">Proof</a>
+    <a href="/#s-klyntar" style="color:#ff4060">Klyntar</a>
+    <a href="/#s-demos">Demos</a>
+    <a href="/#s-request" class="mobile-cta-primary">Request Demo</a>
+    <a href="https://mas-ai.co" target="_blank" rel="noopener" class="mobile-cta-secondary">mas-ai.co</a>
+  </div>
+</header>
+
+<!-- Right-edge chapter rail -->
+<aside class="chapter-rail" aria-label="Chapter navigation">
+  <a href="#setup"      data-chap="setup"      aria-label="Act 1 — Before"></a>
+  <a href="#catalyst"   data-chap="catalyst"   aria-label="Act 2 — The question"></a>
+  <a href="#rising"     data-chap="rising"     aria-label="Act 3 — Pipeline"></a>
+  <a href="#turn"       data-chap="turn"       aria-label="Act 4 — Threat"></a>
+  <a href="#climax"     data-chap="climax"     aria-label="Act 5 — Klyntar"></a>
+  <a href="#resolution" data-chap="resolution" aria-label="Act 6 — Resolution"></a>
+  <a href="#coda"       data-chap="coda"       aria-label="Act 7 — Now"></a>
 </aside>
 
-<main>
+<main id="scroll-content">
 
-<!-- ══════════════════════ 1. SETUP ══════════════════════ -->
-<section class="act" id="setup" aria-labelledby="setup-title">
-  <div class="act-inner">
-    <p class="act-label reveal">Act 01. Before</p>
-    <h2 id="setup-title" class="big-word reveal">
-      <span>Every AI</span>
-      <span>makes decisions</span>
-      <span>nobody can <span class="pulse">trace</span>.</span>
-    </h2>
-    <p class="sub-hint reveal">Scroll to continue.</p>
-  </div>
-</section>
-
-<!-- ══════════════════════ 2. CATALYST ══════════════════════ -->
-<section class="act" id="catalyst">
-  <div class="act-inner">
-    <p class="act-label reveal">Act 02. The question</p>
-    <h2 class="act-title reveal">
-      What if every AI decision<br>
-      left a <em>signature</em>?
-    </h2>
-    <div class="catalyst-line" id="catalyst-line"></div>
-    <p class="catalyst-q reveal">
-      Not a log line. A <span>proof</span>. Merkle-notarized. Append-only.
-      Readable six months later. That was the question.
-    </p>
-    <p class="act-body reveal" style="margin-top:28px">
-      In January 2026, one founder in Richmond Hill started drawing the answer.
-      A platform where <strong>no AI action runs ungoverned</strong>. Ever.
-    </p>
-  </div>
-</section>
-
-<!-- ══════════════════════ 3. RISING — Pipeline appears ══════════════════════ -->
-<section class="act" id="rising" aria-labelledby="rising-title">
-  <div class="rising-shell">
-    <div class="rising-sticky">
-      <!-- SVG pipeline. 10 nodes in a horseshoe, each activates as user scrolls. -->
-      <svg class="pipeline-svg" id="pipelineSvg" viewBox="0 0 420 420" aria-hidden="true">
-        <defs>
-          <linearGradient id="pipelineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="var(--gold)" stop-opacity="0.4"/>
-            <stop offset="50%" stop-color="var(--gold)" stop-opacity="0.8"/>
-            <stop offset="100%" stop-color="var(--gold)" stop-opacity="0.4"/>
-          </linearGradient>
-        </defs>
-        <!-- Outer glow halo -->
-        <circle cx="210" cy="210" r="170" fill="none" stroke="rgba(212,168,83,0.06)" stroke-width="30"/>
-        <!-- The arc itself -->
-        <path id="pipelinePath"
-              d="M 70 330 C 70 90, 350 90, 350 330"
-              fill="none" stroke="url(#pipelineGrad)" stroke-width="3" stroke-linecap="round"/>
-        <g id="pipelineNodes"></g>
-      </svg>
-    </div>
-    <div class="rising-steps">
-      <div class="step" data-idx="0">
-        <p class="step-num">01. SecurityGate</p>
-        <h3 class="step-title">First. The gate.</h3>
-        <p class="step-body">Every request hits SecurityGate before anything else runs. Tenant isolation. Shield rules. Nine immutable laws. Unauthorized traffic dies here.</p>
-      </div>
-      <div class="step" data-idx="1">
-        <p class="step-num">02. InputValidator</p>
-        <h3 class="step-title">Schema, sanitized.</h3>
-        <p class="step-body">Schema validation, payload sanitization, prompt-injection patterns checked. Adversarial input rejected before reasoning ever starts.</p>
-      </div>
-      <div class="step" data-idx="2">
-        <p class="step-num">03. GovernanceEngine</p>
-        <h3 class="step-title">Four tiers. One policy.</h3>
-        <p class="step-body">Routine logged silently. Medium-risk notified. High-risk requires approval. Critical blocked. Governance never blocks execution. It guides it.</p>
-      </div>
-      <div class="step" data-idx="3">
-        <p class="step-num">04. ContextBuilder</p>
-        <h3 class="step-title">Memory, trust-gated.</h3>
-        <p class="step-body">Pulls from the 5-tier NBMF. Only verified knowledge reaches reasoning. Hallucinations never promote past T0.</p>
-      </div>
-      <div class="step" data-idx="4">
-        <p class="step-num">05. ReasoningCore</p>
-        <h3 class="step-title">Standard. Council. Quintessence.</h3>
-        <p class="step-body">Three modes. Single model, 3-model parallel synthesis, or Council plus 15 Domain Context Packs. Pick per request.</p>
-      </div>
-      <div class="step" data-idx="5">
-        <p class="step-num">06. ActionPlanner</p>
-        <h3 class="step-title">Plan before act.</h3>
-        <p class="step-body">Intent decomposes into typed, sandboxed steps with dependency graphs. Nothing executes until the plan is checked.</p>
-      </div>
-      <div class="step" data-idx="6">
-        <p class="step-num">07. OutputValidator</p>
-        <h3 class="step-title">Policy check. Pre-flight.</h3>
-        <p class="step-body">The plan must pass policy before any step runs. The last checkpoint before the world changes.</p>
-      </div>
-      <div class="step" data-idx="7">
-        <p class="step-num">08. ResponseFormatter</p>
-        <h3 class="step-title">Rendered. Attributed.</h3>
-        <p class="step-body">Model attribution. Token cost accounting. Streaming-ready chunks. Every byte traceable to the brain that produced it.</p>
-      </div>
-      <div class="step" data-idx="8">
-        <p class="step-num">09. FeedbackLoop</p>
-        <h3 class="step-title">Outcome captured as eDNA.</h3>
-        <p class="step-body">Experience DNA records with Merkle-notarized lineage. Tamper-evident proof chains of every learning.</p>
-      </div>
-      <div class="step" data-idx="9">
-        <p class="step-num">10. AuditLog</p>
-        <h3 class="step-title">Append-only. Forever.</h3>
-        <p class="step-body">Merkle-notarized trace of the request. Six months later, any decision is replayable. That is the signature.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ 4. TURN — Threat arrives ══════════════════════ -->
-<section class="act" id="turn">
-  <div class="act-inner">
-    <p class="act-label reveal">Act 04. Then a threat arrives</p>
-    <h2 class="act-title reveal">
-      Governance is the floor.<br>
-      <em>Defense is the wall.</em>
-    </h2>
-    <p class="act-body reveal">
-      Governance assumes the request is honest. A scanner. A prompt-injection attempt.
-      A scraped credential. Daena's second face answers those.
-    </p>
-    <div class="turn-grid">
-      <div class="threat-card reveal">
-        <div class="tag">Signal 01</div>
-        <h4>Prompt injection</h4>
-        <p>A user-submitted prompt tries to override the system prompt. Klyntar pattern-matches, classifies, and cages the request in a sandbox.</p>
-      </div>
-      <div class="threat-card reveal">
-        <div class="tag">Signal 02</div>
-        <h4>Credential scraping</h4>
-        <p>A loop is trying public endpoints with leaked keys. Asset Shield flags the pattern, rotates the exposed key, and signs the incident receipt.</p>
-      </div>
-      <div class="threat-card reveal">
-        <div class="tag">Signal 03</div>
-        <h4>Known exploit signature</h4>
-        <p>A request matches one of the 25+ exploit signatures. Klyntar replays against a baseline. If it reproduces, it fires. If not, it drops. Zero false positives.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ 5. CLIMAX — Klyntar fortress (pinned canvas) ══════════════════════ -->
-<section class="act" id="climax" aria-labelledby="climax-title">
-  <div class="climax-pin">
-    <canvas class="climax-canvas" id="climaxCanvas" aria-hidden="true"></canvas>
-    <div class="climax-content">
-      <p class="act-label reveal" style="color:rgba(255,64,96,0.9)">Act 05. Klyntar activates</p>
-      <h2 id="climax-title" class="climax-title reveal">
-        Same mind.<br><span class="red">Security mode on.</span>
-      </h2>
-      <p class="act-body reveal" style="color:rgba(255,255,255,0.75);max-width:620px;margin-left:auto;margin-right:auto">
-        25+ exploit signatures. 45+ behavioral detectors.
-        A Zero-FP gate that drops any finding it cannot reproduce.
-        An Asset Shield that destroys sensitive artifacts within 24 hours.
+  <!-- ═══════════════ ACT 1 — SETUP (HERO) ═══════════════ -->
+  <section class="act-section" id="setup" aria-labelledby="setup-title">
+    <div class="hero-overlay">
+      <p class="hero-eyebrow reveal">Origin · Seven Acts · 2026</p>
+      <h1 id="setup-title" class="hero-bigword reveal">
+        Every AI makes decisions<br><span class="pulse">nobody can trace.</span>
+      </h1>
+      <p class="hero-subhead reveal">
+        Until one founder in Richmond Hill said <strong>enough</strong>.
+        This is the seven-act story of how <strong>governance</strong> and <strong>defense</strong> became
+        the same platform.
       </p>
-      <p class="climax-line reveal">Ownership attestation required. 48h response.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════ 6. RESOLUTION — Two modes, one mind ══════════════════════ -->
-<section class="act" id="resolution">
-  <div class="act-inner">
-    <p class="act-label reveal">Act 06. Resolution</p>
-    <h2 class="act-title reveal">Two modes. <em>One mind.</em></h2>
-    <p class="act-body reveal" style="margin-left:auto;margin-right:auto">
-      Same platform. Same character. Governance speaks when things are normal.
-      Klyntar speaks when something is trying to break in. You never choose between them.
-      The context does.
-    </p>
-    <div class="twins">
-      <div class="twin cyan reveal">
-        <img src="/assets/img/daena-avatar-new.png" alt="Daena, governance mode" loading="lazy">
-        <p class="twin-eyebrow">Default mode</p>
-        <h3>Daena</h3>
-        <p>Governed. Calm. Auditable.</p>
+      <div class="hero-ctas reveal">
+        <a href="#catalyst" class="btn-primary">Begin the story &darr;</a>
+        <a href="/#s-request" class="btn-secondary" style="border-color:rgba(255,64,96,0.35);color:#ff4060">Skip to Request</a>
       </div>
-      <div class="twin-bridge reveal">Same mind.<br>Two modes.</div>
-      <div class="twin red reveal">
-        <img src="/assets/img/klyntar-avatar.png" alt="Klyntar, security mode" loading="lazy">
-        <p class="twin-eyebrow">When threat enters</p>
-        <h3>Klyntar</h3>
-        <p>Defense. Exploit-proof. Fortress.</p>
+      <div class="hero-pills reveal" style="margin-top:32px">
+        <span class="hero-pill"><span class="hero-pill-dot" style="background:#d4a853"></span>2 USPTO patents</span>
+        <span class="hero-pill"><span class="hero-pill-dot" style="background:#00c8ff"></span>2,956 tests passing</span>
+        <span class="hero-pill"><span class="hero-pill-dot" style="background:#ff4060"></span>25+ exploit signatures</span>
       </div>
     </div>
-  </div>
-</section>
+    <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><div class="bar"></div></div>
+  </section>
 
-<!-- ══════════════════════ 7. CODA — One CTA ══════════════════════ -->
-<section class="act" id="coda">
-  <div class="act-inner">
-    <p class="act-label reveal">Act 07. Now it's your turn</p>
-    <h2 class="coda-title reveal">
-      You've read the origin.<br>
-      Want to see the pipeline running on your use case?
-    </h2>
-    <div class="coda-ctas reveal">
-      <a href="/#s-request" class="coda-btn primary">Request Daena Demo. Free</a>
-      <a href="/#s-request" class="coda-btn secondary">Request Klyntar Recon</a>
-      <a href="https://calendly.com/masoud-masoori-mas-ai/30min" target="_blank" rel="noopener" class="coda-btn outline">Book a 30-min call</a>
+  <!-- ═══════════════ ACT 2 — CATALYST ═══════════════ -->
+  <section class="act-section" id="catalyst">
+    <div class="section-inner">
+      <p class="act-eyebrow reveal">Act 02 · The question</p>
+      <h2 class="act-title reveal">
+        What if every AI decision<br>left a <em>signature</em>?
+      </h2>
+      <div class="catalyst-line" id="catalyst-line"></div>
+      <p class="catalyst-q reveal">
+        Not a log line. A <span class="accent">proof</span>. Merkle-notarized. Append-only.
+        Readable six months later. That was the question.
+      </p>
+      <p class="act-body reveal" style="margin-top:18px">
+        In January 2026, one founder in Richmond Hill started drawing the answer.
+        A platform where <strong>no AI action runs ungoverned</strong>. Ever.
+      </p>
     </div>
-    <p class="act-body reveal" style="margin:36px auto 0;font-size:0.8rem;color:var(--ink-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em">
-      MAS-AI Technologies Inc. Richmond Hill, Ontario, Canada. Federally incorporated 2026.
-    </p>
-  </div>
-</section>
+  </section>
+
+  <!-- ═══════════════ ACT 3 — RISING (10-stage pipeline) ═══════════════ -->
+  <section class="act-section" id="rising" aria-labelledby="rising-title">
+    <div class="section-inner">
+      <p class="act-eyebrow reveal">Act 03 · The architecture</p>
+      <h2 id="rising-title" class="act-title reveal">
+        Ten stages.<br>Every action passes through <em>all of them</em>.
+      </h2>
+      <p class="act-body reveal">
+        SecurityGate to AuditLog. Governance is not a wrapper. It is the execution layer itself.
+      </p>
+
+      <!-- Horseshoe pipeline visualization -->
+      <div class="pipeline-wrap reveal">
+        <svg class="pipeline-svg" id="pipelineSvg" viewBox="0 0 700 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="pipelineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="rgba(212,168,83,0.25)"/>
+              <stop offset="50%" stop-color="rgba(212,168,83,0.55)"/>
+              <stop offset="100%" stop-color="rgba(212,168,83,0.25)"/>
+            </linearGradient>
+            <filter id="pipelineGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Outer ambient glow -->
+          <path d="M 220 380 C 220 10, 480 10, 480 380" stroke="rgba(212,168,83,0.05)" stroke-width="60" stroke-linecap="round" fill="none"/>
+          <!-- Horseshoe metal -->
+          <path id="pipelinePath" d="M 220 380 C 220 10, 480 10, 480 380" stroke="url(#pipelineGrad)" stroke-width="38" stroke-linecap="round" fill="none"/>
+          <!-- Inner highlight -->
+          <path d="M 220 380 C 220 10, 480 10, 480 380" stroke="rgba(255,255,255,0.04)" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <!-- Animated traveler -->
+          <circle id="pipelineTraveler" r="6" fill="#FFD700" filter="url(#pipelineGlow)"/>
+          <!-- Stage circles + numbers + labels rendered by JS -->
+          <g id="pipelineStages"></g>
+        </svg>
+      </div>
+
+      <!-- Active-stage detail card (updates as user scrolls / stage activates) -->
+      <div class="pipeline-detail reveal" id="pipelineDetail">
+        <p class="pipeline-detail-num" id="pipelineDetailNum">01 · SecurityGate</p>
+        <h3 class="pipeline-detail-title" id="pipelineDetailTitle">First. The gate.</h3>
+        <p class="pipeline-detail-body" id="pipelineDetailBody">
+          Every request hits SecurityGate before anything else runs. <strong>Tenant isolation. Shield rules. Nine immutable laws.</strong> Unauthorized traffic dies here.
+        </p>
+      </div>
+      <p class="pipeline-caption">Auto-cycling every 3.5s. Hover the SVG nodes or scroll to advance.</p>
+
+      <!-- Always-visible step list (also lets keyboard users / mobile read all 10) -->
+      <div class="pipeline-list" id="pipelineList">
+        <!-- Items injected by JS so the source-of-truth is one array -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ACT 4 — TURN (Threats) ═══════════════ -->
+  <section class="act-section" id="turn">
+    <div class="section-inner">
+      <p class="act-eyebrow reveal" style="color:rgba(255,64,96,0.92)">Act 04 · Then a threat arrives</p>
+      <h2 class="act-title reveal">
+        Governance is the floor.<br><em style="background:linear-gradient(135deg,#ff4060,#ffb4b4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Defense is the wall.</em>
+      </h2>
+      <p class="act-body reveal">
+        Governance assumes the request is honest. A scanner. A prompt-injection attempt.
+        A scraped credential. <strong>Daena's second face answers those.</strong>
+      </p>
+      <div class="threats-grid">
+        <div class="threat-card reveal">
+          <div class="tag">Signal 01</div>
+          <h4>Prompt injection</h4>
+          <p>A user-submitted prompt tries to override the system prompt. <strong>Klyntar pattern-matches, classifies, and cages</strong> the request in a sandbox.</p>
+        </div>
+        <div class="threat-card reveal">
+          <div class="tag">Signal 02</div>
+          <h4>Credential scraping</h4>
+          <p>A loop is trying public endpoints with leaked keys. <strong>Asset Shield flags the pattern, rotates the exposed key</strong>, and signs the incident receipt.</p>
+        </div>
+        <div class="threat-card reveal">
+          <div class="tag">Signal 03</div>
+          <h4>Known exploit signature</h4>
+          <p>A request matches one of the 25+ exploit signatures. <strong>Klyntar replays against a baseline.</strong> If it reproduces, it fires. If not, it drops. Zero false positives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ACT 5 — CLIMAX (Pinned canvas) ═══════════════ -->
+  <section class="act-section" id="climax" aria-labelledby="climax-title">
+    <div class="climax-pin">
+      <canvas class="climax-canvas" id="climaxCanvas" aria-hidden="true"></canvas>
+      <div class="climax-content">
+        <p class="climax-eyebrow reveal">Act 05 · Klyntar activates</p>
+        <h2 id="climax-title" class="climax-title reveal">
+          Same mind.<br><span class="red">Security mode on.</span>
+        </h2>
+        <p class="climax-body reveal">
+          <strong style="color:#fff">25+ exploit signatures. 45+ behavioral detectors.</strong>
+          A Zero-FP gate that drops any finding it cannot reproduce.
+          An Asset Shield that destroys sensitive artifacts within 24 hours.
+        </p>
+        <div class="climax-stats reveal">
+          <div>
+            <span class="climax-stat-num">25+</span>
+            <span class="climax-stat-lbl">Exploit signatures</span>
+          </div>
+          <div>
+            <span class="climax-stat-num">45+</span>
+            <span class="climax-stat-lbl">Behavioral detectors</span>
+          </div>
+          <div>
+            <span class="climax-stat-num">0</span>
+            <span class="climax-stat-lbl">False positives</span>
+          </div>
+        </div>
+        <p class="climax-foot reveal">Ownership attestation required · 48h response</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ACT 6 — RESOLUTION ═══════════════ -->
+  <section class="act-section" id="resolution">
+    <div class="section-inner">
+      <p class="act-eyebrow reveal">Act 06 · Resolution</p>
+      <h2 class="act-title reveal">Two modes. <em>One mind.</em></h2>
+      <p class="act-body reveal">
+        Same platform. Same character. <strong>Governance speaks when things are normal.
+        Klyntar speaks when something is trying to break in.</strong> You never choose between them.
+        The context does.
+      </p>
+      <div class="twins-grid">
+        <div class="twin cyan reveal">
+          <img class="twin-portrait" src="/assets/img/daena-avatar-new.png" alt="Daena, governance mode" loading="lazy" onerror="this.style.display='none'">
+          <p class="twin-eyebrow">Default mode</p>
+          <h3>Daena</h3>
+          <p>Governed. Calm. Auditable.<br>Every decision traceable.</p>
+        </div>
+        <div class="twin-bridge reveal">Same mind.<br>Two modes.</div>
+        <div class="twin red reveal">
+          <img class="twin-portrait" src="/assets/img/klyntar-avatar.png" alt="Klyntar, security mode" loading="lazy" onerror="this.style.display='none'">
+          <p class="twin-eyebrow">When threat enters</p>
+          <h3>Klyntar</h3>
+          <p>Defense. Exploit-proof.<br>Fortress activated.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ ACT 7 — CODA ═══════════════ -->
+  <section class="act-section" id="coda">
+    <div class="section-inner">
+      <p class="act-eyebrow reveal" style="color:rgba(212,168,83,0.95)">Act 07 · Now it's your turn</p>
+      <h2 class="coda-headline reveal">
+        You've read the origin.<br>
+        Want to see it running on <em style="background:linear-gradient(135deg,#d4a853,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal">your use case</em>?
+      </h2>
+      <div class="coda-cta-row reveal">
+        <a href="/#s-request" class="btn-primary">Request Daena Demo &rarr;</a>
+        <a href="/#s-request" class="btn-secondary" style="border-color:rgba(255,64,96,0.35);color:#ff4060">Request Klyntar Recon</a>
+        <a href="https://calendly.com/masoud-masoori-mas-ai/30min" target="_blank" rel="noopener" class="btn-outline">Book a 30-min call</a>
+      </div>
+      <p class="coda-fineprint">MAS-AI Technologies Inc. · Richmond Hill, Ontario, Canada · Federally incorporated 2026</p>
+    </div>
+  </section>
 
 </main>
 
 <script>
 /* ═════════════════════════════════════════════════════════════════════════
- * Scroll engine. GSAP + ScrollTrigger + matchMedia.
- * Reduced-motion path does only IntersectionObserver fade-ins.
+ * ORIGIN.HTML — page logic
+ *  - Scroll progress bar + chapter rail dots
+ *  - Palette/density/type-scale tween per chapter (CSS custom properties)
+ *  - Pipeline horseshoe with auto-cycle + scroll sync
+ *  - Klyntar climax canvas (hex fortress + sweeping wave)
+ *  - Reveal-on-scroll fades
+ *  - Mobile burger menu (matches index.html)
+ *  - Reduced-motion graceful fallback
  * ═════════════════════════════════════════════════════════════════════════ */
-window.addEventListener('load', function(){
+
+(function() {
   'use strict';
 
-  // Fallback if GSAP fails to load: still reveal content.
-  if (typeof gsap === 'undefined') {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-    return;
+  /* ─── Mobile burger menu (mirrors index.html) ─────────────────────────── */
+  var burger = document.getElementById('navBurger');
+  var mobileNav = document.getElementById('mobileNav');
+  if (burger && mobileNav) {
+    burger.addEventListener('click', function() { mobileNav.classList.toggle('is-open'); });
+    mobileNav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() { mobileNav.classList.remove('is-open'); });
+    });
   }
 
-  gsap.registerPlugin(ScrollTrigger);
+  /* ─── Site-header shrink on scroll (mirrors index.html) ───────────────── */
+  var header = document.getElementById('siteHeader');
+  if (header) {
+    var onScroll = function() {
+      header.classList.toggle('scrolled', window.scrollY > 24);
+      var sb = document.getElementById('scrollBar');
+      if (sb) {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        sb.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
-  // ─── Progress bar (cheap, always on) ───────────────────────────────────
-  const progress = document.getElementById('progress');
-  window.addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const pct = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
-    progress.style.transform = 'scaleX(' + pct + ')';
-  }, { passive: true });
+  /* ─── Reveal fades via IntersectionObserver (works even without GSAP) ─── */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('in'); });
+  }
 
-  // ─── Chapter navigation dots — highlight the active chapter ────────────
-  const chapters = [
-    { id: 'setup',      hue: 210, density: 0.18, type: 1.0 },
-    { id: 'catalyst',   hue: 200, density: 0.30, type: 1.0 },
-    { id: 'rising',     hue: 45,  density: 0.55, type: 1.05 },
-    { id: 'turn',       hue: 352, density: 0.60, type: 1.1 },
-    { id: 'climax',     hue: 352, density: 0.85, type: 1.3 },
-    { id: 'resolution', hue: 170, density: 0.35, type: 1.0 },
-    { id: 'coda',       hue: 45,  density: 0.20, type: 1.0 }
+  /* ─── Pipeline data (single source of truth) ──────────────────────────── */
+  var STAGES = [
+    { num: '01', name: 'SecurityGate',     title: 'First. The gate.',                    body: 'Every request hits SecurityGate before anything else runs. <strong>Tenant isolation. Shield rules. Nine immutable laws.</strong> Unauthorized traffic dies here.' },
+    { num: '02', name: 'InputValidator',   title: 'Schema, sanitized.',                  body: '<strong>Schema validation, payload sanitization, prompt-injection patterns checked.</strong> Adversarial input is rejected before reasoning ever starts.' },
+    { num: '03', name: 'GovernanceEngine', title: 'Four tiers. One policy.',             body: 'Routine logged silently. Medium-risk notified. <strong>High-risk requires approval. Critical blocked.</strong> Governance never blocks execution. It guides it.' },
+    { num: '04', name: 'ContextBuilder',   title: 'Memory, trust-gated.',                body: 'Pulls from the 5-tier NBMF. <strong>Only verified knowledge reaches reasoning.</strong> Hallucinations never promote past T0.' },
+    { num: '05', name: 'ReasoningCore',    title: 'Standard. Council. Quintessence.',    body: '<strong>Three modes.</strong> Single model, 3-model parallel synthesis, or Council plus 15 Domain Context Packs. Pick per request.' },
+    { num: '06', name: 'ActionPlanner',    title: 'Plan before act.',                    body: 'Intent decomposes into <strong>typed, sandboxed steps with dependency graphs.</strong> Nothing executes until the plan is checked.' },
+    { num: '07', name: 'OutputValidator',  title: 'Policy check. Pre-flight.',           body: 'The plan must pass policy before any step runs. <strong>The last checkpoint before the world changes.</strong>' },
+    { num: '08', name: 'ResponseFormatter',title: 'Rendered. Attributed.',               body: '<strong>Model attribution. Token cost accounting.</strong> Streaming-ready chunks. Every byte traceable to the brain that produced it.' },
+    { num: '09', name: 'FeedbackLoop',     title: 'Outcome captured as eDNA.',           body: 'Experience DNA records with <strong>Merkle-notarized lineage.</strong> Tamper-evident proof chains of every learning.' },
+    { num: '10', name: 'AuditLog',         title: 'Append-only. Forever.',               body: '<strong>Merkle-notarized trace</strong> of the request. Six months later, any decision is replayable. That is the signature.' }
   ];
 
-  // ─── matchMedia: reduced-motion path vs. full path ─────────────────────
-  const mm = gsap.matchMedia();
+  /* ─── Build the always-visible step list ──────────────────────────────── */
+  (function buildList() {
+    var list = document.getElementById('pipelineList');
+    if (!list) return;
+    list.innerHTML = STAGES.map(function(s) {
+      return '<div class="pipeline-list-item" data-stage="' + s.num + '">' +
+               '<span class="num">' + s.num + ' &middot; ' + s.name + '</span>' +
+               '<span class="name">' + s.title + '</span>' +
+               '<span class="blurb">' + s.body.replace(/<\/?strong>/g, '') + '</span>' +
+             '</div>';
+    }).join('');
+  })();
 
-  mm.add({
-    isFull:    '(prefers-reduced-motion: no-preference)',
-    isReduced: '(prefers-reduced-motion: reduce)'
-  }, (ctx) => {
-    const { isFull, isReduced } = ctx.conditions;
+  /* ─── Build the SVG pipeline ──────────────────────────────────────────── */
+  var pipelineCircles = [];
+  var pipelineNumTexts = [];
+  var pipelineLabels = [];
+  var pipelineStageDists = [];
+  var pipelinePathLength = 0;
+  (function buildPipeline() {
+    var path = document.getElementById('pipelinePath');
+    var group = document.getElementById('pipelineStages');
+    if (!path || !group) return;
+    pipelinePathLength = path.getTotalLength();
+    var svgNS = 'http://www.w3.org/2000/svg';
+    for (var i = 0; i < STAGES.length; i++) {
+      var dist = (i / (STAGES.length - 1)) * pipelinePathLength;
+      pipelineStageDists.push(dist);
+      var p = path.getPointAtLength(dist);
+      var cx = Math.round(p.x * 10) / 10;
+      var cy = Math.round(p.y * 10) / 10;
 
-    // Reveal animations — used in both paths
-    gsap.utils.toArray('.reveal').forEach(el => {
-      ScrollTrigger.create({
-        trigger: el, start: 'top 85%',
-        onEnter: () => el.classList.add('in'),
-      });
-    });
+      var c = document.createElementNS(svgNS, 'circle');
+      c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', 16);
+      c.setAttribute('fill', 'rgba(6,8,16,0.97)');
+      c.setAttribute('stroke', 'rgba(212,168,83,0.4)');
+      c.setAttribute('stroke-width', 2);
+      c.setAttribute('class', 'pipeline-stage-circle');
+      c.style.transformBox = 'fill-box';
+      c.style.transformOrigin = 'center';
+      group.appendChild(c);
+      pipelineCircles.push(c);
 
-    if (isReduced) return; // Static path. Just reveals. No scrubs, no pins.
+      var t = document.createElementNS(svgNS, 'text');
+      t.setAttribute('x', cx); t.setAttribute('y', cy + 4);
+      t.setAttribute('text-anchor', 'middle');
+      t.setAttribute('fill', '#d4a853');
+      t.setAttribute('font-family', 'JetBrains Mono');
+      t.setAttribute('font-size', 11); t.setAttribute('font-weight', 600);
+      t.setAttribute('class', 'pipeline-stage-num');
+      t.textContent = (i + 1).toString();
+      group.appendChild(t);
+      pipelineNumTexts.push(t);
 
-    // ─── Chapter theme tween. Drives CSS custom properties globally ─────
-    chapters.forEach(ch => {
-      ScrollTrigger.create({
-        trigger: '#' + ch.id,
-        start: 'top 65%', end: 'bottom 35%',
-        onToggle: self => {
-          if (!self.isActive) return;
-          gsap.to(document.documentElement, {
-            '--hue-primary': ch.hue,
-            '--density': ch.density,
-            '--type-scale': ch.type,
-            duration: 0.9, ease: 'power2.out'
-          });
-          // Chapter dot indicator
-          document.querySelectorAll('.chapter-nav a').forEach(a => {
-            a.classList.toggle('active', a.dataset.chap === ch.id);
-          });
-        }
-      });
-    });
-
-    // ─── Catalyst line draw ─────────────────────────────────────────────
-    gsap.to('#catalyst-line', {
-      scaleX: 1, ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '#catalyst', start: 'top 60%', end: 'center 40%', scrub: 1
-      }
-    });
-
-    // ─── Rising: pipeline 10 nodes ──────────────────────────────────────
-    // Build the 10 nodes along the SVG path in JS so we don't hand-place them.
-    const path = document.getElementById('pipelinePath');
-    const group = document.getElementById('pipelineNodes');
-    if (path && group) {
-      const total = path.getTotalLength();
-      const svgNS = 'http://www.w3.org/2000/svg';
-      const nodes = [];
-      for (let i = 0; i < 10; i++) {
-        const p = path.getPointAtLength((i / 9) * total);
-        // Circle
-        const c = document.createElementNS(svgNS, 'circle');
-        c.setAttribute('cx', p.x); c.setAttribute('cy', p.y);
-        c.setAttribute('r', 14);
-        c.setAttribute('fill', 'rgba(6,10,20,0.97)');
-        c.setAttribute('stroke', 'rgba(212,168,83,0.25)');
-        c.setAttribute('stroke-width', '2');
-        c.style.transition = 'stroke 0.35s ease, r 0.35s ease, fill 0.35s ease';
-        group.appendChild(c);
-        // Number
-        const t = document.createElementNS(svgNS, 'text');
-        t.setAttribute('x', p.x); t.setAttribute('y', p.y + 4);
-        t.setAttribute('text-anchor', 'middle');
-        t.setAttribute('fill', '#d4a853');
-        t.setAttribute('font-family', 'JetBrains Mono');
-        t.setAttribute('font-size', '10');
-        t.setAttribute('font-weight', '600');
-        t.textContent = (i + 1);
-        group.appendChild(t);
-        nodes.push({ c, t });
-      }
-      // Step triggers — activate the matching node when step is in center view
-      gsap.utils.toArray('#rising .step').forEach((step, idx) => {
-        ScrollTrigger.create({
-          trigger: step, start: 'top 70%', end: 'bottom 30%',
-          onToggle: self => {
-            if (!self.isActive) return;
-            step.classList.add('active');
-            // Deactivate siblings, activate this one
-            nodes.forEach((n, j) => {
-              const isMe = j === idx;
-              n.c.setAttribute('stroke', isMe ? '#d4a853' : 'rgba(212,168,83,0.25)');
-              n.c.setAttribute('r', isMe ? 18 : 14);
-              n.c.setAttribute('fill', isMe ? 'rgba(30,20,6,0.97)' : 'rgba(6,10,20,0.97)');
-              n.t.setAttribute('fill', isMe ? '#FFD700' : '#d4a853');
-            });
-          },
-          onLeave: () => step.classList.remove('active'),
-          onLeaveBack: () => step.classList.remove('active'),
-        });
-      });
+      var isLeft = i < 5;
+      var lbl = document.createElementNS(svgNS, 'text');
+      lbl.setAttribute('x', isLeft ? cx - 28 : cx + 28);
+      lbl.setAttribute('y', cy + 4);
+      lbl.setAttribute('text-anchor', isLeft ? 'end' : 'start');
+      lbl.setAttribute('fill', 'rgba(255,255,255,0.5)');
+      lbl.setAttribute('font-family', 'JetBrains Mono');
+      lbl.setAttribute('font-size', 12);
+      lbl.setAttribute('class', 'pipeline-stage-label');
+      lbl.textContent = STAGES[i].name;
+      group.appendChild(lbl);
+      pipelineLabels.push(lbl);
     }
+  })();
 
-    // ─── Climax canvas: the Klyntar fortress honeycomb + threat wave ─────
-    const canvas = document.getElementById('climaxCanvas');
-    if (canvas) {
-      const ctx2 = canvas.getContext('2d');
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      let CW = 0, CH = 0, climaxProgress = 0;
-
-      function resizeCanvas() {
-        const rect = canvas.getBoundingClientRect();
-        CW = rect.width; CH = rect.height;
-        canvas.width = CW * dpr; canvas.height = CH * dpr;
-        ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      // Precompute 19 hex cells (center + 2 rings of 6)
-      const cells = [];
-      const cellR = 60;
-      function hexPoint(q, r) {
-        return { x: cellR * 1.5 * q, y: cellR * Math.sqrt(3) * (r + q / 2) };
-      }
-      // Center + ring 1 (6) + ring 2 (12)
-      const coords = [[0,0]];
-      for (let q = -1; q <= 1; q++) for (let r = -1; r <= 1; r++)
-        if ((q || r) && Math.abs(q + r) <= 1) coords.push([q, r]);
-      for (let q = -2; q <= 2; q++) for (let r = -2; r <= 2; r++)
-        if ((Math.abs(q) === 2 || Math.abs(r) === 2 || Math.abs(q + r) === 2) && Math.abs(q + r) <= 2) coords.push([q, r]);
-      coords.forEach(([q, r], i) => { const p = hexPoint(q, r); cells.push({ x: p.x, y: p.y, i }); });
-
-      function drawHex(cx, cy, r, fill, stroke, width) {
-        ctx2.beginPath();
-        for (let a = 0; a < 6; a++) {
-          const ang = Math.PI / 3 * a;
-          const x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
-          if (a === 0) ctx2.moveTo(x, y); else ctx2.lineTo(x, y);
-        }
-        ctx2.closePath();
-        if (fill) { ctx2.fillStyle = fill; ctx2.fill(); }
-        if (stroke) { ctx2.strokeStyle = stroke; ctx2.lineWidth = width || 1; ctx2.stroke(); }
-      }
-
-      function renderClimax() {
-        ctx2.clearRect(0, 0, CW, CH);
-        // Bleed dark red base
-        const bg = ctx2.createRadialGradient(CW/2, CH/2, 0, CW/2, CH/2, Math.max(CW, CH) * 0.7);
-        bg.addColorStop(0, 'rgba(25,6,12,1)');
-        bg.addColorStop(1, 'rgba(5,3,8,1)');
-        ctx2.fillStyle = bg;
-        ctx2.fillRect(0, 0, CW, CH);
-
-        // Honeycomb fortress. Scale with progress (0..1).
-        const cx = CW / 2, cy = CH / 2;
-        const scale = 0.6 + climaxProgress * 0.6;
-        const glowAlpha = Math.min(1, climaxProgress * 1.6);
-
-        ctx2.save();
-        ctx2.translate(cx, cy);
-        ctx2.scale(scale, scale);
-
-        // Outer ring glow
-        cells.forEach((cell, idx) => {
-          const dist = Math.hypot(cell.x, cell.y);
-          const delay = Math.min(1, (dist / 160));
-          const alpha = Math.max(0, Math.min(1, (climaxProgress - delay) * 1.6));
-          if (alpha <= 0) return;
-          // Glow
-          ctx2.shadowColor = 'rgba(255,64,96,' + (alpha * 0.6) + ')';
-          ctx2.shadowBlur = 20 * alpha;
-          drawHex(cell.x, cell.y, cellR * 0.85, null,
-                  'rgba(255,64,96,' + (alpha * 0.75) + ')', 1.6 + alpha);
-          ctx2.shadowBlur = 0;
-          // Core fill
-          drawHex(cell.x, cell.y, cellR * 0.55,
-                  'rgba(40,8,14,' + (alpha * 0.9) + ')',
-                  'rgba(255,120,140,' + (alpha * 0.35) + ')', 0.8);
-        });
-        ctx2.restore();
-
-        // Threat wave sweeping left->right in 0.3..0.7 range
-        if (climaxProgress > 0.25 && climaxProgress < 0.85) {
-          const waveT = (climaxProgress - 0.25) / 0.6;
-          const waveX = waveT * CW;
-          const waveAlpha = Math.sin(waveT * Math.PI) * 0.4;
-          const waveGrad = ctx2.createLinearGradient(waveX - 120, 0, waveX + 120, 0);
-          waveGrad.addColorStop(0, 'rgba(255,64,96,0)');
-          waveGrad.addColorStop(0.5, 'rgba(255,64,96,' + waveAlpha + ')');
-          waveGrad.addColorStop(1, 'rgba(255,64,96,0)');
-          ctx2.fillStyle = waveGrad;
-          ctx2.fillRect(0, 0, CW, CH);
-        }
-      }
-
-      renderClimax();
-
-      // Scrub the climax progress with scroll
-      gsap.to({ v: 0 }, {
-        v: 1, ease: 'none',
-        scrollTrigger: {
-          trigger: '#climax', start: 'top top', end: 'bottom bottom',
-          scrub: 0.5, pin: '.climax-pin', anticipatePin: 1,
-          onUpdate: (self) => { climaxProgress = self.progress; renderClimax(); }
-        }
-      });
+  /* ─── Activate a pipeline stage (visual + detail card) ────────────────── */
+  function setActiveStage(idx) {
+    if (idx < 0 || idx >= STAGES.length) return;
+    pipelineCircles.forEach(function(c, j) {
+      var on = j === idx;
+      c.classList.toggle('active', on);
+      c.setAttribute('stroke', on ? '#FFD700' : 'rgba(212,168,83,0.4)');
+      c.setAttribute('fill', on ? 'rgba(40,28,8,0.97)' : 'rgba(6,8,16,0.97)');
+    });
+    pipelineNumTexts.forEach(function(t, j) { t.classList.toggle('active', j === idx); });
+    pipelineLabels.forEach(function(l, j) {
+      var on = j === idx;
+      l.classList.toggle('active', on);
+      l.setAttribute('fill', on ? '#fff' : 'rgba(255,255,255,0.5)');
+      l.setAttribute('font-size', on ? 13 : 12);
+    });
+    var s = STAGES[idx];
+    var detail = document.getElementById('pipelineDetail');
+    if (detail) {
+      document.getElementById('pipelineDetailNum').textContent = s.num + ' · ' + s.name;
+      document.getElementById('pipelineDetailTitle').textContent = s.title;
+      document.getElementById('pipelineDetailBody').innerHTML = s.body;
     }
+    document.querySelectorAll('.pipeline-list-item').forEach(function(el, j) {
+      el.style.borderColor = j === idx ? 'rgba(212,168,83,0.45)' : 'rgba(255,255,255,0.05)';
+    });
+  }
 
-    // ─── Chapter dot click. Smooth scroll to section ─────────────────────
-    document.querySelectorAll('.chapter-nav a').forEach(a => {
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.getElementById(a.dataset.chap);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+  /* ─── Pipeline auto-cycle (with hover pause) ──────────────────────────── */
+  var pipelineActive = 0;
+  var pipelineTimer = null;
+  var pipelineWrap = document.querySelector('.pipeline-wrap');
+  var pipelinePaused = false;
+  function pipelineTick() {
+    if (pipelinePaused) return;
+    setActiveStage(pipelineActive);
+    pipelineActive = (pipelineActive + 1) % STAGES.length;
+  }
+  function startPipelineCycle() {
+    if (pipelineTimer) return;
+    setActiveStage(0); pipelineActive = 1;
+    pipelineTimer = setInterval(pipelineTick, 3500);
+  }
+  function stopPipelineCycle() {
+    if (pipelineTimer) { clearInterval(pipelineTimer); pipelineTimer = null; }
+  }
+  if (pipelineWrap) {
+    pipelineWrap.addEventListener('mouseenter', function() { pipelinePaused = true; });
+    pipelineWrap.addEventListener('mouseleave', function() { pipelinePaused = false; });
+  }
+  // Click a stage circle to jump
+  document.querySelectorAll('.pipeline-stage-circle').forEach(function(c, j) {
+    c.style.cursor = 'pointer';
+    c.addEventListener('click', function() {
+      pipelineActive = (j + 1) % STAGES.length;
+      setActiveStage(j);
     });
   });
 
-  // ─── Cleanup on unload. Prevents ScrollTrigger leaks. ─────────────────
-  window.addEventListener('beforeunload', () => {
-    ScrollTrigger.getAll().forEach(t => t.kill());
+  /* ─── Animated traveler dot along the SVG path ────────────────────────── */
+  var traveler = document.getElementById('pipelineTraveler');
+  var travelerStart = null;
+  var TRAVELER_MS = 7000;
+  var travelerRAF = null;
+  function travelerStep(ts) {
+    if (!travelerStart) travelerStart = ts;
+    var t = ((ts - travelerStart) % TRAVELER_MS) / TRAVELER_MS;
+    if (traveler && pipelinePathLength) {
+      var path = document.getElementById('pipelinePath');
+      var p = path.getPointAtLength(t * pipelinePathLength);
+      traveler.setAttribute('cx', p.x);
+      traveler.setAttribute('cy', p.y);
+    }
+    travelerRAF = requestAnimationFrame(travelerStep);
+  }
+
+  /* ─── Pipeline section visibility — start/stop animations ─────────────── */
+  if ('IntersectionObserver' in window) {
+    var pipelineIO = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          startPipelineCycle();
+          if (!travelerRAF) travelerRAF = requestAnimationFrame(travelerStep);
+        } else {
+          stopPipelineCycle();
+          if (travelerRAF) { cancelAnimationFrame(travelerRAF); travelerRAF = null; }
+        }
+      });
+    }, { threshold: 0.2 });
+    var risingEl = document.getElementById('rising');
+    if (risingEl) pipelineIO.observe(risingEl);
+  } else {
+    setActiveStage(0);
+  }
+
+  /* ─── Chapter rail + palette tween ────────────────────────────────────── */
+  var CHAPTERS = [
+    { id: 'setup',      hue: 45,  density: 0.20, type: 1.00 },
+    { id: 'catalyst',   hue: 200, density: 0.35, type: 1.00 },
+    { id: 'rising',     hue: 45,  density: 0.55, type: 1.05 },
+    { id: 'turn',       hue: 352, density: 0.62, type: 1.10 },
+    { id: 'climax',     hue: 352, density: 0.85, type: 1.20 },
+    { id: 'resolution', hue: 170, density: 0.40, type: 1.00 },
+    { id: 'coda',       hue: 45,  density: 0.25, type: 1.00 }
+  ];
+  function applyChapterTheme(ch) {
+    var root = document.documentElement;
+    var startH = parseFloat(getComputedStyle(root).getPropertyValue('--hue-primary')) || 200;
+    var startD = parseFloat(getComputedStyle(root).getPropertyValue('--density')) || 0.2;
+    var startT = parseFloat(getComputedStyle(root).getPropertyValue('--type-scale')) || 1.0;
+    var dur = 600, t0 = performance.now();
+    function step(ts) {
+      var k = Math.min(1, (ts - t0) / dur);
+      var ease = 1 - Math.pow(1 - k, 3);
+      root.style.setProperty('--hue-primary', (startH + (ch.hue - startH) * ease).toFixed(1));
+      root.style.setProperty('--density', (startD + (ch.density - startD) * ease).toFixed(3));
+      root.style.setProperty('--type-scale', (startT + (ch.type - startT) * ease).toFixed(3));
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if ('IntersectionObserver' in window) {
+    var chapterIO = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting && e.intersectionRatio >= 0.45) {
+          var id = e.target.id;
+          var ch = CHAPTERS.find(function(c) { return c.id === id; });
+          if (ch) applyChapterTheme(ch);
+          document.querySelectorAll('.chapter-rail a').forEach(function(a) {
+            a.classList.toggle('active', a.dataset.chap === id);
+          });
+        }
+      });
+    }, { threshold: [0.45, 0.6, 0.75] });
+    CHAPTERS.forEach(function(ch) {
+      var el = document.getElementById(ch.id);
+      if (el) chapterIO.observe(el);
+    });
+  }
+  // Smooth scroll on rail click
+  document.querySelectorAll('.chapter-rail a').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var t = document.getElementById(a.dataset.chap);
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
-});
+
+  /* ─── Catalyst line draw ──────────────────────────────────────────────── */
+  if ('IntersectionObserver' in window) {
+    var lineIO = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          var line = document.getElementById('catalyst-line');
+          if (line) {
+            line.style.transition = 'transform 1.4s cubic-bezier(.65,.05,.36,1)';
+            line.style.transform = 'scaleX(1)';
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    var catEl = document.getElementById('catalyst-line');
+    if (catEl) lineIO.observe(catEl);
+  }
+
+  /* ─── Climax canvas (Klyntar fortress hexagonal mesh + threat wave) ──── */
+  (function climaxCanvas() {
+    var canvas = document.getElementById('climaxCanvas');
+    if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var CW = 0, CH = 0, climaxProg = 0, sectionVisible = false;
+
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      CW = rect.width; CH = rect.height;
+      canvas.width = CW * dpr; canvas.height = CH * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var cellR = 56;
+    var coords = [[0, 0]];
+    for (var q = -1; q <= 1; q++) for (var r = -1; r <= 1; r++)
+      if ((q || r) && Math.abs(q + r) <= 1) coords.push([q, r]);
+    for (var q2 = -2; q2 <= 2; q2++) for (var r2 = -2; r2 <= 2; r2++)
+      if ((Math.abs(q2) === 2 || Math.abs(r2) === 2 || Math.abs(q2 + r2) === 2) && Math.abs(q2 + r2) <= 2) coords.push([q2, r2]);
+    var cells = coords.map(function(qr) {
+      return { x: cellR * 1.5 * qr[0], y: cellR * Math.sqrt(3) * (qr[1] + qr[0] / 2) };
+    });
+
+    function hex(cx, cy, r, fill, stroke, w) {
+      ctx.beginPath();
+      for (var a = 0; a < 6; a++) {
+        var ang = Math.PI / 3 * a;
+        var x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
+        if (a === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = w || 1; ctx.stroke(); }
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, CW, CH);
+      var bg = ctx.createRadialGradient(CW/2, CH/2, 0, CW/2, CH/2, Math.max(CW, CH) * 0.7);
+      bg.addColorStop(0, 'rgba(28,8,14,1)');
+      bg.addColorStop(1, 'rgba(5,3,8,1)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, CW, CH);
+
+      var cx = CW / 2, cy = CH / 2;
+      var s = 0.55 + climaxProg * 0.55;
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.scale(s, s);
+      cells.forEach(function(cell) {
+        var dist = Math.hypot(cell.x, cell.y);
+        var delay = Math.min(1, dist / 160);
+        var alpha = Math.max(0, Math.min(1, (climaxProg - delay) * 1.7));
+        if (alpha <= 0) return;
+        ctx.shadowColor = 'rgba(255,64,96,' + (alpha * 0.6) + ')';
+        ctx.shadowBlur = 22 * alpha;
+        hex(cell.x, cell.y, cellR * 0.84, null, 'rgba(255,64,96,' + (alpha * 0.78) + ')', 1.5 + alpha);
+        ctx.shadowBlur = 0;
+        hex(cell.x, cell.y, cellR * 0.55, 'rgba(40,8,14,' + (alpha * 0.92) + ')', 'rgba(255,140,160,' + (alpha * 0.35) + ')', 0.8);
+      });
+      ctx.restore();
+
+      if (climaxProg > 0.3 && climaxProg < 0.85) {
+        var wt = (climaxProg - 0.3) / 0.55;
+        var wx = wt * CW;
+        var wa = Math.sin(wt * Math.PI) * 0.45;
+        var wg = ctx.createLinearGradient(wx - 140, 0, wx + 140, 0);
+        wg.addColorStop(0, 'rgba(255,64,96,0)');
+        wg.addColorStop(0.5, 'rgba(255,64,96,' + wa + ')');
+        wg.addColorStop(1, 'rgba(255,64,96,0)');
+        ctx.fillStyle = wg;
+        ctx.fillRect(0, 0, CW, CH);
+      }
+    }
+
+    // Drive climaxProg by scroll progress through #climax
+    function onScrollClimax() {
+      var section = document.getElementById('climax');
+      if (!section) return;
+      var rect = section.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var scrolled = -rect.top;
+      climaxProg = Math.max(0, Math.min(1, scrolled / Math.max(1, total)));
+      sectionVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      if (sectionVisible) render();
+    }
+    window.addEventListener('scroll', onScrollClimax, { passive: true });
+    onScrollClimax();
+    render();
+  })();
+
+})();
 </script>
 
 </body>
