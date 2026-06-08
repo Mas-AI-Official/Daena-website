@@ -263,8 +263,20 @@
         </div>
         <div class="nav-cta">
             <a class="nav-cta-desktop" href="https://mas-ai.co" target="_blank" rel="noopener">Explore MAS-AI</a>
+            <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
         </div>
     </nav>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="/#s-problem">Problem</a>
+        <a href="/#s-solution">Solution</a>
+        <a href="/#s-features">Features</a>
+        <a href="/#s-architecture">Architecture</a>
+        <a href="/whats-new.html" style="color:#00c8ff">What's New</a>
+        <a href="/#s-get-started">Pricing</a>
+        <a href="https://mas-ai.co" target="_blank" rel="noopener" style="color:#d4a853">Explore MAS-AI ↗</a>
+    </div>
 </header>
 
 <main id="scroll-content">
@@ -518,12 +530,31 @@ window.addEventListener('scroll', () => {
     bar.style.transform = `scaleX(${scrolled})`;
 }, { passive: true });
 
-// Header shrink
+// Header shrink — must use 'is-scrolled' to match the .site-header.is-scrolled
+// selector in /style.css. Was 'scrolled' before, which silently never matched.
 window.addEventListener('scroll', () => {
     const h = document.getElementById('siteHeader');
     if (!h) return;
-    h.classList.toggle('scrolled', window.scrollY > 60);
+    h.classList.toggle('is-scrolled', window.scrollY > 60);
 }, { passive: true });
+
+// Mobile burger -> mobile-nav toggle. The .mobile-nav.is-open selector in
+// /style.css drives the open/close state.
+(function () {
+    const burger = document.getElementById('navBurger');
+    const mobileNav = document.getElementById('mobileNav');
+    if (!burger || !mobileNav) return;
+    burger.addEventListener('click', () => {
+        const isOpen = mobileNav.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            mobileNav.classList.remove('is-open');
+            burger.setAttribute('aria-expanded', 'false');
+        });
+    });
+})();
 </script>
 
 </body>
