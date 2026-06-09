@@ -281,8 +281,18 @@ h1,h2,h3{font-family:'Syne',sans-serif}
 .prologue-section.active .prologue-scroll-hint{opacity:0.6;animation:prologueBob 2s ease-in-out infinite}
 @keyframes prologueBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(4px)}}
 @media(max-width:720px){
-  .prologue-section{min-height:240vh}
-  .prologue-beat{padding:0 20px}
+  /* Mobile: collapse the pinned 3-beat scroll-sequence into a compact inline
+     stack. The full-screen sticky beats + tall scroll zone are cinematic on
+     desktop, but on a phone they are ~2.4 screens of mostly-empty scrolling
+     (one short centered line at a time). Show all three beats inline at their
+     natural height instead - same narrative, no dead scroll to wade through. */
+  .prologue-section{min-height:auto;padding:24px 0}
+  .prologue-beat{
+    position:static;height:auto;min-height:0;opacity:1;
+    padding:40px 20px;
+  }
+  .prologue-title{font-size:clamp(1.55rem,7vw,2.2rem)}
+  .prologue-scroll-hint{display:none}
 }
 
 /* ═══ PROVEN RESULTS (Act 02.6) ═══ */
