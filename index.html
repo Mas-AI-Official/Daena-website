@@ -179,11 +179,13 @@
       ]
     }
     </script>
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
-    <!-- Microsoft Clarity -->
-    <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","CLARITY_ID");</script>
+    <!-- Google Analytics 4 DISABLED 2026.06.09: id was placeholder G-XXXXXXXXXX (never configured), so it collected nothing. Set a real GA4 id and uncomment to re-enable.
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-REALID"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-REALID');</script>
+    -->
+    <!-- Microsoft Clarity DISABLED 2026.06.09: tag id was placeholder CLARITY_ID, which 400-errored on every page load. Set a real Clarity project id and uncomment.
+    <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","REAL_CLARITY_ID");</script>
+    -->
     <link rel="manifest" href="/manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1777,7 +1779,15 @@
 </div>
 
 <!-- Canvas 2D living-aurora mesh (replaces Three.js hex particles + the scroll-engine camera rig). -->
-<script src="particles.js" defer></script>
+<!-- 2026.06.09: only run the canvas particle animation on real desktops. On mobile
+     (iOS Safari / Android Chrome) it pegged the main thread for the whole load,
+     causing the slow/partial rendering. min-width 1024 + pointer:fine = mouse, not touch. -->
+<script>
+  if (window.matchMedia && window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches) {
+    var _p = document.createElement('script'); _p.src = 'particles.js'; _p.defer = true;
+    document.body.appendChild(_p);
+  }
+</script>
 <script src="/assets/js/video-player.js?v=2" defer></script>
 
 <script>
