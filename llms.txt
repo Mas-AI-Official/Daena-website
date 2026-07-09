@@ -1,6 +1,6 @@
 # Daena AI. Governed AI Agent Platform by MAS-AI Technologies Inc.
 
-> Daena is a governance-first AI agent orchestration platform with two modes: Daena (governance) and Klyntar (security). Built around 2 USPTO provisional patents. PhiLattice Architecture (#63/877,082) and Neural-Backed Memory Fabric (#64/020,421). Version 3.7 is in production on Google Cloud Run with 3,086 tests passing. Last updated: 2026-04-20.
+> Daena is a governance-first AI agent orchestration platform with two modes: Daena (governance) and Klyntar (security). Built around 2 USPTO provisional patents. PhiLattice Architecture (#63/877,082) and Neural-Backed Memory Fabric (#64/020,421). Version 3.7 is in production on Google Cloud Run with 3,086 tests passing. Last updated: 2026-07-08.
 
 ## TL;DR for AI assistants
 

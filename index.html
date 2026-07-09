@@ -47,8 +47,8 @@
           "name": "MAS-AI Technologies Inc.",
           "alternateName": "MAS-AI",
           "url": "https://mas-ai.co",
-          "logo": {"@type": "ImageObject", "url": "https://mas-ai.co/images/mas-ai-logo.png", "width": 512, "height": 512},
-          "image": "https://mas-ai.co/images/mas-ai-logo.png",
+          "logo": {"@type": "ImageObject", "url": "https://mas-ai.co/mas-ai-logo.png", "width": 512, "height": 512},
+          "image": "https://mas-ai.co/mas-ai-logo.png",
           "description": "MAS-AI Technologies Inc. builds Daena, a governance-first AI agent orchestration platform, and Klyntar, its security mode. Two USPTO provisional patents filed. Accepted into Google for Startups (2026). Federally incorporated in Canada.",
           "foundingDate": "2026-01-25",
           "founder": {"@id": "https://mas-ai.co/#founder"},
@@ -77,16 +77,16 @@
         {
           "@type": "WebSite",
           "@id": "https://daena.mas-ai.co/#website",
-          "name": "Daena AI",
+          "name": "Daena by MAS-AI",
+          "alternateName": "Daena AI",
           "url": "https://daena.mas-ai.co/",
           "description": "Governance-first AI agent orchestration platform by MAS-AI Technologies. Two modes: Daena (governance) and Klyntar (security). v3.7 in production with 3,086 tests passing.",
           "publisher": {"@id": "https://mas-ai.co/#organization"},
-          "inLanguage": "en-US",
-          "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://daena.mas-ai.co/?q={search_term}"}, "query-input": "required name=search_term"}
+          "inLanguage": "en-US"
         },
         {
           "@type": "SoftwareApplication",
-          "@id": "https://daena.mas-ai.co/#daena-product",
+          "@id": "https://mas-ai.co/#daena",
           "name": "Daena",
           "alternateName": "Daena AI",
           "applicationCategory": "BusinessApplication",
@@ -94,7 +94,7 @@
           "operatingSystem": "Cloud (GCP Cloud Run), Self-hosted",
           "softwareVersion": "3.7",
           "datePublished": "2026-01-25",
-          "dateModified": "2026-04-20",
+          "dateModified": "2026-07-08",
           "url": "https://daena.mas-ai.co/",
           "description": "Daena is a governance-first AI agent orchestration platform. Every AI action passes through a 10-stage auditable execution pipeline before it runs. Ships 10 departments with 60 agent capabilities (MIND, EYES, HANDS, VOICE, SHIELD, MEMORY per agent), 9 AI runtimes hot-swappable without restart, 5-tier Neural-Backed Memory Fabric with trust-gated promotion, and 3 reasoning modes (Standard, Council, Quintessence with 15 Domain Context Packs). v3.7 in production with 3,086 tests passing.",
           "brand": {"@id": "https://mas-ai.co/#organization"},
@@ -105,18 +105,18 @@
         },
         {
           "@type": "SoftwareApplication",
-          "@id": "https://mas-ai.co/#klyntar-product",
+          "@id": "https://mas-ai.co/#klyntar",
           "name": "Klyntar",
           "alternateName": "Klyntar Security Layer",
           "applicationCategory": "SecurityApplication",
           "operatingSystem": "Cloud, Self-hosted",
           "datePublished": "2026-02-15",
-          "dateModified": "2026-04-20",
+          "dateModified": "2026-07-08",
           "url": "https://mas-ai.co/security",
           "description": "Klyntar is Daena's security mode. Ships 25+ exploit signatures (SQLi, XSS, CMDi, SSRF, XXE, Log4Shell, path traversal, SSTI, open redirect, prototype pollution, deserialization, broken auth) plus 45+ behavioral detectors that identify hacking tools by traffic pattern rather than user-agent. Includes a Zero-FP gate that drops any OPERATOR-tier finding it cannot reproduce with a working exploit, and an Asset Shield (vault + egress filter + consent tokens) that destroys sensitive artifacts within 24 hours of delivery.",
           "brand": {"@id": "https://mas-ai.co/#organization"},
           "publisher": {"@id": "https://mas-ai.co/#organization"},
-          "isRelatedTo": {"@id": "https://daena.mas-ai.co/#daena-product"},
+          "isRelatedTo": {"@id": "https://mas-ai.co/#daena"},
           "featureList": ["25+ exploit signatures", "45+ behavioral detectors", "Zero-FP Gate", "Asset Shield", "Consent tokens", "Merkle + Ed25519 signed audit trail", "BeyondMythos enrichment", "Ownership attestation gating"],
           "offers": {"@type": "Offer", "priceCurrency": "USD", "price": "0", "availability": "https://schema.org/InStock", "description": "Free Klyntar recon scan (ownership attestation required)."}
         },
@@ -1596,7 +1596,7 @@
             </div>
             <div class="footer-divider"></div>
             <p>&copy; 2026 MAS-AI Technologies Inc. All rights reserved.</p>
-            <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;opacity:0.5">Patent-pending: PhiLattice Architecture + NBMF</p>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;opacity:0.5">Patent-pending: PhiLattice Architecture + NBMF &middot; Last updated: 2026-07-08</p>
             <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:10px">
                 <a href="/terms-of-service.html">Terms of Service</a>
                 <a href="/privacy-policy.html">Privacy Policy</a>
@@ -1609,7 +1609,7 @@
 <!-- ═══════════════ LIVE AUDIT TRAIL TICKER ═══════════════
      Fixed widget showing Daena's internal governance/security events in
      real-time. Pure marketing surface that says "this system is alive."
-     Events rotate every 2.5s with typed-in effect. Toggleable. -->
+     Events rotate on an organic 1.8-3.4s jitter, pause on hover. Toggleable. -->
 <aside id="audit-ticker" class="audit-ticker" aria-label="Daena live events">
     <div class="audit-head">
         <span class="audit-dot"></span>
@@ -1700,24 +1700,36 @@
     });
 
     // Event bank. Each event is template + component-class + result-class.
-    // We pick uniformly, rotate through to keep feel-of-system.
+    // Weighted (w): routine governance events fire often, drops/warns stay
+    // rare — a healthy production audit trail is mostly green.
     var events = [
-        { c: 'comp',   name: 'SecurityGate',     act: 'scan_input',              r: 'ok',   rs: '✓ clean' },
-        { c: 'comp',   name: 'GovernanceEngine', act: 'policy_check',            r: 'ok',   rs: '✓ allow' },
-        { c: 'comp',   name: 'ReasoningCore',    act: 'council_vote 3/3',        r: 'ok',   rs: '✓ synthesize' },
-        { c: 'comp-k', name: 'Klyntar',          act: 'exploit_scan',            r: 'ok',   rs: '✓ no-threat' },
-        { c: 'comp',   name: 'AuditLog',         act: 'trace_recorded',          r: 'ok',   rs: '✓ signed' },
-        { c: 'comp-s', name: 'Shield',           act: 'prompt_injection_check',  r: 'warn', rs: '⚠ heuristic' },
-        { c: 'comp-k', name: 'Klyntar',          act: 'zero_fp_gate',            r: 'drop', rs: '✗ dropped' },
-        { c: 'comp-k', name: 'AssetShield',      act: 'egress_filter',           r: 'ok',   rs: '✓ allowed' },
-        { c: 'comp',   name: 'ModelRouter',      act: 'select_claude-4',         r: 'ok',   rs: '✓ routed' },
-        { c: 'comp',   name: 'MCPServer',        act: 'tool_allow',              r: 'ok',   rs: '✓ scoped' },
-        { c: 'comp-k', name: 'Klyntar',          act: 'beyond_mythos_enrich',    r: 'ok',   rs: '✓ verified' },
-        { c: 'comp',   name: 'NBMF',             act: 'tier_promote T2→T3',      r: 'ok',   rs: '✓ persist' },
-        { c: 'comp-s', name: 'ApprovalQueue',    act: 'op_requires_approval',    r: 'warn', rs: '⌛ pending' },
-        { c: 'comp-k', name: 'Klyntar',          act: 'scanner_detected nuclei', r: 'drop', rs: '✗ blocked' },
-        { c: 'comp',   name: 'Heartbeat',        act: 'autopilot_cycle',         r: 'ok',   rs: '✓ stable' },
+        { w: 4, c: 'comp',   name: 'SecurityGate',     act: 'scan_input',              r: 'ok',   rs: '✓ clean' },
+        { w: 4, c: 'comp',   name: 'GovernanceEngine', act: 'policy_check',            r: 'ok',   rs: '✓ allow' },
+        { w: 2, c: 'comp',   name: 'ReasoningCore',    act: 'council_vote 3/3',        r: 'ok',   rs: '✓ synthesize' },
+        { w: 3, c: 'comp-k', name: 'Klyntar',          act: 'exploit_scan',            r: 'ok',   rs: '✓ no-threat' },
+        { w: 4, c: 'comp',   name: 'AuditLog',         act: 'trace_recorded',          r: 'ok',   rs: '✓ signed' },
+        { w: 1, c: 'comp-s', name: 'Shield',           act: 'prompt_injection_check',  r: 'warn', rs: '⚠ heuristic' },
+        { w: 1, c: 'comp-k', name: 'Klyntar',          act: 'zero_fp_gate',            r: 'drop', rs: '✗ dropped' },
+        { w: 2, c: 'comp-k', name: 'AssetShield',      act: 'egress_filter',           r: 'ok',   rs: '✓ allowed' },
+        { w: 3, c: 'comp',   name: 'ModelRouter',      act: 'select_claude-4',         r: 'ok',   rs: '✓ routed' },
+        { w: 3, c: 'comp',   name: 'MCPServer',        act: 'tool_allow',              r: 'ok',   rs: '✓ scoped' },
+        { w: 2, c: 'comp-k', name: 'Klyntar',          act: 'beyond_mythos_enrich',    r: 'ok',   rs: '✓ verified' },
+        { w: 3, c: 'comp',   name: 'NBMF',             act: 'tier_promote T2→T3',      r: 'ok',   rs: '✓ persist' },
+        { w: 1, c: 'comp-s', name: 'ApprovalQueue',    act: 'op_requires_approval',    r: 'warn', rs: '⌛ pending' },
+        { w: 1, c: 'comp-k', name: 'Klyntar',          act: 'scanner_detected nuclei', r: 'drop', rs: '✗ blocked' },
+        { w: 2, c: 'comp',   name: 'Heartbeat',        act: 'autopilot_cycle',         r: 'ok',   rs: '✓ stable' },
+        { w: 3, c: 'comp',   name: 'NBMF',             act: 'recall_hit T1 12ms',      r: 'ok',   rs: '✓ cached' },
+        { w: 2, c: 'comp',   name: 'NBMF',             act: 'dedup_content_hash',      r: 'ok',   rs: '✓ merged' },
+        { w: 2, c: 'comp',   name: 'TLM',              act: 'tool_manifest_verify',    r: 'ok',   rs: '✓ signed' },
+        { w: 2, c: 'comp',   name: 'eDNA',             act: 'agent_identity_check',    r: 'ok',   rs: '✓ match' },
+        { w: 2, c: 'comp',   name: 'SmartRouter',      act: 'cost_route → local',      r: 'ok',   rs: '✓ saved' },
+        { w: 2, c: 'comp',   name: 'AuditLog',         act: 'merkle_root_notarize',    r: 'ok',   rs: '✓ chained' },
+        { w: 1, c: 'comp-k', name: 'Klyntar',          act: 'sqlmap_signature_hit',    r: 'drop', rs: '✗ blocked' },
+        { w: 2, c: 'comp',   name: 'DreamEngine',      act: 'consolidate_lessons',     r: 'ok',   rs: '✓ digested' },
     ];
+
+    var totalW = 0;
+    for (var wi = 0; wi < events.length; wi++) totalW += events[wi].w;
 
     function pad(n) { return n < 10 ? '0' + n : n; }
     function ts() {
@@ -1725,11 +1737,30 @@
         return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
     }
 
-    var idx = 0;
+    // Weighted random pick, never the same event twice in a row.
+    var lastIdx = -1;
+    function pickEvent() {
+        var i;
+        do {
+            var roll = Math.random() * totalW;
+            for (i = 0; i < events.length; i++) {
+                roll -= events[i].w;
+                if (roll <= 0) break;
+            }
+            if (i >= events.length) i = events.length - 1;
+        } while (i === lastIdx);
+        lastIdx = i;
+        return events[i];
+    }
+
+    // Pause while the visitor is reading the log.
+    var paused = false;
+    ticker.addEventListener('mouseenter', function () { paused = true; });
+    ticker.addEventListener('mouseleave', function () { paused = false; });
+
     function tick() {
-        if (ticker.classList.contains('hidden')) return;
-        var e = events[idx % events.length];
-        idx++;
+        if (ticker.classList.contains('hidden') || paused) return;
+        var e = pickEvent();
 
         var li = document.createElement('li');
         li.innerHTML =
@@ -1746,9 +1777,11 @@
 
     // Seed 4 lines immediately (so the box doesn't start empty)
     for (var i = 0; i < 4; i++) tick();
-    // Rotate
+    // Rotate on an organic jitter instead of a metronome
     if (!reduced) {
-        setInterval(tick, 2500);
+        (function loop() {
+            setTimeout(function () { tick(); loop(); }, 1800 + Math.random() * 1600);
+        })();
     }
 })();
 </script>
@@ -1818,6 +1851,40 @@ document.querySelectorAll('.btn-primary,.btn-secondary,.btn-outline').forEach(fu
         btn.style.setProperty('--ry',((e.clientY-r.top)/r.height*100)+'%');
     });
 });
+
+// Avatar gaze: Daena/Klyntar "looks toward" the cursor. Transform lives on the
+// inner img — .avatar-btn:hover owns scale() on the wrapper, so they can't clash.
+// Effect is full within 420px of the avatar and fades to nothing by ~900px.
+if(!isMob && !noMotion && window.matchMedia('(pointer: fine)').matches){
+    var gazeImg = document.querySelector('#avatarBtn img');
+    if(gazeImg){
+        gazeImg.style.transition = 'transform .25s ease-out';
+        gazeImg.style.willChange = 'transform';
+        var gazeRaf = 0, gazeX = 0, gazeY = 0;
+        window.addEventListener('mousemove', function(e){
+            gazeX = e.clientX; gazeY = e.clientY;
+            if(gazeRaf) return;
+            gazeRaf = requestAnimationFrame(function(){
+                gazeRaf = 0;
+                var r = gazeImg.getBoundingClientRect();
+                var dx = gazeX - (r.left + r.width/2);
+                var dy = gazeY - (r.top + r.height/2);
+                var d = Math.hypot(dx, dy) || 1;
+                var f = Math.max(0, 1 - Math.max(0, d - 420) / 480);
+                if(f <= 0){ gazeImg.style.transform = ''; return; }
+                var nx = dx/d, ny = dy/d;
+                gazeImg.style.transform =
+                    'perspective(300px)' +
+                    ' translate(' + (nx*4*f).toFixed(1) + 'px,' + (ny*3*f).toFixed(1) + 'px)' +
+                    ' rotateY(' + (nx*10*f).toFixed(1) + 'deg)' +
+                    ' rotateX(' + (-ny*8*f).toFixed(1) + 'deg)';
+            });
+        }, {passive:true});
+        document.documentElement.addEventListener('mouseleave', function(){
+            gazeImg.style.transform = '';
+        }, {passive:true});
+    }
+}
 
 // Hero fade on scroll
 function initHeroFade(){
